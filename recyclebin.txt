@@ -1,0 +1,35 @@
+| Name                                       | Bd Jobs | The 2 Hour Job |
+| ------------------------------------------ | ------- | -------------- |
+| Pop-up Ad on welcome screen                | Yes     | No             |
+| Language Change                            | Yes     | Yes            |
+| Career Guide & Tips                        | Yes     | No             |
+| Live Jobs (Number)                         | Yes     | Yes            |
+| Companies (Number)                         | Yes     | Yes            |
+| New Jobs (Number)                          | Yes     | Yes            |
+|                                            |         |                |
+| Browse Jobs by Functional Category         | Yes     | Yes            |
+| Browse Jobs by Industrial Category         | Yes     | Yes            |
+| Browse Jobs by Special Skills              | Yes     | Yes            |
+|                                            |         |                |
+| Search by Keyword (Organization Type)      | Yes     | Yes            |
+| Search by Keyword (Government)             | Yes     | Yes            |
+| Search by Keyword (Semi Government)        | Yes     | Yes            |
+| Search by Keyword (NGO)                    | Yes     | Yes            |
+| Search by Keyword (Private Firm/Company)   | Yes     | Yes            |
+| Search by Keyword (International Agencies) | Yes     | Yes            |
+| Search by Keyword (Others)                 | Yes     | Yes            |
+|                                            |         |                |
+| Divisional Jobs                            | Yes     | Yes            |
+| Quick links                                | Yes     | No             |
+| Hot Jobs                                   | Yes     | No             |
+| Job Posting by third party companies       | Yes     | No             |
+| Android App                                | Yes     | No             |
+| Training                                   | Yes     | No             |
+| Courses                                    | Yes     | No             |
+| Screen Reader Access for Disable people    | Yes     | No             |
+| Feedback                                   | Yes     | Yes            |
+| Contact information                        | Yes     | Yes            |
+| Career Counseling                          | Yes     | No             |
+| FAQ                                        | Yes     | No             |
+| Video Guides                               | Yes     | No             |
+| FAQ                                        | Yes     | No             |
