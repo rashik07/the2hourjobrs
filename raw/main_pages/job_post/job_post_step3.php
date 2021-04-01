@@ -12,7 +12,7 @@
             Candidates Requirements (Step - 3)
         </h1>
        <form class="row">
-            <div class="col-8">
+            <div class="col-lg-8 col-sm-12 ">
 
                 <div class="mb-4">
                     <label for="inputEmail4" class="form-label" required>Organization Type</label><br>
