@@ -1,7 +1,5 @@
 <?php
     include '../../component/navbar/navbar.php';
-    
-    
 
 ?>
 <div class="row">
