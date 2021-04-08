@@ -2,8 +2,8 @@
     include '../../component/navbar/navbar.php';
 
 ?>
-<div class="row">
-    <div class="col-3">
+<div class="row" >
+    <div class="col-3"style="min-height:550px">
     <?php
     include '../../component/sidebar/profile_sidebar.php';
     ?>
