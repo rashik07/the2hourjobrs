@@ -1,42 +1,22 @@
-// Imports: Dependencies
-// import AsyncStorage from "@react-native-community/async-storage";
-import { createStore, applyMiddleware, compose } from "redux";
-// import { createLogger } from "redux-logger";
-import { persistStore, persistReducer } from "redux-persist";
-import rootReducer from "./";
-import storage from "redux-persist/lib/storage";
-import reduxthunk from "redux-thunk";
+import storage from "./storage";
 
-// Middleware: Redux Persist Config
+import { createStore, applyMiddleware } from "redux";
+import { persistStore, persistReducer } from "redux-persist";
+
+import rootReducer from "./../redux";
+
+import { composeWithDevTools } from "redux-devtools-extension";
+
 const persistConfig = {
-  // Root
   key: "root",
-  // Storage Method (React Native)
-  //   storage: AsyncStorage,
-  // Whitelist (Save Specific Reducers)
-  whitelist: ["auth"],
-  // Blacklist (Don't Save Specific Reducers)
-  blacklist: [],
   storage,
 };
-// Middleware: Redux Persist Persisted Reducer
+
 const persistedReducer = persistReducer(persistConfig, rootReducer);
-// Redux: Store
 
-const composeEnhancers =
-  typeof window === "object" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
-        // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
-      })
-    : compose;
-// const middlewareList = [reduxthunk, createLogger()];
-const middlewareList = [reduxthunk];
-
-const store = createStore(
+let store = createStore(
   persistedReducer,
-  composeEnhancers(applyMiddleware(...middlewareList))
+  composeWithDevTools(applyMiddleware())
 );
-// Middleware: Redux Persist Persister
 let persistor = persistStore(store);
-// Exports
 export { store, persistor };

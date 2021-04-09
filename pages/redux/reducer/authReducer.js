@@ -1,9 +1,8 @@
+import * as types from "./../types";
+
 const INITIAL_STATE = {
   isSignedIn: false,
   token: "",
-  user: {
-    name: "",
-  },
   loading: false,
   errorMsg: "",
   recover_user: {},
@@ -12,7 +11,22 @@ const INITIAL_STATE = {
 };
 
 const authReducer = (state = INITIAL_STATE, action) => {
-  return state;
+  switch (action.type) {
+    case types.SIGN_IN:
+      return {
+        ...state,
+        isSignedIn: true,
+        loading: false,
+        ...action.payload,
+        errorMsg: "",
+      };
+
+    case types.SIGN_OUT:
+      return INITIAL_STATE;
+
+    default:
+      return state;
+  }
 };
 
 export default authReducer;
