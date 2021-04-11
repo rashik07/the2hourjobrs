@@ -8,8 +8,30 @@ export const signIn = (logInformValues) => async (dispatch) => {
     });
     dispatch({ type: types.SIGN_IN, payload: response.data });
   } catch (error) {
-    // dispatch({ type: types.AUTH_FAILED });
-    dispatch(signOut());
+    dispatch({ type: types.AUTH_FAILED });
+  }
+};
+
+export const signUp = (formValues) => async (dispatch) => {
+  try {
+    const response = await backend.post("v1/user/data/", {
+      ...formValues,
+    });
+
+    const { username, password } = formValues;
+
+    dispatch(signIn({ username, password }));
+  } catch (error) {
+    let response = error.response.data;
+
+    Object.entries(response).forEach(([key, value]) => {
+      response[key] = value[0];
+    });
+
+    dispatch({
+      type: types.AUTH_FAILED,
+      payload: response,
+    });
   }
 };
 
