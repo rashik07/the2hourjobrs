@@ -2,8 +2,8 @@
     include '../../component/navbar/navbar.php';
     include '../../component/header/header.php';
 ?>
-<div class="container">
-    <ul class="nav nav-tabs">
+<div class="container main-body bg-white my-5">
+    <ul class="nav nav-tabs pt-3">
         <li class="nav-item">
             <a class="nav-link active" aria-current="page" data-bs-toggle="tab" href="#post">Post</a>
         </li>
@@ -11,8 +11,12 @@
             <a class="nav-link" data-bs-toggle="tab" href="#draft">Draft</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="tab" href="#archive">Link</a>
+            <a class="nav-link" data-bs-toggle="tab" href="#archive">Archive</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" href="#archive">Saved</a>
+        </li>
+      
     </ul>
     <div class="tab-content">
         <div class="tab-pane active"  id="post">
