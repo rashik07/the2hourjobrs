@@ -1,3 +1,7 @@
 .main-body{
     min-height:500px;
 }
+.fa-bell:hover{
+    color:  #395E82 !important;
+    font-size: 30px !important;
+}
