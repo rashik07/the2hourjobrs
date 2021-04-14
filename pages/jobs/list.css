@@ -1,0 +1,32 @@
+.main-body {
+  min-height: 500px;
+}
+.fa-chevron-down {
+  color: #70bdf2;
+}
+.btn-check:focus + .btn,
+.btn:focus {
+  outline: 0;
+  box-shadow: none;
+}
+.title-home {
+  color: #163f66;
+}
+.button-home {
+  background-color: #163f66;
+  color: #fff;
+}
+
+.button-home:hover {
+  background-color: #2468a8;
+  color: #fff;
+}
+
+.clear_filter {
+  color: #163f66;
+  text-decoration: none;
+}
+.clear_filter:hover {
+  color: #163f66;
+  text-decoration: underline;
+}

@@ -1,41 +1,66 @@
 import React from "react";
-import Link from "next/link";
+import DropdownUserMenu from "../../components/DropdownUserMenu";
+import { connect } from "react-redux";
 
-const Navbar = ({ page }) => {
-  let nav_buttons = "";
-  if (page === "landing_page") {
-    nav_buttons = (
-      <div className="col-md-3 text-end">
-        <Link href="/auth/login">
-          <button type="button" className="btn btn-outline-primary me-2 mr-3">
-            Login
-          </button>
-        </Link>
-        <Link href="/auth/signup">
-          <button type="button" className="btn btn-primary">
-            Sign-up
-          </button>
-        </Link>
-      </div>
+import { Navbar, Nav, NavDropdown } from "react-bootstrap";
+
+const getItems = (isSignedIn) => {
+  if (isSignedIn) {
+    return (
+      <>
+        <Nav>
+          <NavDropdown title="Jobs" id="basic-nav-dropdown">
+            <NavDropdown.Item href="#action/3.1">Post a Job</NavDropdown.Item>
+            <NavDropdown.Item href="/jobs/list">Job list</NavDropdown.Item>
+          </NavDropdown>
+          <Nav.Link href="#link">Workers</Nav.Link>
+          <Nav.Link href="#link">Products</Nav.Link>
+          <NavDropdown title="Announcements" id="basic-nav-dropdown">
+            <NavDropdown.Item href="#action/3.1">
+              Create Announcement
+            </NavDropdown.Item>
+            <NavDropdown.Item href="#action/3.3">
+              Announcement list
+            </NavDropdown.Item>
+            <NavDropdown.Divider />
+            <NavDropdown.Item href="#action/3.4">
+              My Announcements
+            </NavDropdown.Item>
+          </NavDropdown>
+          <DropdownUserMenu />
+        </Nav>
+      </>
     );
-  } else if (page === "other_page") {
-    nav_buttons = <div className="col-md-3 text-end"></div>;
   }
 
   return (
-    <header>
-      <nav className="navbar navbar-dark bg-light shadow-sm">
-        <div className="container">
-          <Link className="navbar-brand" href="/">
-            <a>
-              <img src="/img/logo.png" alt="Logo" height={50} />
-            </a>
-          </Link>
-          {nav_buttons}
-        </div>
-      </nav>
-    </header>
+    <Nav>
+      <Nav.Link href="/auth/login">Login</Nav.Link>
+      <Nav.Link href="/auth/signup">Sign up</Nav.Link>
+    </Nav>
   );
 };
 
-export default Navbar;
+const CustomNavbar = ({ isSignedIn }) => {
+  return (
+    <div className="container">
+      <Navbar bg="light" expand="lg">
+        <Navbar.Brand href="/">
+          <img src="/img/logo.png" alt="Logo" height={50} />
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse className="justify-content-end">
+          {getItems(isSignedIn)}
+        </Navbar.Collapse>
+      </Navbar>
+    </div>
+  );
+};
+
+const mapStateToProps = (state) => {
+  return {
+    isSignedIn: state.auth.isSignedIn,
+  };
+};
+
+export default connect(mapStateToProps)(CustomNavbar);

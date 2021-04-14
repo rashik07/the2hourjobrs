@@ -5,8 +5,8 @@ import Head from "next/head";
 import Link from "next/link";
 import { connect } from "react-redux";
 import { useDispatch } from "react-redux";
-import * as types from "./../../redux/types";
 
+import * as types from "./../../redux/types";
 import Form from "../../components/Form";
 import { signUp } from "../../redux/actions/authAction";
 
@@ -34,10 +34,6 @@ const Signup = (props) => {
     <>
       <Head>
         <title>Sign up</title>
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/antd/4.15.1/antd.min.css"
-        />
       </Head>
       <Navbar />
       <main className="form-signin text-center mb-5">

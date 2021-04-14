@@ -1,23 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { connect } from "react-redux";
 
 import Footer from "../../container/footer/footer";
 import Navbar from "../../container/navbar/navbar";
 import { signIn } from "../../redux/actions/authAction";
 
-const handleSubmit = (e, username, password, signIn) => {
+const handleSubmit = (e, username, password, signIn, router) => {
   e.preventDefault();
-  if (username && password) {
-    signIn({ username, password });
-  }
+  if (signIn({ username, password }) === true) router.back();
+
+  // if (username && password) {
+  // }
 };
 
-const Login = ({ signIn }) => {
+const Login = ({ signIn, isSignedIn }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [hidePassword, setHidePassword] = useState(true);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (isSignedIn) router.replace("/");
+  });
 
   return (
     <>
@@ -60,7 +68,9 @@ const Login = ({ signIn }) => {
           <div className="d-grid gap-2 d-flex " style={{ height: "50px" }}>
             <button
               className="w-50 btn btn-lg btn-success fs-6 mr-3"
-              onClick={(e) => handleSubmit(e, username, password, signIn)}
+              onClick={(e) =>
+                handleSubmit(e, username, password, signIn, router)
+              }
             >
               Log in
             </button>
@@ -81,6 +91,10 @@ const Login = ({ signIn }) => {
   );
 };
 
-const mapStateToProps = null;
+const mapStateToProps = (state) => {
+  return {
+    isSignedIn: state.auth.isSignedIn,
+  };
+};
 
 export default connect(mapStateToProps, { signIn })(Login);
