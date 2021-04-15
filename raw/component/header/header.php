@@ -30,4 +30,5 @@
     <link rel="stylesheet" href="../../main_pages/job_details/job_details.css">
     <link rel="stylesheet" href="../../main_pages/job_post/job_post.css">
     <link rel="stylesheet" href="/the-2hour-job-Frontend/raw/component/sidebar/sidebars.css">
+ 
 </head>
