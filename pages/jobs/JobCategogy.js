@@ -32,8 +32,13 @@ const JobCategogy = ({ getJobCategories, categories }) => {
         <strong>Category</strong>
         <i className="ms-auto fas fa-chevron-down" />
       </p>
-      <Select className="mb-3" style={{ width: 200 }} onChange={handleChange}>
-        <Option>Select Category</Option>
+      <Select
+        placeholder="Select Category"
+        allowClear
+        className="mb-3"
+        style={{ width: 200 }}
+        onChange={handleChange}
+      >
         {getOptions(categories)}
       </Select>
     </div>

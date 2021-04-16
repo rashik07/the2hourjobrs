@@ -40,3 +40,13 @@ export const getJobCategories = () => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const getIndustries = () => async (dispatch) => {
+  try {
+    const response = await backend.get("v1/category/industry/", getConfig());
+
+    dispatch({ type: types.GET_JOB_INDUSTRIES, payload: response.data });
+  } catch (error) {
+    console.log(error);
+  }
+};

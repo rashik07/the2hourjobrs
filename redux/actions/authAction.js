@@ -17,7 +17,7 @@ export const signIn = (logInformValues) => async (dispatch) => {
 
 export const signUp = (formValues) => async (dispatch) => {
   try {
-    const response = await backend.post("v1/user/data/", {
+    await backend.post("v1/user/data/", {
       ...formValues,
     });
 

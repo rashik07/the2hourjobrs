@@ -2,7 +2,8 @@ import Head from "next/head";
 import React from "react";
 import Navbar from "../../container/navbar/navbar";
 import JobCategogy from "./JobCategogy";
-
+import JobIndustry from "./JobIndustry";
+import SelectedFilter from "./SelectedFilter";
 const JobList = () => {
   return (
     <>
@@ -11,6 +12,7 @@ const JobList = () => {
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/antd/4.15.1/antd.min.css"
         />
+        <title>Job list</title>
       </Head>
       <Navbar />
       <div className="container main-body">
@@ -18,102 +20,8 @@ const JobList = () => {
           {/*1st part*/}
           <div className="col-3">
             <h3 className="m-sm-bottom">Filter By</h3>
-            {/*Category */}
             <JobCategogy />
-            {/*industries */}
-            <div className="border-bottom">
-              <p>
-                <a
-                  className="d-flex btn text-start col-12  "
-                  data-bs-toggle="collapse"
-                  href="#collapseIndustries"
-                  role="button"
-                  aria-expanded="false"
-                  aria-controls="collapseIndustries"
-                >
-                  <strong>Industries</strong>
-                  <i className="ms-auto fas fa-chevron-down" />
-                </a>
-              </p>
-              <div className="collapse" id="collapseIndustries">
-                <div className="form-check">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    defaultValue
-                    id="flexCheckDefault"
-                  />
-                  <label
-                    className="form-check-label"
-                    htmlFor="flexCheckDefault"
-                  >
-                    Default checkbox
-                  </label>
-                </div>
-                <div className="form-check">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    defaultValue
-                    id="flexCheckChecked"
-                    defaultChecked
-                  />
-                  <label
-                    className="form-check-label"
-                    htmlFor="flexCheckChecked"
-                  >
-                    Checked checkbox
-                  </label>
-                </div>
-              </div>
-            </div>
-            {/*Location */}
-            <div className="border-bottom ">
-              <p>
-                <a
-                  className="d-flex btn text-start col-12  "
-                  data-bs-toggle="collapse"
-                  href="#collapseLocation"
-                  role="button"
-                  aria-expanded="false"
-                  aria-controls="collapseLocation"
-                >
-                  <strong>Location</strong>
-                  <i className="ms-auto fas fa-chevron-down" />
-                </a>
-              </p>
-              <div className="collapse" id="collapseLocation">
-                <div className="form-check">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    defaultValue
-                    id="flexCheckDefault"
-                  />
-                  <label
-                    className="form-check-label"
-                    htmlFor="flexCheckDefault"
-                  >
-                    Default checkbox
-                  </label>
-                </div>
-                <div className="form-check">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    defaultValue
-                    id="flexCheckChecked"
-                    defaultChecked
-                  />
-                  <label
-                    className="form-check-label"
-                    htmlFor="flexCheckChecked"
-                  >
-                    Checked checkbox
-                  </label>
-                </div>
-              </div>
-            </div>
+            <JobIndustry />
           </div>
           {/*2nd part*/}
           <div className="col-9 bg-white rounded border ">
@@ -128,6 +36,7 @@ const JobList = () => {
                 Search
               </button>
             </div>
+            <SelectedFilter />
             <div className="row d-flex align-items-center border m-3 rounded">
               <div className="col-3">
                 <img
