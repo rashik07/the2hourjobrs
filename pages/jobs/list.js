@@ -1,10 +1,10 @@
 import Head from "next/head";
 import React, { useState } from "react";
 import Navbar from "../../container/navbar/navbar";
-import JobCategogy from "./JobCategogy";
-import JobIndustry from "./JobIndustry";
-import KeywordSearch from "./KeywordSearch";
-import SelectedFilter from "./SelectedFilter";
+import JobCategogy from "./components/JobCategogy";
+import JobIndustry from "./components/JobIndustry";
+import KeywordSearch from "./components/KeywordSearch";
+import SelectedFilter from "./components/SelectedFilter";
 const JobList = () => {
   const [filter, setFilter] = useState({});
 

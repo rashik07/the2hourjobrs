@@ -1,7 +1,0 @@
-.badge {
-  color: aliceblue;
-}
-
-.badge > button > svg > path {
-  color: aliceblue !important;
-}

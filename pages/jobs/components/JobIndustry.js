@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Select } from "antd";
 import { connect } from "react-redux";
-import { getIndustries } from "../../redux/actions/jobAction";
+import { getIndustries } from "@/redux/actions/jobAction";
 
 const JobIndustry = ({ industries, getIndustries, filter, setFilter }) => {
   const { Option } = Select;
@@ -23,7 +23,6 @@ const JobIndustry = ({ industries, getIndustries, filter, setFilter }) => {
       </p>
       <Select
         placeholder="Select Industry"
-        allowClear
         className="mb-3"
         style={{ width: 200 }}
         onChange={handleChange}

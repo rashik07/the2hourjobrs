@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 
 import Footer from "../../container/footer/footer";
 import Navbar from "../../container/navbar/navbar";
-import { signIn } from "../../redux/actions/authAction";
+import { signIn } from "@/redux/actions/authAction";
 
 const handleSubmit = (e, username, password, signIn, router) => {
   e.preventDefault();

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Select } from "antd";
 import { connect } from "react-redux";
-import { getJobCategories } from "../../redux/actions/jobAction";
+import { getJobCategories } from "@/redux/actions/jobAction";
 
 const JobCategogy = ({ getJobCategories, categories, filter, setFilter }) => {
   const { Option, OptGroup } = Select;
@@ -35,7 +35,6 @@ const JobCategogy = ({ getJobCategories, categories, filter, setFilter }) => {
       </p>
       <Select
         placeholder="Select Category"
-        allowClear
         className="mb-3"
         style={{ width: 200 }}
         onChange={handleChange}
