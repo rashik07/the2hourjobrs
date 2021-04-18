@@ -1,10 +1,13 @@
 import Head from "next/head";
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../../container/navbar/navbar";
-import JobCategogy from "./JobCategogy";
-import JobIndustry from "./JobIndustry";
-import SelectedFilter from "./SelectedFilter";
+import JobCategogy from "./components/JobCategogy";
+import JobIndustry from "./components/JobIndustry";
+import KeywordSearch from "./components/KeywordSearch";
+import SelectedFilter from "./components/SelectedFilter";
 const JobList = () => {
+  const [filter, setFilter] = useState({});
+
   return (
     <>
       <Head>
@@ -12,6 +15,7 @@ const JobList = () => {
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/antd/4.15.1/antd.min.css"
         />
+
         <title>Job list</title>
       </Head>
       <Navbar />
@@ -20,23 +24,13 @@ const JobList = () => {
           {/*1st part*/}
           <div className="col-3">
             <h3 className="m-sm-bottom">Filter By</h3>
-            <JobCategogy />
-            <JobIndustry />
+            <JobCategogy filter={filter} setFilter={setFilter} />
+            <JobIndustry filter={filter} setFilter={setFilter} />
           </div>
           {/*2nd part*/}
           <div className="col-9 bg-white rounded border ">
-            <div className="d-flex m-3">
-              <input
-                className="form-control me-2 mt-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-              />
-              <button className="btn mt-2 button-home" type="submit">
-                Search
-              </button>
-            </div>
-            <SelectedFilter />
+            <KeywordSearch filter={filter} setFilter={setFilter} />
+            <SelectedFilter filter={filter} setFilter={setFilter} />
             <div className="row d-flex align-items-center border m-3 rounded">
               <div className="col-3">
                 <img
