@@ -6,9 +6,9 @@ import Link from "next/link";
 import { connect } from "react-redux";
 import { useDispatch } from "react-redux";
 
-import * as types from "./../../redux/types";
+import * as types from "@/redux/types";
 import Form from "../../components/Form";
-import { signUp } from "../../redux/actions/authAction";
+import { signUp } from "@/redux/actions/authAction";
 
 const Signup = (props) => {
   const dispatch = useDispatch();
