@@ -4,18 +4,18 @@ const sidebar = () => {
   return (
     <div
       className="d-flex flex-column p-3 text-white bg-dark"
-      style={{ width: "280px", minHeight: "100%" }}
+      style={{  minHeight: "100%" }}
     >
       <a
         href="/"
-        className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"
+        className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none  border-bottom"
       >
         <span className="fs-4">My Profile</span>
       </a>
       <hr />
       <ul className="nav nav-pills flex-column mb-auto">
         <li className="nav-item">
-          <a href="#" className="nav-link active">
+          <a href="../../Profile/Profile_info" className="nav-link active">
             <i className="fas fa-users" />
             Personal Info
           </a>
@@ -46,11 +46,11 @@ const sidebar = () => {
         </li>
         <a
           href="/"
-          className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"
+          className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none  border-bottom"
         >
-          <span className="fs-4">My Profile</span>
+          <span className="fs-4">My Profile View</span>
         </a>
-        <hr />
+      <hr/>
         <li>
           <a href="#" className="nav-link text-white">
             <i className="fas fa-cogs" />
