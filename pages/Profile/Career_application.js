@@ -64,7 +64,7 @@ function handleChange(value) {
                     href="https://cdnjs.cloudflare.com/ajax/libs/antd/4.15.1/antd.min.css"
                 />
            
-                <title>Profile Info</title>
+                <title>Career Application</title>
             </Head>
             <Navbar />
             <div className="container">

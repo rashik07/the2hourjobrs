@@ -36,7 +36,7 @@ const sidebar = () => {
               </a>
             </li>
             <li>
-              <a href="#" className="nav-link text-white">
+              <a href="../../Profile/Employment" className="nav-link text-white">
                 <i className="fas fa-laptop-house" />
                 Employment
               </a>
