@@ -13,12 +13,7 @@ const Add_experience = () => {
         <div>
             <Card
                     style={{ width: 250 }}
-                    cover={
-                    <img
-                        alt="example"
-                        src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-                    />
-                    }
+                    
                     actions={[
                     <SettingOutlined key="setting" />,
                     <EditOutlined key="edit" />,

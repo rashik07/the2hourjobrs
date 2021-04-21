@@ -136,7 +136,7 @@ const Profile_info = () => {
                                   />
                             </Form.Item>
                             <Form.Item label="NID Number">
-                            <Input placeholder="input NID number" />
+                                <Input placeholder="input NID number" />
                             </Form.Item>
                             <Form.Item label="Gender">
                                 <Radio.Group onChange={onChange} value={value}>
