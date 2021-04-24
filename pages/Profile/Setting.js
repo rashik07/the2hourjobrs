@@ -2,11 +2,11 @@ import Head from 'next/head';
 import React, { useState } from 'react';
 import Navbar from '../../container/navbar/navbar';
 import Sidebar from "../../container/sidebar/sidebar";
-import Add_experience from "../../components/Add_experience"
 
-import {Form,Input, Button, Radio ,DatePicker,Typography,Divider, Space,TextArea  } from 'antd';
 
-const Employment = () => {
+import {Form,Input, Button, Radio ,DatePicker,Typography,Divider,TextArea , Space  } from 'antd';
+
+const Setting = () => {
     const { RangePicker } = DatePicker;
     const { TextArea } = Input;
     const { Title } = Typography;
@@ -45,7 +45,7 @@ const Employment = () => {
                     href="https://cdnjs.cloudflare.com/ajax/libs/antd/4.15.1/antd.min.css"
                 />
            
-                <title>Employment Info</title>
+                <title>Setting</title>
             </Head>
             <Navbar />
             <div className="container">
@@ -55,20 +55,9 @@ const Employment = () => {
             </div>
             
 
-                <main className="col-md-9   my-4">
+                <main className="col-md-9   my-4" style={{ height: "600px" }}>
                     
-                        <div className="row">
-                            <div className="col-4">
-                                <Add_experience />
-                            </div>
-                            <div className="col-4">
-                                <Add_experience />
-                            </div>
-                            <div className="col-4">
-                                <Add_experience />
-                            </div>
-                            
-                        </div> 
+                        
                         <Form 
                                 {...formItemLayout}
                                     layout={formLayout}
@@ -79,32 +68,18 @@ const Employment = () => {
                                 
                                     >
                            
-                                <Divider> <Title>Add Experience</Title></Divider>
-                                <Form.Item label="Company Name:">
-                                        <Input placeholder="company name" />
+                                <Divider> <Title>Recovery Password</Title></Divider>
+                                <Form.Item label="Current Password:">
+                                        <Input placeholder="current password" />
                                 </Form.Item>
-                                <Form.Item label="Company Business:">
-                                        <Input placeholder="company Business" />
+                                <Form.Item label="New Password:">
+                                        <Input placeholder="new password" />
                                 </Form.Item>
-                                <Form.Item label="Designation:">
-                                        <Input placeholder="Designation" />
-                                </Form.Item>
-                                <Form.Item label="Department:">
-                                        <Input placeholder="Department " />
-                                </Form.Item>
-                                <Form.Item label="Location:">
-                                        <Input placeholder="Location " />
-                                </Form.Item>
-                                <Form.Item label="Time:">
-                                <Space direction="vertical" size={16}>
-                                    <RangePicker />
-                                    
-                                    
-                                </Space>
-                                
+                                <Form.Item label="Retype Password:">
+                                        <Input placeholder="Retype password" />
                                 </Form.Item>
                                 <Form.Item className="text-center">
-                                    <Button type="primary">Add</Button>
+                                    <Button type="primary">Submit</Button>
                                 </Form.Item>
                                 
                         </Form>
@@ -117,4 +92,4 @@ const Employment = () => {
     );
 };
 
-export default Employment;
+export default Setting;

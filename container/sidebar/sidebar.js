@@ -42,7 +42,7 @@ const sidebar = () => {
               </a>
             </li>
             <li>
-              <a href="#" className="nav-link text-white">
+              <a href="../../Profile/Portfolio" className="nav-link text-white">
                 <i className="fas fa-border-none" />
                 Portfolio
               </a>
@@ -55,7 +55,7 @@ const sidebar = () => {
             </a>
           <hr/>
             <li>
-              <a href="#" className="nav-link text-white">
+              <a href="../../Profile/Setting" className="nav-link text-white">
                 <i className="fas fa-cogs" />
                 Settings
               </a>

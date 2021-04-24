@@ -3,10 +3,10 @@ import React, { useState } from 'react';
 import Navbar from '../../container/navbar/navbar';
 import Sidebar from "../../container/sidebar/sidebar";
 import Add_experience from "../../components/Add_experience"
+import { Select } from "antd";
+import {Form,Input, Button, Radio ,DatePicker,Typography,Divider,TextArea , Space  } from 'antd';
 
-import {Form,Input, Button, Radio ,DatePicker,Typography,Divider, Space,TextArea  } from 'antd';
-
-const Employment = () => {
+const Portfolio = () => {
     const { RangePicker } = DatePicker;
     const { TextArea } = Input;
     const { Title } = Typography;
@@ -45,7 +45,7 @@ const Employment = () => {
                     href="https://cdnjs.cloudflare.com/ajax/libs/antd/4.15.1/antd.min.css"
                 />
            
-                <title>Employment Info</title>
+                <title>Portfolio Info</title>
             </Head>
             <Navbar />
             <div className="container">
@@ -79,21 +79,15 @@ const Employment = () => {
                                 
                                     >
                            
-                                <Divider> <Title>Add Experience</Title></Divider>
-                                <Form.Item label="Company Name:">
-                                        <Input placeholder="company name" />
+                                <Divider> <Title>Add Portfolio</Title></Divider>
+                                <Form.Item label="Project Title:">
+                                        <Input placeholder="project title" />
                                 </Form.Item>
-                                <Form.Item label="Company Business:">
-                                        <Input placeholder="company Business" />
+                                <Form.Item label="Skills:">
+                                        <Input placeholder="skills" />
                                 </Form.Item>
-                                <Form.Item label="Designation:">
-                                        <Input placeholder="Designation" />
-                                </Form.Item>
-                                <Form.Item label="Department:">
-                                        <Input placeholder="Department " />
-                                </Form.Item>
-                                <Form.Item label="Location:">
-                                        <Input placeholder="Location " />
+                                <Form.Item label="Description">
+                                    <TextArea rows={4} placeholder="description" />
                                 </Form.Item>
                                 <Form.Item label="Time:">
                                 <Space direction="vertical" size={16}>
@@ -117,4 +111,4 @@ const Employment = () => {
     );
 };
 
-export default Employment;
+export default Portfolio;
