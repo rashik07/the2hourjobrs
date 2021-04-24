@@ -10,9 +10,11 @@ body {
   align-items: center;
   
   padding-bottom: 40px;
-  background-color:whitesmoke;
+  background-color:white;
 }
-
+.container{
+  background-color: whitesmoke;
+}
 .form-signin {
   width: 100%;
   max-width: 530px;
