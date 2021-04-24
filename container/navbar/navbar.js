@@ -1,17 +1,28 @@
 import React from "react";
 import DropdownUserMenu from "../../components/DropdownUserMenu";
 import { connect } from "react-redux";
+import { useRouter } from "next/router";
 
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 
-const getItems = (isSignedIn) => {
+const getItems = (isSignedIn, router) => {
   if (isSignedIn) {
     return (
       <>
         <Nav>
           <NavDropdown title="Jobs" id="basic-nav-dropdown">
-            <NavDropdown.Item href="#action/3.1">Post a Job</NavDropdown.Item>
-            <NavDropdown.Item href="/jobs/list">Job list</NavDropdown.Item>
+            <NavDropdown.Item
+              href="#"
+              onClick={() => router.push("/jobs/post")}
+            >
+              Post a Job
+            </NavDropdown.Item>
+            <NavDropdown.Item
+              href="#"
+              onClick={() => router.push("/jobs/list")}
+            >
+              Job list
+            </NavDropdown.Item>
           </NavDropdown>
           <Nav.Link href="#link">Workers</Nav.Link>
           <Nav.Link href="#link">Products</Nav.Link>
@@ -35,22 +46,28 @@ const getItems = (isSignedIn) => {
 
   return (
     <Nav>
-      <Nav.Link href="/auth/login">Login</Nav.Link>
-      <Nav.Link href="/auth/signup">Sign up</Nav.Link>
+      <Nav.Link href="#" onClick={() => router.push("/auth/login")}>
+        Login
+      </Nav.Link>
+      <Nav.Link href="#" onClick={() => router.push("/auth/signup")}>
+        Sign up
+      </Nav.Link>
     </Nav>
   );
 };
 
 const CustomNavbar = ({ isSignedIn }) => {
+  const router = useRouter();
+
   return (
     <div className="container">
       <Navbar bg="light" expand="lg">
-        <Navbar.Brand href="/">
+        <Navbar.Brand onClick={() => router.push("/")} href="#">
           <img src="/img/logo.png" alt="Logo" height={50} />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse className="justify-content-end">
-          {getItems(isSignedIn)}
+          {getItems(isSignedIn, router)}
         </Navbar.Collapse>
       </Navbar>
     </div>
