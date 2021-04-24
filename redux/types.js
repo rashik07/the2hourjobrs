@@ -8,6 +8,10 @@ export const RESET_SIGN_UP = "RESET_SIGN_UP";
 //************** JOB TYPES *********************/
 export const GET_JOB_CATEGORIES = "GET_JOB_CATEGORIES";
 export const GET_JOB_INDUSTRIES = "GET_JOB_INDUSTRIES";
+export const GET_EDUCATION = "GET_EDUCATION";
+export const GET_LOCATION_LIST = "GET_LOCATION_LIST";
+export const SAVE_TEMPORARY_JOBPOST = "SAVE_TEMPORARY_JOBPOST";
+export const UNSAVE_TEMPORARY_JOBPOST = "UNSAVE_TEMPORARY_JOBPOST";
 export const CREATE_JOB = "CREATE_JOB";
 export const DELETE_JOB = "DELETE_JOB";
 export const UPDATE_JOB = "UPDATE_JOB";
