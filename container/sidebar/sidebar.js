@@ -30,7 +30,7 @@ const sidebar = () => {
               </a>
             </li>
             <li>
-              <a href="#" className="nav-link text-white">
+              <a href="../../Profile/Education" className="nav-link text-white">
                 <i className="fas fa-university" />
                 Education
               </a>
