@@ -19,7 +19,6 @@ const JobIndustry = ({ industries, getIndustries, filter, setFilter }) => {
     <div className="border-bottom">
       <p>
         <strong>Industry</strong>
-        <i className="ms-auto fas fa-chevron-down" />
       </p>
       <Select
         placeholder="Select Industry"

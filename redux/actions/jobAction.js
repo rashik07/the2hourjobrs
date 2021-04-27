@@ -52,6 +52,16 @@ export const getIndustries = () => async (dispatch) => {
   }
 };
 
+export const getAllJobs = () => async (dispatch) => {
+  try {
+    const response = await backend.get("v1/jobpost/data/", getConfig());
+
+    dispatch({ type: types.GET_ALL_JOB, payload: response.data });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const getEducation = () => async (dispatch) => {
   try {
     const response = await backend.get("v1/category/education/parent/");

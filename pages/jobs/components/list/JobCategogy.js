@@ -31,7 +31,6 @@ const JobCategogy = ({ getJobCategories, categories, filter, setFilter }) => {
     <div className="border-bottom">
       <p>
         <strong>Category</strong>
-        <i className="ms-auto fas fa-chevron-down" />
       </p>
       <Select
         placeholder="Select Category"

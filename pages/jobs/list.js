@@ -3,9 +3,10 @@ import React, { useState } from "react";
 import Navbar from "../../container/navbar/navbar";
 import JobCategogy from "./components/list/JobCategogy";
 import JobIndustry from "./components/list/JobIndustry";
+import JobList from "./components/list/JobList";
 import KeywordSearch from "./components/list/KeywordSearch";
 import SelectedFilter from "./components/list/SelectedFilter";
-const JobList = () => {
+const Jobs = () => {
   const [filter, setFilter] = useState({});
 
   return (
@@ -15,7 +16,10 @@ const JobList = () => {
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/antd/4.15.1/antd.min.css"
         />
-
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        />
         <title>Job list</title>
       </Head>
       <Navbar />
@@ -31,51 +35,7 @@ const JobList = () => {
           <div className="col-9 bg-white rounded border ">
             <KeywordSearch filter={filter} setFilter={setFilter} />
             <SelectedFilter filter={filter} setFilter={setFilter} />
-            <div className="row d-flex align-items-center border m-3 rounded">
-              <div className="col-3">
-                <img
-                  src="https://previews.123rf.com/images/roxanabalint/roxanabalint1312/roxanabalint131200148/24476498-demo-grunge-rubber-stamp-on-white.jpg"
-                  className="card-img-top"
-                  alt="..."
-                />
-              </div>
-              <div className="col-6 text-muted fs-6">
-                <h4 className=" text-dark">
-                  <strong className="title-home">
-                    Support Engineer, WordPress
-                  </strong>
-                  <br />
-                </h4>
-                <h5 className=" text-dark">
-                  <strong>TheICTHub</strong>
-                  <br />
-                </h5>
-                <p>
-                  <i className="fas fa-map-marker-alt" />
-                  Mirpur <br />
-                </p>
-                <p>
-                  <i className="fas fa-book-open" />
-                  It doesn`t matter where you went to college or what your CGPA
-                  was as long as you are smart, ...
-                  <br />
-                </p>
-                <p>
-                  <i className="fas fa-briefcase" />1 to 3 year(s)
-                </p>
-              </div>
-              <div className="col-3 btn-group-vertical">
-                <a href="#" className="btn button-home rounded">
-                  Apply
-                </a>
-                <a href="#" className="btn button-home mt-2 rounded">
-                  Details
-                </a>
-                <a href="#" className="btn button-home mt-2 rounded">
-                  Save Job
-                </a>
-              </div>
-            </div>
+            <JobList />
           </div>
         </div>
       </div>
@@ -83,4 +43,4 @@ const JobList = () => {
   );
 };
 
-export default JobList;
+export default Jobs;

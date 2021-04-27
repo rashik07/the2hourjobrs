@@ -1,6 +1,7 @@
 import * as types from "./../types";
 
 const INITIAL_STATE = {
+  id: "",
   isSignedIn: false,
   token: "",
   loading: false,

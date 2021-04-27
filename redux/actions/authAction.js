@@ -7,6 +7,7 @@ export const signIn = (logInformValues) => async (dispatch) => {
       ...logInformValues,
     });
     dispatch({ type: types.SIGN_IN, payload: response.data });
+    console.log(response.data);
     return true;
     // router.back();
   } catch (error) {

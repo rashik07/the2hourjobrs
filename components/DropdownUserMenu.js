@@ -28,7 +28,11 @@ class DropdownUserMenu extends Component {
           <li className="user-footer text-center">
             <div className="clearfix">
               <div className="btn-group">
-                <a href="#" className="btn btn-sm btn-default">
+                <a
+                  href="#"
+                  onClick={() => this.props.router.push("Profile/Profile_info")}
+                  className="btn btn-sm btn-default"
+                >
                   <i className="fa fa-user" /> Profile
                 </a>
               </div>

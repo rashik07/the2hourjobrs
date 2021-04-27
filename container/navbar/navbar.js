@@ -38,7 +38,7 @@ const getItems = (isSignedIn, router) => {
               My Announcements
             </NavDropdown.Item>
           </NavDropdown>
-          <DropdownUserMenu />
+          <DropdownUserMenu router={router} />
         </Nav>
       </>
     );

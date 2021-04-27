@@ -23,6 +23,7 @@ const INITIAL_STATE = {
   },
   education: {},
   location: [],
+  all_jobs: [],
 };
 
 const jobReducer = (state = INITIAL_STATE, action) => {
@@ -32,6 +33,9 @@ const jobReducer = (state = INITIAL_STATE, action) => {
 
     case types.GET_JOB_INDUSTRIES:
       return { ...state, industries: action.payload };
+
+    case types.GET_ALL_JOB:
+      return { ...state, all_jobs: action.payload };
 
     case types.GET_EDUCATION:
       return { ...state, education: action.payload };

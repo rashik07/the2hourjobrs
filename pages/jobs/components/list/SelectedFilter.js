@@ -38,26 +38,29 @@ const SelectedFilter = ({ filter, setFilter }) => {
   }, [state]);
 
   return (
-    <div style={{ margin: 15 }}>
-      <div className="input-group">
-        <InputTags
-          onChange={() => {}}
-          values={state}
-          onTags={(value) => setState(value.values)}
-        />
-        <button
-          className="btn btn-outline-secondary"
-          type="button"
-          data-testid="button-clearAll"
-          onClick={() => {
-            setFilter({});
-          }}
-        >
-          Delete all
-        </button>
+    <>
+      <div style={{ margin: 15, paddingLeft: 15 }}>
+        <div className="input-group row">
+          <InputTags
+            onChange={() => {}}
+            values={state}
+            onTags={(value) => setState(value.values)}
+          />
+          <button
+            className="btn btn-outline-secondary"
+            type="button"
+            data-testid="button-clearAll"
+            onClick={() => {
+              setFilter({});
+            }}
+          >
+            X
+          </button>
+          <button className="btn button-home ml-2">Search</button>
+        </div>
       </div>
       <hr />
-    </div>
+    </>
   );
 };
 
