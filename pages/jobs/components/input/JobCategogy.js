@@ -3,13 +3,8 @@ import { Select } from "antd";
 import { connect } from "react-redux";
 import { getJobCategories } from "@/redux/actions/jobAction";
 
-const JobCategogy = ({ getJobCategories, categories, filter, setFilter }) => {
+const JobCategogy = ({ getJobCategories, categories, setValue, onClear }) => {
   const { Option, OptGroup } = Select;
-
-  function handleChange(value) {
-    const new_filter = { ...filter, category: JSON.parse(value) };
-    setFilter(new_filter);
-  }
 
   useEffect(() => {
     getJobCategories();
@@ -28,19 +23,16 @@ const JobCategogy = ({ getJobCategories, categories, filter, setFilter }) => {
   };
 
   return (
-    <div className="border-bottom">
-      <p>
-        <strong>Category</strong>
-      </p>
-      <Select
-        placeholder="Select Category"
-        className="mb-3"
-        style={{ width: 200 }}
-        onChange={handleChange}
-      >
-        {getOptions(categories)}
-      </Select>
-    </div>
+    <Select
+      placeholder="Select Category"
+      className="mb-3"
+      style={{ width: 200 }}
+      onChange={setValue}
+      onClear={onClear}
+      allowClear
+    >
+      {getOptions(categories)}
+    </Select>
   );
 };
 

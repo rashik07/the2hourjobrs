@@ -8,9 +8,9 @@ import {
 import TagInput from "components/TagInput";
 import CheckBox from "components/CheckBox";
 import { Radio } from "antd";
-import EducationField from "pages/jobs/components/list/EducationField";
+import EducationField from "pages/jobs/components/input/EducationField";
 import _ from "lodash";
-import LocationList from "../list/LocationList";
+import LocationList from "../input/LocationList";
 
 const renderItem = (item, children, saveTemporayJobPost, temp_jobpost) => {
   switch (item) {
@@ -246,6 +246,7 @@ const renderItem = (item, children, saveTemporayJobPost, temp_jobpost) => {
           <LocationList
             value={temp_jobpost.job_location}
             setValue={setJobLocation}
+            multiple={true}
           />
         </>
       );

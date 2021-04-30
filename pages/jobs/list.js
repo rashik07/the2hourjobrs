@@ -1,11 +1,20 @@
 import Head from "next/head";
 import React, { useState } from "react";
+
 import Navbar from "../../container/navbar/navbar";
-import JobCategogy from "./components/list/JobCategogy";
-import JobIndustry from "./components/list/JobIndustry";
 import JobList from "./components/list/JobList";
 import KeywordSearch from "./components/list/KeywordSearch";
 import SelectedFilter from "./components/list/SelectedFilter";
+import LocationFilter from "./components/list/LocationFilter";
+import PostTimeFilter from "./components/list/PostTimeFilter";
+import DeadlineFilter from "./components/list/DeadlineFilter";
+import GenderFilter from "./components/list/GenderFilter";
+import EmploymentStatusFilter from "./components/list/EmploymentStatusFilter";
+import JobCategoryFilter from "./components/list/JobCategoryFilter";
+import JobIndustryFilter from "./components/list/JobIndustryFilter";
+import ExperienceFilter from "./components/list/ExperienceFilter";
+import AgeFilter from "./components/list/AgeFilter";
+
 const Jobs = () => {
   const [filter, setFilter] = useState({});
 
@@ -28,8 +37,15 @@ const Jobs = () => {
           {/*1st part*/}
           <div className="col-3">
             <h3 className="m-sm-bottom">Filter By</h3>
-            <JobCategogy filter={filter} setFilter={setFilter} />
-            <JobIndustry filter={filter} setFilter={setFilter} />
+            <JobCategoryFilter filter={filter} setFilter={setFilter} />
+            <JobIndustryFilter filter={filter} setFilter={setFilter} />
+            <LocationFilter filter={filter} setFilter={setFilter} />
+            <PostTimeFilter filter={filter} setFilter={setFilter} />
+            <DeadlineFilter filter={filter} setFilter={setFilter} />
+            <GenderFilter filter={filter} setFilter={setFilter} />
+            <EmploymentStatusFilter filter={filter} setFilter={setFilter} />
+            <ExperienceFilter filter={filter} setFilter={setFilter} />
+            <AgeFilter filter={filter} setFilter={setFilter} />
           </div>
           {/*2nd part*/}
           <div className="col-9 bg-white rounded border ">

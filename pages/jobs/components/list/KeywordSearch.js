@@ -16,7 +16,7 @@ const KeywordSearch = ({ filter, setFilter }) => {
     <form className="row input-group m-3 mr-4">
       <input
         className="form-control mt-2"
-        placeholder="Search"
+        placeholder="Type and hit Enter"
         onChange={(e) => setKeyword(e.target.value)}
         value={keyword}
       />

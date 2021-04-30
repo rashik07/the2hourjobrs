@@ -27,6 +27,16 @@ const SpecificJobPost = ({ job, userid }) => {
     return location_list.join(", ");
   };
 
+  const getEducation = (education) => {
+    const education_list = [];
+
+    education.forEach((edu) => {
+      education_list.push(edu.name);
+    });
+
+    return education_list.join(", ");
+  };
+
   return (
     <div className="row d-flex align-items-center border m-3 rounded">
       <div className="col-9 text-muted fs-6">
@@ -46,8 +56,7 @@ const SpecificJobPost = ({ job, userid }) => {
         </p>
         <p>
           <i className="fas fa-book-open mr-2" />
-          It doesn`t matter where you went to college or what your CGPA was as
-          long as you are smart, ...
+          {getEducation(job.education)}
           <br />
         </p>
         <p>

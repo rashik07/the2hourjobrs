@@ -3,16 +3,19 @@ import { TreeSelect } from "antd";
 import { connect } from "react-redux";
 import { getLocationList } from "@/redux/actions/jobAction";
 
-const LocationList = ({ getLocationList, location, value, setValue }) => {
+const LocationList = ({
+  getLocationList,
+  location,
+  value,
+  setValue,
+  multiple,
+  onClear,
+}) => {
   useEffect(() => {
     getLocationList();
   }, []);
 
   const { TreeNode } = TreeSelect;
-
-  const onChange = (val) => {
-    setValue(val);
-  };
 
   return (
     <TreeSelect
@@ -20,10 +23,10 @@ const LocationList = ({ getLocationList, location, value, setValue }) => {
       style={{ width: "100%" }}
       value={value}
       dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
-      placeholder="Please select"
       allowClear
-      multiple
-      onChange={onChange}
+      multiple={multiple}
+      onChange={setValue}
+      onClear={onClear}
     >
       {location.map((divison) => {
         return (
