@@ -6,3 +6,13 @@
   max-height: 0;
   max-width: 0;
 }
+
+.anticon svg {
+  margin-bottom: 50%;
+}
+
+.ant-tag {
+  font-size: inherit;
+  padding-top: 1%;
+  margin-top: 1%;
+}

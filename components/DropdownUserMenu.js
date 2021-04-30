@@ -30,7 +30,9 @@ class DropdownUserMenu extends Component {
               <div className="btn-group">
                 <a
                   href="#"
-                  onClick={() => this.props.router.push("Profile/Profile_info")}
+                  onClick={() =>
+                    this.props.router.push("/Profile/Profile_info")
+                  }
                   className="btn btn-sm btn-default"
                 >
                   <i className="fa fa-user" /> Profile
