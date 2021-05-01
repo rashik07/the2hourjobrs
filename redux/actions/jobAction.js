@@ -126,7 +126,6 @@ export const postJob = (data, router) => async (dispatch) => {
           { jobpost: id, skill },
           getConfig()
         );
-        console.log(skill_response.data);
       } catch (error) {
         console.log(error.response);
       }
@@ -140,7 +139,6 @@ export const postJob = (data, router) => async (dispatch) => {
           { jobpost: id, workplace: wp },
           getConfig()
         );
-        console.log(workplace_response.data);
       } catch (error) {
         console.log(error.response);
       }
@@ -154,7 +152,6 @@ export const postJob = (data, router) => async (dispatch) => {
           { jobpost: id, name: es },
           getConfig()
         );
-        console.log(es_response.data);
       } catch (error) {
         console.log(error.response);
       }
@@ -168,7 +165,6 @@ export const postJob = (data, router) => async (dispatch) => {
           { jobpost: id, education: edu },
           getConfig()
         );
-        console.log(edu_response.data);
       } catch (error) {
         console.log(error.response);
       }
@@ -182,7 +178,6 @@ export const postJob = (data, router) => async (dispatch) => {
           { jobpost: id, gender: gndr },
           getConfig()
         );
-        console.log(gender_response.data);
       } catch (error) {
         console.log(error.response);
       }
@@ -198,7 +193,6 @@ export const postJob = (data, router) => async (dispatch) => {
             { jobpost: id, division: location.id },
             getConfig()
           );
-          console.log(location_response.data);
         } catch (error) {
           console.log(error.response);
         }
@@ -209,7 +203,6 @@ export const postJob = (data, router) => async (dispatch) => {
             { jobpost: id, district: location.id },
             getConfig()
           );
-          console.log(location_response.data);
         } catch (error) {
           console.log(error.response);
         }
@@ -220,7 +213,6 @@ export const postJob = (data, router) => async (dispatch) => {
             { jobpost: id, thana: location.id },
             getConfig()
           );
-          console.log(location_response.data);
         } catch (error) {
           console.log(error.response);
         }

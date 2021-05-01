@@ -8,8 +8,6 @@ import _ from "lodash";
 const SelectedFilter = ({ filter, setFilter }) => {
   const [state, setState] = useState([]);
 
-  console.log(filter);
-
   useEffect(() => {
     /* FOR ADDING ITEMS
        newState.push(The Item you want to show); */
@@ -63,6 +61,7 @@ const SelectedFilter = ({ filter, setFilter }) => {
       }
     };
 
+    // Object properties might not be available at the begining, so we are applying try catch
     try {
       cleanUpFilter("category", filter.category.name);
     } catch (error) {}
@@ -94,37 +93,9 @@ const SelectedFilter = ({ filter, setFilter }) => {
     cleanUpFilter("keyword", filter.keyword);
     cleanUpFilter("gender", filter.gender);
     cleanUpFilter("employmentStatus", filter.employmentStatus);
-
-    // if (filter.category && !state.includes(filter.category.name)) {
-    //   setFilter(_.omit(filter, ["category"]));
-    // } else if (filter.industry && !state.includes(filter.industry.name)) {
-    //   setFilter(_.omit(filter, ["industry"]));
-    // } else if (filter.keyword && !state.includes(filter.keyword)) {
-    //   setFilter(_.omit(filter, ["keyword"]));
-    // } else if (
-    //   filter.postedDate &&
-    //   !state.includes(`Posted: ${filter.postedDate.show}`)
-    // ) {
-    //   setFilter(_.omit(filter, ["postedDate"]));
-    // } else if (
-    //   filter.deadline &&
-    //   !state.includes(`Deadline: ${filter.deadline.show}`)
-    // ) {
-    //   setFilter(_.omit(filter, ["deadline"]));
-    // } else if (filter.location && !state.includes(filter.location.name)) {
-    //   setFilter(_.omit(filter, ["location"]));
-    // } else if (filter.gender && !state.includes(filter.gender)) {
-    //   setFilter(_.omit(filter, ["gender"]));
-    // } else if (
-    //   filter.employmentStatus &&
-    //   !state.includes(filter.employmentStatus)
-    // ) {
-    //   setFilter(_.omit(filter, ["employmentStatus"]));
-    // }
   }, [state]);
 
   const onTagClose = (removedTag) => {
-    console.log(removedTag);
     const tags = state.filter((tag) => tag !== removedTag);
     setState(tags);
   };
