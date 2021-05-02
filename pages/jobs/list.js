@@ -1,5 +1,5 @@
 import Head from "next/head";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Navbar from "../../container/navbar/navbar";
 import JobList from "./components/list/JobList";
@@ -17,6 +17,13 @@ import AgeFilter from "./components/list/AgeFilter";
 
 const Jobs = () => {
   const [filter, setFilter] = useState({});
+  const [showFilterJobs, setShowFilterJobs] = useState(false);
+
+  useEffect(() => {
+    if (_.isEmpty(filter)) {
+      setShowFilterJobs(false);
+    }
+  }, [filter]);
 
   return (
     <>
@@ -38,7 +45,7 @@ const Jobs = () => {
           <div className="col-3">
             <h3 className="m-sm-bottom">Filter By</h3>
             <JobCategoryFilter filter={filter} setFilter={setFilter} />
-            <JobIndustryFilter filter={filter} setFilter={setFilter} />
+            {/* <JobIndustryFilter filter={filter} setFilter={setFilter} /> */}
             <LocationFilter filter={filter} setFilter={setFilter} />
             <PostTimeFilter filter={filter} setFilter={setFilter} />
             <DeadlineFilter filter={filter} setFilter={setFilter} />
@@ -50,8 +57,12 @@ const Jobs = () => {
           {/*2nd part*/}
           <div className="col-9 bg-white rounded border ">
             <KeywordSearch filter={filter} setFilter={setFilter} />
-            <SelectedFilter filter={filter} setFilter={setFilter} />
-            <JobList />
+            <SelectedFilter
+              filter={filter}
+              setFilter={setFilter}
+              setShowFilterJobs={setShowFilterJobs}
+            />
+            <JobList filter={filter} showFilterJobs={showFilterJobs} />
           </div>
         </div>
       </div>
