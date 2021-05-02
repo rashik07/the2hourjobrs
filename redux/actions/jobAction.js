@@ -62,6 +62,84 @@ export const getAllJobs = () => async (dispatch) => {
   }
 };
 
+export const filterJobs = (filter) => async (dispatch) => {
+  try {
+    let url = "v1/jobpost/filter/?";
+
+    const createURL = {
+      location: (url, location) => {
+        url += `location=${JSON.stringify(location)}&`;
+        return url;
+      },
+
+      category: (url, category) => {
+        url += `category=${category.id}&`;
+        return url;
+      },
+
+      industry: (url, industry) => {
+        url += `industry=${industry.id}&`;
+        return url;
+      },
+
+      employmentStatus: (url, employmentStatus) => {
+        url += `employmentStatus=${employmentStatus}&`;
+        return url;
+      },
+
+      gender: (url, gender) => {
+        url += `gender=${gender}&`;
+        return url;
+      },
+
+      keyword: (url, keyword) => {
+        url += `keyword=${keyword}&`;
+        return url;
+      },
+
+      deadline: (url, deadline) => {
+        url += `deadline=${deadline.date}&`;
+        return url;
+      },
+
+      postedDate: (url, postedDate) => {
+        url += `postedDate=${postedDate.date}&`;
+        return url;
+      },
+
+      age: (url, age) => {
+        if (age.min) {
+          url += `min_age=${age.min}&`;
+        }
+        if (age.max) {
+          url += `max_age=${age.max}&`;
+        }
+        return url;
+      },
+
+      experience: (url, experience) => {
+        if (experience.min) {
+          url += `min_experience=${experience.min}&`;
+        }
+        if (experience.max) {
+          url += `max_experience=${experience.max}&`;
+        }
+        return url;
+      },
+    };
+
+    for (let i in filter) {
+      url = createURL[i](url, filter[i]);
+    }
+
+    const response = await backend.get(url, getConfig());
+
+    dispatch({ type: types.FILTER_JOB, payload: response.data });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const getEducation = () => async (dispatch) => {
   try {
     const response = await backend.get("v1/category/education/parent/");
