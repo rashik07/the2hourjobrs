@@ -8,6 +8,10 @@ export const RESET_SIGN_UP = "RESET_SIGN_UP";
 //************** JOB TYPES *********************/
 export const GET_JOB_CATEGORIES = "GET_JOB_CATEGORIES";
 export const GET_JOB_INDUSTRIES = "GET_JOB_INDUSTRIES";
+export const GET_EDUCATION = "GET_EDUCATION";
+export const GET_LOCATION_LIST = "GET_LOCATION_LIST";
+export const SAVE_TEMPORARY_JOBPOST = "SAVE_TEMPORARY_JOBPOST";
+export const UNSAVE_TEMPORARY_JOBPOST = "UNSAVE_TEMPORARY_JOBPOST";
 export const CREATE_JOB = "CREATE_JOB";
 export const DELETE_JOB = "DELETE_JOB";
 export const UPDATE_JOB = "UPDATE_JOB";
@@ -16,6 +20,7 @@ export const UNSAVE_JOB = "UNSAVE_JOB";
 export const ARCHIVE_JOB = "ARCHIVE_JOB";
 export const GET_SINGLE_JOB = "GET_SINGLE_JOB";
 export const GET_ALL_JOB = "GET_ALL_JOB";
+export const FILTER_JOB = "FILTER_JOB";
 export const UPLOAD_JOB_MEDIA = "UPLOAD_JOB_MEDIA";
 
 //************** ANNOUNCEMENT TYPES *********************/
@@ -28,3 +33,6 @@ export const ARCHIVE_ANNOUNCEMENT = "ARCHIVE_ANNOUNCEMENT";
 export const GET_SINGLE_ANNOUNCEMENT = "GET_SINGLE_ANNOUNCEMENT";
 export const GET_ALL_ANNOUNCEMENT = "GET_ALL_ANNOUNCEMENT";
 export const UPLOAD_ANNOUNCEMENT_MEDIA = "UPLOAD_ANNOUNCEMENT_MEDIA";
+
+//************** ANNOUNCEMENT TYPES *********************/
+export const UPDATE_USER_PROFILE = "UPDATE_USER_PROFILE";

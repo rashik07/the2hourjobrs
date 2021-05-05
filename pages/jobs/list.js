@@ -1,12 +1,29 @@
 import Head from "next/head";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
 import Navbar from "../../container/navbar/navbar";
-import JobCategogy from "./components/JobCategogy";
-import JobIndustry from "./components/JobIndustry";
-import KeywordSearch from "./components/KeywordSearch";
-import SelectedFilter from "./components/SelectedFilter";
-const JobList = () => {
+import JobList from "./components/list/JobList";
+import KeywordSearch from "./components/list/KeywordSearch";
+import SelectedFilter from "./components/list/SelectedFilter";
+import LocationFilter from "./components/list/LocationFilter";
+import PostTimeFilter from "./components/list/PostTimeFilter";
+import DeadlineFilter from "./components/list/DeadlineFilter";
+import GenderFilter from "./components/list/GenderFilter";
+import EmploymentStatusFilter from "./components/list/EmploymentStatusFilter";
+import JobCategoryFilter from "./components/list/JobCategoryFilter";
+import JobIndustryFilter from "./components/list/JobIndustryFilter";
+import ExperienceFilter from "./components/list/ExperienceFilter";
+import AgeFilter from "./components/list/AgeFilter";
+
+const Jobs = () => {
   const [filter, setFilter] = useState({});
+  const [showFilterJobs, setShowFilterJobs] = useState(false);
+
+  useEffect(() => {
+    if (_.isEmpty(filter)) {
+      setShowFilterJobs(false);
+    }
+  }, [filter]);
 
   return (
     <>
@@ -15,7 +32,10 @@ const JobList = () => {
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/antd/4.15.1/antd.min.css"
         />
-
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        />
         <title>Job list</title>
       </Head>
       <Navbar />
@@ -24,58 +44,25 @@ const JobList = () => {
           {/*1st part*/}
           <div className="col-3">
             <h3 className="m-sm-bottom">Filter By</h3>
-            <JobCategogy filter={filter} setFilter={setFilter} />
-            <JobIndustry filter={filter} setFilter={setFilter} />
+            <JobCategoryFilter filter={filter} setFilter={setFilter} />
+            {/* <JobIndustryFilter filter={filter} setFilter={setFilter} /> */}
+            <LocationFilter filter={filter} setFilter={setFilter} />
+            <PostTimeFilter filter={filter} setFilter={setFilter} />
+            <DeadlineFilter filter={filter} setFilter={setFilter} />
+            <GenderFilter filter={filter} setFilter={setFilter} />
+            <EmploymentStatusFilter filter={filter} setFilter={setFilter} />
+            <ExperienceFilter filter={filter} setFilter={setFilter} />
+            <AgeFilter filter={filter} setFilter={setFilter} />
           </div>
           {/*2nd part*/}
           <div className="col-9 bg-white rounded border ">
             <KeywordSearch filter={filter} setFilter={setFilter} />
-            <SelectedFilter filter={filter} setFilter={setFilter} />
-            <div className="row d-flex align-items-center border m-3 rounded">
-              <div className="col-3">
-                <img
-                  src="https://previews.123rf.com/images/roxanabalint/roxanabalint1312/roxanabalint131200148/24476498-demo-grunge-rubber-stamp-on-white.jpg"
-                  className="card-img-top"
-                  alt="..."
-                />
-              </div>
-              <div className="col-6 text-muted fs-6">
-                <h4 className=" text-dark">
-                  <strong className="title-home">
-                    Support Engineer, WordPress
-                  </strong>
-                  <br />
-                </h4>
-                <h5 className=" text-dark">
-                  <strong>TheICTHub</strong>
-                  <br />
-                </h5>
-                <p>
-                  <i className="fas fa-map-marker-alt" />
-                  Mirpur <br />
-                </p>
-                <p>
-                  <i className="fas fa-book-open" />
-                  It doesn`t matter where you went to college or what your CGPA
-                  was as long as you are smart, ...
-                  <br />
-                </p>
-                <p>
-                  <i className="fas fa-briefcase" />1 to 3 year(s)
-                </p>
-              </div>
-              <div className="col-3 btn-group-vertical">
-                <a href="#" className="btn button-home rounded">
-                  Apply
-                </a>
-                <a href="#" className="btn button-home mt-2 rounded">
-                  Details
-                </a>
-                <a href="#" className="btn button-home mt-2 rounded">
-                  Save Job
-                </a>
-              </div>
-            </div>
+            <SelectedFilter
+              filter={filter}
+              setFilter={setFilter}
+              setShowFilterJobs={setShowFilterJobs}
+            />
+            <JobList filter={filter} showFilterJobs={showFilterJobs} />
           </div>
         </div>
       </div>
@@ -83,4 +70,4 @@ const JobList = () => {
   );
 };
 
-export default JobList;
+export default Jobs;

@@ -49,13 +49,6 @@
                     <label for="inputEmail4" class="form-label" required> Salary *</label><br>
                     <input type="number" id="number" name="number" placeholder="From"> -
                     <input type="number" id="number" name="number" placeholder="To">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-                        <label class="form-check-label" for="gridRadios2">
-                            Outside Dhaka
-                        </label>
-                    </div>
-                    
                 </div>
                 <div class="mb-4">
                     <div class="form-floating">
