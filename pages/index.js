@@ -1,4 +1,5 @@
 import Head from "next/head";
+import "antd/dist/antd.css";
 import Footer from "../container/footer/footer";
 import Navbar from "../container/navbar/navbar";
 

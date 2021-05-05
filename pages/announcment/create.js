@@ -1,14 +1,13 @@
 import React, { useEffect } from "react";
-import { Select } from "antd";
+
 import { connect } from "react-redux";
 import { getJobCategories } from "../../redux/actions/jobAction";
-
-import { Layout, Menu, Breadcrumb } from "antd";
+import { Layout } from "antd";
 
 import Head from "next/head";
 import Footer from "../../container/footer/footer";
 import Navbar from "../../container/navbar/navbar";
-import AllAnnouncements from "../../components/annoucement/AllAnnouncements";
+import AnnouncementCreateForm from "../../components/annoucement/AnnouncementCreateForm";
 
 const JobCategogy = ({ categories }) => {
   return (
@@ -19,11 +18,10 @@ const JobCategogy = ({ categories }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Home</title>
       </Head>
-
       <Layout>
         <Navbar page="landing_page" />
         <Layout>
-          <AllAnnouncements />
+          <AnnouncementCreateForm />
         </Layout>
       </Layout>
       <Footer />
