@@ -1,24 +1,34 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Input, Form, Button, Row, Col } from "antd";
-import "antd/dist/antd.css";
-import { createAnnouncement } from "../../redux/actions/announcementAction";
+import { Input, Form, Button, Row, Col, Cascader } from "antd";
+import {
+  createAnnouncement,
+  uploadimage,
+} from "../../redux/actions/announcementAction";
+import PicturesWall from "./PicturesWall";
+
 const tailLayout = {
   wrapperCol: {
     offset: 2,
     span: 16,
   },
 };
-const areas = [
-  { label: "Beijing", value: "Beijing" },
-  { label: "Shanghai", value: "Shanghai" },
-];
 
 class AnnouncementCreateForm extends Component {
+  state = {
+    fileList: [],
+  };
+
+  setImages = (fileList) => {
+    this.setState({ fileList });
+  };
+
   render() {
     const onFinish = (values) => {
       this.props.createAnnouncement(values);
-      console.log("Success:", values);
+      this.state.fileList.map((file) => {
+        this.props.uploadimage(this.props.announcementResponse.id, file);
+      });
     };
 
     const onFinishFailed = (errorInfo) => {
@@ -27,107 +37,94 @@ class AnnouncementCreateForm extends Component {
 
     return (
       <>
-        <div className="col-8 border-end">
-          <Form
-            layout="vertical"
-            name="basic"
-            initialValues={{
-              remember: true,
-            }}
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
-            size={"large"}
+        <Row>
+          <Col
+            span={14}
+            offset={1}
+            className="announcement_frame announcement_form "
           >
-            <Form.Item
-              label="Title"
-              name="title"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your username!",
-                },
-              ]}
+            <Form
+              layout="vertical"
+              name="basic"
+              initialValues={{
+                remember: true,
+              }}
+              size="large"
+              onFinish={onFinish}
+              onFinishFailed={onFinishFailed}
             >
-              <Input />
-            </Form.Item>
-            <Form.Item name="description" label="Description">
-              <Input.TextArea />
-            </Form.Item>
+              <Form.Item
+                label="Title"
+                name="title"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your username!",
+                  },
+                ]}
+              >
+                <Input />
+              </Form.Item>
+              <Form.Item name="description" label="Description">
+                <Input.TextArea />
+              </Form.Item>
+              <Row>
+                <Col xs={24} sm={4} md={6} lg={8} xl={11}>
+                  <Form.Item
+                    label="Contact"
+                    name="contact_information"
+                    rules={[
+                      {
+                        required: true,
+                        message: "Please input your contact!",
+                      },
+                    ]}
+                  >
+                    <Input />
+                  </Form.Item>
+                </Col>
+                <Col xs={24} sm={4} md={6} lg={8} xl={11} offset={2}>
+                  <Form.Item label="Cascader">
+                    <Cascader
+                      options={[
+                        {
+                          value: "zhejiang",
+                          label: "Zhejiang",
+                          children: [
+                            {
+                              value: "hangzhou",
+                              label: "Hangzhou",
+                            },
+                          ],
+                        },
+                      ]}
+                    />
+                  </Form.Item>
+                </Col>
+              </Row>
 
-            <Form.Item
-              label="Contact"
-              name="contact_information"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your contact!",
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-
-            <Form.Item
-              label="Slug"
-              name="slug_id"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your contact!",
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-
-            <Form.Item
-              label="Poster"
-              name="poster"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your contact!",
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-
-            {/* <Form.Item
-              name="Area"
-              label="Area"
-              rules={[
-                {
-                  required: true,
-                },
-              ]}
-            >
-              <Select placeholder="Select a option" allowClear>
-                <Option value="male">Dhaka</Option>
-                <Option value="female">Dinajpur</Option>
-                <Option value="other">other</Option>
-              </Select>
-            </Form.Item> */}
-
-            <Form.Item>
-              <Button type="primary" htmlType="submit">
-                Submit
-              </Button>
-            </Form.Item>
-          </Form>
-        </div>
-        <div className="col-4">
-          <h1>Tips</h1>
-          <ul>
-            <li>loram ipsam</li>
-            <li>loram ipsam</li>
-            <li>loram ipsam</li>
-            <li>loram ipsam</li>
-          </ul>
-        </div>
+              <Form.Item>
+                <Button type="primary" htmlType="submit">
+                  Submit
+                </Button>
+              </Form.Item>
+            </Form>
+          </Col>
+          <Col span={8} className="announcement_frame ">
+            <PicturesWall setImages={this.setImages} />
+          </Col>
+        </Row>
       </>
     );
   }
 }
 
-export default connect(null, { createAnnouncement })(AnnouncementCreateForm);
+const mapStateToProps = (state) => {
+  return {
+    announcementResponse: state.announcement.announcementResponse,
+  };
+};
+
+export default connect(mapStateToProps, { createAnnouncement, uploadimage })(
+  AnnouncementCreateForm
+);

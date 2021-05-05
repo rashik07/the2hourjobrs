@@ -14,7 +14,7 @@ const getConfig = () => {
   return config;
 };
 
-export const createAnnouncement = (formValues) => async (dispatch) => {
+export const createAnnouncement = (formValues, files) => async (dispatch) => {
   try {
     const response = await backend.post(
       "v1/announcement/data/",
@@ -28,6 +28,26 @@ export const createAnnouncement = (formValues) => async (dispatch) => {
       });
     }
   } catch (error) {
+    console.log(error);
+  }
+};
+
+export const uploadimage = (id, file) => async (dispatch) => {
+  try {
+    const formData = new FormData();
+    formData.append("photo", file.originFileObj);
+    formData.append("announcement", parseInt(id));
+    const response = await backend.post(
+      "v1/announcement/image/",
+      formData,
+      getConfig()
+    );
+    if (response.status === 201) {
+      console.log(response.data);
+      console.log("uploaded");
+    }
+  } catch (error) {
+    console.log(error.response);
     console.log(error);
   }
 };

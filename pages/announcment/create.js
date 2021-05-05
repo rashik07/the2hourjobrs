@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
-import { Select } from "antd";
+
 import { connect } from "react-redux";
 import { getJobCategories } from "../../redux/actions/jobAction";
+import { Layout } from "antd";
 
 import Head from "next/head";
 import Footer from "../../container/footer/footer";
@@ -17,13 +18,12 @@ const JobCategogy = ({ categories }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Home</title>
       </Head>
-      <Navbar page="landing_page" />
-      <div className="container main-body">
-        <div className="row my-5">
+      <Layout>
+        <Navbar page="landing_page" />
+        <Layout>
           <AnnouncementCreateForm />
-        </div>
-      </div>
-
+        </Layout>
+      </Layout>
       <Footer />
     </>
   );
