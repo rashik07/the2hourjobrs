@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Select } from "antd";
 import { connect } from "react-redux";
 import { getJobCategories } from "../../redux/actions/jobAction";
+
 import { Layout, Menu, Breadcrumb } from "antd";
 
 import Head from "next/head";
