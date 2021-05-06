@@ -11,15 +11,19 @@ const JobCategogy = ({ getJobCategories, categories, setValue, onClear }) => {
   }, []);
 
   const getOptions = (categories) => {
-    return categories.map((subCategory) => (
-      <OptGroup key={subCategory.type} label={`${subCategory.type} Categories`}>
-        {subCategory.list.map(({ id, name }) => (
-          <Option key={id} value={JSON.stringify({ id, name })}>
-            {name}
-          </Option>
-        ))}
-      </OptGroup>
-    ));
+    if (categories)
+      return categories.map((subCategory) => (
+        <OptGroup
+          key={subCategory.type}
+          label={`${subCategory.type} Categories`}
+        >
+          {subCategory.list.map(({ id, name }) => (
+            <Option key={id} value={JSON.stringify({ id, name })}>
+              {name}
+            </Option>
+          ))}
+        </OptGroup>
+      ));
   };
 
   return (

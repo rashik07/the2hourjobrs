@@ -40,5 +40,6 @@ export const signUp = (formValues) => async (dispatch) => {
 };
 
 export const signOut = () => (dispatch) => {
+  dispatch({ type: types.RESET_JOB_STATE });
   dispatch({ type: types.SIGN_OUT });
 };

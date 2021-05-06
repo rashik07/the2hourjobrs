@@ -22,6 +22,8 @@ export const GET_SINGLE_JOB = "GET_SINGLE_JOB";
 export const GET_ALL_JOB = "GET_ALL_JOB";
 export const FILTER_JOB = "FILTER_JOB";
 export const UPLOAD_JOB_MEDIA = "UPLOAD_JOB_MEDIA";
+export const RESET_JOB_STATE = "RESET_JOB_STATE";
+export const INIT_JOB_STATE = "INIT_JOB_STATE";
 
 //************** ANNOUNCEMENT TYPES *********************/
 export const CREATE_ANNOUNCEMENT = "CREATE_ANNOUNCEMENT";
