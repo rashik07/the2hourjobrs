@@ -16,9 +16,12 @@ const JobList = ({ getAllJobs, all_jobs, filtered_jobs, showFilterJobs }) => {
     });
   }
 
-  return all_jobs.map((job) => {
-    return <JobPostItem key={job.id} job={job} />;
-  });
+  if (all_jobs)
+    return all_jobs.map((job) => {
+      return <JobPostItem key={job.id} job={job} />;
+    });
+
+  return null;
 };
 
 const mapStateToProps = (state) => {

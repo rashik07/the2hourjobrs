@@ -28,7 +28,7 @@ const authReducer = (state = INITIAL_STATE, action) => {
       };
 
     case types.SIGN_OUT:
-      return INITIAL_STATE;
+      return {};
 
     case types.RESET_SIGN_UP:
       return INITIAL_STATE;

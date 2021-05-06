@@ -47,6 +47,12 @@ const jobReducer = (state = INITIAL_STATE, action) => {
     case types.GET_LOCATION_LIST:
       return { ...state, location: action.payload };
 
+    case types.RESET_JOB_STATE:
+      return {};
+
+    case types.INIT_JOB_STATE:
+      return INITIAL_STATE;
+
     case types.SAVE_TEMPORARY_JOBPOST:
       return {
         ...state,
