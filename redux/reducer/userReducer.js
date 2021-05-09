@@ -1,17 +1,21 @@
 import * as types from "./../types";
 
 const INITIAL_STATE = {
-  user_profile: {},
+  user_profile: {
+
+
+  },
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case types.UPDATE_USER_PROFILE:
-      return { ...state, user_profile: { ...user_profile, ...action.payload } };
+      return { ...state, user_profile: action.payload } ;
 
     default:
-      break;
+      return state;
   }
 };
 
 export default userReducer;
+/*...user_profile,*/

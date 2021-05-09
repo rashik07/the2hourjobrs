@@ -16,8 +16,14 @@ const getConfig = () => {
 };
 
 export const updateProfile = (data) => async (dispatch) => {
-  console.log(data);
-  dispatch({ type: types.UPDATE_USER_PROFILE, payload: {} });
+  try{
+  const response = await backend.get("/v1/user/me/", getConfig());
+  dispatch({ type: types.UPDATE_USER_PROFILE, payload: response.data });
+  }
+  catch (error) {
+         console.log(error);
+         console.log(error.response);
+      }
 
   //   try {
   //     const response = await backend.get("v1/category/industry/", getConfig());

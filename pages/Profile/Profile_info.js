@@ -1,8 +1,12 @@
 import Head from "next/head";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../../container/navbar/navbar";
 import Sidebar from "../../container/sidebar/sidebar";
 import { Select } from "antd";
+import { connect } from "react-redux";
+import {
+  updateProfile
+} from "@/redux/actions/userAction";
 import {
   Form,
   Input,
@@ -14,7 +18,12 @@ import {
   TextArea,
 } from "antd";
 
-const Profile_info = () => {
+const Profile_info = ({updateProfile, user_profile}) => {
+  useEffect(() => {
+    updateProfile();
+  },[]);
+
+  console.log(user_profile);
   const { Option } = Select;
   const { TextArea } = Input;
   const { Title } = Typography;
@@ -73,6 +82,7 @@ const Profile_info = () => {
           },
         }
       : null;
+
   return (
     <div>
       <Head>
@@ -104,7 +114,7 @@ const Profile_info = () => {
                 <Title>Basic Info</Title>
               </Divider>
               <Form.Item label="Name">
-                <Input placeholder="input name" />
+                <Input placeholder="name" defaultValue={user_profile.username}/>
               </Form.Item>
               <Form.Item
                 name="email"
@@ -120,7 +130,7 @@ const Profile_info = () => {
                   },
                 ]}
               >
-                <Input placeholder="Email" />
+                <Input placeholder="e-mail" defaultValue={user_profile.email}/>
               </Form.Item>
               <Form.Item
                 name="phone"
@@ -134,13 +144,14 @@ const Profile_info = () => {
               >
                 <Input
                   addonBefore={prefixSelector}
+                  defaultValue={user_profile.phone}
                   style={{
                     width: "100%",
                   }}
                 />
               </Form.Item>
               <Form.Item label="NID Number">
-                <Input placeholder="input NID number" />
+                <Input placeholder="input NID number" defaultValue={user_profile.nid} />
               </Form.Item>
               <Form.Item label="Gender">
                 <Radio.Group onChange={onChange} value={value}>
@@ -149,13 +160,13 @@ const Profile_info = () => {
                 </Radio.Group>
               </Form.Item>
               <Form.Item name="date-picker" label="Date of Birth" {...config}>
-                <DatePicker />
+                <DatePicker defaultValue={user_profile.birthday}/>
               </Form.Item>
               <Form.Item label="Nationality">
-                <Input placeholder="nationality" />
+                <Input placeholder="nationality" defaultValue={user_profile.birthday}/>
               </Form.Item>
               <Form.Item label="Bio">
-                <TextArea rows={4} />
+                <TextArea rows={4} defaultValue={user_profile.bio}/>
               </Form.Item>
 
               <Divider>
@@ -178,6 +189,7 @@ const Profile_info = () => {
                       .toLowerCase()
                       .localeCompare(optionB.children.toLowerCase())
                   }
+                  defaultValue={user_profile.district}
                 >
                   <Option value="1">Not Identified</Option>
                   <Option value="2">Closed</Option>
@@ -203,6 +215,7 @@ const Profile_info = () => {
                       .toLowerCase()
                       .localeCompare(optionB.children.toLowerCase())
                   }
+                  defaultValue={user_profile.thana}
                 >
                   <Option value="1">Not Identified</Option>
                   <Option value="2">Closed</Option>
@@ -213,7 +226,7 @@ const Profile_info = () => {
                 </Select>
               </Form.Item>
               <Form.Item label="Address">
-                <TextArea rows={4} />
+                <TextArea rows={4} defaultValue={user_profile.address}/>
               </Form.Item>
             </Form>
           </main>
@@ -223,4 +236,11 @@ const Profile_info = () => {
   );
 };
 
-export default Profile_info;
+const mapStateToProps = (state) => {
+  return {
+    user_profile: state.user.user_profile,
+  };
+};
+
+export default connect(mapStateToProps, {updateProfile})(Profile_info);
+
