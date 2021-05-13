@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Select } from "antd";
 import { connect } from "react-redux";
-import { getJobCategories } from "@/redux/actions/jobAction";
+import { getJobCategories } from "redux/actions/jobAction";
 
 const JobCategogy = ({ getJobCategories, categories, setValue, onClear }) => {
   const { Option, OptGroup } = Select;

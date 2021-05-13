@@ -2,10 +2,10 @@ import Navbar from "container/navbar/navbar";
 import React, { useState, useEffect } from "react";
 import { Steps } from "antd";
 import Head from "next/head";
-import Step1 from "./components/post/Step1";
-import Step2 from "./components/post/Step2";
-import Step3 from "./components/post/Step3";
-import Step4 from "./components/post/Step4";
+import Step1 from "components/jobs/post/Step1";
+import Step2 from "components/jobs/post/Step2";
+import Step3 from "components/jobs/post/Step3";
+import Step4 from "components/jobs/post/Step4";
 
 const PostJob = () => {
   const { Step } = Steps;

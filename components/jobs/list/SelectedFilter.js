@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { Tag } from "antd";
 import { connect } from "react-redux";
 import _ from "lodash";
-import { filterJobs } from "@/redux/actions/jobAction";
+import { filterJobs } from "redux/actions/jobAction";
 
 const SelectedFilter = ({
   filter,

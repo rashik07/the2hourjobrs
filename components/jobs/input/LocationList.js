@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { TreeSelect } from "antd";
 import { connect } from "react-redux";
-import { getLocationList } from "@/redux/actions/jobAction";
+import { getLocationList } from "redux/actions/jobAction";
 
 const LocationList = ({
   getLocationList,

@@ -1,11 +1,12 @@
 import "bootstrap/dist/css/bootstrap.css";
 import { Provider } from "react-redux";
-import { store, persistor } from "@/redux/store";
+import { store, persistor } from "redux/store";
 import { PersistGate } from "redux-persist/integration/react";
 import "antd/dist/antd.css";
 import "./auth/login.css";
 import "./jobs/list.css";
-import "./jobs/components/list/SelectedFilter.css";
+// import "@/components/jobs/components/list/SelectedFilter.css";
+import "components/jobs/list/SelectedFilter.css";
 import "./../styles/header.css";
 
 function MyApp({ Component, pageProps }) {
