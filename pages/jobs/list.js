@@ -2,18 +2,18 @@ import Head from "next/head";
 import React, { useState, useEffect } from "react";
 
 import Navbar from "../../container/navbar/navbar";
-import JobList from "./components/list/JobList";
-import KeywordSearch from "./components/list/KeywordSearch";
-import SelectedFilter from "./components/list/SelectedFilter";
-import LocationFilter from "./components/list/LocationFilter";
-import PostTimeFilter from "./components/list/PostTimeFilter";
-import DeadlineFilter from "./components/list/DeadlineFilter";
-import GenderFilter from "./components/list/GenderFilter";
-import EmploymentStatusFilter from "./components/list/EmploymentStatusFilter";
-import JobCategoryFilter from "./components/list/JobCategoryFilter";
-import JobIndustryFilter from "./components/list/JobIndustryFilter";
-import ExperienceFilter from "./components/list/ExperienceFilter";
-import AgeFilter from "./components/list/AgeFilter";
+import JobList from "components/jobs/list/JobList";
+import KeywordSearch from "components/jobs/list/KeywordSearch";
+import SelectedFilter from "components/jobs/list/SelectedFilter";
+import LocationFilter from "components/jobs/list/LocationFilter";
+import PostTimeFilter from "components/jobs/list/PostTimeFilter";
+import DeadlineFilter from "components/jobs/list/DeadlineFilter";
+import GenderFilter from "components/jobs/list/GenderFilter";
+import EmploymentStatusFilter from "components/jobs/list/EmploymentStatusFilter";
+import JobCategoryFilter from "components/jobs/list/JobCategoryFilter";
+import JobIndustryFilter from "components/jobs/list/JobIndustryFilter";
+import ExperienceFilter from "components/jobs/list/ExperienceFilter";
+import AgeFilter from "components/jobs/list/AgeFilter";
 
 const Jobs = () => {
   const [filter, setFilter] = useState({});

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Select } from "antd";
 import { connect } from "react-redux";
-import { getIndustries } from "@/redux/actions/jobAction";
+import { getIndustries } from "redux/actions/jobAction";
 
 const JobIndustry = ({ industries, getIndustries, setValue, onClear }) => {
   const { Option } = Select;

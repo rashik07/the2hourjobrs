@@ -1,14 +1,11 @@
 import React, { useEffect } from "react";
 import { Select } from "antd";
 import { connect } from "react-redux";
-import {
-  getJobCategories,
-  saveTemporayJobPost,
-} from "@/redux/actions/jobAction";
+import { getJobCategories, saveTemporayJobPost } from "redux/actions/jobAction";
 import TagInput from "components/TagInput";
 import CheckBox from "components/CheckBox";
 import { Radio } from "antd";
-import EducationField from "pages/jobs/components/input/EducationField";
+import EducationField from "components/jobs/input/EducationField";
 import _ from "lodash";
 import LocationList from "../input/LocationList";
 

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Descriptions } from "antd";
 import { List } from "antd";
 import dateformat from "dateformat";
-import { postJob } from "@/redux/actions/jobAction";
+import { postJob } from "redux/actions/jobAction";
 import { useRouter } from "next/router";
 
 const renderJobLocation = (inside_dhaka, locations) => {
