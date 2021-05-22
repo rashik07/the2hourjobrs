@@ -4,7 +4,7 @@ import Footer from "../container/footer/footer";
 import Navbar from "../container/navbar/navbar";
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import * as types from "@/redux/types";
+import * as types from "redux/types";
 
 export default function Home() {
   const dispatch = useDispatch();

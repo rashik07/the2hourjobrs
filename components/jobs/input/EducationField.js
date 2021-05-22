@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { TreeSelect } from "antd";
 import { connect } from "react-redux";
-import { getEducation } from "@/redux/actions/jobAction";
+import { getEducation } from "redux/actions/jobAction";
 
 const EducationField = ({ getEducation, education, value, setValue }) => {
   const { TreeNode } = TreeSelect;
