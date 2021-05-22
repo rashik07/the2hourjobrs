@@ -7,7 +7,7 @@ import "./auth/login.css";
 import "./jobs/list.css";
 import "./jobs/components/list/SelectedFilter.css";
 import "./../styles/header.css";
-
+import './Landing_page/Landing_page.css';
 function MyApp({ Component, pageProps }) {
   return (
     <Provider store={store}>

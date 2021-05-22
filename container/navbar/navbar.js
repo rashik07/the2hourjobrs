@@ -60,7 +60,7 @@ const CustomNavbar = ({ isSignedIn }) => {
   const router = useRouter();
 
   return (
-    <div className="container">
+    <div className="">
       <Navbar bg="light" expand="lg">
         <Navbar.Brand onClick={() => router.push("/")} href="#">
           <img src="/img/logo.png" alt="Logo" height={50} />

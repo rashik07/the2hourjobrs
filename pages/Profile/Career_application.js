@@ -1,11 +1,21 @@
 import Head from 'next/head';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from '../../container/navbar/navbar';
 import Sidebar from "../../container/sidebar/sidebar";
 import { Select } from "antd";
+import { connect } from "react-redux";
+import {
+    updateProfile
+  } from "@/redux/actions/userAction";
 import {Form,Input, Button, Radio ,DatePicker,Typography,Divider,TextArea  } from 'antd';
 
-const Career_application = () => {
+
+ 
+const Career_application = ({updateProfile, user_profile}) => {
+    useEffect(() => {
+        updateProfile();
+      },[]);
+    
     const { Option } = Select;
 
 const children = [];
@@ -89,7 +99,7 @@ function handleChange(value) {
                            <Divider> <Title>Career and Application details </Title></Divider> 
                             
                                 <Form.Item label="Objective">
-                                    <TextArea rows={4} />
+                                    <TextArea rows={4}  defaultValue={user_profile.username}/>
                                 </Form.Item>
                                 <Form.Item label="Salary">
                                 <Input.Group compact>
@@ -189,17 +199,15 @@ function handleChange(value) {
                                     </Select>,
                                 </Form.Item>
                         </Form>
-                        
-                   
-                       
-                    
-                    
-
                 </main>
             </div>
             </div>
         </div>
     );
 };
-
-export default Career_application;
+const mapStateToProps = (state) => {
+    return {
+      user_profile: state.user.user_profile,
+    };
+  };
+export default connect(mapStateToProps, {updateProfile})(Career_application); 
