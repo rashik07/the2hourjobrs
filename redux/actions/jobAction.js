@@ -62,6 +62,26 @@ export const getAllJobs = () => async (dispatch) => {
   }
 };
 
+export const getSavedJobs = () => async (dispatch) => {
+  try {
+    const response = await backend.get("v1/jobpost/saved_jobs/", getConfig());
+
+    dispatch({ type: types.GET_SAVED_JOB, payload: response.data });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getAppliedJobs = () => async (dispatch) => {
+  try {
+    const response = await backend.get("v1/jobpost/applied_jobs/", getConfig());
+
+    dispatch({ type: types.GET_APPLIED_JOB, payload: response.data });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const filterJobs = (filter) => async (dispatch) => {
   try {
     let url = "v1/jobpost/filter/?";
@@ -305,3 +325,59 @@ export const postJob = (data, router) => async (dispatch) => {
     console.log(error.response);
   }
 };
+
+export const applyJob =
+  (job_id, userid, setAppliedStatus) => async (dispatch) => {
+    try {
+      const formData = { applied: true, job: job_id, user: userid };
+
+      const response = await backend.post(
+        "v1/jobpost/user_apply_save_jobs/",
+        formData,
+        getConfig()
+      );
+
+      if (response.status == 200 || response.status == 201) {
+        setAppliedStatus(true);
+      }
+
+      dispatch({ type: types.APPLY_JOB, payload: job_id });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+export const saveJob =
+  (job_id, userid, saveStatus, setSavedStatus, applied_saved_id) =>
+  async (dispatch) => {
+    try {
+      const formData = { saved: !saveStatus, job: job_id, user: userid };
+
+      let response = null;
+
+      if (applied_saved_id) {
+        response = await backend.patch(
+          `v1/jobpost/user_apply_save_jobs/${applied_saved_id}/`,
+          formData,
+          getConfig()
+        );
+      } else {
+        response = await backend.post(
+          "v1/jobpost/user_apply_save_jobs/",
+          formData,
+          getConfig()
+        );
+      }
+
+      if (response.status == 200 || response.status == 201) {
+        setSavedStatus(!saveStatus);
+      }
+
+      dispatch({
+        type: types.SAVE_JOB,
+        payload: { job_id: job_id, saved: !saveStatus },
+      });
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
