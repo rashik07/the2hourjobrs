@@ -5,6 +5,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { connect } from "react-redux";
 import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 
 import * as types from "redux/types";
 import Form from "../../components/Form";
@@ -18,6 +19,8 @@ const Signup = (props) => {
     dispatch({ type: types.RESET_SIGN_UP });
   }, [start]);
 
+  const router = useRouter();
+
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -27,7 +30,7 @@ const Signup = (props) => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    props.signUp({ name, username, email, phone, password });
+    props.signUp({ name, username, email, phone, password }, router);
   };
 
   return (

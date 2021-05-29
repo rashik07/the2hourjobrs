@@ -5,39 +5,54 @@ import { useRouter } from "next/router";
 
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 
+const regularOptions = (router, isSignedIn) => {
+  return (
+    <>
+      <NavDropdown title="Jobs" id="basic-nav-dropdown">
+        <NavDropdown.Item
+          disabled={!isSignedIn}
+          onClick={() => router.push("/jobs/post")}
+        >
+          Post a Job
+        </NavDropdown.Item>
+        <NavDropdown.Item onClick={() => router.push("/jobs/list")}>
+          Job list
+        </NavDropdown.Item>
+        <NavDropdown.Item
+          disabled={!isSignedIn}
+          onClick={() => router.push("/jobs/saved")}
+        >
+          Saved Jobs
+        </NavDropdown.Item>
+        <NavDropdown.Item
+          disabled={!isSignedIn}
+          onClick={() => router.push("/jobs/applied")}
+        >
+          Applied Jobs
+        </NavDropdown.Item>
+      </NavDropdown>
+      <Nav.Link href="#link">Workers</Nav.Link>
+      <Nav.Link href="#link">Products</Nav.Link>
+      <NavDropdown title="Announcements" id="basic-nav-dropdown">
+        <NavDropdown.Item href="#action/3.1">
+          Create Announcement
+        </NavDropdown.Item>
+        <NavDropdown.Item href="#action/3.3">
+          Announcement list
+        </NavDropdown.Item>
+        <NavDropdown.Divider />
+        <NavDropdown.Item href="#action/3.4">My Announcements</NavDropdown.Item>
+      </NavDropdown>
+    </>
+  );
+};
+
 const getItems = (isSignedIn, router) => {
   if (isSignedIn) {
     return (
       <>
         <Nav>
-          <NavDropdown title="Jobs" id="basic-nav-dropdown">
-            <NavDropdown.Item
-              href="#"
-              onClick={() => router.push("/jobs/post")}
-            >
-              Post a Job
-            </NavDropdown.Item>
-            <NavDropdown.Item
-              href="#"
-              onClick={() => router.push("/jobs/list")}
-            >
-              Job list
-            </NavDropdown.Item>
-          </NavDropdown>
-          <Nav.Link href="#link">Workers</Nav.Link>
-          <Nav.Link href="#link">Products</Nav.Link>
-          <NavDropdown title="Announcements" id="basic-nav-dropdown">
-            <NavDropdown.Item href="#action/3.1">
-              Create Announcement
-            </NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.3">
-              Announcement list
-            </NavDropdown.Item>
-            <NavDropdown.Divider />
-            <NavDropdown.Item href="#action/3.4">
-              My Announcements
-            </NavDropdown.Item>
-          </NavDropdown>
+          {regularOptions(router, isSignedIn)}
           <DropdownUserMenu router={router} />
         </Nav>
       </>
@@ -46,6 +61,8 @@ const getItems = (isSignedIn, router) => {
 
   return (
     <Nav>
+      {regularOptions(router, isSignedIn)}
+
       <Nav.Link href="#" onClick={() => router.push("/auth/login")}>
         Login
       </Nav.Link>

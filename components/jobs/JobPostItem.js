@@ -1,10 +1,15 @@
+import React, { useState } from "react";
+import { applyJob, saveJob } from "@/redux/actions/jobAction";
 import Link from "next/link";
-import React from "react";
 import { connect } from "react-redux";
 
-const SpecificJobPost = ({ job, userid }) => {
-  const { title, user } = job;
-  const btn_disable = userid === user.id ? "disabled" : "";
+const JobPostItem = ({ job, userid, isSignedIn, applyJob, saveJob }) => {
+  const { id, title, poster, applied, saved, applied_saved_id } = job;
+
+  const btn_disable = userid === poster.id ? "disabled" : "";
+
+  const [appliedStatus, setAppliedStatus] = useState(applied);
+  const [savedStatus, setSavedStatus] = useState(saved);
 
   const getExperience = (min, max) => {
     if (min && max) {
@@ -37,6 +42,23 @@ const SpecificJobPost = ({ job, userid }) => {
     return education_list.join(", ");
   };
 
+  const applyJobBtnClick = () => {
+    if (!isSignedIn) {
+      alert("You must log in to access this feature");
+      return;
+    }
+
+    applyJob(id, userid, setAppliedStatus);
+  };
+
+  const saveJobBtnClick = () => {
+    if (!isSignedIn) {
+      alert("You must log in to access this feature");
+      return;
+    }
+    saveJob(id, userid, savedStatus, setSavedStatus, applied_saved_id);
+  };
+
   return (
     <div className="row d-flex align-items-center border m-3 rounded">
       <div className="col-9 text-muted fs-6">
@@ -46,7 +68,7 @@ const SpecificJobPost = ({ job, userid }) => {
         </h4>
         <h5 className="text-dark">
           <strong>
-            <Link href="/Profile/Profile_info">{user.name}</Link>
+            <Link href="/Profile/Profile_info">{poster.name}</Link>
           </strong>
           <br />
         </h5>
@@ -65,14 +87,23 @@ const SpecificJobPost = ({ job, userid }) => {
         </p>
       </div>
       <div className="col-3 btn-group-vertical">
-        <a href="#" className={`btn button-home rounded ${btn_disable}`}>
-          Apply
-        </a>
-        <a href="#" className="btn button-home mt-2 rounded">
-          Details
-        </a>
-        <a href="#" className={`btn button-home mt-2 rounded ${btn_disable}`}>
-          Save Job
+        {appliedStatus ? (
+          <a className="btn button-home rounded disabled">Applied</a>
+        ) : (
+          <a
+            onClick={applyJobBtnClick}
+            className={`btn button-home rounded ${btn_disable}`}
+          >
+            Apply
+          </a>
+        )}
+
+        <a className="btn button-home mt-2 rounded">Details</a>
+        <a
+          onClick={saveJobBtnClick}
+          className={`btn button-home mt-2 rounded ${btn_disable}`}
+        >
+          {savedStatus ? "Unsave" : "Save"}
         </a>
       </div>
     </div>
@@ -82,7 +113,8 @@ const SpecificJobPost = ({ job, userid }) => {
 const mapStateToProps = (state) => {
   return {
     userid: state.auth.id,
+    isSignedIn: state.auth.isSignedIn,
   };
 };
 
-export default connect(mapStateToProps)(SpecificJobPost);
+export default connect(mapStateToProps, { applyJob, saveJob })(JobPostItem);
