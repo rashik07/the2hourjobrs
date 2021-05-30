@@ -15,14 +15,16 @@ class DropdownUserMenu extends Component {
           id="user-menu-dropdown"
           className="user-menu"
           title={
-            <Avatar
-              email={this.props.email}
-              name={this.props.name}
-              className="mr5"
-              size={30}
-              round="25px"
-              src="https://pbs.twimg.com/media/EuCl5URUUAIenYm.jpg"
-            />
+            <>
+              <Avatar
+                email={this.props.email}
+                name={this.props.name}
+                className="mr5"
+                size={30}
+                round="25px"
+                src="https://pbs.twimg.com/media/EuCl5URUUAIenYm.jpg"
+              />
+            </>
           }
         >
           <li className="user-footer text-center">

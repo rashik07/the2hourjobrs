@@ -8,15 +8,15 @@ export const signIn = (logInformValues) => async (dispatch) => {
     });
     dispatch({ type: types.SIGN_IN, payload: response.data });
     console.log(response.data);
+
     return true;
-    // router.back();
   } catch (error) {
     dispatch({ type: types.AUTH_FAILED });
     return false;
   }
 };
 
-export const signUp = (formValues) => async (dispatch) => {
+export const signUp = (formValues, router) => async (dispatch) => {
   try {
     await backend.post("v1/user/data/", {
       ...formValues,
@@ -25,6 +25,8 @@ export const signUp = (formValues) => async (dispatch) => {
     const { username, password } = formValues;
 
     dispatch(signIn({ username, password }));
+
+    router.back();
   } catch (error) {
     let response = error.response.data;
 
@@ -40,6 +42,6 @@ export const signUp = (formValues) => async (dispatch) => {
 };
 
 export const signOut = () => (dispatch) => {
-  dispatch({ type: types.RESET_JOB_STATE });
+  // dispatch({ type: types.RESET_JOB_STATE });
   dispatch({ type: types.SIGN_OUT });
 };

@@ -26,7 +26,7 @@ const JobList = ({ getAllJobs, all_jobs, filtered_jobs, showFilterJobs }) => {
 
 const mapStateToProps = (state) => {
   return {
-    all_jobs: state.job.all_jobs,
+    all_jobs: Object.values(state.job.all_jobs),
     filtered_jobs: state.job.filtered_jobs,
   };
 };
