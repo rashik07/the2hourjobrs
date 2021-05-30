@@ -1,24 +1,14 @@
+import React from 'react';
 import { Card, Avatar } from 'antd';
 import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
-
-
-
-
-
-import React from 'react';
-
-const Add_experience = () => {
+const Add_skillcatagory = () => {
     const { Meta } = Card;
     return (
         <div>
-            <Card
-                    style={{ width: 250, border: '1px solid whitesmoke', backgroundColor:'whitesmoke' }}
+              <Card
+                    style={{ width: 250, border: '1px solid grey', backgroundColor:'whitesmoke',borderradius:'15px' }}
                     
-                    actions={[
-                    <SettingOutlined key="setting" />,
-                    <EditOutlined key="edit" />,
-                    <EllipsisOutlined key="ellipsis" />,
-                    ]}
+                  
                 >
                     <Meta
                     avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
@@ -26,9 +16,8 @@ const Add_experience = () => {
                     description="This is the description"
                     />
             </Card>
-            
         </div>
     );
 };
 
-export default Add_experience;
+export default Add_skillcatagory;

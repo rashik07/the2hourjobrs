@@ -154,3 +154,17 @@
 .quick-links ul li a i {
     font-size: 8px;
 }
+
+/*industry_skillset.css*/
+.main_body_industry{
+    margin-top: 30px;
+    margin-bottom:30px;
+}
+.main_body_industry h2{
+    font-size: 24px;
+    color: black;
+    font-weight: 700;
+    margin: 0 0 20px;
+    background-color:none ;
+    text-align:center;
+}

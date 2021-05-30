@@ -5,6 +5,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import "antd/dist/antd.css";
 import "./auth/login.css";
 import "./jobs/list.css";
+import "../container/footer/footer.css";
 // import "@/components/jobs/components/list/SelectedFilter.css";
 import "components/jobs/list/SelectedFilter.css";
 import "./../styles/header.css";

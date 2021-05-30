@@ -58,7 +58,7 @@ const Portfolio = () => {
                 <main className="col-md-9   my-4">
                     
                         <div className="row">
-                            <div className="col-4">
+                            <div className="col-4 ">
                                 <Add_experience />
                             </div>
                             <div className="col-4">
