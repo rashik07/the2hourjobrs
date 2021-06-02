@@ -38,5 +38,9 @@ export const GET_SINGLE_ANNOUNCEMENT = "GET_SINGLE_ANNOUNCEMENT";
 export const GET_ALL_ANNOUNCEMENT = "GET_ALL_ANNOUNCEMENT";
 export const UPLOAD_ANNOUNCEMENT_MEDIA = "UPLOAD_ANNOUNCEMENT_MEDIA";
 
-//************** ANNOUNCEMENT TYPES *********************/
+//************** USER TYPES *********************/
 export const UPDATE_USER_PROFILE = "UPDATE_USER_PROFILE";
+
+//************** PROJECT TYPES *********************/
+
+export const VIEW_PROJECT = "VIEW_PROJECT";

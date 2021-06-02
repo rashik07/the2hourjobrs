@@ -1,12 +1,18 @@
 import Head from 'next/head';
-import React, { useState } from 'react';
+import React, {useEffect, useState } from 'react';
 import Navbar from '../../container/navbar/navbar';
 import Sidebar from "../../container/sidebar/sidebar";
 import Add_experience from "../../components/Add_experience"
 import { Select } from "antd";
 import {Form,Input, Button, Radio ,DatePicker,Typography,Divider,TextArea , Space  } from 'antd';
+import { connect } from "react-redux";
+import { viewProject } from '@/redux/actions/projectAction';
+const Portfolio = ({viewProject, view_project}) => {
+    useEffect(() => {
+        viewProject();
+      },[]);
+      console.log(view_project);
 
-const Portfolio = () => {
     const { RangePicker } = DatePicker;
     const { TextArea } = Input;
     const { Title } = Typography;
@@ -111,4 +117,12 @@ const Portfolio = () => {
     );
 };
 
-export default Portfolio;
+/*export default Portfolio;*/
+const mapStateToProps = (state) => {
+    return {
+      view_project: state.project.view_project,
+    };
+  };
+  
+  export default connect(mapStateToProps, {viewProject})(Portfolio);
+  
