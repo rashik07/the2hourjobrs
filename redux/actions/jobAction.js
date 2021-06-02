@@ -218,12 +218,20 @@ export const postJob = (data, router) => async (dispatch) => {
 
     data = _.omit(data, [
       "skills",
-      "workplace",
       "job_location",
       "employment_status",
       "education",
       "gender",
     ]);
+
+    // console.log(data);
+    for (const property in data) {
+      // console.log(`${property}: ${data[property]}`);
+
+      if (data[property] === "" || data[property] === []) {
+        data = _.omit(data, property);
+      }
+    }
 
     const response = await backend.post("v1/jobpost/data/", data, getConfig());
 
