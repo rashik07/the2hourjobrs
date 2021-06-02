@@ -6,9 +6,16 @@ import Step1 from "components/jobs/post/Step1";
 import Step2 from "components/jobs/post/Step2";
 import Step3 from "components/jobs/post/Step3";
 import Step4 from "components/jobs/post/Step4";
+import { getEducation, getJobCategories } from "@/redux/actions/jobAction";
+import { connect } from "react-redux";
 
-const PostJob = () => {
+const PostJob = ({ getJobCategories, getEducation }) => {
   const { Step } = Steps;
+
+  useEffect(() => {
+    getJobCategories();
+    getEducation();
+  }, []);
 
   const [postStep, setPostStep] = useState(0);
 
@@ -53,4 +60,4 @@ const PostJob = () => {
   );
 };
 
-export default PostJob;
+export default connect(null, { getJobCategories, getEducation })(PostJob);
