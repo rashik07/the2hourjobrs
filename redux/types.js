@@ -22,6 +22,7 @@ export const GET_SINGLE_JOB = "GET_SINGLE_JOB";
 export const GET_ALL_JOB = "GET_ALL_JOB";
 export const GET_SAVED_JOB = "GET_SAVED_JOB";
 export const GET_APPLIED_JOB = "GET_APPLIED_JOB";
+export const GET_SELF_POSTED_JOB = "GET_SELF_POSTED_JOB";
 export const FILTER_JOB = "FILTER_JOB";
 export const UPLOAD_JOB_MEDIA = "UPLOAD_JOB_MEDIA";
 export const RESET_JOB_STATE = "RESET_JOB_STATE";

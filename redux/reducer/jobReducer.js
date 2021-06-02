@@ -22,12 +22,13 @@ const INITIAL_STATE = {
     education: [],
     gender: [],
   },
-  education: {},
+  education: [],
   location: [],
   all_jobs: [],
   saved_jobs: [],
   applied_jobs: [],
   filtered_jobs: [],
+  self_posted_jobs: [],
 };
 
 const jobReducer = (state = INITIAL_STATE, action) => {
@@ -40,6 +41,9 @@ const jobReducer = (state = INITIAL_STATE, action) => {
 
     case types.GET_ALL_JOB:
       return { ...state, all_jobs: action.payload };
+
+    case types.GET_SELF_POSTED_JOB:
+      return { ...state, self_posted_jobs: action.payload };
 
     case types.GET_SAVED_JOB:
       return { ...state, saved_jobs: action.payload };

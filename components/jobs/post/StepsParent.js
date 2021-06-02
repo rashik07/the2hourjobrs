@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Select } from "antd";
 import { connect } from "react-redux";
-import { getJobCategories, saveTemporayJobPost } from "redux/actions/jobAction";
+import { saveTemporayJobPost } from "redux/actions/jobAction";
 import TagInput from "components/TagInput";
 import CheckBox from "components/CheckBox";
 import { Radio } from "antd";
@@ -378,10 +378,6 @@ const StepsParent = ({
   temp_jobpost,
   saveTemporayJobPost,
 }) => {
-  useEffect(() => {
-    getJobCategories();
-  }, []);
-
   if (item === "category") {
     return renderCategories(categories, temp_jobpost, saveTemporayJobPost);
   }
@@ -402,6 +398,5 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-  getJobCategories,
   saveTemporayJobPost,
 })(StepsParent);

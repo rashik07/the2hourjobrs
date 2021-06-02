@@ -4,9 +4,16 @@ import { getSavedJobs } from "@/redux/actions/jobAction";
 import { connect } from "react-redux";
 import Navbar from "container/navbar/navbar";
 import JobPostItem from "components/jobs/JobPostItem";
+import { useRouter } from "next/router";
 
-const SavedJobs = ({ saved_jobs, getSavedJobs }) => {
+const SavedJobs = ({ saved_jobs, getSavedJobs, isSignedIn }) => {
+  const router = useRouter();
+  
   useEffect(() => {
+    if (!isSignedIn) {
+      router.push("/auth/login");
+    }
+
     getSavedJobs();
   }, []);
 
@@ -37,6 +44,7 @@ const SavedJobs = ({ saved_jobs, getSavedJobs }) => {
 const mapStateToProps = (state) => {
   return {
     saved_jobs: Object.values(state.job.saved_jobs),
+    isSignedIn: state.auth.isSignedIn,
   };
 };
 

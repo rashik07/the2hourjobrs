@@ -30,6 +30,12 @@ const regularOptions = (router, isSignedIn) => {
         >
           Applied Jobs
         </NavDropdown.Item>
+        <NavDropdown.Item
+          disabled={!isSignedIn}
+          onClick={() => router.push("/jobs/self_posted_jobs")}
+        >
+          My Posted Jobs
+        </NavDropdown.Item>
       </NavDropdown>
       <Nav.Link href="#link">Workers</Nav.Link>
       <Nav.Link href="#link">Products</Nav.Link>
@@ -77,7 +83,7 @@ const CustomNavbar = ({ isSignedIn }) => {
   const router = useRouter();
 
   return (
-    <div className="">
+    <div className="container">
       <Navbar bg="light" expand="lg">
         <Navbar.Brand onClick={() => router.push("/")} href="#">
           <img src="/img/logo.png" alt="Logo" height={50} />
