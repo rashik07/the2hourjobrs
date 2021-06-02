@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import { applyJob, saveJob } from "@/redux/actions/jobAction";
 import Link from "next/link";
 import { connect } from "react-redux";
+import { useRouter } from "next/router";
 
 const JobPostItem = ({ job, userid, isSignedIn, applyJob, saveJob }) => {
+  const router = useRouter();
+
   const { id, title, poster, applied, saved, applied_saved_id } = job;
 
   const btn_disable = userid === poster.id ? "disabled" : "";
@@ -51,12 +54,60 @@ const JobPostItem = ({ job, userid, isSignedIn, applyJob, saveJob }) => {
     applyJob(id, userid, setAppliedStatus);
   };
 
+  const deleteJobBtnClick = () => {
+    if (!isSignedIn) {
+      alert("You must log in to access this feature");
+      return;
+    }
+
+    // applyJob(id, userid, setAppliedStatus);
+  };
+
   const saveJobBtnClick = () => {
     if (!isSignedIn) {
       alert("You must log in to access this feature");
       return;
     }
     saveJob(id, userid, savedStatus, setSavedStatus, applied_saved_id);
+  };
+
+  const renderButtons = () => {
+    if (router.pathname === "/jobs/self_posted_jobs") {
+      return (
+        <>
+          <a className="btn button-home mt-2 rounded">Edit</a>
+          <a
+            onClick={deleteJobBtnClick}
+            className={`btn button-home mt-2 rounded`}
+          >
+            Delete
+          </a>
+        </>
+      );
+    }
+
+    return (
+      <>
+        {appliedStatus ? (
+          <a className="btn button-home rounded disabled">Applied</a>
+        ) : (
+          <a
+            onClick={applyJobBtnClick}
+            className={`btn button-home rounded ${btn_disable}`}
+          >
+            Apply
+          </a>
+        )}
+
+        <a className="btn button-home mt-2 rounded">Details</a>
+        <a
+          onClick={saveJobBtnClick}
+          className={`btn button-home mt-2 rounded ${btn_disable}`}
+        >
+          {savedStatus ? "Unsave" : "Save"}
+        </a>
+      </>
+    );
   };
 
   return (
@@ -86,26 +137,7 @@ const JobPostItem = ({ job, userid, isSignedIn, applyJob, saveJob }) => {
           {getExperience(job.min_experience, job.max_experience)}
         </p>
       </div>
-      <div className="col-3 btn-group-vertical">
-        {appliedStatus ? (
-          <a className="btn button-home rounded disabled">Applied</a>
-        ) : (
-          <a
-            onClick={applyJobBtnClick}
-            className={`btn button-home rounded ${btn_disable}`}
-          >
-            Apply
-          </a>
-        )}
-
-        <a className="btn button-home mt-2 rounded">Details</a>
-        <a
-          onClick={saveJobBtnClick}
-          className={`btn button-home mt-2 rounded ${btn_disable}`}
-        >
-          {savedStatus ? "Unsave" : "Save"}
-        </a>
-      </div>
+      <div className="col-3 btn-group-vertical">{renderButtons()}</div>
     </div>
   );
 };

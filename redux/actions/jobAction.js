@@ -62,6 +62,19 @@ export const getAllJobs = () => async (dispatch) => {
   }
 };
 
+export const getSelfPostedJobs = () => async (dispatch) => {
+  try {
+    const response = await backend.get(
+      `v1/jobpost/data/?poster=${store.getState().auth.id}`,
+      getConfig()
+    );
+
+    dispatch({ type: types.GET_SELF_POSTED_JOB, payload: response.data });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const getSavedJobs = () => async (dispatch) => {
   try {
     const response = await backend.get("v1/jobpost/saved_jobs/", getConfig());
