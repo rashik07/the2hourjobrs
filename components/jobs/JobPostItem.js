@@ -1,10 +1,20 @@
 import React, { useState } from "react";
-import { applyJob, saveJob } from "@/redux/actions/jobAction";
+import { applyJob, saveJob, deleteJob } from "@/redux/actions/jobAction";
 import Link from "next/link";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
 
-const JobPostItem = ({ job, userid, isSignedIn, applyJob, saveJob }) => {
+import { Modal } from "antd";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
+
+const JobPostItem = ({
+  job,
+  userid,
+  isSignedIn,
+  applyJob,
+  saveJob,
+  deleteJob,
+}) => {
   const router = useRouter();
 
   const { id, title, poster, applied, saved, applied_saved_id } = job;
@@ -55,10 +65,19 @@ const JobPostItem = ({ job, userid, isSignedIn, applyJob, saveJob }) => {
   };
 
   const deleteJobBtnClick = () => {
-    if (!isSignedIn) {
-      alert("You must log in to access this feature");
-      return;
-    }
+    const { confirm } = Modal;
+
+    confirm({
+      title: "Are you sure delete this task?",
+      icon: <ExclamationCircleOutlined />,
+      content: "Some descriptions",
+      okText: "Yes",
+      okType: "danger",
+      cancelText: "No",
+      onOk() {
+        deleteJob(id);
+      },
+    });
 
     // applyJob(id, userid, setAppliedStatus);
   };
@@ -72,16 +91,18 @@ const JobPostItem = ({ job, userid, isSignedIn, applyJob, saveJob }) => {
   };
 
   const renderButtons = () => {
+    // For self posted jobs
     if (router.pathname === "/jobs/self_posted_jobs") {
       return (
         <>
-          <a className="btn button-home mt-2 rounded">Edit</a>
-          <a
+          <button className="btn button-home mt-2 rounded">Edit</button>
+          <button className="btn button-home mt-2 rounded">Detail</button>
+          <button
             onClick={deleteJobBtnClick}
             className={`btn button-home mt-2 rounded`}
           >
             Delete
-          </a>
+          </button>
         </>
       );
     }
@@ -149,4 +170,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { applyJob, saveJob })(JobPostItem);
+export default connect(mapStateToProps, { applyJob, saveJob, deleteJob })(
+  JobPostItem
+);

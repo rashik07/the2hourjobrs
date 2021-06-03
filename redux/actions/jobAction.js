@@ -203,7 +203,7 @@ export const saveTemporayJobPost = (data) => async (dispatch) => {
 
 export const postJob = (data, router) => async (dispatch) => {
   try {
-    data = { ...data, posted: true };
+    data = { ...data, posted: true, poster: store.getState().auth.id };
     const {
       category,
       employment_status,
@@ -402,3 +402,21 @@ export const saveJob =
       console.log(error.response);
     }
   };
+
+export const deleteJob = (job_id) => async (dispatch) => {
+  try {
+    const response = await backend.delete(
+      `v1/jobpost/data/${job_id}/`,
+      getConfig()
+    );
+
+    if (response.status == 200 || response.status == 204) {
+      dispatch({
+        type: types.DELETE_JOB,
+        payload: { job_id: job_id },
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
