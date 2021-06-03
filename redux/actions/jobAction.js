@@ -214,17 +214,19 @@ export const postJob = (data, router) => async (dispatch) => {
       gender,
     } = data;
 
-    data = { ...data, category: category.id };
+    data = {
+      ...data,
+      category: category.id,
+    };
 
     data = _.omit(data, [
-      "skills",
+      // "skills",
       "job_location",
       "employment_status",
       "education",
       "gender",
     ]);
 
-    // console.log(data);
     for (const property in data) {
       // console.log(`${property}: ${data[property]}`);
 
@@ -233,22 +235,23 @@ export const postJob = (data, router) => async (dispatch) => {
       }
     }
 
+    console.log(data);
     const response = await backend.post("v1/jobpost/data/", data, getConfig());
 
     const { id } = response.data;
 
     // creating skill instance for jobpost
-    skills.forEach(async (skill) => {
-      try {
-        let skill_response = await backend.post(
-          "v1/jobpost/skill/",
-          { jobpost: id, skill },
-          getConfig()
-        );
-      } catch (error) {
-        console.log(error.response);
-      }
-    });
+    // skills.forEach(async (skill) => {
+    //   try {
+    //     let skill_response = await backend.post(
+    //       "v1/jobpost/skill/",
+    //       { jobpost: id, skill },
+    //       getConfig()
+    //     );
+    //   } catch (error) {
+    //     console.log(error.response);
+    //   }
+    // });
 
     // creating workplace instance for jobpost
     workplace.forEach(async (wp) => {
