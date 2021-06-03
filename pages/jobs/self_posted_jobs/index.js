@@ -26,7 +26,7 @@ const SelfPostedJobs = ({ self_posted_jobs, getSelfPostedJobs }) => {
   return (
     <div>
       <Head>
-        <title>Saved Jobs</title>
+        <title>Self Posted Jobs</title>
       </Head>
       <Navbar />
 

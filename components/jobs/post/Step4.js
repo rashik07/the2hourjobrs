@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Descriptions } from "antd";
-import { List } from "antd";
 import dateformat from "dateformat";
 import { postJob } from "redux/actions/jobAction";
 import { useRouter } from "next/router";

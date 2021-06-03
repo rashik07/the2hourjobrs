@@ -65,6 +65,23 @@ const jobReducer = (state = INITIAL_STATE, action) => {
       jobs[job_id].saved = saved;
       return { ...state, all_jobs: Object.values(jobs) };
 
+    case types.DELETE_JOB:
+      let all_jobs = state.all_jobs;
+      let self_posted_jobs = state.self_posted_jobs;
+
+      all_jobs = all_jobs.filter((job) => job.id !== action.payload.job_id);
+      self_posted_jobs = self_posted_jobs.filter(
+        (job) => job.id !== action.payload.job_id
+      );
+      // delete all_jobs[action.payload.job_id];
+      // delete self_posted_jobs[action.payload.job_id];
+
+      return {
+        ...state,
+        all_jobs: Object.values(all_jobs),
+        self_posted_jobs: Object.values(self_posted_jobs),
+      };
+
     case types.FILTER_JOB:
       return { ...state, filtered_jobs: action.payload };
 
