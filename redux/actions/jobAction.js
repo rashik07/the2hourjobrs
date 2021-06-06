@@ -203,7 +203,7 @@ export const saveTemporayJobPost = (data) => async (dispatch) => {
 
 export const postJob = (data, router) => async (dispatch) => {
   try {
-    data = { ...data, posted: true };
+    data = { ...data, posted: true, poster: store.getState().auth.id };
     const {
       category,
       employment_status,
@@ -214,7 +214,10 @@ export const postJob = (data, router) => async (dispatch) => {
       gender,
     } = data;
 
-    data = { ...data, category: category.id };
+    data = {
+      ...data,
+      category: category.id,
+    };
 
     data = _.omit(data, [
       "skills",
@@ -224,119 +227,71 @@ export const postJob = (data, router) => async (dispatch) => {
       "gender",
     ]);
 
-    // console.log(data);
+    // // For removing empty properties
     for (const property in data) {
-      // console.log(`${property}: ${data[property]}`);
-
       if (data[property] === "" || data[property] === []) {
         data = _.omit(data, property);
       }
     }
 
+    let job_Location = [];
+
+    // job_location.fore
+    job_location.forEach((x) => job_Location.push(JSON.parse(x)));
+
+    console.log(job_Location);
+
+    data = {
+      ...data,
+      extra_fields: {
+        skills: skills,
+        job_location: job_location,
+        employment_status: employment_status,
+        education: education,
+        gender: gender,
+        workplace: workplace,
+      },
+    };
+
     const response = await backend.post("v1/jobpost/data/", data, getConfig());
 
     const { id } = response.data;
 
-    // creating skill instance for jobpost
-    skills.forEach(async (skill) => {
-      try {
-        let skill_response = await backend.post(
-          "v1/jobpost/skill/",
-          { jobpost: id, skill },
-          getConfig()
-        );
-      } catch (error) {
-        console.log(error.response);
-      }
-    });
-
-    // creating workplace instance for jobpost
-    workplace.forEach(async (wp) => {
-      try {
-        let workplace_response = await backend.post(
-          "v1/jobpost/workplace/",
-          { jobpost: id, workplace: wp },
-          getConfig()
-        );
-      } catch (error) {
-        console.log(error.response);
-      }
-    });
-
-    // creating employment_status instance for jobpost
-    employment_status.forEach(async (es) => {
-      try {
-        let es_response = await backend.post(
-          "v1/jobpost/employmentStatus/",
-          { jobpost: id, name: es },
-          getConfig()
-        );
-      } catch (error) {
-        console.log(error.response);
-      }
-    });
-
-    // creating education instance for jobpost
-    education.forEach(async (edu) => {
-      try {
-        let edu_response = await backend.post(
-          "v1/jobpost/education/",
-          { jobpost: id, education: edu },
-          getConfig()
-        );
-      } catch (error) {
-        console.log(error.response);
-      }
-    });
-
-    // creating gender instance for jobpost
-    gender.forEach(async (gndr) => {
-      try {
-        let gender_response = await backend.post(
-          "v1/jobpost/gender/",
-          { jobpost: id, gender: gndr },
-          getConfig()
-        );
-      } catch (error) {
-        console.log(error.response);
-      }
-    });
-
-    // creating job location instance for jobpost
-    job_location.forEach(async (location) => {
-      location = JSON.parse(location);
-      if (location.type === "division") {
-        try {
-          let location_response = await backend.post(
-            "v1/jobpost/division/",
-            { jobpost: id, division: location.id },
-            getConfig()
-          );
-        } catch (error) {
-          console.log(error.response);
-        }
-      } else if (location.type === "district") {
-        try {
-          let location_response = await backend.post(
-            "v1/jobpost/district/",
-            { jobpost: id, district: location.id },
-            getConfig()
-          );
-        } catch (error) {
-          console.log(error.response);
-        }
-      } else if (location.type === "thana") {
-        try {
-          let location_response = await backend.post(
-            "v1/jobpost/thana/",
-            { jobpost: id, thana: location.id },
-            getConfig()
-          );
-        } catch (error) {
-          console.log(error.response);
-        }
-      }
-    });
+    // // creating job location instance for jobpost
+    // job_location.forEach(async (location) => {
+    //   location = JSON.parse(location);
+    //   if (location.type === "division") {
+    //     try {
+    //       let location_response = await backend.post(
+    //         "v1/jobpost/division/",
+    //         { jobpost: id, division: location.id },
+    //         getConfig()
+    //       );
+    //     } catch (error) {
+    //       console.log(error.response);
+    //     }
+    //   } else if (location.type === "district") {
+    //     try {
+    //       let location_response = await backend.post(
+    //         "v1/jobpost/district/",
+    //         { jobpost: id, district: location.id },
+    //         getConfig()
+    //       );
+    //     } catch (error) {
+    //       console.log(error.response);
+    //     }
+    //   } else if (location.type === "thana") {
+    //     try {
+    //       let location_response = await backend.post(
+    //         "v1/jobpost/thana/",
+    //         { jobpost: id, thana: location.id },
+    //         getConfig()
+    //       );
+    //     } catch (error) {
+    //       console.log(error.response);
+    //     }
+    //   }
+    // });
 
     dispatch({ type: types.CREATE_JOB, payload: id });
     dispatch({ type: types.UNSAVE_TEMPORARY_JOBPOST });
@@ -402,3 +357,21 @@ export const saveJob =
       console.log(error.response);
     }
   };
+
+export const deleteJob = (job_id) => async (dispatch) => {
+  try {
+    const response = await backend.delete(
+      `v1/jobpost/data/${job_id}/`,
+      getConfig()
+    );
+
+    if (response.status == 200 || response.status == 204) {
+      dispatch({
+        type: types.DELETE_JOB,
+        payload: { job_id: job_id },
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
