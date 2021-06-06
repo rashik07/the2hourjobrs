@@ -2,16 +2,15 @@ import Head from 'next/head';
 import React, {useEffect, useState } from 'react';
 import Navbar from '../../container/navbar/navbar';
 import Sidebar from "../../container/sidebar/sidebar";
-import Add_experience from "../../components/Add_experience"
-import { Select } from "antd";
 import {Form,Input, Button, Radio ,DatePicker,Typography,Divider,TextArea , Space  } from 'antd';
 import { connect } from "react-redux";
 import { viewProject } from '@/redux/actions/projectAction';
+import Add_project from 'components/Add_project';
 const Portfolio = ({viewProject, view_project}) => {
     useEffect(() => {
         viewProject();
       },[]);
-      console.log(view_project);
+    //  console.log(view_project);
 
     const { RangePicker } = DatePicker;
     const { TextArea } = Input;
@@ -63,18 +62,13 @@ const Portfolio = ({viewProject, view_project}) => {
 
                 <main className="col-md-9   my-4">
                     
-                        <div className="row">
-                            <div className="col-4 ">
-                                <Add_experience />
-                            </div>
-                            <div className="col-4">
-                                <Add_experience />
-                            </div>
-                            <div className="col-4">
-                                <Add_experience />
-                            </div>
-                            
-                        </div> 
+                <div className="row">
+                              {
+                                  view_project.map(project => <Add_project 
+                                  key={view_project.id}
+                                  project={project}></Add_project>)
+                            }  
+                        </div>
                         <Form 
                                 {...formItemLayout}
                                     layout={formLayout}
