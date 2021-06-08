@@ -2,17 +2,38 @@ import Head from 'next/head';
 import React, {useEffect, useState } from 'react';
 import Navbar from '../../container/navbar/navbar';
 import Sidebar from "../../container/sidebar/sidebar";
-import {Form,Input, Button, Radio ,DatePicker,Typography,Divider,TextArea , Space  } from 'antd';
+import {Form,Input, Button, DatePicker,Typography,Divider } from 'antd';
 import { connect } from "react-redux";
-import { viewProject } from '@/redux/actions/projectAction';
+import { viewProject , createProject} from '@/redux/actions/projectAction';
 import Add_project from 'components/Add_project';
-const Portfolio = ({viewProject, view_project}) => {
+import {
+  updateProfile
+} from "@/redux/actions/userAction";
+
+const Portfolio = ({viewProject, view_project, createProject, updateProfile,user_profile}) => {
+  useEffect(() => {
+    updateProfile();
+  },[]);
+  const onFinish = (values) => {
+   
+   
+    console.log('Success:', values );
+    createProject(values);
+    
+   
+  };
+  
+
+  const onFinishFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
+  };
+  
     useEffect(() => {
         viewProject();
       },[]);
     //  console.log(view_project);
 
-    const { RangePicker } = DatePicker;
+    
     const { TextArea } = Input;
     const { Title } = Typography;
     const [form] = Form.useForm();
@@ -21,27 +42,17 @@ const Portfolio = ({viewProject, view_project}) => {
     const onFormLayoutChange = ({ layout }) => {
       setFormLayout(layout);
     };
+    
 
-    const formItemLayout =
-    formLayout === 'horizontal'
-      ? {
-          labelCol: {
-            span: 4,
-          },
-          wrapperCol: {
-            span: 12,
-          },
-        }
-      : null;
-  const buttonItemLayout =
-    formLayout === 'horizontal'
-      ? {
-          wrapperCol: {
-            span: 14,
-            offset: 4,
-          },
-        }
-      : null;
+    const layout = {
+      labelCol: {
+        span: 8,
+      },
+      wrapperCol: {
+        span: 16,
+      },
+    };
+     
     return (
         <div>
             <Head>
@@ -70,35 +81,32 @@ const Portfolio = ({viewProject, view_project}) => {
                             }  
                         </div>
                         <Form 
-                                {...formItemLayout}
+                                {...layout}
                                     layout={formLayout}
-                                    form={form}
-                                    initialValues={{
-                                    layout: formLayout,
-                                    }}
+                                   
+                                    onFinish={onFinish}
+                                    onFinishFailed={onFinishFailed}
                                 
                                     >
                            
                                 <Divider> <Title>Add Portfolio</Title></Divider>
-                                <Form.Item label="Project Title:">
+                                
+                              
+                                <Form.Item label="Project Title:"  name={'title'}>
                                         <Input placeholder="project title" />
                                 </Form.Item>
-                                <Form.Item label="Skills:">
+                                <Form.Item label="Skills:" name={ 'skills'}>
                                         <Input placeholder="skills" />
                                 </Form.Item>
-                                <Form.Item label="Description">
+                                <Form.Item label="Description" name={'description'}>
                                     <TextArea rows={4} placeholder="description" />
                                 </Form.Item>
-                                <Form.Item label="Time:">
-                                <Space direction="vertical" size={16}>
-                                    <RangePicker />
-                                    
-                                    
-                                </Space>
-                                
-                                </Form.Item>
-                                <Form.Item className="text-center">
-                                    <Button type="primary">Add</Button>
+                             
+                      
+                                <Form.Item className="text-center" >
+                                    <Button type="primary" htmlType="submit" >
+                                      Add
+                                    </Button>
                                 </Form.Item>
                                 
                         </Form>
@@ -115,8 +123,12 @@ const Portfolio = ({viewProject, view_project}) => {
 const mapStateToProps = (state) => {
     return {
       view_project: state.project.view_project,
+      create_project: state.project.create_project,
+      user_profile: state.user.user_profile,
+    
+
     };
   };
   
-  export default connect(mapStateToProps, {viewProject})(Portfolio);
+  export default connect(mapStateToProps, {viewProject, createProject,updateProfile})(Portfolio);
   

@@ -45,3 +45,4 @@ export const UPDATE_USER_PROFILE = "UPDATE_USER_PROFILE";
 //************** PROJECT TYPES *********************/
 
 export const VIEW_PROJECT = "VIEW_PROJECT";
+export const CREATE_PROJECT = "CREATE_PROJECT";

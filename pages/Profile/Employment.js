@@ -7,6 +7,14 @@ import Add_experience from "../../components/Add_experience"
 import {Form,Input, Button, Radio ,DatePicker,Typography,Divider, Space,TextArea  } from 'antd';
 
 const Employment = () => {
+  const onFinish = (values) => {
+    console.log('Success:', values);
+   
+    
+  };
+  const onFinishFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
+  };
     const { RangePicker } = DatePicker;
     const { TextArea } = Input;
     const { Title } = Typography;
@@ -76,7 +84,8 @@ const Employment = () => {
                                     initialValues={{
                                     layout: formLayout,
                                     }}
-                                
+                                    onFinish={onFinish}
+                                    onFinishFailed={onFinishFailed}
                                     >
                            
                                 <Divider> <Title>Add Experience</Title></Divider>
@@ -104,7 +113,7 @@ const Employment = () => {
                                 
                                 </Form.Item>
                                 <Form.Item className="text-center">
-                                    <Button type="primary">Add</Button>
+                                    <Button type="primary" htmlType="submit">Add</Button>
                                 </Form.Item>
                                 
                         </Form>

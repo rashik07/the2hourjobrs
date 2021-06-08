@@ -11,7 +11,7 @@ const Add_project = ({viewProject, view_project, project}) => {
     useEffect(() => {
         viewProject();
       },[]);
-      console.log(view_project);
+      //console.log(view_project);
       
     const { Meta } = Card;
     return (
