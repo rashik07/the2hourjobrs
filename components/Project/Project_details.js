@@ -1,18 +1,37 @@
 import React, {useEffect, useState } from 'react';
-import { Card, Avatar } from 'antd';
-import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
+import { Card, Avatar,Modal } from 'antd';
+import { EditOutlined, EllipsisOutlined, SettingOutlined , DeleteOutlined } from '@ant-design/icons';
 import { connect } from "react-redux";
 
-import { viewProject } from '@/redux/actions/projectAction';
+import { viewProject , deleteProject} from '@/redux/actions/projectAction';
+import { ExclamationCircleOutlined } from "@ant-design/icons";
 
 
 
-const Add_project = ({viewProject, view_project, project}) => {
+const Project_details = ({viewProject, view_project, project,deleteProject}) => {
+  
     useEffect(() => {
+      
         viewProject();
       },[]);
-      //console.log(view_project);
       
+  
+      //console.log(view_project);
+      const deleteProjectBtnClick = () => {
+        const { confirm } = Modal;
+    
+        confirm({
+          title: "Are you sure delete this project?",
+          icon: <ExclamationCircleOutlined />,
+          content: "Some descriptions",
+          okText: "Yes",
+          okType: "danger",
+          cancelText: "No",
+          onOk() {
+            deleteProject(id);
+          },
+        });
+      };
     const { Meta } = Card;
     return (
         <div>
@@ -24,7 +43,7 @@ const Add_project = ({viewProject, view_project, project}) => {
                         actions={[
                                 
                         <EditOutlined key="edit" />,
-                        <EllipsisOutlined key="ellipsis" />,
+                        <DeleteOutlined  key="ellipsis" onClick={deleteProjectBtnClick}/>,
                         ]}
                   >
                   <Meta
@@ -48,8 +67,11 @@ const Add_project = ({viewProject, view_project, project}) => {
 const mapStateToProps = (state) => {
     return {
       view_project: state.project.view_project,
+      
+
+
+
     };
   };
   
-  export default connect(mapStateToProps, {viewProject})(Add_project);
-/*export default Add_project;*/
+  export default connect(mapStateToProps, {viewProject,deleteProject})(Project_details);

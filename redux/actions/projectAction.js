@@ -17,6 +17,7 @@ const getConfig = () => {
 
 export const viewProject = (data) => async (dispatch) => {
   try{
+    
     const response = await backend.get(`v1/user/projects/?user=${store.getState().auth.id}`, getConfig());
     dispatch({ type: types.VIEW_PROJECT, payload: response.data });
   }
@@ -53,6 +54,25 @@ export const createProject = (formValues) => async (dispatch) => {
         
       });
       
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
+export const deleteProject = (project_id) => async (dispatch) => {
+  try {
+    const response = await backend.delete(
+      `v1/user/projects/${project_id}/`,
+      getConfig()
+    );
+
+    if (response.status == 200 || response.status == 204) {
+      dispatch({
+        type: types.DELETE_PROJECT,
+        payload: { project_id: project_id },
+      });
     }
   } catch (error) {
     console.log(error);

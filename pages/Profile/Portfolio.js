@@ -1,58 +1,20 @@
 import Head from 'next/head';
-import React, {useEffect, useState } from 'react';
+import React, {useEffect , useState} from 'react';
 import Navbar from '../../container/navbar/navbar';
 import Sidebar from "../../container/sidebar/sidebar";
 import {Form,Input, Button, DatePicker,Typography,Divider } from 'antd';
 import { connect } from "react-redux";
 import { viewProject , createProject} from '@/redux/actions/projectAction';
-import Add_project from 'components/Add_project';
-import {
-  updateProfile
-} from "@/redux/actions/userAction";
+import Project_details from 'components/Project/Project_details';
+import Add_project from 'components/Project/Add_project';
 
-const Portfolio = ({viewProject, view_project, createProject, updateProfile,user_profile}) => {
+
+const Portfolio = ({viewProject, view_project}) => {
+  const [updateList, setUpdateList]=useState(true);
   useEffect(() => {
-    updateProfile();
-  },[]);
-  const onFinish = (values) => {
-   
-   
-    console.log('Success:', values );
-    createProject(values);
-    
-   
-  };
-  
-
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
-  
-    useEffect(() => {
-        viewProject();
-      },[]);
-    //  console.log(view_project);
-
-    
-    const { TextArea } = Input;
-    const { Title } = Typography;
-    const [form] = Form.useForm();
-    const [formLayout, setFormLayout] = useState('horizontal');
-  
-    const onFormLayoutChange = ({ layout }) => {
-      setFormLayout(layout);
-    };
-    
-
-    const layout = {
-      labelCol: {
-        span: 8,
-      },
-      wrapperCol: {
-        span: 16,
-      },
-    };
-     
+      
+    viewProject();
+  },[updateList]);
     return (
         <div>
             <Head>
@@ -75,41 +37,14 @@ const Portfolio = ({viewProject, view_project, createProject, updateProfile,user
                     
                 <div className="row">
                               {
-                                  view_project.map(project => <Add_project 
-                                  key={view_project.id}
-                                  project={project}></Add_project>)
+                                  view_project.map(project => <Project_details 
+                                  key={view_project.id} 
+                                  
+                                  setUpdateList={setUpdateList}
+                                  project={project}></Project_details>)
                             }  
                         </div>
-                        <Form 
-                                {...layout}
-                                    layout={formLayout}
-                                   
-                                    onFinish={onFinish}
-                                    onFinishFailed={onFinishFailed}
-                                
-                                    >
-                           
-                                <Divider> <Title>Add Portfolio</Title></Divider>
-                                
-                              
-                                <Form.Item label="Project Title:"  name={'title'}>
-                                        <Input placeholder="project title" />
-                                </Form.Item>
-                                <Form.Item label="Skills:" name={ 'skills'}>
-                                        <Input placeholder="skills" />
-                                </Form.Item>
-                                <Form.Item label="Description" name={'description'}>
-                                    <TextArea rows={4} placeholder="description" />
-                                </Form.Item>
-                             
-                      
-                                <Form.Item className="text-center" >
-                                    <Button type="primary" htmlType="submit" >
-                                      Add
-                                    </Button>
-                                </Form.Item>
-                                
-                        </Form>
+                        <Add_project></Add_project>
                    
 
                 </main>
@@ -123,12 +58,12 @@ const Portfolio = ({viewProject, view_project, createProject, updateProfile,user
 const mapStateToProps = (state) => {
     return {
       view_project: state.project.view_project,
-      create_project: state.project.create_project,
-      user_profile: state.user.user_profile,
+     
+    
     
 
     };
   };
   
-  export default connect(mapStateToProps, {viewProject, createProject,updateProfile})(Portfolio);
+  export default connect(mapStateToProps, {viewProject, createProject})(Portfolio);
   
