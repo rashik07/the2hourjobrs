@@ -1,42 +1,20 @@
 import Head from 'next/head';
-import React, { useState } from 'react';
+import React, {useEffect , useState} from 'react';
 import Navbar from '../../container/navbar/navbar';
 import Sidebar from "../../container/sidebar/sidebar";
-import Add_experience from "../../components/Add_experience"
-import { Select } from "antd";
-import {Form,Input, Button, Radio ,DatePicker,Typography,Divider,TextArea , Space  } from 'antd';
+import {Form,Input, Button, DatePicker,Typography,Divider } from 'antd';
+import { connect } from "react-redux";
+import { viewProject , createProject} from '@/redux/actions/projectAction';
+import Project_details from 'components/Project/Project_details';
+import Add_project from 'components/Project/Add_project';
 
-const Portfolio = () => {
-    const { RangePicker } = DatePicker;
-    const { TextArea } = Input;
-    const { Title } = Typography;
-    const [form] = Form.useForm();
-    const [formLayout, setFormLayout] = useState('horizontal');
-  
-    const onFormLayoutChange = ({ layout }) => {
-      setFormLayout(layout);
-    };
 
-    const formItemLayout =
-    formLayout === 'horizontal'
-      ? {
-          labelCol: {
-            span: 4,
-          },
-          wrapperCol: {
-            span: 12,
-          },
-        }
-      : null;
-  const buttonItemLayout =
-    formLayout === 'horizontal'
-      ? {
-          wrapperCol: {
-            span: 14,
-            offset: 4,
-          },
-        }
-      : null;
+const Portfolio = ({viewProject, view_project}) => {
+  const [updateList, setUpdateList]=useState(true);
+  useEffect(() => {
+      
+    viewProject();
+  },[updateList]);
     return (
         <div>
             <Head>
@@ -57,51 +35,16 @@ const Portfolio = () => {
 
                 <main className="col-md-9   my-4">
                     
-                        <div className="row">
-                            <div className="col-4 ">
-                                <Add_experience />
-                            </div>
-                            <div className="col-4">
-                                <Add_experience />
-                            </div>
-                            <div className="col-4">
-                                <Add_experience />
-                            </div>
-                            
-                        </div> 
-                        <Form 
-                                {...formItemLayout}
-                                    layout={formLayout}
-                                    form={form}
-                                    initialValues={{
-                                    layout: formLayout,
-                                    }}
-                                
-                                    >
-                           
-                                <Divider> <Title>Add Portfolio</Title></Divider>
-                                <Form.Item label="Project Title:">
-                                        <Input placeholder="project title" />
-                                </Form.Item>
-                                <Form.Item label="Skills:">
-                                        <Input placeholder="skills" />
-                                </Form.Item>
-                                <Form.Item label="Description">
-                                    <TextArea rows={4} placeholder="description" />
-                                </Form.Item>
-                                <Form.Item label="Time:">
-                                <Space direction="vertical" size={16}>
-                                    <RangePicker />
-                                    
-                                    
-                                </Space>
-                                
-                                </Form.Item>
-                                <Form.Item className="text-center">
-                                    <Button type="primary">Add</Button>
-                                </Form.Item>
-                                
-                        </Form>
+                <div className="row">
+                              {
+                                  view_project.map(project => <Project_details 
+                                  key={view_project.id} 
+                                  
+                                  setUpdateList={setUpdateList}
+                                  project={project}></Project_details>)
+                            }  
+                        </div>
+                        <Add_project></Add_project>
                    
 
                 </main>
@@ -111,4 +54,16 @@ const Portfolio = () => {
     );
 };
 
-export default Portfolio;
+/*export default Portfolio;*/
+const mapStateToProps = (state) => {
+    return {
+      view_project: state.project.view_project,
+     
+    
+    
+
+    };
+  };
+  
+  export default connect(mapStateToProps, {viewProject, createProject})(Portfolio);
+  
