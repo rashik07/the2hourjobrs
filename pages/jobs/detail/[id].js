@@ -12,7 +12,11 @@ const JobPostDetail = ({ job, getJob }) => {
     getJob(id);
   }, []);
 
-  return <JobDetail temp_jobpost={job} />;
+  if (id) {
+    return <JobDetail temp_jobpost={job} />;
+  }
+
+  return null;
 };
 
 const mapStateToProps = (state) => {
