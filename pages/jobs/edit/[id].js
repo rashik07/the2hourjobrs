@@ -25,7 +25,6 @@ const UpdateJobPost = ({ job, getJobForUpdate }) => {
   }, [job]);
 
   if (hasData) {
-    console.log(job);
     return <JobCreateUpdate editJob={job} />;
   }
 

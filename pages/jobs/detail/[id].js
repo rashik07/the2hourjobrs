@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { connect } from "react-redux";
 import { getJob } from "@/redux/actions/jobAction";
@@ -6,13 +6,23 @@ import JobDetail from "components/jobs/JobDetail";
 
 const JobPostDetail = ({ job, getJob }) => {
   const router = useRouter();
+
   const { id } = router.query;
+  const [hasData, sethasData] = useState(false);
 
   useEffect(() => {
-    getJob(id);
-  }, []);
+    if (id) {
+      getJob(id);
+    }
+  }, [router.query.id]);
 
-  if (id) {
+  useEffect(() => {
+    if (id && !_.isEmpty(job)) {
+      sethasData(true);
+    }
+  }, [job]);
+
+  if (hasData) {
     return <JobDetail temp_jobpost={job} />;
   }
 
