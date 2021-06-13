@@ -98,6 +98,9 @@ const jobReducer = (state = INITIAL_STATE, action) => {
     case types.GET_LOCATION_LIST:
       return { ...state, location: action.payload };
 
+    case types.RESET_TEMP_JOB_STATE:
+      return { ...state, temp_jobpost: {} };
+
     case types.RESET_JOB_STATE:
       return {};
 

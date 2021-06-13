@@ -1,5 +1,6 @@
 import Navbar from "container/navbar/navbar";
 import React, { useState, useEffect } from "react";
+
 import { Steps } from "antd";
 import Head from "next/head";
 import Step1 from "components/jobs/post/Step1";
@@ -9,7 +10,7 @@ import Step4 from "components/jobs/post/Step4";
 import { getEducation, getJobCategories } from "@/redux/actions/jobAction";
 import { connect } from "react-redux";
 
-const JobCreateUpdate = ({ getJobCategories, getEducation }) => {
+const JobCreateUpdate = ({ getJobCategories, getEducation, editJob }) => {
   const { Step } = Steps;
 
   useEffect(() => {
@@ -31,7 +32,13 @@ const JobCreateUpdate = ({ getJobCategories, getEducation }) => {
         return <Step3 postStep={postStep} setPostStep={setPostStep} />;
 
       case 3:
-        return <Step4 postStep={postStep} setPostStep={setPostStep} />;
+        return (
+          <Step4
+            editJob={editJob}
+            postStep={postStep}
+            setPostStep={setPostStep}
+          />
+        );
 
       default:
         break;
@@ -60,6 +67,7 @@ const JobCreateUpdate = ({ getJobCategories, getEducation }) => {
   );
 };
 
-export default connect(null, { getJobCategories, getEducation })(
-  JobCreateUpdate
-);
+export default connect(null, {
+  getJobCategories,
+  getEducation,
+})(JobCreateUpdate);
