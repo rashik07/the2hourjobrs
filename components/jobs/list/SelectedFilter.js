@@ -2,15 +2,13 @@ import React, { useState, useEffect } from "react";
 // import { InputTags } from "react-bootstrap-tagsinput";
 // import "react-bootstrap-tagsinput/dist/index.css";
 import { Tag } from "antd";
-import { connect } from "react-redux";
 import _ from "lodash";
-import { filterJobs } from "redux/actions/jobAction";
 
 const SelectedFilter = ({
   filter,
   setFilter,
-  filterJobs,
-  setShowFilterJobs,
+  getFilteredList,
+  setShowFilter,
 }) => {
   const [state, setState] = useState([]);
 
@@ -139,8 +137,8 @@ const SelectedFilter = ({
             </button>
             <button
               onClick={() => {
-                filterJobs(filter);
-                setShowFilterJobs(true);
+                getFilteredList(filter);
+                setShowFilter(true);
               }}
               className="btn button-home ml-2 mt-2"
             >
@@ -154,4 +152,4 @@ const SelectedFilter = ({
   );
 };
 
-export default connect(null, { filterJobs })(SelectedFilter);
+export default SelectedFilter;
