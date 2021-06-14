@@ -95,7 +95,12 @@ const JobPostItem = ({
     if (router.pathname === "/jobs/self_posted_jobs") {
       return (
         <>
-          <button className="btn button-home mt-2 rounded">Edit</button>
+          <button
+            onClick={() => router.push(`/jobs/edit/${id}`)}
+            className="btn button-home mt-2 rounded"
+          >
+            Edit
+          </button>
           <button
             onClick={() => router.push(`/jobs/detail/${id}`)}
             className="btn button-home mt-2 rounded"

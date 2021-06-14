@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Descriptions } from "antd";
 import dateformat from "dateformat";
-import { postJob } from "redux/actions/jobAction";
+import { postJob, updateJob } from "redux/actions/jobAction";
 import { useRouter } from "next/router";
 
 const renderJobLocation = (inside_dhaka, locations) => {
@@ -116,10 +116,16 @@ const renderEducation = (education, job_post_education) => {
   );
 };
 
-const Step4 = ({ postStep, setPostStep, temp_jobpost, education, postJob }) => {
+const Step4 = ({
+  postStep,
+  setPostStep,
+  temp_jobpost,
+  education,
+  postJob,
+  updateJob,
+  editJob,
+}) => {
   const router = useRouter();
-
-  console.log(temp_jobpost);
 
   const renderItem = (item) => {
     const labelStyle = { fontWeight: 700 };
@@ -209,12 +215,21 @@ const Step4 = ({ postStep, setPostStep, temp_jobpost, education, postJob }) => {
         >
           Prev
         </button>
-        <button
-          onClick={() => postJob(temp_jobpost, router)}
-          className="btn btn-primary mr-3"
-        >
-          Post
-        </button>
+        {editJob ? (
+          <button
+            onClick={() => updateJob(temp_jobpost, router)}
+            className="btn btn-primary mr-3"
+          >
+            Update
+          </button>
+        ) : (
+          <button
+            onClick={() => postJob(temp_jobpost, router)}
+            className="btn btn-primary mr-3"
+          >
+            Post
+          </button>
+        )}
         <br />
         <br />
         <br />
@@ -230,4 +245,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { postJob })(Step4);
+export default connect(mapStateToProps, { postJob, updateJob })(Step4);

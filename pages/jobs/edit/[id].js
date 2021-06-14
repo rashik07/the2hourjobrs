@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { connect } from "react-redux";
-import { getJob } from "@/redux/actions/jobAction";
-import JobDetail from "components/jobs/JobDetail";
+import _ from "lodash";
 
-const JobPostDetail = ({ job, getJob }) => {
+import { getJobForUpdate } from "@/redux/actions/jobAction";
+import JobCreateUpdate from "components/jobs/JobCreateUpdate";
+
+const UpdateJobPost = ({ job, getJobForUpdate }) => {
   const router = useRouter();
 
-  const { id } = router.query;
   const [hasData, sethasData] = useState(false);
+  const { id } = router.query;
 
   useEffect(() => {
     if (id) {
-      getJob(id);
+      getJobForUpdate(id);
     }
   }, [router.query.id]);
 
@@ -23,16 +25,16 @@ const JobPostDetail = ({ job, getJob }) => {
   }, [job]);
 
   if (hasData) {
-    return <JobDetail temp_jobpost={job} />;
+    return <JobCreateUpdate editJob={job} />;
   }
 
-  return null;
+  return <h1>{id}</h1>;
 };
 
 const mapStateToProps = (state) => {
   return {
-    job: state.job.fetched_job,
+    job: state.job.temp_jobpost,
   };
 };
 
-export default connect(mapStateToProps, { getJob })(JobPostDetail);
+export default connect(mapStateToProps, { getJobForUpdate })(UpdateJobPost);

@@ -145,23 +145,11 @@ const JobDetail = ({ temp_jobpost, education }) => {
               label="Employment Status"
               labelStyle={labelStyle}
             >
-              {/* <List
-                  size="small"
-                  bordered
-                  dataSource={temp_jobpost.employment_status}
-                  renderItem={(item) => <List.Item>{item}</List.Item>}
-                /> */}
               {temp_jobpost.employment_status.length
                 ? temp_jobpost.employment_status.join(", ")
                 : ""}
             </Descriptions.Item>
             <Descriptions.Item label="Skills" labelStyle={labelStyle}>
-              {/* <List
-                  size="small"
-                  bordered
-                  dataSource={temp_jobpost.skills}
-                  renderItem={(item) => <List.Item>{item}</List.Item>}
-                /> */}
               {temp_jobpost.skills.length ? temp_jobpost.skills.join(", ") : ""}
             </Descriptions.Item>
             <Descriptions.Item label="Description" labelStyle={labelStyle}>
@@ -190,14 +178,11 @@ const JobDetail = ({ temp_jobpost, education }) => {
 
   return (
     <>
-      <div className="container" style={{ marginTop: "10%" }}>
+      <div className="container" style={{ marginTop: "5%" }}>
         <div className="text-secondary">
           {renderItem("job_detail")} <hr />
-          {/* {renderItem("employee_requirement")} */}
+          {renderItem("employee_requirement")}
         </div>
-        <br />
-        <br />
-        <br />
       </div>
     </>
   );

@@ -281,6 +281,7 @@ export const updateJob = (data, router) => async (dispatch) => {
       "education",
       "gender",
       "workplace",
+      "slug_id",
     ]);
 
     // For removing empty properties
@@ -309,12 +310,15 @@ export const updateJob = (data, router) => async (dispatch) => {
       },
     };
 
-    const response = await backend.patch("v1/jobpost/data/", data, getConfig());
+    const response = await backend.patch(
+      `v1/jobpost/data/${id}/`,
+      data,
+      getConfig()
+    );
 
-    dispatch({ type: types.CREATE_JOB, payload: id });
     dispatch({ type: types.UNSAVE_TEMPORARY_JOBPOST });
 
-    router.push("/jobs/list");
+    router.push("/jobs/self_posted_jobs");
   } catch (error) {
     console.log(error.response);
   }
@@ -405,6 +409,49 @@ export const getJob = (job_id) => async (dispatch) => {
       dispatch({
         type: types.GET_SINGLE_JOB,
         payload: response.data,
+      });
+      dispatch({
+        type: types.SAVE_TEMPORARY_JOBPOST,
+        payload: response.data,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getJobForUpdate = (job_id) => async (dispatch) => {
+  try {
+    const response = await backend.get(
+      `v1/jobpost/data/${job_id}/`,
+      getConfig()
+    );
+
+    if (response.status == 200) {
+      let { data } = response;
+
+      let { job_location, education } = data;
+
+      //------------------- For putting data in Ant.js TreeNode -------------------
+      job_location = job_location.map(({ id, name, type }) =>
+        JSON.stringify({ id, name, type })
+      );
+
+      education = education.map((edu) => edu.id);
+
+      data = {
+        ...data,
+        job_location: job_location,
+        education: education,
+      };
+
+      // dispatch({
+      //   type: types.GET_SINGLE_JOB,
+      //   payload: data,
+      // });
+      dispatch({
+        type: types.SAVE_TEMPORARY_JOBPOST,
+        payload: data,
       });
     }
   } catch (error) {
