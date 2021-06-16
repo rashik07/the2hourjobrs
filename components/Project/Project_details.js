@@ -2,17 +2,20 @@ import React, {useEffect, useState } from 'react';
 import { Card, Avatar,Modal } from 'antd';
 import { EditOutlined, EllipsisOutlined, SettingOutlined , DeleteOutlined } from '@ant-design/icons';
 import { connect } from "react-redux";
-
+import { useRouter } from "next/router";
 import { viewProject , deleteProject} from '@/redux/actions/projectAction';
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 
 
 
 const Project_details = ({viewProject, view_project, project,deleteProject}) => {
-  
+  const router = useRouter();
+
     useEffect(() => {
       
         viewProject();
+        //setUpdateList(false);
+        
       },[]);
       
   
@@ -28,24 +31,30 @@ const Project_details = ({viewProject, view_project, project,deleteProject}) => 
           okType: "danger",
           cancelText: "No",
           onOk() {
-            deleteProject(id);
+            deleteProject(project.id);
           },
         });
       };
     const { Meta } = Card;
+    
     return (
+
         <div>
                 
             <div className="col-4 ">
+           
                   <Card
-                        style={{ width: 250, border: '1px solid whitesmoke', backgroundColor:'whitesmoke', marginBottom: 10}}
-                                
+                        style={{ width: 250, border: '1px solid whitesmoke', backgroundColor:'whitesmoke', marginBottom: 10, height: 168}}
+                                  
                         actions={[
-                                
-                        <EditOutlined key="edit" />,
+                                  
+                        
                         <DeleteOutlined  key="ellipsis" onClick={deleteProjectBtnClick}/>,
+                          
                         ]}
+                      
                   >
+           
                   <Meta
                         avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
                             
@@ -64,6 +73,7 @@ const Project_details = ({viewProject, view_project, project,deleteProject}) => 
         </div>
     );
 };
+
 const mapStateToProps = (state) => {
     return {
       view_project: state.project.view_project,

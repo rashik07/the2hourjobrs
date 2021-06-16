@@ -17,7 +17,7 @@ const getConfig = () => {
 
 export const updateProfile = (data) => async (dispatch) => {
   try{
-  const response = await backend.get("/v1/user/me/", getConfig());
+  const response = await backend.get(`/v1/user/me/?user=${store.getState().auth.id}`, getConfig());
   dispatch({ type: types.UPDATE_USER_PROFILE, payload: response.data });
   }
   catch (error) {

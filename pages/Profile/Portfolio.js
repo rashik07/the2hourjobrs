@@ -14,7 +14,7 @@ const Portfolio = ({viewProject, view_project}) => {
   useEffect(() => {
       
     viewProject();
-  },[updateList]);
+  },[]);
     return (
         <div>
             <Head>
@@ -37,7 +37,7 @@ const Portfolio = ({viewProject, view_project}) => {
                     
                 <div className="row">
                               {
-                                  view_project.map(project => <Project_details 
+                                  view_project.map(project =>  <Project_details 
                                   key={view_project.id} 
                                   
                                   setUpdateList={setUpdateList}
