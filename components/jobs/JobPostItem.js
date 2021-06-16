@@ -95,8 +95,18 @@ const JobPostItem = ({
     if (router.pathname === "/jobs/self_posted_jobs") {
       return (
         <>
-          <button className="btn button-home mt-2 rounded">Edit</button>
-          <button className="btn button-home mt-2 rounded">Detail</button>
+          <button
+            onClick={() => router.push(`/jobs/edit/${id}`)}
+            className="btn button-home mt-2 rounded"
+          >
+            Edit
+          </button>
+          <button
+            onClick={() => router.push(`/jobs/detail/${id}`)}
+            className="btn button-home mt-2 rounded"
+          >
+            Detail
+          </button>
           <button
             onClick={deleteJobBtnClick}
             className={`btn button-home mt-2 rounded`}
@@ -110,23 +120,28 @@ const JobPostItem = ({
     return (
       <>
         {appliedStatus ? (
-          <a className="btn button-home rounded disabled">Applied</a>
+          <button className="btn button-home rounded disabled">Applied</button>
         ) : (
-          <a
+          <button
             onClick={applyJobBtnClick}
             className={`btn button-home rounded ${btn_disable}`}
           >
             Apply
-          </a>
+          </button>
         )}
 
-        <a className="btn button-home mt-2 rounded">Details</a>
-        <a
+        <button
+          onClick={() => router.push(`/jobs/detail/${id}`)}
+          className="btn button-home mt-2 rounded"
+        >
+          Details
+        </button>
+        <button
           onClick={saveJobBtnClick}
           className={`btn button-home mt-2 rounded ${btn_disable}`}
         >
           {savedStatus ? "Unsave" : "Save"}
-        </a>
+        </button>
       </>
     );
   };
@@ -146,7 +161,7 @@ const JobPostItem = ({
         </h5>
         <p>
           <i className="fas fa-map-marker-alt mr-2" />
-          {getLocations(job.location)} <br />
+          {getLocations(job.job_location)} <br />
         </p>
         <p>
           <i className="fas fa-book-open mr-2" />

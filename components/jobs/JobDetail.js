@@ -2,8 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import { Descriptions } from "antd";
 import dateformat from "dateformat";
-import { postJob, updateJob } from "redux/actions/jobAction";
-import { useRouter } from "next/router";
 
 const renderJobLocation = (inside_dhaka, locations) => {
   inside_dhaka
@@ -12,9 +10,7 @@ const renderJobLocation = (inside_dhaka, locations) => {
 
   const extract_location = [];
 
-  locations.forEach((element) =>
-    extract_location.push(JSON.parse(element).name)
-  );
+  locations.forEach((element) => extract_location.push(element.name));
 
   locations = extract_location.join(", ");
   locations += ` (${inside_dhaka})`;
@@ -106,27 +102,17 @@ const renderEducation = (education, job_post_education) => {
   return (
     <Descriptions.Item label="Education" labelStyle={{ fontWeight: 700 }}>
       {/* <List
-        size="small"
-        bordered
-        dataSource={child_educations}
-        renderItem={(item) => <List.Item>{item}</List.Item>}
-      /> */}
+          size="small"
+          bordered
+          dataSource={child_educations}
+          renderItem={(item) => <List.Item>{item}</List.Item>}
+        /> */}
       {child_educations.join(", ")}
     </Descriptions.Item>
   );
 };
 
-const Step4 = ({
-  postStep,
-  setPostStep,
-  temp_jobpost,
-  education,
-  postJob,
-  updateJob,
-  editJob,
-}) => {
-  const router = useRouter();
-
+const JobDetail = ({ temp_jobpost, education }) => {
   const renderItem = (item) => {
     const labelStyle = { fontWeight: 700 };
 
@@ -159,23 +145,11 @@ const Step4 = ({
               label="Employment Status"
               labelStyle={labelStyle}
             >
-              {/* <List
-                size="small"
-                bordered
-                dataSource={temp_jobpost.employment_status}
-                renderItem={(item) => <List.Item>{item}</List.Item>}
-              /> */}
               {temp_jobpost.employment_status.length
                 ? temp_jobpost.employment_status.join(", ")
                 : ""}
             </Descriptions.Item>
             <Descriptions.Item label="Skills" labelStyle={labelStyle}>
-              {/* <List
-                size="small"
-                bordered
-                dataSource={temp_jobpost.skills}
-                renderItem={(item) => <List.Item>{item}</List.Item>}
-              /> */}
               {temp_jobpost.skills.length ? temp_jobpost.skills.join(", ") : ""}
             </Descriptions.Item>
             <Descriptions.Item label="Description" labelStyle={labelStyle}>
@@ -204,35 +178,11 @@ const Step4 = ({
 
   return (
     <>
-      <div className="col-8 mt-4">
+      <div className="container" style={{ marginTop: "5%" }}>
         <div className="text-secondary">
           {renderItem("job_detail")} <hr />
           {renderItem("employee_requirement")}
         </div>
-        <button
-          onClick={() => setPostStep(postStep - 1)}
-          className="btn btn-secondary mr-3"
-        >
-          Prev
-        </button>
-        {editJob ? (
-          <button
-            onClick={() => updateJob(temp_jobpost, router)}
-            className="btn btn-primary mr-3"
-          >
-            Update
-          </button>
-        ) : (
-          <button
-            onClick={() => postJob(temp_jobpost, router)}
-            className="btn btn-primary mr-3"
-          >
-            Post
-          </button>
-        )}
-        <br />
-        <br />
-        <br />
       </div>
     </>
   );
@@ -241,8 +191,7 @@ const Step4 = ({
 const mapStateToProps = (state) => {
   return {
     education: state.job.education,
-    temp_jobpost: state.job.temp_jobpost,
   };
 };
 
-export default connect(mapStateToProps, { postJob, updateJob })(Step4);
+export default connect(mapStateToProps)(JobDetail);

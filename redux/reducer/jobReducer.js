@@ -1,10 +1,10 @@
-import { configConsumerProps } from "antd/lib/config-provider";
 import * as types from "./../types";
 
 const INITIAL_STATE = {
   categories: [],
   industries: [],
   temp_jobpost: {
+    id: "",
     title: "",
     vacancy: "",
     category: "",
@@ -14,7 +14,7 @@ const INITIAL_STATE = {
     workplace: "",
     job_location_inside_dhaka: undefined,
     job_location: [],
-    description: "",
+    job_description: "",
     min_salary: "",
     max_salary: "",
     min_experience: "",
@@ -29,6 +29,7 @@ const INITIAL_STATE = {
   applied_jobs: [],
   filtered_jobs: [],
   self_posted_jobs: [],
+  fetched_job: {},
 };
 
 const jobReducer = (state = INITIAL_STATE, action) => {
@@ -82,14 +83,23 @@ const jobReducer = (state = INITIAL_STATE, action) => {
         self_posted_jobs: Object.values(self_posted_jobs),
       };
 
+    case types.GET_SINGLE_JOB:
+      return { ...state, fetched_job: action.payload };
+
     case types.FILTER_JOB:
       return { ...state, filtered_jobs: action.payload };
+
+    case types.UPDATE_JOB:
+      return state;
 
     case types.GET_EDUCATION:
       return { ...state, education: action.payload };
 
     case types.GET_LOCATION_LIST:
       return { ...state, location: action.payload };
+
+    case types.RESET_TEMP_JOB_STATE:
+      return { ...state, temp_jobpost: {} };
 
     case types.RESET_JOB_STATE:
       return {};

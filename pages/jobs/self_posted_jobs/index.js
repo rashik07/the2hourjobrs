@@ -1,13 +1,19 @@
 import React, { useEffect } from "react";
 import Head from "next/head";
 import { getSelfPostedJobs } from "@/redux/actions/jobAction";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import Navbar from "container/navbar/navbar";
 import JobPostItem from "components/jobs/JobPostItem";
 
+import * as types from "@/redux/types";
+
 const SelfPostedJobs = ({ self_posted_jobs, getSelfPostedJobs }) => {
+  const dispatch = useDispatch();
+
   useEffect(() => {
     getSelfPostedJobs();
+
+    dispatch({ type: types.RESET_TEMP_JOB_STATE });
   }, []);
 
   const showSelfPostedJobs = () => {

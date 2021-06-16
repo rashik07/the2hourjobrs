@@ -55,9 +55,9 @@ const renderItem = (item, children, saveTemporayJobPost, temp_jobpost) => {
               className="form-control"
               placeholder="Write description"
               style={{ height: "100px" }}
-              defaultValue={temp_jobpost.description}
+              defaultValue={temp_jobpost.job_description}
               onChange={(e) =>
-                saveTemporayJobPost({ description: e.target.value })
+                saveTemporayJobPost({ job_description: e.target.value })
               }
             />
           </>

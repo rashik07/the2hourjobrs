@@ -203,7 +203,6 @@ export const saveTemporayJobPost = (data) => async (dispatch) => {
 
 export const postJob = (data, router) => async (dispatch) => {
   try {
-    data = { ...data, posted: true, poster: store.getState().auth.id };
     const {
       category,
       employment_status,
@@ -214,20 +213,16 @@ export const postJob = (data, router) => async (dispatch) => {
       gender,
     } = data;
 
-    data = {
-      ...data,
-      category: category.id,
-    };
-
     data = _.omit(data, [
       "skills",
       "job_location",
       "employment_status",
       "education",
       "gender",
+      "workplace",
     ]);
 
-    // // For removing empty properties
+    // For removing empty properties
     for (const property in data) {
       if (data[property] === "" || data[property] === []) {
         data = _.omit(data, property);
@@ -236,13 +231,13 @@ export const postJob = (data, router) => async (dispatch) => {
 
     let job_Location = [];
 
-    // job_location.fore
-    job_location.forEach((x) => job_Location.push(JSON.parse(x)));
-
-    console.log(job_Location);
+    job_location.forEach((location) => job_Location.push(JSON.parse(location)));
 
     data = {
       ...data,
+      category: category.id,
+      posted: true,
+      poster: store.getState().auth.id,
       extra_fields: {
         skills: skills,
         job_location: job_location,
@@ -257,46 +252,73 @@ export const postJob = (data, router) => async (dispatch) => {
 
     const { id } = response.data;
 
-    // // creating job location instance for jobpost
-    // job_location.forEach(async (location) => {
-    //   location = JSON.parse(location);
-    //   if (location.type === "division") {
-    //     try {
-    //       let location_response = await backend.post(
-    //         "v1/jobpost/division/",
-    //         { jobpost: id, division: location.id },
-    //         getConfig()
-    //       );
-    //     } catch (error) {
-    //       console.log(error.response);
-    //     }
-    //   } else if (location.type === "district") {
-    //     try {
-    //       let location_response = await backend.post(
-    //         "v1/jobpost/district/",
-    //         { jobpost: id, district: location.id },
-    //         getConfig()
-    //       );
-    //     } catch (error) {
-    //       console.log(error.response);
-    //     }
-    //   } else if (location.type === "thana") {
-    //     try {
-    //       let location_response = await backend.post(
-    //         "v1/jobpost/thana/",
-    //         { jobpost: id, thana: location.id },
-    //         getConfig()
-    //       );
-    //     } catch (error) {
-    //       console.log(error.response);
-    //     }
-    //   }
-    // });
-
     dispatch({ type: types.CREATE_JOB, payload: id });
     dispatch({ type: types.UNSAVE_TEMPORARY_JOBPOST });
 
     router.push("/jobs/list");
+  } catch (error) {
+    console.log(error.response);
+  }
+};
+
+export const updateJob = (data, router) => async (dispatch) => {
+  try {
+    const {
+      id,
+      category,
+      employment_status,
+      skills,
+      workplace,
+      job_location,
+      education,
+      gender,
+    } = data;
+
+    data = _.omit(data, [
+      "skills",
+      "job_location",
+      "employment_status",
+      "education",
+      "gender",
+      "workplace",
+      "slug_id",
+    ]);
+
+    // For removing empty properties
+    for (const property in data) {
+      if (data[property] === "" || data[property] === []) {
+        data = _.omit(data, property);
+      }
+    }
+
+    let job_Location = [];
+
+    job_location.forEach((location) => job_Location.push(JSON.parse(location)));
+
+    data = {
+      ...data,
+      category: category.id,
+      posted: true,
+      poster: store.getState().auth.id,
+      extra_fields: {
+        skills: skills,
+        job_location: job_location,
+        employment_status: employment_status,
+        education: education,
+        gender: gender,
+        workplace: workplace,
+      },
+    };
+
+    const response = await backend.patch(
+      `v1/jobpost/data/${id}/`,
+      data,
+      getConfig()
+    );
+
+    dispatch({ type: types.UNSAVE_TEMPORARY_JOBPOST });
+
+    router.push("/jobs/self_posted_jobs");
   } catch (error) {
     console.log(error.response);
   }
@@ -369,6 +391,67 @@ export const deleteJob = (job_id) => async (dispatch) => {
       dispatch({
         type: types.DELETE_JOB,
         payload: { job_id: job_id },
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getJob = (job_id) => async (dispatch) => {
+  try {
+    const response = await backend.get(
+      `v1/jobpost/data/${job_id}/`,
+      getConfig()
+    );
+
+    if (response.status == 200) {
+      dispatch({
+        type: types.GET_SINGLE_JOB,
+        payload: response.data,
+      });
+      dispatch({
+        type: types.SAVE_TEMPORARY_JOBPOST,
+        payload: response.data,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getJobForUpdate = (job_id) => async (dispatch) => {
+  try {
+    const response = await backend.get(
+      `v1/jobpost/data/${job_id}/`,
+      getConfig()
+    );
+
+    if (response.status == 200) {
+      let { data } = response;
+
+      let { job_location, education } = data;
+
+      //------------------- For putting data in Ant.js TreeNode -------------------
+      job_location = job_location.map(({ id, name, type }) =>
+        JSON.stringify({ id, name, type })
+      );
+
+      education = education.map((edu) => edu.id);
+
+      data = {
+        ...data,
+        job_location: job_location,
+        education: education,
+      };
+
+      // dispatch({
+      //   type: types.GET_SINGLE_JOB,
+      //   payload: data,
+      // });
+      dispatch({
+        type: types.SAVE_TEMPORARY_JOBPOST,
+        payload: data,
       });
     }
   } catch (error) {
