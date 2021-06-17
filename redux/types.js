@@ -42,6 +42,7 @@ export const UPLOAD_ANNOUNCEMENT_MEDIA = "UPLOAD_ANNOUNCEMENT_MEDIA";
 
 //************** USER TYPES *********************/
 export const UPDATE_USER_PROFILE = "UPDATE_USER_PROFILE";
+export const EDIT_USER_PROFILE = "EDIT_USER_PROFILE";
 
 //************** PROJECT TYPES *********************/
 

@@ -5,7 +5,7 @@ import Sidebar from "../../container/sidebar/sidebar";
 import { Select } from "antd";
 import { connect } from "react-redux";
 import {
-  updateProfile
+  updateProfile ,editUserProfile
 } from "@/redux/actions/userAction";
 import {
   Form,
@@ -18,15 +18,24 @@ import {
   TextArea,
 } from "antd";
 
-const Profile_info = ({updateProfile, user_profile}) => {
+const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_profile}) => {
   useEffect(() => {
     updateProfile();
   },[]);
 
   console.log(user_profile);
 
-  const onFinish = (values) => {
+  const onFinish = (values ) => {
+     values = {
+      ...values,
+      'birthday': values['birthday'].format('YYYY-MM-DD'),
+      // 'time-picker': fieldsValue['time-picker'].format('HH:mm:ss'),
+    };
+   
+   
     console.log('Received values of form: ', values);
+    editUserProfile(values);
+    console.log('update: ', edit_user_profile);
   };
 
   const { Option } = Select;
@@ -41,7 +50,9 @@ const Profile_info = ({updateProfile, user_profile}) => {
       },
     ],
   };
-
+  //date
+ 
+//phone no
   const prefixSelector = (
     <Form.Item name="prefix" noStyle>
       <Select
@@ -53,13 +64,15 @@ const Profile_info = ({updateProfile, user_profile}) => {
       </Select>
     </Form.Item>
   );
-
-  const [value, setValue] = React.useState(1);
-
+  //gender
+  const plainOptions = ['Male', 'Female'];
+  const [value, setValue] = React.useState();
+  
   const onChange = (e) => {
     console.log("radio checked", e.target.value);
     setValue(e.target.value);
   };
+
   const [form] = Form.useForm();
   const [formLayout, setFormLayout] = useState("horizontal");
 
@@ -125,18 +138,15 @@ const Profile_info = ({updateProfile, user_profile}) => {
               layout={formLayout}
               form={form}
               name="register"
-      onFinish={onFinish}
-              initialValues={{
-                layout: formLayout,
-                prefix: '880',
-              }}
+        onFinish={onFinish}
+             initialValues={user_profile}
             >
               <Divider>
                 {" "}
                 <Title>Basic Info</Title>
               </Divider>
-              <Form.Item label="Name">
-                <Input placeholder="name" defaultValue={user_profile.username}/>
+              <Form.Item label="Name" name="username">
+                <Input placeholder="name" />
               </Form.Item>
               <Form.Item
                 name="email"
@@ -152,7 +162,7 @@ const Profile_info = ({updateProfile, user_profile}) => {
                   },
                 ]}
               >
-                <Input placeholder="e-mail" defaultValue={user_profile.email}/>
+                <Input placeholder="e-mail" />
               </Form.Item>
               <Form.Item
                 name="phone"
@@ -166,36 +176,33 @@ const Profile_info = ({updateProfile, user_profile}) => {
               >
                 <Input
                   addonBefore={prefixSelector}
-                  defaultValue={user_profile.phone}
+                  
                   style={{
                     width: "100%",
                   }}
                 />
               </Form.Item>
-              <Form.Item label="NID Number">
-                <Input placeholder="input NID number" defaultValue={user_profile.nid} />
+              <Form.Item label="NID Number" name="nid">
+                <Input placeholder="input NID number"  />
               </Form.Item>
-              <Form.Item label="Gender">
-                <Radio.Group onChange={onChange} value={value}>
-                  <Radio value={1}>Male</Radio>
-                  <Radio value={2}>Female</Radio>
+              <Form.Item label="Gender" name="gender">
+                <Radio.Group  options={plainOptions} onChange={onChange} value={value} >
+                  
                 </Radio.Group>
               </Form.Item>
-              <Form.Item name="date-picker" label="Date of Birth" {...config}>
-                <DatePicker defaultValue={user_profile.birthday}/>
+              <Form.Item  label="Date of Birth"  name="birthday">
+                <DatePicker />
               </Form.Item>
-              <Form.Item label="Nationality">
-                <Input placeholder="nationality" defaultValue={user_profile.birthday}/>
-              </Form.Item>
-              <Form.Item label="Bio">
-                <TextArea rows={4} defaultValue={user_profile.bio}/>
+              
+              <Form.Item label="Bio" name="bio">
+                <TextArea rows={4} />
               </Form.Item>
 
               <Divider>
                 {" "}
                 <Title>Address</Title>
               </Divider>
-              <Form.Item label="District">
+              <Form.Item label="District" name="district">
                 <Select
                   showSearch
                   style={{ width: 200 }}
@@ -211,7 +218,7 @@ const Profile_info = ({updateProfile, user_profile}) => {
                       .toLowerCase()
                       .localeCompare(optionB.children.toLowerCase())
                   }
-                  defaultValue={user_profile.district}
+                  
                 >
                   <Option value="1">Not Identified</Option>
                   <Option value="2">Closed</Option>
@@ -221,7 +228,7 @@ const Profile_info = ({updateProfile, user_profile}) => {
                   <Option value="6">Cancelled</Option>
                 </Select>
               </Form.Item>
-              <Form.Item label="Thana">
+              <Form.Item label="Thana" name="thana" >
                 <Select
                   showSearch
                   style={{ width: 200 }}
@@ -237,7 +244,7 @@ const Profile_info = ({updateProfile, user_profile}) => {
                       .toLowerCase()
                       .localeCompare(optionB.children.toLowerCase())
                   }
-                  defaultValue={user_profile.thana}
+                
                 >
                   <Option value="1">Not Identified</Option>
                   <Option value="2">Closed</Option>
@@ -247,8 +254,8 @@ const Profile_info = ({updateProfile, user_profile}) => {
                   <Option value="6">Cancelled</Option>
                 </Select>
               </Form.Item>
-              <Form.Item label="Address">
-                <TextArea rows={4} defaultValue={user_profile.address}/>
+              <Form.Item label="Address" name="address">
+                <TextArea rows={4} />
               </Form.Item>
               <Form.Item {...tailFormItemLayout}>
                 <Button type="primary" htmlType="submit">
@@ -266,8 +273,9 @@ const Profile_info = ({updateProfile, user_profile}) => {
 const mapStateToProps = (state) => {
   return {
     user_profile: state.user.user_profile,
+    edit_user_profile: state.user.editUserProfile,
   };
 };
 
-export default connect(mapStateToProps, {updateProfile})(Profile_info);
+export default connect(mapStateToProps, {updateProfile,editUserProfile})(Profile_info);
 
