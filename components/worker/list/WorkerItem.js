@@ -1,6 +1,15 @@
 import Link from "next/link";
 import React from "react";
 
+const renderButtons = () => {
+  return (
+    <>
+      <button className="btn button-home mt-2 rounded">Detail</button>
+      <button className={`btn button-home mt-2 rounded`}>Save</button>
+    </>
+  );
+};
+
 const WorkerItem = ({ worker }) => {
   const { name, phone, email } = worker;
   return (
@@ -24,7 +33,7 @@ const WorkerItem = ({ worker }) => {
           {email}
         </p>
       </div>
-      <div className="col-3 btn-group-vertical"></div>
+      <div className="col-3 btn-group-vertical">{renderButtons()}</div>
     </div>
   );
 };
