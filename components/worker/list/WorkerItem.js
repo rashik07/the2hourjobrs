@@ -1,17 +1,45 @@
-import Link from "next/link";
-import React from "react";
+import { saveWorker } from "@/redux/actions/userAction";
+import React, { useState } from "react";
+import { connect } from "react-redux";
+import { useRouter } from "next/router";
 
-const renderButtons = () => {
+const renderButtons = (
+  id,
+  saved_user_instance_id,
+  setSavedStatus,
+  saveWorker,
+  isSignedIn,
+  show_save_button
+) => {
   return (
     <>
       <button className="btn button-home mt-2 rounded">Detail</button>
-      <button className={`btn button-home mt-2 rounded`}>Save</button>
+      {show_save_button ? (
+        <button
+          onClick={() => saveWorker(id, saved_user_instance_id, setSavedStatus)}
+          className="btn button-home mt-2 rounded"
+          disabled={!isSignedIn}
+        >
+          {saved_user_instance_id ? "Unsave" : "Save"}
+        </button>
+      ) : null}
     </>
   );
 };
 
-const WorkerItem = ({ worker }) => {
-  const { name, phone, email } = worker;
+const WorkerItem = ({ worker, saveWorker, isSignedIn }) => {
+  const { id, name, phone, email, saved_user_instance_id } = worker;
+
+  const router = useRouter();
+
+  let show_save_button = true;
+
+  if (router.pathname === "/worker/saved") {
+    show_save_button = false;
+  }
+
+  const [savedStatus, setSavedStatus] = useState(saved_user_instance_id);
+
   return (
     <div className="row d-flex align-items-center border m-3 rounded">
       <div className="col-9 text-muted fs-6">
@@ -33,9 +61,24 @@ const WorkerItem = ({ worker }) => {
           {email}
         </p>
       </div>
-      <div className="col-3 btn-group-vertical">{renderButtons()}</div>
+      <div className="col-3 btn-group-vertical">
+        {renderButtons(
+          id,
+          savedStatus,
+          setSavedStatus,
+          saveWorker,
+          isSignedIn,
+          show_save_button
+        )}
+      </div>
     </div>
   );
 };
 
-export default WorkerItem;
+const mapStateToProps = (state) => {
+  return {
+    isSignedIn: state.auth.isSignedIn,
+  };
+};
+
+export default connect(mapStateToProps, { saveWorker })(WorkerItem);

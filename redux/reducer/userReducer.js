@@ -4,6 +4,7 @@ const INITIAL_STATE = {
   user_profile: {},
   all_workers: [],
   filtered_workers: [],
+  saved_workers: [],
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -16,6 +17,16 @@ const userReducer = (state = INITIAL_STATE, action) => {
 
     case types.FILTERED_WORKERS:
       return { ...state, filtered_workers: action.payload };
+
+    case types.GET_SAVED_WORKERS:
+      return { ...state, saved_workers: action.payload };
+
+    case types.SAVE_WORKER:
+      let workers = _.mapKeys(state.all_workers, "id");
+      const { saved_user, saved_user_instance_id } = action.payload;
+
+      workers[saved_user].saved_user_instance_id = saved_user_instance_id;
+      return { ...state, all_workers: Object.values(workers) };
 
     case types.INIT_USER_STATE:
       return INITIAL_STATE;

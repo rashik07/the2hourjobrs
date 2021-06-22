@@ -42,6 +42,12 @@ const regularOptions = (router, isSignedIn) => {
         <NavDropdown.Item onClick={() => router.push("/worker/list")}>
           Worker list
         </NavDropdown.Item>
+        <NavDropdown.Item
+          disabled={!isSignedIn}
+          onClick={() => router.push("/worker/saved")}
+        >
+          Saved Worker list
+        </NavDropdown.Item>
       </NavDropdown>
 
       <Nav.Link href="#link">Products</Nav.Link>
