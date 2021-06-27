@@ -49,3 +49,8 @@ export const EDIT_USER_PROFILE = "EDIT_USER_PROFILE";
 export const VIEW_PROJECT = "VIEW_PROJECT";
 export const CREATE_PROJECT = "CREATE_PROJECT";
 export const DELETE_PROJECT = "DELETE_PROJECT";
+
+//************** EMPLOYMENT TYPES *********************/
+export const VIEW_EMPLOYMENT = "VIEW_EMPLOYMENT";
+export const CREATE_EMPLOYMENT = "CREATE_EMPLOYMENT";
+export const DELETE_EMPLOYMENT = "DELETE_EMPLOYMENT";

@@ -12,7 +12,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
     case types.UPDATE_USER_PROFILE:
       return { ...state, user_profile: action.payload } ;
       case types.EDIT_USER_PROFILE:
-        return {...state, user_profile: action.payload};
+        return {...state, edit_user_profile: action.payload};
     default:
       return state;
   }

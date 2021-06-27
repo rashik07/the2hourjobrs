@@ -34,10 +34,19 @@ export const updateProfile = (data) => async (dispatch) => {
   //   }
 };
 export const editUserProfile = (values) => async (dispatch) =>{
+
+  console.log(values);
+  try{
   const response = await backend.patch(
-    `/v1/user/me/?user=${store.getState().auth.id}`
-    ,{values}, getConfig()
+    `/v1/user/profile/${store.getState().auth.id}/`,values,
+    getConfig()
     );
-  dispatch({ type: EDIT_USER_PROFILE, payload: response.data});
-  history.push('/');
-}
+  
+  dispatch({ type: types.EDIT_USER_PROFILE, payload: response.data});
+  console.log(values);
+  }
+  catch (error) {
+    console.log(error);
+    console.log(error.response);
+ }
+};

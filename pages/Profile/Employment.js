@@ -1,20 +1,21 @@
 import Head from 'next/head';
-import React, { useState } from 'react';
+import React, {useEffect, useState } from 'react';
 import Navbar from '../../container/navbar/navbar';
 import Sidebar from "../../container/sidebar/sidebar";
-import Add_experience from "../../components/Add_experience"
+import { EditOutlined, EllipsisOutlined, SettingOutlined , DeleteOutlined } from '@ant-design/icons';
+import { connect } from "react-redux";
+import { viewEmployment } from '@/redux/actions/employmentAction';
+import {Form,Input, Button, Radio ,DatePicker,Typography,Divider, Space,TextArea ,Card,Avatar } from 'antd';
+import Employment_details from 'components/Employment/Employment_details';
+import Add_employment from 'components/Employment/Add_employment';
 
-import {Form,Input, Button, Radio ,DatePicker,Typography,Divider, Space,TextArea  } from 'antd';
+const Employment = ({viewEmployment, view_employment}) => {
+  useEffect(() => {
+      
+    viewEmployment();
+  },[]);
+  console.log(view_employment);
 
-const Employment = () => {
-  const onFinish = (values) => {
-    console.log('Success:', values);
-   
-    
-  };
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
     const { RangePicker } = DatePicker;
     const { TextArea } = Input;
     const { Title } = Typography;
@@ -45,6 +46,7 @@ const Employment = () => {
           },
         }
       : null;
+      const { Meta } = Card;
     return (
         <div>
             <Head>
@@ -64,59 +66,21 @@ const Employment = () => {
             
 
                 <main className="col-md-9   my-4">
-                    
+               
                         <div className="row">
-                            <div className="col-4">
-                                <Add_experience />
-                            </div>
-                            <div className="col-4">
-                                <Add_experience />
-                            </div>
-                            <div className="col-4">
-                                <Add_experience />
-                            </div>
-                            
-                        </div> 
-                        <Form 
-                                {...formItemLayout}
-                                    layout={formLayout}
-                                    form={form}
-                                    initialValues={{
-                                    layout: formLayout,
-                                    }}
-                                    onFinish={onFinish}
-                                    onFinishFailed={onFinishFailed}
-                                    >
+                        {
+                          
+                                  view_employment.map(employment =>  <Employment_details 
+                                  key={view_employment.id} 
+                                  
+                                
+                                  employment={employment}></Employment_details>)
+                            }  
                            
-                                <Divider> <Title>Add Experience</Title></Divider>
-                                <Form.Item label="Company Name:">
-                                        <Input placeholder="company name" />
-                                </Form.Item>
-                                <Form.Item label="Company Business:">
-                                        <Input placeholder="company Business" />
-                                </Form.Item>
-                                <Form.Item label="Designation:">
-                                        <Input placeholder="Designation" />
-                                </Form.Item>
-                                <Form.Item label="Department:">
-                                        <Input placeholder="Department " />
-                                </Form.Item>
-                                <Form.Item label="Location:">
-                                        <Input placeholder="Location " />
-                                </Form.Item>
-                                <Form.Item label="Time:">
-                                <Space direction="vertical" size={16}>
-                                    <RangePicker />
-                                    
-                                    
-                                </Space>
-                                
-                                </Form.Item>
-                                <Form.Item className="text-center">
-                                    <Button type="primary" htmlType="submit">Add</Button>
-                                </Form.Item>
-                                
-                        </Form>
+        
+                             
+                        </div> 
+                            <Add_employment></Add_employment>
                    
 
                 </main>
@@ -124,6 +88,18 @@ const Employment = () => {
             </div>
         </div>
     );
+   
 };
 
-export default Employment;
+//export default Employment;
+const mapStateToProps = (state) => {
+  return {
+    view_employment: state.employment.view_employment,
+   
+  
+  
+
+  };
+};
+
+export default connect(mapStateToProps, {viewEmployment })(Employment);

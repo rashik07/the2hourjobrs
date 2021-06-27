@@ -3,6 +3,7 @@ import { useState } from 'react';
 import {Form,Input, Button, DatePicker,Typography,Divider } from 'antd';
 import { connect } from "react-redux";
 import { viewProject , createProject} from '@/redux/actions/projectAction';
+import Link from 'next/link'
 
 const Add_project = ( {createProject}) => {
     const onFinish = (values) => {
@@ -70,9 +71,11 @@ const Add_project = ( {createProject}) => {
                              
                       
                                 <Form.Item className="text-center" >
+                              
                                     <Button type="primary" htmlType="submit" >
                                       Add
                                     </Button>
+                                
                                 </Form.Item>
                                 
                         </Form>

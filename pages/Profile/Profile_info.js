@@ -17,6 +17,9 @@ import {
   Divider,
   TextArea,
 } from "antd";
+import { Upload, Space } from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
+import moment from 'moment';
 
 const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_profile}) => {
   useEffect(() => {
@@ -24,7 +27,8 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
   },[]);
 
   console.log(user_profile);
-
+  const dateFormat = 'YYYY-MM-DD';
+  user_profile.birthday=moment(user_profile.birthday, dateFormat);
   const onFinish = (values ) => {
      values = {
       ...values,
@@ -35,7 +39,7 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
    
     console.log('Received values of form: ', values);
     editUserProfile(values);
-    console.log('update: ', edit_user_profile);
+ //   console.log('update: ', editUserProfile);
   };
 
   const { Option } = Select;
@@ -54,11 +58,12 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
  
 //phone no
   const prefixSelector = (
-    <Form.Item name="prefix" noStyle>
+    <Form.Item name="prefix "  noStyle>
       <Select
         style={{
           width: 80,
         }}
+       
       >
         <Option value="880">+880</Option>
       </Select>
@@ -138,13 +143,26 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
               layout={formLayout}
               form={form}
               name="register"
-        onFinish={onFinish}
-             initialValues={user_profile}
+              onFinish={onFinish}
+              initialValues={user_profile}
             >
               <Divider>
                 {" "}
                 <Title>Basic Info</Title>
               </Divider>
+              {/* <Form.Item label="Image" name="image">
+                <Space direction="vertical" style={{ width: '100%' }} size="large">
+                  <Upload
+                    action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                    listType="picture"
+                    maxCount={1}
+                  >
+                  <Button icon={<UploadOutlined />}>Upload (Max: 1)</Button>
+                  </Upload>
+   
+                </Space>
+              </Form.Item> */}
+             
               <Form.Item label="Name" name="username">
                 <Input placeholder="name" />
               </Form.Item>
@@ -157,7 +175,7 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
                     message: "The input is not valid E-mail!",
                   },
                   {
-                    required: true,
+                  //  required: true,
                     message: "Please input your E-mail!",
                   },
                 ]}
@@ -169,7 +187,7 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
                 label="Phone Number"
                 rules={[
                   {
-                    required: true,
+                  //  required: true,
                     message: "Please input your phone number!",
                   },
                 ]}
@@ -191,7 +209,7 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
                 </Radio.Group>
               </Form.Item>
               <Form.Item  label="Date of Birth"  name="birthday">
-                <DatePicker />
+                <DatePicker format={dateFormat}/>
               </Form.Item>
               
               <Form.Item label="Bio" name="bio">
@@ -259,7 +277,7 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
               </Form.Item>
               <Form.Item {...tailFormItemLayout}>
                 <Button type="primary" htmlType="submit">
-                    Register
+                    Save
                 </Button>
               </Form.Item>
             </Form>
@@ -273,7 +291,8 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
 const mapStateToProps = (state) => {
   return {
     user_profile: state.user.user_profile,
-    edit_user_profile: state.user.editUserProfile,
+    edit_user_profile: state.user.edit_user_profile,
+  
   };
 };
 

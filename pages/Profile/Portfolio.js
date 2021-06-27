@@ -2,7 +2,6 @@ import Head from 'next/head';
 import React, {useEffect , useState} from 'react';
 import Navbar from '../../container/navbar/navbar';
 import Sidebar from "../../container/sidebar/sidebar";
-import {Form,Input, Button, DatePicker,Typography,Divider } from 'antd';
 import { connect } from "react-redux";
 import { viewProject , createProject} from '@/redux/actions/projectAction';
 import Project_details from 'components/Project/Project_details';
