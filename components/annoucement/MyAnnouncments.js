@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { Row, Col, Image, Divider, Button, Space } from "antd";
+import { Row, Col, Image, Divider, Button, Space, Tabs } from "antd";
 import {
   PhoneOutlined,
   ScheduleOutlined,
@@ -8,18 +8,31 @@ import {
   UserOutlined,
   FieldTimeOutlined,
 } from "@ant-design/icons";
-import { getAllAnnouncement } from "../../redux/actions/announcementAction";
+import {
+  getAllAnnouncementOfUser,
+  archiveAnnouncement,
+} from "../../redux/actions/announcementAction";
 import dateformat from "dateformat";
 import Link from "next/link";
 
-class AllAnnouncements extends Component {
-  componentDidMount() {
-    this.props.getAllAnnouncement();
-  }
+const { TabPane } = Tabs;
 
-  renderimage(announcment) {
-    if (announcment.image) {
-      return announcment.image.map((announcment) => {
+const AllAnnouncements = ({
+  getAllAnnouncementOfUser,
+  archiveAnnouncement,
+  announcments,
+  auth,
+}) => {
+  const [updatelist, setUpdatelist] = useState(true);
+
+  useEffect(() => {
+    getAllAnnouncementOfUser(auth.id);
+    setUpdatelist(true);
+  }, [getAllAnnouncementOfUser, updatelist, setUpdatelist]);
+
+  const renderimage = (announcments) => {
+    if (announcments.image) {
+      return announcments.image.map((announcment) => {
         if (announcment.cover) {
           return <Image src={"http://127.0.0.1:8000" + announcment.photo} />;
         }
@@ -34,11 +47,11 @@ class AllAnnouncements extends Component {
         />
       );
     }
-  }
+  };
 
-  renderAnnounements() {
-    if (this.props.announcments) {
-      return this.props.announcments.map((announcment) => {
+  const renderAnnounements = () => {
+    if (announcments) {
+      return announcments.map((announcment) => {
         if (!announcment.archive) {
           return (
             <>
@@ -46,7 +59,7 @@ class AllAnnouncements extends Component {
                 <Col xs={24} sm={4} md={6} lg={8} xl={6}>
                   <Row>
                     <Col span={12} offset={6}>
-                      {this.renderimage(announcment)}
+                      {renderimage(announcment)}
                     </Col>
                   </Row>
                 </Col>
@@ -91,12 +104,23 @@ class AllAnnouncements extends Component {
                 >
                   <Row>
                     <Col span={18} offset={3}>
-                      <Link href={"/announcement/" + announcment.id + "/"}>
+                      <Link
+                        href={
+                          "/announcement/myannouncement/" + announcment.id + "/"
+                        }
+                      >
                         <Button type="primary" block>
-                          View
+                          Edit
                         </Button>
                       </Link>
-                      <Button block>Save</Button>
+                      <Button
+                        block
+                        onClick={() =>
+                          archiveAnnouncement(announcment, true, setUpdatelist)
+                        }
+                      >
+                        Move to Archive
+                      </Button>
                     </Col>
                   </Row>
                 </Col>
@@ -107,24 +131,117 @@ class AllAnnouncements extends Component {
         }
       });
     }
-  }
-  render() {
-    return (
-      <>
-        <Row>
-          <Col span={24} className="announcement_frame">
-            {this.renderAnnounements()}
-          </Col>
-        </Row>
-      </>
-    );
-  }
-}
+  };
+  const renderArchivedAnnounements = () => {
+    if (announcments) {
+      return announcments.map((announcment) => {
+        if (announcment.archive) {
+          return (
+            <>
+              <Row key={announcment.id} className="announcement_card">
+                <Col xs={24} sm={4} md={6} lg={8} xl={6}>
+                  <Row>
+                    <Col span={12} offset={6}>
+                      {renderimage(announcment)}
+                    </Col>
+                  </Row>
+                </Col>
+                <Col
+                  xs={24}
+                  sm={16}
+                  md={12}
+                  lg={8}
+                  xl={12}
+                  className="announcement_details"
+                >
+                  <h3>{announcment.title}</h3>
+                  <p>
+                    <Space size={"large"}>
+                      <div>
+                        <UserOutlined /> {announcment.user.name}
+                      </div>
+                      {/* <div>
+                      <FieldTimeOutlined /> {announcment.created_timestamp}
+                    </div> */}
+                      <div>
+                        <ScheduleOutlined />{" "}
+                        {dateformat(
+                          announcment.created_timestamp,
+                          "mmmm dS, yyyy"
+                        )}
+                      </div>
+                    </Space>
+                  </p>
+                  <p>{announcment.description}</p>
+                  {/* <p>
+                  <PhoneOutlined /> {announcment.contact_information}
+                </p> */}
+                </Col>
+                <Col
+                  xs={24}
+                  sm={4}
+                  md={6}
+                  lg={8}
+                  xl={6}
+                  className="announcement_button"
+                >
+                  <Row>
+                    <Col span={18} offset={3}>
+                      <Link
+                        href={
+                          "/announcement/myannouncement/" + announcment.id + "/"
+                        }
+                      >
+                        <Button type="primary" block>
+                          Edit
+                        </Button>
+                      </Link>
+                      <Button
+                        block
+                        onClick={() =>
+                          archiveAnnouncement(announcment, false, setUpdatelist)
+                        }
+                      >
+                        Move to Active Archives
+                      </Button>
+                    </Col>
+                  </Row>
+                </Col>
+              </Row>
+              <Divider />
+            </>
+          );
+        }
+      });
+    }
+  };
 
-const mapStateToProps = (state) => {
-  return { announcments: Object.values(state.announcement.annountmentList) };
+  return (
+    <>
+      <Row>
+        <Col span={24} className="announcement_frame">
+          <Tabs defaultActiveKey="1">
+            <TabPane tab="Active Announcements" key="1">
+              {renderAnnounements()}
+            </TabPane>
+            <TabPane tab="Archived Announcements" key="2">
+              {renderArchivedAnnounements()}
+            </TabPane>
+          </Tabs>
+        </Col>
+      </Row>
+    </>
+  );
 };
 
-export default connect(mapStateToProps, { getAllAnnouncement })(
-  AllAnnouncements
-);
+const mapStateToProps = (state) => {
+  return {
+    announcments: state.announcement.myAnnouncement,
+    auth: state.auth,
+  };
+};
+
+export default connect(mapStateToProps, {
+  getAllAnnouncementOfUser,
+  archiveAnnouncement,
+})(AllAnnouncements);

@@ -35,18 +35,6 @@ class PicturesWall extends Component {
         file.name || file.url.substring(file.url.lastIndexOf("/") + 1),
     });
   };
-  // handlePreview = async (file) => {
-  //   if (!file.url && !file.preview) {
-  //     file.preview = await getBase64(file.originFileObj);
-  //   }
-
-  //   this.setState({
-  //     previewImage: file.url || file.preview,
-  //     previewVisible: true,
-  //     previewTitle:
-  //       file.name || file.url.substring(file.url.lastIndexOf("/") + 1),
-  //   });
-  // };
 
   handleChange = ({ fileList }) => {
     this.props.setImages(fileList);
@@ -69,6 +57,7 @@ class PicturesWall extends Component {
             fileList={fileList}
             onPreview={this.handlePreview}
             onChange={this.handleChange}
+            maxCount={this.props.limit}
           >
             {fileList.length >= 5 ? null : uploadButton}
           </Upload>

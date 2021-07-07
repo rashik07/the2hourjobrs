@@ -1,6 +1,11 @@
 import * as types from "./../types";
 
-const INITIAL_STATE = { annountmentList: [], announcementResponse: {} };
+const INITIAL_STATE = {
+  annountmentList: [],
+  announcementResponse: {},
+  singleAnnouncement: [],
+  myAnnouncement: [],
+};
 
 const announcementReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -9,6 +14,12 @@ const announcementReducer = (state = INITIAL_STATE, action) => {
 
     case types.GET_ALL_ANNOUNCEMENT:
       return { ...state, annountmentList: action.payload };
+
+    case types.GET_ALL_ANNOUNCEMENT_OF_USER:
+      return { ...state, myAnnouncement: action.payload };
+
+    case types.GET_SINGLE_ANNOUNCEMENT:
+      return { ...state, singleAnnouncement: action.payload };
 
     default:
       return state;
