@@ -1,3 +1,4 @@
+
 import Industry_skillset from 'components/Landing_page/Industry_skillset';
 import Search_banner from 'components/Landing_page/Search_banner';
 import Head from 'next/head';
@@ -20,6 +21,8 @@ const Landing_page = () => {
             <Navbar />
             <Search_banner></Search_banner>
             <Industry_skillset></Industry_skillset>
+            
+            
                     
             
     

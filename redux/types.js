@@ -47,3 +47,9 @@ export const GET_SAVED_WORKERS = "GET_SAVED_WORKERS";
 export const FILTERED_WORKERS = "FILTERED_WORKERS";
 export const INIT_USER_STATE = "INIT_USER_STATE";
 export const SAVE_WORKER = "SAVE_WORKER";
+
+//************** PROJECT TYPES *********************/
+
+export const VIEW_PROJECT = "VIEW_PROJECT";
+export const CREATE_PROJECT = "CREATE_PROJECT";
+export const DELETE_PROJECT = "DELETE_PROJECT";

@@ -3,6 +3,7 @@ import authReducer from "./authReducer";
 import jobReducer from "./jobReducer";
 import userReducer from "./userReducer";
 import announcementReducer from "./announcementReducer";
+import projectReducer from "./projectReducer";
 import { reducer as formReducer } from "redux-form";
 
 export default combineReducers({
@@ -11,5 +12,6 @@ export default combineReducers({
   announcement: announcementReducer,
   user: userReducer,
   form: formReducer,
+  project: projectReducer,
   
 });
