@@ -1,23 +1,41 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { Row, Col, Image, Divider, Button, Space } from "antd";
+import Head from "next/head";
+import Footer from "../../container/footer/footer";
+import Newnavbar from "../../container/navbar/newNavbar";
+import {
+  Row,
+  Col,
+  Image,
+  Divider,
+  Button,
+  Space,
+  Layout,
+  Breadcrumb,
+} from "antd";
+import { useRouter } from "next/router";
 import {
   PhoneOutlined,
   ScheduleOutlined,
   HomeOutlined,
   UserOutlined,
   FieldTimeOutlined,
+  EnvironmentOutlined,
 } from "@ant-design/icons";
-import { getAllAnnouncement } from "../../redux/actions/announcementAction";
+import { getSpecificAnnouncement } from "../../redux/actions/announcementAction";
 import dateformat from "dateformat";
 import Link from "next/link";
+const { Content } = Layout;
 
-class AllAnnouncements extends Component {
-  componentDidMount() {
-    this.props.getAllAnnouncement();
-  }
+const AnnouncementDetails = ({ getSpecificAnnouncement, announcment }) => {
+  const router = useRouter();
+  const { announcement_id } = router.query;
 
-  renderimage(announcment) {
+  useEffect(() => {
+    getSpecificAnnouncement(announcement_id);
+  }, []);
+
+  const renderimage = () => {
     if (announcment.image) {
       return announcment.image.map((announcment) => {
         if (announcment.cover) {
@@ -34,97 +52,109 @@ class AllAnnouncements extends Component {
         />
       );
     }
-  }
+  };
 
-  renderAnnounements() {
-    if (this.props.announcments) {
-      return this.props.announcments.map((announcment) => {
-        if (!announcment.archive) {
-          return (
-            <>
-              <Row key={announcment.id} className="announcement_card">
-                <Col xs={24} sm={4} md={6} lg={8} xl={6}>
-                  <Row>
-                    <Col span={12} offset={6}>
-                      {this.renderimage(announcment)}
-                    </Col>
-                  </Row>
-                </Col>
-                <Col
-                  xs={24}
-                  sm={16}
-                  md={12}
-                  lg={8}
-                  xl={12}
-                  className="announcement_details"
-                >
-                  <h3>{announcment.title}</h3>
-                  <p>
-                    <Space size={"large"}>
-                      <div>
-                        <UserOutlined /> {announcment.user.name}
-                      </div>
-                      {/* <div>
-                      <FieldTimeOutlined /> {announcment.created_timestamp}
-                    </div> */}
-                      <div>
-                        <ScheduleOutlined />{" "}
-                        {dateformat(
-                          announcment.created_timestamp,
-                          "mmmm dS, yyyy"
-                        )}
-                      </div>
-                    </Space>
-                  </p>
-                  <p>{announcment.description}</p>
-                  {/* <p>
-                  <PhoneOutlined /> {announcment.contact_information}
-                </p> */}
-                </Col>
-                <Col
-                  xs={24}
-                  sm={4}
-                  md={6}
-                  lg={8}
-                  xl={6}
-                  className="announcement_button"
-                >
-                  <Row>
-                    <Col span={18} offset={3}>
-                      <Link href={"/announcement/" + announcment.id + "/"}>
-                        <Button type="primary" block>
-                          View
-                        </Button>
-                      </Link>
-                      <Button block>Save</Button>
-                    </Col>
-                  </Row>
-                </Col>
-              </Row>
-              <Divider />
-            </>
-          );
-        }
-      });
-    }
-  }
-  render() {
+  const rendergalleryimage = () => {
+    return announcment.image.map((imagee) => {
+      // console.log(imagee);
+      // <Col xs={12} sm={12} md={12} lg={12} xl={12}>
+      // <Image src={"http://127.0.0.1:8000" + imagee} />
+      // </Col>
+      <p>sadik</p>;
+    });
+  };
+
+  const renderAnnounements = () => {
     return (
-      <>
-        <Row>
-          <Col span={24} className="announcement_frame">
-            {this.renderAnnounements()}
-          </Col>
-        </Row>
-      </>
+      <Row key={announcment.id}>
+        <Col xs={24} sm={24} md={5} lg={5} xl={5}>
+          {renderimage()}
+          <Row>
+            <Image.PreviewGroup>
+              {announcment.image.map((imagee) => {
+                if (!imagee.cover) {
+                  return (
+                    <Col
+                      xs={8}
+                      sm={8}
+                      md={8}
+                      lg={8}
+                      xl={8}
+                      style={{ padding: "3px" }}
+                    >
+                      <Image src={"http://127.0.0.1:8000" + imagee.photo} />
+                    </Col>
+                  );
+                }
+              })}
+            </Image.PreviewGroup>
+          </Row>
+        </Col>
+        <Col xs={24} sm={24} md={12} lg={12} xl={12} offset={1}>
+          <h2>{announcment.title}</h2>
+          <p style={{ marginBottom: "1px", color: "blue" }}>
+            posted by {announcment.user.name}
+          </p>
+          <p>
+            <EnvironmentOutlined /> {announcment.user.profile.address}
+          </p>
+          <Space></Space>
+          <h3>Description</h3>
+          <p>{announcment.description}</p>
+          <Divider />
+          <h3>Other annoucement from the same user</h3>
+        </Col>
+        <Col xs={24} sm={24} md={4} lg={4} xl={4} offset={1}>
+          <h3>Location</h3>
+          <p>Address: {announcment.user.profile.address}</p>
+          <p>Thana: {announcment.user.profile.thana}</p>
+          <p>District: {announcment.user.profile.district}</p>
+          <p>Division: {announcment.user.profile.division}</p>
+          <Divider />
+          <h3>User details</h3>
+          <p>Phone: {announcment.user.phone}</p>
+          <p>Gender: {announcment.user.profile.gender}</p>
+          <p>Bio: {announcment.user.profile.bio}</p>
+        </Col>
+      </Row>
     );
-  }
-}
+  };
 
-const mapStateToProps = (state) => {
-  return { announcments: Object.values(state.announcement.annountmentList) };
+  return (
+    <>
+      <Head>
+        <title>{announcment.title}</title>
+      </Head>
+      <Layout>
+        <Newnavbar />
+        <Content
+          className="site-layout"
+          style={{ padding: "0 50px", marginTop: 64 }}
+        >
+          <Breadcrumb style={{ margin: "16px 0" }}>
+            <Breadcrumb.Item>Home</Breadcrumb.Item>
+            <Breadcrumb.Item>
+              <Link href="/announcement">Announcement</Link>
+            </Breadcrumb.Item>
+            <Breadcrumb.Item>{announcment.title}</Breadcrumb.Item>
+          </Breadcrumb>
+          <div
+            className="site-layout-background"
+            style={{ padding: 24, minHeight: 380 }}
+          >
+            {renderAnnounements()}
+          </div>
+        </Content>
+        <Footer />
+      </Layout>
+    </>
+  );
 };
 
-export default connect(mapStateToProps, { getAllAnnouncement })(
-  AllAnnouncements
+const mapStateToProps = (state) => {
+  return { announcment: state.announcement.singleAnnouncement };
+};
+
+export default connect(mapStateToProps, { getSpecificAnnouncement })(
+  AnnouncementDetails
 );

@@ -14,29 +14,39 @@ const getConfig = () => {
   return config;
 };
 
-export const createAnnouncement = (formValues, files) => async (dispatch) => {
-  try {
-    const response = await backend.post(
-      "v1/announcement/data/",
-      { ...formValues },
-      getConfig()
-    );
-    if (response.status === 201) {
-      dispatch({
-        type: types.CREATE_ANNOUNCEMENT,
-        payload: { ...response.data },
-      });
+export const createAnnouncement =
+  (formValues, files, cover) => async (dispatch) => {
+    try {
+      const response = await backend.post(
+        "v1/announcement/data/",
+        { ...formValues },
+        getConfig()
+      );
+      if (response.status === 201) {
+        dispatch({
+          type: types.CREATE_ANNOUNCEMENT,
+          payload: { ...response.data },
+        });
+        const id = response.data.id;
+        files.map((file) => {
+          dispatch(uploadimage(id, file, false));
+        });
+        cover.map((file) => {
+          dispatch(uploadimage(id, file, true));
+        });
+      }
+      router.push("/announcement");
+    } catch (error) {
+      console.log(error);
     }
-  } catch (error) {
-    console.log(error);
-  }
-};
+  };
 
-export const uploadimage = (id, file) => async (dispatch) => {
+const uploadimage = (id, file, flag) => async (dispatch) => {
   try {
     const formData = new FormData();
     formData.append("photo", file.originFileObj);
     formData.append("announcement", parseInt(id));
+    formData.append("cover", flag);
     const response = await backend.post(
       "v1/announcement/image/",
       formData,
@@ -65,3 +75,99 @@ export const getAllAnnouncement = () => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const getAllAnnouncementOfUser = (id) => async (dispatch) => {
+  try {
+    const response = await backend.get(
+      `v1/announcement/user_annoucements/${id}`,
+      getConfig()
+    );
+    if (response.status === 200) {
+      dispatch({
+        type: types.GET_ALL_ANNOUNCEMENT_OF_USER,
+        payload: response.data,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getSpecificAnnouncement = (id) => async (dispatch) => {
+  try {
+    const response = await backend.get(
+      `v1/announcement/data/${id}/`,
+      getConfig()
+    );
+    if (response.status === 200) {
+      dispatch({
+        type: types.GET_SINGLE_ANNOUNCEMENT,
+        payload: response.data,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const updateAnnouncement = (id, formValues) => async (dispatch) => {
+  try {
+    const response = await backend.patch(
+      `v1/announcement/data/${id}/`,
+      formValues,
+      getConfig()
+    );
+    if (response.status === 200) {
+      dispatch({
+        type: types.UPDATE_ANNOUNCEMENT,
+        payload: { ...response.data },
+      });
+    }
+  } catch (error) {
+    console.log(error.response);
+  }
+};
+
+export const deleteAnnouncement = (id) => async (dispatch) => {
+  try {
+    const response = await backend.delete(
+      `v1/announcement/data/${id}/`,
+      getConfig()
+    );
+    if (response.status === 204) {
+      dispatch({ type: types.DELETE_ANNOUNCEMENT, payload: id });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const archiveAnnouncement =
+  (announcment, value, setUpdatelist) => async (dispatch) => {
+    try {
+      const formdata = new FormData();
+      formdata.append("title", announcment.title);
+      formdata.append("description", announcment.description);
+      formdata.append("contact_information", announcment.contact_information);
+      formdata.append("slug_id", announcment.slug_id);
+      formdata.append("poster", announcment.poster);
+      formdata.append("archive", value);
+      console.log(formdata);
+      const response = await backend.patch(
+        `v1/announcement/data/${announcment.id}/`,
+        formdata,
+        getConfig()
+      );
+      if (response.status === 200) {
+        dispatch({
+          type: types.UPDATE_ANNOUNCEMENT,
+          payload: { ...response.data },
+        });
+        setUpdatelist(false);
+        console.log("updated");
+      }
+    } catch (error) {
+      console.log(error);
+      console.log(error.response);
+    }
+  };

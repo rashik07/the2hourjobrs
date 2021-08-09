@@ -11,6 +11,7 @@ export default function Home() {
 
   useEffect(() => {
     dispatch({ type: types.INIT_JOB_STATE });
+    dispatch({ type: types.INIT_USER_STATE });
   }, []);
 
   return (

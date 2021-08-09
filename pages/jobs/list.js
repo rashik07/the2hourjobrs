@@ -1,5 +1,6 @@
 import Head from "next/head";
 import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
 
 import Navbar from "../../container/navbar/navbar";
 import JobList from "components/jobs/list/JobList";
@@ -14,8 +15,9 @@ import JobCategoryFilter from "components/jobs/list/JobCategoryFilter";
 import JobIndustryFilter from "components/jobs/list/JobIndustryFilter";
 import ExperienceFilter from "components/jobs/list/ExperienceFilter";
 import AgeFilter from "components/jobs/list/AgeFilter";
+import { filterJobs } from "redux/actions/jobAction";
 
-const Jobs = () => {
+const Jobs = ({ filterJobs }) => {
   const [filter, setFilter] = useState({});
   const [showFilterJobs, setShowFilterJobs] = useState(false);
 
@@ -60,7 +62,8 @@ const Jobs = () => {
             <SelectedFilter
               filter={filter}
               setFilter={setFilter}
-              setShowFilterJobs={setShowFilterJobs}
+              setShowFilter={setShowFilterJobs}
+              getFilteredList={filterJobs}
             />
             <JobList filter={filter} showFilterJobs={showFilterJobs} />
           </div>
@@ -70,4 +73,4 @@ const Jobs = () => {
   );
 };
 
-export default Jobs;
+export default connect(null, { filterJobs })(Jobs);
