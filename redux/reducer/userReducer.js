@@ -10,6 +10,11 @@ const INITIAL_STATE = {
 const userReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case types.UPDATE_USER_PROFILE:
+<<<<<<< HEAD
+      return { ...state, user_profile: action.payload } ;
+      case types.EDIT_USER_PROFILE:
+        return {...state, edit_user_profile: action.payload};
+=======
       return { ...state, user_profile: action.payload };
 
     case types.GET_OTHER_WORKERS:
@@ -31,9 +36,11 @@ const userReducer = (state = INITIAL_STATE, action) => {
     case types.INIT_USER_STATE:
       return INITIAL_STATE;
 
+>>>>>>> origin
     default:
       return state;
   }
 };
+
 
 export default userReducer;

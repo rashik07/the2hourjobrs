@@ -16,12 +16,18 @@ const getConfig = () => {
 };
 
 export const updateProfile = (data) => async (dispatch) => {
+<<<<<<< HEAD
+  try{
+  const response = await backend.get(`/v1/user/me/?user=${store.getState().auth.id}`, getConfig());
+  dispatch({ type: types.UPDATE_USER_PROFILE, payload: response.data });
+=======
   try {
     const response = await backend.get("/v1/user/me/", getConfig());
     dispatch({ type: types.UPDATE_USER_PROFILE, payload: response.data });
   } catch (error) {
     console.log(error);
     console.log(error.response);
+>>>>>>> origin
   }
 
   //   try {
@@ -32,6 +38,25 @@ export const updateProfile = (data) => async (dispatch) => {
   //     console.log(error);
   //   }
 };
+<<<<<<< HEAD
+export const editUserProfile = (values) => async (dispatch) =>{
+
+  console.log(values);
+  try{
+  const response = await backend.patch(
+    `/v1/user/profile/${store.getState().auth.id}/`,values,
+    getConfig()
+    );
+  
+  dispatch({ type: types.EDIT_USER_PROFILE, payload: response.data});
+  console.log(values);
+  }
+  catch (error) {
+    console.log(error);
+    console.log(error.response);
+ }
+};
+
 
 export const getOtherWorkers = () => async (dispatch) => {
   try {
@@ -150,3 +175,4 @@ export const getSavedWorkers = () => async (dispatch) => {
     console.log(error.response);
   }
 };
+>>>>>>> origin

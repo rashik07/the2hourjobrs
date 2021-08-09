@@ -3,24 +3,22 @@ import { Card, Avatar,Modal } from 'antd';
 import { EditOutlined, EllipsisOutlined, SettingOutlined , DeleteOutlined } from '@ant-design/icons';
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
-import { viewProject , deleteProject} from '@/redux/actions/projectAction';
+import { viewEmployment,deleteEmployment} from '@/redux/actions/employmentAction';
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 
 
 
-const Project_details = ({viewProject, view_project, project,deleteProject}) => {
+const Employment_details= ({viewEmployment, view_employment, employment , deleteEmployment}) => {
   const router = useRouter();
 
     useEffect(() => {
       
-        viewProject();
+        viewEmployment();
         //setUpdateList(false);
         
       },[]);
       
-  
-      //console.log(view_project);
-      const deleteProjectBtnClick = () => {
+      const deleteEmploymentBtnClick = () => {
         const { confirm } = Modal;
     
         confirm({
@@ -31,10 +29,13 @@ const Project_details = ({viewProject, view_project, project,deleteProject}) => 
           okType: "danger",
           cancelText: "No",
           onOk() {
-            deleteProject(project.id);
+            deleteEmployment(employment.id);
           },
         });
       };
+      
+   
+     
     const { Meta } = Card;
     
     return (
@@ -49,7 +50,7 @@ const Project_details = ({viewProject, view_project, project,deleteProject}) => 
                         actions={[
                                   
                         
-                        <DeleteOutlined  key="ellipsis" onClick={deleteProjectBtnClick}/>,
+                        <DeleteOutlined  key="ellipsis"  onClick={deleteEmploymentBtnClick}/>,
                           
                         ]}
                       
@@ -58,8 +59,8 @@ const Project_details = ({viewProject, view_project, project,deleteProject}) => 
                   <Meta
                         avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
                             
-                        title={project.title}
-                        description={project.description}
+                        title={employment.company_name}
+                        description={employment.designation}
                                 
                   />
                             
@@ -76,7 +77,7 @@ const Project_details = ({viewProject, view_project, project,deleteProject}) => 
 
 const mapStateToProps = (state) => {
     return {
-      view_project: state.project.view_project,
+      view_employment: state.employment.view_employment,
       
 
 
@@ -84,4 +85,4 @@ const mapStateToProps = (state) => {
     };
   };
   
-  export default connect(mapStateToProps, {viewProject,deleteProject})(Project_details);
+  export default connect(mapStateToProps, {viewEmployment,deleteEmployment})(Employment_details);

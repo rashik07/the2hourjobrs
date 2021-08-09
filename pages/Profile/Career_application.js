@@ -5,17 +5,24 @@ import Sidebar from "../../container/sidebar/sidebar";
 import { Select } from "antd";
 import { connect } from "react-redux";
 import {
-    updateProfile
+    updateProfile ,editUserProfile
   } from "@/redux/actions/userAction";
-import {Form,Input, Button, Radio ,DatePicker,Typography,Divider,TextArea  } from 'antd';
-
+import {Form,Input, Switch ,Button, Radio ,DatePicker,Typography,Divider,TextArea  } from 'antd';
+import { CloseOutlined, CheckOutlined } from '@ant-design/icons'
 
  
-const Career_application = ({updateProfile, user_profile}) => {
+const Career_application = ({updateProfile, user_profile,editUserProfile,edit_user_profile}) => {
     useEffect(() => {
         updateProfile();
       },[]);
-    
+      const onFinish = (values ) => {
+       
+      
+      
+       console.log('Received values of form: ', values);
+       editUserProfile(values);
+    //   console.log('update: ', editUserProfile);
+     };
     const { Option } = Select;
 
 const children = [];
@@ -28,15 +35,20 @@ function handleChange(value) {
 }
     const { Title } = Typography;
     const { TextArea } = Input;
-    const [value1, setValue1] = React.useState(1);
-    const onChange1 = e => {
-        console.log('radio1 checked', e.target.value);
-        setValue1(e.target.value);
-      };
-      const [value2, setValue2] = React.useState(1);
-      const onChange2 = e => {
-        console.log('radio2 checked', e.target.value);
-        setValue2(e.target.value);
+    
+    //job level
+    const plainOptions = ['Entry Level', 'mid','Top Level'];
+    const [value, setValue] = React.useState();
+    const onChange = e => {
+      console.log('radio1 checked', e.target.value);
+      setValue(e.target.value);
+    };
+    //job nature
+    const natureOptions = ['Full time', 'Part time','Contractual','Freelance','Internship'];
+    const [value2, setValue2] = React.useState();
+    const onChange2 = e => {
+      console.log('radio2 checked', e.target.value);
+      setValue2(e.target.value);
       };
     
     const [form] = Form.useForm();
@@ -66,6 +78,19 @@ function handleChange(value) {
           },
         }
       : null;
+      const tailFormItemLayout = {
+        wrapperCol: {
+          xs: {
+            span: 24,
+            offset: 0,
+          },
+          sm: {
+            span: 16,
+            offset: 8,
+          },
+        },
+      };
+ 
     return (
         <div>
             <Head>
@@ -90,63 +115,41 @@ function handleChange(value) {
                             {...formItemLayout}
                             layout={formLayout}
                             form={form}
-                            initialValues={{
-                            layout: formLayout,
-                            }}
+                            name="register"
+                            onFinish={onFinish}
+                            
+                            initialValues={user_profile}
                          
                             >
-                           
+                           <Switch className="float-right" checkedChildren="available for work" unCheckedChildren="not available for work" defaultChecked />
                            <Divider> <Title>Career and Application details </Title></Divider> 
                             
-                                <Form.Item label="Objective">
-                                    <TextArea rows={4}  defaultValue={user_profile.username}/>
-                                </Form.Item>
-                                <Form.Item label="Salary">
-                                <Input.Group compact>
-                                        <Select defaultValue="1">
-                                            <Option value="1">Present</Option>
-                                            <Option value="2">Except</Option>
-                                        </Select>
-                                        <Input style={{ width: 130, textAlign: 'center' }} placeholder="Minimum" />
-                                        <Input
-                                            className="site-input-split"
-                                            style={{
-                                            width: 30,
-                                            borderLeft: 0,
-                                            borderRight: 0,
-                                            pointerEvents: 'none',
-                                            }}
-                                            placeholder="~"
-                                            disabled
-                                        />
-                                        <Input
-                                            className="site-input-right"
-                                            style={{
-                                            width: 130,
-                                            textAlign: 'center',
-                                            }}
-                                            placeholder="Maximum"
-                                        />
-                                        </Input.Group>
-                                </Form.Item>
-                                <Form.Item label="Job level">
-                                        <Radio.Group onChange={onChange1} value={value1}>
-                                            <Radio value={1}>Entry Level</Radio>
-                                            <Radio value={2}>Mid Level</Radio>
-                                            <Radio value={3}>Top Level</Radio>
-                                        </Radio.Group>
-                                </Form.Item>
-                                <Form.Item label="Job Nature">
-                                        <Radio.Group onChange={onChange2} value={value2}>
-                                            <Radio value={1}>Full Time</Radio>
-                                            <Radio value={2}>Part Time</Radio>
-                                            <Radio value={3}>Contractual</Radio>
-                                            <Radio value={4}>Freelance</Radio>
-                                            <Radio value={5}>Internship</Radio>
+                              <Form.Item label="Objective" name="objective">
+                                <TextArea rows={4} />
+                              </Form.Item>
+                              <Form.Item label="Present Salary" name="present_salary">
+                                  <Input placeholder="present salary" />
+                              </Form.Item>
+                              <Form.Item label="Expected Salary" name="expected_salary">
+                                  <Input placeholder="expected salary" />
+                              </Form.Item>
+                              <Form.Item label="Job level"  name="job_level"> 
+                                <Radio.Group onChange={onChange} options={plainOptions} value={value}>
                                             
-                                        </Radio.Group>
-                                </Form.Item>
-                           <Divider> <Title>Prefered Categories </Title></Divider>
+                                </Radio.Group>
+                              </Form.Item>
+                              <Form.Item label="Job Nature" name="job_nature">
+                                <Radio.Group onChange={onChange2} options={natureOptions} value={value2}>
+                                 
+                                            
+                                </Radio.Group>
+                              </Form.Item>
+                              <Form.Item {...tailFormItemLayout}>
+                                <Button type="primary" htmlType="submit">
+                                  Save
+                                </Button>
+                              </Form.Item>
+                           {/* <Divider> <Title>Prefered Categories </Title></Divider>
                                             
                                 <Form.Item label="Functional">
                                     <Select
@@ -197,7 +200,7 @@ function handleChange(value) {
                                         <Option value="jack">Dhaka</Option>
                                         <Option value="lucy">Dinajpur</Option>
                                     </Select>,
-                                </Form.Item>
+                                </Form.Item> */}
                         </Form>
                 </main>
             </div>
@@ -208,6 +211,7 @@ function handleChange(value) {
 const mapStateToProps = (state) => {
     return {
       user_profile: state.user.user_profile,
+      edit_user_profile: state.user.edit_user_profile,
     };
   };
-export default connect(mapStateToProps, {updateProfile})(Career_application); 
+export default connect(mapStateToProps, {updateProfile,editUserProfile})(Career_application); 
