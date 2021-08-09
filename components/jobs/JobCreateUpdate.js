@@ -1,8 +1,10 @@
-import Navbar from "container/navbar/navbar";
+import Navbar from "container/navbar/newNavbar";
 import React, { useState, useEffect } from "react";
 
-import { Steps } from "antd";
+import { Steps, Layout, Breadcrumb, Row, Col } from "antd";
+const { Content } = Layout;
 import Head from "next/head";
+import Footer from "../../container/footer/footer";
 import Step1 from "components/jobs/post/Step1";
 import Step2 from "components/jobs/post/Step2";
 import Step3 from "components/jobs/post/Step3";
@@ -49,20 +51,35 @@ const JobCreateUpdate = ({ getJobCategories, getEducation, editJob }) => {
     <>
       <Navbar />
       <Head>
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/antd/4.15.1/antd.min.css"
-        />
+        <title>Post a job</title>
       </Head>
-      <div className="container mt-4">
-        <Steps size="medium" current={postStep}>
-          <Step title="Primary Information" />
-          <Step title="More Job Information" />
-          <Step title="Candidates Requirements" />
-          <Step title="Preview" />
-        </Steps>
-        {renderInputForms()}
-      </div>
+      <Layout>
+        <Navbar />
+        <Content className="site-layout">
+          <Breadcrumb className="breadcrumb_main">
+            <Breadcrumb.Item>Home</Breadcrumb.Item>
+            <Breadcrumb.Item>Job</Breadcrumb.Item>
+            <Breadcrumb.Item>List</Breadcrumb.Item>
+          </Breadcrumb>
+          <div
+            className="site-layout-background"
+            style={{ padding: "15px 50px" }}
+          >
+            <Steps
+              size="medium"
+              current={postStep}
+              style={{ alignItems: "end" }}
+            >
+              <Step title="Primary Information" />
+              <Step title="More Job Information" />
+              <Step title="Candidates Requirements" />
+              <Step title="Preview" />
+            </Steps>
+            {renderInputForms()}
+          </div>
+        </Content>
+        <Footer />
+      </Layout>
     </>
   );
 };

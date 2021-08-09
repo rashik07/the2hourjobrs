@@ -29,8 +29,7 @@ const JobCategogy = ({ getJobCategories, categories, setValue, onClear }) => {
   return (
     <Select
       placeholder="Select Category"
-      className="mb-3"
-      style={{ width: 200 }}
+      className="filtter-items"
       onChange={setValue}
       onClear={onClear}
       allowClear
