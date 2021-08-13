@@ -5,8 +5,9 @@ import Sidebar from "../../container/sidebar/sidebar";
 import { Select } from "antd";
 import { connect } from "react-redux";
 import {
-  updateProfile ,editUserProfile
+  updateProfile ,editUserProfile, getDistrict
 } from "@/redux/actions/userAction";
+
 import {
   Form,
   Input,
@@ -20,12 +21,14 @@ import {
 import { Upload, Space } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import moment from 'moment';
+import DistrictList from "components/jobs/input/DistrictList";
 
-const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_profile}) => {
+const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_profile,getDistrict,onClear,get_district}) => {
   useEffect(() => {
     updateProfile();
+    getDistrict();
   },[]);
-
+  
   console.log(user_profile);
   const dateFormat = 'YYYY-MM-DD';
   user_profile.birthday=moment(user_profile.birthday, dateFormat);
@@ -37,10 +40,15 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
     };
    
    
-    console.log('Received values of form: ', values);
+    // console.log('Received values of form: ', values);
     editUserProfile(values);
  //   console.log('update: ', editUserProfile);
   };
+
+
+  
+
+
 
   const { Option } = Select;
   const { TextArea } = Input;
@@ -117,7 +125,11 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
           },
         },
       };
- 
+      // console.log(get_district);
+      // const setDistrict = (value) => {
+      //   getDistrict({ get_District: value });
+       
+      // };
       
 
   return (
@@ -220,31 +232,15 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
                 {" "}
                 <Title>Address</Title>
               </Divider>
-              <Form.Item label="District" name="district">
-                <Select
-                  showSearch
-                  style={{ width: 200 }}
-                  placeholder="Search to Select"
-                  optionFilterProp="children"
-                  filterOption={(input, option) =>
-                    option.children
-                      .toLowerCase()
-                      .indexOf(input.toLowerCase()) >= 0
-                  }
-                  filterSort={(optionA, optionB) =>
-                    optionA.children
-                      .toLowerCase()
-                      .localeCompare(optionB.children.toLowerCase())
-                  }
-                  
-                >
-                  <Option value="1">Not Identified</Option>
-                  <Option value="2">Closed</Option>
-                  <Option value="3">Communicated</Option>
-                  <Option value="4">Identified</Option>
-                  <Option value="5">Resolved</Option>
-                  <Option value="6">Cancelled</Option>
-                </Select>
+              <Form.Item label="District" name="district.name">
+                        <DistrictList
+                        style={{ width: 200 }}
+                        placeholder="Search to Select"
+                         
+                        ></DistrictList>
+             
+                                
+
               </Form.Item>
               <Form.Item label="Thana" name="thana" >
                 <Select
@@ -292,9 +288,10 @@ const mapStateToProps = (state) => {
   return {
     user_profile: state.user.user_profile,
     edit_user_profile: state.user.edit_user_profile,
+    get_district: state.user.get_district,
   
   };
 };
 
-export default connect(mapStateToProps, {updateProfile,editUserProfile})(Profile_info);
+export default connect(mapStateToProps, {updateProfile,editUserProfile,getDistrict})(Profile_info);
 

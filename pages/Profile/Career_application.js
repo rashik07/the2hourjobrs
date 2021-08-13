@@ -7,11 +7,17 @@ import { connect } from "react-redux";
 import {
     updateProfile ,editUserProfile
   } from "@/redux/actions/userAction";
+  import { saveTemporayJobPost } from "redux/actions/jobAction";
 import {Form,Input, Switch ,Button, Radio ,DatePicker,Typography,Divider,TextArea  } from 'antd';
+import LocationList from "../../components/jobs/input/LocationList";
+import { getJobCategories } from "redux/actions/jobAction";
+
+
+import { TagsInput } from "react-tag-input-component";
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons'
 
  
-const Career_application = ({updateProfile, user_profile,editUserProfile,edit_user_profile}) => {
+const Career_application = ({updateProfile, user_profile,editUserProfile,edit_user_profile,saveTemporayJobPost, temp_jobpost,getJobCategories, categories,  onClear }) => {
     useEffect(() => {
         updateProfile();
       },[]);
@@ -23,8 +29,31 @@ const Career_application = ({updateProfile, user_profile,editUserProfile,edit_us
        editUserProfile(values);
     //   console.log('update: ', editUserProfile);
      };
-    const { Option } = Select;
+     const { OptGroup } = Select;
 
+     useEffect(() => {
+       getJobCategories();
+     }, []);
+   
+     const getOptions = (categories) => {
+       if (categories)
+         return categories.map((subCategory) => (
+           <OptGroup
+             key={subCategory.type}
+             label={`${subCategory.type} Categories`}
+           >
+             {subCategory.list.map(({ id, name }) => (
+               <Option key={id} value={JSON.stringify({ id, name })}>
+                 {name}
+               </Option>
+             ))}
+           </OptGroup>
+         ));
+     };
+
+
+    const { Option } = Select;
+    
 const children = [];
 for (let i = 10; i < 36; i++) {
   children.push(<Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>);
@@ -90,7 +119,9 @@ function handleChange(value) {
           },
         },
       };
- 
+      const setJobLocation = (value) => {
+        saveTemporayJobPost({ job_location: value });
+      };
     return (
         <div>
             <Head>
@@ -149,58 +180,51 @@ function handleChange(value) {
                                   Save
                                 </Button>
                               </Form.Item>
-                           {/* <Divider> <Title>Prefered Categories </Title></Divider>
+                         
+                        </Form>
+                        <Form
+                            {...formItemLayout}
+                            layout={formLayout}
+                            form={form}
+                            name="register"
+                            onFinish={onFinish}
+                            
+                           // initialValues={user_profile}
+                         
+                            >
+                          
+                          
+                           <Divider> <Title>Prefered Categories </Title></Divider>
                                             
                                 <Form.Item label="Functional">
-                                    <Select
-                                        mode="multiple"
-                                        allowClear
-                                        style={{ width: '100%' }}
-                                        placeholder="Please select"
-                                        defaultValue={['a10', 'c12']}
-                                        onChange={handleChange}
-                                        >
-                                        {children}
-                                    </Select>
+                                  <Select
+                                    placeholder="Select Category"
+                                    className="mb-3"
+                                    style={{ width: 300 }}
+                                    onChange={setValue}
+                                    multiple={true}
+                                    onClear={onClear}
+                                    allowClear
+                                  >
+                                    {getOptions(categories)}
+                                  </Select>
 
                                 </Form.Item>
                                 <Form.Item label="Special Skills ">
-                                    <Select
-                                        mode="multiple"
-                                        allowClear
-                                        style={{ width: '100%' }}
-                                        placeholder="Please select"
-                                        defaultValue={['a10', 'c12']}
-                                        onChange={handleChange}
-                                        >
-                                        {children}
-                                    </Select>
+                                    <TagsInput></TagsInput>
 
                                 </Form.Item>
                                 <Form.Item label="Organization Type ">
-                                    <Select
-                                        mode="multiple"
-                                        allowClear
-                                        style={{ width: '100%' }}
-                                        placeholder="Please select"
-                                        defaultValue={['a10', 'c12']}
-                                        onChange={handleChange}
-                                        >
-                                        {children}
-                                    </Select>
+                                    <TagsInput></TagsInput>
 
                                 </Form.Item>
-                                <Form.Item label="Location ">
-                                    <Select
-                                        labelInValue
-                                        defaultValue={{ value: 'lucy' }}
-                                        style={{ width: 120 }}
-                                        onChange={handleChange}
-                                    >
-                                        <Option value="jack">Dhaka</Option>
-                                        <Option value="lucy">Dinajpur</Option>
-                                    </Select>,
-                                </Form.Item> */}
+                                <Form.Item label="Location " >
+                                  <LocationList
+                                    value={temp_jobpost.job_location}
+                                    setValue={setJobLocation}
+                                    multiple={true}
+                                  />
+                                </Form.Item>
                         </Form>
                 </main>
             </div>
@@ -212,6 +236,9 @@ const mapStateToProps = (state) => {
     return {
       user_profile: state.user.user_profile,
       edit_user_profile: state.user.edit_user_profile,
+      location: state.job.location,
+      temp_jobpost: state.job.temp_jobpost,
+      categories: state.job.categories,
     };
   };
-export default connect(mapStateToProps, {updateProfile,editUserProfile})(Career_application); 
+export default connect(mapStateToProps, {updateProfile,editUserProfile,saveTemporayJobPost,getJobCategories})(Career_application); 
