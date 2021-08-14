@@ -1,62 +1,60 @@
 import React, { useState, useEffect } from "react";
 import { TreeSelect } from "antd";
 import { connect } from "react-redux";
-import { getDistrict } from "redux/actions/userAction";
+import { getDivision } from "redux/actions/userAction";
 
-const DistrictList = ({
+const DivisionList = ({
   getLocationList,
-  getDistrict,
+  getDivision,
   district,
   location,
   value,
   setValue,
   multiple,
   onClear,
-  get_district
+  get_division
 }) => {
   useEffect(() => {
-    getDistrict();
+    getDivision();
   }, []);
-console.log(get_district);
+console.log(get_division);
   const { TreeNode } = TreeSelect;
 
-  if (get_district)
+  if (get_division)
     return (
       <TreeSelect
         showSearch
         style={{ width: "100%" }}
-        // value={value}
+        value={value}
         dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
         allowClear
         multiple={multiple}
         onChange={setValue}
         onClear={onClear}
       >
-       
+        
              
-                  {get_district.map((get_district) => {
-                   
+                  {get_division.map((get_division) => {
                 return (
                   <TreeNode
-                  
                   value={JSON.stringify({
-                    id: get_district.id,
-                    name: get_district.name,
-                    type: get_district.type,
+                    id: get_division.id,
+                    name: get_division.name,
+                    type: get_division.type,
                     // value: get_district.id,
                   })}
                   key={JSON.stringify({
-                    id: get_district.id,
-                    name: get_district.name,
-                    type: get_district.type,
+                    id: get_division.id,
+                    name: get_division.name,
+                    type: get_division.type,
                   })}
-                  title={get_district.name}
+                  title={get_division.name}
                   >
                  
                   </TreeNode>
                 );
               })}
-            
+          
           
        
       </TreeSelect>
@@ -67,8 +65,8 @@ console.log(get_district);
 
 const mapStateToProps = (state) => {
   return {
-    get_district: state.user.get_district,
+    get_division: state.user.get_division,
   };
 };
 
-export default connect(mapStateToProps, { getDistrict })(DistrictList);
+export default connect(mapStateToProps, { getDivision })(DivisionList);

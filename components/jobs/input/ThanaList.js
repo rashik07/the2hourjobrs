@@ -1,62 +1,61 @@
 import React, { useState, useEffect } from "react";
 import { TreeSelect } from "antd";
 import { connect } from "react-redux";
-import { getDistrict } from "redux/actions/userAction";
+import { getThana } from "redux/actions/userAction";
 
-const DistrictList = ({
+const ThanaList = ({
   getLocationList,
-  getDistrict,
+  getThana,
   district,
   location,
   value,
   setValue,
   multiple,
   onClear,
-  get_district
+  get_thana
 }) => {
   useEffect(() => {
-    getDistrict();
+    getThana();
   }, []);
-console.log(get_district);
+console.log(get_thana);
   const { TreeNode } = TreeSelect;
 
-  if (get_district)
+  if (get_thana)
     return (
       <TreeSelect
         showSearch
         style={{ width: "100%" }}
-        // value={value}
+         value={value}
         dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
         allowClear
         multiple={multiple}
         onChange={setValue}
         onClear={onClear}
       >
-       
+        
              
-                  {get_district.map((get_district) => {
-                   
+                  {get_thana.map((get_thana) => {
                 return (
                   <TreeNode
                   
                   value={JSON.stringify({
-                    id: get_district.id,
-                    name: get_district.name,
-                    type: get_district.type,
+                    id: get_thana.id,
+                    name: get_thana.name,
+                    type: get_thana.type,
                     // value: get_district.id,
                   })}
                   key={JSON.stringify({
-                    id: get_district.id,
-                    name: get_district.name,
-                    type: get_district.type,
+                    id: get_thana.id,
+                    name: get_thana.name,
+                    type: get_thana.type,
                   })}
-                  title={get_district.name}
+                  title={get_thana.name}
                   >
                  
                   </TreeNode>
                 );
               })}
-            
+          
           
        
       </TreeSelect>
@@ -67,8 +66,8 @@ console.log(get_district);
 
 const mapStateToProps = (state) => {
   return {
-    get_district: state.user.get_district,
+    get_thana: state.user.get_thana,
   };
 };
 
-export default connect(mapStateToProps, { getDistrict })(DistrictList);
+export default connect(mapStateToProps, { getThana })(ThanaList);

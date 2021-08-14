@@ -22,6 +22,8 @@ import { Upload, Space } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import moment from 'moment';
 import DistrictList from "components/jobs/input/DistrictList";
+import DivisionList from "components/jobs/input/DivisionList";
+import ThanaList from "components/jobs/input/ThanaList";
 
 const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_profile,getDistrict,onClear,get_district}) => {
   useEffect(() => {
@@ -130,7 +132,9 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
       //   getDistrict({ get_District: value });
        
       // };
-      
+      const setDivision = (value) => {
+        updateProfile({ division: value });
+      };
 
   return (
     <div>
@@ -232,7 +236,22 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
                 {" "}
                 <Title>Address</Title>
               </Divider>
-              <Form.Item label="District" name="district.name">
+              <Form.Item label="Division" name="division">
+                        <DivisionList
+                          style={{ width: 200 }}
+                          placeholder="Search to Select"
+                          value={user_profile.division}
+                          setValue={setDivision}
+                           
+                        >
+
+                        </DivisionList>
+                      
+             
+                                
+
+              </Form.Item>
+              <Form.Item label="District" name="district">
                         <DistrictList
                         style={{ width: 200 }}
                         placeholder="Search to Select"
@@ -243,30 +262,9 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
 
               </Form.Item>
               <Form.Item label="Thana" name="thana" >
-                <Select
-                  showSearch
-                  style={{ width: 200 }}
-                  placeholder="Search to Select"
-                  optionFilterProp="children"
-                  filterOption={(input, option) =>
-                    option.children
-                      .toLowerCase()
-                      .indexOf(input.toLowerCase()) >= 0
-                  }
-                  filterSort={(optionA, optionB) =>
-                    optionA.children
-                      .toLowerCase()
-                      .localeCompare(optionB.children.toLowerCase())
-                  }
-                
-                >
-                  <Option value="1">Not Identified</Option>
-                  <Option value="2">Closed</Option>
-                  <Option value="3">Communicated</Option>
-                  <Option value="4">Identified</Option>
-                  <Option value="5">Resolved</Option>
-                  <Option value="6">Cancelled</Option>
-                </Select>
+                  <ThanaList>
+
+                  </ThanaList>
               </Form.Item>
               <Form.Item label="Address" name="address">
                 <TextArea rows={4} />

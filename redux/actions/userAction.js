@@ -55,6 +55,29 @@ export const getDistrict = (data) => async (dispatch) => {
   }
 
 };
+export const getDivision = (data) => async (dispatch) => {
+  try{
+  const response = await backend.get("/v1/category/division/", getConfig());
+  dispatch({ type: types.GET_DIVISION, payload: response.data });
+ 
+  } catch (error) {
+    console.log(error);
+    console.log(error.response);
+  }
+
+};
+export const getThana = (data) => async (dispatch) => {
+  try{
+  const response = await backend.get("/v1/category/thana/", getConfig());
+  dispatch({ type: types.GET_THANA, payload: response.data });
+ 
+  } catch (error) {
+    console.log(error);
+    console.log(error.response);
+  }
+
+};
+
 
 
 export const getOtherWorkers = () => async (dispatch) => {

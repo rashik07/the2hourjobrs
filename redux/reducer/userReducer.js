@@ -11,10 +11,14 @@ const userReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case types.UPDATE_USER_PROFILE:
       return { ...state, user_profile: action.payload } ;
-      case types.EDIT_USER_PROFILE:
-        return {...state, edit_user_profile: action.payload};
-      case types.GET_DISTRICT:
-        return {...state, get_district: action.payload};
+    case types.EDIT_USER_PROFILE:
+      return {...state, edit_user_profile: action.payload};
+    case types.GET_DIVISION:
+      return {...state, get_division: action.payload};  
+    case types.GET_DISTRICT:
+      return {...state, get_district: action.payload};
+    case types.GET_THANA:
+      return {...state, get_thana: action.payload};
      
 
     case types.GET_OTHER_WORKERS:
