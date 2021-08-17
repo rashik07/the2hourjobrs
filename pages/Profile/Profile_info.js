@@ -240,8 +240,7 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
                         <DivisionList
                           style={{ width: 200 }}
                           placeholder="Search to Select"
-                          value={user_profile.division}
-                          setValue={setDivision}
+                         
                            
                         >
 
