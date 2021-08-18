@@ -24,14 +24,17 @@ import moment from 'moment';
 
 import ThanaList from "components/jobs/input/ThanaList";
 
-const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_profile,getDistrict,onClear,get_division,get_district,get_thana}) => {
+const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_profile,getDivision,getDistrict,getThana,onClear,get_division,get_district,get_thana}) => {
   useEffect(() => {
     updateProfile();
     getDistrict();
+    getDivision();
+    getThana();
     
   },[]);
   
   console.log(user_profile);
+  console.log('division:',get_division);
   const dateFormat = 'YYYY-MM-DD';
   user_profile.birthday=moment(user_profile.birthday, dateFormat);
   const onFinish = (values ) => {
@@ -242,6 +245,7 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
                   >
                     
                         {get_division.map(({ id, name }) => (
+                          
                           <Option key={id} value={ id }>
                             {name}
                           </Option>
@@ -324,5 +328,5 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, {updateProfile,editUserProfile,getDistrict ,getDivision})(Profile_info);
+export default connect(mapStateToProps, {updateProfile,editUserProfile,getDistrict ,getDivision,getThana})(Profile_info);
 

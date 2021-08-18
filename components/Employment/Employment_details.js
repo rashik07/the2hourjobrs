@@ -14,7 +14,7 @@ const Employment_details= ({viewEmployment, view_employment, employment , delete
     useEffect(() => {
       
         viewEmployment();
-        //setUpdateList(false);
+     
         
       },[]);
       

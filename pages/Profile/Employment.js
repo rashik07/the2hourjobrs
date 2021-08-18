@@ -4,12 +4,12 @@ import Navbar from '../../container/navbar/navbar';
 import Sidebar from "../../container/sidebar/sidebar";
 import { EditOutlined, EllipsisOutlined, SettingOutlined , DeleteOutlined } from '@ant-design/icons';
 import { connect } from "react-redux";
-import { viewEmployment } from '@/redux/actions/employmentAction';
+import { viewEmployment} from '@/redux/actions/employmentAction';
 import {Form,Input, Button, Radio ,DatePicker,Typography,Divider, Space,TextArea ,Card,Avatar } from 'antd';
 import Employment_details from 'components/Employment/Employment_details';
 import Add_employment from 'components/Employment/Add_employment';
 
-const Employment = ({viewEmployment, view_employment}) => {
+const Employment = ({viewEmployment, view_employment,employment}) => {
   useEffect(() => {
       
     viewEmployment();
@@ -45,6 +45,24 @@ const Employment = ({viewEmployment, view_employment}) => {
         }
       : null;
       const { Meta } = Card;
+      const deleteEmploymentBtnClick = () => {
+        const { confirm } = Modal;
+    
+        confirm({
+          title: "Are you sure delete this project?",
+          icon: <ExclamationCircleOutlined />,
+          content: "Some descriptions",
+          okText: "Yes",
+          okType: "danger",
+          cancelText: "No",
+          onOk() {
+            deleteEmployment(employment.id);
+          },
+        });
+      };
+      
+   
+  
     return (
         <div>
             <Head>
@@ -74,6 +92,7 @@ const Employment = ({viewEmployment, view_employment}) => {
                                 
                                   employment={employment}></Employment_details>)
                             }  
+                  
                            
         
                              
