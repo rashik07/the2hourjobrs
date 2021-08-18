@@ -5,7 +5,7 @@ import Sidebar from "../../container/sidebar/sidebar";
 import { Select } from "antd";
 import { connect } from "react-redux";
 import {
-  updateProfile ,editUserProfile, getDistrict
+  updateProfile ,editUserProfile, getDistrict, getDivision , getThana
 } from "@/redux/actions/userAction";
 
 import {
@@ -21,14 +21,14 @@ import {
 import { Upload, Space } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import moment from 'moment';
-import DistrictList from "components/jobs/input/DistrictList";
-import DivisionList from "components/jobs/input/DivisionList";
+
 import ThanaList from "components/jobs/input/ThanaList";
 
-const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_profile,getDistrict,onClear,get_district}) => {
+const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_profile,getDistrict,onClear,get_division,get_district,get_thana}) => {
   useEffect(() => {
     updateProfile();
     getDistrict();
+    
   },[]);
   
   console.log(user_profile);
@@ -67,18 +67,18 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
   //date
  
 //phone no
-  const prefixSelector = (
-    <Form.Item name="prefix "  noStyle>
-      <Select
-        style={{
-          width: 80,
-        }}
+  // const prefixSelector = (
+  //   <Form.Item name="prefix " defaultValue={value} noStyle>
+  //     <Select
+  //       style={{
+  //         width: 80,
+  //       }}
        
-      >
-        <Option value="880">+880</Option>
-      </Select>
-    </Form.Item>
-  );
+  //     >
+  //       <Option value="880">+880</Option>
+  //     </Select>
+  //   </Form.Item>
+  // );
   //gender
   const plainOptions = ['Male', 'Female'];
   const [value, setValue] = React.useState();
@@ -127,14 +127,9 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
           },
         },
       };
-      // console.log(get_district);
-      // const setDistrict = (value) => {
-      //   getDistrict({ get_District: value });
-       
-      // };
-      const setDivision = (value) => {
-        updateProfile({ division: value });
-      };
+   
+      
+     
 
   return (
     <div>
@@ -209,7 +204,7 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
                 ]}
               >
                 <Input
-                  addonBefore={prefixSelector}
+                  // addonBefore={prefixSelector}
                   
                   style={{
                     width: "100%",
@@ -237,33 +232,70 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
                 <Title>Address</Title>
               </Divider>
               <Form.Item label="Division" name="division">
-                        <DivisionList
-                          style={{ width: 200 }}
-                          placeholder="Search to Select"
-                         
-                           
-                        >
-
-                        </DivisionList>
+                <Select
+                    placeholder="Select Category"
+                    className="mb-3"
+                    style={{ width: 300 }}
+                    onChange={setValue}
+                    
+                    defaultValue={user_profile.division}
+                  >
+                    
+                        {get_division.map(({ id, name }) => (
+                          <Option key={id} value={ id }>
+                            {name}
+                          </Option>
+                        ))}
+                      
+                </Select>
                       
              
                                 
 
               </Form.Item>
-              <Form.Item label="District" name="district">
-                        <DistrictList
-                        style={{ width: 200 }}
-                        placeholder="Search to Select"
-                         
-                        ></DistrictList>
              
+              
+              <Form.Item label="District" name="district">
+                <Select
+                    placeholder="Select Category"
+                    className="mb-3"
+                    style={{ width: 300 }}
+                    onChange={setValue}
+                    
+                    defaultValue={user_profile.district}
+                  >
+                    
+                       
+                        
+                        {
+                        get_district.map(({ id, name }) => (
+                          <Option key={id} value={ id }>
+                            {name} 
+                          </Option>
+                        ))}
+                      
+                </Select>
+              
                                 
 
               </Form.Item>
               <Form.Item label="Thana" name="thana" >
-                  <ThanaList>
-
-                  </ThanaList>
+                <Select
+                    placeholder="Select Category"
+                    className="mb-3"
+                    style={{ width: 300 }}
+                    onChange={setValue}
+                    
+                    defaultValue={user_profile.thana}
+                  >
+                    
+                        {get_thana.map(({ id, name }) => (
+                          <Option key={id} value={ id }>
+                            {name}
+                          </Option>
+                        ))}
+                      
+                </Select>
               </Form.Item>
               <Form.Item label="Address" name="address">
                 <TextArea rows={4} />
@@ -286,9 +318,11 @@ const mapStateToProps = (state) => {
     user_profile: state.user.user_profile,
     edit_user_profile: state.user.edit_user_profile,
     get_district: state.user.get_district,
+    get_division: state.user.get_division,
+    get_thana: state.user.get_thana,
   
   };
 };
 
-export default connect(mapStateToProps, {updateProfile,editUserProfile,getDistrict})(Profile_info);
+export default connect(mapStateToProps, {updateProfile,editUserProfile,getDistrict ,getDivision})(Profile_info);
 

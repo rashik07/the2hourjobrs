@@ -3,7 +3,7 @@ import { Select } from "antd";
 import { connect } from "react-redux";
 import { getJobCategories } from "redux/actions/jobAction";
 
-const JobCategogy = ({ getJobCategories, categories, setValue, onClear }) => {
+const JobCategogy = ({ getJobCategories, categories, setValue, onClear,multiple ,value}) => {
   const { Option, OptGroup } = Select;
 
   useEffect(() => {
@@ -30,10 +30,14 @@ const JobCategogy = ({ getJobCategories, categories, setValue, onClear }) => {
     <Select
       placeholder="Select Category"
       className="mb-3"
-      style={{ width: 200 }}
-      onChange={setValue}
-      onClear={onClear}
-      allowClear
+      showSearch
+        style={{ width: "100%" }}
+        value={value}
+        dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
+        allowClear
+        mode="multiple"
+        onChange={setValue}
+        onClear={onClear}
     >
       {getOptions(categories)}
     </Select>

@@ -16,9 +16,7 @@ const Employment = ({viewEmployment, view_employment}) => {
   },[]);
   console.log(view_employment);
 
-    const { RangePicker } = DatePicker;
-    const { TextArea } = Input;
-    const { Title } = Typography;
+    
     const [form] = Form.useForm();
     const [formLayout, setFormLayout] = useState('horizontal');
   

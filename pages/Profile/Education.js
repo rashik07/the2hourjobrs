@@ -1,11 +1,18 @@
 import Head from 'next/head';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { connect } from "react-redux";
 import Navbar from '../../container/navbar/navbar';
 import Sidebar from "../../container/sidebar/sidebar";
 import { Select } from "antd";
 import {Form,Input, Button, Radio ,DatePicker,Typography,Divider,TextArea,InputNumber  } from 'antd';
+import { getEducation } from "redux/actions/jobAction";
+import EducationField from 'components/jobs/input/EducationField';
 
-const Education = () => {
+const Education = ({ getEducation, education} ) => {
+   useEffect(() => {
+     getEducation();
+   }, []);
+  //console.log('education',education);
     function onChangeNum(value) {
         console.log('changed', value);
       }
@@ -23,19 +30,7 @@ const Education = () => {
       ],
     };
   
-    const prefixSelector = (
-      <Form.Item name="prefix" noStyle>
-        <Select
-          style={{
-            width: 80,
-          }}
-        >
-          <Option value="880">+880</Option>
-          
-        </Select>
-      </Form.Item>
-    );
-  
+ 
       const [value, setValue] = React.useState(1);
   
       const onChange = e => {
@@ -101,68 +96,39 @@ const Education = () => {
                              
                              <Divider> <Title>Academic Info</Title></Divider> 
                               <Form.Item label="Level of Education">
-                              <Select
-                                    showSearch
-                                    style={{ width: 200 }}
-                                    placeholder="Search to Select"
-                                    optionFilterProp="children"
-                                    filterOption={(input, option) =>
-                                    option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                                    }
-                                    filterSort={(optionA, optionB) =>
-                                    optionA.children.toLowerCase().localeCompare(optionB.children.toLowerCase())
-                                    }
+                                <Select
+                                  showSearch
+                                  onChange={setValue}
                                 >
-                                    <Option value="1">Not Identified</Option>
-                                    <Option value="2">Closed</Option>
-                                    <Option value="3">Communicated</Option>
-                                    <Option value="4">Identified</Option>
-                                    <Option value="5">Resolved</Option>
-                                    <Option value="6">Cancelled</Option>
-                            </Select>
+                                 
+                                   
+                                  {education.map((parent) => {
+                                     //console.log(parent.id);
+                                      <Option key={parent.id} value={parent.id}  >
+                                       {parent.name}
+                                      
+                                      </Option>
+                                     // console.log('parent end:',parent.name);
+                                   })}
+                                 
+                                </Select>
                               </Form.Item>
                               <Form.Item label="Exam/Degree Title">
                                   
                                 <Select
-                                    showSearch
-                                    style={{ width: 200 }}
-                                    placeholder="Search to Select"
-                                    optionFilterProp="children"
-                                    filterOption={(input, option) =>
-                                    option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                                    }
-                                    filterSort={(optionA, optionB) =>
-                                    optionA.children.toLowerCase().localeCompare(optionB.children.toLowerCase())
-                                    }
                                 >
-                                    <Option value="1">Not Identified</Option>
-                                    <Option value="2">Closed</Option>
-                                    <Option value="3">Communicated</Option>
-                                    <Option value="4">Identified</Option>
-                                    <Option value="5">Resolved</Option>
-                                    <Option value="6">Cancelled</Option>
+                                   <Option   >
+                                       dssdd
+                                      
+                                    </Option>
                                 </Select>
                               </Form.Item>
                               <Form.Item label="Institution">
                                   
                                   <Select
-                                      showSearch
-                                      style={{ width: 300 }}
-                                      placeholder="Search to Select"
-                                      optionFilterProp="children"
-                                      filterOption={(input, option) =>
-                                      option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                                      }
-                                      filterSort={(optionA, optionB) =>
-                                      optionA.children.toLowerCase().localeCompare(optionB.children.toLowerCase())
-                                      }
+                                      
                                   >
-                                      <Option value="1">Not Identified</Option>
-                                      <Option value="2">Closed</Option>
-                                      <Option value="3">Communicated</Option>
-                                      <Option value="4">Identified</Option>
-                                      <Option value="5">Resolved</Option>
-                                      <Option value="6">Cancelled</Option>
+                                      
                                   </Select>
                               </Form.Item>
                               <Form.Item label="Result">
@@ -179,23 +145,9 @@ const Education = () => {
                             <Divider> <Title>Training</Title></Divider>
                             <Form.Item label="Title">
                               <Select
-                                    showSearch
-                                    style={{ width: 200 }}
-                                    placeholder="Search to Select"
-                                    optionFilterProp="children"
-                                    filterOption={(input, option) =>
-                                    option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                                    }
-                                    filterSort={(optionA, optionB) =>
-                                    optionA.children.toLowerCase().localeCompare(optionB.children.toLowerCase())
-                                    }
+                                   
                                 >
-                                    <Option value="1">Not Identified</Option>
-                                    <Option value="2">Closed</Option>
-                                    <Option value="3">Communicated</Option>
-                                    <Option value="4">Identified</Option>
-                                    <Option value="5">Resolved</Option>
-                                    <Option value="6">Cancelled</Option>
+                                    
                             </Select>
                               </Form.Item>
                              
@@ -204,23 +156,8 @@ const Education = () => {
                               <Form.Item label="Institution">
                                   
                                   <Select
-                                      showSearch
-                                      style={{ width: 300 }}
-                                      placeholder="Search to Select"
-                                      optionFilterProp="children"
-                                      filterOption={(input, option) =>
-                                      option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                                      }
-                                      filterSort={(optionA, optionB) =>
-                                      optionA.children.toLowerCase().localeCompare(optionB.children.toLowerCase())
-                                      }
+                                     
                                   >
-                                      <Option value="1">Not Identified</Option>
-                                      <Option value="2">Closed</Option>
-                                      <Option value="3">Communicated</Option>
-                                      <Option value="4">Identified</Option>
-                                      <Option value="5">Resolved</Option>
-                                      <Option value="6">Cancelled</Option>
                                   </Select>
                               </Form.Item>
                               <Form.Item label="Duration">
@@ -236,23 +173,9 @@ const Education = () => {
                               <Divider> <Title>Professional Qualification</Title></Divider>
                             <Form.Item label="Certification">
                               <Select
-                                    showSearch
-                                    style={{ width: 200 }}
-                                    placeholder="Search to Select"
-                                    optionFilterProp="children"
-                                    filterOption={(input, option) =>
-                                    option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                                    }
-                                    filterSort={(optionA, optionB) =>
-                                    optionA.children.toLowerCase().localeCompare(optionB.children.toLowerCase())
-                                    }
+                                
                                 >
-                                    <Option value="1">Not Identified</Option>
-                                    <Option value="2">Closed</Option>
-                                    <Option value="3">Communicated</Option>
-                                    <Option value="4">Identified</Option>
-                                    <Option value="5">Resolved</Option>
-                                    <Option value="6">Cancelled</Option>
+                                  
                             </Select>
                               </Form.Item>
                              
@@ -261,23 +184,9 @@ const Education = () => {
                               <Form.Item label="Institution">
                                   
                                   <Select
-                                      showSearch
-                                      style={{ width: 300 }}
-                                      placeholder="Search to Select"
-                                      optionFilterProp="children"
-                                      filterOption={(input, option) =>
-                                      option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                                      }
-                                      filterSort={(optionA, optionB) =>
-                                      optionA.children.toLowerCase().localeCompare(optionB.children.toLowerCase())
-                                      }
+                                     
                                   >
-                                      <Option value="1">Not Identified</Option>
-                                      <Option value="2">Closed</Option>
-                                      <Option value="3">Communicated</Option>
-                                      <Option value="4">Identified</Option>
-                                      <Option value="5">Resolved</Option>
-                                      <Option value="6">Cancelled</Option>
+                                     
                                   </Select>
                               </Form.Item>
                               <Form.Item label="Location:">
@@ -309,4 +218,10 @@ const Education = () => {
     );
 };
 
-export default Education;
+const mapStateToProps = (state) => {
+  return {
+    education: state.job.education,
+  };
+};
+
+export default connect(mapStateToProps, { getEducation })(Education);

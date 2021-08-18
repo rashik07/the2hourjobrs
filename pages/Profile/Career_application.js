@@ -15,6 +15,7 @@ import { getJobCategories } from "redux/actions/jobAction";
 
 import { TagsInput } from "react-tag-input-component";
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons'
+import JobCategogy from 'components/jobs/input/JobCategogy';
 
  
 const Career_application = ({updateProfile, user_profile,editUserProfile,edit_user_profile,saveTemporayJobPost, temp_jobpost,getJobCategories, categories,  onClear }) => {
@@ -41,6 +42,7 @@ const Career_application = ({updateProfile, user_profile,editUserProfile,edit_us
            <OptGroup
              key={subCategory.type}
              label={`${subCategory.type} Categories`}
+             
            >
              {subCategory.list.map(({ id, name }) => (
                <Option key={id} value={JSON.stringify({ id, name })}>
@@ -66,7 +68,7 @@ function handleChange(value) {
     const { TextArea } = Input;
     
     //job level
-    const plainOptions = ['Entry Level', 'mid','Top Level'];
+    const plainOptions = ['entry', 'mid','top'];
     const [value, setValue] = React.useState();
     const onChange = e => {
       console.log('radio1 checked', e.target.value);
@@ -197,7 +199,7 @@ function handleChange(value) {
                            <Divider> <Title>Prefered Categories </Title></Divider>
                                             
                                 <Form.Item label="Functional">
-                                  <Select
+                                  {/* <Select
                                     placeholder="Select Category"
                                     className="mb-3"
                                     style={{ width: 300 }}
@@ -207,7 +209,8 @@ function handleChange(value) {
                                     allowClear
                                   >
                                     {getOptions(categories)}
-                                  </Select>
+                                  </Select> */}
+                                  <JobCategogy></JobCategogy>
 
                                 </Form.Item>
                                 <Form.Item label="Special Skills ">
@@ -225,6 +228,11 @@ function handleChange(value) {
                                     multiple={true}
                                   />
                                 </Form.Item>
+                                <Form.Item {...tailFormItemLayout}>
+                                <Button type="primary" htmlType="submit">
+                                  Save
+                                </Button>
+                              </Form.Item>
                         </Form>
                 </main>
             </div>

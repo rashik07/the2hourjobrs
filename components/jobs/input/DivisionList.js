@@ -70,7 +70,7 @@ console.log(get_division);
       style={{ width: 300 }}
       onChange={setValue}
       // onChange={(value) => setValue({ division: JSON.parse(value) })}
-      defaultValue={JSON.stringify(user_profile.division.name)}
+      defaultValue={user_profile.division}
     >
       {/* {get_division.map((get_division) => ( */}
         {/* // <OptGroup
@@ -78,7 +78,7 @@ console.log(get_division);
         //   label={`${get_division.type} division`}
         // > */}
           {get_division.map(({ id, name }) => (
-            <Option key={id} value={JSON.stringify({ id, name })}>
+            <Option key={id} value={ id }>
               {name}
             </Option>
           ))}
