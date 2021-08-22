@@ -21,19 +21,15 @@ const LocationFilter = ({ filter, setFilter }) => {
   };
 
   return (
-    <div className="border-bottom">
-      <div className="mb-3">
-        <p>
-          <strong>Location</strong>
-        </p>
-        <LocationList
-          value={location}
-          setValue={onLocationSelect}
-          multiple={false}
-          onClear={onClear}
-        />
-      </div>
-    </div>
+    <>
+      <h3>Location</h3>
+      <LocationList
+        value={location}
+        setValue={onLocationSelect}
+        multiple={false}
+        onClear={onClear}
+      />
+    </>
   );
 };
 

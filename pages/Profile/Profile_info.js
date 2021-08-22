@@ -2,12 +2,13 @@ import Head from "next/head";
 import React, { useEffect, useState } from "react";
 import Navbar from "../../container/navbar/navbar";
 import Sidebar from "../../container/sidebar/sidebar";
-import { Select } from "antd";
+import { Select,Image  } from "antd";
+
 import { connect } from "react-redux";
 import {
   updateProfile ,editUserProfile, getDistrict, getDivision , getThana
 } from "@/redux/actions/userAction";
-
+import PicturesWall from "../../components/annoucement/PicturesWall";
 import {
   Form,
   Input,
@@ -26,15 +27,20 @@ import ThanaList from "components/jobs/input/ThanaList";
 
 const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_profile,getDivision,getDistrict,getThana,onClear,get_division,get_district,get_thana}) => {
   useEffect(() => {
-    updateProfile();
+    
     getDistrict();
     getDivision();
     getThana();
-    
+    updateProfile();
   },[]);
-  
-  console.log(user_profile);
-  console.log('division:',get_division);
+  // const [image, setimage] = useState([]);
+  // const uploadcover = (fileList) => {
+  //   setimage(fileList);
+  // };
+
+
+  //console.log(user_profile);
+ // console.log('division:',get_division);
   const dateFormat = 'YYYY-MM-DD';
   user_profile.birthday=moment(user_profile.birthday, dateFormat);
   const onFinish = (values ) => {
@@ -46,7 +52,8 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
    
    
     // console.log('Received values of form: ', values);
-    editUserProfile(values);
+    editUserProfile(values );
+    window.location.reload();
  //   console.log('update: ', editUserProfile);
   };
 
@@ -131,9 +138,16 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
         },
       };
    
+      const normFile = (e) => {
+        console.log('Upload event:', e);
       
-     
-
+        if (Array.isArray(e)) {
+          return e;
+        }
+      
+        return e && e.fileList;
+      };
+    
   return (
     <div>
       <Head>
@@ -152,6 +166,14 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
           </div>
 
           <main className="col-md-9   my-4">
+           
+            
+            <Image
+              width={200}
+              src={"http://127.0.0.1:8000" + user_profile.image} 
+              
+            />
+            {/* <PicturesWall setImages={uploadcover} limit={1} /> */}
             <Form
               {...formItemLayout}
               layout={formLayout}
@@ -159,24 +181,24 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
               name="register"
               onFinish={onFinish}
               initialValues={user_profile}
+              
             >
               <Divider>
                 {" "}
                 <Title>Basic Info</Title>
               </Divider>
-              {/* <Form.Item label="Image" name="image">
-                <Space direction="vertical" style={{ width: '100%' }} size="large">
-                  <Upload
-                    action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                    listType="picture"
-                    maxCount={1}
-                  >
-                  <Button icon={<UploadOutlined />}>Upload (Max: 1)</Button>
-                  </Upload>
-   
-                </Space>
-              </Form.Item> */}
-             
+              
+              <Form.Item
+                name="photo"
+                label="Upload"
+                valuePropName="fileList"
+               getValueFromEvent={normFile}
+                extra="longgggggggggggggggggggggggggggggggggg"
+              >
+                <Upload name="imagee"  listType="picture">
+                  <Button icon={<UploadOutlined />}>Click to upload</Button>
+                </Upload>
+              </Form.Item>
               <Form.Item label="Name" name="username">
                 <Input placeholder="name" />
               </Form.Item>
@@ -225,6 +247,18 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
               <Form.Item  label="Date of Birth"  name="birthday">
                 <DatePicker format={dateFormat}/>
               </Form.Item>
+              <Form.Item label="Facebook Link" name="facebook_link">
+                <Input placeholder="input Facebook Link"  />
+              </Form.Item>
+              <Form.Item label="Website Link" name="website_link">
+                <Input placeholder="input Website Link"  />
+              </Form.Item>
+              <Form.Item label="Youtube Link" name="youtube_link">
+                <Input placeholder="input Youtube Link"  />
+              </Form.Item>
+              <Form.Item label="Portfolio Link" name="portfolio_link">
+                <Input placeholder="input Portfolio Link"  />
+              </Form.Item>
               
               <Form.Item label="Bio" name="bio">
                 <TextArea rows={4} />
@@ -234,13 +268,20 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
                 {" "}
                 <Title>Address</Title>
               </Divider>
-              <Form.Item label="Division" name="division">
+              {/* <Form.Item label="Division" name="division">
                 <Select
-                    placeholder="Select Category"
-                    className="mb-3"
-                    style={{ width: 300 }}
+                    showSearch
+                    className="filtter-items"
+                    value={value}
+                    dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
+                    allowClear
+                   // multiple={multiple}
                     onChange={setValue}
+                    onClear={onClear}
                     
+                    filterOption={(input, option) =>
+                      option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                    }
                     defaultValue={user_profile.division}
                   >
                     
@@ -261,11 +302,18 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
               
               <Form.Item label="District" name="district">
                 <Select
-                    placeholder="Select Category"
-                    className="mb-3"
-                    style={{ width: 300 }}
+                    showSearch
+                    className="filtter-items"
+                    value={value}
+                    dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
+                    allowClear
+                   // multiple={multiple}
                     onChange={setValue}
+                    onClear={onClear}
                     
+                    filterOption={(input, option) =>
+                      option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                    }
                     defaultValue={user_profile.district}
                   >
                     
@@ -285,11 +333,18 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
               </Form.Item>
               <Form.Item label="Thana" name="thana" >
                 <Select
-                    placeholder="Select Category"
-                    className="mb-3"
-                    style={{ width: 300 }}
+                    showSearch
+                    className="filtter-items"
+                    value={value}
+                    dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
+                    allowClear
+                   // multiple={multiple}
                     onChange={setValue}
+                    onClear={onClear}
                     
+                    filterOption={(input, option) =>
+                      option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                    }
                     defaultValue={user_profile.thana}
                   >
                     
@@ -300,7 +355,7 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
                         ))}
                       
                 </Select>
-              </Form.Item>
+              </Form.Item> */}
               <Form.Item label="Address" name="address">
                 <TextArea rows={4} />
               </Form.Item>

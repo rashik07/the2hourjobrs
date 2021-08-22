@@ -13,7 +13,7 @@ const Add_project = ( {createProject}) => {
         console.log('Success:', values );
         createProject(values);
         
-        
+        window.location.reload();
        
       };
       

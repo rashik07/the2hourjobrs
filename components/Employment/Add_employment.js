@@ -19,6 +19,7 @@ const Add_employment = ( {createEmployment ,view_employment}) => {
       };
         console.log('Success:', values );
         createEmployment(values);
+        window.location.reload();
       };
       
     
@@ -48,7 +49,7 @@ const Add_employment = ( {createEmployment ,view_employment}) => {
             span: 16,
           },
         };
-         
+     
     return (
         <div>
                         <Form 

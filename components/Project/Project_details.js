@@ -32,6 +32,7 @@ const Project_details = ({viewProject, view_project, project,deleteProject}) => 
           cancelText: "No",
           onOk() {
             deleteProject(project.id);
+            window.location.reload();
           },
         });
       };

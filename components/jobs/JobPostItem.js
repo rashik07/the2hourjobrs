@@ -3,9 +3,23 @@ import { applyJob, saveJob, deleteJob } from "@/redux/actions/jobAction";
 import Link from "next/link";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
+import PopupDetails from "./PopupDetails";
 
 import { Modal } from "antd";
-import { ExclamationCircleOutlined } from "@ant-design/icons";
+import {
+  ExclamationCircleOutlined,
+  PushpinFilled,
+  PushpinTwoTone,
+} from "@ant-design/icons";
+
+import { Layout, Breadcrumb, Row, Col } from "antd";
+import {
+  PhoneOutlined,
+  ScheduleOutlined,
+  EnvironmentOutlined,
+  UserOutlined,
+  EditOutlined,
+} from "@ant-design/icons";
 
 const JobPostItem = ({
   job,
@@ -41,6 +55,7 @@ const JobPostItem = ({
     location.forEach((loc) => {
       location_list.push(loc.name);
     });
+    console.log(location_list);
 
     return location_list.join(", ");
   };
@@ -107,6 +122,7 @@ const JobPostItem = ({
           >
             Detail
           </button>
+          <PushpinOutlined onClick={() => router.push(`/jobs/detail/${id}`)} />
           <button
             onClick={deleteJobBtnClick}
             className={`btn button-home mt-2 rounded`}
@@ -120,61 +136,83 @@ const JobPostItem = ({
     return (
       <>
         {appliedStatus ? (
-          <button className="btn button-home rounded disabled">Applied</button>
+          ""
         ) : (
-          <button
+          <a
+            style={{
+              color: "black",
+              padding: "2px",
+              borderBottom: "5px solid #F9BE02",
+              borderColor: "#F9BE02",
+            }}
             onClick={applyJobBtnClick}
-            className={`btn button-home rounded ${btn_disable}`}
           >
             Apply
-          </button>
+          </a>
         )}
 
-        <button
+        {/* <button
           onClick={() => router.push(`/jobs/detail/${id}`)}
           className="btn button-home mt-2 rounded"
         >
           Details
         </button>
+
         <button
           onClick={saveJobBtnClick}
           className={`btn button-home mt-2 rounded ${btn_disable}`}
         >
           {savedStatus ? "Unsave" : "Save"}
-        </button>
+        </button> */}
+        <PushpinFilled
+          onClick={saveJobBtnClick}
+          style={{
+            fontSize: "20px",
+            color: "#0E8044",
+            marginTop: "5px",
+            float: "right",
+          }}
+        />
       </>
     );
   };
+  console.log(job);
 
   return (
-    <div className="row d-flex align-items-center border m-3 rounded">
-      <div className="col-9 text-muted fs-6">
-        <h4 className=" text-dark">
-          <strong className="title-home">{title}</strong>
-          <br />
+    <Row className="job_post">
+      <Col span={24}>
+        <Row>
+          <Col span={21}>
+            <PopupDetails job={job} />
+          </Col>
+          <Col span={3}>{renderButtons()}</Col>
+        </Row>
+        <h4 style={{ color: "gray" }}>
+          <UserOutlined />{" "}
+          <Link href="/Profile/Profile_info">{poster.name}</Link>{" "}
+          <EnvironmentOutlined /> {getLocations(job.job_location)}
         </h4>
-        <h5 className="text-dark">
-          <strong>
-            <Link href="/Profile/Profile_info">{poster.name}</Link>
-          </strong>
-          <br />
-        </h5>
+        <p style={{ marginTop: "1rem", marginBottom: "1rem" }}>
+          Lorem Ipsum is simply dummy text of the printing and typesetting
+          industry. Lorem Ipsum has been the industry's standard dummy text ever
+          since the 1500s, when an unknown printer took a galley of type and
+          scrambled it to make a type specimen book. It has survived not only
+          five centuries, but also the leap into electronic typesetting,
+          remaining essentially unchanged. It was popularised in the 1960s with
+          the release of Letraset sheets containing Lorem Ipsum passages, and
+          more recently with desktop publishing software like Aldus PageMaker
+          including versions of Lorem Ipsum.
+        </p>
+
         <p>
-          <i className="fas fa-map-marker-alt mr-2" />
-          {getLocations(job.job_location)} <br />
+          <EditOutlined /> {getEducation(job.education)}
         </p>
         <p>
-          <i className="fas fa-book-open mr-2" />
-          {getEducation(job.education)}
-          <br />
-        </p>
-        <p>
-          <i className="fas fa-briefcase mr-2" />
+          <ScheduleOutlined />{" "}
           {getExperience(job.min_experience, job.max_experience)}
         </p>
-      </div>
-      <div className="col-3 btn-group-vertical">{renderButtons()}</div>
-    </div>
+      </Col>
+    </Row>
   );
 };
 

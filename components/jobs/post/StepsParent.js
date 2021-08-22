@@ -1,5 +1,5 @@
 import React from "react";
-import { Select } from "antd";
+import { Select, Row, Col } from "antd";
 import { connect } from "react-redux";
 import { saveTemporayJobPost } from "redux/actions/jobAction";
 import TagInput from "components/TagInput";
@@ -65,7 +65,7 @@ const renderItem = (item, children, saveTemporayJobPost, temp_jobpost) => {
 
       case "vacancy":
         return (
-          <label>
+          <>
             <label className="form-label">Vacancy</label>
             <input
               onChange={(e) => {
@@ -76,7 +76,7 @@ const renderItem = (item, children, saveTemporayJobPost, temp_jobpost) => {
               className="form-control"
               defaultValue={temp_jobpost.vacancy}
             />
-          </label>
+          </>
         );
 
       case "job_location_inside_dhaka":
@@ -341,30 +341,28 @@ const renderCategories = (categories, temp_jobpost, setValue) => {
   if (temp_jobpost)
     return (
       <>
-        <div className="col-8 mt-4">
-          <label className="form-label">Job Category</label>
-          <br />
-          <Select
-            placeholder="Select Category"
-            className="mb-3"
-            style={{ width: 300 }}
-            onChange={(value) => setValue({ category: JSON.parse(value) })}
-            defaultValue={JSON.stringify(temp_jobpost.category)}
-          >
-            {categories.map((subCategory) => (
-              <OptGroup
-                key={subCategory.type}
-                label={`${subCategory.type} Categories`}
-              >
-                {subCategory.list.map(({ id, name }) => (
-                  <Option key={id} value={JSON.stringify({ id, name })}>
-                    {name}
-                  </Option>
-                ))}
-              </OptGroup>
-            ))}
-          </Select>
-        </div>
+        <label className="form-label" style={{ marginTop: "0px" }}>
+          Job Category
+        </label>
+        <br />
+        <Select
+          placeholder="Select Category"
+          onChange={(value) => setValue({ category: JSON.parse(value) })}
+          defaultValue={JSON.stringify(temp_jobpost.category)}
+        >
+          {categories.map((subCategory) => (
+            <OptGroup
+              key={subCategory.type}
+              label={`${subCategory.type} Categories`}
+            >
+              {subCategory.list.map(({ id, name }) => (
+                <Option key={id} value={JSON.stringify({ id, name })}>
+                  {name}
+                </Option>
+              ))}
+            </OptGroup>
+          ))}
+        </Select>
       </>
     );
 
@@ -383,9 +381,11 @@ const StepsParent = ({
   }
 
   return (
-    <div className="col-8 mt-4">
-      {renderItem(item, children, saveTemporayJobPost, temp_jobpost)}
-    </div>
+    <Row>
+      <Col span={24}>
+        {renderItem(item, children, saveTemporayJobPost, temp_jobpost)}
+      </Col>
+    </Row>
   );
 };
 

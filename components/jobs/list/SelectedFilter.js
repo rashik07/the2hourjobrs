@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 // import { InputTags } from "react-bootstrap-tagsinput";
 // import "react-bootstrap-tagsinput/dist/index.css";
-import { Tag } from "antd";
+import { Badge, Tag } from "antd";
 import _ from "lodash";
 
 const SelectedFilter = ({
@@ -106,9 +106,12 @@ const SelectedFilter = ({
 
   return (
     <>
-      <div style={{ margin: 15, paddingLeft: 15 }}>
+      <div style={{ margin: 15 }}>
         {state.length ? (
           <div className="input-group row">
+            <span style={{ fontSize: "1.17em", marginRight: ".5rem" }}>
+              Acive Filters :
+            </span>
             {/* <InputTags
             onChange={() => {}}
             values={state}
@@ -119,23 +122,23 @@ const SelectedFilter = ({
             <>
               {state.map((item) => {
                 return (
-                  <Tag key={item} closable onClose={() => onTagClose(item)}>
-                    {item}
-                  </Tag>
+                  // <Tag key={item} closable onClose={() => onTagClose(item)}>
+                  //   {item}
+                  // </Tag>
+                  <Badge className="site-badge-count-109">{item}</Badge>
                 );
               })}
             </>
-            <button
-              className="btn btn-outline-secondary mt-2"
+            <a
               type="button"
               data-testid="button-clearAll"
               onClick={() => {
                 setFilter({});
               }}
             >
-              X
-            </button>
-            <button
+              Clear all
+            </a>
+            {/* <button
               onClick={() => {
                 getFilteredList(filter);
                 setShowFilter(true);
@@ -143,11 +146,10 @@ const SelectedFilter = ({
               className="btn button-home ml-2 mt-2"
             >
               Search
-            </button>
+            </button> */}
           </div>
         ) : null}
       </div>
-      <hr />
     </>
   );
 };

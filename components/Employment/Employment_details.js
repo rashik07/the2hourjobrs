@@ -30,6 +30,7 @@ const Employment_details= ({viewEmployment, view_employment, employment , delete
           cancelText: "No",
           onOk() {
             deleteEmployment(employment.id);
+            window.location.reload();
           },
         });
       };

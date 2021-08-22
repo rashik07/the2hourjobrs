@@ -1,3 +1,16 @@
+
+.site-layout{
+  padding: 0 50px;
+  margin-top: 64px;
+}
+.breadcrumb_main{
+  margin: 16px 0;
+}
+.site-layout-background{
+  padding: 15px;
+  min-height: 60vh;
+  border-radius: 5px;
+}
 #components-layout-demo-fixed .logo {
     float: left;
     width: 120px;
@@ -12,5 +25,72 @@
     margin-bottom: 0%;
 }
 .ant-layout-header {
-    background: white;
+    background: #163F66;
+    height: 65px;
+}
+.ant-menu{
+  background: #163F66;
+  color: white;
+}
+.ant-menu-horizontal > .ant-menu-item a {
+  color: white;
+}
+.filtter-items{
+  width: 100%;
+}
+.Jobfilter > h3 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.Jobfilter > .ant-divider {
+  margin: 11px 0;
+}
+.job_post{
+  border: 1px solid #70BDF2;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+.job_post:hover{
+  background-color: #EDF4FE;
+}
+.job_title{
+  cursor: pointer;
+}
+.job_title:hover{
+  color: #0e8044;
+  text-decoration: underline;
+}
+.ant-select:not(.ant-select-customize-input) .ant-select-selector {
+  border: 0px solid #70BDF2;
+  border-bottom: 1px solid #70BDF2;
+  
+}
+.ant-steps {
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid lightgray;
+}
+
+.form-control {
+  margin-bottom: 2rem;
+  width: 100%;
+  border: 0px solid;
+  border-bottom: 1px solid #70BDF2;
+  border-radius: 0px;
+}
+.form-label{
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.ant-badge {
+  color: black;
+  background-color: #F9BE02;
+  padding: .5rem;
+  border-radius: 5px;
+  margin-right: .5rem;
+  margin-bottom: .5rem;
+  box-shadow: 0 0 0 1px #d9d9d9 inset;
 }

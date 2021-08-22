@@ -15,6 +15,7 @@ const Employment = ({viewEmployment, view_employment,employment}) => {
     viewEmployment();
   },[]);
   console.log(view_employment);
+  
 
     
     const [form] = Form.useForm();

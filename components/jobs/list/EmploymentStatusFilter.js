@@ -14,14 +14,10 @@ const EmploymentStatusFilter = ({ filter, setFilter }) => {
   };
 
   return (
-    <div className="border-bottom">
-      <div className="mb-3">
-        <p>
-          <strong>Employment Status</strong>
-        </p>
-        <EmploymentStatusList setValue={handleChange} onClear={onClear} />
-      </div>
-    </div>
+    <>
+      <h3>Employment Status</h3>
+      <EmploymentStatusList setValue={handleChange} onClear={onClear} />
+    </>
   );
 };
 

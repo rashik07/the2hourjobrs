@@ -15,14 +15,10 @@ const PostTimeFilter = ({ filter, setFilter }) => {
   };
 
   return (
-    <div className="border-bottom">
-      <div className="mb-3">
-        <p>
-          <strong>Posted with in</strong>
-        </p>
-        <PostTimeList setValue={handleChange} onClear={onClear} />
-      </div>
-    </div>
+    <>
+      <h3>Posted with in</h3>
+      <PostTimeList setValue={handleChange} onClear={onClear} />
+    </>
   );
 };
 

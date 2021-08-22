@@ -15,14 +15,10 @@ const AgeFilter = ({ filter, setFilter }) => {
   };
 
   return (
-    <div className="border-bottom">
-      <div className="mb-3">
-        <p>
-          <strong>Age</strong>
-        </p>
-        <AgeList setValue={handleChange} onClear={onClear} />
-      </div>
-    </div>
+    <>
+      <h3>Age</h3>
+      <AgeList setValue={handleChange} onClear={onClear} />
+    </>
   );
 };
 

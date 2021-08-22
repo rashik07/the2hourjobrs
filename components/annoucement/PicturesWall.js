@@ -58,6 +58,7 @@ class PicturesWall extends Component {
             onPreview={this.handlePreview}
             onChange={this.handleChange}
             maxCount={this.props.limit}
+            
           >
             {fileList.length >= 5 ? null : uploadButton}
           </Upload>

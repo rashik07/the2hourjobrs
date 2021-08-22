@@ -21,7 +21,7 @@ const LocationList = ({
     return (
       <TreeSelect
         showSearch
-        style={{ width: "100%" }}
+        className="filtter-items"
         value={value}
         dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
         allowClear

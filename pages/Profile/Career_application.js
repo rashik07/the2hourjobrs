@@ -28,6 +28,7 @@ const Career_application = ({updateProfile, user_profile,editUserProfile,edit_us
       
        console.log('Received values of form: ', values);
        editUserProfile(values);
+       window.location.reload();
     //   console.log('update: ', editUserProfile);
      };
      const { OptGroup } = Select;
@@ -36,22 +37,7 @@ const Career_application = ({updateProfile, user_profile,editUserProfile,edit_us
        getJobCategories();
      }, []);
    
-     const getOptions = (categories) => {
-       if (categories)
-         return categories.map((subCategory) => (
-           <OptGroup
-             key={subCategory.type}
-             label={`${subCategory.type} Categories`}
-             
-           >
-             {subCategory.list.map(({ id, name }) => (
-               <Option key={id} value={JSON.stringify({ id, name })}>
-                 {name}
-               </Option>
-             ))}
-           </OptGroup>
-         ));
-     };
+     
 
 
     const { Option } = Select;
@@ -191,25 +177,14 @@ function handleChange(value) {
                             name="register"
                             onFinish={onFinish}
                             
-                           // initialValues={user_profile}
-                         
+                          
                             >
                           
                           
                            <Divider> <Title>Prefered Categories </Title></Divider>
                                             
                                 <Form.Item label="Functional">
-                                  {/* <Select
-                                    placeholder="Select Category"
-                                    className="mb-3"
-                                    style={{ width: 300 }}
-                                    onChange={setValue}
-                                    multiple={true}
-                                    onClear={onClear}
-                                    allowClear
-                                  >
-                                    {getOptions(categories)}
-                                  </Select> */}
+                                  
                                   <JobCategogy></JobCategogy>
 
                                 </Form.Item>
@@ -223,8 +198,7 @@ function handleChange(value) {
                                 </Form.Item>
                                 <Form.Item label="Location " >
                                   <LocationList
-                                    value={temp_jobpost.job_location}
-                                    setValue={setJobLocation}
+                                    
                                     multiple={true}
                                   />
                                 </Form.Item>
