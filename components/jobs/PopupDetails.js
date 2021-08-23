@@ -44,13 +44,7 @@ const PopupDetails = ({ job }) => {
             <h4>Vacancy : </h4>
             <span style={{ fontWeight: "600" }}>{job.vacancy}</span>
           </Col>
-          <Col span={3}>
-            <Button
-              style={{ background: "#163F66", color: "white", float: "right" }}
-            >
-              Apply
-            </Button>
-          </Col>
+         
         </Row>
         <Divider />
         <h4>Job description</h4>

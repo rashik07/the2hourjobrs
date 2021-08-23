@@ -2,11 +2,13 @@ import Head from "next/head";
 import React, { useEffect, useState } from "react";
 import Navbar from "../../container/navbar/navbar";
 import Sidebar from "../../container/sidebar/sidebar";
-import { Select } from "antd";
+import { Select,Image  } from "antd";
+
 import { connect } from "react-redux";
 import {
-  updateProfile ,editUserProfile
+  updateProfile ,editUserProfile, getDistrict, getDivision , getThana
 } from "@/redux/actions/userAction";
+import PicturesWall from "../../components/annoucement/PicturesWall";
 import {
   Form,
   Input,
@@ -21,12 +23,24 @@ import { Upload, Space } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import moment from 'moment';
 
-const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_profile}) => {
+import ThanaList from "components/jobs/input/ThanaList";
+
+const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_profile,getDivision,getDistrict,getThana,onClear,get_division,get_district,get_thana}) => {
   useEffect(() => {
+    
+    getDistrict();
+    getDivision();
+    getThana();
     updateProfile();
   },[]);
+  // const [image, setimage] = useState([]);
+  // const uploadcover = (fileList) => {
+  //   setimage(fileList);
+  // };
 
-  console.log(user_profile);
+
+  //console.log(user_profile);
+ // console.log('division:',get_division);
   const dateFormat = 'YYYY-MM-DD';
   user_profile.birthday=moment(user_profile.birthday, dateFormat);
   const onFinish = (values ) => {
@@ -37,10 +51,16 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
     };
    
    
-    console.log('Received values of form: ', values);
-    editUserProfile(values);
+    // console.log('Received values of form: ', values);
+    editUserProfile(values );
+    window.location.reload();
  //   console.log('update: ', editUserProfile);
   };
+
+
+  
+
+
 
   const { Option } = Select;
   const { TextArea } = Input;
@@ -57,18 +77,18 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
   //date
  
 //phone no
-  const prefixSelector = (
-    <Form.Item name="prefix "  noStyle>
-      <Select
-        style={{
-          width: 80,
-        }}
+  // const prefixSelector = (
+  //   <Form.Item name="prefix " defaultValue={value} noStyle>
+  //     <Select
+  //       style={{
+  //         width: 80,
+  //       }}
        
-      >
-        <Option value="880">+880</Option>
-      </Select>
-    </Form.Item>
-  );
+  //     >
+  //       <Option value="880">+880</Option>
+  //     </Select>
+  //   </Form.Item>
+  // );
   //gender
   const plainOptions = ['Male', 'Female'];
   const [value, setValue] = React.useState();
@@ -117,9 +137,17 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
           },
         },
       };
- 
+   
+      const normFile = (e) => {
+        console.log('Upload event:', e);
       
-
+        if (Array.isArray(e)) {
+          return e;
+        }
+      
+        return e && e.fileList;
+      };
+    
   return (
     <div>
       <Head>
@@ -138,6 +166,14 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
           </div>
 
           <main className="col-md-9   my-4">
+           
+            
+            <Image
+              width={200}
+              src={"http://127.0.0.1:8000" + user_profile.image} 
+              
+            />
+            {/* <PicturesWall setImages={uploadcover} limit={1} /> */}
             <Form
               {...formItemLayout}
               layout={formLayout}
@@ -145,24 +181,24 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
               name="register"
               onFinish={onFinish}
               initialValues={user_profile}
+              
             >
               <Divider>
                 {" "}
                 <Title>Basic Info</Title>
               </Divider>
-              {/* <Form.Item label="Image" name="image">
-                <Space direction="vertical" style={{ width: '100%' }} size="large">
-                  <Upload
-                    action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                    listType="picture"
-                    maxCount={1}
-                  >
-                  <Button icon={<UploadOutlined />}>Upload (Max: 1)</Button>
-                  </Upload>
-   
-                </Space>
-              </Form.Item> */}
-             
+              
+              <Form.Item
+                name="photo"
+                label="Upload"
+                valuePropName="fileList"
+               getValueFromEvent={normFile}
+                extra="longgggggggggggggggggggggggggggggggggg"
+              >
+                <Upload name="imagee"  listType="picture">
+                  <Button icon={<UploadOutlined />}>Click to upload</Button>
+                </Upload>
+              </Form.Item>
               <Form.Item label="Name" name="username">
                 <Input placeholder="name" />
               </Form.Item>
@@ -193,7 +229,7 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
                 ]}
               >
                 <Input
-                  addonBefore={prefixSelector}
+                  // addonBefore={prefixSelector}
                   
                   style={{
                     width: "100%",
@@ -211,6 +247,18 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
               <Form.Item  label="Date of Birth"  name="birthday">
                 <DatePicker format={dateFormat}/>
               </Form.Item>
+              <Form.Item label="Facebook Link" name="facebook_link">
+                <Input placeholder="input Facebook Link"  />
+              </Form.Item>
+              <Form.Item label="Website Link" name="website_link">
+                <Input placeholder="input Website Link"  />
+              </Form.Item>
+              <Form.Item label="Youtube Link" name="youtube_link">
+                <Input placeholder="input Youtube Link"  />
+              </Form.Item>
+              <Form.Item label="Portfolio Link" name="portfolio_link">
+                <Input placeholder="input Portfolio Link"  />
+              </Form.Item>
               
               <Form.Item label="Bio" name="bio">
                 <TextArea rows={4} />
@@ -220,56 +268,92 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
                 {" "}
                 <Title>Address</Title>
               </Divider>
+              <Form.Item label="Division" name="division">
+                <Select
+                    showSearch
+                    className="filtter-items"
+                    value={value}
+                    dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
+                    allowClear
+                   // multiple={multiple}
+                    onChange={setValue}
+                    onClear={onClear}
+                    
+                    filterOption={(input, option) =>
+                      option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                    }
+                    defaultValue={user_profile.division}
+                  >
+                    
+                        {get_division.map(({ id, name }) => (
+                          
+                          <Option key={id} value={ id }>
+                            {name}
+                          </Option>
+                        ))}
+                      
+                </Select>
+                      
+             
+                                
+
+              </Form.Item>
+             
+              
               <Form.Item label="District" name="district">
                 <Select
-                  showSearch
-                  style={{ width: 200 }}
-                  placeholder="Search to Select"
-                  optionFilterProp="children"
-                  filterOption={(input, option) =>
-                    option.children
-                      .toLowerCase()
-                      .indexOf(input.toLowerCase()) >= 0
-                  }
-                  filterSort={(optionA, optionB) =>
-                    optionA.children
-                      .toLowerCase()
-                      .localeCompare(optionB.children.toLowerCase())
-                  }
-                  
-                >
-                  <Option value="1">Not Identified</Option>
-                  <Option value="2">Closed</Option>
-                  <Option value="3">Communicated</Option>
-                  <Option value="4">Identified</Option>
-                  <Option value="5">Resolved</Option>
-                  <Option value="6">Cancelled</Option>
+                    showSearch
+                    className="filtter-items"
+                    value={value}
+                    dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
+                    allowClear
+                   // multiple={multiple}
+                    onChange={setValue}
+                    onClear={onClear}
+                    
+                    filterOption={(input, option) =>
+                      option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                    }
+                    defaultValue={user_profile.district}
+                  >
+                    
+                       
+                        
+                        {
+                        get_district.map(({ id, name }) => (
+                          <Option key={id} value={ id }>
+                            {name} 
+                          </Option>
+                        ))}
+                      
                 </Select>
+              
+                                
+
               </Form.Item>
               <Form.Item label="Thana" name="thana" >
                 <Select
-                  showSearch
-                  style={{ width: 200 }}
-                  placeholder="Search to Select"
-                  optionFilterProp="children"
-                  filterOption={(input, option) =>
-                    option.children
-                      .toLowerCase()
-                      .indexOf(input.toLowerCase()) >= 0
-                  }
-                  filterSort={(optionA, optionB) =>
-                    optionA.children
-                      .toLowerCase()
-                      .localeCompare(optionB.children.toLowerCase())
-                  }
-                
-                >
-                  <Option value="1">Not Identified</Option>
-                  <Option value="2">Closed</Option>
-                  <Option value="3">Communicated</Option>
-                  <Option value="4">Identified</Option>
-                  <Option value="5">Resolved</Option>
-                  <Option value="6">Cancelled</Option>
+                    showSearch
+                    className="filtter-items"
+                    value={value}
+                    dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
+                    allowClear
+                   // multiple={multiple}
+                    onChange={setValue}
+                    onClear={onClear}
+                    
+                    filterOption={(input, option) =>
+                      option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                    }
+                    defaultValue={user_profile.thana}
+                  >
+                    
+                        {get_thana.map(({ id, name }) => (
+                          <Option key={id} value={ id }>
+                            {name}
+                          </Option>
+                        ))}
+                      
                 </Select>
               </Form.Item>
               <Form.Item label="Address" name="address">
@@ -292,9 +376,12 @@ const mapStateToProps = (state) => {
   return {
     user_profile: state.user.user_profile,
     edit_user_profile: state.user.edit_user_profile,
+    get_district: state.user.get_district,
+    get_division: state.user.get_division,
+    get_thana: state.user.get_thana,
   
   };
 };
 
-export default connect(mapStateToProps, {updateProfile,editUserProfile})(Profile_info);
+export default connect(mapStateToProps, {updateProfile,editUserProfile,getDistrict ,getDivision,getThana})(Profile_info);
 

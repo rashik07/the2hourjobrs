@@ -4,49 +4,23 @@ import Navbar from '../../container/navbar/navbar';
 import Sidebar from "../../container/sidebar/sidebar";
 import { EditOutlined, EllipsisOutlined, SettingOutlined , DeleteOutlined } from '@ant-design/icons';
 import { connect } from "react-redux";
-import { viewEmployment } from '@/redux/actions/employmentAction';
+import { viewEmployment} from '@/redux/actions/employmentAction';
 import {Form,Input, Button, Radio ,DatePicker,Typography,Divider, Space,TextArea ,Card,Avatar } from 'antd';
 import Employment_details from 'components/Employment/Employment_details';
 import Add_employment from 'components/Employment/Add_employment';
 
-const Employment = ({viewEmployment, view_employment}) => {
+const Employment = ({viewEmployment, view_employment,employment}) => {
   useEffect(() => {
       
     viewEmployment();
   },[]);
   console.log(view_employment);
-
-    const { RangePicker } = DatePicker;
-    const { TextArea } = Input;
-    const { Title } = Typography;
-    const [form] = Form.useForm();
-    const [formLayout, setFormLayout] = useState('horizontal');
   
-    const onFormLayoutChange = ({ layout }) => {
-      setFormLayout(layout);
-    };
 
-    const formItemLayout =
-    formLayout === 'horizontal'
-      ? {
-          labelCol: {
-            span: 4,
-          },
-          wrapperCol: {
-            span: 12,
-          },
-        }
-      : null;
-  const buttonItemLayout =
-    formLayout === 'horizontal'
-      ? {
-          wrapperCol: {
-            span: 14,
-            offset: 4,
-          },
-        }
-      : null;
-      const { Meta } = Card;
+    
+    
+   
+  
     return (
         <div>
             <Head>
@@ -70,12 +44,13 @@ const Employment = ({viewEmployment, view_employment}) => {
                         <div className="row">
                         {
                           
-                                  view_employment.map(employment =>  <Employment_details 
-                                  key={view_employment.id} 
+                                  <Employment_details 
+                                 
                                   
                                 
-                                  employment={employment}></Employment_details>)
+                                  ></Employment_details>
                             }  
+                  
                            
         
                              
