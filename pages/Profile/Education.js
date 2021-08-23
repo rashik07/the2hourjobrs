@@ -103,7 +103,7 @@ const Education = ({ getEducation, education} ) => {
                                  
                                    
                                   {education.map((parent) => {
-                                     //console.log(parent.id);
+                                     console.log(parent.id);
                                       <Option key={parent.id} value={parent.id}  >
                                        {parent.name}
                                       
