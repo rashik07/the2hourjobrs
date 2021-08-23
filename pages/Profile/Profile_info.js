@@ -268,7 +268,7 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
                 {" "}
                 <Title>Address</Title>
               </Divider>
-              {/* <Form.Item label="Division" name="division">
+              <Form.Item label="Division" name="division">
                 <Select
                     showSearch
                     className="filtter-items"
@@ -355,7 +355,7 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
                         ))}
                       
                 </Select>
-              </Form.Item> */}
+              </Form.Item>
               <Form.Item label="Address" name="address">
                 <TextArea rows={4} />
               </Form.Item>

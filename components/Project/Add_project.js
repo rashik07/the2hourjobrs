@@ -3,25 +3,31 @@ import { useState } from 'react';
 import {Form,Input, Button, DatePicker,Typography,Divider } from 'antd';
 import { connect } from "react-redux";
 import { viewProject , createProject} from '@/redux/actions/projectAction';
-import Link from 'next/link'
+import Link from 'next/link';
+import moment from 'moment';
 
-const Add_project = ( {createProject}) => {
-    const onFinish = (values) => {
-        
-      
-   
-        console.log('Success:', values );
-        createProject(values);
-        
-        window.location.reload();
-       
-      };
+const Add_project = ( {createProject,create_project}) => {
+  const dateFormat = 'YYYY-MM-DD';
+  create_project.start_date=moment(create_project.start_date, dateFormat);
+  create_project.end_date=moment(create_project.end_date, dateFormat);
+  const onFinish = (values) => { 
+    values = {
+      ...values,
+      'start_date': values['start_date'].format('YYYY-MM-DD'),
+      'end_date': values['end_date'].format('YYYY-MM-DD'),
+      // 'time-picker': fieldsValue['time-picker'].format('HH:mm:ss'),
+    };
+      console.log('Success:', values );
+      createProject(values);
+     window.location.reload();
+    };
+    
+  
+    const onFinishFailed = (errorInfo) => {
+      console.log("Failed:", errorInfo);
+    };
       
     
-      const onFinishFailed = (errorInfo) => {
-        console.log("Failed:", errorInfo);
-      };
-      
        
       
     
@@ -62,11 +68,15 @@ const Add_project = ( {createProject}) => {
                                 <Form.Item label="Project Title:"  name={'title'}>
                                         <Input placeholder="project title" />
                                 </Form.Item>
-                                <Form.Item label="Skills:" name={ 'skills'}>
-                                        <Input placeholder="skills" />
-                                </Form.Item>
+                               
                                 <Form.Item label="Description" name={'description'}>
                                     <TextArea rows={4} placeholder="description" />
+                                </Form.Item>
+                                <Form.Item  label="From"  name="start_date">
+                                        <DatePicker format={dateFormat}/>
+                                </Form.Item>
+                                <Form.Item  label="To"  name="end_date">
+                                        <DatePicker format={dateFormat}/>
                                 </Form.Item>
                              
                       

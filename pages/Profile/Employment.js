@@ -18,50 +18,7 @@ const Employment = ({viewEmployment, view_employment,employment}) => {
   
 
     
-    const [form] = Form.useForm();
-    const [formLayout, setFormLayout] = useState('horizontal');
-  
-    const onFormLayoutChange = ({ layout }) => {
-      setFormLayout(layout);
-    };
-
-    const formItemLayout =
-    formLayout === 'horizontal'
-      ? {
-          labelCol: {
-            span: 4,
-          },
-          wrapperCol: {
-            span: 12,
-          },
-        }
-      : null;
-  const buttonItemLayout =
-    formLayout === 'horizontal'
-      ? {
-          wrapperCol: {
-            span: 14,
-            offset: 4,
-          },
-        }
-      : null;
-      const { Meta } = Card;
-      const deleteEmploymentBtnClick = () => {
-        const { confirm } = Modal;
     
-        confirm({
-          title: "Are you sure delete this project?",
-          icon: <ExclamationCircleOutlined />,
-          content: "Some descriptions",
-          okText: "Yes",
-          okType: "danger",
-          cancelText: "No",
-          onOk() {
-            deleteEmployment(employment.id);
-          },
-        });
-      };
-      
    
   
     return (
@@ -87,11 +44,11 @@ const Employment = ({viewEmployment, view_employment,employment}) => {
                         <div className="row">
                         {
                           
-                                  view_employment.map(employment =>  <Employment_details 
-                                  key={view_employment.id} 
+                                  <Employment_details 
+                                 
                                   
                                 
-                                  employment={employment}></Employment_details>)
+                                  ></Employment_details>
                             }  
                   
                            

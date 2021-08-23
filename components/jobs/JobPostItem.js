@@ -135,6 +135,9 @@ const JobPostItem = ({
 
     return (
       <>
+      if () {
+        
+      }
         {appliedStatus ? (
           ""
         ) : (

@@ -2,7 +2,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import { Provider } from "react-redux";
 import { store, persistor } from "@/redux/store";
 import { PersistGate } from "redux-persist/integration/react";
-// import "antd/dist/antd.css";
+//import "antd/dist/antd.css";
 import "./auth/login.css";
 import "./jobs/list.css";
 import "../container/footer/footer.css";
