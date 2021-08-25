@@ -7,12 +7,14 @@ import { Select } from "antd";
 import {Form,Input, Button, Radio ,DatePicker,Typography,Divider,TextArea,InputNumber  } from 'antd';
 import { getEducation } from "redux/actions/jobAction";
 import EducationField from 'components/jobs/input/EducationField';
+import LevelOFEduList from 'components/jobs/input/LevelOFEduList';
+import ExamDegreeList from 'components/jobs/input/ExamDegreeList';
 
 const Education = ({ getEducation, education} ) => {
    useEffect(() => {
      getEducation();
    }, []);
-  //console.log('education',education);
+  console.log('education',education);
     function onChangeNum(value) {
         console.log('changed', value);
       }
@@ -90,46 +92,26 @@ const Education = ({ getEducation, education} ) => {
                               form={form}
                               initialValues={{
                               layout: formLayout,
+                              
                               }}
                            
                               >
                              
                              <Divider> <Title>Academic Info</Title></Divider> 
                               <Form.Item label="Level of Education">
-                                <Select
-                                  showSearch
-                                  onChange={setValue}
-                                >
-                                 
-                                   
-                                  {education.map((parent) => {
-                                     console.log(parent.id);
-                                      <Option key={parent.id} value={parent.id}  >
-                                       {parent.name}
-                                      
-                                      </Option>
-                                     // console.log('parent end:',parent.name);
-                                   })}
-                                 
-                                </Select>
+                                
+                                <LevelOFEduList></LevelOFEduList>
+
                               </Form.Item>
                               <Form.Item label="Exam/Degree Title">
                                   
-                                <Select
-                                >
-                                   <Option   >
-                                       dssdd
-                                      
-                                    </Option>
-                                </Select>
+                                <ExamDegreeList ></ExamDegreeList>
                               </Form.Item>
-                              <Form.Item label="Institution">
+                              <Form.Item label="Institution" name="institute_name" >
                                   
-                                  <Select
-                                      
-                                  >
-                                      
-                                  </Select>
+                                  
+                                      <Input defaultValue={education.institute_name}></Input>
+                                  
                               </Form.Item>
                               <Form.Item label="Result">
                                 <InputNumber min={1} max={10} defaultValue={3} onChange={onChangeNum} />

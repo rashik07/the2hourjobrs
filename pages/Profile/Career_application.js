@@ -28,7 +28,7 @@ const Career_application = ({updateProfile, user_profile,editUserProfile,edit_us
       
        console.log('Received values of form: ', values);
        editUserProfile(values);
-       window.location.reload();
+       //window.location.reload();
     //   console.log('update: ', editUserProfile);
      };
      const { OptGroup } = Select;
@@ -140,9 +140,11 @@ function handleChange(value) {
                             initialValues={user_profile}
                          
                             >
-                           <Switch className="float-right" checkedChildren="available for work" unCheckedChildren="not available for work" defaultChecked />
+                           
                            <Divider> <Title>Career and Application details </Title></Divider> 
-                            
+                              <Form.Item  name="available_for_work" valuePropName="checked">
+                                <Switch className="float-right" checkedChildren="available for work" unCheckedChildren="not available for work"  />
+                              </Form.Item>
                               <Form.Item label="Objective" name="objective">
                                 <TextArea rows={4} />
                               </Form.Item>

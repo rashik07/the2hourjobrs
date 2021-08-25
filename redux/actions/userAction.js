@@ -27,22 +27,27 @@ export const updateProfile = (data) => async (dispatch) => {
 
 };
 
-export const editUserProfile = (values,image) => async (dispatch) =>{
 
+export const editUserProfile = (values) => async (dispatch) =>{
+  console.log(values)
+  
   try{
-    const formData = new FormData();
-    formData.append("image", values["photo"][0].originFileObj);
-    // console.log(values);
+    
+    
+   
     // values["image"] = values["photo"][0].originFileObj;
 
   const response = await backend.patch(
-    `/v1/user/profile/${store.getState().auth.id}/`,formData,
+    `/v1/user/profile/${store.getState().auth.id}/`,values,
     getConfig()
     );
   dispatch({ type: types.EDIT_USER_PROFILE, payload: response.data});
   // console.log(values);
   }
   catch (error) {
+    for (var value of formData.values()) {
+      console.log(value);
+   }
     console.log(error);
     console.log(error.response);
  }

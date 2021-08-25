@@ -44,21 +44,46 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
   const dateFormat = 'YYYY-MM-DD';
   user_profile.birthday=moment(user_profile.birthday, dateFormat);
   const onFinish = (values ) => {
+     const formData = new FormData();
      values = {
       ...values,
       'birthday': values['birthday'].format('YYYY-MM-DD'),
       // 'time-picker': fieldsValue['time-picker'].format('HH:mm:ss'),
     };
    
+    formData.append("nid", values.nid );
+    formData.append("gender",values.gender );
+    formData.append("facebook_link",values.facebook_link );
+    formData.append("birthday", values.birthday );
+    formData.append("bio", values.bio );
+    formData.append("address", values.address );
+    // formData.append("objective", values.objective );
+    // formData.append("present_salary", values.present_salary );
+    // formData.append("expected_salary", values.expected_salary );
+    // formData.append("job_level", values.job_level );
+    // formData.append("job_nature", values.job_nature );
+    formData.append("youtube_link", values.youtube_link );
+    formData.append("website_link", values.website_link );
+    formData.append("portfolio_link", values.portfolio_link );
+    formData.append("division", values.division);
+    formData.append("district", values.district );
+    formData.append("thana", values.thana );
+    
+    if(typeof values.photo === 'undefined'){
+
+    }else{
+      console.log("image");
+      formData.append("image", values.photo[0].originFileObj);
+    }
+    
    
     // console.log('Received values of form: ', values);
-    editUserProfile(values );
-    window.location.reload();
+    editUserProfile(formData );
+   // window.location.reload();
  //   console.log('update: ', editUserProfile);
   };
 
-
-  
+ 
 
 
 
@@ -137,7 +162,16 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
           },
         },
       };
-   
+      //  const fileList = [
+      //    {
+      //      uid: '-1',
+      //      name: 'xxx.png',
+      //      status: 'done',
+      //      url: 'http://127.0.0.1:8000" + user_profile.image',
+      //      thumbUrl: '{http://127.0.0.1:8000" + user_profile.image}',
+      //    },
+        
+      // ];
       const normFile = (e) => {
         console.log('Upload event:', e);
       
@@ -191,13 +225,15 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
               <Form.Item
                 name="photo"
                 label="Upload"
-                valuePropName="fileList"
+                valuePropName="fileList" 
                getValueFromEvent={normFile}
                 extra="longgggggggggggggggggggggggggggggggggg"
               >
-                <Upload name="imagee"  listType="picture">
+                <Upload name="image"  listType="picture"  maxCount={1} >
                   <Button icon={<UploadOutlined />}>Click to upload</Button>
+                 
                 </Upload>
+                
               </Form.Item>
               <Form.Item label="Name" name="username">
                 <Input placeholder="name" />
