@@ -45,9 +45,7 @@ export const editUserProfile = (values) => async (dispatch) =>{
   // console.log(values);
   }
   catch (error) {
-    for (var value of formData.values()) {
-      console.log(value);
-   }
+  +
     console.log(error);
     console.log(error.response);
  }

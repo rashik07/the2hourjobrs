@@ -57,17 +57,12 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
     formData.append("birthday", values.birthday );
     formData.append("bio", values.bio );
     formData.append("address", values.address );
-    // formData.append("objective", values.objective );
-    // formData.append("present_salary", values.present_salary );
-    // formData.append("expected_salary", values.expected_salary );
-    // formData.append("job_level", values.job_level );
-    // formData.append("job_nature", values.job_nature );
     formData.append("youtube_link", values.youtube_link );
     formData.append("website_link", values.website_link );
     formData.append("portfolio_link", values.portfolio_link );
-    formData.append("division", values.division);
-    formData.append("district", values.district );
-    formData.append("thana", values.thana );
+    // formData.append("division", values.division);
+    // formData.append("district", values.district );
+    // formData.append("thana", values.thana );
     
     if(typeof values.photo === 'undefined'){
 
@@ -304,7 +299,7 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
                 {" "}
                 <Title>Address</Title>
               </Divider>
-              <Form.Item label="Division" name="division">
+              {/* <Form.Item label="Division" name="division">
                 <Select
                     showSearch
                     className="filtter-items"
@@ -391,7 +386,7 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
                         ))}
                       
                 </Select>
-              </Form.Item>
+              </Form.Item> */}
               <Form.Item label="Address" name="address">
                 <TextArea rows={4} />
               </Form.Item>

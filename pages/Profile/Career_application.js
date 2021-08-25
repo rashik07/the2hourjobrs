@@ -8,13 +8,13 @@ import {
     updateProfile ,editUserProfile
   } from "@/redux/actions/userAction";
   import { saveTemporayJobPost } from "redux/actions/jobAction";
-import {Form,Input, Switch ,Button, Radio ,DatePicker,Typography,Divider,TextArea  } from 'antd';
+import {Form,Input, Switch ,Button, Radio ,DatePicker,Typography,Divider,TextArea ,Upload } from 'antd';
 import LocationList from "../../components/jobs/input/LocationList";
 import { getJobCategories } from "redux/actions/jobAction";
 
 
 import { TagsInput } from "react-tag-input-component";
-import { CloseOutlined, CheckOutlined } from '@ant-design/icons'
+import { CloseOutlined, CheckOutlined, InboxOutlined, UploadOutlined } from '@ant-design/icons'
 import JobCategogy from 'components/jobs/input/JobCategogy';
 
  
@@ -24,11 +24,24 @@ const Career_application = ({updateProfile, user_profile,editUserProfile,edit_us
       },[]);
       const onFinish = (values ) => {
        
-      
+        const formData = new FormData();
+        formData.append("objective", values.objective );
+        formData.append("present_salary", values.present_salary );
+        formData.append("expected_salary", values.expected_salary );
+        formData.append("job_level", values.job_level );
+        formData.append("job_nature", values.job_nature );
+        formData.append("available_for_work", values.available_for_work );
+        if(typeof values.upload === 'undefined'){
+          console.log("not resume");
+        }else{
+          console.log("resume");
+          formData.append("resume", values.upload[0].originFileObj);
+        }
+        
       
        console.log('Received values of form: ', values);
-       editUserProfile(values);
-       //window.location.reload();
+       editUserProfile(formData);
+      // window.location.reload();
     //   console.log('update: ', editUserProfile);
      };
      const { OptGroup } = Select;
@@ -47,9 +60,7 @@ for (let i = 10; i < 36; i++) {
   children.push(<Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>);
 }
 
-function handleChange(value) {
-  console.log(`selected ${value}`);
-}
+
     const { Title } = Typography;
     const { TextArea } = Input;
     
@@ -110,6 +121,15 @@ function handleChange(value) {
       const setJobLocation = (value) => {
         saveTemporayJobPost({ job_location: value });
       };
+      const normFile = (e) => {
+        console.log('Upload event:', e);
+      
+        if (Array.isArray(e)) {
+          return e;
+        }
+      
+        return e && e.fileList;
+      };
     return (
         <div>
             <Head>
@@ -145,6 +165,24 @@ function handleChange(value) {
                               <Form.Item  name="available_for_work" valuePropName="checked">
                                 <Switch className="float-right" checkedChildren="available for work" unCheckedChildren="not available for work"  />
                               </Form.Item>
+                              <Form.Item
+                                  name="upload"
+                                  label="Upload"
+                                  valuePropName="fileList" 
+                                  getValueFromEvent={normFile}
+                                  extra="longgggggggggggggggggggggggggggggggggg"
+                                  
+                                >
+                                  <Upload name="resume"  listType="picture"  maxCount={1} >
+                                    <Button icon={<UploadOutlined />}>Click to upload</Button> <br/>
+                                    <a href={"http://127.0.0.1:8000" + user_profile.resume}  download>Click to download</a>
+                                  </Upload>
+                              </Form.Item>
+                              
+                              
+                               
+                                
+                             
                               <Form.Item label="Objective" name="objective">
                                 <TextArea rows={4} />
                               </Form.Item>
