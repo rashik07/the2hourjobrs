@@ -25,7 +25,7 @@ import moment from 'moment';
 
 import ThanaList from "components/jobs/input/ThanaList";
 
-const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_profile,getDivision,getDistrict,getThana,onClear,get_division,get_district,get_thana}) => {
+const Profile_info = ({updateProfile, user_profile,editUserProfile,getDivision,getDistrict,getThana,}) => {
   useEffect(() => {
     
     getDistrict();
@@ -33,12 +33,6 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
     getThana();
     updateProfile();
   },[]);
-  // const [image, setimage] = useState([]);
-  // const uploadcover = (fileList) => {
-  //   setimage(fileList);
-  // };
-
-
   //console.log(user_profile);
  // console.log('division:',get_division);
   const dateFormat = 'YYYY-MM-DD';
@@ -76,12 +70,7 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
     editUserProfile(formData );
    // window.location.reload();
  //   console.log('update: ', editUserProfile);
-  };
-
- 
-
-
-
+  }; 
   const { Option } = Select;
   const { TextArea } = Input;
   const { Title } = Typography;
@@ -94,21 +83,6 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
       },
     ],
   };
-  //date
- 
-//phone no
-  // const prefixSelector = (
-  //   <Form.Item name="prefix " defaultValue={value} noStyle>
-  //     <Select
-  //       style={{
-  //         width: 80,
-  //       }}
-       
-  //     >
-  //       <Option value="880">+880</Option>
-  //     </Select>
-  //   </Form.Item>
-  // );
   //gender
   const plainOptions = ['Male', 'Female'];
   const [value, setValue] = React.useState();
@@ -157,16 +131,7 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
           },
         },
       };
-      //  const fileList = [
-      //    {
-      //      uid: '-1',
-      //      name: 'xxx.png',
-      //      status: 'done',
-      //      url: 'http://127.0.0.1:8000" + user_profile.image',
-      //      thumbUrl: '{http://127.0.0.1:8000" + user_profile.image}',
-      //    },
-        
-      // ];
+    
       const normFile = (e) => {
         console.log('Upload event:', e);
       

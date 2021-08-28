@@ -21,23 +21,7 @@ const Project_details = ({viewProject, view_project, project,deleteProject}) => 
       
   console.log(view_project[0].id);
       //console.log(view_project);
-      // const deleteProjectBtnClick = () => {
-      //   const { confirm } = Modal;
-    
-      //   confirm({
-      //     title: "Are you sure delete this project?",
-      //     icon: <ExclamationCircleOutlined />,
-      //     content: "Some descriptions",
-      //     okText: "Yes",
-      //     okType: "danger",
-      //     cancelText: "No",
-      //     onOk() {
-      //       deleteProject(view_project[0].id);
-      //       console.log(view_project[0].id);
-      //       //window.location.reload();
-      //     },
-      //   });
-      // };
+     
       const columns = [
         {
           title: 'Title',

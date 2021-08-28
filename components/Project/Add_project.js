@@ -8,8 +8,8 @@ import moment from 'moment';
 
 const Add_project = ( {createProject,create_project}) => {
   const dateFormat = 'YYYY-MM-DD';
-  create_project.start_date=moment(create_project.start_date, dateFormat);
-  create_project.end_date=moment(create_project.end_date, dateFormat);
+  // create_project.start_date=moment(create_project.start_date, dateFormat);
+  // create_project.end_date=moment(create_project.end_date, dateFormat);
   const onFinish = (values) => { 
     values = {
       ...values,
