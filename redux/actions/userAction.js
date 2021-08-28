@@ -16,47 +16,37 @@ const getConfig = () => {
 };
 
 export const updateProfile = (data) => async (dispatch) => {
-<<<<<<< HEAD
-  try{
-  const response = await backend.get(`/v1/user/me/?user=${store.getState().auth.id}`, getConfig());
-  dispatch({ type: types.UPDATE_USER_PROFILE, payload: response.data });
-=======
   try {
-    const response = await backend.get("/v1/user/me/", getConfig());
+    const response = await backend.get(
+      `/v1/user/me/?user=${store.getState().auth.id}`,
+      getConfig()
+    );
     dispatch({ type: types.UPDATE_USER_PROFILE, payload: response.data });
+  } catch (error) {
+    //   try {
+    //     const response = await backend.get("v1/category/industry/", getConfig());
+
+    //     dispatch({ type: types.GET_JOB_INDUSTRIES, payload: response.data });
+    // }
+    console.log(error);
+  }
+};
+export const editUserProfile = (values) => async (dispatch) => {
+  console.log(values);
+  try {
+    const response = await backend.patch(
+      `/v1/user/profile/${store.getState().auth.id}/`,
+      values,
+      getConfig()
+    );
+
+    dispatch({ type: types.EDIT_USER_PROFILE, payload: response.data });
+    console.log(values);
   } catch (error) {
     console.log(error);
     console.log(error.response);
->>>>>>> origin
   }
-
-  //   try {
-  //     const response = await backend.get("v1/category/industry/", getConfig());
-
-  //     dispatch({ type: types.GET_JOB_INDUSTRIES, payload: response.data });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
 };
-<<<<<<< HEAD
-export const editUserProfile = (values) => async (dispatch) =>{
-
-  console.log(values);
-  try{
-  const response = await backend.patch(
-    `/v1/user/profile/${store.getState().auth.id}/`,values,
-    getConfig()
-    );
-  
-  dispatch({ type: types.EDIT_USER_PROFILE, payload: response.data});
-  console.log(values);
-  }
-  catch (error) {
-    console.log(error);
-    console.log(error.response);
- }
-};
-
 
 export const getOtherWorkers = () => async (dispatch) => {
   try {
@@ -175,4 +165,3 @@ export const getSavedWorkers = () => async (dispatch) => {
     console.log(error.response);
   }
 };
->>>>>>> origin
