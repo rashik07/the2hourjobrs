@@ -28,6 +28,7 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
   useEffect(() => {
     updateProfile();
     getDistrict();
+    getDivision();
     
   },[]);
   
@@ -161,18 +162,7 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
                 {" "}
                 <Title>Basic Info</Title>
               </Divider>
-              {/* <Form.Item label="Image" name="image">
-                <Space direction="vertical" style={{ width: '100%' }} size="large">
-                  <Upload
-                    action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                    listType="picture"
-                    maxCount={1}
-                  >
-                  <Button icon={<UploadOutlined />}>Upload (Max: 1)</Button>
-                  </Upload>
-   
-                </Space>
-              </Form.Item> */}
+             
              
               <Form.Item label="Name" name="username">
                 <Input placeholder="name" />
