@@ -15,14 +15,10 @@ const GenderFilter = ({ filter, setFilter }) => {
   };
 
   return (
-    <div className="border-bottom">
-      <div className="mb-3">
-        <p>
-          <strong>Gender</strong>
-        </p>
-        <GenderList setValue={handleChange} onClear={onClear} />
-      </div>
-    </div>
+    <>
+      <h3>Gender</h3>
+      <GenderList setValue={handleChange} onClear={onClear} />
+    </>
   );
 };
 

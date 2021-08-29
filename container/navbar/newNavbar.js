@@ -40,7 +40,7 @@ const navbar = ({ isSignedIn, signOut }) => {
       <Row>
         <Col xs={24} sm={4} md={6} lg={6} xl={6}>
           <div className="logo">
-            <h3>THE 2 HOURS JOB</h3>
+            <img src="/img/logo.png" alt="Logo" height={40} />
           </div>
         </Col>
         <Col xs={24} sm={4} md={18} lg={18} xl={18}>

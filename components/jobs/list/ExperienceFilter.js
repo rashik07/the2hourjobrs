@@ -13,16 +13,12 @@ const ExperienceFilter = ({ filter, setFilter }) => {
     filter = _.omit(filter, ["experience"]);
     setFilter(filter);
   };
-  
+
   return (
-    <div className="border-bottom">
-      <div className="mb-3">
-        <p>
-          <strong>Experience</strong>
-        </p>
-        <ExperienceList setValue={handleChange} onClear={onClear} />
-      </div>
-    </div>
+    <>
+      <h3>Experience</h3>
+      <ExperienceList setValue={handleChange} onClear={onClear} />
+    </>
   );
 };
 

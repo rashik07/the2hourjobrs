@@ -18,12 +18,7 @@ const projectReducer = (state = INITIAL_STATE, action) => {
       //  let self_posted_jobs = state.self_posted_jobs;
   
       user_project = user_project.filter((project) => project.id !== action.payload.project_id);
-        //self_posted_jobs = self_posted_jobs.filter(
-          //(job) => job.id !== action.payload.job_id
-        //);
-        // delete all_jobs[action.payload.job_id];
-        // delete self_posted_jobs[action.payload.job_id];
-  
+     
         return {
           ...state,
           user_project: Object.values(user_project),

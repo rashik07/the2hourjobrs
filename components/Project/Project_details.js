@@ -1,5 +1,5 @@
 import React, {useEffect, useState } from 'react';
-import { Card, Avatar,Modal } from 'antd';
+import { Card, Avatar,Modal , Table, Space } from 'antd';
 import { EditOutlined, EllipsisOutlined, SettingOutlined , DeleteOutlined } from '@ant-design/icons';
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
@@ -17,56 +17,68 @@ const Project_details = ({viewProject, view_project, project,deleteProject}) => 
         //setUpdateList(false);
         
       },[]);
+      console.log(view_project);
       
-  
+  console.log(view_project[0].id);
       //console.log(view_project);
-      const deleteProjectBtnClick = () => {
-        const { confirm } = Modal;
-    
-        confirm({
-          title: "Are you sure delete this project?",
-          icon: <ExclamationCircleOutlined />,
-          content: "Some descriptions",
-          okText: "Yes",
-          okType: "danger",
-          cancelText: "No",
-          onOk() {
-            deleteProject(project.id);
-          },
-        });
-      };
-    const { Meta } = Card;
+     
+      const columns = [
+        {
+          title: 'Title',
+          dataIndex: 'title',
+          key: 'title',
+          width: '30%',
+          //...this.getColumnSearchProps('name'),
+        },
+        {
+          title: 'Description',
+          dataIndex: 'description',
+          key: 'description',
+          width: '100%',
+
+         // ...this.getColumnSearchProps('age'),
+        },
+       
+        {
+          title: 'From',
+          dataIndex: 'start_date',
+          key: 'start_date',
+          width: '150px',
+        //  ...this.getColumnSearchProps('address'),
+       //   sorter: (a, b) => a.address.length - b.address.length,
+  //sortDirections: ['descend', 'ascend'],
+        },
+        {
+          title: 'To',
+          dataIndex: 'end_date',
+          key: 'end_date',
+          width: '150px',
+        //  ...this.getColumnSearchProps('address'),
+       //   sorter: (a, b) => a.address.length - b.address.length,
+  //sortDirections: ['descend', 'ascend'],
+        },
+        {
+          title: 'Action',
+          key: 'action',
+                    
+          render: (details) => (
+            //console.log('project id:',details.id);
+            <Space size="middle">
+              
+               <DeleteOutlined  key="ellipsis" onClick={()=>{deleteProject(details.id);window.location.reload()}} 
+               
+               />
+               
+            </Space>
+            
+          ),
+        },
+      ];
     
     return (
 
         <div>
-                
-            <div className="col-4 ">
-           
-                  <Card
-                        style={{ width: 250, border: '1px solid whitesmoke', backgroundColor:'whitesmoke', marginBottom: 10, height: 168}}
-                                  
-                        actions={[
-                                  
-                        
-                        <DeleteOutlined  key="ellipsis" onClick={deleteProjectBtnClick}/>,
-                          
-                        ]}
-                      
-                  >
-           
-                  <Meta
-                        avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-                            
-                        title={project.title}
-                        description={project.description}
-                                
-                  />
-                            
-
-                        </Card>
-           
-            </div>
+                <Table columns={columns} dataSource={view_project} />
                
               
                

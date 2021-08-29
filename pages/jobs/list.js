@@ -2,7 +2,8 @@ import Head from "next/head";
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
-import Navbar from "../../container/navbar/navbar";
+import Navbar from "../../container/navbar/newNavbar";
+import Footer from "../../container/footer/footer";
 import JobList from "components/jobs/list/JobList";
 import KeywordSearch from "components/jobs/list/KeywordSearch";
 import SelectedFilter from "components/jobs/list/SelectedFilter";
@@ -17,6 +18,10 @@ import ExperienceFilter from "components/jobs/list/ExperienceFilter";
 import AgeFilter from "components/jobs/list/AgeFilter";
 import { filterJobs } from "redux/actions/jobAction";
 
+import { Layout, Breadcrumb, Row, Col, Divider } from "antd";
+
+const { Content } = Layout;
+
 const Jobs = ({ filterJobs }) => {
   const [filter, setFilter] = useState({});
   const [showFilterJobs, setShowFilterJobs] = useState(false);
@@ -30,45 +35,54 @@ const Jobs = ({ filterJobs }) => {
   return (
     <>
       <Head>
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/antd/4.15.1/antd.min.css"
-        />
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-        />
         <title>Job list</title>
       </Head>
-      <Navbar />
-      <div className="container main-body">
-        <div className="row my-5">
-          {/*1st part*/}
-          <div className="col-3">
-            <h3 className="m-sm-bottom">Filter By</h3>
-            <JobCategoryFilter filter={filter} setFilter={setFilter} />
-            {/* <JobIndustryFilter filter={filter} setFilter={setFilter} /> */}
-            <LocationFilter filter={filter} setFilter={setFilter} />
-            <PostTimeFilter filter={filter} setFilter={setFilter} />
-            <DeadlineFilter filter={filter} setFilter={setFilter} />
-            <GenderFilter filter={filter} setFilter={setFilter} />
-            <EmploymentStatusFilter filter={filter} setFilter={setFilter} />
-            <ExperienceFilter filter={filter} setFilter={setFilter} />
-            <AgeFilter filter={filter} setFilter={setFilter} />
+      <Layout>
+        <Navbar />
+        <Content className="site-layout">
+          <Breadcrumb className="breadcrumb_main">
+            <Breadcrumb.Item>Home</Breadcrumb.Item>
+            <Breadcrumb.Item>Job</Breadcrumb.Item>
+            <Breadcrumb.Item>List</Breadcrumb.Item>
+          </Breadcrumb>
+          <div className="site-layout-background">
+            <Row>
+              {/*1st part*/}
+              <Col span={6} className="Jobfilter">
+                <h2>Filter By</h2>
+                <JobCategoryFilter filter={filter} setFilter={setFilter} />
+                {/* <JobIndustryFilter filter={filter} setFilter={setFilter} /> */}
+                <LocationFilter filter={filter} setFilter={setFilter} />
+                <PostTimeFilter filter={filter} setFilter={setFilter} />
+                <DeadlineFilter filter={filter} setFilter={setFilter} />
+                <GenderFilter filter={filter} setFilter={setFilter} />
+                <EmploymentStatusFilter filter={filter} setFilter={setFilter} />
+                <ExperienceFilter filter={filter} setFilter={setFilter} />
+                <AgeFilter filter={filter} setFilter={setFilter} />
+              </Col>
+              {/*2nd part*/}
+              <Col span={17} offset={1}>
+                <SelectedFilter
+                  filter={filter}
+                  setFilter={setFilter}
+                  setShowFilter={setShowFilterJobs}
+                  getFilteredList={filterJobs}
+                  showFilterJobs={showFilterJobs}
+                />
+                <KeywordSearch
+                  filter={filter}
+                  setFilter={setFilter}
+                  setShowFilter={setShowFilterJobs}
+                  getFilteredList={filterJobs}
+                />
+                <Divider />
+                <JobList filter={filter} showFilterJobs={showFilterJobs} />
+              </Col>
+            </Row>
           </div>
-          {/*2nd part*/}
-          <div className="col-9 bg-white rounded border ">
-            <KeywordSearch filter={filter} setFilter={setFilter} />
-            <SelectedFilter
-              filter={filter}
-              setFilter={setFilter}
-              setShowFilter={setShowFilterJobs}
-              getFilteredList={filterJobs}
-            />
-            <JobList filter={filter} showFilterJobs={showFilterJobs} />
-          </div>
-        </div>
-      </div>
+        </Content>
+        <Footer />
+      </Layout>
     </>
   );
 };

@@ -13,7 +13,7 @@ import { signUp } from "redux/actions/authAction";
 
 const Signup = (props) => {
   const dispatch = useDispatch();
-  const start = 0;
+  let start = 0;
 
   useEffect(() => {
     dispatch({ type: types.RESET_SIGN_UP });
@@ -92,7 +92,7 @@ const Signup = (props) => {
           </Link>
         </form>
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

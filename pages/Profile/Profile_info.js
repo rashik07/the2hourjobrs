@@ -2,12 +2,13 @@ import Head from "next/head";
 import React, { useEffect, useState } from "react";
 import Navbar from "../../container/navbar/navbar";
 import Sidebar from "../../container/sidebar/sidebar";
-import { Select } from "antd";
+import { Select,Image  } from "antd";
+
 import { connect } from "react-redux";
 import {
   updateProfile ,editUserProfile, getDistrict, getDivision , getThana
 } from "@/redux/actions/userAction";
-
+import PicturesWall from "../../components/annoucement/PicturesWall";
 import {
   Form,
   Input,
@@ -24,35 +25,58 @@ import moment from 'moment';
 
 import ThanaList from "components/jobs/input/ThanaList";
 
-const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_profile,getDistrict,onClear,get_division,get_district,get_thana}) => {
+const Profile_info = ({updateProfile, user_profile,editUserProfile,getDivision,getDistrict,getThana,}) => {
   useEffect(() => {
+<<<<<<< HEAD
     updateProfile();
     getDistrict();
     getDivision();
+=======
+>>>>>>> bdd5c8649fc6f6b551231af7adb4626df2adf9af
     
+    getDistrict();
+    getDivision();
+    getThana();
+    updateProfile();
   },[]);
-  
-  console.log(user_profile);
+  //console.log(user_profile);
+ // console.log('division:',get_division);
   const dateFormat = 'YYYY-MM-DD';
   user_profile.birthday=moment(user_profile.birthday, dateFormat);
   const onFinish = (values ) => {
+     const formData = new FormData();
      values = {
       ...values,
       'birthday': values['birthday'].format('YYYY-MM-DD'),
       // 'time-picker': fieldsValue['time-picker'].format('HH:mm:ss'),
     };
    
+    formData.append("nid", values.nid );
+    formData.append("gender",values.gender );
+    formData.append("facebook_link",values.facebook_link );
+    formData.append("birthday", values.birthday );
+    formData.append("bio", values.bio );
+    formData.append("address", values.address );
+    formData.append("youtube_link", values.youtube_link );
+    formData.append("website_link", values.website_link );
+    formData.append("portfolio_link", values.portfolio_link );
+    // formData.append("division", values.division);
+    // formData.append("district", values.district );
+    // formData.append("thana", values.thana );
+    
+    if(typeof values.photo === 'undefined'){
+
+    }else{
+      console.log("image");
+      formData.append("image", values.photo[0].originFileObj);
+    }
+    
    
     // console.log('Received values of form: ', values);
-    editUserProfile(values);
+    editUserProfile(formData );
+   // window.location.reload();
  //   console.log('update: ', editUserProfile);
-  };
-
-
-  
-
-
-
+  }; 
   const { Option } = Select;
   const { TextArea } = Input;
   const { Title } = Typography;
@@ -65,21 +89,6 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
       },
     ],
   };
-  //date
- 
-//phone no
-  // const prefixSelector = (
-  //   <Form.Item name="prefix " defaultValue={value} noStyle>
-  //     <Select
-  //       style={{
-  //         width: 80,
-  //       }}
-       
-  //     >
-  //       <Option value="880">+880</Option>
-  //     </Select>
-  //   </Form.Item>
-  // );
   //gender
   const plainOptions = ['Male', 'Female'];
   const [value, setValue] = React.useState();
@@ -128,10 +137,17 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
           },
         },
       };
-   
+    
+      const normFile = (e) => {
+        console.log('Upload event:', e);
       
-     
-
+        if (Array.isArray(e)) {
+          return e;
+        }
+      
+        return e && e.fileList;
+      };
+    
   return (
     <div>
       <Head>
@@ -150,6 +166,14 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
           </div>
 
           <main className="col-md-9   my-4">
+           
+            
+            <Image
+              width={200}
+              src={"http://127.0.0.1:8000" + user_profile.image} 
+              
+            />
+            {/* <PicturesWall setImages={uploadcover} limit={1} /> */}
             <Form
               {...formItemLayout}
               layout={formLayout}
@@ -157,6 +181,7 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
               name="register"
               onFinish={onFinish}
               initialValues={user_profile}
+              
             >
               <Divider>
                 {" "}
@@ -164,6 +189,20 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
               </Divider>
              
              
+              
+              <Form.Item
+                name="photo"
+                label="Upload"
+                valuePropName="fileList" 
+               getValueFromEvent={normFile}
+                extra="longgggggggggggggggggggggggggggggggggg"
+              >
+                <Upload name="image"  listType="picture"  maxCount={1} >
+                  <Button icon={<UploadOutlined />}>Click to upload</Button>
+                 
+                </Upload>
+                
+              </Form.Item>
               <Form.Item label="Name" name="username">
                 <Input placeholder="name" />
               </Form.Item>
@@ -212,6 +251,18 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
               <Form.Item  label="Date of Birth"  name="birthday">
                 <DatePicker format={dateFormat}/>
               </Form.Item>
+              <Form.Item label="Facebook Link" name="facebook_link">
+                <Input placeholder="input Facebook Link"  />
+              </Form.Item>
+              <Form.Item label="Website Link" name="website_link">
+                <Input placeholder="input Website Link"  />
+              </Form.Item>
+              <Form.Item label="Youtube Link" name="youtube_link">
+                <Input placeholder="input Youtube Link"  />
+              </Form.Item>
+              <Form.Item label="Portfolio Link" name="portfolio_link">
+                <Input placeholder="input Portfolio Link"  />
+              </Form.Item>
               
               <Form.Item label="Bio" name="bio">
                 <TextArea rows={4} />
@@ -221,17 +272,25 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
                 {" "}
                 <Title>Address</Title>
               </Divider>
-              <Form.Item label="Division" name="division">
+              {/* <Form.Item label="Division" name="division">
                 <Select
-                    placeholder="Select Category"
-                    className="mb-3"
-                    style={{ width: 300 }}
+                    showSearch
+                    className="filtter-items"
+                    value={value}
+                    dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
+                    allowClear
+                   // multiple={multiple}
                     onChange={setValue}
+                    onClear={onClear}
                     
+                    filterOption={(input, option) =>
+                      option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                    }
                     defaultValue={user_profile.division}
                   >
                     
                         {get_division.map(({ id, name }) => (
+                          
                           <Option key={id} value={ id }>
                             {name}
                           </Option>
@@ -247,11 +306,18 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
               
               <Form.Item label="District" name="district">
                 <Select
-                    placeholder="Select Category"
-                    className="mb-3"
-                    style={{ width: 300 }}
+                    showSearch
+                    className="filtter-items"
+                    value={value}
+                    dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
+                    allowClear
+                   // multiple={multiple}
                     onChange={setValue}
+                    onClear={onClear}
                     
+                    filterOption={(input, option) =>
+                      option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                    }
                     defaultValue={user_profile.district}
                   >
                     
@@ -271,11 +337,18 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
               </Form.Item>
               <Form.Item label="Thana" name="thana" >
                 <Select
-                    placeholder="Select Category"
-                    className="mb-3"
-                    style={{ width: 300 }}
+                    showSearch
+                    className="filtter-items"
+                    value={value}
+                    dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
+                    allowClear
+                   // multiple={multiple}
                     onChange={setValue}
+                    onClear={onClear}
                     
+                    filterOption={(input, option) =>
+                      option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                    }
                     defaultValue={user_profile.thana}
                   >
                     
@@ -286,7 +359,7 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,edit_user_pro
                         ))}
                       
                 </Select>
-              </Form.Item>
+              </Form.Item> */}
               <Form.Item label="Address" name="address">
                 <TextArea rows={4} />
               </Form.Item>
@@ -314,5 +387,5 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, {updateProfile,editUserProfile,getDistrict ,getDivision})(Profile_info);
+export default connect(mapStateToProps, {updateProfile,editUserProfile,getDistrict ,getDivision,getThana})(Profile_info);
 

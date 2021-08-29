@@ -2,6 +2,7 @@ import CropImageUploader from "components/CropImageUploader";
 import React, { useState } from "react";
 import StepsParent from "./StepsParent";
 import { connect } from "react-redux";
+import { Space } from "antd";
 
 const Step1 = ({ postStep, setPostStep, temp_jobpost }) => {
   const onSubmit = () => {
@@ -29,20 +30,24 @@ const Step1 = ({ postStep, setPostStep, temp_jobpost }) => {
 
   return (
     <>
+      <br />
       <StepsParent item="title" />
       {/* <StepsParent item="image">
         <CropImageUploader limit={1} uploadImage={setImage} />
       </StepsParent> */}
-      <StepsParent item="vacancy" />
-      <StepsParent item="category" />
+      <Space size="large">
+        <StepsParent item="vacancy" />
+        <StepsParent item="category" />
+        <StepsParent item="deadline" />
+      </Space>
       <StepsParent item="skills" />
+      <br />
       <StepsParent item="employment_status" />
-      <StepsParent item="deadline" />
-      <div className="col-4 mt-4">
-        <button onClick={onSubmit} className="btn btn-primary">
-          Next
-        </button>
-      </div>
+      <br />
+      <button onClick={onSubmit} style={{ float: "right" }}>
+        Next
+      </button>
+
       <br />
       <br />
       <br />

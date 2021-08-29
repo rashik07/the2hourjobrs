@@ -15,12 +15,10 @@ const JobCategoryFilter = ({ filter, setFilter }) => {
   };
 
   return (
-    <div className="border-bottom">
-      <p>
-        <strong>Category</strong>
-      </p>
+    <>
+      <h3>Category</h3>
       <JobCategogy setValue={handleChange} onClear={onClear} />
-    </div>
+    </>
   );
 };
 

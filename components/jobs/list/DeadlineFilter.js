@@ -16,14 +16,10 @@ const DeadlineFilter = ({ filter, setFilter }) => {
   };
 
   return (
-    <div className="border-bottom">
-      <div className="mb-3">
-        <p>
-          <strong>Deadline in</strong>
-        </p>
-        <DeadlineList setValue={handleChange} onClear={onClear} />
-      </div>
-    </div>
+    <>
+      <h3>Deadline in</h3>
+      <DeadlineList setValue={handleChange} onClear={onClear} />
+    </>
   );
 };
 

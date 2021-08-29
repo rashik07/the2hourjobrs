@@ -1,6 +1,13 @@
 import React, { useState } from "react";
+import { Button, Tooltip } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
 
-const KeywordSearch = ({ filter, setFilter }) => {
+const KeywordSearch = ({
+  filter,
+  setFilter,
+  getFilteredList,
+  setShowFilter,
+}) => {
   const [keyword, setKeyword] = useState("");
 
   const onKeywordSubmit = (e) => {
@@ -13,19 +20,39 @@ const KeywordSearch = ({ filter, setFilter }) => {
   };
 
   return (
-    <form className="row input-group m-3 mr-4">
+    <form style={{ display: "flex", width: "100%" }}>
       <input
-        className="form-control mt-2"
+        // className="form-control mt-2"
+        style={{
+          width: "90%",
+          padding: ".5rem",
+          borderTopLeftRadius: "8px",
+          borderBottomLeftRadius: "8px",
+          border: "1px solid #70BDF2",
+        }}
         placeholder="Type and hit Enter"
         onChange={(e) => setKeyword(e.target.value)}
         value={keyword}
       />
-      <button
-        className="btn mt-2 button-home"
-        onClick={(e) => onKeywordSubmit(e)}
+
+      <Button
+        style={{
+          height: "auto",
+          borderTopRightRadius: "8px",
+          borderBottomRightRadius: "8px",
+          background: "#163F66",
+          color: "white",
+          borderColor: "#163F66",
+        }}
+        icon={<SearchOutlined />}
+        onClick={(e) => {
+          onKeywordSubmit(e);
+          getFilteredList(filter);
+          setShowFilter(true);
+        }}
       >
-        Keyword Filter
-      </button>
+        Search
+      </Button>
     </form>
   );
 };

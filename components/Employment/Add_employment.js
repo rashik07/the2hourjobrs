@@ -19,6 +19,7 @@ const Add_employment = ( {createEmployment ,view_employment}) => {
       };
         console.log('Success:', values );
         createEmployment(values);
+      //  window.location.reload();
       };
       
     
@@ -48,7 +49,7 @@ const Add_employment = ( {createEmployment ,view_employment}) => {
             span: 16,
           },
         };
-         
+     
     return (
         <div>
                         <Form 
@@ -64,14 +65,15 @@ const Add_employment = ( {createEmployment ,view_employment}) => {
                                 <Form.Item label="Company Name:" name="company_name">
                                         <Input placeholder="company name" />
                                 </Form.Item>
-                                <Form.Item label="Company Business:" >
-                                        <Input placeholder="company Business" />
+                                <Form.Item label="designation:" name="designation">
+                                        <Input placeholder="designation" />
                                 </Form.Item>
-                                <Form.Item label="Designation:" name="designation">
-                                        <Input placeholder="Designation" />
-                                </Form.Item>
+                                
                                 <Form.Item label="Department:" name="department">
                                         <Input placeholder="Department " />
+                                </Form.Item>
+                                <Form.Item label="Responsibilities:" name="responsibilities">
+                                        <Input placeholder="responsibilities" />
                                 </Form.Item>
                                 <Form.Item label="Location:" name="company_location">
                                         <Input placeholder="Location " />

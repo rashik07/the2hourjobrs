@@ -27,19 +27,25 @@ export const updateProfile = (data) => async (dispatch) => {
 
 };
 
-export const editUserProfile = (values) => async (dispatch) =>{
 
-  console.log(values);
+export const editUserProfile = (values) => async (dispatch) =>{
+  console.log(values)
+  
   try{
+    
+    
+   
+    // values["image"] = values["photo"][0].originFileObj;
+
   const response = await backend.patch(
     `/v1/user/profile/${store.getState().auth.id}/`,values,
     getConfig()
     );
-  
   dispatch({ type: types.EDIT_USER_PROFILE, payload: response.data});
-  console.log(values);
+  // console.log(values);
   }
   catch (error) {
+  +
     console.log(error);
     console.log(error.response);
  }

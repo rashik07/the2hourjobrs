@@ -9,7 +9,7 @@ import Add_project from 'components/Project/Add_project';
 
 
 const Portfolio = ({viewProject, view_project}) => {
-  const [updateList, setUpdateList]=useState(true);
+  
   useEffect(() => {
       
     viewProject();
@@ -34,14 +34,10 @@ const Portfolio = ({viewProject, view_project}) => {
 
                 <main className="col-md-9   my-4">
                     
-                <div className="row">
-                              {
-                                  view_project.map(project =>  <Project_details 
-                                  key={view_project.id} 
-                                  
-                                  setUpdateList={setUpdateList}
-                                  project={project}></Project_details>)
-                            }  
+                        <div className="row">
+                              
+                            <Project_details ></Project_details>
+                     
                         </div>
                         <Add_project></Add_project>
                    

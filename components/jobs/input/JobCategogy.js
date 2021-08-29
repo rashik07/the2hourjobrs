@@ -29,15 +29,11 @@ const JobCategogy = ({ getJobCategories, categories, setValue, onClear,multiple 
   return (
     <Select
       placeholder="Select Category"
-      className="mb-3"
-      showSearch
-        style={{ width: "100%" }}
-        value={value}
-        dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
-        allowClear
-        mode="multiple"
-        onChange={setValue}
-        onClear={onClear}
+      className="filtter-items"
+      onChange={setValue}
+      onClear={onClear}
+      allowClear
+      mode="multiple"
     >
       {getOptions(categories)}
     </Select>

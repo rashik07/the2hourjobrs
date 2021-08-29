@@ -21,7 +21,7 @@ const PostTimeList = ({ value, setValue, onClear }) => {
 
   return (
     <Select
-      style={{ width: 200 }}
+      className="filtter-items"
       onChange={setValue}
       onClear={onClear}
       allowClear
