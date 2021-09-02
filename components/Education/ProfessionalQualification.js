@@ -62,7 +62,7 @@ const ProfessionalQualification = ({  createQualification,viewQualification,dele
         title: 'Institution',
         dataIndex: 'institute',
         key: 'institute',
-        width: '100%',
+        width: '30%',
 
        // ...this.getColumnSearchProps('age'),
       },

@@ -1,14 +1,9 @@
-import Head from "next/head";
 import React, { useEffect, useState } from "react";
-import Navbar from "../../container/navbar/navbar";
-import Sidebar from "../../container/sidebar/sidebar";
 import { Select,Image  } from "antd";
-
 import { connect } from "react-redux";
 import {
   updateProfile ,editUserProfile, getDistrict, getDivision , getThana
 } from "@/redux/actions/userAction";
-import PicturesWall from "../../components/annoucement/PicturesWall";
 import {
   Form,
   Input,
@@ -17,27 +12,24 @@ import {
   DatePicker,
   Typography,
   Divider,
-  TextArea,
+
 } from "antd";
 import { Upload, Space } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import moment from 'moment';
 
-import ThanaList from "components/jobs/input/ThanaList";
 
-const Profile_info = ({updateProfile, user_profile,editUserProfile,getDivision,getDistrict,getThana,}) => {
+
+const Profile_info = ({updateProfile, user_profile,editUserProfile,getDivision,getDistrict,getThana,onClear,get_division,get_district,get_thana }) => {
+    const [loader, setloader] =  useState(false);
+
   useEffect(() => {
-<<<<<<< HEAD
-    updateProfile();
-    getDistrict();
-    getDivision();
-=======
->>>>>>> bdd5c8649fc6f6b551231af7adb4626df2adf9af
-    
+
     getDistrict();
     getDivision();
     getThana();
     updateProfile();
+   
   },[]);
   //console.log(user_profile);
  // console.log('division:',get_division);
@@ -60,9 +52,9 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,getDivision,g
     formData.append("youtube_link", values.youtube_link );
     formData.append("website_link", values.website_link );
     formData.append("portfolio_link", values.portfolio_link );
-    // formData.append("division", values.division);
-    // formData.append("district", values.district );
-    // formData.append("thana", values.thana );
+    formData.append("division", values.division);
+    formData.append("district", values.district );
+    formData.append("thana", values.thana );
     
     if(typeof values.photo === 'undefined'){
 
@@ -74,6 +66,7 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,getDivision,g
    
     // console.log('Received values of form: ', values);
     editUserProfile(formData );
+    setloader(true);
    // window.location.reload();
  //   console.log('update: ', editUserProfile);
   }; 
@@ -149,31 +142,9 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,getDivision,g
       };
     
   return (
-    <div>
-      <Head>
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/antd/4.15.1/antd.min.css"
-        />
-
-        <title>Profile Info</title>
-      </Head>
-      <Navbar />
-      <div className="container">
-        <div className="row">
-          <div className="col-md-3 ">
-            <Sidebar />
-          </div>
-
-          <main className="col-md-9   my-4">
-           
+    <>            
             
-            <Image
-              width={200}
-              src={"http://127.0.0.1:8000" + user_profile.image} 
-              
-            />
-            {/* <PicturesWall setImages={uploadcover} limit={1} /> */}
+          
             <Form
               {...formItemLayout}
               layout={formLayout}
@@ -181,14 +152,18 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,getDivision,g
               name="register"
               onFinish={onFinish}
               initialValues={user_profile}
-              
+              setloader={setloader}
             >
               <Divider>
                 {" "}
                 <Title>Basic Info</Title>
               </Divider>
              
-             
+              <Image
+              width={200}
+              src={"http://127.0.0.1:8000" + user_profile.image} 
+              
+            />
               
               <Form.Item
                 name="photo"
@@ -272,7 +247,7 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,getDivision,g
                 {" "}
                 <Title>Address</Title>
               </Divider>
-              {/* <Form.Item label="Division" name="division">
+              <Form.Item label="Division" name="division">
                 <Select
                     showSearch
                     className="filtter-items"
@@ -359,7 +334,7 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,getDivision,g
                         ))}
                       
                 </Select>
-              </Form.Item> */}
+              </Form.Item>
               <Form.Item label="Address" name="address">
                 <TextArea rows={4} />
               </Form.Item>
@@ -369,10 +344,9 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,getDivision,g
                 </Button>
               </Form.Item>
             </Form>
-          </main>
-        </div>
-      </div>
-    </div>
+            
+       
+  </>
   );
 };
 
