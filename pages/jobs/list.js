@@ -50,15 +50,47 @@ const Jobs = ({ filterJobs }) => {
               {/*1st part*/}
               <Col span={6} className="Jobfilter">
                 <h2>Filter By</h2>
-                <JobCategoryFilter filter={filter} setFilter={setFilter} />
+                <JobCategoryFilter
+                  filter={filter}
+                  setFilter={setFilter}
+                  reload={setShowFilterJobs}
+                />
                 {/* <JobIndustryFilter filter={filter} setFilter={setFilter} /> */}
-                <LocationFilter filter={filter} setFilter={setFilter} />
-                <PostTimeFilter filter={filter} setFilter={setFilter} />
-                <DeadlineFilter filter={filter} setFilter={setFilter} />
-                <GenderFilter filter={filter} setFilter={setFilter} />
-                <EmploymentStatusFilter filter={filter} setFilter={setFilter} />
-                <ExperienceFilter filter={filter} setFilter={setFilter} />
-                <AgeFilter filter={filter} setFilter={setFilter} />
+                <LocationFilter
+                  filter={filter}
+                  setFilter={setFilter}
+                  reload={setShowFilterJobs}
+                />
+                <PostTimeFilter
+                  filter={filter}
+                  setFilter={setFilter}
+                  reload={setShowFilterJobs}
+                />
+                <DeadlineFilter
+                  filter={filter}
+                  setFilter={setFilter}
+                  reload={setShowFilterJobs}
+                />
+                <GenderFilter
+                  filter={filter}
+                  setFilter={setFilter}
+                  reload={setShowFilterJobs}
+                />
+                <EmploymentStatusFilter
+                  filter={filter}
+                  setFilter={setFilter}
+                  reload={setShowFilterJobs}
+                />
+                <ExperienceFilter
+                  filter={filter}
+                  setFilter={setFilter}
+                  reload={setShowFilterJobs}
+                />
+                <AgeFilter
+                  filter={filter}
+                  setFilter={setFilter}
+                  reload={setShowFilterJobs}
+                />
               </Col>
               {/*2nd part*/}
               <Col span={17} offset={1}>
@@ -74,6 +106,7 @@ const Jobs = ({ filterJobs }) => {
                   setFilter={setFilter}
                   setShowFilter={setShowFilterJobs}
                   getFilteredList={filterJobs}
+                  reload={showFilterJobs}
                 />
                 <Divider />
                 <JobList filter={filter} showFilterJobs={showFilterJobs} />
