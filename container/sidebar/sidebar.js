@@ -27,6 +27,30 @@ const sidebar = ({selector,setloader}) => {
                 selector.current = "career";
                 setloader(true);
               }}>Career &amp; Application</a> <br/>
+
+              <a href="#" icon={<PieChartOutlined />} onClick={()=>{
+               
+               selector.current = "education";
+               setloader(true);
+              }}>Education</a> <br/>
+
+              <a href="#" icon={<PieChartOutlined />} onClick={()=>{
+               
+               selector.current = "employment";
+               setloader(true);
+              }}>Employment</a> <br/>
+
+              <a href="#" icon={<PieChartOutlined />} onClick={()=>{
+               
+               selector.current = "portfolio";
+               setloader(true);
+              }}>Portfolio</a> <br/>
+
+              <a href="#" icon={<PieChartOutlined />} onClick={()=>{
+               
+               selector.current = "setting";
+               setloader(true);
+              }}>Settings</a> <br/>
       
            
           

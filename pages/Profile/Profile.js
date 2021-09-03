@@ -2,18 +2,13 @@ import React, {useState,useRef,useEffect} from 'react';
 import Head from "next/head";
 import Navbar from '../../container/navbar/newNavbar';
 import Sidebar from "../../container/sidebar/sidebar";
-import {
-    Form,
-    Input,
-    Button,
-    Radio,
-    DatePicker,
-    Typography,
-    Divider,
-    TextArea,
-    Layout, Breadcrumb, Row, Col
-  } from "antd";
+import {Layout, Breadcrumb, Row, Col} from "antd";
 import Profile_info from 'components/Profile/Profile_info';
+import Career_application from 'components/Profile/Career_application';
+import Education from 'components/Profile/Education';
+import Employment from 'components/Profile/Employment';
+import Portfolio from 'components/Profile/Portfolio';
+import Setting from 'components/Profile/Setting';
 
 const Profile = () => {
     const { Content } = Layout;
@@ -25,7 +20,7 @@ const Profile = () => {
         () => {
             //console.log(selector.current);
             
-                                console.log(selector.current);
+                     //           console.log(selector.current);
             
           
             setloader(false);
@@ -34,43 +29,64 @@ const Profile = () => {
       );
     const clickPage = () => {
         if(selector.current=="Profile_info"){
-            console.log(selector.current);
+            //console.log(selector.current);
             return <Profile_info/>;          
             }
-        }
+        if(selector.current=="career"){
+            //console.log(selector.current);
+            return <Career_application/>;          
+            }
+        
+        if(selector.current=="education"){
+          //console.log(selector.current);
+          return <Education/>;          
+          }
+        if(selector.current=="employment"){
+           // console.log(selector.current);
+            return <Employment/>;          
+            }
+            if(selector.current=="portfolio"){
+             // console.log(selector.current);
+              return <Portfolio/>;          
+              }
+              if(selector.current=="setting"){
+               // console.log(selector.current);
+                return <Setting/>;          
+                }
+      }
+
     return (
         <div>
-                  <Head>
-                    <title>Profile Info</title>
+                <Head>
+                  <title>Profile Info</title>
                 </Head>
-      <Layout>
-        <Navbar />
-        <Layout>
-       
-        <Layout>   
-        <Content className="site-layout">
-          
-            <Breadcrumb className="breadcrumb_main">
-                
-                <Breadcrumb.Item>Profile</Breadcrumb.Item>
-                <Breadcrumb.Item>{selector.current}</Breadcrumb.Item>
-            </Breadcrumb>
-          <div className="site-layout-background">
-          <Row>
-            <Col span={4}><Sidebar setloader={setloader} selector={selector}/></Col>
-            <Col span={2}></Col>
-          
-            <Col span={18}>
-            {clickPage(selector.current)}
-               {/* <Profile_info/> */}
-          
-            </Col>
-            </Row>
-    </div>
-        </Content>
-        </Layout>
-        </Layout>
-      </Layout>
+                <Layout>
+                  <Navbar />
+                  <Layout>                
+                    <Layout>   
+                      <Content className="site-layout">
+                        
+                        <Breadcrumb className="breadcrumb_main">
+                              
+                            <Breadcrumb.Item>Profile</Breadcrumb.Item>
+                            <Breadcrumb.Item>{selector.current}</Breadcrumb.Item>
+                        </Breadcrumb>
+                        <div className="site-layout-background">
+                          <Row>
+                            <Col span={4}><Sidebar setloader={setloader} selector={selector}/></Col>
+                            
+                          
+                            <Col span={20}>
+                            {clickPage(selector.current)}
+                              {/* <Profile_info/> */}
+                          
+                            </Col>
+                          </Row>
+                        </div>
+                      </Content>
+                    </Layout>
+                  </Layout>
+                </Layout>
         </div>
     );
 };

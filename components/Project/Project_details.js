@@ -8,18 +8,14 @@ import { ExclamationCircleOutlined } from "@ant-design/icons";
 
 
 
-const Project_details = ({viewProject, view_project, project,deleteProject}) => {
+const Project_details = ({viewProject, view_project, project,deleteProject,setloader}) => {
   const router = useRouter();
 
-    useEffect(() => {
-      
+    useEffect(() => {  
         viewProject();
-        //setUpdateList(false);
-        
-      },[]);
-      console.log(view_project);
-      
-  console.log(view_project[0].id);
+    },[]);
+      // console.log(view_project); 
+      // console.log(view_project[0].id);
       //console.log(view_project);
      
       const columns = [
@@ -53,9 +49,7 @@ const Project_details = ({viewProject, view_project, project,deleteProject}) => 
           dataIndex: 'end_date',
           key: 'end_date',
           width: '150px',
-        //  ...this.getColumnSearchProps('address'),
-       //   sorter: (a, b) => a.address.length - b.address.length,
-  //sortDirections: ['descend', 'ascend'],
+      
         },
         {
           title: 'Action',
@@ -65,9 +59,7 @@ const Project_details = ({viewProject, view_project, project,deleteProject}) => 
             //console.log('project id:',details.id);
             <Space size="middle">
               
-               <DeleteOutlined  key="ellipsis" onClick={()=>{deleteProject(details.id);window.location.reload()}} 
-               
-               />
+              <DeleteOutlined  key="ellipsis" onClick={()=>{deleteProject(details.id);setloader(true)}}/>
                
             </Space>
             

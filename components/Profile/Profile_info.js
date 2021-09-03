@@ -24,13 +24,14 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,getDivision,g
     const [loader, setloader] =  useState(false);
 
   useEffect(() => {
-
     getDistrict();
     getDivision();
     getThana();
     updateProfile();
-   
-  },[]);
+    setloader(false);
+  },[loader]);
+
+  
   //console.log(user_profile);
  // console.log('division:',get_division);
   const dateFormat = 'YYYY-MM-DD';
@@ -40,7 +41,6 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,getDivision,g
      values = {
       ...values,
       'birthday': values['birthday'].format('YYYY-MM-DD'),
-      // 'time-picker': fieldsValue['time-picker'].format('HH:mm:ss'),
     };
    
     formData.append("nid", values.nid );
@@ -62,12 +62,10 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,getDivision,g
       console.log("image");
       formData.append("image", values.photo[0].originFileObj);
     }
-    
-   
+
     // console.log('Received values of form: ', values);
     editUserProfile(formData );
     setloader(true);
-   // window.location.reload();
  //   console.log('update: ', editUserProfile);
   }; 
   const { Option } = Select;
@@ -272,13 +270,9 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,getDivision,g
                         ))}
                       
                 </Select>
-                      
-             
-                                
 
               </Form.Item>
-             
-              
+
               <Form.Item label="District" name="district">
                 <Select
                     showSearch
@@ -306,8 +300,6 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,getDivision,g
                         ))}
                       
                 </Select>
-              
-                                
 
               </Form.Item>
               <Form.Item label="Thana" name="thana" >

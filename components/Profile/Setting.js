@@ -1,7 +1,6 @@
-import Head from 'next/head';
+
 import React, { useState } from 'react';
-import Navbar from '../../container/navbar/newNavbar';
-import Sidebar from "../../container/sidebar/sidebar";
+
 import { connect } from "react-redux";
 import {
   editPassword
@@ -43,21 +42,7 @@ const Setting = ({editPassword}) => {
 
     return (
         <div>
-            <Head>
-               
-           
-                <title>Setting</title>
-            </Head>
-             
-            <Navbar />
-            <div className="container">
-            <div className="row">
-            <div className="col-md-3 ">
-                <Sidebar />    
-            </div>
-            
-
-                <main className="col-md-9   my-4" style={{ height: "600px" }}>
+        
                     
                         
                         <Form 
@@ -120,9 +105,7 @@ const Setting = ({editPassword}) => {
                         </Form>
                    
 
-                </main>
-            </div>
-            </div>
+              
         </div>
     );
 };

@@ -1,7 +1,5 @@
 import Head from 'next/head';
 import React, { useEffect, useState } from 'react';
-import Navbar from '../../container/navbar/navbar';
-import Sidebar from "../../container/sidebar/sidebar";
 import { Select } from "antd";
 import { connect } from "react-redux";
 import {
@@ -11,8 +9,6 @@ import {
 import {Form,Input, Switch ,Button, Radio ,DatePicker,Typography,Divider,TextArea ,Upload } from 'antd';
 import LocationList from "../../components/jobs/input/LocationList";
 import { getJobCategories } from "redux/actions/jobAction";
-
-
 import { TagsInput } from "react-tag-input-component";
 import { CloseOutlined, CheckOutlined, InboxOutlined, UploadOutlined } from '@ant-design/icons'
 import JobCategogy from 'components/jobs/input/JobCategogy';
@@ -131,25 +127,7 @@ for (let i = 10; i < 36; i++) {
         return e && e.fileList;
       };
     return (
-        <div>
-            <Head>
-                <link
-                    rel="stylesheet"
-                    href="https://cdnjs.cloudflare.com/ajax/libs/antd/4.15.1/antd.min.css"
-                />
-           
-                <title>Career Application</title>
-            </Head>
-            <Navbar />
-            <div className="container">
-            <div className="row">
-            <div className="col-md-3 ">
-                <Sidebar />    
-            </div>
-            
-
-                <main className="col-md-9   my-4">
-                   
+        <div>       
                         <Form
                             {...formItemLayout}
                             layout={formLayout}
@@ -248,9 +226,7 @@ for (let i = 10; i < 36; i++) {
                                 </Button>
                               </Form.Item>
                         </Form>
-                </main>
-            </div>
-            </div>
+              
         </div>
     );
 };
