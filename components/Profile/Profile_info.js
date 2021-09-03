@@ -21,7 +21,8 @@ import moment from 'moment';
 
 
 const Profile_info = ({updateProfile, user_profile,editUserProfile,getDivision,getDistrict,getThana,onClear,get_division,get_district,get_thana }) => {
-    const [loader, setloader] =  useState(false);
+  
+  const [loader, setloader] =  useState(false);
 
   useEffect(() => {
     getDistrict();
@@ -142,7 +143,7 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,getDivision,g
   return (
     <>            
             
-          
+           
             <Form
               {...formItemLayout}
               layout={formLayout}
@@ -336,7 +337,7 @@ const Profile_info = ({updateProfile, user_profile,editUserProfile,getDivision,g
                 </Button>
               </Form.Item>
             </Form>
-            
+           
        
   </>
   );

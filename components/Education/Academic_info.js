@@ -5,25 +5,26 @@ import { getEducation } from "redux/actions/jobAction";
 import { createEducation,viewEducation,deleteEducation } from "@/redux/actions/usereducationAction";
 import moment from 'moment';
 import { DeleteOutlined } from '@ant-design/icons';
-const Academic_info = ({ education, value, setValue,create_education,createEducation,view_education, viewEducation,deleteEducation }) => {
+const Academic_info = ({ education,getEducation, value, setValue,create_education,createEducation,view_education, viewEducation,deleteEducation }) => {
 
     useEffect(() => {
-      
+      getEducation();
         viewEducation();
-        //setUpdateList(false);
+        
         
       },[]);
+
       console.log(view_education);
     const { Option, OptGroup } = Select;
     const dateFormat = 'YYYY';
-    //create_education.year_of_passing=moment(create_education.year_of_passing, dateFormat);
+   
     const onFinish = (values) => {
         values = {
             ...values,
             'year_of_passing': values['year_of_passing'].format('YYYY'),
           };
           createEducation(values);
-        console.log('Success:', values);
+ //       console.log('Success:', values);
       };
    
     //user_profile.birthday=moment(user_profile.birthday, dateFormat);
@@ -81,15 +82,12 @@ const Academic_info = ({ education, value, setValue,create_education,createEduca
           dataIndex: "Education",
           key: 'Education',
           width: '30%',
-          //...this.getColumnSearchProps('name'),
         },
         {
           title: 'Exam/Degree Title',
           dataIndex: 'Degree',
           key: 'Degree',
           width: '100%',
-
-         // ...this.getColumnSearchProps('age'),
         },
        
         {
@@ -97,39 +95,28 @@ const Academic_info = ({ education, value, setValue,create_education,createEduca
           dataIndex: 'institute_name',
           key: 'institute_name',
           width: '150px',
-        //  ...this.getColumnSearchProps('address'),
-       //   sorter: (a, b) => a.address.length - b.address.length,
-  //sortDirections: ['descend', 'ascend'],
         },
         {
           title: 'result',
           dataIndex: 'result',
           key: 'result',
           width: '150px',
-        //  ...this.getColumnSearchProps('address'),
-       //   sorter: (a, b) => a.address.length - b.address.length,
-  //sortDirections: ['descend', 'ascend'],
         },
         {
             title: 'year_of_passing',
             dataIndex: 'year_of_passing',
             key: 'year_of_passing',
             width: '150px',
-          //  ...this.getColumnSearchProps('address'),
-         //   sorter: (a, b) => a.address.length - b.address.length,
-    //sortDirections: ['descend', 'ascend'],
           },
         {
           title: 'Action',
           key: 'action',
                     
           render: (details) => (
-            console.log('education id:',details.id),
+          //  console.log('education id:',details.id),
             <Space size="middle">
               
-               <DeleteOutlined  key="ellipsis" onClick={()=>{deleteEducation(details.id);window.location.reload()}} 
-               
-               />
+               <DeleteOutlined  key="ellipsis" onClick={()=>{deleteEducation(details.id);window.location.reload()}} />
                
             </Space>
             
@@ -158,16 +145,15 @@ const Academic_info = ({ education, value, setValue,create_education,createEduca
                                     onChange={setValue}
                                     
                                 >                                   
-                                    <OptGroup
-                                        key={education.id}
-                                        
-                                    >
+                                    <OptGroup key={education.id}>
                                         {education.map((parent) => {
                                             return (
-                                            <Option value={parent.id} key={parent.name} >
-                                                {parent.name}
-                                            </Option>
+                                              <Option value={parent.id} key={parent.name}  >
+                                                  {parent.name}
+                                                  
+                                              </Option>
                                             );
+                                            console.log(parent.id);
                                         })}
                                     </OptGroup>
                                     

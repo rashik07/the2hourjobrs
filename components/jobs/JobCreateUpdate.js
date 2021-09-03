@@ -1,6 +1,5 @@
 import Navbar from "container/navbar/newNavbar";
 import React, { useState, useEffect } from "react";
-
 import { Steps, Layout, Breadcrumb, Row, Col } from "antd";
 const { Content } = Layout;
 import Head from "next/head";
@@ -19,9 +18,7 @@ const JobCreateUpdate = ({ getJobCategories, getEducation, editJob }) => {
     getJobCategories();
     getEducation();
   }, []);
-
   const [postStep, setPostStep] = useState(0);
-
   const renderInputForms = () => {
     switch (postStep) {
       case 0:

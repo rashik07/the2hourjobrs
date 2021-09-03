@@ -4,11 +4,7 @@ import Training from 'components/Education/Training';
 import ProfessionalQualification from 'components/Education/ProfessionalQualification';
 
 const Education = ( ) => {
-  
-  
-    
-   
-   
+
       return (
           <div>
              
