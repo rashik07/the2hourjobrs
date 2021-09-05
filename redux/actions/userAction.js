@@ -14,14 +14,10 @@ const getConfig = () => {
 
   return config;
 };
-
-export const updateProfile = (data) => async (dispatch) => {
+export const getDistrict = (data) => async (dispatch) => {
   try {
-    const response = await backend.get(
-      `/v1/user/me/?user=${store.getState().auth.id}`,
-      getConfig()
-    );
-    dispatch({ type: types.UPDATE_USER_PROFILE, payload: response.data });
+    const response = await backend.get("/v1/category/district/", getConfig());
+    dispatch({ type: types.GET_DISTRICT, payload: response.data });
   } catch (error) {
     //   try {
     //     const response = await backend.get("v1/category/industry/", getConfig());
@@ -32,39 +28,11 @@ export const updateProfile = (data) => async (dispatch) => {
     console.log(error.response);
   }
 };
-
-export const editUserProfile = (values, image) => async (dispatch) => {
-  try {
-    const formData = new FormData();
-    formData.append("image", values["photo"][0].originFileObj);
-    // console.log(values);
-    // values["image"] = values["photo"][0].originFileObj;
-
-    const response = await backend.patch(
-      `/v1/user/profile/${store.getState().auth.id}/`,
-      formData,
-      getConfig()
-    );
-    dispatch({ type: types.EDIT_USER_PROFILE, payload: response.data });
-    // console.log(values);
-  } catch (error) {
-    console.log(error);
-    console.log(error.response);
-  }
-};
-export const getDistrict = (data) => async (dispatch) => {
-  try {
-    const response = await backend.get("/v1/category/district/", getConfig());
-    dispatch({ type: types.GET_DISTRICT, payload: response.data });
-  } catch (error) {
-    console.log(error);
-    console.log(error.response);
-  }
-};
-export const getDivision = (data) => async (dispatch) => {
+export const getDivision = () => async (dispatch) => {
   try {
     const response = await backend.get("/v1/category/division/", getConfig());
     dispatch({ type: types.GET_DIVISION, payload: response.data });
+    console.log(response.data);
   } catch (error) {
     console.log(error);
     console.log(error.response);
@@ -76,6 +44,39 @@ export const getThana = (data) => async (dispatch) => {
     dispatch({ type: types.GET_THANA, payload: response.data });
   } catch (error) {
     console.log(error);
+    console.log(error.response);
+  }
+};
+
+export const updateProfile = (data) => async (dispatch) => {
+  try {
+    const response = await backend.get(
+      `/v1/user/me/?user=${store.getState().auth.id}`,
+      getConfig()
+    );
+    dispatch({ type: types.UPDATE_USER_PROFILE, payload: response.data });
+    console.log("user data callll");
+  } catch (error) {
+    console.log(error);
+    console.log(error.response);
+  }
+};
+
+export const editUserProfile = (values) => async (dispatch) => {
+  console.log(values);
+
+  try {
+    // values["image"] = values["photo"][0].originFileObj;
+
+    const response = await backend.patch(
+      `/v1/user/profile/${store.getState().auth.id}/`,
+      values,
+      getConfig()
+    );
+    dispatch({ type: types.EDIT_USER_PROFILE, payload: response.data });
+    // console.log(values);
+  } catch (error) {
+    +console.log(error);
     console.log(error.response);
   }
 };

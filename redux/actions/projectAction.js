@@ -25,14 +25,6 @@ export const viewProject = (data) => async (dispatch) => {
          console.log(error);
          console.log(error.response);
       }
-
-  //   try {
-  //     const response = await backend.get("v1/category/industry/", getConfig());
-
-  //     dispatch({ type: types.GET_JOB_INDUSTRIES, payload: response.data });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
 };
 
 export const createProject = (formValues) => async (dispatch) => {

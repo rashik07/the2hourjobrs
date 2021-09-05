@@ -1,66 +1,108 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
+import { Layout, Menu, Breadcrumb, Typography } from "antd";
+import Link from "next/link";
+import {
+  DesktopOutlined,
+  RadiusSettingOutlined,
+  PieChartOutlined,
+  FolderOpenOutlined,
+  FileOutlined,
+  TeamOutlined,
+  BookOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
 
-const sidebar = () => {
+const { Header, Content, Footer, Sider } = Layout;
+const { SubMenu } = Menu;
+const sidebar = ({ selector, setloader }) => {
+  const { Title } = Typography;
+  const [collapsed, setcollapsed] = useState(false);
+
+  const collapse = () => {
+    setcollapsed({ collapsed });
+  };
+
   return (
-    <div
-      className="d-flex flex-column p-3 text-white bg-dark"
-      style={{ minHeight: "100%" }}
-    >
-      <a
-        href="/"
-        className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none  border-bottom"
+    <div>
+      <Sider
+        className="sidebar-layout-background"
+        width={200}
+        collapsible
+        collapse={collapse}
       >
-        <span className="fs-4">My Profile</span>
-      </a>
-      <hr />
-      <ul className="nav nav-pills flex-column mb-auto">
-        <li className="nav-item">
-          <a href="../../Profile/Profile_info" className="nav-link active">
-            <i className="fas fa-users" />
-            Personal Info
-          </a>
-        </li>
-        <li>
-          <a
-            href="../../Profile/Career_application"
-            className="nav-link text-white"
-          >
-            <i className="fas fa-tools" />
-            Career &amp; Application
-          </a>
-        </li>
-        <li>
-          <a href="../../Profile/Education" className="nav-link text-white">
-            <i className="fas fa-university" />
-            Education
-          </a>
-        </li>
-        <li>
-          <a href="../../Profile/Employment" className="nav-link text-white">
-            <i className="fas fa-laptop-house" />
-            Employment
-          </a>
-        </li>
-        <li>
-          <a href="../../Profile/Portfolio" className="nav-link text-white">
-            <i className="fas fa-border-none" />
-            Portfolio
-          </a>
-        </li>
-        <a
-          href="/"
-          className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none  border-bottom"
-        >
-          <span className="fs-4">My Profile View</span>
-        </a>
-        <hr />
-        <li>
-          <a href="../../Profile/Setting" className="nav-link text-white">
-            <i className="fas fa-cogs" />
-            Settings
-          </a>
-        </li>
-      </ul>
+        <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
+          <Menu.Item key="1" icon={<UserOutlined />}>
+            <a
+              href="#"
+              onClick={() => {
+                selector.current = "Profile_info";
+                setloader(true);
+              }}
+            >
+              Personal Info
+            </a>
+          </Menu.Item>
+          <Menu.Item key="2" icon={<DesktopOutlined />}>
+            <a
+              href="#"
+              onClick={() => {
+                selector.current = "career";
+                setloader(true);
+              }}
+            >
+              Career &amp; Application
+            </a>{" "}
+          </Menu.Item>
+          <Menu.Item key="3" icon={<BookOutlined />}>
+            {" "}
+            <a
+              href="#"
+              onClick={() => {
+                selector.current = "education";
+                setloader(true);
+              }}
+            >
+              Education
+            </a>
+          </Menu.Item>
+          <Menu.Item key="4" icon={<PieChartOutlined />}>
+            {" "}
+            <a
+              href="#"
+              onClick={() => {
+                selector.current = "employment";
+                setloader(true);
+              }}
+            >
+              Employment
+            </a>
+          </Menu.Item>
+          <Menu.Item key="5" icon={<FolderOpenOutlined />}>
+            <a
+              href="#"
+              onClick={() => {
+                selector.current = "portfolio";
+                setloader(true);
+              }}
+            >
+              Portfolio
+            </a>
+          </Menu.Item>
+
+          <Menu.Item key="6" icon={<RadiusSettingOutlined />}>
+            {" "}
+            <a
+              href="#"
+              onClick={() => {
+                selector.current = "setting";
+                setloader(true);
+              }}
+            >
+              Settings
+            </a>
+          </Menu.Item>
+        </Menu>
+      </Sider>
     </div>
   );
 };

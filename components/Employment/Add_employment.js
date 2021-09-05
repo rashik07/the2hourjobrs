@@ -3,9 +3,8 @@ import { useState } from 'react';
 import {Form,Input, Button,DatePicker, Radio,Typography,Divider, Space,TextArea ,Card,Avatar } from 'antd';
 import { connect } from "react-redux";
 import { viewProject , createEmployment} from '@/redux/actions/employmentAction';
-import Link from 'next/link'
 import moment from 'moment';
-const Add_employment = ( {createEmployment ,view_employment}) => {
+const Add_employment = ( {createEmployment ,view_employment,setloader}) => {
 
   const dateFormat = 'YYYY-MM-DD';
   view_employment.employment_period_from=moment(view_employment.employment_period_from, dateFormat);
@@ -15,15 +14,13 @@ const Add_employment = ( {createEmployment ,view_employment}) => {
         ...values,
         'employment_period_from': values['employment_period_from'].format('YYYY-MM-DD'),
         'employment_period_to': values['employment_period_to'].format('YYYY-MM-DD'),
-        // 'time-picker': fieldsValue['time-picker'].format('HH:mm:ss'),
       };
         console.log('Success:', values );
         createEmployment(values);
-      //  window.location.reload();
+        setloader(true);
       };
-      
-    
-      const onFinishFailed = (errorInfo) => {
+        
+    const onFinishFailed = (errorInfo) => {
         console.log("Failed:", errorInfo);
       };
       

@@ -94,3 +94,21 @@
   margin-bottom: .5rem;
   box-shadow: 0 0 0 1px #d9d9d9 inset;
 }
+
+.sidebar-layout-background a{
+  color:#ffffff;
+  
+}
+/* .ant-menu-item-selected a, .ant-menu-item-selected a:hover {
+  color: #000000;
+  
+}
+.ant-menu-item-selected{
+  background: #ffffff !important;
+} */
+
+
+.ant-layout-sider-has-trigger {
+  margin-top: 63px;
+  min-height: 100%;
+}
