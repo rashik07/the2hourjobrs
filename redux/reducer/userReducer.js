@@ -5,6 +5,9 @@ const INITIAL_STATE = {
   all_workers: [],
   filtered_workers: [],
   saved_workers: [],
+  division:[],
+  district: [],
+  thana:[],
   
 };
 

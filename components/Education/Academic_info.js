@@ -9,7 +9,7 @@ const Academic_info = ({ education,getEducation, value, setValue,create_educatio
 
     useEffect(() => {
       getEducation();
-        viewEducation();
+      viewEducation();
         
         
       },[]);

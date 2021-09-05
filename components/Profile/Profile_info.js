@@ -137,6 +137,45 @@ const Profile_info = ({
       },
     },
   };
+  let divisionToRender;
+  if (get_division) {
+    divisionToRender = get_division.map(({ id, name }) => {
+      return <Option key={id} value={id}>
+      {name}
+    </Option>;
+    });
+  }
+  else {
+    divisionToRender = "Loading...";
+  }
+
+  let districtToRender;
+  if (get_district) {
+    districtToRender = get_district.map(({ id, name }) => {
+      return <Option key={id} value={id}>
+      {name}
+    </Option>;
+    });
+  }
+  else {
+    districtToRender = "Loading...";
+  }
+  let thanaToRender;
+  if (get_thana) {
+    thanaToRender = get_thana.map(({ id, name }) => {
+      return <Option key={id} value={id}>
+      {name}
+    </Option>;
+    });
+  }
+  else {
+    thanaToRender = "Loading...";
+  }
+  // get_division.map(({ id, name }) => (
+  //     <Option key={id} value={id}>
+  //       {name}
+  //     </Option>
+  //   ))
 
   const normFile = (e) => {
     console.log("Upload event:", e);
@@ -263,11 +302,8 @@ const Profile_info = ({
             }
             defaultValue={user_profile.division}
           >
-            {get_division.map(({ id, name }) => (
-              <Option key={id} value={id}>
-                {name}
-              </Option>
-            ))}
+            {divisionToRender}
+           
           </Select>
         </Form.Item>
 
@@ -286,11 +322,13 @@ const Profile_info = ({
             }
             defaultValue={user_profile.district}
           >
-            {get_district.map(({ id, name }) => (
+            {districtToRender}
+            {/* {
+            get_district.map(({ id, name }) => (
               <Option key={id} value={id}>
                 {name}
               </Option>
-            ))}
+            ))} */}
           </Select>
         </Form.Item>
         <Form.Item label="Thana" name="thana">
@@ -308,11 +346,12 @@ const Profile_info = ({
             }
             defaultValue={user_profile.thana}
           >
-            {get_thana.map(({ id, name }) => (
+            {thanaToRender}
+            {/* {get_thana.map(({ id, name }) => (
               <Option key={id} value={id}>
                 {name}
               </Option>
-            ))}
+            ))} */}
           </Select>
         </Form.Item>
         <Form.Item label="Address" name="address">

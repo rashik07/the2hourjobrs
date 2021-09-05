@@ -15,7 +15,7 @@ const getConfig = () => {
   return config;
 };
 /*education */
-export const viewEducation = (data) => async (dispatch) => {
+export const viewEducation = () => async (dispatch) => {
   try{    
     const response = await backend.get(`v1/user/education/?user=${store.getState().auth.id}`, getConfig());
     dispatch({ type: types.VIEW_EDUCATION, payload: response.data });

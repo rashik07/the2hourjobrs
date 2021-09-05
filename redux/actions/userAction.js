@@ -14,22 +14,9 @@ const getConfig = () => {
 
   return config;
 };
-export const getDistrict = (data) => async (dispatch) => {
-  try {
-    const response = await backend.get("/v1/category/district/", getConfig());
-    dispatch({ type: types.GET_DISTRICT, payload: response.data });
-  } catch (error) {
-    //   try {
-    //     const response = await backend.get("v1/category/industry/", getConfig());
-
-    //     dispatch({ type: types.GET_JOB_INDUSTRIES, payload: response.data });
-    // }
-    console.log(error);
-    console.log(error.response);
-  }
-};
 export const getDivision = () => async (dispatch) => {
   try {
+    console.log("working");
     const response = await backend.get("/v1/category/division/", getConfig());
     dispatch({ type: types.GET_DIVISION, payload: response.data });
     console.log(response.data);
@@ -38,7 +25,18 @@ export const getDivision = () => async (dispatch) => {
     console.log(error.response);
   }
 };
-export const getThana = (data) => async (dispatch) => {
+export const getDistrict = () => async (dispatch) => {
+  try {
+    const response = await backend.get("/v1/category/district/", getConfig());
+    dispatch({ type: types.GET_DISTRICT, payload: response.data });
+  } catch (error) {
+
+    console.log(error);
+    console.log(error.response);
+  }
+};
+
+export const getThana = () => async (dispatch) => {
   try {
     const response = await backend.get("/v1/category/thana/", getConfig());
     dispatch({ type: types.GET_THANA, payload: response.data });
@@ -48,7 +46,7 @@ export const getThana = (data) => async (dispatch) => {
   }
 };
 
-export const updateProfile = (data) => async (dispatch) => {
+export const updateProfile = () => async (dispatch) => {
   try {
     const response = await backend.get(
       `/v1/user/me/?user=${store.getState().auth.id}`,
