@@ -19,6 +19,11 @@ export const getDistrict = (data) => async (dispatch) => {
     const response = await backend.get("/v1/category/district/", getConfig());
     dispatch({ type: types.GET_DISTRICT, payload: response.data });
   } catch (error) {
+    //   try {
+    //     const response = await backend.get("v1/category/industry/", getConfig());
+
+    //     dispatch({ type: types.GET_JOB_INDUSTRIES, payload: response.data });
+    // }
     console.log(error);
     console.log(error.response);
   }
