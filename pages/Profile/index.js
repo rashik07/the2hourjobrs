@@ -9,22 +9,24 @@ import Education from "components/Profile/Education";
 import Employment from "components/Profile/Employment";
 import Portfolio from "components/Profile/Portfolio";
 import Setting from "components/Profile/Setting";
-
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 const Profile = () => {
   const { Content } = Layout;
-  const selector = useRef();
+  const selector = useRef("");
   const [loader, setloader] = useState(false);
 
   useEffect(() => {
-    //console.log(selector.current);
-
-    //           console.log(selector.current);
 
     setloader(false);
   }, [loader]);
   const clickPage = () => {
+    if (selector.current == "") {
+      console.log(selector.current);
+      return <Profile_info />;
+    }
+
     if (selector.current == "Profile_info") {
-      //console.log(selector.current);
+      console.log(selector.current);
       return <Profile_info />;
     }
     if (selector.current == "career") {
@@ -66,6 +68,14 @@ const Profile = () => {
                 <Breadcrumb.Item>{selector.current}</Breadcrumb.Item>
               </Breadcrumb>
               <div className="site-layout-background">
+                {/* <Router>
+                  <Switch>
+                    <Route exact  path="/profile">
+                      <Profile_info />
+                    </Route>
+                 
+                  </Switch>
+                </Router> */}
                 {clickPage(selector.current)}
                 {/* <Profile_info/> */}
               </div>

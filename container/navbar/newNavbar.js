@@ -103,7 +103,7 @@ const navbar = ({ isSignedIn, signOut }) => {
               </Menu.Item>
             </SubMenu>
             <Menu.Item key="3">
-              <Link href="/Profile/Profile_info">Profile</Link>
+              <Link href="/Profile">Profile</Link>
             </Menu.Item>
             {getItems(isSignedIn, signOut)}
           </Menu>
