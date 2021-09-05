@@ -122,9 +122,7 @@ const JobPostItem = ({
 
     return (
       <>
-      if () {
-        
-      }
+        if () {}
         {appliedStatus ? (
           ""
         ) : (
@@ -140,7 +138,6 @@ const JobPostItem = ({
             Apply
           </a>
         )}
-
         {/* <button
           onClick={() => router.push(`/jobs/detail/${id}`)}
           className="btn button-home mt-2 rounded"
@@ -166,7 +163,6 @@ const JobPostItem = ({
       </>
     );
   };
-  console.log(job);
 
   return (
     <Row className="job_post">

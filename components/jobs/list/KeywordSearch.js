@@ -7,6 +7,7 @@ const KeywordSearch = ({
   setFilter,
   getFilteredList,
   setShowFilter,
+  reload,
 }) => {
   const [keyword, setKeyword] = useState("");
 
@@ -18,6 +19,9 @@ const KeywordSearch = ({
       setKeyword("");
     }
   };
+  if (reload) {
+    getFilteredList(filter);
+  }
 
   return (
     <form style={{ display: "flex", width: "100%" }}>

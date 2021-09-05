@@ -8,13 +8,14 @@ const JobList = ({
   getOtherWorkers,
   all_workers,
   filtered_workers,
-  showFilterWorkers,
+  showFilterWorker,
 }) => {
   useEffect(() => {
     getOtherWorkers();
   }, []);
+  console.log(showFilterWorker);
 
-  if (showFilterWorkers) {
+  if (showFilterWorker) {
     return filtered_workers.map((worker) => {
       return <WorkerItem key={worker.id} worker={worker} />;
     });

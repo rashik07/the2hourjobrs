@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import LocationList from "../input/LocationList";
 import _ from "lodash";
 
-const LocationFilter = ({ filter, setFilter }) => {
+const LocationFilter = ({ filter, setFilter, reload }) => {
   const [location, setLocation] = useState("");
 
   const onLocationSelect = (location) => {
@@ -13,11 +13,13 @@ const LocationFilter = ({ filter, setFilter }) => {
 
       setFilter({ ...filter, location });
     }
+    reload(true);
   };
 
   const onClear = () => {
     filter = _.omit(filter, ["location"]);
     setFilter(filter);
+    reload(true);
   };
 
   return (
