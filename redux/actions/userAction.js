@@ -113,6 +113,7 @@ export const filterWorkers = (filter) => async (dispatch) => {
         const { id, type } = location;
 
         url += `profile__${type}=${id}&`;
+
         return url;
       },
 
@@ -131,8 +132,10 @@ export const filterWorkers = (filter) => async (dispatch) => {
     } else {
       response = await backend.get(url);
     }
-
-    dispatch({ type: types.FILTERED_WORKERS, payload: response.data });
+    if (response.status == 200) {
+      console.log(response);
+      dispatch({ type: types.FILTERED_WORKERS, payload: response.data });
+    }
   } catch (error) {
     console.log(error);
   }

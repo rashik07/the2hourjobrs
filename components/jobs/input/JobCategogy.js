@@ -3,7 +3,14 @@ import { Select } from "antd";
 import { connect } from "react-redux";
 import { getJobCategories } from "redux/actions/jobAction";
 
-const JobCategogy = ({ getJobCategories, categories, setValue, onClear,multiple ,value}) => {
+const JobCategogy = ({
+  getJobCategories,
+  categories,
+  setValue,
+  onClear,
+  multiple,
+  value,
+}) => {
   const { Option, OptGroup } = Select;
 
   useEffect(() => {
@@ -33,7 +40,6 @@ const JobCategogy = ({ getJobCategories, categories, setValue, onClear,multiple 
       onChange={setValue}
       onClear={onClear}
       allowClear
-      mode="multiple"
     >
       {getOptions(categories)}
     </Select>

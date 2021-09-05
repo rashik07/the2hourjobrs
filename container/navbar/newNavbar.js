@@ -11,9 +11,14 @@ const getItems = (isSignedIn, signOut) => {
     return (
       <>
         <Menu.Item key="5">
-          <Link href="#" onClick={() => signOut()}>
+          <a
+            href="#"
+            onClick={() => {
+              signOut();
+            }}
+          >
             Logout
-          </Link>
+          </a>
         </Menu.Item>
       </>
     );
@@ -21,12 +26,12 @@ const getItems = (isSignedIn, signOut) => {
   return (
     <>
       <Menu.Item key="6">
-        <Link href="#" onClick={() => router.push("/auth/login")}>
+        <Link href="/auth/login" onClick={() => router.push("/auth/login")}>
           Login
         </Link>
       </Menu.Item>
       <Menu.Item key="7">
-        <Link href="#" onClick={() => router.push("/auth/signup")}>
+        <Link href="/auth/signup" onClick={() => router.push("/auth/signup")}>
           Sign up
         </Link>
       </Menu.Item>
@@ -71,7 +76,17 @@ const navbar = ({ isSignedIn, signOut }) => {
                 <Link href="/jobs/my_posts">My Posted Jobs</Link>
               </Menu.Item>
             </SubMenu>
-            <Menu.Item key="4">Workers</Menu.Item>
+
+            <SubMenu key="4" title="Workers">
+              <Menu.Item key="setting:1">
+                <Link href="/worker/list">List</Link>
+              </Menu.Item>
+              <Menu.Item key="setting:2">
+                {" "}
+                <Link href="/worker/saved">Saved workers</Link>
+              </Menu.Item>
+            </SubMenu>
+
             <SubMenu key="2" title="Announcements">
               <Menu.Item key="setting:1">
                 <Link href="/announcement">All Announcements</Link>

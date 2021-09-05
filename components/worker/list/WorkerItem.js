@@ -1,7 +1,17 @@
 import { saveWorker } from "@/redux/actions/userAction";
 import React, { useState } from "react";
+import Link from "next/link";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
+
+import { Layout, Breadcrumb, Row, Col } from "antd";
+import {
+  PhoneOutlined,
+  ScheduleOutlined,
+  EnvironmentOutlined,
+  UserOutlined,
+  EditOutlined,
+} from "@ant-design/icons";
 
 const renderButtons = (
   id,
@@ -28,6 +38,7 @@ const renderButtons = (
 };
 
 const WorkerItem = ({ worker, saveWorker, isSignedIn }) => {
+  // console.log(worker);
   const { id, name, phone, email, saved_user_instance_id } = worker;
 
   const router = useRouter();
@@ -41,37 +52,51 @@ const WorkerItem = ({ worker, saveWorker, isSignedIn }) => {
   const [savedStatus, setSavedStatus] = useState(saved_user_instance_id);
 
   return (
-    <div className="row d-flex align-items-center border m-3 rounded">
-      <div className="col-9 text-muted fs-6">
-        <h4 className=" text-dark">
-          <strong className="title-home">{name}</strong>
-          <br />
-        </h4>
-        <p>
-          <i className="fas fa-map-marker-alt mr-2" />
-          Location <br />
-        </p>
-        <p>
-          <i className="fas fa-phone mr-2" />
-          {phone}
-          <br />
-        </p>
-        <p>
-          <i className="fas fa-envelope mr-2" />
-          {email}
-        </p>
-      </div>
-      <div className="col-3 btn-group-vertical">
-        {renderButtons(
-          id,
-          savedStatus,
-          setSavedStatus,
-          saveWorker,
-          isSignedIn,
-          show_save_button
-        )}
-      </div>
-    </div>
+    <>
+      <Row className="job_post">
+        <Col span={24}>
+          {/* <Row>
+            <Col span={21}>
+              <PopupDetails job={job} />
+            </Col>
+            <Col span={3}>{renderButtons()}</Col>
+          </Row> */}
+          {renderButtons(
+            id,
+            savedStatus,
+            setSavedStatus,
+            saveWorker,
+            isSignedIn,
+            show_save_button
+          )}
+          <h4 style={{ color: "gray" }}>
+            <UserOutlined /> <Link href="/Profile/Profile_info">{name}</Link>{" "}
+            {/* <EnvironmentOutlined /> {getLocations(job.job_location)} */}
+          </h4>
+          <p style={{ marginTop: "1rem", marginBottom: "1rem" }}>
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry's standard dummy text
+            ever since the 1500s, when an unknown printer took a galley of type
+            and scrambled it to make a type specimen book. It has survived not
+            only five centuries, but also the leap into electronic typesetting,
+            remaining essentially unchanged. It was popularised in the 1960s
+            with the release of Letraset sheets containing Lorem Ipsum passages,
+            and more recently with desktop publishing software like Aldus
+            PageMaker including versions of Lorem Ipsum.
+          </p>
+
+          <p>
+            {/* <EditOutlined /> {getEducation(job.education)} */}
+            {phone}
+            {email}
+          </p>
+          <p>
+            <ScheduleOutlined />{" "}
+            {/* {getExperience(job.min_experience, job.max_experience)} */}
+          </p>
+        </Col>
+      </Row>
+    </>
   );
 };
 
