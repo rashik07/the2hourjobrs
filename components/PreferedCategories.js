@@ -76,7 +76,8 @@ const PreferedCategories = ({
           value={value}
           dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
           allowClear
-          multiple={multiple}
+          multiple
+         
           onChange={setValue}
           onClear={onClear}
         >

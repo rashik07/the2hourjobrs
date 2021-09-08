@@ -18,7 +18,7 @@ const getConfig = () => {
 export const viewPreferedCategories = () => async (dispatch) => {
   try {
     const response = await backend.get(
-      `v1/user/projects/?user=${store.getState().auth.id}`,
+      `/v1/user/prefered-options/?user=${store.getState().auth.id}`,
       getConfig()
     );
     dispatch({ type: types.VIEW_PREFERED_CATEGORIES, payload: response.data });
@@ -33,7 +33,7 @@ export const createPreferedCategories = (formValues) => async (dispatch) => {
   try {
     formValues = { ...formValues, user: store.getState().auth.id };
     const response = await backend.post(
-      "v1/user/projects/",
+      "/v1/user/prefered-options",
       { ...formValues },
       getConfig()
     );
