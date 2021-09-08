@@ -35,13 +35,12 @@ const MultijobCategory = ({
 
   return (
     <Select
-      mode="multiple"
+      // mode="multiple"
       placeholder="Select Category"
       className="filtter-items"
       onChange={setValue}
       onClear={onClear}
       allowClear
-      
     >
       {getOptions(categories)}
     </Select>

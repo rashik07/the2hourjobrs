@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Select } from "antd";
 import { connect } from "react-redux";
-import { updateProfile, editUserProfile } from "@/redux/actions/userAction";
-import { saveTemporayJobPost } from "redux/actions/jobAction";
+import { getJobCategories } from "redux/actions/jobAction";
 import {
   Form,
+  TreeSelect,
   Input,
   Switch,
   Button,
@@ -16,14 +16,29 @@ import {
   Upload,
 } from "antd";
 import LocationList from "../components/jobs/input/LocationList";
-import { getJobCategories } from "redux/actions/jobAction";
 import { TagsInput } from "react-tag-input-component";
-import MultijobCategory from "components/jobs/input/MultijobCategory";
+import { getLocationList } from "redux/actions/jobAction";
+import { createPreferedCategories } from "redux/actions/preferedcategoriesAction";
 
-const PreferedCategories = () => {
+const PreferedCategories = ({
+  getJobCategories,
+  createPreferedCategories,
+  getLocationList,
+  location,
+  categories,
+  setValue,
+  onClear,
+  multiple,
+  value,
+}) => {
   const { Title } = Typography;
-
-  const onFinish1 = (values) => {
+  useEffect(() => {
+    getJobCategories();
+    getLocationList();
+    createPreferedCategories();
+  }, []);
+  const { Option, OptGroup } = Select;
+  const onFinish = (values) => {
     console.log("Received values of form: ", values);
   };
   const [form] = Form.useForm();
@@ -51,9 +66,77 @@ const PreferedCategories = () => {
       },
     },
   };
-  //   const setJobLocation = (value) => {
+  const { TreeNode } = TreeSelect;
+  const locationList = () => {
+    if (location)
+      return (
+        <TreeSelect
+          showSearch
+          className="filtter-items"
+          value={value}
+          dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
+          allowClear
+          multiple={multiple}
+          onChange={setValue}
+          onClear={onClear}
+        >
+          {location.map((divison) => {
+            return (
+              <TreeNode
+                value={JSON.stringify({
+                  id: divison.id,
+                  name: divison.name,
+                  type: divison.type,
+                })}
+                key={JSON.stringify({
+                  id: divison.id,
+                  name: divison.name,
+                  type: divison.type,
+                })}
+                title={divison.name}
+              >
+                {divison.districts.map((district) => {
+                  return (
+                    <TreeNode
+                      value={JSON.stringify({
+                        id: district.id,
+                        name: district.name,
+                        type: district.type,
+                      })}
+                      key={JSON.stringify({
+                        id: district.id,
+                        name: district.name,
+                        type: district.type,
+                      })}
+                      title={district.name}
+                    >
+                      {district.thana.map((thana) => {
+                        return (
+                          <TreeNode
+                            value={JSON.stringify({
+                              id: thana.id,
+                              name: thana.name,
+                              type: thana.type,
+                            })}
+                            key={JSON.stringify({
+                              id: thana.id,
+                              name: thana.name,
+                              type: thana.type,
+                            })}
+                            title={thana.name}
+                          />
+                        );
+                      })}
+                    </TreeNode>
+                  );
+                })}
+              </TreeNode>
+            );
+          })}
+        </TreeSelect>
+      );
+  };
 
-  //   };
   return (
     <div>
       <Form
@@ -61,32 +144,37 @@ const PreferedCategories = () => {
         layout={formLayout}
         form={form}
         name="register"
-        onFinish={onFinish1}
+        onFinish={onFinish}
       >
         <Divider>
-          {" "}
           <Title>Prefered Categories </Title>
         </Divider>
-
-        <Form.Item
-          name="select-multiple"
-          label="Select[multiple]"
-          rules={[
-            {
-              required: true,
-              message: "Please select your favourite colors!",
-              type: "array",
-            },
-          ]}
-        >
-          <MultijobCategory></MultijobCategory>
+        <Form.Item name="functional_categories" label="Functional Categories">
+          <Select
+            placeholder="Select Category"
+            onChange={setValue}
+            mode="multiple"
+            //  defaultValue={JSON.stringify(temp_jobpost.category)}
+          >
+            {categories.map((subCategory) => (
+              <OptGroup
+                key={subCategory.type}
+                label={`${subCategory.type} Categories`}
+              >
+                {subCategory.list.map(({ id, name }) => (
+                  <Option key={id} value={JSON.stringify({ id, name })}>
+                    {name}
+                  </Option>
+                ))}
+              </OptGroup>
+            ))}
+          </Select>
         </Form.Item>
         <Form.Item label="Special Skills " name="skills">
           <TagsInput></TagsInput>
         </Form.Item>
-
         <Form.Item label="Location " name="location">
-          <LocationList multiple={true} />
+          {locationList()}
         </Form.Item>
         <Form.Item {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit">
@@ -97,5 +185,15 @@ const PreferedCategories = () => {
     </div>
   );
 };
+const mapStateToProps = (state) => {
+  return {
+    categories: state.job.categories,
+    location: state.job.location,
+    create_prefered_categories: state.preferedcategories.create_prefered_categories
+  };
+};
 
-export default PreferedCategories;
+export default connect(mapStateToProps, { getJobCategories, getLocationList,createPreferedCategories })(
+  PreferedCategories
+);
+//export default PreferedCategories;

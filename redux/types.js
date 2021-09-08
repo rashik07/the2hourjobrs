@@ -53,7 +53,6 @@ export const GET_DISTRICT = "GET_DISTRICT";
 export const GET_DIVISION = "GET_DIVISION";
 export const GET_THANA = "GET_THANA";
 
-
 //************** PROJECT TYPES *********************/
 
 export const VIEW_PROJECT = "VIEW_PROJECT";
@@ -81,3 +80,7 @@ export const DELETE_QUALIFICATION = "DELETE_QUALIFICATION";
 
 //************** SETTING TYPES *********************/
 export const EDIT_PASSWORD = "EDIT_PASSWORD ";
+
+//************** PREFERED_CATEGORIES TYPES *********************/
+export const CREATE_PREFERED_CATEGORIES = "CREATE_PREFERED_CATEGORIES";
+export const VIEW_PREFERED_CATEGORIES = "VIEW_PREFERED_CATEGORIES";
