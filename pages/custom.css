@@ -1,41 +1,41 @@
-
-.site-layout{
+.site-layout {
   padding: 0 50px;
   margin-top: 64px;
 }
-.breadcrumb_main{
+.breadcrumb_main {
   margin: 16px 0;
 }
-.site-layout-background{
+.site-layout-background {
   padding: 15px;
   min-height: 60vh;
   border-radius: 5px;
+  margin-bottom: 40px;
 }
 #components-layout-demo-fixed .logo {
-    float: left;
-    width: 120px;
-    height: 31px;
-    margin: 16px 24px 16px 0;
-    background: rgba(255, 255, 255, 0.2);
-  }
-  .site-layout .site-layout-background {
-    background: #fff;
-  }
-  .anticon svg {
-    margin-bottom: 0%;
+  float: left;
+  width: 120px;
+  height: 31px;
+  margin: 16px 24px 16px 0;
+  background: rgba(255, 255, 255, 0.2);
+}
+.site-layout .site-layout-background {
+  background: #fff;
+}
+.anticon svg {
+  margin-bottom: 0%;
 }
 .ant-layout-header {
-    background: #163F66;
-    height: 65px;
+  background: #163f66;
+  height: 65px;
 }
-.ant-menu{
-  background: #163F66;
+.ant-menu {
+  background: #163f66;
   color: white;
 }
 .ant-menu-horizontal > .ant-menu-item a {
   color: white;
 }
-.filtter-items{
+.filtter-items {
   width: 100%;
 }
 .Jobfilter > h3 {
@@ -45,26 +45,25 @@
 .Jobfilter > .ant-divider {
   margin: 11px 0;
 }
-.job_post{
-  border: 1px solid #70BDF2;
+.job_post {
+  border: 1px solid #70bdf2;
   border-radius: 10px;
   padding: 1rem;
   margin-bottom: 1rem;
 }
-.job_post:hover{
-  background-color: #EDF4FE;
+.job_post:hover {
+  background-color: #edf4fe;
 }
-.job_title{
+.job_title {
   cursor: pointer;
 }
-.job_title:hover{
+.job_title:hover {
   color: #0e8044;
   text-decoration: underline;
 }
 .ant-select:not(.ant-select-customize-input) .ant-select-selector {
-  border: 0px solid #70BDF2;
-  border-bottom: 1px solid #70BDF2;
-  
+  border: 0px solid #70bdf2;
+  border-bottom: 1px solid #70bdf2;
 }
 .ant-steps {
   width: 100%;
@@ -77,38 +76,41 @@
   margin-bottom: 2rem;
   width: 100%;
   border: 0px solid;
-  border-bottom: 1px solid #70BDF2;
+  border-bottom: 1px solid #70bdf2;
   border-radius: 0px;
 }
-.form-label{
+.form-label {
   margin-bottom: 2rem;
   text-transform: uppercase;
   font-weight: 500;
 }
 .ant-badge {
   color: black;
-  background-color: #F9BE02;
-  padding: .5rem;
+  background-color: #f9be02;
+  padding: 0.5rem;
   border-radius: 5px;
-  margin-right: .5rem;
-  margin-bottom: .5rem;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
   box-shadow: 0 0 0 1px #d9d9d9 inset;
 }
 
-.sidebar-layout-background a{
-  color:#ffffff;
-  
+.sidebar-layout-background a {
+  color: #ffffff;
 }
-/* .ant-menu-item-selected a, .ant-menu-item-selected a:hover {
-  color: #000000;
-  
-}
-.ant-menu-item-selected{
-  background: #ffffff !important;
-} */
-
 
 .ant-layout-sider-has-trigger {
   margin-top: 63px;
   min-height: 100%;
+}
+
+.button_eye {
+  position: absolute;
+  right: 100px;
+}
+.profile_image {
+  border-radius: 50%;
+}
+.view_profile_content{
+  margin-left: 100px;
+  margin-right: 100px;
 }

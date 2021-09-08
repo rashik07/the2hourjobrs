@@ -3,7 +3,7 @@ import { Select } from "antd";
 import { connect } from "react-redux";
 import { getJobCategories } from "redux/actions/jobAction";
 
-const JobCategogy = ({
+const MultijobCategory = ({
   getJobCategories,
   categories,
   setValue,
@@ -35,6 +35,7 @@ const JobCategogy = ({
 
   return (
     <Select
+      mode="multiple"
       placeholder="Select Category"
       className="filtter-items"
       onChange={setValue}
@@ -53,4 +54,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { getJobCategories })(JobCategogy);
+export default connect(mapStateToProps, { getJobCategories })(MultijobCategory);

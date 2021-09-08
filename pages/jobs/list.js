@@ -37,9 +37,9 @@ const Jobs = ({ filterJobs }) => {
       <Head>
         <title>Job list</title>
       </Head>
-      <Layout>
+      <Layout className="layout">
         <Navbar />
-        <Content className="site-layout">
+        <Content className="site-layout" >
           <Breadcrumb className="breadcrumb_main">
             <Breadcrumb.Item>Home</Breadcrumb.Item>
             <Breadcrumb.Item>Job</Breadcrumb.Item>
@@ -114,7 +114,7 @@ const Jobs = ({ filterJobs }) => {
             </Row>
           </div>
         </Content>
-        <Footer />
+      
       </Layout>
     </>
   );

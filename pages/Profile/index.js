@@ -16,7 +16,6 @@ const Profile = () => {
   const [loader, setloader] = useState(false);
 
   useEffect(() => {
-
     setloader(false);
   }, [loader]);
   const clickPage = () => {
@@ -62,24 +61,19 @@ const Profile = () => {
         <Layout style={{ minHeight: "100vh" }}>
           <Sidebar setloader={setloader} selector={selector} />
           <Layout>
-            <Content className="site-layout">
-              <Breadcrumb className="breadcrumb_main">
-                <Breadcrumb.Item>Profile</Breadcrumb.Item>
-                <Breadcrumb.Item>{selector.current}</Breadcrumb.Item>
-              </Breadcrumb>
-              <div className="site-layout-background">
-                {/* <Router>
-                  <Switch>
-                    <Route exact  path="/profile">
-                      <Profile_info />
-                    </Route>
-                 
-                  </Switch>
-                </Router> */}
-                {clickPage(selector.current)}
-                {/* <Profile_info/> */}
-              </div>
-            </Content>
+            <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+              <Col  className="gutter-row" span={24}>
+              <Content className="site-layout" style={{ padding: '0 50px' }}>
+                <Breadcrumb className="breadcrumb_main">
+                  <Breadcrumb.Item>Profile</Breadcrumb.Item>
+                  <Breadcrumb.Item>{selector.current}</Breadcrumb.Item>
+                </Breadcrumb>
+                <div className="site-layout-background">
+                  {clickPage(selector.current)}
+                </div>
+              </Content>
+              </Col>
+            </Row>
           </Layout>
         </Layout>
       </Layout>

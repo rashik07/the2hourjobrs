@@ -1,5 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Select, Image } from "antd";
+import {
+  Select,
+  Image,
+  Upload,
+  Space,
+  Form,
+  Input,
+  Button,
+  Radio,
+  DatePicker,
+  Typography,
+  Divider,
+  Tooltip,
+} from "antd";
 import { connect } from "react-redux";
 import {
   getDistrict,
@@ -8,17 +21,7 @@ import {
   updateProfile,
   editUserProfile,
 } from "@/redux/actions/userAction";
-import {
-  Form,
-  Input,
-  Button,
-  Radio,
-  DatePicker,
-  Typography,
-  Divider,
-} from "antd";
-import { Upload, Space } from "antd";
-import { UploadOutlined } from "@ant-design/icons";
+import { UploadOutlined, EyeOutlined } from "@ant-design/icons";
 import moment from "moment";
 
 const Profile_info = ({
@@ -43,7 +46,7 @@ const Profile_info = ({
     setloader(false);
   }, [loader]);
 
- // console.log(updateProfile);
+  // console.log(updateProfile);
   const dateFormat = "YYYY-MM-DD";
   user_profile.birthday = moment(user_profile.birthday, dateFormat);
   const onFinish = (values) => {
@@ -140,42 +143,40 @@ const Profile_info = ({
   let divisionToRender;
   if (get_division) {
     divisionToRender = get_division.map(({ id, name }) => {
-      return <Option key={id} value={id}>
-      {name}
-    </Option>;
+      return (
+        <Option key={id} value={id}>
+          {name}
+        </Option>
+      );
     });
-  }
-  else {
+  } else {
     divisionToRender = "Loading...";
   }
 
   let districtToRender;
   if (get_district) {
     districtToRender = get_district.map(({ id, name }) => {
-      return <Option key={id} value={id}>
-      {name}
-    </Option>;
+      return (
+        <Option key={id} value={id}>
+          {name}
+        </Option>
+      );
     });
-  }
-  else {
+  } else {
     districtToRender = "Loading...";
   }
   let thanaToRender;
   if (get_thana) {
     thanaToRender = get_thana.map(({ id, name }) => {
-      return <Option key={id} value={id}>
-      {name}
-    </Option>;
+      return (
+        <Option key={id} value={id}>
+          {name}
+        </Option>
+      );
     });
-  }
-  else {
+  } else {
     thanaToRender = "Loading...";
   }
-  // get_division.map(({ id, name }) => (
-  //     <Option key={id} value={id}>
-  //       {name}
-  //     </Option>
-  //   ))
 
   const normFile = (e) => {
     console.log("Upload event:", e);
@@ -202,15 +203,22 @@ const Profile_info = ({
           {" "}
           <Title>Basic Info</Title>
         </Divider>
-
-        <Image width={200} src={"http://127.0.0.1:8000" + user_profile.image} />
-
+        <Image
+          width={200}
+          height={200}
+          src={"http://127.0.0.1:8000" + user_profile.image}
+        />
+        <Tooltip title="search" className="button_eye">
+          <a href="../../Profile/View_profile">
+            <Button type="primary" shape="circle" icon={<EyeOutlined />} />
+          </a>
+        </Tooltip>
         <Form.Item
           name="photo"
-          label="Upload"
+          label="Upload Photo"
           valuePropName="fileList"
           getValueFromEvent={normFile}
-          extra="longgggggggggggggggggggggggggggggggggg"
+          extra="upload photo"
         >
           <Upload name="image" listType="picture" maxCount={1}>
             <Button icon={<UploadOutlined />}>Click to upload</Button>
@@ -303,7 +311,6 @@ const Profile_info = ({
             defaultValue={user_profile.division}
           >
             {divisionToRender}
-           
           </Select>
         </Form.Item>
 
