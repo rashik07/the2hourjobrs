@@ -8,6 +8,7 @@ import usereduReducer from "./usereducationReducer";
 import { reducer as formReducer } from "redux-form";
 import employmentReducer from "./employmentReducer";
 import settingReducer from "./settingReducer";
+import preferedcategoriesReducer from "./preferedcategoriesReducer";
 
 export default combineReducers({
   auth: authReducer,
@@ -16,7 +17,8 @@ export default combineReducers({
   user: userReducer,
   form: formReducer,
   project: projectReducer,
-  employment:employmentReducer,
+  employment: employmentReducer,
   education: usereduReducer,
   setting: settingReducer,
+  preferedcategories: preferedcategoriesReducer,
 });

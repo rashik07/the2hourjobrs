@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { applyJob, saveJob, deleteJob } from "@/redux/actions/jobAction";
 import Link from "next/link";
 import { connect } from "react-redux";
@@ -18,7 +18,7 @@ import {
   UserOutlined,
   EditOutlined,
 } from "@ant-design/icons";
-
+import { getSelfPostedJobs,getAllJobs } from "@/redux/actions/jobAction";
 const JobPostItem = ({
   job,
   userid,
@@ -26,6 +26,9 @@ const JobPostItem = ({
   applyJob,
   saveJob,
   deleteJob,
+  getSelfPostedJobs,
+  self_posted_jobs,
+ 
 }) => {
   const router = useRouter();
   const { id, title, poster, applied, saved, applied_saved_id } = job;
@@ -41,7 +44,14 @@ const JobPostItem = ({
     }
     return `Maximum ${max} year(s)`;
   };
+  
+  useEffect(() => {
+    getSelfPostedJobs();
 
+   
+  }, []);
+
+console.log(self_posted_jobs);
   const getLocations = (location) => {
     const location_list = [];
     location.forEach((loc) => {
@@ -60,10 +70,11 @@ const JobPostItem = ({
   };
 
   const applyJobBtnClick = () => {
-    if (!isSignedIn) {
+    if (!isSignedIn ) {
       alert("You must log in to access this feature");
       return;
     }
+   
     applyJob(id, userid, setAppliedStatus);
   };
 
@@ -91,6 +102,30 @@ const JobPostItem = ({
     }
     saveJob(id, userid, savedStatus, setSavedStatus, applied_saved_id);
   };
+  const applyShow =() =>{
+   if( appliedStatus) {
+  return    "applied"
+    }
+   
+    else if(btn_disable) {
+      return ""
+      
+    }
+    console.log(self_posted_jobs);
+    return    <a
+        style={{
+          color: "black",
+          padding: "2px",
+          borderBottom: "5px solid #F9BE02",
+          borderColor: "#F9BE02",
+        }}
+      
+        onClick={applyJobBtnClick}
+      >
+        Apply
+      </a>
+    
+  }
 
   const renderButtons = () => {
     // For self posted jobs
@@ -122,22 +157,10 @@ const JobPostItem = ({
 
     return (
       <>
-        if () {}
-        {appliedStatus ? (
-          ""
-        ) : (
-          <a
-            style={{
-              color: "black",
-              padding: "2px",
-              borderBottom: "5px solid #F9BE02",
-              borderColor: "#F9BE02",
-            }}
-            onClick={applyJobBtnClick}
-          >
-            Apply
-          </a>
-        )}
+  
+        {
+          applyShow()
+       }
         {/* <button
           onClick={() => router.push(`/jobs/detail/${id}`)}
           className="btn button-home mt-2 rounded"
@@ -206,9 +229,11 @@ const mapStateToProps = (state) => {
   return {
     userid: state.auth.id,
     isSignedIn: state.auth.isSignedIn,
+    self_posted_jobs: Object.values(state.job.self_posted_jobs),
+ 
   };
 };
 
-export default connect(mapStateToProps, { applyJob, saveJob, deleteJob })(
+export default connect(mapStateToProps, { applyJob, saveJob, deleteJob,getSelfPostedJobs })(
   JobPostItem
 );

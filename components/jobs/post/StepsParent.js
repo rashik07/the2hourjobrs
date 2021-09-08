@@ -10,6 +10,7 @@ import _ from "lodash";
 import LocationList from "../input/LocationList";
 
 const renderItem = (item, children, saveTemporayJobPost, temp_jobpost) => {
+  
   if (temp_jobpost)
     switch (item) {
       case "title":
@@ -349,6 +350,7 @@ const renderCategories = (categories, temp_jobpost, setValue) => {
           placeholder="Select Category"
           onChange={(value) => setValue({ category: JSON.parse(value) })}
           defaultValue={JSON.stringify(temp_jobpost.category)}
+          
         >
           {categories.map((subCategory) => (
             <OptGroup

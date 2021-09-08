@@ -8,7 +8,7 @@ const INITIAL_STATE = {
 const employmentReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case types.CREATE_EMPLOYMENT:
-      return { ...state, create_project: action.payload };
+      return { ...state, create_employment: action.payload };
 
     case types.VIEW_EMPLOYMENT:
       return { ...state, view_employment: action.payload } ;

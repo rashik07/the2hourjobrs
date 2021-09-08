@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Layout, Menu, Breadcrumb, Typography } from "antd";
-import Link from "next/link";
+
 import {
   DesktopOutlined,
   RadiusSettingOutlined,
@@ -11,7 +11,7 @@ import {
   BookOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 const sidebar = ({ selector, setloader }) => {
@@ -32,6 +32,7 @@ const sidebar = ({ selector, setloader }) => {
       >
         <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
           <Menu.Item key="1" icon={<UserOutlined />}>
+        
             <a
               href="#"
               onClick={() => {

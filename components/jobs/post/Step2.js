@@ -3,6 +3,7 @@ import StepsParent from "./StepsParent";
 import { connect } from "react-redux";
 
 const Step2 = ({ postStep, setPostStep, temp_jobpost }) => {
+  console.log(temp_jobpost);
   const onSubmit = () => {
     const { min_salary, max_salary, job_description } = temp_jobpost;
 
