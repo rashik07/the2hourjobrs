@@ -1,7 +1,7 @@
 import * as types from "./../types";
 
 const INITIAL_STATE = {
-  user_prefered_categories: [],
+  user_prefered_categories: {},
 };
 
 const preferedcategoriesReducer = (state = INITIAL_STATE, action) => {

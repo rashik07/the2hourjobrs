@@ -2,14 +2,14 @@ import React, { useEffect } from "react";
 import Head from "next/head";
 import { getSelfPostedJobs } from "@/redux/actions/jobAction";
 import { connect, useDispatch } from "react-redux";
-import Navbar from "container/navbar/navbar";
+import Navbar from "container/navbar/newNavbar";
 import JobPostItem from "components/jobs/JobPostItem";
-
+import { Layout, Breadcrumb } from "antd";
 import * as types from "@/redux/types";
 
 const SelfPostedJobs = ({ self_posted_jobs, getSelfPostedJobs }) => {
   const dispatch = useDispatch();
-
+  const { Header, Content, Footer } = Layout;
   useEffect(() => {
     getSelfPostedJobs();
 
@@ -34,12 +34,22 @@ const SelfPostedJobs = ({ self_posted_jobs, getSelfPostedJobs }) => {
       <Head>
         <title>Self Posted Jobs</title>
       </Head>
-      <Navbar />
-
-      <div className="container main-body">
-        <h2 className="ml-3 mt-4">Self Posted Jobs</h2>
-        {showSelfPostedJobs()}
-      </div>
+      <Layout className="layout">
+        <Navbar />
+       
+        <Content  className="site-layout" style={{ padding: "0 50px" }}>
+          <Breadcrumb style={{ margin: "16px 0" }}>
+            <Breadcrumb.Item>Jobs</Breadcrumb.Item>
+            <Breadcrumb.Item>Self posted jobs</Breadcrumb.Item> 
+            
+          </Breadcrumb>
+          <div className="site-layout-content">
+            <h2 className="ml-3 mt-4">Self Posted Jobs</h2>
+            {showSelfPostedJobs()}
+          </div>
+        </Content>
+       
+      </Layout>
     </div>
   );
 };

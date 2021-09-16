@@ -9,7 +9,7 @@ import Education from "components/Profile/Education";
 import Employment from "components/Profile/Employment";
 import Portfolio from "components/Profile/Portfolio";
 import Setting from "components/Profile/Setting";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+
 const Profile = () => {
   const { Content } = Layout;
   const selector = useRef("");
@@ -61,19 +61,15 @@ const Profile = () => {
         <Layout style={{ minHeight: "100vh" }}>
           <Sidebar setloader={setloader} selector={selector} />
           <Layout>
-            <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-              <Col  className="gutter-row" span={24}>
-              <Content className="site-layout" style={{ padding: '0 50px' }}>
-                <Breadcrumb className="breadcrumb_main">
-                  <Breadcrumb.Item>Profile</Breadcrumb.Item>
-                  <Breadcrumb.Item>{selector.current}</Breadcrumb.Item>
-                </Breadcrumb>
-                <div className="site-layout-background">
-                  {clickPage(selector.current)}
-                </div>
-              </Content>
-              </Col>
-            </Row>
+            <Content className="site-layout" style={{ padding: "0 50px" }}>
+              <Breadcrumb className="breadcrumb_main">
+                <Breadcrumb.Item>Profile</Breadcrumb.Item>
+                <Breadcrumb.Item>{selector.current}</Breadcrumb.Item>
+              </Breadcrumb>
+              <div className="site-layout-background">
+                {clickPage(selector.current)}
+              </div>
+            </Content>
           </Layout>
         </Layout>
       </Layout>

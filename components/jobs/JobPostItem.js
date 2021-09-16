@@ -10,7 +10,7 @@ import {
   PushpinFilled,
   PushpinTwoTone,
 } from "@ant-design/icons";
-import {Row, Col } from "antd";
+import { Row, Col } from "antd";
 import {
   PhoneOutlined,
   ScheduleOutlined,
@@ -18,7 +18,7 @@ import {
   UserOutlined,
   EditOutlined,
 } from "@ant-design/icons";
-import { getSelfPostedJobs,getAllJobs } from "@/redux/actions/jobAction";
+import { getSelfPostedJobs, getAllJobs } from "@/redux/actions/jobAction";
 const JobPostItem = ({
   job,
   userid,
@@ -28,7 +28,6 @@ const JobPostItem = ({
   deleteJob,
   getSelfPostedJobs,
   self_posted_jobs,
- 
 }) => {
   const router = useRouter();
   const { id, title, poster, applied, saved, applied_saved_id } = job;
@@ -44,14 +43,12 @@ const JobPostItem = ({
     }
     return `Maximum ${max} year(s)`;
   };
-  
+
   useEffect(() => {
     getSelfPostedJobs();
-
-   
   }, []);
 
-console.log(self_posted_jobs);
+  console.log(self_posted_jobs);
   const getLocations = (location) => {
     const location_list = [];
     location.forEach((loc) => {
@@ -70,11 +67,11 @@ console.log(self_posted_jobs);
   };
 
   const applyJobBtnClick = () => {
-    if (!isSignedIn ) {
+    if (!isSignedIn) {
       alert("You must log in to access this feature");
       return;
     }
-   
+
     applyJob(id, userid, setAppliedStatus);
   };
 
@@ -102,30 +99,27 @@ console.log(self_posted_jobs);
     }
     saveJob(id, userid, savedStatus, setSavedStatus, applied_saved_id);
   };
-  const applyShow =() =>{
-   if( appliedStatus) {
-  return    "applied"
-    }
-   
-    else if(btn_disable) {
-      return ""
-      
+  const applyShow = () => {
+    if (appliedStatus) {
+      return "applied";
+    } else if (btn_disable) {
+      return "";
     }
     console.log(self_posted_jobs);
-    return    <a
+    return (
+      <a
         style={{
           color: "black",
           padding: "2px",
           borderBottom: "5px solid #F9BE02",
           borderColor: "#F9BE02",
         }}
-      
         onClick={applyJobBtnClick}
       >
         Apply
       </a>
-    
-  }
+    );
+  };
 
   const renderButtons = () => {
     // For self posted jobs
@@ -157,10 +151,7 @@ console.log(self_posted_jobs);
 
     return (
       <>
-  
-        {
-          applyShow()
-       }
+        {applyShow()}
         {/* <button
           onClick={() => router.push(`/jobs/detail/${id}`)}
           className="btn button-home mt-2 rounded"
@@ -230,10 +221,12 @@ const mapStateToProps = (state) => {
     userid: state.auth.id,
     isSignedIn: state.auth.isSignedIn,
     self_posted_jobs: Object.values(state.job.self_posted_jobs),
- 
   };
 };
 
-export default connect(mapStateToProps, { applyJob, saveJob, deleteJob,getSelfPostedJobs })(
-  JobPostItem
-);
+export default connect(mapStateToProps, {
+  applyJob,
+  saveJob,
+  deleteJob,
+  getSelfPostedJobs,
+})(JobPostItem);

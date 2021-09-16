@@ -16,10 +16,10 @@ const getConfig = () => {
 };
 export const getDivision = () => async (dispatch) => {
   try {
-    console.log("working");
+ //   console.log("working");
     const response = await backend.get("/v1/category/division/", getConfig());
     dispatch({ type: types.GET_DIVISION, payload: response.data });
-    console.log(response.data);
+   // console.log(response.data);
   } catch (error) {
     console.log(error);
     console.log(error.response);
@@ -53,7 +53,7 @@ export const updateProfile = () => async (dispatch) => {
       getConfig()
     );
     dispatch({ type: types.UPDATE_USER_PROFILE, payload: response.data });
-    console.log("user data callll");
+    //console.log("user data callll");
   } catch (error) {
     console.log(error);
     console.log(error.response);

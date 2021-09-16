@@ -21,7 +21,7 @@ import {
   updateProfile,
   editUserProfile,
 } from "@/redux/actions/userAction";
-import { UploadOutlined, EyeOutlined } from "@ant-design/icons";
+import { UploadOutlined, EyeOutlined, ContactsFilled } from "@ant-design/icons";
 import moment from "moment";
 
 const Profile_info = ({
@@ -46,7 +46,7 @@ const Profile_info = ({
     setloader(false);
   }, [loader]);
 
-  // console.log(updateProfile);
+ 
   const dateFormat = "YYYY-MM-DD";
   user_profile.birthday = moment(user_profile.birthday, dateFormat);
   const onFinish = (values) => {
@@ -74,11 +74,10 @@ const Profile_info = ({
       console.log("image");
       formData.append("image", values.photo[0].originFileObj);
     }
-
-    // console.log('Received values of form: ', values);
+    console.log(values);
     editUserProfile(formData);
     setloader(true);
-    //   console.log('update: ', editUserProfile);
+    alert("successfully saved");
   };
   const { Option } = Select;
   const { TextArea } = Input;

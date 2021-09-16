@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from "react";
 import Head from "next/head";
-import { connect } from "react-redux";
-import { updateProfile } from "@/redux/actions/userAction";
 import Navbar from "../../container/navbar/newNavbar";
-import { Layout, Breadcrumb, Row, Col, Image, Typography, Space } from "antd";
-import {PhoneOutlined } from "@ant-design/icons";
+import { Layout, Breadcrumb, Row, Col, Typography, Divider } from "antd";
+import Topsection from "components/Viewprofile/Topsection";
+import Sidesection from "components/Viewprofile/Sidesection";
+import Mainsection from "components/Viewprofile/Mainsection";
 
-const View_profile = ({ updateProfile, user_profile }) => {
+const View_profile = () => {
   const { Text, Link, Title } = Typography;
   const { Content } = Layout;
-  useEffect(() => {
-    updateProfile();
-  }, []);
+
   return (
     <div>
       <Head>
@@ -19,29 +17,24 @@ const View_profile = ({ updateProfile, user_profile }) => {
       </Head>
       <Layout className="layout">
         <Navbar />
-        <Content className="site-layout view_profile_content" style={{ padding: "0 50px" }}>
+        <Content
+          className="site-layout view_profile_content"
+          style={{ padding: "0 50px" }}
+        >
           <Breadcrumb className="breadcrumb_main">
+            <Breadcrumb.Item>Profile</Breadcrumb.Item>
             <Breadcrumb.Item>View Profile</Breadcrumb.Item>
           </Breadcrumb>
           <div className="site-layout-background">
-            <Row justify="center" align="top">
-              <Col span={4} >
-
-                <Image
-                  className="profile_image"
-                  shape="circle"
-                  width={100}
-                  height={100}
-                  src={"http://127.0.0.1:8000" + user_profile.image}
-                />
-                </Col>
-                
-              <Col span={20} >
-                <Title level={2}>{user_profile.name}</Title> 
-                <Text type="secondary" icon={<PhoneOutlined />}><PhoneOutlined/>{user_profile.phone}</Text>
-                <Text type="secondary">{user_profile.address},{user_profile.division}</Text>
+            <Topsection />
+            <Divider />
+            <Row justify="left" align="top">
+              <Col span={5} >
+                <Sidesection />
               </Col>
-              <Col span={18}></Col>
+              <Col span={19} style={{borderLeft: "1px solid #F0F0F0", padding: "0px 10px" }}>
+                <Mainsection/>
+              </Col>
             </Row>
           </div>
         </Content>
@@ -50,13 +43,5 @@ const View_profile = ({ updateProfile, user_profile }) => {
   );
 };
 
-//export default View_profile;
-const mapStateToProps = (state) => {
-  return {
-    user_profile: state.user.user_profile,
-  };
-};
+export default View_profile;
 
-export default connect(mapStateToProps, {
-  updateProfile,
-})(View_profile);

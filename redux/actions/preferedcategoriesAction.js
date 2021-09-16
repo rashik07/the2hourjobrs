@@ -21,7 +21,8 @@ export const viewPreferedCategories = () => async (dispatch) => {
       `/v1/user/prefered-options/?user=${store.getState().auth.id}`,
       getConfig()
     );
-    dispatch({ type: types.VIEW_PREFERED_CATEGORIES, payload: response.data });
+    dispatch({ type: types.VIEW_PREFERED_CATEGORIES, payload: response.data[0] });
+    console.log("user data callll");
   } catch (error) {
     console.log(error);
     console.log(error.response);
@@ -33,7 +34,7 @@ export const createPreferedCategories = (formValues) => async (dispatch) => {
   try {
     formValues = { ...formValues, user: store.getState().auth.id };
     const response = await backend.post(
-      "/v1/user/prefered-options",
+      "/v1/user/prefered-options/",
       { ...formValues },
       getConfig()
     );

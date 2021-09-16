@@ -114,3 +114,8 @@
   margin-left: 100px;
   margin-right: 100px;
 }
+.site-layout-content{
+  min-height: 280px;
+  padding: 24px;
+  background: #fff;
+}

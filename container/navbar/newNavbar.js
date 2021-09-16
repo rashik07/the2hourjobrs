@@ -6,7 +6,8 @@ import { signOut } from "../../redux/actions/authAction";
 const { Header } = Layout;
 const { SubMenu } = Menu;
 
-const getItems = (isSignedIn, signOut) => {
+const getItems = (isSignedIn, signOut) => 
+{  const { Header, Content, Footer } = Layout;
   if (isSignedIn) {
     return (
       <>
@@ -25,6 +26,7 @@ const getItems = (isSignedIn, signOut) => {
   }
   return (
     <>
+  
       <Menu.Item key="6">
         <Link href="/auth/login" onClick={() => router.push("/auth/login")}>
           Login
@@ -35,6 +37,7 @@ const getItems = (isSignedIn, signOut) => {
           Sign up
         </Link>
       </Menu.Item>
+ 
     </>
   );
 };
