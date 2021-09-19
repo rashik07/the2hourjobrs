@@ -19,10 +19,10 @@ const PopupDetails = ({ job }) => {
 
   return (
     <>
+    
       <h3 className="job_title" onClick={showDrawer}>
         {job.title}
       </h3>
-
       <Drawer
         title={job.title}
         placement="right"
@@ -30,19 +30,21 @@ const PopupDetails = ({ job }) => {
         closable={false}
         onClose={onClose}
         visible={visible}
+      
       >
-        <Row>
-          <Col span={10}>
-            <h4>Type :</h4> {job.category.name}
-            <br />
-          </Col>
-          
           <button
             onClick={() => router.push(`/jobs/detail/${job.id}`)}
             className="btn button-home mt-2 rounded"
           >
             Detail
           </button>
+        <Row>
+          <Col span={10}>
+            <h4>Type :</h4> {job.category.name}
+            <br />
+          </Col>
+
+        
           <Col span={4}>
             <h4>Posted on :</h4>{" "}
             <span>{dateformat(job.posting_timestamp, "mmmm dS, yyyy")}</span>

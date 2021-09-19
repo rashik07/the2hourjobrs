@@ -12,9 +12,9 @@ const SelfPostedJobs = ({ self_posted_jobs, getSelfPostedJobs }) => {
   const { Header, Content, Footer } = Layout;
   useEffect(() => {
     getSelfPostedJobs();
-
     dispatch({ type: types.RESET_TEMP_JOB_STATE });
   }, []);
+  console.log(self_posted_jobs);
 
   const showSelfPostedJobs = () => {
     if (self_posted_jobs.length)
@@ -36,19 +36,17 @@ const SelfPostedJobs = ({ self_posted_jobs, getSelfPostedJobs }) => {
       </Head>
       <Layout className="layout">
         <Navbar />
-       
-        <Content  className="site-layout" style={{ padding: "0 50px" }}>
+
+        <Content className="site-layout" style={{ padding: "0 50px" }}>
           <Breadcrumb style={{ margin: "16px 0" }}>
             <Breadcrumb.Item>Jobs</Breadcrumb.Item>
-            <Breadcrumb.Item>Self posted jobs</Breadcrumb.Item> 
-            
+            <Breadcrumb.Item>Self posted jobs</Breadcrumb.Item>
           </Breadcrumb>
           <div className="site-layout-content">
             <h2 className="ml-3 mt-4">Self Posted Jobs</h2>
             {showSelfPostedJobs()}
           </div>
         </Content>
-       
       </Layout>
     </div>
   );

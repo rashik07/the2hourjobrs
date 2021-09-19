@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Footer from "../../container/footer/footer";
-import Navbar from "../../container/navbar/navbar";
+import Navbar from "../../container/navbar/newNavbar";
 import Head from "next/head";
 import Link from "next/link";
 import { connect } from "react-redux";
@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import * as types from "redux/types";
 import Form from "../../components/Form";
 import { signUp } from "redux/actions/authAction";
+import { Layout, Button, Input } from "antd";
 
 const Signup = (props) => {
   const dispatch = useDispatch();
@@ -38,7 +39,14 @@ const Signup = (props) => {
     <>
       <Head>
         <title>Sign up</title>
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous"
+        ></link>
       </Head>
+      <Layout className="layout">
       <Navbar />
       <main className="form-signin text-center mb-5">
         <form>
@@ -93,6 +101,7 @@ const Signup = (props) => {
           </Link>
         </form>
       </main>
+      </Layout>
       {/* <Footer /> */}
     </>
   );

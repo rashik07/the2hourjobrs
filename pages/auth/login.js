@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { connect } from "react-redux";
 import { Layout, Button, Form, Input } from "antd";
-
 import Navbar from "../../container/navbar/newNavbar";
 import { signIn } from "redux/actions/authAction";
 
@@ -12,8 +11,6 @@ const handleSubmit = (e, username, password, signIn, router) => {
   e.preventDefault();
   if (signIn({ username, password }) === true) router.back();
 
-  // if (username && password) {
-  // }
 };
 
 const Login = ({ signIn, isSignedIn }) => {
@@ -24,54 +21,50 @@ const Login = ({ signIn, isSignedIn }) => {
   const router = useRouter();
 
   useEffect(() => {
-    if (isSignedIn) router.replace("/");
+    if (isSignedIn) router.replace("/jobs/list");
   });
   const { Content } = Layout;
   const tailLayout = {
-  wrapperCol: { offset: 8, span: 16 },
-};
+    wrapperCol: { offset: 8, span: 16 },
+  };
+  
 
   return (
     <>
       <Head>
         <title>Login</title>
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous"
+        ></link>
       </Head>
       <Layout className="layout">
         <Navbar />
-        <Content
-          className="site-layout view_profile_content"
-          style={{ padding: "0 50px" }}
-        >
-          <Form name="basic" labelCol={{ span: 8 }} wrapperCol={{ span: 16 }}>
+        <main className="form-signin text-center ">
+          <form>
             <h1>Login</h1>
-
-            <Form.Item
-              label="Username"
-              name="username"
-              rules={[
-                { required: true, message: "Please input your username!" },
-              ]}
-            >
-              <Input
+            <div className="m-4 ">
+              <label htmlFor="inputEmail " className="fs-6 fw-normal">
+                Email / Username:
+              </label>
+              <input
                 type="text"
                 className="form-control"
-                on
-                Change={(e) => setUsername(e.target.value)}
+                onChange={(e) => setUsername(e.target.value)}
               />
-            </Form.Item>
-            <Form.Item
-              label="Password"
-              name="password"
-              rules={[
-                { required: true, message: "Please input your password!" },
-              ]}
-            >
-              <Input
+            </div>
+            <div className="m-4">
+              <label htmlFor="inputPassword" className="fs-6 fw-normal">
+                Password:
+              </label>
+              <input
                 type={hidePassword ? "password" : "text"}
                 className="form-control"
                 onChange={(e) => setPassword(e.target.value)}
               />
-            </Form.Item>
+            </div>
             <div data-v-e52648b8 className="right">
               <div
                 data-v-58ebcdf7
@@ -81,29 +74,27 @@ const Login = ({ signIn, isSignedIn }) => {
                 <a href="#">Forgot password?</a>
               </div>
             </div>
-
-            <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-              <Button
+            <div className="d-grid gap-2 d-flex " style={{ height: "50px" }}>
+              <button
+                className="w-50 btn btn-lg btn-success fs-6 mr-3"
                 onClick={(e) =>
                   handleSubmit(e, username, password, signIn, router)
                 }
               >
                 Log in
-              </Button>
-            </Form.Item>
-            <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+              </button>
               <Link href="/auth/signup">
-                <Button
-                  type="primary"
-                  block
+                <button
+                  className="w-50 btn btn-lg fs-6 text-white"
+                  type="submit"
                   style={{ backgroundColor: "#163F66" }}
                 >
                   Sign Up
-                </Button>
+                </button>
               </Link>
-            </Form.Item>
-          </Form>
-        </Content>
+            </div>
+          </form>
+        </main>
       </Layout>
     </>
   );
