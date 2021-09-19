@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import { Drawer, Button, Divider, Row, Col } from "antd";
 import dateformat from "dateformat";
 import { Descriptions } from "antd";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 const PopupDetails = ({ job }) => {
+  const router = useRouter();
   const [visible, setVisible] = useState(false);
-
+  console.log(job);
   const showDrawer = () => {
     setVisible(true);
   };
@@ -19,6 +22,7 @@ const PopupDetails = ({ job }) => {
       <h3 className="job_title" onClick={showDrawer}>
         {job.title}
       </h3>
+
       <Drawer
         title={job.title}
         placement="right"
@@ -32,6 +36,13 @@ const PopupDetails = ({ job }) => {
             <h4>Type :</h4> {job.category.name}
             <br />
           </Col>
+          
+          <button
+            onClick={() => router.push(`/jobs/detail/${job.id}`)}
+            className="btn button-home mt-2 rounded"
+          >
+            Detail
+          </button>
           <Col span={4}>
             <h4>Posted on :</h4>{" "}
             <span>{dateformat(job.posting_timestamp, "mmmm dS, yyyy")}</span>
@@ -44,7 +55,6 @@ const PopupDetails = ({ job }) => {
             <h4>Vacancy : </h4>
             <span style={{ fontWeight: "600" }}>{job.vacancy}</span>
           </Col>
-         
         </Row>
         <Divider />
         <h4>Job description</h4>

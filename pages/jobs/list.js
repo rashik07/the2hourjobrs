@@ -1,9 +1,7 @@
 import Head from "next/head";
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-
 import Navbar from "../../container/navbar/newNavbar";
-import Footer from "../../container/footer/footer";
 import JobList from "components/jobs/list/JobList";
 import KeywordSearch from "components/jobs/list/KeywordSearch";
 import SelectedFilter from "components/jobs/list/SelectedFilter";
@@ -17,7 +15,6 @@ import JobIndustryFilter from "components/jobs/list/JobIndustryFilter";
 import ExperienceFilter from "components/jobs/list/ExperienceFilter";
 import AgeFilter from "components/jobs/list/AgeFilter";
 import { filterJobs } from "redux/actions/jobAction";
-
 import { Layout, Breadcrumb, Row, Col, Divider } from "antd";
 
 const { Content } = Layout;
@@ -39,7 +36,7 @@ const Jobs = ({ filterJobs }) => {
       </Head>
       <Layout className="layout">
         <Navbar />
-        <Content className="site-layout" >
+        <Content className="site-layout">
           <Breadcrumb className="breadcrumb_main">
             <Breadcrumb.Item>Home</Breadcrumb.Item>
             <Breadcrumb.Item>Job</Breadcrumb.Item>
@@ -114,7 +111,6 @@ const Jobs = ({ filterJobs }) => {
             </Row>
           </div>
         </Content>
-      
       </Layout>
     </>
   );

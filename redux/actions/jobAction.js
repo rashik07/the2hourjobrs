@@ -396,6 +396,7 @@ export const deleteJob = (job_id) => async (dispatch) => {
   } catch (error) {
     console.log(error);
   }
+
 };
 
 export const getJob = (job_id) => async (dispatch) => {

@@ -1,7 +1,9 @@
 import React from "react";
+import Head from "next/head";
 import { connect } from "react-redux";
-import { Descriptions } from "antd";
+import { Descriptions,Layout, Breadcrumb } from "antd";
 import dateformat from "dateformat";
+import Navbar from "container/navbar/newNavbar";
 
 const renderJobLocation = (inside_dhaka, locations) => {
   inside_dhaka
@@ -175,15 +177,25 @@ const JobDetail = ({ temp_jobpost, education }) => {
         break;
     }
   };
+  const { Content } = Layout;
 
   return (
     <>
-      <div className="container" style={{ marginTop: "5%" }}>
-        <div className="text-secondary">
-          {renderItem("job_detail")} <hr />
-          {renderItem("employee_requirement")}
-        </div>
-      </div>
+      <Head>
+        <title>Job list</title>
+      </Head>
+      <Layout className="layout">
+        <Navbar/>
+        <Content className="site-layout">
+         
+          <div className="container" style={{ marginTop: "5%" }}>
+            <div className="text-secondary">
+              {renderItem("job_detail")} <hr />
+              {renderItem("employee_requirement")}
+            </div>
+          </div>
+        </Content>
+      </Layout>
     </>
   );
 };

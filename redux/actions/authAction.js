@@ -18,13 +18,14 @@ export const signIn = (logInformValues) => async (dispatch) => {
 
 export const signUp = (formValues, router) => async (dispatch) => {
   try {
-    await backend.post("v1/user/data/", {
+    await backend.post("v1/user/signup/", {
       ...formValues,
     });
-
+    
     const { username, password } = formValues;
 
     dispatch(signIn({ username, password }));
+    console.log(formValues);
 
     router.back();
   } catch (error) {

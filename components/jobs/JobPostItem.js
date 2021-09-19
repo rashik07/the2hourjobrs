@@ -48,13 +48,13 @@ const JobPostItem = ({
     getSelfPostedJobs();
   }, []);
 
-  console.log(self_posted_jobs);
+  //console.log(self_posted_jobs);
   const getLocations = (location) => {
     const location_list = [];
     location.forEach((loc) => {
       location_list.push(loc.name);
     });
-    console.log(location_list);
+  //  console.log(location_list);
     return location_list.join(", ");
   };
 
@@ -188,8 +188,7 @@ const JobPostItem = ({
           <Col span={3}>{renderButtons()}</Col>
         </Row>
         <h4 style={{ color: "gray" }}>
-          <UserOutlined />{" "}
-          <Link href="/Profile/Profile_info">{poster.name}</Link>{" "}
+          <UserOutlined /> <Link href="/Profile/">{poster.name}</Link>{" "}
           <EnvironmentOutlined /> {getLocations(job.job_location)}
         </h4>
         <p style={{ marginTop: "1rem", marginBottom: "1rem" }}>

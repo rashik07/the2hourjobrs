@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { updateProfile } from "@/redux/actions/userAction";
 import { viewEducation } from "@/redux/actions/usereducationAction";
 import { viewEmployment } from "@/redux/actions/employmentAction";
-import { Table, Space, Card, Row, Col } from "antd";
+import { Table, Space, Card, Row, Col, Divider } from "antd";
 import { viewProject } from "@/redux/actions/projectAction";
 
 const Mainsection = ({
@@ -28,81 +28,44 @@ const Mainsection = ({
       title: "Level of Education",
       dataIndex: "Education",
       key: "Education",
-      width: "30%",
     },
     {
       title: "Exam/Degree Title",
       dataIndex: "Degree",
       key: "Degree",
-      width: "100%",
     },
 
     {
       title: "institute_name",
       dataIndex: "institute_name",
       key: "institute_name",
-      width: "150px",
     },
     {
       title: "result",
       dataIndex: "result",
       key: "result",
-      width: "150px",
     },
     {
-      title: "year_of_passing",
+      title: "Year of Passing",
       dataIndex: "year_of_passing",
       key: "year_of_passing",
       width: "150px",
     },
   ];
-  const expoColumns = [
-    {
-      title: "Name",
-      dataIndex: "company_name",
-      key: "company_name",
-    },
-    {
-      title: "Designation",
-      dataIndex: "designation",
-      key: "designation",
-    },
-    {
-      title: "department",
-      dataIndex: "department",
-      key: "address",
-    },
-
-    {
-      title: "responsibilities",
-      dataIndex: "responsibilities",
-      key: "responsibilities",
-    },
-    {
-      title: "Location",
-      dataIndex: "company_location",
-      key: "company_location",
-    },
-    {
-      title: "From",
-      dataIndex: "employment_period_from",
-      key: "employment_period_from",
-    },
-    {
-      title: "To",
-      dataIndex: "employment_period_to",
-      key: "employment_period_to",
-    },
-  ];
-  return (
-    <div>
+  const education = () => {
+    if (view_education == "") {
+      return " ";
+    }
+    return (
       <p>
-        <span style={{ fontWeight: "bold" }}>Objective </span>
-        <br />
-        {user_profile.objective}
-      </p>
-      <p>
-        <span style={{ fontWeight: "bold" }}>Education </span>
+        <div>
+          <Divider
+            style={{ fontWeight: "bold", borderTopColor: "rgb(0 0 0)" }}
+            orientation="left"
+          >
+            Education
+          </Divider>
+        </div>
         <br />
         <Table
           columns={eduColumns}
@@ -110,28 +73,113 @@ const Mainsection = ({
           pagination={false}
         />
       </p>
+    );
+  };
+  const employment = () => {
+    if (view_employment == "") {
+      return " ";
+    }
+    return (
       <p>
-        <span style={{ fontWeight: "bold" }}>Experience </span>
+        <div>
+          <Divider
+            style={{ fontWeight: "bold", borderTopColor: "rgb(0 0 0)" }}
+            orientation="left"
+          >
+            Experience
+          </Divider>
+        </div>
         <br />
-
-        <Table
-          columns={expoColumns}
-          dataSource={view_employment}
-          pagination={false}
-        />
+        <ol>
+          {view_employment.map((view_employment) => (
+            <li>
+              <p>
+                <span
+                  style={{ fontWeight: "bold", textDecoration: "underline" }}
+                >
+                  {view_employment.designation}(
+                  {view_employment.employment_period_from} to{" "}
+                  {view_employment.employment_period_to})
+                </span>
+                -
+                <span style={{ fontWeight: "bold" }}>
+                  {view_employment.company_name}
+                </span>{" "}
+                <br />
+                {view_employment.department}
+                <br />
+                {view_employment.company_location}
+                <br />
+                <span
+                  style={{ fontWeight: "bold", textDecoration: "underline" }}
+                >
+                  {" "}
+                  Duties/Responsibilities:
+                </span>{" "}
+                <br />
+                {view_employment.responsibilities}
+              </p>
+            </li>
+          ))}
+        </ol>
       </p>
+    );
+  };
+  const project = () => {
+    if (view_project == "") {
+      return " ";
+    }
+    return (
       <div className="site-card-wrapper">
-        <span style={{ fontWeight: "bold" }}>Projects </span>
+        <div>
+          <Divider
+            style={{ fontWeight: "bold", borderTopColor: "rgb(0 0 0)" }}
+            orientation="left"
+          >
+            Projects
+          </Divider>
+        </div>
         <Row gutter={16}>
-        {view_project.map((view_project) => (
-          <Col span={8}>
-           
-              <Card title={view_project.title}>{view_project.description}</Card>
-          
-          </Col>
-            ))}
+          {view_project.map((view_project) => (
+            <Col span={8} style={{ paddingBottom: "20px" }}>
+              <Card
+                style={{ boxShadow: "2px 2px #FAFAFA" }}
+                title={view_project.title}
+              >
+                {view_project.description}
+              </Card>
+            </Col>
+          ))}
         </Row>
       </div>
+    );
+  };
+  const objective = () => {
+    if (user_profile.objective == " ") {
+      return " ";
+    }
+    return (
+      <p>
+        <div>
+          <Divider
+            style={{ fontWeight: "bold", borderTopColor: "rgb(0 0 0)" }}
+            orientation="left"
+          >
+            Objective
+          </Divider>
+        </div>
+        <br />
+        {user_profile.objective}
+      </p>
+    );
+  };
+
+  return (
+    <div>
+      {objective()}
+      {employment()}
+      {education()}
+      {project()}
     </div>
   );
 };

@@ -37,8 +37,6 @@ const Project_details = ({
       dataIndex: "description",
       key: "description",
       width: "100%",
-
-      // ...this.getColumnSearchProps('age'),
     },
 
     {
@@ -46,9 +44,6 @@ const Project_details = ({
       dataIndex: "start_date",
       key: "start_date",
       width: "150px",
-      //  ...this.getColumnSearchProps('address'),
-      //   sorter: (a, b) => a.address.length - b.address.length,
-      //sortDirections: ['descend', 'ascend'],
     },
     {
       title: "To",
@@ -61,7 +56,6 @@ const Project_details = ({
       key: "action",
 
       render: (details) => (
-        //console.log('project id:',details.id);
         <Space size="middle">
           <DeleteOutlined
             key="ellipsis"

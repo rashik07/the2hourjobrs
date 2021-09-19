@@ -2,22 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Select } from "antd";
 import { connect } from "react-redux";
 import { getJobCategories } from "redux/actions/jobAction";
-import {
-  Form,
-  TreeSelect,
-  Input,
-  Switch,
-  Button,
-  Radio,
-  DatePicker,
-  Typography,
-  Divider,
-  TextArea,
-  Upload,
-  Skeleton,
-  message,
-} from "antd";
-import LocationList from "../components/jobs/input/LocationList";
+import { Form, TreeSelect, Button, Typography, Divider, message } from "antd";
 import { TagsInput } from "react-tag-input-component";
 import { getLocationList } from "redux/actions/jobAction";
 import {
@@ -38,7 +23,6 @@ const PreferedCategories = ({
   multiple,
   view_prefered_categories,
   value,
-  Alert,
 }) => {
   const [loader, setloader] = useState(false);
   const { Title } = Typography;
@@ -54,7 +38,6 @@ const PreferedCategories = ({
     console.log("Received values of form: ", values);
     createPreferedCategories(values);
     setloader(true);
-
     alert("This is a success message");
   };
   const onFinishFailed = () => {

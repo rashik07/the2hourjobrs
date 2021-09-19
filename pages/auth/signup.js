@@ -6,7 +6,6 @@ import Link from "next/link";
 import { connect } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
-
 import * as types from "redux/types";
 import Form from "../../components/Form";
 import { signUp } from "redux/actions/authAction";
@@ -31,7 +30,9 @@ const Signup = (props) => {
     e.preventDefault();
 
     props.signUp({ name, username, email, phone, password }, router);
+    console.log(name, username, email, phone, password );
   };
+  
 
   return (
     <>
