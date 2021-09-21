@@ -22,7 +22,7 @@ const Step2 = ({ postStep, setPostStep, temp_jobpost }) => {
 
     setPostStep(postStep + 1);
   };
-
+  console.log(temp_jobpost);
   return (
     <>
       <StepsParent item="workplace" />

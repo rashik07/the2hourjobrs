@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import { connect } from "react-redux";
-import { Descriptions,Layout, Breadcrumb } from "antd";
+import { Descriptions, Layout, Breadcrumb, Typography } from "antd";
 import dateformat from "dateformat";
 import Navbar from "container/navbar/newNavbar";
+import { getAppliedJobsPerson } from "@/redux/actions/jobAction";
 
 const renderJobLocation = (inside_dhaka, locations) => {
   inside_dhaka
@@ -114,7 +115,37 @@ const renderEducation = (education, job_post_education) => {
   );
 };
 
-const JobDetail = ({ temp_jobpost, education }) => {
+const JobDetail = ({
+  temp_jobpost,
+  education,
+  getAppliedJobsPerson,
+  applied_jobs_person,
+
+}) => {
+  const { Paragraph, Title } = Typography;
+  const [user, setUser] = useState(false);
+  console.log(user);
+  useEffect(() => {
+    getAppliedJobsPerson(temp_jobpost).then(() =>setUser(true) ,console.log(user));
+    console.log(user);
+  }, []);
+ 
+  // console.log(temp_jobpost);
+  // if(applied_jobs_person)
+  const appliedPerson = () => {
+    if (user === false) {
+      return <p>Loading profile...</p>;
+    }
+    return applied_jobs_person.map((applied_jobs_person) => {
+      //  console.log(applied_jobs_person.user.username);
+      console.log(user);
+      return (
+        <a>
+          {applied_jobs_person.user.username} {" , "}{" "}
+        </a>
+      );
+    });
+  };
   const renderItem = (item) => {
     const labelStyle = { fontWeight: 700 };
 
@@ -169,6 +200,7 @@ const JobDetail = ({ temp_jobpost, education }) => {
             <Descriptions.Item label="Age" labelStyle={labelStyle}>
               {renderAge(temp_jobpost.min_age, temp_jobpost.max_age)}
             </Descriptions.Item>
+
             {renderEducation(education, temp_jobpost.education)}
           </Descriptions>
         );
@@ -185,13 +217,14 @@ const JobDetail = ({ temp_jobpost, education }) => {
         <title>Job list</title>
       </Head>
       <Layout className="layout">
-        <Navbar/>
+        <Navbar />
         <Content className="site-layout">
-         
           <div className="container" style={{ marginTop: "5%" }}>
             <div className="text-secondary">
               {renderItem("job_detail")} <hr />
               {renderItem("employee_requirement")}
+              <span style={{ fontWeight: "bold" }}>Applied Person:</span>{" "}
+              {appliedPerson()}
             </div>
           </div>
         </Content>
@@ -203,7 +236,10 @@ const JobDetail = ({ temp_jobpost, education }) => {
 const mapStateToProps = (state) => {
   return {
     education: state.job.education,
+    applied_jobs_person: state.job.applied_jobs_person,
   };
 };
-
-export default connect(mapStateToProps)(JobDetail);
+export default connect(mapStateToProps, {
+  getAppliedJobsPerson,
+})(JobDetail);
+//export default connect(mapStateToProps)(JobDetail);

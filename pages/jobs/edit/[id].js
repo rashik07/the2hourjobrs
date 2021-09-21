@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import _ from "lodash";
 
 import { getJobForUpdate } from "@/redux/actions/jobAction";
-import JobCreateUpdate from "components/jobs/JobCreateUpdate";
+import JobCreate from "components/jobs/JobCreate";
 
 const UpdateJobPost = ({ job, getJobForUpdate }) => {
   const router = useRouter();

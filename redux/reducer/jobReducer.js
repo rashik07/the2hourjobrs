@@ -51,7 +51,8 @@ const jobReducer = (state = INITIAL_STATE, action) => {
 
     case types.GET_APPLIED_JOB:
       return { ...state, applied_jobs: action.payload };
-
+    case types.GET_APPLIED_JOB_PERSON:
+      return { ...state, applied_jobs_person: action.payload };
     case types.APPLY_JOB:
       let jobs = _.mapKeys(state.all_jobs, "id");
 

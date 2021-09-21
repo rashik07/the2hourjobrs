@@ -14,7 +14,11 @@ import {
   CalendarOutlined,
   EditOutlined,
 } from "@ant-design/icons";
-import { getSelfPostedJobs, getAllJobs } from "@/redux/actions/jobAction";
+import {
+  getSelfPostedJobs,
+  getAllJobs,
+  getAppliedJobsPerson,
+} from "@/redux/actions/jobAction";
 
 const JobPostItem = ({
   job,
@@ -24,7 +28,10 @@ const JobPostItem = ({
   saveJob,
   deleteJob,
   getSelfPostedJobs,
+  show_save_button,
   self_posted_jobs,
+  getAppliedJobsPerson,
+  applied_jobs_person,
 }) => {
   const router = useRouter();
   const { id, title, poster, applied, saved, applied_saved_id } = job;
@@ -43,9 +50,24 @@ const JobPostItem = ({
 
   useEffect(() => {
     getSelfPostedJobs();
+    // getAppliedJobsPerson(job);
   }, []);
 
-  //console.log(self_posted_jobs);
+  // console.log(job);
+  // console.log(applied_jobs_person);
+
+  // const appliedPerson = () => {
+  //   return applied_jobs_person.map((applied_jobs_person) => {
+  //     console.log(applied_jobs_person.user.username);
+   
+  //     return (
+  //       <p>
+  //         {applied_jobs_person.user.username} {" ,"}
+  //       </p>
+  //     );
+     
+  //   });   
+  // };
   const getLocations = (location) => {
     const location_list = [];
     location.forEach((loc) => {
@@ -70,6 +92,7 @@ const JobPostItem = ({
     }
 
     applyJob(id, userid, setAppliedStatus);
+    alert("successfully");
   };
 
   const deleteJobBtnClick = () => {
@@ -94,7 +117,7 @@ const JobPostItem = ({
       alert("You must log in to access this feature");
       return;
     }
-    saveJob(id, userid, savedStatus, setSavedStatus, applied_saved_id);
+    saveJob(id, userid, savedStatus, applied_saved_id);
   };
   const applyShow = () => {
     if (appliedStatus) {
@@ -149,6 +172,7 @@ const JobPostItem = ({
     return (
       <>
         {applyShow()}
+
         {/* <button
           onClick={() => router.push(`/jobs/detail/${id}`)}
           className="btn button-home mt-2 rounded"
@@ -202,6 +226,7 @@ const JobPostItem = ({
         <p>
           <CalendarOutlined /> Deadline: {job.deadline}
         </p>
+        {/* {appliedPerson()} */}
       </Col>
     </Row>
   );
@@ -212,6 +237,7 @@ const mapStateToProps = (state) => {
     userid: state.auth.id,
     isSignedIn: state.auth.isSignedIn,
     self_posted_jobs: Object.values(state.job.self_posted_jobs),
+    applied_jobs_person: state.job.applied_jobs_person,
   };
 };
 
@@ -220,4 +246,5 @@ export default connect(mapStateToProps, {
   saveJob,
   deleteJob,
   getSelfPostedJobs,
+  getAppliedJobsPerson,
 })(JobPostItem);

@@ -1,25 +1,28 @@
 import React, { useEffect } from "react";
 import Head from "next/head";
-import { getSelfPostedJobs } from "@/redux/actions/jobAction";
+import { getSelfPostedJobs,getAppliedJobsPerson } from "@/redux/actions/jobAction";
 import { connect, useDispatch } from "react-redux";
 import Navbar from "container/navbar/newNavbar";
 import JobPostItem from "components/jobs/JobPostItem";
 import { Layout, Breadcrumb } from "antd";
 import * as types from "@/redux/types";
 
-const SelfPostedJobs = ({ self_posted_jobs, getSelfPostedJobs }) => {
+const SelfPostedJobs = ({ self_posted_jobs, getSelfPostedJobs ,getAppliedJobsPerson,applied_jobs_person,job }) => {
   const dispatch = useDispatch();
-  const { Header, Content, Footer } = Layout;
+  const { Content } = Layout;
   useEffect(() => {
     getSelfPostedJobs();
+    getAppliedJobsPerson();
     dispatch({ type: types.RESET_TEMP_JOB_STATE });
   }, []);
-  console.log(self_posted_jobs);
+//  console.log(self_posted_jobs);
+ // console.log(applied_jobs_person);
 
   const showSelfPostedJobs = () => {
     if (self_posted_jobs.length)
       return self_posted_jobs.map((job) => {
         return <JobPostItem key={job.id} job={job} />;
+        
       });
 
     return (
@@ -55,7 +58,8 @@ const SelfPostedJobs = ({ self_posted_jobs, getSelfPostedJobs }) => {
 const mapStateToProps = (state) => {
   return {
     self_posted_jobs: Object.values(state.job.self_posted_jobs),
+    applied_jobs_person:state.job.applied_jobs_person,
   };
 };
 
-export default connect(mapStateToProps, { getSelfPostedJobs })(SelfPostedJobs);
+export default connect(mapStateToProps, { getSelfPostedJobs,getAppliedJobsPerson })(SelfPostedJobs);
