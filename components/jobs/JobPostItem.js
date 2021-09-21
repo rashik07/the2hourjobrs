@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { applyJob, saveJob, deleteJob } from "@/redux/actions/jobAction";
+import {
+  applyJob,
+  saveJob,
+  deleteJob,
+  getSelfPostedJobs,
+  getAllJobs,
+  getAppliedJobsPerson,
+} from "@/redux/actions/jobAction";
 import Link from "next/link";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
@@ -13,12 +20,8 @@ import {
   UserOutlined,
   CalendarOutlined,
   EditOutlined,
+  SaveOutlined
 } from "@ant-design/icons";
-import {
-  getSelfPostedJobs,
-  getAllJobs,
-  getAppliedJobsPerson,
-} from "@/redux/actions/jobAction";
 
 const JobPostItem = ({
   job,
@@ -50,24 +53,9 @@ const JobPostItem = ({
 
   useEffect(() => {
     getSelfPostedJobs();
-    // getAppliedJobsPerson(job);
+   
   }, []);
 
-  // console.log(job);
-  // console.log(applied_jobs_person);
-
-  // const appliedPerson = () => {
-  //   return applied_jobs_person.map((applied_jobs_person) => {
-  //     console.log(applied_jobs_person.user.username);
-   
-  //     return (
-  //       <p>
-  //         {applied_jobs_person.user.username} {" ,"}
-  //       </p>
-  //     );
-     
-  //   });   
-  // };
   const getLocations = (location) => {
     const location_list = [];
     location.forEach((loc) => {
@@ -94,7 +82,13 @@ const JobPostItem = ({
     applyJob(id, userid, setAppliedStatus);
     alert("successfully");
   };
-
+  const saveJobBtnClick = () => {
+    if (!isSignedIn) {
+      alert("You must log in to access this feature");
+      return;
+    }
+    saveJob(id, userid, savedStatus, setSavedStatus,applied_saved_id);
+  };
   const deleteJobBtnClick = () => {
     const { confirm } = Modal;
     confirm({
@@ -112,20 +106,14 @@ const JobPostItem = ({
     // applyJob(id, userid, setAppliedStatus);
   };
 
-  const saveJobBtnClick = () => {
-    if (!isSignedIn) {
-      alert("You must log in to access this feature");
-      return;
-    }
-    saveJob(id, userid, savedStatus, applied_saved_id);
-  };
+  
   const applyShow = () => {
     if (appliedStatus) {
       return "applied";
     } else if (btn_disable) {
       return "";
     }
-    console.log(self_posted_jobs);
+  //  console.log(self_posted_jobs);
     return (
       <a
         style={{
@@ -138,6 +126,33 @@ const JobPostItem = ({
       >
         Apply
       </a>
+    );
+  };
+  const saveShow = () => {
+    if (savedStatus) {
+     
+      <SaveOutlined
+      onClick={saveJobBtnClick}
+      style={{
+        fontSize: "20px",
+        color: "#0E8044",
+        marginTop: "5px",
+        float: "right",
+      }}
+      />
+    }
+  //  console.log(self_posted_jobs);
+    return (
+
+      <PushpinFilled
+      onClick={saveJobBtnClick}
+      style={{
+        fontSize: "20px",
+        color: "#0E8044",
+        marginTop: "5px",
+        float: "right",
+      }}
+    />
     );
   };
 
@@ -173,28 +188,22 @@ const JobPostItem = ({
       <>
         {applyShow()}
 
+        {saveShow()}
+
         {/* <button
           onClick={() => router.push(`/jobs/detail/${id}`)}
           className="btn button-home mt-2 rounded"
         >
           Details
-        </button>
+        </button> */}
 
-        <button
+        {/* <button
           onClick={saveJobBtnClick}
           className={`btn button-home mt-2 rounded ${btn_disable}`}
         >
           {savedStatus ? "Unsave" : "Save"}
         </button> */}
-        <PushpinFilled
-          onClick={saveJobBtnClick}
-          style={{
-            fontSize: "20px",
-            color: "#0E8044",
-            marginTop: "5px",
-            float: "right",
-          }}
-        />
+       
       </>
     );
   };

@@ -120,25 +120,24 @@ const JobDetail = ({
   education,
   getAppliedJobsPerson,
   applied_jobs_person,
-
 }) => {
-  const { Paragraph, Title } = Typography;
-  const [user, setUser] = useState(false);
-  console.log(user);
+  // const { Paragraph, Title } = Typography;
+  const [user, setUser] = useState(null);
+  //  console.log(user);
   useEffect(() => {
-    getAppliedJobsPerson(temp_jobpost).then(() =>setUser(true) ,console.log(user));
-    console.log(user);
-  }, []);
- 
+    getAppliedJobsPerson(temp_jobpost).then((u) => setUser(u));
+  }, [temp_jobpost]);
+
   // console.log(temp_jobpost);
   // if(applied_jobs_person)
   const appliedPerson = () => {
-    if (user === false) {
+    if (user === null) {
       return <p>Loading profile...</p>;
     }
     return applied_jobs_person.map((applied_jobs_person) => {
       //  console.log(applied_jobs_person.user.username);
-      console.log(user);
+      //  console.log(user);
+
       return (
         <a>
           {applied_jobs_person.user.username} {" , "}{" "}
@@ -210,7 +209,9 @@ const JobDetail = ({
     }
   };
   const { Content } = Layout;
-
+  // if (user === null) {
+  //   return <p>Loading profile...</p>;
+  // }
   return (
     <>
       <Head>
