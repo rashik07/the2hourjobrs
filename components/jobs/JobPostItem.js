@@ -11,7 +11,7 @@ import Link from "next/link";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import PopupDetails from "./PopupDetails";
-import { Modal } from "antd";
+import { Modal, Button } from "antd";
 import { ExclamationCircleOutlined, PushpinFilled } from "@ant-design/icons";
 import { Row, Col } from "antd";
 import {
@@ -20,7 +20,7 @@ import {
   UserOutlined,
   CalendarOutlined,
   EditOutlined,
-  SaveOutlined
+  SaveOutlined,
 } from "@ant-design/icons";
 
 const JobPostItem = ({
@@ -53,7 +53,6 @@ const JobPostItem = ({
 
   useEffect(() => {
     getSelfPostedJobs();
-   
   }, []);
 
   const getLocations = (location) => {
@@ -87,7 +86,7 @@ const JobPostItem = ({
       alert("You must log in to access this feature");
       return;
     }
-    saveJob(id, userid, savedStatus, setSavedStatus,applied_saved_id);
+    saveJob(id, userid, savedStatus, setSavedStatus, applied_saved_id);
   };
   const deleteJobBtnClick = () => {
     const { confirm } = Modal;
@@ -106,14 +105,13 @@ const JobPostItem = ({
     // applyJob(id, userid, setAppliedStatus);
   };
 
-  
   const applyShow = () => {
     if (appliedStatus) {
       return "applied";
     } else if (btn_disable) {
       return "";
     }
-  //  console.log(self_posted_jobs);
+    //  console.log(self_posted_jobs);
     return (
       <a
         style={{
@@ -130,29 +128,29 @@ const JobPostItem = ({
   };
   const saveShow = () => {
     if (savedStatus) {
-     
-      <SaveOutlined
-      onClick={saveJobBtnClick}
-      style={{
-        fontSize: "20px",
-        color: "#0E8044",
-        marginTop: "5px",
-        float: "right",
-      }}
-      />
+      return (
+        <SaveOutlined
+          onClick={saveJobBtnClick}
+          style={{
+            fontSize: "20px",
+            color: "#0E8044",
+            marginTop: "5px",
+            float: "right",
+          }}
+        />
+      );
     }
-  //  console.log(self_posted_jobs);
+    //  console.log(self_posted_jobs);
     return (
-
       <PushpinFilled
-      onClick={saveJobBtnClick}
-      style={{
-        fontSize: "20px",
-        color: "#0E8044",
-        marginTop: "5px",
-        float: "right",
-      }}
-    />
+        onClick={saveJobBtnClick}
+        style={{
+          fontSize: "20px",
+          color: "#0E8044",
+          marginTop: "5px",
+          float: "right",
+        }}
+      />
     );
   };
 
@@ -203,7 +201,6 @@ const JobPostItem = ({
         >
           {savedStatus ? "Unsave" : "Save"}
         </button> */}
-       
       </>
     );
   };
@@ -218,9 +215,14 @@ const JobPostItem = ({
           <Col span={3}>{renderButtons()}</Col>
         </Row>
         <h4 style={{ color: "gray" }}>
-          <UserOutlined /> <Link href="/Profile/">{poster.name}</Link>{" "}
+          <UserOutlined />{" "}
+          <Link href={`/Profile/Profile_details/${poster.id}`}>
+         
+            {poster.name}
+          </Link>{" "}
           <EnvironmentOutlined /> {getLocations(job.job_location)}
         </h4>
+        {/* onClick={() => router.push(`/jobs/detail/${job.id}`)} */}
         {/* <p style={{ marginTop: "1rem", marginBottom: "1rem" }}>
           {job.skills} {" "}
         </p> */}

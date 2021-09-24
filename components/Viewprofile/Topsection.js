@@ -7,10 +7,8 @@ import { PhoneFilled, HomeFilled } from "@ant-design/icons";
 const Topsection = ({ updateProfile, user_profile }) => {
   const { Text, Link, Title } = Typography;
   const { Content } = Layout;
-  useEffect(() => {
-    updateProfile();
-  }, []);
-  console.log(user_profile);
+  
+  //console.log(user_profile);
   return (
     <div>
       <Row justify="center" align="top">
@@ -51,14 +49,5 @@ const Topsection = ({ updateProfile, user_profile }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    user_profile: state.user.user_profile,
-  };
-};
 
-export default connect(mapStateToProps, {
-  updateProfile,
-})(Topsection);
-
-//export default Topsection;
+export default Topsection;

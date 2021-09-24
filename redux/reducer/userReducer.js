@@ -3,12 +3,12 @@ import * as types from "./../types";
 const INITIAL_STATE = {
   user_profile: {},
   all_workers: [],
+  all_profile:{},
   filtered_workers: [],
   saved_workers: [],
-  division:[],
+  division: [],
   district: [],
-  thana:[],
-  
+  thana: [],
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -23,6 +23,8 @@ const userReducer = (state = INITIAL_STATE, action) => {
       return { ...state, get_district: action.payload };
     case types.GET_THANA:
       return { ...state, get_thana: action.payload };
+    case types.GET_SINGLE_PROFILE:
+      return { ...state, all_profile: action.payload };
 
     case types.GET_OTHER_WORKERS:
       return { ...state, all_workers: action.payload };

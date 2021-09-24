@@ -29,6 +29,21 @@ export const viewPreferedCategories = () => async (dispatch) => {
   }
 };
 
+export const viewSinglePreferedCategories = (id) => async (dispatch) => {
+  try {
+    const response = await backend.get(
+      `/v1/user/prefered-options/?user=${id}`,
+      getConfig()
+    );
+    dispatch({ type: types.VIEW_SINGLE_PREFERED_CATEGORIES, payload: response.data[0] });
+    console.log("user data callll");
+  } catch (error) {
+    console.log(error);
+    console.log(error.response);
+  }
+};
+
+
 export const createPreferedCategories = (formValues) => async (dispatch) => {
   console.log(formValues);
   try {

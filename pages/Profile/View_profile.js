@@ -6,10 +6,10 @@ import Topsection from "components/Viewprofile/Topsection";
 import Sidesection from "components/Viewprofile/Sidesection";
 import Mainsection from "components/Viewprofile/Mainsection";
 
-const View_profile = () => {
+const View_profile = ({ user_profile, view_education,view_employment ,view_project}) => {
   const { Text, Link, Title } = Typography;
   const { Content } = Layout;
-
+  //  console.log(user_profile)
   return (
     <div>
       <Head>
@@ -26,14 +26,23 @@ const View_profile = () => {
             <Breadcrumb.Item>View Profile</Breadcrumb.Item>
           </Breadcrumb>
           <div className="site-layout-background">
-            <Topsection />
+            <Topsection user_profile={user_profile} />
             <Divider />
             <Row justify="left" align="top">
-              <Col span={5} >
-                <Sidesection />
+              <Col span={5}>
+                <Sidesection user_profile={user_profile} />
               </Col>
-              <Col span={19} style={{borderLeft: "1px solid #F0F0F0", padding: "0px 10px" }}>
-                <Mainsection/>
+              <Col
+                span={19}
+                style={{ borderLeft: "1px solid #F0F0F0", padding: "0px 10px" }}
+              >
+                <Mainsection
+                  user_profile={user_profile}
+                  view_education={view_education}
+                  view_employment={view_employment}
+                  view_project={view_project}
+                 
+                />
               </Col>
             </Row>
           </div>
@@ -44,4 +53,3 @@ const View_profile = () => {
 };
 
 export default View_profile;
-

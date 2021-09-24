@@ -15,7 +15,7 @@ const getItems = (isSignedIn, signOut, user_profile) => {
   if (isSignedIn) {
     return (
       <>
-        {console.log(user_profile.name)}
+        {/* {console.log(user_profile.name)} */}
         <Menu.Item key="setting:12">
           <Link href="/Profile">
             <a>
@@ -67,7 +67,7 @@ const navbar = ({ isSignedIn, signOut, updateProfile, user_profile }) => {
     updateProfile();
   }, []);
 
-  console.log(user_profile.name);
+  // console.log(user_profile.name);
   return (
     <Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
       <Row>

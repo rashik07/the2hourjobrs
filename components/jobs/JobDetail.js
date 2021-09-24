@@ -5,6 +5,7 @@ import { Descriptions, Layout, Breadcrumb, Typography } from "antd";
 import dateformat from "dateformat";
 import Navbar from "container/navbar/newNavbar";
 import { getAppliedJobsPerson } from "@/redux/actions/jobAction";
+import Link from "next/link";
 
 const renderJobLocation = (inside_dhaka, locations) => {
   inside_dhaka
@@ -128,7 +129,7 @@ const JobDetail = ({
     getAppliedJobsPerson(temp_jobpost).then((u) => setUser(u));
   }, [temp_jobpost]);
 
-  // console.log(temp_jobpost);
+   console.log(applied_jobs_person);
   // if(applied_jobs_person)
   const appliedPerson = () => {
     if (user === null) {
@@ -139,9 +140,9 @@ const JobDetail = ({
       //  console.log(user);
 
       return (
-        <a>
-          {applied_jobs_person.user.username} {" , "}{" "}
-        </a>
+        <Link href={`/Profile/Profile_details/${applied_jobs_person.user.id}`}>
+         <a> {applied_jobs_person.user.username} {" , "}{" "}</a>
+        </Link>
       );
     });
   };

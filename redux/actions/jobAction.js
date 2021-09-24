@@ -96,7 +96,10 @@ export const getAppliedJobs = () => async (dispatch) => {
 };
 export const getAppliedJobsPerson = (temp_jobpost) => async (dispatch) => {
   try {
-    const response = await backend.get(`/v1/jobpost/job_applied_users/${temp_jobpost.id}/`, getConfig());
+    const response = await backend.get(
+      `/v1/jobpost/job_applied_users/${temp_jobpost.id}/`,
+      getConfig()
+    );
 
     dispatch({ type: types.GET_APPLIED_JOB_PERSON, payload: response.data });
   } catch (error) {
@@ -353,7 +356,6 @@ export const applyJob =
       console.log(error);
     }
   };
- 
 
 export const saveJob =
   (job_id, userid, saveStatus, setSavedStatus, applied_saved_id) =>
@@ -406,7 +408,6 @@ export const deleteJob = (job_id) => async (dispatch) => {
   } catch (error) {
     console.log(error);
   }
-
 };
 
 export const getJob = (job_id) => async (dispatch) => {

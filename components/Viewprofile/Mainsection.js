@@ -1,28 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { updateProfile } from "@/redux/actions/userAction";
-import { viewEducation } from "@/redux/actions/usereducationAction";
-import { viewEmployment } from "@/redux/actions/employmentAction";
 import { Table, Space, Card, Row, Col, Divider } from "antd";
-import { viewProject } from "@/redux/actions/projectAction";
+
 
 const Mainsection = ({
-  updateProfile,
   user_profile,
-  viewEducation,
   view_education,
-  viewEmployment,
   view_employment,
-  viewProject,
   view_project,
 }) => {
-  useEffect(() => {
-    updateProfile();
-    viewEducation();
-    viewEmployment();
-    viewProject();
-  }, []);
-  console.log(view_project);
+  
+
+ // console.log(view_project);
   const eduColumns = [
     {
       title: "Level of Education",
@@ -75,6 +64,7 @@ const Mainsection = ({
       </p>
     );
   };
+
   const employment = () => {
     if (view_employment == "") {
       return " ";
@@ -125,6 +115,7 @@ const Mainsection = ({
       </p>
     );
   };
+
   const project = () => {
     if (view_project == "") {
       return " ";
@@ -140,6 +131,7 @@ const Mainsection = ({
           </Divider>
         </div>
         <Row gutter={16}>
+          
           {view_project.map((view_project) => (
             <Col span={8} style={{ paddingBottom: "20px" }}>
               <Card
@@ -178,24 +170,27 @@ const Mainsection = ({
     <div>
       {objective()}
       {employment()}
+      
       {education()}
       {project()}
     </div>
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    user_profile: state.user.user_profile,
-    view_education: state.education.view_education,
-    view_employment: state.employment.view_employment,
-    view_project: state.project.view_project,
-  };
-};
+// const mapStateToProps = (state) => {
+//   return {
 
-export default connect(mapStateToProps, {
-  updateProfile,
-  viewEducation,
-  viewEmployment,
-  viewProject,
-})(Mainsection);
+   
+  
+//     view_project: state.project.view_project,
+//   };
+// };
+
+// export default connect(mapStateToProps, {
+
+
+
+//   viewProject,
+  
+// })(Mainsection);
+export default Mainsection;

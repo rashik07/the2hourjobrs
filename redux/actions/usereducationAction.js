@@ -26,6 +26,17 @@ export const viewEducation = () => async (dispatch) => {
       }
 };
 
+export const viewSingleEducation = (id) => async (dispatch) => {
+  try{    
+    const response = await backend.get(`v1/user/education/?user=${id}`, getConfig());
+    dispatch({ type: types.VIEW_SINGLE_EDUCATION, payload: response.data });
+  }
+  catch (error) {
+         console.log(error);
+         console.log(error.response);
+      }
+};
+
 export const createEducation = (formValues) => async (dispatch) => {
   console.log(formValues)
   try {

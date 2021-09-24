@@ -36,7 +36,7 @@ const AppliedJobs = ({ applied_jobs, getAppliedJobs }) => {
           <Breadcrumb className="breadcrumb_main">
             <Breadcrumb.Item>Home</Breadcrumb.Item>
             <Breadcrumb.Item>Job</Breadcrumb.Item>
-            <Breadcrumb.Item>Save Jobs</Breadcrumb.Item>
+            <Breadcrumb.Item>Applied Jobs</Breadcrumb.Item>
           </Breadcrumb>
           <div className="site-layout-background">
             <div className="container main-body">{showAppliedJobs()}</div>

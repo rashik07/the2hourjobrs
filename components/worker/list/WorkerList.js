@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-
 import { getOtherWorkers } from "redux/actions/userAction";
 import WorkerItem from "./WorkerItem";
 
@@ -13,7 +12,7 @@ const JobList = ({
   useEffect(() => {
     getOtherWorkers();
   }, []);
-  console.log(showFilterWorker);
+  console.log(all_workers);
 
   if (showFilterWorker) {
     return filtered_workers.map((worker) => {

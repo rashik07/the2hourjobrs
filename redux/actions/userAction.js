@@ -14,38 +14,6 @@ const getConfig = () => {
 
   return config;
 };
-export const getDivision = () => async (dispatch) => {
-  try {
- //   console.log("working");
-    const response = await backend.get("/v1/category/division/", getConfig());
-    dispatch({ type: types.GET_DIVISION, payload: response.data });
-   // console.log(response.data);
-  } catch (error) {
-    console.log(error);
-    console.log(error.response);
-  }
-};
-export const getDistrict = () => async (dispatch) => {
-  try {
-    const response = await backend.get("/v1/category/district/", getConfig());
-    dispatch({ type: types.GET_DISTRICT, payload: response.data });
-  } catch (error) {
-
-    console.log(error);
-    console.log(error.response);
-  }
-};
-
-export const getThana = () => async (dispatch) => {
-  try {
-    const response = await backend.get("/v1/category/thana/", getConfig());
-    dispatch({ type: types.GET_THANA, payload: response.data });
-  } catch (error) {
-    console.log(error);
-    console.log(error.response);
-  }
-};
-
 export const updateProfile = () => async (dispatch) => {
   try {
     const response = await backend.get(
@@ -54,6 +22,31 @@ export const updateProfile = () => async (dispatch) => {
     );
     dispatch({ type: types.UPDATE_USER_PROFILE, payload: response.data });
     //console.log("user data callll");
+  } catch (error) {
+    console.log(error);
+    console.log(error.response);
+  }
+};
+export const getSpecificProfile = (profile_id) => async (dispatch) => {
+  try {
+    const response = await backend.get(
+      `/v1/user/other_users/${profile_id}/`,
+      getConfig()
+    );
+    // let response = null;
+
+    // if (store.getState().auth.isSignedIn) {
+    //   response = await backend.get(`/v1/user/other_users/${profile_id}`, getConfig());
+    // } else {
+    //   response = await backend.get(`/v1/user/other_users/${profile_id}`);
+    // }
+
+    dispatch({
+      type: types.GET_SINGLE_PROFILE,
+      payload: response.data,
+    });
+
+    //console.log(response.data);
   } catch (error) {
     console.log(error);
     console.log(error.response);
@@ -72,24 +65,56 @@ export const editUserProfile = (values) => async (dispatch) => {
       getConfig()
     );
     dispatch({ type: types.EDIT_USER_PROFILE, payload: response.data });
-    // console.log(values);
+    console.log(values);
   } catch (error) {
     +console.log(error);
+    console.log(error.response);
+  }
+};
+export const getDivision = () => async (dispatch) => {
+  try {
+    //   console.log("working");
+    const response = await backend.get("/v1/category/division/", getConfig());
+    dispatch({ type: types.GET_DIVISION, payload: response.data });
+    // console.log(response.data);
+  } catch (error) {
+    console.log(error);
+    console.log(error.response);
+  }
+};
+export const getDistrict = () => async (dispatch) => {
+  try {
+    const response = await backend.get("/v1/category/district/", getConfig());
+    dispatch({ type: types.GET_DISTRICT, payload: response.data });
+  } catch (error) {
+    console.log(error);
+    console.log(error.response);
+  }
+};
+
+export const getThana = () => async (dispatch) => {
+  try {
+    const response = await backend.get("/v1/category/thana/", getConfig());
+    dispatch({ type: types.GET_THANA, payload: response.data });
+  
+  } catch (error) {
+    console.log(error);
     console.log(error.response);
   }
 };
 
 export const getOtherWorkers = () => async (dispatch) => {
   try {
-    let response = null;
+    // let response = null;
 
-    if (store.getState().auth.isSignedIn) {
-      response = await backend.get("/v1/user/other_users/", getConfig());
-    } else {
-      response = await backend.get("/v1/user/other_users/");
-    }
+    // if (store.getState().auth.isSignedIn) {
+    //   response = await backend.get("/v1/user/other_users/", getConfig());
+    // } else {
+    const  response = await backend.get("/v1/user/other_users/", getConfig());
+    // }
 
     dispatch({ type: types.GET_OTHER_WORKERS, payload: response.data });
+    console.log(response.data);
   } catch (error) {
     console.log(error);
     console.log(error.response);

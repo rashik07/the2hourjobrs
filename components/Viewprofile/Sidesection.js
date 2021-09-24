@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { updateProfile } from "@/redux/actions/userAction";
 import { Button, Tooltip } from "antd";
 import {
   FacebookFilled,
@@ -8,19 +7,18 @@ import {
   GoogleCircleFilled,
   DownloadOutlined,
 } from "@ant-design/icons";
-import { viewPreferedCategories } from "redux/actions/preferedcategoriesAction";
+import { viewSinglePreferedCategories } from "redux/actions/preferedcategoriesAction";
 
 const Sidesection = ({
-  updateProfile,
   user_profile,
-  viewPreferedCategories,
+  viewSinglePreferedCategories,
   view_prefered_categories,
 }) => {
   useEffect(() => {
-    updateProfile();
-    viewPreferedCategories();
+
+    viewSinglePreferedCategories();
   }, []);
-  console.log(view_prefered_categories);
+//  console.log(view_prefered_categories);
   const facebook_link = () => {
     if (user_profile.facebook_link == null) {
       return "  ";
@@ -167,13 +165,13 @@ const Sidesection = ({
 
 const mapStateToProps = (state) => {
   return {
-    user_profile: state.user.user_profile,
-    view_prefered_categories: state.preferedcategories.view_prefered_categories,
+  
+    view_prefered_categories: state.preferedcategories.view_single_prefered_categories,
   };
 };
 
 export default connect(mapStateToProps, {
-  viewPreferedCategories,
-  updateProfile,
+  viewSinglePreferedCategories,
+
 })(Sidesection);
 //export default Sidesection;
