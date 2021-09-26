@@ -1,5 +1,4 @@
 import { filterWorkers } from "@/redux/actions/userAction";
-
 import KeywordSearch from "components/jobs/list/KeywordSearch";
 import SelectedFilter from "components/jobs/list/SelectedFilter";
 import LocationFilter from "components/jobs/list/LocationFilter";
@@ -11,10 +10,8 @@ import JobCategoryFilter from "components/jobs/list/JobCategoryFilter";
 import JobIndustryFilter from "components/jobs/list/JobIndustryFilter";
 import ExperienceFilter from "components/jobs/list/ExperienceFilter";
 import AgeFilter from "components/jobs/list/AgeFilter";
-
 import WorkerList from "components/worker/list/WorkerList";
 import Navbar from "../../container/navbar/newNavbar";
-import Footer from "../../container/footer/footer";
 import Head from "next/head";
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
@@ -42,7 +39,7 @@ const Workers = ({ filterWorkers }) => {
         <Content className="site-layout">
           <Breadcrumb className="breadcrumb_main">
             <Breadcrumb.Item>Home</Breadcrumb.Item>
-            <Breadcrumb.Item>Wordker</Breadcrumb.Item>
+            <Breadcrumb.Item>Worker</Breadcrumb.Item>
             <Breadcrumb.Item>List</Breadcrumb.Item>
           </Breadcrumb>
           <div className="site-layout-background">
@@ -116,7 +113,7 @@ const Workers = ({ filterWorkers }) => {
             </Row>
           </div>
         </Content>
-        <Footer />
+     
       </Layout>
     </>
   );

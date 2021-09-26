@@ -119,3 +119,9 @@
   padding: 24px;
   background: #fff;
 }
+.ant-space {
+  display: -webkit-box !important;
+}
+.ant-row {
+  padding-bottom: 15px;
+}

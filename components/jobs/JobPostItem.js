@@ -188,19 +188,7 @@ const JobPostItem = ({
 
         {saveShow()}
 
-        {/* <button
-          onClick={() => router.push(`/jobs/detail/${id}`)}
-          className="btn button-home mt-2 rounded"
-        >
-          Details
-        </button> */}
 
-        {/* <button
-          onClick={saveJobBtnClick}
-          className={`btn button-home mt-2 rounded ${btn_disable}`}
-        >
-          {savedStatus ? "Unsave" : "Save"}
-        </button> */}
       </>
     );
   };

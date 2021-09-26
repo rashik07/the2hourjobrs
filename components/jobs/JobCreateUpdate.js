@@ -1,7 +1,6 @@
 import Navbar from "container/navbar/newNavbar";
 import React, { useState, useEffect } from "react";
 import { Steps, Layout, Breadcrumb, Row, Col } from "antd";
-const { Content } = Layout;
 import Head from "next/head";
 import Footer from "../../container/footer/footer";
 import Step1 from "components/jobs/post/Step1";
@@ -13,7 +12,7 @@ import { connect } from "react-redux";
 
 const JobCreateUpdate = ({ getJobCategories, getEducation, editJob }) => {
   const { Step } = Steps;
-
+  const { Content } = Layout;
   useEffect(() => {
     getJobCategories();
     getEducation();
@@ -75,7 +74,7 @@ const JobCreateUpdate = ({ getJobCategories, getEducation, editJob }) => {
             {renderInputForms()}
           </div>
         </Content>
-        <Footer />
+       
       </Layout>
     </>
   );

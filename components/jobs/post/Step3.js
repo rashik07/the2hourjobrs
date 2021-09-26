@@ -20,10 +20,11 @@ const Step3 = ({ postStep, setPostStep, temp_jobpost }) => {
 
   return (
     <>
-      <StepsParent item="experience" />
       <StepsParent item="education" />
       <StepsParent item="gender" />
       <StepsParent item="age" />
+      
+      <StepsParent item="experience" />
       <div className="col-4 mt-4">
         <button
           onClick={() => setPostStep(postStep - 1)}

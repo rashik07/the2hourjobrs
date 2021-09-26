@@ -4,13 +4,15 @@ import Link from "next/link";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
 
-import { Layout, Breadcrumb, Row, Col } from "antd";
+import { Layout, Breadcrumb, Row, Col, Image } from "antd";
 import {
   PhoneOutlined,
   ScheduleOutlined,
   EnvironmentOutlined,
   UserOutlined,
   EditOutlined,
+  PushpinFilled,
+  SaveOutlined,
 } from "@ant-design/icons";
 
 const renderButtons = (
@@ -19,27 +21,49 @@ const renderButtons = (
   setSavedStatus,
   saveWorker,
   isSignedIn,
-  show_save_button
+  show_save_button,
+  savedStatus
 ) => {
-  return (
-    <>
-      <button className="btn button-home mt-2 rounded">Detail</button>
-      {show_save_button ? (
-        <button
-          onClick={() => saveWorker(id, saved_user_instance_id, setSavedStatus)}
-          className="btn button-home mt-2 rounded"
-          disabled={!isSignedIn}
-        >
-          {saved_user_instance_id ? "Unsave" : "Save"}
-        </button>
-      ) : null}
-    </>
-  );
+  const saveWorkerBtnClick = () => {
+    if (!isSignedIn) {
+      alert("You must log in to access this feature");
+      return;
+    }
+    saveWorker(id, saved_user_instance_id, setSavedStatus);
+  };
+  const saveShow = () => {
+    if (saved_user_instance_id) {
+      return (
+        <SaveOutlined
+          onClick={saveWorkerBtnClick}
+          style={{
+            fontSize: "20px",
+            color: "#0E8044",
+            marginTop: "5px",
+            float: "right",
+          }}
+        />
+      );
+    }
+    //  console.log(self_posted_jobs);
+    return (
+      <PushpinFilled
+        onClick={saveWorkerBtnClick}
+        style={{
+          fontSize: "20px",
+          color: "#0E8044",
+          marginTop: "5px",
+          float: "right",
+        }}
+      />
+    );
+  };
+  return <>{saveShow()}</>;
 };
 
 const WorkerItem = ({ worker, saveWorker, isSignedIn }) => {
   // console.log(worker);
-  const { id, name, phone, email, saved_user_instance_id } = worker;
+  const { id, name, phone, email, saved_user_instance_id, image } = worker;
 
   const router = useRouter();
 
@@ -54,7 +78,17 @@ const WorkerItem = ({ worker, saveWorker, isSignedIn }) => {
   return (
     <>
       <Row className="job_post">
-        <Col span={24}>
+        <Col span={4}>
+          <Image
+            
+            shape="circle"
+            width={100}
+            height={100}
+            src={"http://127.0.0.1:8000" + image}
+            preview={false}
+          />
+        </Col>
+        <Col span={20}>
           {/* <Row>
             <Col span={21}>
               <PopupDetails job={job} />
@@ -70,15 +104,13 @@ const WorkerItem = ({ worker, saveWorker, isSignedIn }) => {
             show_save_button
           )}
           <h4 style={{ color: "gray" }}>
-            <UserOutlined /> <Link href="/Profile/Profile_info">{name}</Link>{" "}
+            <UserOutlined />{" "}
+            <Link href={`/Profile/Profile_details/${id}`}>{name}</Link>{" "}
             {/* <EnvironmentOutlined /> {getLocations(job.job_location)} */}
           </h4>
           <p style={{ marginTop: "1rem", marginBottom: "1rem" }}>
             Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-        
+            industry.
           </p>
 
           <p>
@@ -86,6 +118,7 @@ const WorkerItem = ({ worker, saveWorker, isSignedIn }) => {
             {phone}
             {email}
           </p>
+
           <p>
             <ScheduleOutlined />{" "}
             {/* {getExperience(job.min_experience, job.max_experience)} */}
