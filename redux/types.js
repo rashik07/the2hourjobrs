@@ -81,3 +81,7 @@ export const DELETE_QUALIFICATION = "DELETE_QUALIFICATION";
 
 //************** SETTING TYPES *********************/
 export const EDIT_PASSWORD = "EDIT_PASSWORD ";
+
+//************** PREFERED_CATEGORIES TYPES *********************/
+export const CREATE_PREFERED_CATEGORIES = "CREATE_PREFERED_CATEGORIES";
+export const VIEW_PREFERED_CATEGORIES = "VIEW_PREFERED_CATEGORIES";

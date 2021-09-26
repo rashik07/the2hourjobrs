@@ -15,53 +15,33 @@ const getConfig = () => {
   return config;
 };
 
-export const viewEmployment = (data) => async (dispatch) => {
+export const viewPreferedCategories = () => async (dispatch) => {
   try {
     const response = await backend.get(
-      `/v1/user/job_experience/?user=${store.getState().auth.id}`,
+      `/v1/user/prefered-options/?user=${store.getState().auth.id}`,
       getConfig()
     );
-    dispatch({ type: types.VIEW_EMPLOYMENT, payload: response.data });
+    dispatch({ type: types.VIEW_PREFERED_CATEGORIES, payload: response.data });
   } catch (error) {
     console.log(error);
     console.log(error.response);
   }
-
-
 };
 
-export const createEmployment = (formValues) => async (dispatch) => {
+export const createPreferedCategories = (formValues) => async (dispatch) => {
   console.log(formValues);
   try {
     formValues = { ...formValues, user: store.getState().auth.id };
     const response = await backend.post(
-      "v1/user/job_experience/",
+      "/v1/user/prefered-options",
       { ...formValues },
       getConfig()
     );
 
     if (response.status === 201) {
       dispatch({
-        type: types.CREATE_PROJECT,
+        type: types.CREATE_PREFERED_CATEGORIES,
         payload: { ...response.data },
-      });
-    }
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-export const deleteEmployment = (employment_id) => async (dispatch) => {
-  try {
-    const response = await backend.delete(
-      `v1/user/job_experience/${employment_id}/`,
-      getConfig()
-    );
-
-    if (response.status == 200 || response.status == 204) {
-      dispatch({
-        type: types.DELETE_EMPLOYMENT,
-        payload: { employment_id: employment_id },
       });
     }
   } catch (error) {
