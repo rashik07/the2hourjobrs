@@ -15,7 +15,7 @@ const getConfig = () => {
 };
 
 export const createAnnouncement =
-  (formValues, files, cover) => async (dispatch) => {
+  (formValues, files, cover, router) => async (dispatch) => {
     try {
       const response = await backend.post(
         "v1/announcement/data/",
@@ -23,6 +23,7 @@ export const createAnnouncement =
         getConfig()
       );
       if (response.status === 201) {
+        router.push("/announcement");
         dispatch({
           type: types.CREATE_ANNOUNCEMENT,
           payload: { ...response.data },
@@ -35,7 +36,6 @@ export const createAnnouncement =
           dispatch(uploadimage(id, file, true));
         });
       }
-      router.push("/announcement");
     } catch (error) {
       console.log(error);
     }
@@ -171,3 +171,40 @@ export const archiveAnnouncement =
       console.log(error.response);
     }
   };
+
+// saved announcment section
+
+export const savedAnnouncement = (formValues) => async (dispatch) => {
+  try {
+    const response = await backend.post(
+      "v1/announcement/data/",
+      { ...formValues },
+      getConfig()
+    );
+    if (response.status === 201) {
+      dispatch({
+        type: types.CREATE_ANNOUNCEMENT,
+        payload: { ...response.data },
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getAllSavedAnnouncement = (id) => async (dispatch) => {
+  try {
+    const response = await backend.get(
+      `v1/announcement/user_saved_annoucements_list/${id}/`,
+      getConfig()
+    );
+    if (response.status === 200) {
+      dispatch({
+        type: types.GET_ALL_SAVED_ANNOUNCEMENT,
+        payload: response.data,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};

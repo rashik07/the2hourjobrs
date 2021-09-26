@@ -5,6 +5,7 @@ const INITIAL_STATE = {
   announcementResponse: {},
   singleAnnouncement: [],
   myAnnouncement: [],
+  savedannountmentList: [],
 };
 
 const announcementReducer = (state = INITIAL_STATE, action) => {
@@ -14,6 +15,9 @@ const announcementReducer = (state = INITIAL_STATE, action) => {
 
     case types.GET_ALL_ANNOUNCEMENT:
       return { ...state, annountmentList: action.payload };
+
+    case types.GET_ALL_SAVED_ANNOUNCEMENT:
+      return { ...state, savedannountmentList: action.payload };
 
     case types.GET_ALL_ANNOUNCEMENT_OF_USER:
       return { ...state, myAnnouncement: action.payload };

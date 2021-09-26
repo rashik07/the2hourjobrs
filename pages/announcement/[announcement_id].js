@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import Head from "next/head";
 import Footer from "../../container/footer/footer";
@@ -29,14 +29,17 @@ const { Content } = Layout;
 
 const AnnouncementDetails = ({ getSpecificAnnouncement, announcment }) => {
   const router = useRouter();
+  const [loader, setLoader] = useState(true);
   const { announcement_id } = router.query;
 
   useEffect(() => {
-    getSpecificAnnouncement(announcement_id);
+    getSpecificAnnouncement(announcement_id).then(() => {
+      setLoader(false);
+    });
   }, []);
 
   const renderimage = () => {
-    if (announcment.image) {
+    if (announcment.image.length > 0) {
       return announcment.image.map((announcment) => {
         if (announcment.cover) {
           return <Image src={"http://127.0.0.1:8000" + announcment.photo} />;
@@ -65,59 +68,83 @@ const AnnouncementDetails = ({ getSpecificAnnouncement, announcment }) => {
   };
 
   const renderAnnounements = () => {
-    return (
-      <Row key={announcment.id}>
-        <Col xs={24} sm={24} md={5} lg={5} xl={5}>
-          {renderimage()}
-          <Row>
-            <Image.PreviewGroup>
-              {announcment.image.map((imagee) => {
-                if (!imagee.cover) {
-                  return (
-                    <Col
-                      xs={8}
-                      sm={8}
-                      md={8}
-                      lg={8}
-                      xl={8}
-                      style={{ padding: "3px" }}
-                    >
-                      <Image src={"http://127.0.0.1:8000" + imagee.photo} />
-                    </Col>
-                  );
-                }
-              })}
-            </Image.PreviewGroup>
-          </Row>
-        </Col>
-        <Col xs={24} sm={24} md={12} lg={12} xl={12} offset={1}>
-          <h2>{announcment.title}</h2>
-          <p style={{ marginBottom: "1px", color: "blue" }}>
-            posted by {announcment.user.name}
-          </p>
-          <p>
-            <EnvironmentOutlined /> {announcment.user.profile.address}
-          </p>
-          <Space></Space>
-          <h3>Description</h3>
-          <p>{announcment.description}</p>
-          <Divider />
-          <h3>Other annoucement from the same user</h3>
-        </Col>
-        <Col xs={24} sm={24} md={4} lg={4} xl={4} offset={1}>
-          <h3>Location</h3>
-          <p>Address: {announcment.user.profile.address}</p>
-          <p>Thana: {announcment.user.profile.thana}</p>
-          <p>District: {announcment.user.profile.district}</p>
-          <p>Division: {announcment.user.profile.division}</p>
-          <Divider />
-          <h3>User details</h3>
-          <p>Phone: {announcment.user.phone}</p>
-          <p>Gender: {announcment.user.profile.gender}</p>
-          <p>Bio: {announcment.user.profile.bio}</p>
-        </Col>
-      </Row>
-    );
+    console.log(announcment);
+    if (!loader) {
+      return (
+        <Row key={announcment.id}>
+          <Col xs={24} sm={24} md={5} lg={5} xl={5}>
+            {renderimage()}
+            <Row>
+              <Image.PreviewGroup>
+                {announcment.image.map((imagee) => {
+                  if (!imagee.cover) {
+                    return (
+                      <Col
+                        xs={8}
+                        sm={8}
+                        md={8}
+                        lg={8}
+                        xl={8}
+                        style={{ padding: "3px" }}
+                      >
+                        <Image src={"http://127.0.0.1:8000" + imagee.photo} />
+                      </Col>
+                    );
+                  }
+                })}
+              </Image.PreviewGroup>
+            </Row>
+          </Col>
+          <Col xs={24} sm={24} md={12} lg={12} xl={12} offset={1}>
+            <h2>{announcment.title}</h2>
+            <p style={{ marginBottom: "1px", color: "blue" }}>
+              posted by {announcment.user.name}
+            </p>
+            <p>
+              {/* <EnvironmentOutlined /> {announcment.user.profile.address} */}
+            </p>
+            <Space></Space>
+            <h3>Description</h3>
+            <p>{announcment.description}</p>
+            <Divider />
+            <h3>Other annoucement from the same user</h3>
+          </Col>
+          <Col xs={24} sm={24} md={4} lg={4} xl={4} offset={1}>
+            <h3>location</h3>
+            <p>
+              Address:{" "}
+              {announcment.Thana == null ? "-" : announcment.Thana.name + ", "}
+              {announcment.District == null
+                ? "-"
+                : announcment.District.name + ", "}
+              {announcment.Division == null ? "-" : announcment.Division.name}
+            </p>
+            <p>
+              Contact:{" "}
+              {announcment.contact_information == null
+                ? "-"
+                : announcment.contact_information}
+            </p>
+
+            <Divider />
+            <h3>User details</h3>
+            <p>
+              Phone:{" "}
+              {announcment.user.phone == null ? "-" : announcment.user.phone}
+            </p>
+            <p>
+              Gender:{" "}
+              {announcment.user.gender == null ? "-" : announcment.user.gender}
+            </p>
+            <p>
+              Bio: {announcment.user.bio == null ? "-" : announcment.user.bio}
+            </p>
+          </Col>
+        </Row>
+      );
+    } else {
+      return <h3>Loading</h3>;
+    }
   };
 
   return (

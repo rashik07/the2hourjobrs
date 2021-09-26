@@ -13,7 +13,6 @@ const JobList = ({
   useEffect(() => {
     getOtherWorkers();
   }, []);
-  console.log(showFilterWorker);
 
   if (showFilterWorker) {
     return filtered_workers.map((worker) => {

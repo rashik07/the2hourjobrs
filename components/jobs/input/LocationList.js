@@ -28,6 +28,7 @@ const LocationList = ({
         multiple={multiple}
         onChange={setValue}
         onClear={onClear}
+        placeholder="Select a location"
       >
         {location.map((divison) => {
           return (

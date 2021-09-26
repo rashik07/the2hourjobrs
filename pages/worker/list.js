@@ -3,12 +3,9 @@ import { filterWorkers } from "@/redux/actions/userAction";
 import KeywordSearch from "components/jobs/list/KeywordSearch";
 import SelectedFilter from "components/jobs/list/SelectedFilter";
 import LocationFilter from "components/jobs/list/LocationFilter";
-import PostTimeFilter from "components/jobs/list/PostTimeFilter";
-import DeadlineFilter from "components/jobs/list/DeadlineFilter";
 import GenderFilter from "components/jobs/list/GenderFilter";
 import EmploymentStatusFilter from "components/jobs/list/EmploymentStatusFilter";
 import JobCategoryFilter from "components/jobs/list/JobCategoryFilter";
-import JobIndustryFilter from "components/jobs/list/JobIndustryFilter";
 import ExperienceFilter from "components/jobs/list/ExperienceFilter";
 import AgeFilter from "components/jobs/list/AgeFilter";
 
@@ -60,16 +57,7 @@ const Workers = ({ filterWorkers }) => {
                   setFilter={setFilter}
                   reload={setShowFilterWorker}
                 />
-                <PostTimeFilter
-                  filter={filter}
-                  setFilter={setFilter}
-                  reload={setShowFilterWorker}
-                />
-                <DeadlineFilter
-                  filter={filter}
-                  setFilter={setFilter}
-                  reload={setShowFilterWorker}
-                />
+
                 <GenderFilter
                   filter={filter}
                   setFilter={setFilter}

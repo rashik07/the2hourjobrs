@@ -13,9 +13,6 @@ const SelectedFilter = ({
   const [state, setState] = useState([]);
 
   useEffect(() => {
-    /* FOR ADDING ITEMS
-       newState.push(The Item you want to show); */
-
     const newState = [];
     if (filter.category) {
       newState.push(filter.category.name);
@@ -53,18 +50,17 @@ const SelectedFilter = ({
     }
   }, [filter]);
 
+  const cleanUpFilter = (object, include_query) => {
+    if (filter[object] && !state.includes(include_query)) {
+      setFilter(_.omit(filter, [object]));
+    }
+  };
+
   useEffect(() => {
-    /* FOR REMOVING ITEMS
-       if (filter.object && !state.includes(filter.object.Item_which_is_shown)) {
-         setFilter(_.omit(filter, ["object"]));
-    }*/
-
-    const cleanUpFilter = (object, include_query) => {
-      if (filter[object] && !state.includes(include_query)) {
-        setFilter(_.omit(filter, [object]));
-      }
-    };
-
+    // FOR REMOVING ITEMS
+    // if (filter.object && !state.includes(filter.object.Item_which_is_shown)) {
+    //   setFilter(_.omit(filter, ["object"]));
+    // }
     // Object properties might not be available at the begining, so we are applying try catch
     try {
       cleanUpFilter("category", filter.category.name);
@@ -103,7 +99,8 @@ const SelectedFilter = ({
     const tags = state.filter((tag) => tag !== removedTag);
     setState(tags);
   };
-
+  console.log(filter);
+  console.log("state : " + state);
   return (
     <>
       <div style={{ margin: 15 }}>
@@ -112,20 +109,20 @@ const SelectedFilter = ({
             <span style={{ fontSize: "1.17em", marginRight: ".5rem" }}>
               Acive Filters :
             </span>
-            {/* <InputTags
-            onChange={() => {}}
-            values={state}
-            onTags={(value) => {
-              setState(value.values);
-            }}
-          /> */}
             <>
               {state.map((item) => {
+                console.log(item);
                 return (
-                  // <Tag key={item} closable onClose={() => onTagClose(item)}>
-                  //   {item}
-                  // </Tag>
-                  <Badge className="site-badge-count-109">{item}</Badge>
+                  <Badge className="site-badge-count-109">
+                    {item}
+                    {/* <a
+                      onClick={() => {
+                        alert(item);
+                      }}
+                    >
+                      x
+                    </a> */}
+                  </Badge>
                 );
               })}
             </>

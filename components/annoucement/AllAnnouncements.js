@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Row, Col, Image, Divider, Button, Space } from "antd";
+import { Row, Col, Image, Divider, Button, Space, Tabs } from "antd";
 import {
   PhoneOutlined,
   ScheduleOutlined,
@@ -8,17 +8,22 @@ import {
   UserOutlined,
   FieldTimeOutlined,
 } from "@ant-design/icons";
-import { getAllAnnouncement } from "../../redux/actions/announcementAction";
+import {
+  getAllAnnouncement,
+  getAllSavedAnnouncement,
+} from "../../redux/actions/announcementAction";
 import dateformat from "dateformat";
 import Link from "next/link";
+const { TabPane } = Tabs;
 
 class AllAnnouncements extends Component {
   componentDidMount() {
     this.props.getAllAnnouncement();
+    this.props.getAllSavedAnnouncement(5);
   }
 
   renderimage(announcment) {
-    if (announcment.image) {
+    if (announcment.image.length > 0) {
       return announcment.image.map((announcment) => {
         if (announcment.cover) {
           return <Image src={"http://127.0.0.1:8000" + announcment.photo} />;
@@ -36,9 +41,9 @@ class AllAnnouncements extends Component {
     }
   }
 
-  renderAnnounements() {
-    if (this.props.announcments) {
-      return this.props.announcments.map((announcment) => {
+  renderAnnounements(data) {
+    if (data) {
+      return data.map((announcment) => {
         if (!announcment.archive) {
           return (
             <>
@@ -108,12 +113,103 @@ class AllAnnouncements extends Component {
       });
     }
   }
+
+  renderSavedAnnounements(data) {
+    if (data) {
+      return data.map((announcment) => {
+        console.log(announcment.announcement_data);
+        if (!announcment.announcement_data.archive) {
+          return (
+            <>
+              <Row
+                key={announcment.announcement_data.id}
+                className="announcement_card"
+              >
+                <Col xs={24} sm={4} md={6} lg={8} xl={6}>
+                  <Row>
+                    <Col span={12} offset={6}>
+                      {this.renderimage(announcment.announcement_data)}
+                    </Col>
+                  </Row>
+                </Col>
+                <Col
+                  xs={24}
+                  sm={16}
+                  md={12}
+                  lg={8}
+                  xl={12}
+                  className="announcement_details"
+                >
+                  <h3>{announcment.announcement_data.title}</h3>
+                  <p>
+                    <Space size={"large"}>
+                      <div>
+                        <UserOutlined />{" "}
+                        {announcment.announcement_data.user.name}
+                      </div>
+                      {/* <div>
+                      <FieldTimeOutlined /> {announcment.created_timestamp}
+                    </div> */}
+                      <div>
+                        <ScheduleOutlined />{" "}
+                        {dateformat(
+                          announcment.announcement_data.created_timestamp,
+                          "mmmm dS, yyyy"
+                        )}
+                      </div>
+                    </Space>
+                  </p>
+                  <p>{announcment.announcement_data.description}</p>
+                  {/* <p>
+                  <PhoneOutlined /> {announcment.contact_information}
+                </p> */}
+                </Col>
+                <Col
+                  xs={24}
+                  sm={4}
+                  md={6}
+                  lg={8}
+                  xl={6}
+                  className="announcement_button"
+                >
+                  <Row>
+                    <Col span={18} offset={3}>
+                      <Link
+                        href={
+                          "/announcement/" +
+                          announcment.announcement_data.id +
+                          "/"
+                        }
+                      >
+                        <Button type="primary" block>
+                          View
+                        </Button>
+                      </Link>
+                      <Button block>Remove</Button>
+                    </Col>
+                  </Row>
+                </Col>
+              </Row>
+              <Divider />
+            </>
+          );
+        }
+      });
+    }
+  }
   render() {
     return (
       <>
         <Row>
           <Col span={24} className="announcement_frame">
-            {this.renderAnnounements()}
+            <Tabs defaultActiveKey="1">
+              <TabPane tab="All Announcements" key="1">
+                {this.renderAnnounements(this.props.announcments)}
+              </TabPane>
+              <TabPane tab="Saved Announcements" key="2">
+                {this.renderSavedAnnounements(this.props.savedannouncments)}
+              </TabPane>
+            </Tabs>
           </Col>
         </Row>
       </>
@@ -122,9 +218,13 @@ class AllAnnouncements extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { announcments: Object.values(state.announcement.annountmentList) };
+  return {
+    announcments: Object.values(state.announcement.annountmentList),
+    savedannouncments: state.announcement.savedannountmentList,
+  };
 };
 
-export default connect(mapStateToProps, { getAllAnnouncement })(
-  AllAnnouncements
-);
+export default connect(mapStateToProps, {
+  getAllAnnouncement,
+  getAllSavedAnnouncement,
+})(AllAnnouncements);
