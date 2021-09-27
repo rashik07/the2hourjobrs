@@ -15,6 +15,7 @@ import { Modal, Button } from "antd";
 import { ExclamationCircleOutlined, PushpinFilled } from "@ant-design/icons";
 import { Row, Col } from "antd";
 import {
+  PhoneOutlined,
   ScheduleOutlined,
   EnvironmentOutlined,
   UserOutlined,
@@ -37,14 +38,19 @@ const JobPostItem = ({
   applied_jobs_person,
 }) => {
   const router = useRouter();
+
   const { id, title, poster, applied, saved, applied_saved_id } = job;
+
   const btn_disable = userid === poster.id ? "disabled" : "";
+
   const [appliedStatus, setAppliedStatus] = useState(applied);
   const [savedStatus, setSavedStatus] = useState(saved);
+
   const getExperience = (min, max) => {
     if (min && max) {
       return `${min} to ${max} year(s)`;
     }
+
     if (min) {
       return `Minimum ${min} year(s)`;
     }
@@ -57,18 +63,21 @@ const JobPostItem = ({
 
   const getLocations = (location) => {
     const location_list = [];
+
     location.forEach((loc) => {
       location_list.push(loc.name);
     });
-    //  console.log(location_list);
+
     return location_list.join(", ");
   };
 
   const getEducation = (education) => {
     const education_list = [];
+
     education.forEach((edu) => {
       education_list.push(edu.name);
     });
+
     return education_list.join(", ");
   };
 
@@ -90,6 +99,7 @@ const JobPostItem = ({
   };
   const deleteJobBtnClick = () => {
     const { confirm } = Modal;
+
     confirm({
       title: "Are you sure delete this task?",
       icon: <ExclamationCircleOutlined />,
@@ -105,13 +115,13 @@ const JobPostItem = ({
     // applyJob(id, userid, setAppliedStatus);
   };
 
+
   const applyShow = () => {
     if (appliedStatus) {
       return "applied";
     } else if (btn_disable) {
       return "";
     }
-    //  console.log(self_posted_jobs);
     return (
       <a
         style={{
@@ -189,6 +199,20 @@ const JobPostItem = ({
         {saveShow()}
 
 
+        {/* <button
+          onClick={() => router.push(`/jobs/detail/${id}`)}
+          className="btn button-home mt-2 rounded"
+        >
+          Details
+        </button>
+
+        <button
+          onClick={saveJobBtnClick}
+          className={`btn button-home mt-2 rounded ${btn_disable}`}
+        >
+          {savedStatus ? "Unsave" : "Save"}
+        </button> */}
+        
       </>
     );
   };

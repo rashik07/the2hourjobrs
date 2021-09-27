@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
+import { useRouter } from "next/router";
 import {
   Input,
   Form,
@@ -23,6 +24,7 @@ const tailLayout = {
 const AnnouncementCreateForm = ({ createAnnouncement }) => {
   const [gallery, setgallery] = useState([]);
   const [cover, setcover] = useState([]);
+  const router = useRouter();
 
   const uploadgallery = (fileList) => {
     setgallery(fileList);
@@ -40,10 +42,10 @@ const AnnouncementCreateForm = ({ createAnnouncement }) => {
           // description: "You must add a cover image",
         });
       } else {
-        createAnnouncement(values, gallery, cover);
+        createAnnouncement(values, gallery, cover, router);
       }
     } else {
-      createAnnouncement(values, gallery, cover);
+      createAnnouncement(values, gallery, cover, router);
     }
   };
 

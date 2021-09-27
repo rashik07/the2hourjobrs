@@ -5,6 +5,7 @@ const JobCategoryFilter = ({ filter, setFilter, reload }) => {
   function handleChange(value) {
     if (value) {
       const new_filter = { ...filter, category: JSON.parse(value) };
+      console.log(new_filter);
       setFilter(new_filter);
       reload(true);
     }

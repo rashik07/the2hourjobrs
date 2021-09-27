@@ -119,22 +119,48 @@ const editAnnouncementForm = ({ announcement, updateAnnouncement }) => {
         </Col>
         <Col xs={24} sm={24} md={7} lg={7} xl={7} offset={1}>
           <h3>Upload New image</h3>
-          <PicturesWall setImages={setImages} />
+          <Image.PreviewGroup>
+            <Row>
+              {announcement.image.map((imagee) => {
+                console.log(imagee);
+                if (imagee.cover) {
+                  return (
+                    <>
+                      <Col span={8}>
+                        <Image
+                          style={{ padding: "5px", width: 105 }}
+                          src={"http://127.0.0.1:8000" + imagee.photo}
+                        />
+                        <Button>Remove</Button>
+                      </Col>
+                    </>
+                  );
+                }
+              })}
+              <Col span={8}>
+                <PicturesWall setImages={setImages} />
+              </Col>
+            </Row>
+          </Image.PreviewGroup>
+
           <h3>Gallery images</h3>
           <Image.PreviewGroup>
             <Row>
               {announcement.image.map((imagee) => {
-                return (
-                  <>
-                    <Col span={8}>
-                      <Image
-                        style={{ padding: "5px" }}
-                        src={"http://127.0.0.1:8000" + imagee}
-                      />
-                      <Button>Remove</Button>
-                    </Col>
-                  </>
-                );
+                console.log(imagee);
+                if (!imagee.cover) {
+                  return (
+                    <>
+                      <Col span={8}>
+                        <Image
+                          style={{ padding: "5px", width: 105 }}
+                          src={"http://127.0.0.1:8000" + imagee.photo}
+                        />
+                        <Button>Remove</Button>
+                      </Col>
+                    </>
+                  );
+                }
               })}
             </Row>
           </Image.PreviewGroup>
