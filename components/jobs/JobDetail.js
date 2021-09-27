@@ -126,10 +126,11 @@ const JobDetail = ({
   const [user, setUser] = useState(null);
   //  console.log(user);
   useEffect(() => {
+    
     getAppliedJobsPerson(temp_jobpost).then((u) => setUser(u));
   }, [temp_jobpost]);
 
-   console.log(applied_jobs_person);
+  console.log(temp_jobpost);
   // if(applied_jobs_person)
   const appliedPerson = () => {
     if (user === null) {
@@ -141,7 +142,10 @@ const JobDetail = ({
 
       return (
         <Link href={`/Profile/Profile_details/${applied_jobs_person.user.id}`}>
-         <a> {applied_jobs_person.user.username} {" , "}{" "}</a>
+          <a>
+            {" "}
+            {applied_jobs_person.user.username}{", "}
+          </a>
         </Link>
       );
     });
@@ -218,10 +222,17 @@ const JobDetail = ({
       <Head>
         <title>Job list</title>
       </Head>
-      <Layout className="layout">
+      <Layout>
         <Navbar />
+
         <Content className="site-layout">
-          <div className="container" style={{ marginTop: "5%" }}>
+          <Breadcrumb className="breadcrumb_main">
+            <Breadcrumb.Item>Home</Breadcrumb.Item>
+            <Breadcrumb.Item>Job</Breadcrumb.Item>
+            <Breadcrumb.Item>Job Details</Breadcrumb.Item>
+            <Breadcrumb.Item>{temp_jobpost.title}</Breadcrumb.Item>
+          </Breadcrumb>
+          <div className="site-layout-background" >
             <div className="text-secondary">
               {renderItem("job_detail")} <hr />
               {renderItem("employee_requirement")}

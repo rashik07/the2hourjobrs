@@ -2,7 +2,6 @@ import Navbar from "container/navbar/newNavbar";
 import React, { useState, useEffect } from "react";
 import { Steps, Layout, Breadcrumb, Row, Col } from "antd";
 import Head from "next/head";
-import Footer from "../../container/footer/footer";
 import Step1 from "components/jobs/post/Step1";
 import Step2 from "components/jobs/post/Step2";
 import Step3 from "components/jobs/post/Step3";

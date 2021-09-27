@@ -274,12 +274,12 @@ const Profile_info = ({ updateProfile, user_profile, editUserProfile }) => {
           name="birthday"
           rules={[
             {
-              type: "number",
-              message: "The input is not valid NID!",
+              type: "date",
+              message: "The input is not valid BOD!",
             },
             {
               required: true,
-              message: "Please input your NID!",
+              message: "Please input your BOD!",
             },
           ]}
         >

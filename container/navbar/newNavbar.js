@@ -11,27 +11,48 @@ const { SubMenu } = Menu;
 
 const getItems = (isSignedIn, signOut, user_profile) => {
   const { Header, Content, Footer } = Layout;
-
+  const image=() => {
+  if (user_profile.image === null) {
+    return (
+      console.log("get image"),
+      <Link href="/Profile">
+        <a >
+          {" "}
+          {/* <UserOutlined />  */}
+         
+          {"  "}
+          
+          {user_profile.name}
+        </a>
+      </Link>
+    );
+     
+  }
+  return (
+    console.log("get image"),
+    <Link href="/Profile">
+      <a >
+        {" "}
+        {/* <UserOutlined />  */}
+        <Image
+          preview={false}
+          width={35}
+          height={35}
+          src={"http://127.0.0.1:8000" + user_profile.image}
+          style={{ marginTop: "10px", borderRadius: "50%" }}
+        />
+        {"  "}
+        
+        {user_profile.name}
+      </a>
+    </Link>
+  );
+  }
   if (isSignedIn) {
     return (
       <>
         {/* {console.log(user_profile.name)} */}
-        <Menu.Item key="setting:12">
-          <Link href="/Profile">
-            <a>
-              {" "}
-              {/* <UserOutlined />  */}
-              <Image
-                preview={false}
-                width={35}
-                height={35}
-                src={"http://127.0.0.1:8000" + user_profile.image}
-                style={{marginTop:"10px",borderRadius: "50%"}}
-              />{"  "}
-              {user_profile.name}
-            </a>
-          </Link>
-        </Menu.Item>
+        <Menu.Item key="setting:12">{image()}</Menu.Item>
 
         <Menu.Item key="setting:13">
           <a
@@ -66,6 +87,13 @@ const navbar = ({ isSignedIn, signOut, updateProfile, user_profile }) => {
   useEffect(() => {
     updateProfile();
   }, []);
+  // const createPost=()=>{
+  //   if (!isSignedIn) {
+  //     alert("You must log in to access this feature");
+  //     return;
+  //   }
+    
+  // }
 
   // console.log(user_profile.name);
   return (
