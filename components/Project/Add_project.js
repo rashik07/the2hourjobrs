@@ -28,36 +28,39 @@ const Add_project = ( {createProject,create_project,setloader}) => {
         const { TextArea } = Input;
         const { Title } = Typography;
         const [form] = Form.useForm();
-        const [formLayout, setFormLayout] = useState('horizontal');     
-        const onFormLayoutChange = ({ layout }) => {
-          setFormLayout(layout);
-        };           
-        const layout = {
-          labelCol: {
-            span: 8,
-          },
-          wrapperCol: {
-            span: 16,
-          },
-        };
-        const tailFormItemLayout = {
-          wrapperCol: {
-            xs: {
-              span: 24,
-              offset: 0,
-            },
-            sm: {
-              span: 16,
-              offset: 8,
-            },
-          },
-        };
+        const [formLayout, setFormLayout] = useState("horizontal");
+      
+        const formItemLayout =
+          formLayout === "horizontal"
+            ? {
+                labelCol: {
+                  span: 4,
+                },
+                wrapperCol: {
+                  span: 12,
+                },
+              }
+            : null;
+            const tailFormItemLayout = {
+              wrapperCol: {
+                xs: {
+                  span: 24,
+                  offset: 0,
+                },
+                sm: {
+                  span: 16,
+                  offset: 8,
+                },
+              },
+            };
          
     return (
         <div>
             <Form 
-                    {...layout}
-                    layout={formLayout}                               
+                   
+                   {...formItemLayout}
+                   layout={formLayout}
+                   form={form}                              
                     onFinish={onFinish}
                     onFinishFailed={onFinishFailed}                                
             >                    

@@ -97,6 +97,7 @@ const Jobs = ({ filterJobs }) => {
                   setShowFilter={setShowFilterJobs}
                   getFilteredList={filterJobs}
                   showFilterJobs={showFilterJobs}
+                  //reload={setShowFilterJobs}
                 />
                 <KeywordSearch
                   filter={filter}
@@ -104,6 +105,8 @@ const Jobs = ({ filterJobs }) => {
                   setShowFilter={setShowFilterJobs}
                   getFilteredList={filterJobs}
                   reload={showFilterJobs}
+                  //reload={setShowFilterJobs}
+             
                 />
                 <Divider />
                 <JobList filter={filter} showFilterJobs={showFilterJobs} />

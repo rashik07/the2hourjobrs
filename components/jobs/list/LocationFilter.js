@@ -30,6 +30,7 @@ const LocationFilter = ({ filter, setFilter, reload }) => {
         setValue={onLocationSelect}
         multiple={false}
         onClear={onClear}
+        placeholder="Select a location"
       />
     </>
   );

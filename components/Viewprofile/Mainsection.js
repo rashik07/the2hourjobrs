@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
-import { Table, Space, Card, Row, Col, Divider } from "antd";
-
+import { Table, Modal, Button, Card, Row, Col, Divider } from "antd";
 
 const Mainsection = ({
   user_profile,
@@ -9,9 +7,20 @@ const Mainsection = ({
   view_employment,
   view_project,
 }) => {
-  
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
- // console.log(view_project);
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
   const eduColumns = [
     {
       title: "Level of Education",
@@ -49,7 +58,7 @@ const Mainsection = ({
       <p>
         <div>
           <Divider
-            style={{ fontWeight: "bold", borderTopColor: "rgb(0 0 0)" }}
+            style={{ fontWeight: "bold", borderTopColor: "#F0F0F0" }}
             orientation="left"
           >
             Education
@@ -73,7 +82,7 @@ const Mainsection = ({
       <p>
         <div>
           <Divider
-            style={{ fontWeight: "bold", borderTopColor: "rgb(0 0 0)" }}
+            style={{ fontWeight: "bold", borderTopColor: "#F0F0F0" }}
             orientation="left"
           >
             Experience
@@ -124,14 +133,13 @@ const Mainsection = ({
       <div className="site-card-wrapper">
         <div>
           <Divider
-            style={{ fontWeight: "bold", borderTopColor: "rgb(0 0 0)" }}
+            style={{ fontWeight: "bold", borderTopColor: "#F0F0F0" }}
             orientation="left"
           >
             Projects
           </Divider>
         </div>
         <Row gutter={16}>
-          
           {view_project.map((view_project) => (
             <Col span={8} style={{ paddingBottom: "20px" }}>
               <Card
@@ -147,14 +155,14 @@ const Mainsection = ({
     );
   };
   const objective = () => {
-    if (user_profile.objective == " ") {
+    if (user_profile.objective == null) {
       return " ";
     }
     return (
       <p>
         <div>
           <Divider
-            style={{ fontWeight: "bold", borderTopColor: "rgb(0 0 0)" }}
+            style={{ fontWeight: "bold", borderTopColor: "#F0F0F0" }}
             orientation="left"
           >
             Objective
@@ -170,27 +178,33 @@ const Mainsection = ({
     <div>
       {objective()}
       {employment()}
-      
+
       {education()}
       {project()}
+      <Button
+        type="primary"
+        onClick={showModal}
+        style={{
+          display: "block",
+          marginRight: "auto",
+          marginLeft: "auto",
+          
+        }}
+      >
+        Contact With Me
+      </Button>
+      <Modal
+        title="Contact Info"
+        visible={isModalVisible}
+        // onOk={handleOk}
+        onCancel={handleCancel}
+        footer={null}
+      >
+        <p><a href={`tel:${user_profile.phone}`}>{user_profile.phone}</a></p>
+        <p><a href={`mailto:${user_profile.email}`}>{user_profile.email}</a></p>
+      </Modal>
     </div>
   );
 };
 
-// const mapStateToProps = (state) => {
-//   return {
-
-   
-  
-//     view_project: state.project.view_project,
-//   };
-// };
-
-// export default connect(mapStateToProps, {
-
-
-
-//   viewProject,
-  
-// })(Mainsection);
 export default Mainsection;

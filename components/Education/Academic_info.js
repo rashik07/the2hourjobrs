@@ -32,10 +32,12 @@ const Academic_info = ({
   viewEducation,
   deleteEducation,
 }) => {
+  const [loader, setloader] = useState(false);
   useEffect(() => {
     getEducation();
     viewEducation();
-  }, []);
+    setloader(false);
+  }, [loader]);
 
   console.log(view_education);
   const { Option, OptGroup } = Select;
@@ -47,6 +49,7 @@ const Academic_info = ({
       year_of_passing: values["year_of_passing"].format("YYYY"),
     };
     createEducation(values);
+    setloader(true);
     //       console.log('Success:', values);
   };
 
@@ -81,6 +84,18 @@ const Academic_info = ({
           },
         }
       : null;
+  const tailFormItemLayout = {
+    wrapperCol: {
+      xs: {
+        span: 24,
+        offset: 0,
+      },
+      sm: {
+        span: 16,
+        offset: 8,
+      },
+    },
+  };
   const getOptions = (education) => {
     if (education)
       return education.map((parent) => (
@@ -136,7 +151,7 @@ const Academic_info = ({
             key="ellipsis"
             onClick={() => {
               deleteEducation(details.id);
-              window.location.reload();
+              setloader(true);
             }}
           />
         </Space>
@@ -201,7 +216,7 @@ const Academic_info = ({
         <Form.Item label="Year of Passing" name="year_of_passing">
           <DatePicker format={dateFormat} picker="year" />
         </Form.Item>
-        <Form.Item className="text-center">
+        <Form.Item className="text-center" {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit">
             Add
           </Button>

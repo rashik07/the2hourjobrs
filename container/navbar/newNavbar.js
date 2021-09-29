@@ -29,7 +29,6 @@ const getItems = (isSignedIn, signOut, user_profile) => {
      
   }
   return (
-    console.log("get image"),
     <Link href="/Profile">
       <a >
         {" "}

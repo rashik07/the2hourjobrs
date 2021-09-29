@@ -29,11 +29,11 @@ const View_profile = ({ user_profile, view_education,view_employment ,view_proje
             <Topsection user_profile={user_profile} />
             <Divider />
             <Row justify="left" align="top">
-              <Col span={5}>
+              <Col span={6}>
                 <Sidesection user_profile={user_profile} />
               </Col>
               <Col
-                span={19}
+                span={18}
                 style={{ borderLeft: "1px solid #F0F0F0", padding: "0px 10px" }}
               >
                 <Mainsection

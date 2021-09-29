@@ -7,8 +7,8 @@ import moment from 'moment';
 const Add_employment = ( {createEmployment ,view_employment,setloader}) => {
 
   const dateFormat = 'YYYY-MM-DD';
-  view_employment.employment_period_from=moment(view_employment.employment_period_from, dateFormat);
-  view_employment.employment_period_to=moment(view_employment.employment_period_to, dateFormat);
+  // view_employment.employment_period_from=moment(view_employment.employment_period_from, dateFormat);
+  // view_employment.employment_period_to=moment(view_employment.employment_period_to, dateFormat);
     const onFinish = (values) => { 
       values = {
         ...values,
@@ -31,28 +31,38 @@ const Add_employment = ( {createEmployment ,view_employment,setloader}) => {
         const { TextArea } = Input;
         const { Title } = Typography;
         const [form] = Form.useForm();
-        const [formLayout, setFormLayout] = useState('horizontal');
+        const [formLayout, setFormLayout] = useState("horizontal");
       
-        const onFormLayoutChange = ({ layout }) => {
-          setFormLayout(layout);
-        };
-        
-    
-        const layout = {
-          labelCol: {
-            span: 8,
-          },
-          wrapperCol: {
-            span: 16,
-          },
-        };
+        const formItemLayout =
+          formLayout === "horizontal"
+            ? {
+                labelCol: {
+                  span: 4,
+                },
+                wrapperCol: {
+                  span: 12,
+                },
+              }
+            : null;
+            const tailFormItemLayout = {
+              wrapperCol: {
+                xs: {
+                  span: 24,
+                  offset: 0,
+                },
+                sm: {
+                  span: 16,
+                  offset: 8,
+                },
+              },
+            };
      
     return (
         <div>
                         <Form 
-                                {...layout}
-                                    layout={formLayout}
-                                    form={form}
+                                  {...formItemLayout}
+                                  layout={formLayout}
+                                  form={form}
                                    
                                     onFinish={onFinish}
                                     onFinishFailed={onFinishFailed}
@@ -86,7 +96,7 @@ const Add_employment = ( {createEmployment ,view_employment,setloader}) => {
                                     
                                     
                                 
-                                <Form.Item className="text-center">
+                                <Form.Item className="text-center" {...tailFormItemLayout}>
                                     <Button type="primary" htmlType="submit">Add</Button>
                                 </Form.Item>
                                 

@@ -26,7 +26,7 @@ const ProfileDetails = ({
     viewSingleEducation(id);
     getSpecificProfile(id);
   }, [router.query.id]);
-  console.log(view_project);
+  //console.log(view_project);
   return (
     <div>
       <View_profile
