@@ -15,7 +15,7 @@ const renderItem = (item, children, saveTemporayJobPost, temp_jobpost) => {
       case "title":
         return (
           <>
-            <label className="form-label">Job Title *</label>
+            <label className="form-label">what am i looking for?</label>
             <input
               onChange={(e) => saveTemporayJobPost({ title: e.target.value })}
               type="text"

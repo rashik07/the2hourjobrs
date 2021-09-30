@@ -100,7 +100,7 @@ const navbar = ({ isSignedIn, signOut, updateProfile, user_profile }) => {
       <Row>
         <Col xs={24} sm={24} md={6} lg={6} xl={6}>
           <div className="logo">
-            <img src="/img/logo.png" alt="Logo" height={40} />
+            <img src="/img/logo1.png" alt="Logo" height={40} />
           </div>
         </Col>
         <Col xs={24} sm={24} md={18} lg={18} xl={18}>

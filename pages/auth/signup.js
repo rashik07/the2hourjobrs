@@ -10,8 +10,15 @@ import * as types from "redux/types";
 import Form from "../../components/Form";
 import { signUp } from "redux/actions/authAction";
 import { Layout, Button, Input } from "antd";
+// import { facebookProvider } from "config/authMethods";
+// import socialMediaAuth from "service/auth";
 
 const Signup = (props) => {
+  const handleOnClick = async (provider) => {
+    const res = await socialMediaAuth(provider);
+    console.log(res);
+  };
+  
   const dispatch = useDispatch();
   let start = 0;
 
@@ -93,6 +100,7 @@ const Signup = (props) => {
             >
               Sign Up
             </button>
+            {/* <button onClick={() => handleOnClick(facebookProvider)}>facebook</button> */}
           </div>
           <Link href="/auth/login">
             <button type="button" className="btn btn-secondary mt-3">

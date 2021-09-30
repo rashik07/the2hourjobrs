@@ -14,6 +14,7 @@
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
     "dateformat": "^4.5.1",
+    "firebase": "^9.1.0",
     "lodash": "^4.17.21",
     "next": "10.0.8",
     "next-redux-wrapper": "^6.0.2",

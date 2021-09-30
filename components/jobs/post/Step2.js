@@ -32,9 +32,9 @@ const Step2 = ({ postStep, setPostStep, temp_jobpost }) => {
             <StepsParent item="workplace" />
           </Col>
           <br />
-          <Col span={24}>
+          {/* <Col span={24}>
             <StepsParent item="job_location_inside_dhaka" />
-          </Col>
+          </Col> */}
           <Col span={24}>
             <StepsParent item="job_location" />
           </Col>

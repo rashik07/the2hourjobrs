@@ -3,14 +3,16 @@ import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { connect } from "react-redux";
-import { Layout, Button, Form, Input } from "antd";
+import { Layout} from "antd";
 import Navbar from "../../container/navbar/newNavbar";
 import { signIn } from "redux/actions/authAction";
+// import { facebookProvider } from "config/authMethods";
+// import socialMediaAuth from "service/auth";
+
 
 const handleSubmit = (e, username, password, signIn, router) => {
   e.preventDefault();
   if (signIn({ username, password }) === true) router.back();
-
 };
 
 const Login = ({ signIn, isSignedIn }) => {
@@ -19,7 +21,11 @@ const Login = ({ signIn, isSignedIn }) => {
   const [hidePassword, setHidePassword] = useState(true);
 
   const router = useRouter();
-
+  const handleOnClick = async (provider) => {
+    const res = await socialMediaAuth(provider);
+    console.log(res);
+  };
+  
   useEffect(() => {
     if (isSignedIn) router.replace("/jobs/list");
   });
@@ -27,7 +33,6 @@ const Login = ({ signIn, isSignedIn }) => {
   const tailLayout = {
     wrapperCol: { offset: 8, span: 16 },
   };
-  
 
   return (
     <>
@@ -39,6 +44,7 @@ const Login = ({ signIn, isSignedIn }) => {
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
           crossorigin="anonymous"
         ></link>
+        
       </Head>
       <Layout className="layout">
         <Navbar />
@@ -92,13 +98,18 @@ const Login = ({ signIn, isSignedIn }) => {
                   Sign Up
                 </button>
               </Link>
+              {/* <button onClick={() => handleOnClick(facebookProvider)}>facebook</button> */}
             </div>
           </form>
         </main>
       </Layout>
+      
+      
     </>
+    
   );
 };
+
 
 const mapStateToProps = (state) => {
   return {

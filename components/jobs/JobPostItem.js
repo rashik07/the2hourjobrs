@@ -87,7 +87,7 @@ const JobPostItem = ({
       return;
     }
 
-    applyJob(id, userid, setAppliedStatus);
+    applyJob(id, userid,appliedStatus, setAppliedStatus);
     alert("successfully");
   };
   const saveJobBtnClick = () => {
@@ -118,22 +118,20 @@ const JobPostItem = ({
 
   const applyShow = () => {
     if (appliedStatus) {
-      return "applied";
+      return (
+        <Button type="primary" shape="round"  onClick={applyJobBtnClick} disabled>
+            Applied
+          </Button>
+        
+      );
     } else if (btn_disable) {
       return "";
     }
     return (
-      <a
-        style={{
-          color: "black",
-          padding: "2px",
-          borderBottom: "5px solid #F9BE02",
-          borderColor: "#F9BE02",
-        }}
-        onClick={applyJobBtnClick}
-      >
-        Apply
-      </a>
+      <Button type="primary" shape="round"  onClick={applyJobBtnClick}>
+          Apply
+        </Button>
+      
     );
   };
   const saveShow = () => {
