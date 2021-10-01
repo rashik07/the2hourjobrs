@@ -241,7 +241,7 @@ const renderItem = (item, children, saveTemporayJobPost, temp_jobpost) => {
             <label className="form-label">Education</label>
             <br />
             <EducationField
-              // value={temp_jobpost.education}
+              value={temp_jobpost.education}
               setValue={setEducation}
             />
           </>
@@ -257,7 +257,7 @@ const renderItem = (item, children, saveTemporayJobPost, temp_jobpost) => {
             <label className="form-label">Location</label>
             <br />
             <LocationList
-              // value={temp_jobpost.job_location}
+              value={temp_jobpost.job_location}
               setValue={setJobLocation}
               multiple={true}
             />

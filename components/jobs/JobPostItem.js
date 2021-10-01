@@ -22,6 +22,7 @@ import {
   CalendarOutlined,
   EditOutlined,
   SaveOutlined,
+  DeleteOutlined,
 } from "@ant-design/icons";
 
 const JobPostItem = ({
@@ -87,7 +88,7 @@ const JobPostItem = ({
       return;
     }
 
-    applyJob(id, userid,appliedStatus, setAppliedStatus);
+    applyJob(id, userid, appliedStatus, setAppliedStatus);
     alert("successfully");
   };
   const saveJobBtnClick = () => {
@@ -114,24 +115,43 @@ const JobPostItem = ({
 
     // applyJob(id, userid, setAppliedStatus);
   };
+  const deleteShow = () => {
+    if (btn_disable) {
+      return (
+        <DeleteOutlined
+          onClick={deleteJobBtnClick}
+          style={{
+            fontSize: "20px",
 
+            marginTop: "5px",
+            float: "right",
+            marginLeft: "15px",
+          }}
+        />
+      );
+    }
+    return " ";
+  };
 
   const applyShow = () => {
     if (appliedStatus) {
       return (
-        <Button type="primary" shape="round"  onClick={applyJobBtnClick} disabled>
-            Applied
-          </Button>
-        
+        <Button
+          type="primary"
+          shape="round"
+          onClick={applyJobBtnClick}
+          disabled
+        >
+          Applied
+        </Button>
       );
     } else if (btn_disable) {
       return "";
     }
     return (
-      <Button type="primary" shape="round"  onClick={applyJobBtnClick}>
-          Apply
-        </Button>
-      
+      <Button type="primary" shape="round" onClick={applyJobBtnClick}>
+        Apply
+      </Button>
     );
   };
   const saveShow = () => {
@@ -141,7 +161,7 @@ const JobPostItem = ({
           onClick={saveJobBtnClick}
           style={{
             fontSize: "20px",
-            color: "#0E8044",
+            // color: "#0E8044",
             marginTop: "5px",
             float: "right",
           }}
@@ -154,7 +174,7 @@ const JobPostItem = ({
         onClick={saveJobBtnClick}
         style={{
           fontSize: "20px",
-          color: "#0E8044",
+          color: "#FF3155",
           marginTop: "5px",
           float: "right",
         }}
@@ -164,28 +184,20 @@ const JobPostItem = ({
 
   const renderButtons = () => {
     // For self posted jobs
-    if (router.pathname === "/jobs/self_posted_jobs") {
+    if (router.pathname === "/jobs/my_posts") {
       return (
         <>
-          <button
-            onClick={() => router.push(`/jobs/edit/${id}`)}
-            className="btn button-home mt-2 rounded"
-          >
-            Edit
-          </button>
-          <button
-            onClick={() => router.push(`/jobs/detail/${id}`)}
-            className="btn button-home mt-2 rounded"
-          >
-            Detail
-          </button>
-          <PushpinOutlined onClick={() => router.push(`/jobs/detail/${id}`)} />
-          <button
-            onClick={deleteJobBtnClick}
-            className={`btn button-home mt-2 rounded`}
-          >
-            Delete
-          </button>
+             {applyShow()}
+        {deleteShow()}
+        {saveShow()}
+        <Button
+          onClick={() => router.push(`/jobs/edit/${id}`)}
+          type="primary"
+          shape="round"
+         
+        >
+          Edit
+        </Button>
         </>
       );
     }
@@ -193,9 +205,9 @@ const JobPostItem = ({
     return (
       <>
         {applyShow()}
-
+      
         {saveShow()}
-
+      
 
         {/* <button
           onClick={() => router.push(`/jobs/detail/${id}`)}
@@ -210,7 +222,6 @@ const JobPostItem = ({
         >
           {savedStatus ? "Unsave" : "Save"}
         </button> */}
-        
       </>
     );
   };
@@ -227,7 +238,6 @@ const JobPostItem = ({
         <h4 style={{ color: "gray" }}>
           <UserOutlined />{" "}
           <Link href={`/Profile/Profile_details/${poster.id}`}>
-         
             {poster.name}
           </Link>{" "}
           <EnvironmentOutlined /> {getLocations(job.job_location)}

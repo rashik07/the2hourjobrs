@@ -330,7 +330,7 @@ export const updateJob = (data, router) => async (dispatch) => {
 
     dispatch({ type: types.UNSAVE_TEMPORARY_JOBPOST });
 
-    router.push("/jobs/self_posted_jobs");
+    router.push("/jobs/my_posts");
   } catch (error) {
     console.log(error.response);
   }

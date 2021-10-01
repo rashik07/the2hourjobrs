@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { connect } from "react-redux";
 import _ from "lodash";
-
 import { getJobForUpdate } from "@/redux/actions/jobAction";
-import JobCreate from "components/jobs/JobCreate";
+import JobCreateUpdate from "components/jobs/JobCreateUpdate";
 
 const UpdateJobPost = ({ job, getJobForUpdate }) => {
   const router = useRouter();
