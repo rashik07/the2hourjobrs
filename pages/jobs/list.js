@@ -1,5 +1,5 @@
 import Head from "next/head";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect ,useRef} from "react";
 import { connect } from "react-redux";
 import Navbar from "../../container/navbar/newNavbar";
 import JobList from "components/jobs/list/JobList";
@@ -16,25 +16,31 @@ import ExperienceFilter from "components/jobs/list/ExperienceFilter";
 import AgeFilter from "components/jobs/list/AgeFilter";
 import { filterJobs } from "redux/actions/jobAction";
 import { Layout, Breadcrumb, Row, Col, Divider } from "antd";
+import Index from "../index";
 
 const { Content } = Layout;
 
 const Jobs = ({ filterJobs }) => {
   const [filter, setFilter] = useState({});
   const [showFilterJobs, setShowFilterJobs] = useState(false);
+  const showPage = useRef("job_list");
+
+
 
   useEffect(() => {
     if (_.isEmpty(filter)) {
       setShowFilterJobs(false);
     }
   }, [filter]);
+ 
 
   return (
     <>
+
       <Head>
         <title>Job list</title>
       </Head>
-      <Layout className="layout">
+      <Layout className="layout" >
         <Navbar />
         <Content className="site-layout">
           <Breadcrumb className="breadcrumb_main">
@@ -57,6 +63,7 @@ const Jobs = ({ filterJobs }) => {
                   filter={filter}
                   setFilter={setFilter}
                   reload={setShowFilterJobs}
+                  showPage={showPage}
                 />
                 <PostTimeFilter
                   filter={filter}
@@ -112,9 +119,11 @@ const Jobs = ({ filterJobs }) => {
                 <JobList filter={filter} showFilterJobs={showFilterJobs} />
               </Col>
             </Row>
+            
           </div>
         </Content>
       </Layout>
+
     </>
   );
 };
