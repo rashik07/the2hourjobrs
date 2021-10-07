@@ -9,10 +9,10 @@ const SelectedFilter = ({
   setFilter,
   getFilteredList,
   setShowFilter,
+  query
 }) => {
   const [state, setState] = useState([]);
   
-
   useEffect(() => {
     const newState = [];
     console.log(filter);
