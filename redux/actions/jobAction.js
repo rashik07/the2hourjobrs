@@ -470,3 +470,11 @@ export const getJobForUpdate = (job_id) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const SetfilterAction = (data) => async (dispatch) => {
+  try {
+    dispatch({ type: types.GET_FILTER, payload: data });
+  } catch (error) {
+    console.log(error);
+  }
+};

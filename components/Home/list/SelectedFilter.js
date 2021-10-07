@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { SetfilterAction } from "../../../redux/actions/jobAction";
-import { connect } from "react-redux";
 // import { InputTags } from "react-bootstrap-tagsinput";
 // import "react-bootstrap-tagsinput/dist/index.css";
 import { Badge, Tag } from "antd";
@@ -11,11 +9,10 @@ const SelectedFilter = ({
   setFilter,
   getFilteredList,
   setShowFilter,
-  query,
-  SetfilterAction,
+  query
 }) => {
   const [state, setState] = useState([]);
-
+  
   useEffect(() => {
     const newState = [];
     console.log(filter);
@@ -136,7 +133,6 @@ const SelectedFilter = ({
               data-testid="button-clearAll"
               onClick={() => {
                 setFilter({});
-                SetfilterAction("");
               }}
             >
               Clear all
@@ -157,4 +153,4 @@ const SelectedFilter = ({
   );
 };
 
-export default connect(null, { SetfilterAction })(SelectedFilter);
+export default SelectedFilter;
