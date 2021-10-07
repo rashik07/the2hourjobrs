@@ -1,17 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Drawer, Button, Divider, Row, Col } from "antd";
 import dateformat from "dateformat";
 import { Descriptions } from "antd";
+import Link from "next/link";
+import { connect } from "react-redux";
+import { useRouter } from "next/router";
+import { getAppliedJobsPerson } from "@/redux/actions/jobAction";
 
-const PopupDetails = ({ job }) => {
+const PopupDetails = ({ job, getAppliedJobsPerson, applied_jobs_person }) => {
+  const router = useRouter();
   const [visible, setVisible] = useState(false);
-
+  //  console.log(job);
   const showDrawer = () => {
     setVisible(true);
   };
 
   const onClose = () => {
     setVisible(false);
+  };
+  useEffect(() => {
+    getAppliedJobsPerson(job);
+  }, []);
+  const appliedPerson = () => {
+    return applied_jobs_person.map((applied_jobs_person) => {
+      console.log(applied_jobs_person.user.username);
+
+      return (
+        <p>
+          {applied_jobs_person.user.username} {" ,"}
+        </p>
+      );
+    });
   };
 
   return (
@@ -27,11 +46,20 @@ const PopupDetails = ({ job }) => {
         onClose={onClose}
         visible={visible}
       >
+        <button
+          onClick={() => router.push(`/jobs/detail/${job.id}`)}
+          className="btn button-home mt-2 rounded"
+      
+          
+        >
+          Detail
+        </button>
         <Row>
           <Col span={10}>
             <h4>Type :</h4> {job.category.name}
             <br />
           </Col>
+
           <Col span={4}>
             <h4>Posted on :</h4>{" "}
             <span>{dateformat(job.posting_timestamp, "mmmm dS, yyyy")}</span>
@@ -44,7 +72,6 @@ const PopupDetails = ({ job }) => {
             <h4>Vacancy : </h4>
             <span style={{ fontWeight: "600" }}>{job.vacancy}</span>
           </Col>
-         
         </Row>
         <Divider />
         <h4>Job description</h4>
@@ -106,6 +133,7 @@ const PopupDetails = ({ job }) => {
                 <h4>Job Location :</h4>
               </Col>
               <Col span={12}>{job.job_location[0].name}</Col>
+              {/* {appliedPerson()} */}
             </Row>
           </Col>
         </Row>
@@ -113,5 +141,14 @@ const PopupDetails = ({ job }) => {
     </>
   );
 };
+const mapStateToProps = (state) => {
+  return {
+    applied_jobs_person: state.job.applied_jobs_person,
+  };
+};
 
-export default PopupDetails;
+export default connect(mapStateToProps, {
+  getAppliedJobsPerson,
+})(PopupDetails);
+
+//export default PopupDetails;

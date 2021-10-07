@@ -32,7 +32,7 @@ const KeywordSearch = ({
           padding: ".5rem",
           borderTopLeftRadius: "8px",
           borderBottomLeftRadius: "8px",
-          border: "1px solid #70BDF2",
+          border: "1px solid #000000",
         }}
         placeholder="Type and hit Enter"
         onChange={(e) => setKeyword(e.target.value)}
@@ -44,9 +44,9 @@ const KeywordSearch = ({
           height: "auto",
           borderTopRightRadius: "8px",
           borderBottomRightRadius: "8px",
-          background: "#163F66",
+          background: "#773EA9",
           color: "white",
-          borderColor: "#163F66",
+          borderColor: "#000000",
         }}
         icon={<SearchOutlined />}
         onClick={(e) => {

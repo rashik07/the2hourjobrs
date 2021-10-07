@@ -15,6 +15,8 @@ const usereduReducer = (state = INITIAL_STATE, action) => {
 
     case types.VIEW_EDUCATION:
       return { ...state, view_education: action.payload }; 
+    case types.VIEW_SINGLE_EDUCATION:
+      return { ...state, view_single_education: action.payload }; 
 
     case types.DELETE_PROJECT:
         let user_education = state.user_education;

@@ -27,6 +27,18 @@ export const viewProject = () => async (dispatch) => {
     console.log(error.response);
   }
 };
+export const viewSingleProject = (id) => async (dispatch) => {
+  try {
+    const response = await backend.get(
+      `v1/user/projects/?user=${id}`,
+      getConfig()
+    );
+    dispatch({ type: types.VIEW_SINGLE_PROJECT, payload: response.data });
+  } catch (error) {
+    console.log(error);
+    console.log(error.response);
+  }
+};
 
 export const createProject = (formValues) => async (dispatch) => {
   console.log(formValues);

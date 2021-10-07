@@ -1,26 +1,30 @@
 import React, { useState, useEffect } from "react";
-import { applyJob, saveJob, deleteJob } from "@/redux/actions/jobAction";
+import {
+  applyJob,
+  saveJob,
+  deleteJob,
+  getSelfPostedJobs,
+  getAllJobs,
+  getAppliedJobsPerson,
+} from "@/redux/actions/jobAction";
 import Link from "next/link";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import PopupDetails from "./PopupDetails";
-
-import { Modal } from "antd";
-import {
-  ExclamationCircleOutlined,
-  PushpinFilled,
-  PushpinTwoTone,
-} from "@ant-design/icons";
-
-import { Layout, Breadcrumb, Row, Col } from "antd";
+import { Modal, Button } from "antd";
+import { ExclamationCircleOutlined, PushpinFilled } from "@ant-design/icons";
+import { Row, Col } from "antd";
 import {
   PhoneOutlined,
   ScheduleOutlined,
   EnvironmentOutlined,
   UserOutlined,
+  CalendarOutlined,
   EditOutlined,
+  SaveOutlined,
+  DeleteOutlined,
 } from "@ant-design/icons";
-import { getSelfPostedJobs, getAllJobs } from "@/redux/actions/jobAction";
+
 const JobPostItem = ({
   job,
   userid,
@@ -29,7 +33,10 @@ const JobPostItem = ({
   saveJob,
   deleteJob,
   getSelfPostedJobs,
+  show_save_button,
   self_posted_jobs,
+  getAppliedJobsPerson,
+  applied_jobs_person,
 }) => {
   const router = useRouter();
 
@@ -55,14 +62,12 @@ const JobPostItem = ({
     getSelfPostedJobs();
   }, []);
 
-  console.log(self_posted_jobs);
   const getLocations = (location) => {
     const location_list = [];
 
     location.forEach((loc) => {
       location_list.push(loc.name);
     });
-    console.log(location_list);
 
     return location_list.join(", ");
   };
@@ -83,9 +88,16 @@ const JobPostItem = ({
       return;
     }
 
-    applyJob(id, userid, setAppliedStatus);
+    applyJob(id, userid, appliedStatus, setAppliedStatus);
+    alert("successfully");
   };
-
+  const saveJobBtnClick = () => {
+    if (!isSignedIn) {
+      alert("You must log in to access this feature");
+      return;
+    }
+    saveJob(id, userid, savedStatus, setSavedStatus, applied_saved_id);
+  };
   const deleteJobBtnClick = () => {
     const { confirm } = Modal;
 
@@ -103,60 +115,89 @@ const JobPostItem = ({
 
     // applyJob(id, userid, setAppliedStatus);
   };
+  const deleteShow = () => {
+    if (btn_disable) {
+      return (
+        <DeleteOutlined
+          onClick={deleteJobBtnClick}
+          style={{
+            fontSize: "20px",
 
-  const saveJobBtnClick = () => {
-    if (!isSignedIn) {
-      alert("You must log in to access this feature");
-      return;
+            marginTop: "5px",
+            float: "right",
+            marginLeft: "15px",
+          }}
+        />
+      );
     }
-    saveJob(id, userid, savedStatus, setSavedStatus, applied_saved_id);
+    return " ";
   };
+
   const applyShow = () => {
     if (appliedStatus) {
-      return "applied";
+      return (
+        <Button
+          type="primary"
+          shape="round"
+          onClick={applyJobBtnClick}
+          disabled
+        >
+          Applied
+        </Button>
+      );
     } else if (btn_disable) {
       return "";
     }
-    console.log(self_posted_jobs);
     return (
-      <a
-        style={{
-          color: "black",
-          padding: "2px",
-          borderBottom: "5px solid #F9BE02",
-          borderColor: "#F9BE02",
-        }}
-        onClick={applyJobBtnClick}
-      >
+      <Button type="primary" shape="round" onClick={applyJobBtnClick}>
         Apply
-      </a>
+      </Button>
+    );
+  };
+  const saveShow = () => {
+    if (savedStatus) {
+      return (
+        <SaveOutlined
+          onClick={saveJobBtnClick}
+          style={{
+            fontSize: "20px",
+            // color: "#0E8044",
+            marginTop: "5px",
+            float: "right",
+          }}
+        />
+      );
+    }
+    //  console.log(self_posted_jobs);
+    return (
+      <PushpinFilled
+        onClick={saveJobBtnClick}
+        style={{
+          fontSize: "20px",
+          color: "#FF3155",
+          marginTop: "5px",
+          float: "right",
+        }}
+      />
     );
   };
 
   const renderButtons = () => {
     // For self posted jobs
-    if (router.pathname === "/jobs/self_posted_jobs") {
+    if (router.pathname === "/jobs/my_posts") {
       return (
         <>
-          <button
-            onClick={() => router.push(`/jobs/edit/${id}`)}
-            className="btn button-home mt-2 rounded"
-          >
-            Edit
-          </button>
-          <button
-            onClick={() => router.push(`/jobs/detail/${id}`)}
-            className="btn button-home mt-2 rounded"
-          >
-            Detail
-          </button>
-          <PushpinOutlined onClick={() => router.push(`/jobs/detail/${id}`)} />
-          <button
-            onClick={deleteJobBtnClick}
-            className={`btn button-home mt-2 rounded`}
-          >
-            Delete
-          </button>
+             {applyShow()}
+        {deleteShow()}
+        {saveShow()}
+        <Button
+          onClick={() => router.push(`/jobs/edit/${id}`)}
+          type="primary"
+          shape="round"
+         
+        >
+          Edit
+        </Button>
         </>
       );
     }
@@ -164,6 +205,10 @@ const JobPostItem = ({
     return (
       <>
         {applyShow()}
+      
+        {saveShow()}
+      
+
         {/* <button
           onClick={() => router.push(`/jobs/detail/${id}`)}
           className="btn button-home mt-2 rounded"
@@ -177,15 +222,6 @@ const JobPostItem = ({
         >
           {savedStatus ? "Unsave" : "Save"}
         </button> */}
-        <PushpinFilled
-          onClick={saveJobBtnClick}
-          style={{
-            fontSize: "20px",
-            color: "#0E8044",
-            marginTop: "5px",
-            float: "right",
-          }}
-        />
       </>
     );
   };
@@ -201,20 +237,15 @@ const JobPostItem = ({
         </Row>
         <h4 style={{ color: "gray" }}>
           <UserOutlined />{" "}
-          <Link href="/Profile/Profile_info">{poster.name}</Link>{" "}
+          <Link href={`/Profile/Profile_details/${poster.id}`}>
+            {poster.name}
+          </Link>{" "}
           <EnvironmentOutlined /> {getLocations(job.job_location)}
         </h4>
-        <p style={{ marginTop: "1rem", marginBottom: "1rem" }}>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book. It has survived not only
-          five centuries, but also the leap into electronic typesetting,
-          remaining essentially unchanged. It was popularised in the 1960s with
-          the release of Letraset sheets containing Lorem Ipsum passages, and
-          more recently with desktop publishing software like Aldus PageMaker
-          including versions of Lorem Ipsum.
-        </p>
+        {/* onClick={() => router.push(`/jobs/detail/${job.id}`)} */}
+        {/* <p style={{ marginTop: "1rem", marginBottom: "1rem" }}>
+          {job.skills} {" "}
+        </p> */}
 
         <p>
           <EditOutlined /> {getEducation(job.education)}
@@ -223,6 +254,10 @@ const JobPostItem = ({
           <ScheduleOutlined />{" "}
           {getExperience(job.min_experience, job.max_experience)}
         </p>
+        <p>
+          <CalendarOutlined /> Deadline: {job.deadline}
+        </p>
+        {/* {appliedPerson()} */}
       </Col>
     </Row>
   );
@@ -233,6 +268,7 @@ const mapStateToProps = (state) => {
     userid: state.auth.id,
     isSignedIn: state.auth.isSignedIn,
     self_posted_jobs: Object.values(state.job.self_posted_jobs),
+    applied_jobs_person: state.job.applied_jobs_person,
   };
 };
 
@@ -241,4 +277,5 @@ export default connect(mapStateToProps, {
   saveJob,
   deleteJob,
   getSelfPostedJobs,
+  getAppliedJobsPerson,
 })(JobPostItem);

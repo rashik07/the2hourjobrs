@@ -25,11 +25,11 @@
   margin-bottom: 0%;
 }
 .ant-layout-header {
-  background: #163f66;
+  background: #ff3155;
   height: 65px;
 }
 .ant-menu {
-  background: #163f66;
+  background: #ff3155;
   color: white;
 }
 .ant-menu-horizontal > .ant-menu-item a {
@@ -46,24 +46,32 @@
   margin: 11px 0;
 }
 .job_post {
-  border: 1px solid #70bdf2;
+  border: 1px solid #7171714d;
   border-radius: 10px;
   padding: 1rem;
   margin-bottom: 1rem;
 }
 .job_post:hover {
-  background-color: #edf4fe;
+  box-shadow: 0px 3px 6px rgb(0 0 0 / 16%);
 }
 .job_title {
   cursor: pointer;
+  color: #000;
+  font-size: 24px;
+  margin-bottom: 0;
 }
 .job_title:hover {
-  color: #0e8044;
+  color: #ff3155;
   text-decoration: underline;
 }
 .ant-select:not(.ant-select-customize-input) .ant-select-selector {
   border: 0px solid #70bdf2;
-  border-bottom: 1px solid #70bdf2;
+  border-bottom: 1px solid #ff3155;
+}
+.ant-select:not(.ant-select-customize-input) .ant-select-selector:hover {
+  border: 0px solid #70bdf2;
+  border-bottom: 1px solid #ff3155;
+  border-right: 1px solid #ff3155;
 }
 .ant-steps {
   width: 100%;
@@ -76,7 +84,7 @@
   margin-bottom: 2rem;
   width: 100%;
   border: 0px solid;
-  border-bottom: 1px solid #70bdf2;
+  border-bottom: 1px solid #FF3155;
   border-radius: 0px;
 }
 .form-label {
@@ -110,7 +118,29 @@
 .profile_image {
   border-radius: 50%;
 }
-.view_profile_content{
+.view_profile_content {
   margin-left: 100px;
   margin-right: 100px;
+}
+.site-layout-content {
+  min-height: 280px;
+  padding: 24px;
+  background: #fff;
+}
+.ant-space {
+  display: -webkit-box !important;
+}
+.ant-row {
+  padding-bottom: 15px;
+}
+.ant-btn {
+  background-color: #773ea9;
+  border: #773ea9;
+}
+
+.ant-select_focused:not(.ant-select-disabled).ant-select:not(.ant-select-customize-input).ant-select-selector {
+  border-color: #ff3155;
+  border-right-width: 1px !important;
+  outline: 0;
+  box-shadow: 0 0 0 2px rgb(24 144 255 20%);
 }

@@ -1,9 +1,7 @@
 import Head from "next/head";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect ,useRef} from "react";
 import { connect } from "react-redux";
-
 import Navbar from "../../container/navbar/newNavbar";
-import Footer from "../../container/footer/footer";
 import JobList from "components/jobs/list/JobList";
 import KeywordSearch from "components/jobs/list/KeywordSearch";
 import SelectedFilter from "components/jobs/list/SelectedFilter";
@@ -17,39 +15,52 @@ import JobIndustryFilter from "components/jobs/list/JobIndustryFilter";
 import ExperienceFilter from "components/jobs/list/ExperienceFilter";
 import AgeFilter from "components/jobs/list/AgeFilter";
 import { filterJobs } from "redux/actions/jobAction";
-
 import { Layout, Breadcrumb, Row, Col, Divider } from "antd";
+import Index from "../index";
+import { useRouter } from 'next/router';
 
 const { Content } = Layout;
 
 const Jobs = ({ filterJobs }) => {
+  const router = useRouter();
+  let query= Object.keys(router.query)[0]
+  // let e = JSON.parse(query);
   const [filter, setFilter] = useState({});
   const [showFilterJobs, setShowFilterJobs] = useState(false);
+  const showPage = useRef("job_list");
+  
+  
+
+  
 
   useEffect(() => {
     if (_.isEmpty(filter)) {
       setShowFilterJobs(false);
     }
   }, [filter]);
+ 
 
   return (
     <>
+
       <Head>
         <title>Job list</title>
       </Head>
-      <Layout className="layout">
+      <Layout className="layout" >
         <Navbar />
-        <Content className="site-layout" >
+        <Content className="site-layout">
           <Breadcrumb className="breadcrumb_main">
             <Breadcrumb.Item>Home</Breadcrumb.Item>
             <Breadcrumb.Item>Job</Breadcrumb.Item>
             <Breadcrumb.Item>List</Breadcrumb.Item>
           </Breadcrumb>
           <div className="site-layout-background">
+            
             <Row>
               {/*1st part*/}
               <Col span={6} className="Jobfilter">
                 <h2>Filter By</h2>
+              
                 <JobCategoryFilter
                   filter={filter}
                   setFilter={setFilter}
@@ -60,6 +71,8 @@ const Jobs = ({ filterJobs }) => {
                   filter={filter}
                   setFilter={setFilter}
                   reload={setShowFilterJobs}
+                  showPage={showPage}
+                  query={query}
                 />
                 <PostTimeFilter
                   filter={filter}
@@ -100,6 +113,7 @@ const Jobs = ({ filterJobs }) => {
                   setShowFilter={setShowFilterJobs}
                   getFilteredList={filterJobs}
                   showFilterJobs={showFilterJobs}
+                  //reload={setShowFilterJobs}
                 />
                 <KeywordSearch
                   filter={filter}
@@ -107,15 +121,18 @@ const Jobs = ({ filterJobs }) => {
                   setShowFilter={setShowFilterJobs}
                   getFilteredList={filterJobs}
                   reload={showFilterJobs}
+                  //reload={setShowFilterJobs}
+             
                 />
                 <Divider />
                 <JobList filter={filter} showFilterJobs={showFilterJobs} />
               </Col>
             </Row>
+            
           </div>
         </Content>
-      
       </Layout>
+
     </>
   );
 };

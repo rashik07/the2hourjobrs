@@ -1,6 +1,7 @@
 import React from "react";
 import StepsParent from "./StepsParent";
 import { connect } from "react-redux";
+import { Select, Row, Col, Space } from "antd";
 
 const Step2 = ({ postStep, setPostStep, temp_jobpost }) => {
   console.log(temp_jobpost);
@@ -22,14 +23,30 @@ const Step2 = ({ postStep, setPostStep, temp_jobpost }) => {
 
     setPostStep(postStep + 1);
   };
-
+  console.log(temp_jobpost);
   return (
     <>
-      <StepsParent item="workplace" />
-      <StepsParent item="job_location_inside_dhaka" />
-      <StepsParent item="job_location" />
-      <StepsParent item="salary" />
-      <StepsParent item="description" />
+      <Space direction="vertical" size="large">
+        <Row>
+          <Col span={24}>
+            <StepsParent item="workplace" />
+          </Col>
+          <br />
+          {/* <Col span={24}>
+            <StepsParent item="job_location_inside_dhaka" />
+          </Col> */}
+          <Col span={24}>
+            <StepsParent item="job_location" />
+          </Col>
+          <Col span={24}>
+            <StepsParent item="salary" />
+          </Col>
+          <Col span={24}>
+            <StepsParent item="description" />
+          </Col>
+        </Row>
+      </Space>
+
       <div className="col-4 mt-4">
         <button
           onClick={() => setPostStep(postStep - 1)}

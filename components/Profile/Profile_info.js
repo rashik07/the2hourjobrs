@@ -12,8 +12,10 @@ import {
   Typography,
   Divider,
   Tooltip,
+  InputNumber,
 } from "antd";
 import { connect } from "react-redux";
+import Link from "next/link";
 import {
   getDistrict,
   getDivision,
@@ -21,38 +23,28 @@ import {
   updateProfile,
   editUserProfile,
 } from "@/redux/actions/userAction";
-import { UploadOutlined, EyeOutlined } from "@ant-design/icons";
+import { UploadOutlined, EyeOutlined, ContactsFilled } from "@ant-design/icons";
+import { useRouter } from "next/router";
 import moment from "moment";
+import Profile_adress from "./Profile_adress";
 
-const Profile_info = ({
-  updateProfile,
-  user_profile,
-  editUserProfile,
-  getDivision,
-  getDistrict,
-  getThana,
-  onClear,
-  get_division,
-  get_district,
-  get_thana,
-}) => {
+const Profile_info = ({ updateProfile, user_profile, editUserProfile }) => {
   const [loader, setloader] = useState(false);
-
+  const router = useRouter();
   useEffect(() => {
-    getDistrict();
-    getDivision();
-    getThana();
     updateProfile();
     setloader(false);
   }, [loader]);
 
-  // console.log(updateProfile);
+  //console.log(user_profile);
   const dateFormat = "YYYY-MM-DD";
   user_profile.birthday = moment(user_profile.birthday, dateFormat);
   const onFinish = (values) => {
     const formData = new FormData();
+
     values = {
       ...values,
+
       birthday: values["birthday"].format("YYYY-MM-DD"),
     };
 
@@ -61,24 +53,25 @@ const Profile_info = ({
     formData.append("facebook_link", values.facebook_link);
     formData.append("birthday", values.birthday);
     formData.append("bio", values.bio);
-    formData.append("address", values.address);
     formData.append("youtube_link", values.youtube_link);
     formData.append("website_link", values.website_link);
     formData.append("portfolio_link", values.portfolio_link);
-    formData.append("division", values.division);
-    formData.append("district", values.district);
-    formData.append("thana", values.thana);
 
     if (typeof values.photo === "undefined") {
     } else {
       console.log("image");
       formData.append("image", values.photo[0].originFileObj);
     }
-
-    // console.log('Received values of form: ', values);
+    for (var value of formData.values()) {
+      console.log(value);
+    }
     editUserProfile(formData);
     setloader(true);
-    //   console.log('update: ', editUserProfile);
+    // alert("successfully saved");
+  };
+  console.log(user_profile.id);
+  const onFinishFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
   };
   const { Option } = Select;
   const { TextArea } = Input;
@@ -140,43 +133,6 @@ const Profile_info = ({
       },
     },
   };
-  let divisionToRender;
-  if (get_division) {
-    divisionToRender = get_division.map(({ id, name }) => {
-      return (
-        <Option key={id} value={id}>
-          {name}
-        </Option>
-      );
-    });
-  } else {
-    divisionToRender = "Loading...";
-  }
-
-  let districtToRender;
-  if (get_district) {
-    districtToRender = get_district.map(({ id, name }) => {
-      return (
-        <Option key={id} value={id}>
-          {name}
-        </Option>
-      );
-    });
-  } else {
-    districtToRender = "Loading...";
-  }
-  let thanaToRender;
-  if (get_thana) {
-    thanaToRender = get_thana.map(({ id, name }) => {
-      return (
-        <Option key={id} value={id}>
-          {name}
-        </Option>
-      );
-    });
-  } else {
-    thanaToRender = "Loading...";
-  }
 
   const normFile = (e) => {
     console.log("Upload event:", e);
@@ -196,23 +152,31 @@ const Profile_info = ({
         form={form}
         name="register"
         onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
         initialValues={user_profile}
-        setloader={setloader}
+        //   setloader={setloader}
       >
         <Divider>
           {" "}
           <Title>Basic Info</Title>
         </Divider>
-        <Image
+        {/* <Image
           width={200}
           height={200}
           src={"http://127.0.0.1:8000" + user_profile.image}
-        />
-        <Tooltip title="search" className="button_eye">
-          <a href="../../Profile/View_profile">
-            <Button type="primary" shape="circle" icon={<EyeOutlined />} />
-          </a>
-        </Tooltip>
+        /> */}
+        <Link href={`/Profile/Profile_details/${user_profile.id}`}>
+          <Tooltip title="View My Profile" className="button_eye">
+            <Button
+              // onClick={() =>
+              //   router.push(`/Profile/Profile_details/${user_profile.id}`)
+              // }
+              type="primary"
+              shape="circle"
+              icon={<EyeOutlined />}
+            ></Button>
+          </Tooltip>
+        </Link>
         <Form.Item
           name="photo"
           label="Upload Photo"
@@ -225,7 +189,14 @@ const Profile_info = ({
           </Upload>
         </Form.Item>
         <Form.Item label="Name" name="username">
-          <Input placeholder="name" />
+          <Input
+            style={{
+              width: "100%",
+              color: "black",
+            }}
+            placeholder="name"
+            disabled
+          />
         </Form.Item>
         <Form.Item
           name="email"
@@ -241,7 +212,14 @@ const Profile_info = ({
             },
           ]}
         >
-          <Input placeholder="e-mail" />
+          <Input
+            style={{
+              width: "100%",
+              color: "black",
+            }}
+            placeholder="e-mail"
+            disabled
+          />
         </Form.Item>
         <Form.Item
           name="phone"
@@ -258,11 +236,31 @@ const Profile_info = ({
 
             style={{
               width: "100%",
+              color: "black",
             }}
+            disabled
           />
         </Form.Item>
-        <Form.Item label="NID Number" name="nid">
-          <Input placeholder="input NID number" />
+        <Form.Item
+          label="NID Number"
+          name="nid"
+          rules={[
+            {
+              type: "number",
+              message: "The input is not valid NID!",
+            },
+            {
+              required: true,
+              message: "Please input your NID!",
+            },
+          ]}
+        >
+          <InputNumber
+            placeholder="input NID number"
+            style={{
+              width: 200,
+            }}
+          />
         </Form.Item>
         <Form.Item label="Gender" name="gender">
           <Radio.Group
@@ -271,7 +269,20 @@ const Profile_info = ({
             value={value}
           ></Radio.Group>
         </Form.Item>
-        <Form.Item label="Date of Birth" name="birthday">
+        <Form.Item
+          label="Date of Birth"
+          name="birthday"
+          rules={[
+            {
+              type: "date",
+              message: "The input is not valid BOD!",
+            },
+            {
+              required: true,
+              message: "Please input your BOD!",
+            },
+          ]}
+        >
           <DatePicker format={dateFormat} />
         </Form.Item>
         <Form.Item label="Facebook Link" name="facebook_link">
@@ -290,86 +301,13 @@ const Profile_info = ({
         <Form.Item label="Bio" name="bio">
           <TextArea rows={4} />
         </Form.Item>
-
-        <Divider>
-          {" "}
-          <Title>Address</Title>
-        </Divider>
-        <Form.Item label="Division" name="division">
-          <Select
-            showSearch
-            className="filtter-items"
-            value={value}
-            dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
-            allowClear
-            // multiple={multiple}
-            onChange={setValue}
-            onClear={onClear}
-            filterOption={(input, option) =>
-              option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-            }
-            defaultValue={user_profile.division}
-          >
-            {divisionToRender}
-          </Select>
-        </Form.Item>
-
-        <Form.Item label="District" name="district">
-          <Select
-            showSearch
-            className="filtter-items"
-            value={value}
-            dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
-            allowClear
-            // multiple={multiple}
-            onChange={setValue}
-            onClear={onClear}
-            filterOption={(input, option) =>
-              option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-            }
-            defaultValue={user_profile.district}
-          >
-            {districtToRender}
-            {/* {
-            get_district.map(({ id, name }) => (
-              <Option key={id} value={id}>
-                {name}
-              </Option>
-            ))} */}
-          </Select>
-        </Form.Item>
-        <Form.Item label="Thana" name="thana">
-          <Select
-            showSearch
-            className="filtter-items"
-            value={value}
-            dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
-            allowClear
-            // multiple={multiple}
-            onChange={setValue}
-            onClear={onClear}
-            filterOption={(input, option) =>
-              option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-            }
-            defaultValue={user_profile.thana}
-          >
-            {thanaToRender}
-            {/* {get_thana.map(({ id, name }) => (
-              <Option key={id} value={id}>
-                {name}
-              </Option>
-            ))} */}
-          </Select>
-        </Form.Item>
-        <Form.Item label="Address" name="address">
-          <TextArea rows={4} />
-        </Form.Item>
         <Form.Item {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit">
             Save
           </Button>
         </Form.Item>
       </Form>
+      <Profile_adress />
     </>
   );
 };

@@ -1,7 +1,7 @@
 import * as types from "./../types";
 
 const INITIAL_STATE = {
-  user_prefered_categories: [],
+  user_prefered_categories: {},
 };
 
 const preferedcategoriesReducer = (state = INITIAL_STATE, action) => {
@@ -11,6 +11,8 @@ const preferedcategoriesReducer = (state = INITIAL_STATE, action) => {
 
     case types.VIEW_PREFERED_CATEGORIES:
       return { ...state, view_prefered_categories: action.payload };
+    case types.VIEW_SINGLE_PREFERED_CATEGORIES:
+      return { ...state, view_single_prefered_categories: action.payload };
 
     default:
       return state;

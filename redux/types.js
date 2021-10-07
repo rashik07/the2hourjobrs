@@ -28,6 +28,7 @@ export const UPLOAD_JOB_MEDIA = "UPLOAD_JOB_MEDIA";
 export const RESET_JOB_STATE = "RESET_JOB_STATE";
 export const RESET_TEMP_JOB_STATE = "RESET_TEMP_JOB_STATE";
 export const INIT_JOB_STATE = "INIT_JOB_STATE";
+export const GET_APPLIED_JOB_PERSON = "GET_APPLIED_JOB_PERSON";
 
 //************** ANNOUNCEMENT TYPES *********************/
 export const CREATE_ANNOUNCEMENT = "CREATE_ANNOUNCEMENT";
@@ -53,22 +54,26 @@ export const SAVE_WORKER = "SAVE_WORKER";
 export const GET_DISTRICT = "GET_DISTRICT";
 export const GET_DIVISION = "GET_DIVISION";
 export const GET_THANA = "GET_THANA";
+export const GET_SINGLE_PROFILE = "GET_SINGLE_PROFILE";
 
 //************** PROJECT TYPES *********************/
 
 export const VIEW_PROJECT = "VIEW_PROJECT";
 export const CREATE_PROJECT = "CREATE_PROJECT";
 export const DELETE_PROJECT = "DELETE_PROJECT";
+export const VIEW_SINGLE_PROJECT = "VIEW_SINGLE_PROJECT";
 
 //************** EMPLOYMENT TYPES *********************/
 export const VIEW_EMPLOYMENT = "VIEW_EMPLOYMENT";
 export const CREATE_EMPLOYMENT = "CREATE_EMPLOYMENT";
 export const DELETE_EMPLOYMENT = "DELETE_EMPLOYMENT";
+export const VIEW_SINGLE_EMPLOYMENT = "VIEW_SINGLE_EMPLOYMENT";
 
 //************** EDUCATION TYPES *********************/
 export const VIEW_EDUCATION = "VIEW_EDUCATION ";
 export const CREATE_EDUCATION = "CREATE_EDUCATION";
 export const DELETE_EDUCATION = "DELETE_EDUCATION";
+export const VIEW_SINGLE_EDUCATION = "VIEW_SINGLE_EDUCATION ";
 //************** TRAINING TYPES *********************/
 export const VIEW_TRAINING = "VIEW_TRAINING ";
 export const CREATE_TRAINING = "CREATE_TRAINING";
@@ -85,3 +90,4 @@ export const EDIT_PASSWORD = "EDIT_PASSWORD ";
 //************** PREFERED_CATEGORIES TYPES *********************/
 export const CREATE_PREFERED_CATEGORIES = "CREATE_PREFERED_CATEGORIES";
 export const VIEW_PREFERED_CATEGORIES = "VIEW_PREFERED_CATEGORIES";
+export const VIEW_SINGLE_PREFERED_CATEGORIES = "VIEW_SINGLE_PREFERED_CATEGORIES";

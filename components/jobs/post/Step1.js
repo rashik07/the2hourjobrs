@@ -27,7 +27,7 @@ const Step1 = ({ postStep, setPostStep, temp_jobpost }) => {
   };
 
   const [image, setImage] = useState([]);
-
+  console.log(temp_jobpost);
   return (
     <>
       <br />

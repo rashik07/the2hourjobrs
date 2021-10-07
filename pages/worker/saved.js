@@ -1,13 +1,15 @@
 import React, { useEffect } from "react";
 import Head from "next/head";
-import Navbar from "../../container/navbar/navbar";
+import Navbar from "../../container/navbar/newNavbar";
 import { useRouter } from "next/router";
 import { getSavedWorkers } from "@/redux/actions/userAction";
 import { connect } from "react-redux";
 import WorkerItem from "components/worker/list/WorkerItem";
+import { Layout, Breadcrumb, Row, Col, Divider } from "antd";
 
 const SavedWorkerList = ({ getSavedWorkers, saved_workers, isSignedIn }) => {
   const router = useRouter();
+  const { Content } = Layout;
 
   useEffect(() => {
     if (!isSignedIn) {
@@ -35,8 +37,16 @@ const SavedWorkerList = ({ getSavedWorkers, saved_workers, isSignedIn }) => {
       <Head>
         <title>Saved Worker list</title>
       </Head>
-      <Navbar />
-      <div className="container main-body">{showSavedWorkers()}</div>
+      <Layout>
+        <Navbar />
+        <Content className="site-layout">
+          <Breadcrumb className="breadcrumb_main">
+            <Breadcrumb.Item>Home</Breadcrumb.Item>
+            <Breadcrumb.Item>Saved Worker</Breadcrumb.Item>
+          </Breadcrumb>
+          <div className="site-layout-background">{showSavedWorkers()}</div>
+        </Content>
+      </Layout>
     </>
   );
 };

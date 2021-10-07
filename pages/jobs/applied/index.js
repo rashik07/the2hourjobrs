@@ -2,10 +2,12 @@ import React, { useEffect } from "react";
 import Head from "next/head";
 import { getAppliedJobs } from "@/redux/actions/jobAction";
 import { connect } from "react-redux";
-import Navbar from "container/navbar/navbar";
+import Navbar from "container/navbar/newNavbar";
 import JobPostItem from "components/jobs/JobPostItem";
+import { Layout, Breadcrumb } from "antd";
 
 const AppliedJobs = ({ applied_jobs, getAppliedJobs }) => {
+  const { Content } = Layout;
   useEffect(() => {
     getAppliedJobs();
   }, []);
@@ -28,8 +30,19 @@ const AppliedJobs = ({ applied_jobs, getAppliedJobs }) => {
       <Head>
         <title>Applied Jobs</title>
       </Head>
-      <Navbar />
-      <div className="container main-body">{showAppliedJobs()}</div>
+      <Layout className="layout">
+        <Navbar />
+        <Content className="site-layout">
+          <Breadcrumb className="breadcrumb_main">
+            <Breadcrumb.Item>Home</Breadcrumb.Item>
+            <Breadcrumb.Item>Job</Breadcrumb.Item>
+            <Breadcrumb.Item>Applied Jobs</Breadcrumb.Item>
+          </Breadcrumb>
+          <div className="site-layout-background">
+            <div className="container main-body">{showAppliedJobs()}</div>
+          </div>
+        </Content>
+      </Layout>
     </div>
   );
 };

@@ -15,16 +15,8 @@ import {
   TextArea,
   Upload,
 } from "antd";
-import LocationList from "../../components/jobs/input/LocationList";
 import { getJobCategories } from "redux/actions/jobAction";
-import { TagsInput } from "react-tag-input-component";
-import {
-  CloseOutlined,
-  CheckOutlined,
-  InboxOutlined,
-  UploadOutlined,
-} from "@ant-design/icons";
-import MultijobCategory from "components/jobs/input/MultijobCategory";
+import { UploadOutlined } from "@ant-design/icons";
 import PreferedCategories from "components/PreferedCategories";
 
 const Career_application = ({
@@ -58,6 +50,7 @@ const Career_application = ({
 
     // console.log("Received values of form: ", values);
     editUserProfile(formData);
+    alert("successfully saved");
 
     //   console.log('update: ', editUserProfile);
   };
@@ -219,7 +212,7 @@ const Career_application = ({
           </Button>
         </Form.Item>
       </Form>
-      <PreferedCategories/>
+      <PreferedCategories />
     </div>
   );
 };

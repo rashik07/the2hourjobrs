@@ -1,17 +1,24 @@
 import React, { useState, useEffect } from "react";
 import Footer from "../../container/footer/footer";
-import Navbar from "../../container/navbar/navbar";
+import Navbar from "../../container/navbar/newNavbar";
 import Head from "next/head";
 import Link from "next/link";
 import { connect } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
-
 import * as types from "redux/types";
 import Form from "../../components/Form";
 import { signUp } from "redux/actions/authAction";
+import { Layout, Button, Input } from "antd";
+// import { facebookProvider } from "config/authMethods";
+// import socialMediaAuth from "service/auth";
 
 const Signup = (props) => {
+  const handleOnClick = async (provider) => {
+    const res = await socialMediaAuth(provider);
+    console.log(res);
+  };
+  
   const dispatch = useDispatch();
   let start = 0;
 
@@ -31,13 +38,22 @@ const Signup = (props) => {
     e.preventDefault();
 
     props.signUp({ name, username, email, phone, password }, router);
+    console.log(name, username, email, phone, password );
   };
+  
 
   return (
     <>
       <Head>
         <title>Sign up</title>
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous"
+        ></link>
       </Head>
+      <Layout className="layout">
       <Navbar />
       <main className="form-signin text-center mb-5">
         <form>
@@ -84,6 +100,7 @@ const Signup = (props) => {
             >
               Sign Up
             </button>
+            {/* <button onClick={() => handleOnClick(facebookProvider)}>facebook</button> */}
           </div>
           <Link href="/auth/login">
             <button type="button" className="btn btn-secondary mt-3">
@@ -92,6 +109,7 @@ const Signup = (props) => {
           </Link>
         </form>
       </main>
+      </Layout>
       {/* <Footer /> */}
     </>
   );

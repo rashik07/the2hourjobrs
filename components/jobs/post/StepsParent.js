@@ -10,13 +10,12 @@ import _ from "lodash";
 import LocationList from "../input/LocationList";
 
 const renderItem = (item, children, saveTemporayJobPost, temp_jobpost) => {
-  
   if (temp_jobpost)
     switch (item) {
       case "title":
         return (
           <>
-            <label className="form-label">Job Title *</label>
+            <label className="form-label">what am i looking for?</label>
             <input
               onChange={(e) => saveTemporayJobPost({ title: e.target.value })}
               type="text"
@@ -123,33 +122,37 @@ const renderItem = (item, children, saveTemporayJobPost, temp_jobpost) => {
           <>
             <label className="form-label">Salary</label>
             <br />
-            <div className="row col-12">
-              <input
-                type="number"
-                className="form-control col-5"
-                placeholder="From"
-                onChange={(e) =>
-                  saveTemporayJobPost({
-                    min_salary: e.target.value,
-                    max_salary: temp_jobpost.max_salary,
-                  })
-                }
-                defaultValue={temp_jobpost.min_salary}
-              />
+            <Row>
+              <Col>
+                <input
+                  type="number"
+                  className="form-control col-5"
+                  placeholder="From"
+                  onChange={(e) =>
+                    saveTemporayJobPost({
+                      min_salary: e.target.value,
+                      max_salary: temp_jobpost.max_salary,
+                    })
+                  }
+                  defaultValue={temp_jobpost.min_salary}
+                />
+              </Col>
               <div className="col-1 mt-1">&mdash;</div>
-              <input
-                type="number"
-                className="form-control col-5"
-                placeholder="To"
-                onChange={(e) =>
-                  saveTemporayJobPost({
-                    min_salary: temp_jobpost.min_salary,
-                    max_salary: e.target.value,
-                  })
-                }
-                defaultValue={temp_jobpost.max_salary}
-              />
-            </div>
+              <Col>
+                <input
+                  type="number"
+                  className="form-control col-5"
+                  placeholder="To"
+                  onChange={(e) =>
+                    saveTemporayJobPost({
+                      min_salary: temp_jobpost.min_salary,
+                      max_salary: e.target.value,
+                    })
+                  }
+                  defaultValue={temp_jobpost.max_salary}
+                />
+              </Col>
+            </Row>
           </>
         );
 
@@ -158,33 +161,37 @@ const renderItem = (item, children, saveTemporayJobPost, temp_jobpost) => {
           <>
             <label className="form-label">Years of Experience</label>
             <br />
-            <div className="row col-12">
-              <input
-                type="number"
-                className="form-control col-5"
-                placeholder="Minimum Experience"
-                onChange={(e) =>
-                  saveTemporayJobPost({
-                    min_experience: e.target.value,
-                    max_experience: temp_jobpost.max_experience,
-                  })
-                }
-                defaultValue={temp_jobpost.min_experience}
-              />
+            <Row style={{paddingBottom:"0px"}}>
+              <Col>
+                <input
+                  type="number"
+                  className="form-control "
+                  placeholder="Minimum Experience"
+                  onChange={(e) =>
+                    saveTemporayJobPost({
+                      min_experience: e.target.value,
+                      max_experience: temp_jobpost.max_experience,
+                    })
+                  }
+                  defaultValue={temp_jobpost.min_experience}
+                />
+              </Col>
               <div className="col-1 mt-1">&mdash;</div>
-              <input
-                type="number"
-                className="form-control col-5"
-                placeholder="Maximum Experience"
-                onChange={(e) =>
-                  saveTemporayJobPost({
-                    min_experience: temp_jobpost.min_experience,
-                    max_experience: e.target.value,
-                  })
-                }
-                defaultValue={temp_jobpost.max_experience}
-              />
-            </div>
+              <Col>
+                <input
+                  type="number"
+                  className="form-control col-5"
+                  placeholder="Maximum Experience"
+                  onChange={(e) =>
+                    saveTemporayJobPost({
+                      min_experience: temp_jobpost.min_experience,
+                      max_experience: e.target.value,
+                    })
+                  }
+                  defaultValue={temp_jobpost.max_experience}
+                />
+              </Col>
+            </Row>
           </>
         );
 
@@ -297,35 +304,39 @@ const renderItem = (item, children, saveTemporayJobPost, temp_jobpost) => {
           <>
             <label className="form-label">Age</label>
             <br />
-            <div className="row col-12">
-              <Select
-                onChange={(val) => saveTemporayJobPost({ min_age: val })}
-                style={{ width: 200 }}
-                placeholder="Minimum age"
-                defaultValue={temp_jobpost.min_age}
-                allowClear
-              >
-                {age.map((a) => (
-                  <Select.Option key={a} value={a}>
-                    {a}
-                  </Select.Option>
-                ))}
-              </Select>
+            <Row>
+              <Col>
+                <Select
+                  onChange={(val) => saveTemporayJobPost({ min_age: val })}
+                  style={{ width: 200 }}
+                  placeholder="Minimum age"
+                  defaultValue={temp_jobpost.min_age}
+                  allowClear
+                >
+                  {age.map((a) => (
+                    <Select.Option key={a} value={a}>
+                      {a}
+                    </Select.Option>
+                  ))}
+                </Select>
+              </Col>
               <div className="col-1 mt-1">&mdash;</div>
-              <Select
-                onChange={(val) => saveTemporayJobPost({ max_age: val })}
-                style={{ width: 200 }}
-                placeholder="Maximum age"
-                defaultValue={temp_jobpost.max_age}
-                allowClear
-              >
-                {age.map((a) => (
-                  <Select.Option key={a} value={a}>
-                    {a}
-                  </Select.Option>
-                ))}
-              </Select>
-            </div>
+              <Col>
+                <Select
+                  onChange={(val) => saveTemporayJobPost({ max_age: val })}
+                  style={{ width: 200 }}
+                  placeholder="Maximum age"
+                  defaultValue={temp_jobpost.max_age}
+                  allowClear
+                >
+                  {age.map((a) => (
+                    <Select.Option key={a} value={a}>
+                      {a}
+                    </Select.Option>
+                  ))}
+                </Select>
+              </Col>
+            </Row>
           </>
         );
 
@@ -342,7 +353,7 @@ const renderCategories = (categories, temp_jobpost, setValue) => {
   if (temp_jobpost)
     return (
       <>
-        <label className="form-label" style={{ marginTop: "0px" }}>
+        <label className="form-label" style={{ width: "100px" }}>
           Job Category
         </label>
         <br />
@@ -350,7 +361,7 @@ const renderCategories = (categories, temp_jobpost, setValue) => {
           placeholder="Select Category"
           onChange={(value) => setValue({ category: JSON.parse(value) })}
           defaultValue={JSON.stringify(temp_jobpost.category)}
-          
+          style={{ width: "200px" }}
         >
           {categories.map((subCategory) => (
             <OptGroup

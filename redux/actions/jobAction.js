@@ -94,6 +94,18 @@ export const getAppliedJobs = () => async (dispatch) => {
     console.log(error);
   }
 };
+export const getAppliedJobsPerson = (temp_jobpost) => async (dispatch) => {
+  try {
+    const response = await backend.get(
+      `/v1/jobpost/job_applied_users/${temp_jobpost.id}/`,
+      getConfig()
+    );
+
+    dispatch({ type: types.GET_APPLIED_JOB_PERSON, payload: response.data });
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const filterJobs = (filter) => async (dispatch) => {
   try {
@@ -318,7 +330,7 @@ export const updateJob = (data, router) => async (dispatch) => {
 
     dispatch({ type: types.UNSAVE_TEMPORARY_JOBPOST });
 
-    router.push("/jobs/self_posted_jobs");
+    router.push("/jobs/my_posts");
   } catch (error) {
     console.log(error.response);
   }

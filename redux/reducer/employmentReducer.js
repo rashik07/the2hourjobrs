@@ -1,8 +1,7 @@
 import * as types from "./../types";
 
 const INITIAL_STATE = {
-   user_employment:[],
-   
+  user_employment: [],
 };
 
 const employmentReducer = (state = INITIAL_STATE, action) => {
@@ -11,20 +10,21 @@ const employmentReducer = (state = INITIAL_STATE, action) => {
       return { ...state, create_employment: action.payload };
 
     case types.VIEW_EMPLOYMENT:
-      return { ...state, view_employment: action.payload } ;
-      
-      case types.DELETE_EMPLOYMENT:
-        let user_employment = state.user_employment;
-      
-  
-       user_employment = user_employment.filter((employment) => employment.id !== action.payload.employment_id);
-        
-  
-        return {
-          ...state,
-          user_employment: Object.values(user_employment),
-      
-        };
+      return { ...state, view_employment: action.payload };
+    case types.VIEW_SINGLE_EMPLOYMENT:
+      return { ...state, view_single_employment: action.payload };
+
+    case types.DELETE_EMPLOYMENT:
+      let user_employment = state.user_employment;
+
+      user_employment = user_employment.filter(
+        (employment) => employment.id !== action.payload.employment_id
+      );
+
+      return {
+        ...state,
+        user_employment: Object.values(user_employment),
+      };
 
     default:
       return state;
