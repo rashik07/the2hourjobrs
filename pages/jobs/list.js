@@ -17,15 +17,21 @@ import AgeFilter from "components/jobs/list/AgeFilter";
 import { filterJobs } from "redux/actions/jobAction";
 import { Layout, Breadcrumb, Row, Col, Divider } from "antd";
 import Index from "../index";
+import { useRouter } from 'next/router';
 
 const { Content } = Layout;
 
 const Jobs = ({ filterJobs }) => {
+  const router = useRouter();
+  let query= Object.keys(router.query)[0]
+  // let e = JSON.parse(query);
   const [filter, setFilter] = useState({});
   const [showFilterJobs, setShowFilterJobs] = useState(false);
   const showPage = useRef("job_list");
+  
+  
 
-
+  
 
   useEffect(() => {
     if (_.isEmpty(filter)) {
@@ -49,10 +55,12 @@ const Jobs = ({ filterJobs }) => {
             <Breadcrumb.Item>List</Breadcrumb.Item>
           </Breadcrumb>
           <div className="site-layout-background">
+            
             <Row>
               {/*1st part*/}
               <Col span={6} className="Jobfilter">
                 <h2>Filter By</h2>
+              
                 <JobCategoryFilter
                   filter={filter}
                   setFilter={setFilter}
@@ -64,6 +72,7 @@ const Jobs = ({ filterJobs }) => {
                   setFilter={setFilter}
                   reload={setShowFilterJobs}
                   showPage={showPage}
+                  query={query}
                 />
                 <PostTimeFilter
                   filter={filter}

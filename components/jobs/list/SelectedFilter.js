@@ -11,9 +11,11 @@ const SelectedFilter = ({
   setShowFilter,
 }) => {
   const [state, setState] = useState([]);
+  
 
   useEffect(() => {
     const newState = [];
+    console.log(filter);
     if (filter.category) {
       newState.push(filter.category.name);
     }

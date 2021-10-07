@@ -1,8 +1,8 @@
-import React, { useState, useEffect ,useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import { getLocationList } from "redux/actions/jobAction";
 import { Button } from "antd";
-
+import { useRouter } from "next/router";
 
 const Location = ({
   location,
@@ -10,11 +10,13 @@ const Location = ({
   setShowPage,
   setValue,
   showPage,
- 
+
   value,
   setLocation,
 }) => {
-  const locationshow= useRef("");
+  const router = useRouter();
+
+  const locationshow = useRef("");
   useEffect(() => {
     getLocationList();
   }, []);
@@ -24,20 +26,20 @@ const Location = ({
       {location.map((divison) => {
         return (
           <Button
-          key={JSON.stringify({
-            id: divison.id,
-            name: divison.name,
-            type: divison.type,
-          })}
+            key={JSON.stringify({
+              id: divison.id,
+              name: divison.name,
+              type: divison.type,
+            })}
             onClick={() => {
               locationshow.current = { ...divison };
               delete locationshow.current.districts;
-            //  setValue(newdiv);
+              //  setValue(newdiv);
 
-             setValue(JSON.stringify(locationshow.current));
+              setValue(JSON.stringify(locationshow.current));
               console.log(locationshow.current.id);
-              showPage.current="job_list";
-              
+              showPage.current = "job_list";
+
               //setShowPage(true);
             }}
             //   setShowPage(true),
@@ -45,26 +47,35 @@ const Location = ({
             {" "}
             {divison.name}
           </Button>
-     
         );
-      })}
-       {/* {location.map((divison) => {
+      })}{" "}
+      <br />
+      {location.map((divison) => {
         return (
           <Button
-          key={JSON.stringify({
-            id: divison.id,
-            name: divison.name,
-            type: divison.type,
-          })}
+            key={JSON.stringify({
+              id: divison.id,
+              name: divison.name,
+              type: divison.type,
+            })}
             onClick={() => {
               locationshow.current = { ...divison };
               delete locationshow.current.districts;
-            //  setValue(newdiv);
+              //  setValue(newdiv);
 
-             setValue(JSON.stringify(locationshow.current));
+              // setValue(JSON.stringify(locationshow.current));
               console.log(locationshow.current.id);
-              showPage.current="job_list";
-              
+              // showPage.current="job_list";
+              router.push({
+                pathname: "/jobs/list",
+                query: JSON.stringify({
+                  id: locationshow.current.id,
+                  name: locationshow.current.name,
+                  type: locationshow.current.type,
+                }),
+              });
+              setValue();
+
               //setShowPage(true);
             }}
             //   setShowPage(true),
@@ -72,10 +83,9 @@ const Location = ({
             {" "}
             {divison.name}
           </Button>
-     
         );
       })}
-    </div> */}
+    </div>
   );
 };
 

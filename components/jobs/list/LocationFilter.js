@@ -3,27 +3,33 @@ import LocationList from "../input/LocationList";
 import _ from "lodash";
 import Location from "components/Home/Location";
 
+
 const LocationFilter = ({
   filter,
   setFilter,
   reload,
   setShowPage,
   showPage,
+  query
+  
 }) => {
+
   const [location, setLocation] = useState("");
+
   
   const onLocationSelect = (location) => {
-    console.log(location);
+    
     setLocation(location);
 
     if (location) {
       location = JSON.parse(location);
-
+      console.log(location);
       setFilter({ ...filter, location });
   
     }
     reload(true);
   };
+  
 
   const onClear = () => {
     filter = _.omit(filter, ["location"]);
@@ -42,7 +48,7 @@ const LocationFilter = ({
           onClear={onClear}
           placeholder="Select a location"
         />
-        
+
       );
     if (showPage.current == "")
       return (
@@ -50,6 +56,7 @@ const LocationFilter = ({
           value={location}
           setValue={onLocationSelect}
           showPage={showPage}
+         // query={query}
           
         ></Location>
       );
