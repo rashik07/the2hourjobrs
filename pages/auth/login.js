@@ -18,7 +18,7 @@ const handleSubmit = (e, username, password, signIn, router) => {
   if (signIn({ username, password }) === true) router.back();
 };
 
-const Login = ({ signIn, isSignedIn, googleLogin }) => {
+const Login = ({ signIn, isSignedIn, social_auth, googleLogin }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [hidePassword, setHidePassword] = useState(true);
@@ -30,7 +30,8 @@ const Login = ({ signIn, isSignedIn, googleLogin }) => {
   };
   
   useEffect(() => {
-    if (isSignedIn) router.replace("/jobs/list");
+    if (social_auth) router.replace("/Profile");
+    else if (isSignedIn) router.replace("/jobs/list");
   });
   const { Content } = Layout;
   const tailLayout = {
@@ -137,6 +138,7 @@ const Login = ({ signIn, isSignedIn, googleLogin }) => {
 const mapStateToProps = (state) => {
   return {
     isSignedIn: state.auth.isSignedIn,
+    social_auth: state.auth.social_auth,
   };
 };
 
