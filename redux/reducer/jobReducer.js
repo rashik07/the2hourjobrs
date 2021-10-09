@@ -30,6 +30,7 @@ const INITIAL_STATE = {
   filtered_jobs: [],
   self_posted_jobs: [],
   fetched_job: {},
+  filter: {},
 };
 
 const jobReducer = (state = INITIAL_STATE, action) => {
@@ -59,6 +60,9 @@ const jobReducer = (state = INITIAL_STATE, action) => {
       jobs[action.payload].applied = true;
 
       return { ...state, all_jobs: Object.values(jobs) };
+
+    case types.GET_FILTER:
+      return { ...state, filter: action.payload };
 
     case types.SAVE_JOB:
       jobs = _.mapKeys(state.all_jobs, "id");

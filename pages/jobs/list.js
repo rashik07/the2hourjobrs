@@ -1,5 +1,5 @@
 import Head from "next/head";
-import React, { useState, useEffect ,useRef} from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import Navbar from "../../container/navbar/newNavbar";
 import JobList from "components/jobs/list/JobList";
@@ -15,39 +15,37 @@ import JobIndustryFilter from "components/jobs/list/JobIndustryFilter";
 import ExperienceFilter from "components/jobs/list/ExperienceFilter";
 import AgeFilter from "components/jobs/list/AgeFilter";
 import { filterJobs } from "redux/actions/jobAction";
+import { SetfilterAction } from "../../redux/actions/jobAction";
 import { Layout, Breadcrumb, Row, Col, Divider } from "antd";
 import Index from "../index";
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 
 const { Content } = Layout;
 
-const Jobs = ({ filterJobs }) => {
+const Jobs = ({ filterJobs, filterfromState, SetfilterAction }) => {
   const router = useRouter();
- //  const location=router.query;
-  let location= Object.keys(router.query)[0]
-  // let e = JSON.parse(query);
+
   const [filter, setFilter] = useState({});
   const [showFilterJobs, setShowFilterJobs] = useState(false);
   const showPage = useRef("job_list");
-  
-  
-
-  
 
   useEffect(() => {
     if (_.isEmpty(filter)) {
       setShowFilterJobs(false);
     }
   }, [filter]);
- 
+
+  useEffect(() => {
+    setFilter(filterfromState);
+    setShowFilterJobs(true);
+  }, [filterfromState]);
 
   return (
     <>
-
       <Head>
         <title>Job list</title>
       </Head>
-      <Layout className="layout" >
+      <Layout className="layout">
         <Navbar />
         <Content className="site-layout">
           <Breadcrumb className="breadcrumb_main">
@@ -56,12 +54,11 @@ const Jobs = ({ filterJobs }) => {
             <Breadcrumb.Item>List</Breadcrumb.Item>
           </Breadcrumb>
           <div className="site-layout-background">
-            
             <Row>
               {/*1st part*/}
               <Col span={6} className="Jobfilter">
                 <h2>Filter By</h2>
-              
+
                 <JobCategoryFilter
                   filter={filter}
                   setFilter={setFilter}
@@ -115,7 +112,7 @@ const Jobs = ({ filterJobs }) => {
                   setShowFilter={setShowFilterJobs}
                   getFilteredList={filterJobs}
                   showFilterJobs={showFilterJobs}
-                  query={location}
+                 // query={location}
                   //reload={setShowFilterJobs}
                 />
                 <KeywordSearch
@@ -125,19 +122,21 @@ const Jobs = ({ filterJobs }) => {
                   getFilteredList={filterJobs}
                   reload={showFilterJobs}
                   //reload={setShowFilterJobs}
-             
                 />
                 <Divider />
                 <JobList filter={filter} showFilterJobs={showFilterJobs} />
               </Col>
             </Row>
-            
           </div>
         </Content>
       </Layout>
-
     </>
   );
 };
+const mapStateToProps = (state) => {
+  return {
+    filterfromState: state.job.filter,
+  };
+};
 
-export default connect(null, { filterJobs })(Jobs);
+export default connect(mapStateToProps, { filterJobs, SetfilterAction })(Jobs);
