@@ -11,8 +11,9 @@ const SelectedFilter = ({
   setShowFilter,
   query
 }) => {
+  //const obj=JSON.parse(query);
   const [state, setState] = useState([]);
-  
+  //filter.location.name= obj.name;
   useEffect(() => {
     const newState = [];
     console.log(filter);

@@ -82,7 +82,7 @@ const getItems = (isSignedIn, signOut, user_profile) => {
   );
 };
 
-const navbar = ({ isSignedIn, signOut, updateProfile, user_profile }) => {
+const navbar = ({ isSignedIn, signOut, updateProfile, user_profile ,temp_jobpost}) => {
   useEffect(() => {
     updateProfile();
   }, []);
@@ -112,7 +112,7 @@ const navbar = ({ isSignedIn, signOut, updateProfile, user_profile }) => {
           >
             <SubMenu key="1" title="Jobs">
               <Menu.Item key="setting:1">
-                <Link href="/jobs/post">Post a Job</Link>
+                <Link href="/jobs/post" onClick={temp_jobpost="", console.log("svds")}>Post a Job</Link>
               </Menu.Item>
               <Menu.Item key="setting:2">
                 {" "}
@@ -170,6 +170,7 @@ const mapStateToProps = (state) => {
   return {
     isSignedIn: state.auth.isSignedIn,
     user_profile: state.user.user_profile,
+
   };
 };
 

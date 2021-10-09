@@ -36,9 +36,14 @@ const Profile_info = ({ updateProfile, user_profile, editUserProfile }) => {
     setloader(false);
   }, [loader]);
 
-  //console.log(user_profile);
+  console.log(user_profile);
   const dateFormat = "YYYY-MM-DD";
+  if(user_profile.birthday==null){
+  user_profile.birthday =moment('2015/01/01', dateFormat);
+  }
+  else{
   user_profile.birthday = moment(user_profile.birthday, dateFormat);
+  }
   const onFinish = (values) => {
     const formData = new FormData();
 
@@ -51,6 +56,7 @@ const Profile_info = ({ updateProfile, user_profile, editUserProfile }) => {
     formData.append("nid", values.nid);
     formData.append("gender", values.gender);
     formData.append("facebook_link", values.facebook_link);
+    
     formData.append("birthday", values.birthday);
     formData.append("bio", values.bio);
     formData.append("youtube_link", values.youtube_link);
@@ -272,6 +278,7 @@ const Profile_info = ({ updateProfile, user_profile, editUserProfile }) => {
         <Form.Item
           label="Date of Birth"
           name="birthday"
+          
           rules={[
             {
               type: "date",

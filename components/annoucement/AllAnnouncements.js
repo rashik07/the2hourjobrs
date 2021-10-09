@@ -97,11 +97,11 @@ class AllAnnouncements extends Component {
                   <Row>
                     <Col span={18} offset={3}>
                       <Link href={"/announcement/" + announcment.id + "/"}>
-                        <Button type="primary" block>
+                        <Button type="primary" block style={{marginBottom:"15px"}}>
                           View
                         </Button>
                       </Link>
-                      <Button block>Save</Button>
+                      <Button block style={{backgroundColor:"black",color:"white"}}>Save</Button>
                     </Col>
                   </Row>
                 </Col>
@@ -181,11 +181,11 @@ class AllAnnouncements extends Component {
                           "/"
                         }
                       >
-                        <Button type="primary" block>
+                        <Button type="primary" block style={{marginBottom:"15px"}}>
                           View
                         </Button>
                       </Link>
-                      <Button block>Remove</Button>
+                      <Button block style={{backgroundColor:"black",color:"white"}}>Remove</Button>
                     </Col>
                   </Row>
                 </Col>

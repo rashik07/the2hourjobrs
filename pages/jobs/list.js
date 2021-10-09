@@ -23,7 +23,8 @@ const { Content } = Layout;
 
 const Jobs = ({ filterJobs }) => {
   const router = useRouter();
-  let query= Object.keys(router.query)[0]
+ //  const location=router.query;
+  let location= Object.keys(router.query)[0]
   // let e = JSON.parse(query);
   const [filter, setFilter] = useState({});
   const [showFilterJobs, setShowFilterJobs] = useState(false);
@@ -72,7 +73,8 @@ const Jobs = ({ filterJobs }) => {
                   setFilter={setFilter}
                   reload={setShowFilterJobs}
                   showPage={showPage}
-                  query={query}
+               //   query={location}
+         
                 />
                 <PostTimeFilter
                   filter={filter}
@@ -113,6 +115,7 @@ const Jobs = ({ filterJobs }) => {
                   setShowFilter={setShowFilterJobs}
                   getFilteredList={filterJobs}
                   showFilterJobs={showFilterJobs}
+                  query={location}
                   //reload={setShowFilterJobs}
                 />
                 <KeywordSearch
