@@ -19,12 +19,8 @@ export const googleLogin = (accesstoken) => async (dispatch) => {
   console.log("google login");
   console.log(accesstoken);
   try {
-    const response = await backend.post("v1/auth/convert-token/", {
-      token: accesstoken,
-      backend: 'google-oauth2',
-      grant_type: 'convert_token',
-      client_id: 'NbBuZ5XpoYf65Wk722mFZt6IqrF9fZ1UcXrnjKTv',
-      client_secret: '6cSQV1mdDbzQPNqAvPxZUygtG7cKFDQGecxd8ywskDbcq5exCzw0AuNtLzAcKFIC4Y2LDmtr72kwsaNdesW77uBXtkkJeUoyhBpuZ9u5YvGteOxDK4ubhf1jgPIhcH5D',
+    const response = await backend.post("v1/user/rest-auth/google/", {
+      access_token : accesstoken,
     });
     dispatch({ type: types.SIGN_IN, payload: response.data });
     console.log(response.data);

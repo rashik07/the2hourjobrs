@@ -39,6 +39,8 @@ const Login = ({ signIn, isSignedIn, googleLogin }) => {
 
   const HOME_URL = '/';
   const REACT_APP_GOOGLE_CLIENT_ID = '961548394079-b0mfvhnvg76i0ie9j6lkhcrij992dc76.apps.googleusercontent.com';
+  const REACT_APP_GOOGLE_CLIENT_SECRET = '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';
+
   const REACT_APP_BASE_BACKEND_URL = 'http://localhost:8000';
 
   //const { setUser } = useContext(UserContext);
