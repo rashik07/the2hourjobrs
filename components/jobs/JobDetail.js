@@ -223,7 +223,7 @@ const JobDetail = ({
         <title>Job list</title>
       </Head>
       <Layout>
-        <Navbar />
+        <Navbar temp_jobpost={temp_jobpost}/>
 
         <Content className="site-layout">
           <Breadcrumb className="breadcrumb_main">
