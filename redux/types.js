@@ -56,6 +56,7 @@ export const GET_DISTRICT = "GET_DISTRICT";
 export const GET_DIVISION = "GET_DIVISION";
 export const GET_THANA = "GET_THANA";
 export const GET_SINGLE_PROFILE = "GET_SINGLE_PROFILE";
+export const EDIT_PHONE = "EDIT_PHONE";
 
 //************** PROJECT TYPES *********************/
 

@@ -15,6 +15,7 @@ const getConfig = () => {
   return config;
 };
 export const updateProfile = () => async (dispatch) => {
+ // console.log(store.getState().auth.id);
   try {
     const response = await backend.get(
       `/v1/user/me/?user=${store.getState().auth.id}`,
@@ -22,6 +23,20 @@ export const updateProfile = () => async (dispatch) => {
     );
     dispatch({ type: types.UPDATE_USER_PROFILE, payload: response.data });
     //console.log("user data callll");
+  } catch (error) {
+    console.log(error);
+    console.log(error.response);
+  }
+};
+export const editPhone = (values,id) => async (dispatch) => {
+  try {
+    const response = await backend.patch(
+      `/v1/user/signup/${id}/`,
+      values,
+      getConfig()
+    );
+    dispatch({ type: types.EDIT_PHONE, payload: response.data });
+    console.log("user data callll");
   } catch (error) {
     console.log(error);
     console.log(error.response);
@@ -53,14 +68,14 @@ export const getSpecificProfile = (profile_id) => async (dispatch) => {
   }
 };
 
-export const editUserProfile = (values) => async (dispatch) => {
+export const editUserProfile = (values,id) => async (dispatch) => {
   console.log(values);
 
   try {
     // values["image"] = values["photo"][0].originFileObj;
 
     const response = await backend.patch(
-      `/v1/user/profile/${store.getState().auth.id}/`,
+      `/v1/user/profile/${id}/`,
       values,
       getConfig()
     );

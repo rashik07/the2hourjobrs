@@ -45,7 +45,7 @@ const JobCategoryFilter = ({
               }}
               style={{ margin: "0rem 0rem" }}
             >
-              <p> > {subcategory.name}</p>
+              <p> <li> {subcategory.name}</li></p>
             </Col>
           );
         });

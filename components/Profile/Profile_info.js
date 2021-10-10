@@ -22,13 +22,14 @@ import {
   getThana,
   updateProfile,
   editUserProfile,
+  editPhone
 } from "@/redux/actions/userAction";
 import { UploadOutlined, EyeOutlined, ContactsFilled } from "@ant-design/icons";
 import { useRouter } from "next/router";
 import moment from "moment";
 import Profile_adress from "./Profile_adress";
 
-const Profile_info = ({ updateProfile, user_profile, editUserProfile }) => {
+const Profile_info = ({ updateProfile, user_profile, editUserProfile,editPhone,edit_phone }) => {
   const [loader, setloader] = useState(false);
   const router = useRouter();
   useEffect(() => {
@@ -52,7 +53,7 @@ const Profile_info = ({ updateProfile, user_profile, editUserProfile }) => {
 
       birthday: values["birthday"].format("YYYY-MM-DD"),
     };
-
+    //formData.append("phone", values.phone);
     formData.append("nid", values.nid);
     formData.append("gender", values.gender);
     formData.append("facebook_link", values.facebook_link);
@@ -71,11 +72,13 @@ const Profile_info = ({ updateProfile, user_profile, editUserProfile }) => {
     for (var value of formData.values()) {
       console.log(value);
     }
-    editUserProfile(formData);
+    editUserProfile(formData,user_profile.id);
     setloader(true);
-    // alert("successfully saved");
+    editPhone(values,user_profile.id);
+    alert("successfully saved");
+   // console.log(values)
   };
-  console.log(user_profile.id);
+  console.log(edit_phone);
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
@@ -201,7 +204,7 @@ const Profile_info = ({ updateProfile, user_profile, editUserProfile }) => {
               color: "black",
             }}
             placeholder="name"
-            disabled
+            
           />
         </Form.Item>
         <Form.Item
@@ -244,7 +247,7 @@ const Profile_info = ({ updateProfile, user_profile, editUserProfile }) => {
               width: "100%",
               color: "black",
             }}
-            disabled
+            
           />
         </Form.Item>
         <Form.Item
@@ -326,6 +329,7 @@ const mapStateToProps = (state) => {
     get_thana: state.user.get_thana,
     user_profile: state.user.user_profile,
     edit_user_profile: state.user.edit_user_profile,
+    edit_phone: state.user.edit_phone,
   };
 };
 
@@ -335,4 +339,5 @@ export default connect(mapStateToProps, {
   getDistrict,
   getDivision,
   getThana,
+  editPhone
 })(Profile_info);
