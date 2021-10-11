@@ -22,6 +22,10 @@ export const updateProfile = () => async (dispatch) => {
       getConfig()
     );
     dispatch({ type: types.UPDATE_USER_PROFILE, payload: response.data });
+    store.getState().auth.id = response.data.id
+    store.getState().auth.username = response.data.username
+    store.getState().auth.email = response.data.email
+    store.getState().auth.phone = response.data.phone
     //console.log("user data callll");
   } catch (error) {
     console.log(error);

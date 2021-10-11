@@ -5,8 +5,9 @@ import { useRouter } from "next/router";
 import { connect } from "react-redux";
 import { Layout} from "antd";
 import Navbar from "../../container/navbar/newNavbar";
-import { signIn, googleLogin } from "redux/actions/authAction";
+import { signIn, googleLogin, facebookLogin } from "redux/actions/authAction";
 import { GoogleLogin } from 'react-google-login';
+import FacebookLogin from 'react-facebook-login';
 import GoogleButton from 'react-google-button';
 import { useHistory } from 'react-router-dom';
 // import { facebookProvider } from "config/authMethods";
@@ -18,7 +19,7 @@ const handleSubmit = (e, username, password, signIn, router) => {
   if (signIn({ username, password }) === true) router.back();
 };
 
-const Login = ({ signIn, isSignedIn, social_auth, googleLogin }) => {
+const Login = ({ signIn, isSignedIn, social_auth, googleLogin, facebookLogin }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [hidePassword, setHidePassword] = useState(true);
@@ -38,17 +39,20 @@ const Login = ({ signIn, isSignedIn, social_auth, googleLogin }) => {
     wrapperCol: { offset: 8, span: 16 },
   };
 
-  const HOME_URL = '/';
   const REACT_APP_GOOGLE_CLIENT_ID = '961548394079-b0mfvhnvg76i0ie9j6lkhcrij992dc76.apps.googleusercontent.com';
-  const REACT_APP_GOOGLE_CLIENT_SECRET = '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';
+  const REACT_APP_FACEBOOK_CLIENT_ID = '3184283581802188';
 
-  const REACT_APP_BASE_BACKEND_URL = 'http://localhost:8000';
 
   //const { setUser } = useContext(UserContext);
   const responseGoogle = (response) =>{
     console.log("response google");
     console.log(response);
     googleLogin(response.accessToken);
+  };
+  const responseFacebook = (response) =>{
+    console.log("response facebook");
+    console.log(response);
+    facebookLogin(response.accessToken);
   };
   return (
     <>
@@ -96,33 +100,50 @@ const Login = ({ signIn, isSignedIn, social_auth, googleLogin }) => {
                 <a href="#">Forgot password?</a>
               </div>
             </div>
-            <div className="d-grid gap-2 d-flex " style={{ height: "50px" }}>
-              <button
-                className="w-50 btn btn-lg btn-success fs-6 mr-3"
-                onClick={(e) =>
-                  handleSubmit(e, username, password, signIn, router)
-                }
-              >
-                Log in
-              </button>
-              
-              <GoogleLogin
-                    clientId={REACT_APP_GOOGLE_CLIENT_ID}
-                    buttonText="Join with Google"
-                    onSuccess={responseGoogle}
-                    onFailure={responseGoogle}
-                    cookiePolicy={'single_host_origin'}
-                />
-              <Link href="/auth/signup">
+            <div>
+              <div className="d-grid gap-2 d-flex " style={{ height: "50px" }}>
                 <button
-                  className="w-50 btn btn-lg fs-6 text-white"
-                  type="submit"
-                  style={{ backgroundColor: "#163F66" }}
+                  className="w-50 btn btn-lg btn-success fs-6 mr-3"
+                  onClick={(e) =>
+                    handleSubmit(e, username, password, signIn, router)
+                  }
                 >
-                  Sign Up
+                  Log in
                 </button>
-              </Link>
-              {/* <button onClick={() => handleOnClick(facebookProvider)}>facebook</button> */}
+
+                <Link href="/auth/signup">
+                  <button
+                    className="w-50 btn btn-lg fs-6 text-white"
+                    type="submit"
+                    style={{ backgroundColor: "#163F66" }}
+                  >
+                    Sign Up
+                  </button>
+                </Link>
+                {/* <button onClick={() => handleOnClick(facebookProvider)}>facebook</button> */}
+              </div>
+              <div className="d-grid gap-2 d-flex " style={{ height: "50px" }}>
+                
+                
+                <GoogleLogin
+                      clientId={REACT_APP_GOOGLE_CLIENT_ID}
+                      buttonText="Join with Google"
+                      onSuccess={responseGoogle}
+                      onFailure={responseGoogle}
+                      cookiePolicy={'single_host_origin'}
+                  />
+
+                  <FacebookLogin
+                      appId={REACT_APP_FACEBOOK_CLIENT_ID}
+                      autoLoad={true}
+                      fields="name,email,picture"
+                      scope="public_profile,user_friends"
+                      buttonText="Join with Facebook"
+                      callback={responseFacebook}
+                      version="3.1"
+                  />
+                
+              </div>
             </div>
           </form>
         </main>
@@ -142,4 +163,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { signIn, googleLogin })(Login);
+export default connect(mapStateToProps, { signIn, googleLogin, facebookLogin })(Login);

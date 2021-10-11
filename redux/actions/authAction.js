@@ -34,6 +34,25 @@ export const googleLogin = (accesstoken) => async (dispatch) => {
     return false;
   }
 };
+export const facebookLogin = (accesstoken) => async (dispatch) => {
+  console.log("facebook login");
+  console.log(accesstoken);
+  try {
+    const response = await backend.post("v1/user/rest-auth/facebook/", {
+      access_token : accesstoken,
+    });
+    const data = {'token': response.data.key, 'social_auth': true}
+    console.log('data');
+    console.log(data);
+    dispatch({ type: types.SIGN_IN, payload: data });
+    console.log(response.data);
+
+    return true;
+  } catch (error) {
+    dispatch({ type: types.AUTH_FAILED });
+    return false;
+  }
+};
 // export const googleLogin = (accesstoken) => async (dispatch) => {
 //   console.log("google login");
 //   console.log(accesstoken);
