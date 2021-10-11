@@ -42,9 +42,26 @@ const Jobs = ({ filterJobs }) => {
       <Layout className="layout">
         <Navbar />
         <Content className="site-layout" style={{ backgroundColor: "white" }}>
-          <Row>
+          <Row style={{ marginTop: "10px" }}>
             {/*1st part*/}
             <Col span={24}>
+              <Row>
+                <KeywordSearch
+                  filter={filter}
+                  setFilter={setFilter}
+                  setShowFilter={setShowFilterJobs}
+                  getFilteredList={filterJobs}
+                  reload={showFilterJobs}
+                  //reload={setShowFilterJobs}
+                />
+                <LocationFilter
+                  filter={filter}
+                  setFilter={setFilter}
+                  reload={setShowFilterJobs}
+                  //setShowPage={setShowPage}
+                  showPage={showPage}
+                />
+              </Row>
               <Divider />
               <h2 style={{ color: "#773EA9" }}>Job Categories</h2>
               <Row>
