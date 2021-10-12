@@ -135,7 +135,6 @@ const Login = ({ signIn, isSignedIn, social_auth, googleLogin, facebookLogin }) 
 
                   <FacebookLogin
                       appId={REACT_APP_FACEBOOK_CLIENT_ID}
-                      autoLoad={true}
                       fields="name,email,picture"
                       scope="public_profile,email"
                       buttonText="Join with Facebook"
