@@ -42,7 +42,7 @@ const KeywordSearch = ({
   }
 
   return (
-    <Col span={18}>
+    <Col span={18} style={{ padding: "60px" }}> 
     <form style={{ display: "flex", width: "100%" }}>
       <input
         // className="form-control mt-2"
