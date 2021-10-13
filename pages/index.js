@@ -41,33 +41,34 @@ const Jobs = ({ filterJobs }) => {
       </Head>
       <Layout className="layout">
         <Navbar />
- 
-          <div style={{ marginTop:"64px"}}>
-            <Row>
-              {/*1st part*/}
 
-              <KeywordSearch
-                filter={filter}
-                setFilter={setFilter}
-                setShowFilter={setShowFilterJobs}
-                getFilteredList={filterJobs}
-                reload={showFilterJobs}
-                //reload={setShowFilterJobs}
-              />
+        <div style={{ marginTop: "64px" }}>
+          <Row>
+            {/*1st part*/}
 
-              <LocationFilter
-                filter={filter}
-                setFilter={setFilter}
-                reload={setShowFilterJobs}
-                //setShowPage={setShowPage}
-                showPage={showPage}
-              />
-            </Row>
-          </div>
-      
-         
+            <KeywordSearch
+              filter={filter}
+              setFilter={setFilter}
+              setShowFilter={setShowFilterJobs}
+              getFilteredList={filterJobs}
+              reload={showFilterJobs}
+              //reload={setShowFilterJobs}
+            />
 
-          <Content className="site-layout" style={{ backgroundColor: "white" , margin: "16px 66px"}}>
+            <LocationFilter
+              filter={filter}
+              setFilter={setFilter}
+              reload={setShowFilterJobs}
+              //setShowPage={setShowPage}
+              showPage={showPage}
+            />
+          </Row>
+        </div>
+
+        <Content
+          className="site-layout"
+          style={{ backgroundColor: "white", margin: "16px 66px" }}
+        >
           <h2 style={{ color: "#773EA9" }}>Job Categories</h2>
           <Row>
             <JobCategoryFilter
@@ -77,6 +78,7 @@ const Jobs = ({ filterJobs }) => {
             />
           </Row>
           <Divider />
+          
         </Content>
       </Layout>
     </>
