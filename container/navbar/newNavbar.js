@@ -14,6 +14,8 @@ import Link from "next/link";
 import { connect } from "react-redux";
 import { signOut } from "../../redux/actions/authAction";
 import { updateProfile } from "@/redux/actions/userAction";
+import { getAllNotification, getAllUnreadNotification } from "@/redux/actions/notoficationAction";
+
 import {
   UserOutlined,
   NotificationOutlined,
@@ -98,12 +100,19 @@ const getItems = (isSignedIn, signOut, user_profile) => {
 const navbar = ({
   isSignedIn,
   signOut,
+  allnotificationList,
+  unreadnotificationList,
   updateProfile,
   user_profile,
   temp_jobpost,
+  getAllNotification,
+  getAllUnreadNotification,
 }) => {
   const { Option } = Select;
-
+  useEffect(() => {
+    getAllNotification();
+    getAllUnreadNotification();
+  }, []);
   const data = [
     "Racing car sprays burning fuel into crowd.",
     "Japanese princess to wed commoner.",
@@ -121,26 +130,14 @@ const navbar = ({
         width: "300px",
       }}
     >
-      <a>
-        {" "}
-        <li>'Racing car sprays burning fuel into crowd.',</li>{" "}
-      </a>
-      <a>
-        {" "}
-        <li>'Racing car sprays burning fuel into crowd.',</li>{" "}
-      </a>
-      <a>
-        {" "}
-        <li>'Racing car sprays burning fuel into crowd.',</li>{" "}
-      </a>
-      <a>
-        {" "}
-        <li>'Racing car sprays burning fuel into crowd.',</li>{" "}
-      </a>
-      <a>
-        {" "}
-        <li>'Racing car sprays burning fuel into crowd.',</li>{" "}
-      </a>
+     
+      {allnotificationList.map((notification, index) => (  
+              <a>
+                {" "}
+                  <li>{notification['verb']}</li>
+                {" "}
+              </a>
+      ))}  
     </ul>
   );
   useEffect(() => {
@@ -240,7 +237,9 @@ const mapStateToProps = (state) => {
   return {
     isSignedIn: state.auth.isSignedIn,
     user_profile: state.user.user_profile,
+    allnotificationList: state.notifications.allnotificationList,
+    unreadnotificationList: state.notifications.unreadnotificationList,
   };
 };
 
-export default connect(mapStateToProps, { updateProfile, signOut })(navbar);
+export default connect(mapStateToProps, { updateProfile, signOut, getAllNotification, getAllUnreadNotification})(navbar);
