@@ -1,16 +1,31 @@
 import React, { useEffect, useState } from "react";
-import { Layout, Menu, Row, Col, Popover, Image } from "antd";
+import {
+  Layout,
+  Menu,
+  Row,
+  Col,
+  Popover,
+  Image,
+  Button,
+  Dropdown,
+  Select,
+} from "antd";
 import Link from "next/link";
 import { connect } from "react-redux";
 import { signOut } from "../../redux/actions/authAction";
 import { updateProfile } from "@/redux/actions/userAction";
-import { UserOutlined } from "@ant-design/icons";
+import {
+  UserOutlined,
+  NotificationOutlined,
+  NotificationFilled,
+} from "@ant-design/icons";
 
 const { Header } = Layout;
 const { SubMenu } = Menu;
 
 const getItems = (isSignedIn, signOut, user_profile) => {
   const { Header, Content, Footer } = Layout;
+
   const image = () => {
     if (user_profile.image === null) {
       return (
@@ -87,6 +102,47 @@ const navbar = ({
   user_profile,
   temp_jobpost,
 }) => {
+  const { Option } = Select;
+
+  const data = [
+    "Racing car sprays burning fuel into crowd.",
+    "Japanese princess to wed commoner.",
+    "Australian walks 100km after outback crash.",
+    "Man charged over missing wedding girl.",
+    "Los Angeles battles huge wildfires.",
+  ];
+
+  const notification = (
+    <ul
+      style={{
+        backgroundColor: "white",
+        overflowY: "scroll",
+        height: "200px",
+        width: "300px",
+      }}
+    >
+      <a>
+        {" "}
+        <li>'Racing car sprays burning fuel into crowd.',</li>{" "}
+      </a>
+      <a>
+        {" "}
+        <li>'Racing car sprays burning fuel into crowd.',</li>{" "}
+      </a>
+      <a>
+        {" "}
+        <li>'Racing car sprays burning fuel into crowd.',</li>{" "}
+      </a>
+      <a>
+        {" "}
+        <li>'Racing car sprays burning fuel into crowd.',</li>{" "}
+      </a>
+      <a>
+        {" "}
+        <li>'Racing car sprays burning fuel into crowd.',</li>{" "}
+      </a>
+    </ul>
+  );
   useEffect(() => {
     updateProfile();
   }, []);
@@ -168,6 +224,9 @@ const navbar = ({
                 <Link href="/announcement/create">Create Announcement</Link>
               </Menu.Item>
             </SubMenu>
+            <Dropdown overlay={notification} placement="bottomLeft">
+              <NotificationFilled />
+            </Dropdown>
 
             {getItems(isSignedIn, signOut, user_profile)}
           </Menu>
