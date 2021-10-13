@@ -54,7 +54,14 @@ const LocationFilter = ({
 
   return (
     <>
-      <Col span={6}  style={{ backgroundColor:"#FF3155",     padding: "7px 33px"}}>
+      <Col
+        span={6}
+        style={{
+          backgroundColor: "#773EA9",
+          padding: "7px 33px",
+        
+        }}
+      >
         <h3>Location</h3>
         {location.map((divison) => {
           return (
@@ -69,7 +76,12 @@ const LocationFilter = ({
                 onLocationSelect(JSON.stringify(divison));
                 console.log(divison);
               }}
-              style={{ backgroundColor:"#FF3155", border:"1px solid #5B5B5B", margin:"3px",textColor:"#FF3155"}}
+              style={{
+                backgroundColor: "#773EA9",
+                border: "1px solid #ffffff",
+                margin: "3px",
+                color: "#ffffff",
+              }}
             >
               {" "}
               {divison.name}

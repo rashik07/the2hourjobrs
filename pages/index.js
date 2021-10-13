@@ -41,39 +41,42 @@ const Jobs = ({ filterJobs }) => {
       </Head>
       <Layout className="layout">
         <Navbar />
-        <Content className="site-layout" style={{ backgroundColor: "white" }}>
-          <Row style={{ marginTop: "10px" }}>
-            {/*1st part*/}
-            <Col span={24}>
-              <Row>
-                <KeywordSearch
-                  filter={filter}
-                  setFilter={setFilter}
-                  setShowFilter={setShowFilterJobs}
-                  getFilteredList={filterJobs}
-                  reload={showFilterJobs}
-                  //reload={setShowFilterJobs}
-                />
-                <LocationFilter
-                  filter={filter}
-                  setFilter={setFilter}
-                  reload={setShowFilterJobs}
-                  //setShowPage={setShowPage}
-                  showPage={showPage}
-                />
-              </Row>
-              <Divider />
-              <h2 style={{ color: "#773EA9" }}>Job Categories</h2>
-              <Row>
-                <JobCategoryFilter
-                  filter={filter}
-                  setFilter={setFilter}
-                  reload={setShowFilterJobs}
-                />
-              </Row>
-              <Divider />
-            </Col>
+ 
+          <div style={{ marginTop:"64px"}}>
+            <Row>
+              {/*1st part*/}
+
+              <KeywordSearch
+                filter={filter}
+                setFilter={setFilter}
+                setShowFilter={setShowFilterJobs}
+                getFilteredList={filterJobs}
+                reload={showFilterJobs}
+                //reload={setShowFilterJobs}
+              />
+
+              <LocationFilter
+                filter={filter}
+                setFilter={setFilter}
+                reload={setShowFilterJobs}
+                //setShowPage={setShowPage}
+                showPage={showPage}
+              />
+            </Row>
+          </div>
+      
+         
+
+          <Content className="site-layout" style={{ backgroundColor: "white" , margin: "16px 66px"}}>
+          <h2 style={{ color: "#773EA9" }}>Job Categories</h2>
+          <Row>
+            <JobCategoryFilter
+              filter={filter}
+              setFilter={setFilter}
+              reload={setShowFilterJobs}
+            />
           </Row>
+          <Divider />
         </Content>
       </Layout>
     </>
