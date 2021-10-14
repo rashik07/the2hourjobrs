@@ -84,7 +84,7 @@
   margin-bottom: 2rem;
   width: 100%;
   border: 0px solid;
-  border-bottom: 1px solid #FF3155;
+  border-bottom: 1px solid #ff3155;
   border-radius: 0px;
 }
 .form-label {
@@ -143,4 +143,19 @@
   border-right-width: 1px !important;
   outline: 0;
   box-shadow: 0 0 0 2px rgb(24 144 255 20%);
+}
+.ant-menu-horizontal {
+
+  border-bottom: 0px solid #f0f0f0;
+  box-shadow: none;
+}
+
+.quick_link{
+  margin-bottom:15px ;
+}
+.quick_link a{
+  color:white;
+}
+.quick_link a:hover{
+  text-decoration:underline;
 }

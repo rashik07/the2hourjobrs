@@ -109,7 +109,7 @@ const AllAnnouncements = ({
                           "/announcement/myannouncement/" + announcment.id + "/"
                         }
                       >
-                        <Button type="primary" block>
+                        <Button type="primary" block style={{marginBottom:"15px"}}>
                           Edit
                         </Button>
                       </Link>
@@ -118,6 +118,7 @@ const AllAnnouncements = ({
                         onClick={() =>
                           archiveAnnouncement(announcment, true, setUpdatelist)
                         }
+                        style={{backgroundColor:"black",color:"white"}}
                       >
                         Move to Archive
                       </Button>
@@ -192,7 +193,7 @@ const AllAnnouncements = ({
                           "/announcement/myannouncement/" + announcment.id + "/"
                         }
                       >
-                        <Button type="primary" block>
+                        <Button type="primary" block style={{marginBottom:"15px"}}>
                           Edit
                         </Button>
                       </Link>
@@ -201,6 +202,7 @@ const AllAnnouncements = ({
                         onClick={() =>
                           archiveAnnouncement(announcment, false, setUpdatelist)
                         }
+                        style={{backgroundColor:"black",color:"white"}}
                       >
                         Move to Active Archives
                       </Button>

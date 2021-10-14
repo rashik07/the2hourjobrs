@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import {
   Select,
+  Row,
+  Col,
   Image,
   Upload,
   Space,
@@ -22,13 +24,20 @@ import {
   getThana,
   updateProfile,
   editUserProfile,
+  editPhone,
 } from "@/redux/actions/userAction";
 import { UploadOutlined, EyeOutlined, ContactsFilled } from "@ant-design/icons";
 import { useRouter } from "next/router";
 import moment from "moment";
 import Profile_adress from "./Profile_adress";
 
-const Profile_info = ({ updateProfile, user_profile, editUserProfile }) => {
+const Profile_info = ({
+  updateProfile,
+  user_profile,
+  editUserProfile,
+  editPhone,
+  edit_phone,
+}) => {
   const [loader, setloader] = useState(false);
   const router = useRouter();
   useEffect(() => {
@@ -36,9 +45,13 @@ const Profile_info = ({ updateProfile, user_profile, editUserProfile }) => {
     setloader(false);
   }, [loader]);
 
-  //console.log(user_profile);
+  console.log(user_profile);
   const dateFormat = "YYYY-MM-DD";
-  user_profile.birthday = moment(user_profile.birthday, dateFormat);
+  if (user_profile.birthday == null) {
+    user_profile.birthday = moment("2015/01/01", dateFormat);
+  } else {
+    user_profile.birthday = moment(user_profile.birthday, dateFormat);
+  }
   const onFinish = (values) => {
     const formData = new FormData();
 
@@ -47,10 +60,11 @@ const Profile_info = ({ updateProfile, user_profile, editUserProfile }) => {
 
       birthday: values["birthday"].format("YYYY-MM-DD"),
     };
-
+    //formData.append("phone", values.phone);
     formData.append("nid", values.nid);
     formData.append("gender", values.gender);
     formData.append("facebook_link", values.facebook_link);
+
     formData.append("birthday", values.birthday);
     formData.append("bio", values.bio);
     formData.append("youtube_link", values.youtube_link);
@@ -65,11 +79,13 @@ const Profile_info = ({ updateProfile, user_profile, editUserProfile }) => {
     for (var value of formData.values()) {
       console.log(value);
     }
-    editUserProfile(formData);
+    editUserProfile(formData, user_profile.id);
     setloader(true);
-    // alert("successfully saved");
+    editPhone(values, user_profile.id);
+    alert("successfully saved");
+    // console.log(values)
   };
-  console.log(user_profile.id);
+  console.log(edit_phone);
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
@@ -188,7 +204,16 @@ const Profile_info = ({ updateProfile, user_profile, editUserProfile }) => {
             <Button icon={<UploadOutlined />}>Click to upload</Button>
           </Upload>
         </Form.Item>
-        <Form.Item label="Name" name="username">
+        <Form.Item label="Name" name="name">
+          <Input
+            style={{
+              width: "100%",
+              color: "black",
+            }}
+            placeholder="name"
+          />
+        </Form.Item>
+        <Form.Item label="User Name" name="username">
           <Input
             style={{
               width: "100%",
@@ -221,26 +246,34 @@ const Profile_info = ({ updateProfile, user_profile, editUserProfile }) => {
             disabled
           />
         </Form.Item>
-        <Form.Item
-          name="phone"
-          label="Phone Number"
-          rules={[
-            {
-              //  required: true,
-              message: "Please input your phone number!",
-            },
-          ]}
-        >
-          <Input
-            // addonBefore={prefixSelector}
+    
+          <Form.Item
+            name="phone"
+            label="Phone Number"
+            rules={[
+              {
+                //  required: true,
+                message: "Please input your phone number!",
+              },
+            ]}
+           
+          >
+            <Input
+              // addonBefore={prefixSelector}
 
-            style={{
-              width: "100%",
-              color: "black",
-            }}
-            disabled
-          />
-        </Form.Item>
+              style={{
+                width: "35%",
+                color: "black",
+                marginRight:"3px"
+              }}
+            />
+             <Button type="primary" >
+              Verify
+            </Button>
+          </Form.Item>
+
+          
+     
         <Form.Item
           label="NID Number"
           name="nid"
@@ -319,6 +352,7 @@ const mapStateToProps = (state) => {
     get_thana: state.user.get_thana,
     user_profile: state.user.user_profile,
     edit_user_profile: state.user.edit_user_profile,
+    edit_phone: state.user.edit_phone,
   };
 };
 
@@ -328,4 +362,5 @@ export default connect(mapStateToProps, {
   getDistrict,
   getDivision,
   getThana,
+  editPhone,
 })(Profile_info);

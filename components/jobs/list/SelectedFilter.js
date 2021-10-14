@@ -14,6 +14,7 @@ const SelectedFilter = ({
   query,
   SetfilterAction,
 }) => {
+  //const obj=JSON.parse(query);
   const [state, setState] = useState([]);
 
   useEffect(() => {

@@ -12,7 +12,7 @@ const Step2 = ({ postStep, setPostStep, temp_jobpost }) => {
       alert("You must enter minimum salary");
       return;
     }
-    if (max_salary && min_salary >= max_salary) {
+    if (min_salary < max_salary) {
       alert("Max salary should be greater than min salary");
       return;
     }

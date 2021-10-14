@@ -10,15 +10,17 @@ import AgeFilter from "components/jobs/list/AgeFilter";
 import WorkerList from "components/worker/list/WorkerList";
 import Navbar from "../../container/navbar/newNavbar";
 import Head from "next/head";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect ,useRef } from "react";
 import { connect } from "react-redux";
 import { Layout, Breadcrumb, Row, Col, Divider } from "antd";
+import { useRouter } from 'next/router';
 
 const { Content } = Layout;
 
 const Workers = ({ filterWorkers }) => {
   const [filter, setFilter] = useState({});
   const [showFilterWorker, setShowFilterWorker] = useState(false);
+  const showPage = useRef("job_list");
 
   useEffect(() => {
     if (_.isEmpty(filter)) {
@@ -53,6 +55,7 @@ const Workers = ({ filterWorkers }) => {
                   filter={filter}
                   setFilter={setFilter}
                   reload={setShowFilterWorker}
+                  showPage={showPage}
                 />
 
                 <GenderFilter

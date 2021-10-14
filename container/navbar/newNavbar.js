@@ -1,52 +1,67 @@
 import React, { useEffect, useState } from "react";
-import { Layout, Menu, Row, Col, Popover, Image } from "antd";
+import {
+  Layout,
+  Menu,
+  Row,
+  Col,
+  Popover,
+  Image,
+  Button,
+  Dropdown,
+  Select,
+} from "antd";
 import Link from "next/link";
 import { connect } from "react-redux";
 import { signOut } from "../../redux/actions/authAction";
 import { updateProfile } from "@/redux/actions/userAction";
-import { UserOutlined } from "@ant-design/icons";
+import { getAllNotification, getAllUnreadNotification } from "@/redux/actions/notoficationAction";
+
+import {
+  UserOutlined,
+  NotificationOutlined,
+  NotificationFilled,
+} from "@ant-design/icons";
 
 const { Header } = Layout;
 const { SubMenu } = Menu;
 
 const getItems = (isSignedIn, signOut, user_profile) => {
   const { Header, Content, Footer } = Layout;
-  const image=() => {
-  if (user_profile.image === null) {
+
+  const image = () => {
+    if (user_profile.image === null) {
+      return (
+        console.log("get image"),
+        (
+          <Link href="/Profile">
+            <a>
+              {" "}
+              {/* <UserOutlined />  */}
+              {"  "}
+              {user_profile.username}
+            </a>
+          </Link>
+        )
+      );
+    }
     return (
-      console.log("get image"),
       <Link href="/Profile">
-        <a >
+        <a>
           {" "}
           {/* <UserOutlined />  */}
-         
+          <Image
+            preview={false}
+            width={35}
+            height={35}
+            src={"http://127.0.0.1:8000" + user_profile.image}
+            style={{ marginTop: "10px", borderRadius: "50%" }}
+          />
           {"  "}
-          
-          {user_profile.name}
+          {user_profile.username}
         </a>
       </Link>
     );
-     
-  }
-  return (
-    <Link href="/Profile">
-      <a >
-        {" "}
-        {/* <UserOutlined />  */}
-        <Image
-          preview={false}
-          width={35}
-          height={35}
-          src={"http://127.0.0.1:8000" + user_profile.image}
-          style={{ marginTop: "10px", borderRadius: "50%" }}
-        />
-        {"  "}
-        
-        {user_profile.name}
-      </a>
-    </Link>
-  );
-  }
+  };
   if (isSignedIn) {
     return (
       <>
@@ -82,7 +97,49 @@ const getItems = (isSignedIn, signOut, user_profile) => {
   );
 };
 
-const navbar = ({ isSignedIn, signOut, updateProfile, user_profile }) => {
+const navbar = ({
+  isSignedIn,
+  signOut,
+  allnotificationList,
+  unreadnotificationList,
+  updateProfile,
+  user_profile,
+  temp_jobpost,
+  getAllNotification,
+  getAllUnreadNotification,
+}) => {
+  const { Option } = Select;
+  useEffect(() => {
+    getAllNotification();
+    getAllUnreadNotification();
+  }, []);
+  const data = [
+    "Racing car sprays burning fuel into crowd.",
+    "Japanese princess to wed commoner.",
+    "Australian walks 100km after outback crash.",
+    "Man charged over missing wedding girl.",
+    "Los Angeles battles huge wildfires.",
+  ];
+
+  const notification = (
+    <ul
+      style={{
+        backgroundColor: "white",
+        overflowY: "scroll",
+        height: "200px",
+        width: "300px",
+      }}
+    >
+     
+      {allnotificationList.map((notification, index) => (  
+              <a>
+                {" "}
+                  <li>{notification['verb']}</li>
+                {" "}
+              </a>
+      ))}  
+    </ul>
+  );
   useEffect(() => {
     updateProfile();
   }, []);
@@ -91,7 +148,7 @@ const navbar = ({ isSignedIn, signOut, updateProfile, user_profile }) => {
   //     alert("You must log in to access this feature");
   //     return;
   //   }
-    
+
   // }
 
   // console.log(user_profile.name);
@@ -99,9 +156,11 @@ const navbar = ({ isSignedIn, signOut, updateProfile, user_profile }) => {
     <Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
       <Row>
         <Col xs={24} sm={24} md={6} lg={6} xl={6}>
-          <div className="logo">
-            <img src="/img/logo1.png" alt="Logo" height={40} />
-          </div>
+          <a href="/">
+            <div className="logo">
+              <img src="/img/logo1.png" alt="Logo" height={40} />
+            </div>
+          </a>
         </Col>
         <Col xs={24} sm={24} md={18} lg={18} xl={18}>
           <Menu
@@ -112,7 +171,12 @@ const navbar = ({ isSignedIn, signOut, updateProfile, user_profile }) => {
           >
             <SubMenu key="1" title="Jobs">
               <Menu.Item key="setting:1">
-                <Link href="/jobs/post">Post a Job</Link>
+                <Link
+                  href="/jobs/post"
+                 
+                >
+                  Post a Job
+                </Link>
               </Menu.Item>
               <Menu.Item key="setting:2">
                 {" "}
@@ -157,6 +221,9 @@ const navbar = ({ isSignedIn, signOut, updateProfile, user_profile }) => {
                 <Link href="/announcement/create">Create Announcement</Link>
               </Menu.Item>
             </SubMenu>
+            <Dropdown overlay={notification} placement="bottomLeft">
+              <NotificationFilled />
+            </Dropdown>
 
             {getItems(isSignedIn, signOut, user_profile)}
           </Menu>
@@ -170,7 +237,9 @@ const mapStateToProps = (state) => {
   return {
     isSignedIn: state.auth.isSignedIn,
     user_profile: state.user.user_profile,
+    allnotificationList: state.notifications.allnotificationList,
+    unreadnotificationList: state.notifications.unreadnotificationList,
   };
 };
 
-export default connect(mapStateToProps, { updateProfile, signOut })(navbar);
+export default connect(mapStateToProps, { updateProfile, signOut, getAllNotification, getAllUnreadNotification})(navbar);

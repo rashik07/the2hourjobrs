@@ -14,7 +14,7 @@ const LocationFilter = ({
   
 }) => {
 
-  const [location, setLocation] = useState(query);
+  const [location, setLocation] = useState();
 
   
   const onLocationSelect = (location) => {
@@ -24,7 +24,7 @@ const LocationFilter = ({
     if (location) {
       location = JSON.parse(location);
       console.log(location);
-      setFilter({ ...filter, query });
+      setFilter({ ...filter,location });
   
     }
     reload(true);

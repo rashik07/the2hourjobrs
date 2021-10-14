@@ -3,6 +3,7 @@ import * as types from "./../types";
 const INITIAL_STATE = {
   id: "",
   isSignedIn: false,
+  social_auth: false,
   token: "",
   loading: false,
   errorMsg: "",

@@ -37,26 +37,48 @@ const Jobs = ({ filterJobs }) => {
   return (
     <>
       <Head>
-        <title>Job list</title>
+        <title>the2hourjob</title>
       </Head>
       <Layout className="layout">
         <Navbar />
-        <Content className="site-layout" style={{ backgroundColor: "white" }}>
+
+        <div style={{ marginTop: "64px" }}>
           <Row>
             {/*1st part*/}
-            <Col span={24}>
-              <Divider />
-              <h2 style={{ color: "#773EA9" }}>Job Categories</h2>
-              <Row>
-                <JobCategoryFilter
-                  filter={filter}
-                  setFilter={setFilter}
-                  reload={setShowFilterJobs}
-                />
-              </Row>
-              <Divider />
-            </Col>
+
+            <KeywordSearch
+              filter={filter}
+              setFilter={setFilter}
+              setShowFilter={setShowFilterJobs}
+              getFilteredList={filterJobs}
+              reload={showFilterJobs}
+              //reload={setShowFilterJobs}
+            />
+
+            <LocationFilter
+              filter={filter}
+              setFilter={setFilter}
+              reload={setShowFilterJobs}
+              //setShowPage={setShowPage}
+              showPage={showPage}
+            />
           </Row>
+        </div>
+
+        <Content
+          className="site-layout"
+          style={{ backgroundColor: "white", margin: "16px 66px" }}
+        >
+          <h2 style={{ color: "#773EA9",marginTop:"15px" }}>Job Categories</h2>
+          <Row>
+            <JobCategoryFilter
+              filter={filter}
+              setFilter={setFilter}
+              reload={setShowFilterJobs}
+            />
+          </Row>
+          <Divider />
+          
         </Content>
       </Layout>
     </>
