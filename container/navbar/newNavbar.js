@@ -132,9 +132,10 @@ const navbar = ({
     >
      
       {allnotificationList.map((notification, index) => (  
+        
               <a>
-                {" "}
-                  <li>{notification['verb']}</li>
+                {console.log(notification)}
+                  <Link href={"/jobs/detail/"+notification['description']}>{notification['verb']}</Link>
                 {" "}
               </a>
       ))}  

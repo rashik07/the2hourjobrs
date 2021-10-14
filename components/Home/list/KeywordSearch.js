@@ -28,10 +28,6 @@ const KeywordSearch = ({
       // reload(true);
     }
   }
-  const Banner=()=>{
-  return  <img src="../../../img/banner.jpg" alt="Logo" height={40} />
-    // <img src="../../../p" alt="Logo" height={40} />
-  }
 
 
   const onKeywordSubmit = (e) => {
@@ -47,7 +43,7 @@ const KeywordSearch = ({
   }
 
   return (
-    <Col span={18} style={{ padding: "60px"  ,backgroundImage: `url('/img/banner.jpg')`, }}> 
+    <Col span={18} style={{ padding: "100px"  ,backgroundImage: `url('/img/banner.jpg')`, }}> 
     <form style={{ display: "flex", width: "100%" }}>
       <input
         // className="form-control mt-2"

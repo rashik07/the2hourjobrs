@@ -4,7 +4,7 @@ import JobCategogy from "../input/JobCategogy";
 import { connect } from "react-redux";
 import { getJobCategories } from "redux/actions/jobAction";
 import { useRouter } from "next/router";
-import { Layout, Breadcrumb, Row, Col, Divider, Button } from "antd";
+import {  Row, Col, Divider, Button } from "antd";
 
 const JobCategoryFilter = ({
   filter,
