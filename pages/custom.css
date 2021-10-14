@@ -149,3 +149,13 @@
   border-bottom: 0px solid #f0f0f0;
   box-shadow: none;
 }
+
+.quick_link{
+  margin-bottom:15px ;
+}
+.quick_link a{
+  color:white;
+}
+.quick_link a:hover{
+  text-decoration:underline;
+}

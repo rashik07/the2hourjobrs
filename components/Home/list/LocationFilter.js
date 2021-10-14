@@ -6,6 +6,8 @@ import { connect } from "react-redux";
 import { getLocationList } from "redux/actions/jobAction";
 import { useRouter } from "next/router";
 import { Button, Col } from "antd";
+import Link from "next/link";
+import { ForwardOutlined } from "@ant-design/icons";
 
 const LocationFilter = ({
   filter,
@@ -58,8 +60,7 @@ const LocationFilter = ({
         span={6}
         style={{
           backgroundColor: "#773EA9",
-          padding: "7px 33px",
-        
+          padding: "10px 33px",
         }}
       >
         <h3>Location</h3>
@@ -88,6 +89,13 @@ const LocationFilter = ({
             </Button>
           );
         })}
+        <h3 style={{marginTop:"15px "}}>Quick links</h3>
+        <div className="quick_link">
+          <ForwardOutlined />
+          <Link href="/worker/list"> Worker list </Link>
+          <ForwardOutlined />
+          <Link href="/announcement"> All Announcements </Link> 
+        </div>
       </Col>
     </>
   );

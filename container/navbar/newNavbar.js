@@ -174,7 +174,7 @@ const navbar = ({
               <Menu.Item key="setting:1">
                 <Link
                   href="/jobs/post"
-                  onClick={((temp_jobpost = ""), console.log({temp_jobpost}))}
+                 
                 >
                   Post a Job
                 </Link>
