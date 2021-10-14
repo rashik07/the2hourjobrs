@@ -418,14 +418,33 @@ export const getJob = (job_id) => async (dispatch) => {
     );
 
     if (response.status == 200) {
-      dispatch({
-        type: types.GET_SINGLE_JOB,
-        payload: response.data,
-      });
+      // dispatch({
+      //   type: types.GET_SINGLE_JOB,
+      //   payload: response.data,
+      // });
       dispatch({
         type: types.SAVE_TEMPORARY_JOBPOST,
         payload: response.data,
       });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getJobDetails = (job_id) => async (dispatch) => {
+  try {
+    const response = await backend.get(
+      `v1/jobpost/data/${job_id}/`,
+      getConfig()
+    );
+
+    if (response.status == 200) {
+      dispatch({
+        type: types.GET_SINGLE_JOB,
+        payload: response.data,
+      });
+     
     }
   } catch (error) {
     console.log(error);

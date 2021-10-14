@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { connect } from "react-redux";
-import { getJob } from "@/redux/actions/jobAction";
+import { getJobDetails } from "@/redux/actions/jobAction";
 import JobDetail from "components/jobs/JobDetail";
 
-const JobPostDetail = ({ job, getJob }) => {
+const JobPostDetail = ({ job, getJobDetails }) => {
   const router = useRouter();
 
   const { id } = router.query;
@@ -12,7 +12,7 @@ const JobPostDetail = ({ job, getJob }) => {
 
   useEffect(() => {
     if (id) {
-      getJob(id);
+      getJobDetails(id);
     }
   }, [router.query.id]);
 
@@ -24,7 +24,7 @@ const JobPostDetail = ({ job, getJob }) => {
  console.log(job);
  
   if (hasData) {
-    return <JobDetail temp_jobpost={job} />;
+    return <JobDetail temp_job={job} />;
 
   }
 
@@ -37,4 +37,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { getJob })(JobPostDetail);
+export default connect(mapStateToProps, { getJobDetails })(JobPostDetail);

@@ -117,7 +117,7 @@ const renderEducation = (education, job_post_education) => {
 };
 
 const JobDetail = ({
-  temp_jobpost,
+  temp_job,
   education,
   getAppliedJobsPerson,
   applied_jobs_person,
@@ -127,10 +127,10 @@ const JobDetail = ({
   //  console.log(user);
   useEffect(() => {
     
-    getAppliedJobsPerson(temp_jobpost).then((u) => setUser(u));
-  }, [temp_jobpost]);
+    getAppliedJobsPerson(temp_job).then((u) => setUser(u));
+  }, [temp_job]);
 
-  console.log(temp_jobpost);
+  console.log(temp_job);
   // if(applied_jobs_person)
   const appliedPerson = () => {
     if (user === null) {
@@ -158,39 +158,39 @@ const JobDetail = ({
         return (
           <Descriptions title="Job Detail" layout="vertical">
             <Descriptions.Item label="Title" labelStyle={labelStyle}>
-              {temp_jobpost.title}
+              {temp_job.title}
             </Descriptions.Item>
             <Descriptions.Item label="Vacancy" labelStyle={labelStyle}>
-              {temp_jobpost.vacancy}
+              {temp_job.vacancy}
             </Descriptions.Item>
-            {renderSalary(temp_jobpost.min_salary, temp_jobpost.max_salary)}
-            {renderDeadline(temp_jobpost.deadline)}
+            {renderSalary(temp_job.min_salary, temp_job.max_salary)}
+            {renderDeadline(temp_job.deadline)}
             {renderJobLocation(
-              temp_jobpost.job_location_inside_dhaka,
-              temp_jobpost.job_location
+              temp_job.job_location_inside_dhaka,
+              temp_job.job_location
             )}
             {renderExperience(
-              temp_jobpost.min_experience,
-              temp_jobpost.max_experience
+              temp_job.min_experience,
+              temp_job.max_experience
             )}
             <Descriptions.Item label="Workplace" labelStyle={labelStyle}>
-              {temp_jobpost.workplace.length
-                ? temp_jobpost.workplace.join(", ")
+              {temp_job.workplace.length
+                ? temp_job.workplace.join(", ")
                 : ""}
             </Descriptions.Item>
             <Descriptions.Item
               label="Employment Status"
               labelStyle={labelStyle}
             >
-              {temp_jobpost.employment_status.length
-                ? temp_jobpost.employment_status.join(", ")
+              {temp_job.employment_status.length
+                ? temp_job.employment_status.join(", ")
                 : ""}
             </Descriptions.Item>
             <Descriptions.Item label="Skills" labelStyle={labelStyle}>
-              {temp_jobpost.skills.length ? temp_jobpost.skills.join(", ") : ""}
+              {temp_job.skills.length ? temp_job.skills.join(", ") : ""}
             </Descriptions.Item>
             <Descriptions.Item label="Description" labelStyle={labelStyle}>
-              {temp_jobpost.job_description}
+              {temp_job.job_description}
             </Descriptions.Item>
           </Descriptions>
         );
@@ -199,13 +199,13 @@ const JobDetail = ({
         return (
           <Descriptions title="Employee Requirement" layout="vertical">
             <Descriptions.Item label="Gender" labelStyle={labelStyle}>
-              {temp_jobpost.gender.length ? temp_jobpost.gender.join(", ") : ""}
+              {temp_job.gender.length ? temp_job.gender.join(", ") : ""}
             </Descriptions.Item>
             <Descriptions.Item label="Age" labelStyle={labelStyle}>
-              {renderAge(temp_jobpost.min_age, temp_jobpost.max_age)}
+              {renderAge(temp_job.min_age, temp_job.max_age)}
             </Descriptions.Item>
 
-            {renderEducation(education, temp_jobpost.education)}
+            {renderEducation(education, temp_job.education)}
           </Descriptions>
         );
 
@@ -223,14 +223,14 @@ const JobDetail = ({
         <title>Job list</title>
       </Head>
       <Layout>
-        <Navbar temp_jobpost={temp_jobpost}/>
+        <Navbar temp_job={temp_job}/>
 
         <Content className="site-layout">
           <Breadcrumb className="breadcrumb_main">
             <Breadcrumb.Item>Home</Breadcrumb.Item>
             <Breadcrumb.Item>Job</Breadcrumb.Item>
             <Breadcrumb.Item>Job Details</Breadcrumb.Item>
-            <Breadcrumb.Item>{temp_jobpost.title}</Breadcrumb.Item>
+            <Breadcrumb.Item>{temp_job.title}</Breadcrumb.Item>
           </Breadcrumb>
           <div className="site-layout-background" >
             <div className="text-secondary">
