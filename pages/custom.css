@@ -27,6 +27,7 @@
 .ant-layout-header {
   background: #a93ea6;
   height: 65px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .ant-menu {
   background: #a93ea6;
@@ -61,17 +62,17 @@
   margin-bottom: 0;
 }
 .job_title:hover {
-  color: #ff3155;
+  color: #A93EA6;
   text-decoration: underline;
 }
 .ant-select:not(.ant-select-customize-input) .ant-select-selector {
-  border: 0px solid #70bdf2;
-  border-bottom: 1px solid #ff3155;
+  border: 0px solid #A93EA6;
+  border-bottom: 1px solid #A93EA6;
 }
 .ant-select:not(.ant-select-customize-input) .ant-select-selector:hover {
-  border: 0px solid #70bdf2;
-  border-bottom: 1px solid #ff3155;
-  border-right: 1px solid #ff3155;
+  border: 0px solid #A93EA6;
+  border-bottom: 1px solid #A93EA6;
+  border-right: 1px solid #A93EA6;
 }
 .ant-steps {
   width: 100%;
@@ -215,4 +216,21 @@
   padding-top: 7px;
   width: 169px;
 
+}
+.ant-layout-sider-trigger {
+  background: #A93EA6;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.ant-layout-sider {
+  background: #A93EA6;
+}
+.ant-menu.ant-menu-dark, .ant-menu-dark .ant-menu-sub, .ant-menu.ant-menu-dark .ant-menu-sub {
+ 
+  background: #A93EA6;
+}
+.notifi_bar  a{
+  color: #000000;
+}
+.notifi_bar a li:hover{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
