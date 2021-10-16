@@ -19,7 +19,7 @@ const SelectedFilter = ({
 
   useEffect(() => {
     const newState = [];
-    console.log(filter);
+ //   console.log(filter);
     if (filter.category) {
       newState.push(filter.category.name);
     }
@@ -105,8 +105,8 @@ const SelectedFilter = ({
     const tags = state.filter((tag) => tag !== removedTag);
     setState(tags);
   };
-  console.log(filter);
-  console.log("state : " + state);
+ // console.log(filter);
+  //console.log("state : " + state);
   return (
     <>
       <div style={{ margin: 15 }}>

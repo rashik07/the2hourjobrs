@@ -126,20 +126,23 @@ const navbar = ({
 
   const notification = (
     <ul
+      className="notifi_bar"
       style={{
         backgroundColor: "white",
         overflowY: "scroll",
         height: "200px",
         width: "300px",
+        boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+        
       }}
     >
-      {allnotificationList.map((notification, index) => (
-        <a>
-          {console.log(notification)}
-          <Link href={"/jobs/detail/" + notification["description"]}>
+      {allnotificationList.map((notification, index) => (      
+        <li >
+          {/* {console.log(notification)} */}
+          <Link href={"/jobs/detail/" + notification["description"]} style={{color:"white"}}>
             {notification["verb"]}
           </Link>{" "}
-        </a>
+        </li>
       ))}
     </ul>
   );
