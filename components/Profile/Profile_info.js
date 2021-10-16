@@ -81,7 +81,7 @@ const Profile_info = ({
     }
     editUserProfile(formData, user_profile.id);
     setloader(true);
-    editPhone(values, user_profile.id);
+   // editPhone(values, user_profile.id);
     alert("successfully saved");
     // console.log(values)
   };

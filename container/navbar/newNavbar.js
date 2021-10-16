@@ -14,7 +14,10 @@ import Link from "next/link";
 import { connect } from "react-redux";
 import { signOut } from "../../redux/actions/authAction";
 import { updateProfile } from "@/redux/actions/userAction";
-import { getAllNotification, getAllUnreadNotification } from "@/redux/actions/notoficationAction";
+import {
+  getAllNotification,
+  getAllUnreadNotification,
+} from "@/redux/actions/notoficationAction";
 
 import {
   UserOutlined,
@@ -130,15 +133,14 @@ const navbar = ({
         width: "300px",
       }}
     >
-     
-      {allnotificationList.map((notification, index) => (  
-        
-              <a>
-                {console.log(notification)}
-                  <Link href={"/jobs/detail/"+notification['description']}>{notification['verb']}</Link>
-                {" "}
-              </a>
-      ))}  
+      {allnotificationList.map((notification, index) => (
+        <a>
+          {console.log(notification)}
+          <Link href={"/jobs/detail/" + notification["description"]}>
+            {notification["verb"]}
+          </Link>{" "}
+        </a>
+      ))}
     </ul>
   );
   useEffect(() => {
@@ -159,26 +161,22 @@ const navbar = ({
         <Col xs={24} sm={24} md={6} lg={6} xl={6}>
           <a href="/">
             <div className="logo">
-              <img src="/img/logo1.png" alt="Logo" height={40} />
+              <img src="/img/logo.png" alt="Logo" height={40} />
             </div>
           </a>
         </Col>
         <Col xs={24} sm={24} md={18} lg={18} xl={18}>
+          <Button className="jobpost_btn" >
+            <Link href="/jobs/post">Post a Job</Link>
+          </Button>
           <Menu
             theme=""
             mode="horizontal"
             defaultSelectedKeys={["2"]}
             style={{ float: "right" }}
           >
+            {/* <Menu.Item key="setting:1"></Menu.Item> */}
             <SubMenu key="1" title="Jobs">
-              <Menu.Item key="setting:1">
-                <Link
-                  href="/jobs/post"
-                 
-                >
-                  Post a Job
-                </Link>
-              </Menu.Item>
               <Menu.Item key="setting:2">
                 {" "}
                 <Link href="/jobs/list">Job list</Link>
@@ -243,4 +241,9 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { updateProfile, signOut, getAllNotification, getAllUnreadNotification})(navbar);
+export default connect(mapStateToProps, {
+  updateProfile,
+  signOut,
+  getAllNotification,
+  getAllUnreadNotification,
+})(navbar);
