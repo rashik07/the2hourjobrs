@@ -7,7 +7,6 @@ import JobPostItem from "../JobPostItem";
 const JobList = ({ getAllJobs, all_jobs, filtered_jobs, showFilterJobs }) => {
   useEffect(() => {
     getAllJobs();
-  
   }, []);
 
   if (showFilterJobs) {

@@ -49,10 +49,7 @@ export const editPhone = (values, id) => async (dispatch) => {
 };
 export const getSpecificProfile = (profile_id) => async (dispatch) => {
   try {
-    const response = await backend.get(
-      `/v1/user/other_users/${profile_id}/`,
-      getConfig()
-    );
+    const response = await backend.get(`/v1/user/other_users/${profile_id}/`);
     // let response = null;
 
     // if (store.getState().auth.isSignedIn) {
@@ -94,7 +91,7 @@ export const editUserProfile = (values, id) => async (dispatch) => {
 export const getDivision = () => async (dispatch) => {
   try {
     //   console.log("working");
-    const response = await backend.get("/v1/category/division/", getConfig());
+    const response = await backend.get("/v1/category/division/");
     dispatch({ type: types.GET_DIVISION, payload: response.data });
     // console.log(response.data);
   } catch (error) {
@@ -104,7 +101,7 @@ export const getDivision = () => async (dispatch) => {
 };
 export const getDistrict = () => async (dispatch) => {
   try {
-    const response = await backend.get("/v1/category/district/", getConfig());
+    const response = await backend.get("/v1/category/district/");
     dispatch({ type: types.GET_DISTRICT, payload: response.data });
   } catch (error) {
     console.log(error);
@@ -114,7 +111,7 @@ export const getDistrict = () => async (dispatch) => {
 
 export const getThana = () => async (dispatch) => {
   try {
-    const response = await backend.get("/v1/category/thana/", getConfig());
+    const response = await backend.get("/v1/category/thana/");
     dispatch({ type: types.GET_THANA, payload: response.data });
   } catch (error) {
     console.log(error);
@@ -129,7 +126,7 @@ export const getOtherWorkers = () => async (dispatch) => {
     // if (store.getState().auth.isSignedIn) {
     //   response = await backend.get("/v1/user/other_users/", getConfig());
     // } else {
-    const response = await backend.get("/v1/user/other_users/", getConfig());
+    const response = await backend.get("/v1/user/other_users/");
     // }
 
     dispatch({ type: types.GET_OTHER_WORKERS, payload: response.data });
@@ -170,7 +167,7 @@ export const filterWorkers = (filter) => async (dispatch) => {
     }
 
     if (store.getState().auth.isSignedIn) {
-      response = await backend.get(url, getConfig());
+      response = await backend.get(url);
     } else {
       response = await backend.get(url);
     }

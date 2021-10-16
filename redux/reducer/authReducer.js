@@ -28,8 +28,8 @@ const authReducer = (state = INITIAL_STATE, action) => {
         errorMsg: "",
       };
 
-    case types.SIGN_OUT:
-      return { isSignedIn: false };
+    // case types.SIGN_OUT:
+    //   return { isSignedIn: false };
 
     case types.RESET_SIGN_UP:
       return INITIAL_STATE;

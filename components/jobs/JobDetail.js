@@ -121,12 +121,12 @@ const JobDetail = ({
   education,
   getAppliedJobsPerson,
   applied_jobs_person,
+  userid,
 }) => {
   // const { Paragraph, Title } = Typography;
   const [user, setUser] = useState(null);
   //  console.log(user);
   useEffect(() => {
-    
     getAppliedJobsPerson(temp_job).then((u) => setUser(u));
   }, [temp_job]);
 
@@ -144,7 +144,8 @@ const JobDetail = ({
         <Link href={`/Profile/Profile_details/${applied_jobs_person.user.id}`}>
           <a>
             {" "}
-            {applied_jobs_person.user.username}{", "}
+            {applied_jobs_person.user.username}
+            {", "}
           </a>
         </Link>
       );
@@ -169,14 +170,9 @@ const JobDetail = ({
               temp_job.job_location_inside_dhaka,
               temp_job.job_location
             )}
-            {renderExperience(
-              temp_job.min_experience,
-              temp_job.max_experience
-            )}
+            {renderExperience(temp_job.min_experience, temp_job.max_experience)}
             <Descriptions.Item label="Workplace" labelStyle={labelStyle}>
-              {temp_job.workplace.length
-                ? temp_job.workplace.join(", ")
-                : ""}
+              {temp_job.workplace.length ? temp_job.workplace.join(", ") : ""}
             </Descriptions.Item>
             <Descriptions.Item
               label="Employment Status"
@@ -223,7 +219,7 @@ const JobDetail = ({
         <title>Job list</title>
       </Head>
       <Layout>
-        <Navbar temp_job={temp_job}/>
+        <Navbar temp_job={temp_job} />
 
         <Content className="site-layout">
           <Breadcrumb className="breadcrumb_main">
@@ -232,12 +228,18 @@ const JobDetail = ({
             <Breadcrumb.Item>Job Details</Breadcrumb.Item>
             <Breadcrumb.Item>{temp_job.title}</Breadcrumb.Item>
           </Breadcrumb>
-          <div className="site-layout-background" >
+          <div className="site-layout-background">
             <div className="text-secondary">
               {renderItem("job_detail")} <hr />
               {renderItem("employee_requirement")}
-              <span style={{ fontWeight: "bold" }}>Applied Person:</span>{" "}
-              {appliedPerson()}
+              {typeof applied_jobs_person == "undefined" ? (
+                ""
+              ) : (
+                <>
+                  <span style={{ fontWeight: "bold" }}>Applied Person:</span>{" "}
+                  {userid == applied_jobs_person.id ? appliedPerson() : ""}
+                </>
+              )}
             </div>
           </div>
         </Content>
@@ -250,6 +252,7 @@ const mapStateToProps = (state) => {
   return {
     education: state.job.education,
     applied_jobs_person: state.job.applied_jobs_person,
+    userid: state.auth.id,
   };
 };
 export default connect(mapStateToProps, {

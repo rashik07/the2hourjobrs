@@ -45,7 +45,7 @@ export const getJobCategories = () => async (dispatch) => {
 
 export const getIndustries = () => async (dispatch) => {
   try {
-    const response = await backend.get("v1/category/industry/", getConfig());
+    const response = await backend.get("v1/category/industry/");
 
     dispatch({ type: types.GET_JOB_INDUSTRIES, payload: response.data });
   } catch (error) {
@@ -55,7 +55,7 @@ export const getIndustries = () => async (dispatch) => {
 
 export const getAllJobs = () => async (dispatch) => {
   try {
-    const response = await backend.get("v1/jobpost/data/", getConfig());
+    const response = await backend.get("v1/jobpost/data/");
 
     dispatch({ type: types.GET_ALL_JOB, payload: response.data });
   } catch (error) {
@@ -178,7 +178,7 @@ export const filterJobs = (filter) => async (dispatch) => {
       url = createURL[i](url, filter[i]);
     }
 
-    const response = await backend.get(url, getConfig());
+    const response = await backend.get(url);
 
     dispatch({ type: types.FILTER_JOB, payload: response.data });
   } catch (error) {
@@ -436,10 +436,7 @@ export const getJob = (job_id) => async (dispatch) => {
 
 export const getJobDetails = (job_id) => async (dispatch) => {
   try {
-    const response = await backend.get(
-      `v1/jobpost/data/${job_id}/`,
-      getConfig()
-    );
+    const response = await backend.get(`v1/jobpost/data/${job_id}/`);
 
     if (response.status == 200) {
       dispatch({
