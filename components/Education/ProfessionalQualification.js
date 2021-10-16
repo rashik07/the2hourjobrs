@@ -38,6 +38,7 @@ const ProfessionalQualification = ({
       year_of_passing: values["year_of_passing"].format("YYYY-MM-DD"),
     };
     createQualification(values);
+    form.resetFields();
     setloader(true);
     // console.log("Success:", values);
   };
@@ -137,7 +138,7 @@ const ProfessionalQualification = ({
               key="ellipsis"
               onClick={() => {
                 deleteQualification(details.id);
-                setloader(true);;
+                setloader(true);
               }}
             />
           </Space>

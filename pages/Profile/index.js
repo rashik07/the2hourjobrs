@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { connect } from "react-redux";
 import Head from "next/head";
 import Navbar from "../../container/navbar/newNavbar";
 import Sidebar from "../../container/sidebar/sidebar";
@@ -9,13 +10,20 @@ import Education from "components/Profile/Education";
 import Employment from "components/Profile/Employment";
 import Portfolio from "components/Profile/Portfolio";
 import Setting from "components/Profile/Setting";
+import { useRouter } from "next/router";
 
-const Profile = () => {
+const Profile = ({ auth }) => {
+  const router = useRouter();
   const { Content } = Layout;
   const selector = useRef("");
   const [loader, setloader] = useState(false);
 
   useEffect(() => {
+    if (!auth.isSignedIn) {
+      router.push({
+        pathname: "/auth/login",
+      });
+    }
     setloader(false);
   }, [loader]);
   const clickPage = () => {
@@ -77,4 +85,9 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth,
+  };
+};
+export default connect(mapStateToProps)(Profile);

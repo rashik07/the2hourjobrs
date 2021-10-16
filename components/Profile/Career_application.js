@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Select } from "antd";
+import { Select, Skeleton } from "antd";
 import { connect } from "react-redux";
 import { updateProfile, editUserProfile } from "@/redux/actions/userAction";
 import { saveTemporayJobPost } from "redux/actions/jobAction";
@@ -21,7 +21,7 @@ import PreferedCategories from "components/PreferedCategories";
 
 const Career_application = ({
   updateProfile,
-  user_profile,
+  auth,
   editUserProfile,
   edit_user_profile,
   saveTemporayJobPost,
@@ -30,8 +30,20 @@ const Career_application = ({
   categories,
   onClear,
 }) => {
+  const [user_profile, setuser_profile] = useState([]);
+  const [loading, setloading] = useState(true);
   useEffect(() => {
-    updateProfile();
+    if (!auth.isSignedIn) {
+      router.push({
+        pathname: "/auth/login",
+      });
+    } else {
+      setloading(true);
+      updateProfile().then((result) => {
+        setuser_profile(result);
+        setloading(false);
+      });
+    }
   }, []);
   const onFinish = (values) => {
     const formData = new FormData();
@@ -49,7 +61,7 @@ const Career_application = ({
     }
 
     // console.log("Received values of form: ", values);
-    editUserProfile(formData);
+    editUserProfile(formData, user_profile.id);
     alert("successfully saved");
 
     //   console.log('update: ', editUserProfile);
@@ -147,82 +159,88 @@ const Career_application = ({
 
     return e && e.fileList;
   };
-  return (
-    <div>
-      <Form
-        {...formItemLayout}
-        layout={formLayout}
-        form={form}
-        name="register"
-        onFinish={onFinish}
-        initialValues={user_profile}
-      >
-        <Divider>
-          {" "}
-          <Title>Career and Application details </Title>
-        </Divider>
-        <Form.Item name="available_for_work" valuePropName="checked">
-          <Switch
-            className="float-right"
-            checkedChildren="available for work"
-            unCheckedChildren="not available for work"
-          />
-        </Form.Item>
-        <Form.Item
-          name="upload"
-          label="CV Upload"
-          valuePropName="fileList"
-          getValueFromEvent={normFile}
-          extra="Please Upload PDF Format"
-        >
-          <Upload name="resume" listType="picture" maxCount={1}>
-            <Button icon={<UploadOutlined />}>Click to upload</Button> <br />
-            <a href={"http://127.0.0.1:8000" + user_profile.resume} download>
-              Click to download
-            </a>
-          </Upload>
-        </Form.Item>
 
-        <Form.Item label="Objective" name="objective">
-          <TextArea rows={4} />
-        </Form.Item>
-        <Form.Item label="Present Salary" name="present_salary">
-          <Input placeholder="present salary" />
-        </Form.Item>
-        <Form.Item label="Expected Salary" name="expected_salary">
-          <Input placeholder="expected salary" />
-        </Form.Item>
-        <Form.Item label="Job level" name="job_level">
-          <Radio.Group
-            onChange={onChange}
-            options={plainOptions}
-            value={value}
-          ></Radio.Group>
-        </Form.Item>
-        <Form.Item label="Job Nature" name="job_nature">
-          <Radio.Group
-            onChange={onChange2}
-            options={natureOptions}
-            value={value2}
-          ></Radio.Group>
-        </Form.Item>
-        <Form.Item {...tailFormItemLayout}>
-          <Button type="primary" htmlType="submit">
-            Save
-          </Button>
-        </Form.Item>
-      </Form>
-      <PreferedCategories />
-    </div>
-  );
+  if (loading) {
+    return <Skeleton active />;
+  } else {
+    return (
+      <div>
+        <Form
+          {...formItemLayout}
+          layout={formLayout}
+          form={form}
+          name="register"
+          onFinish={onFinish}
+          initialValues={user_profile}
+        >
+          <Divider>
+            {" "}
+            <Title>Career and Application details </Title>
+          </Divider>
+          <Form.Item name="available_for_work" valuePropName="checked">
+            <Switch
+              className="float-right"
+              checkedChildren="available for work"
+              unCheckedChildren="not available for work"
+            />
+          </Form.Item>
+          <Form.Item
+            name="upload"
+            label="CV Upload"
+            valuePropName="fileList"
+            getValueFromEvent={normFile}
+            extra="Please Upload PDF Format"
+          >
+            <Upload name="resume" listType="picture" maxCount={1}>
+              <Button icon={<UploadOutlined />}>Click to upload</Button> <br />
+              <a href={"http://127.0.0.1:8000" + user_profile.resume} download>
+                Click to download
+              </a>
+            </Upload>
+          </Form.Item>
+
+          <Form.Item label="Objective" name="objective">
+            <TextArea rows={4} />
+          </Form.Item>
+          <Form.Item label="Present Salary" name="present_salary">
+            <Input placeholder="present salary" />
+          </Form.Item>
+          <Form.Item label="Expected Salary" name="expected_salary">
+            <Input placeholder="expected salary" />
+          </Form.Item>
+          <Form.Item label="Job level" name="job_level">
+            <Radio.Group
+              onChange={onChange}
+              options={plainOptions}
+              value={value}
+            ></Radio.Group>
+          </Form.Item>
+          <Form.Item label="Job Nature" name="job_nature">
+            <Radio.Group
+              onChange={onChange2}
+              options={natureOptions}
+              value={value2}
+            ></Radio.Group>
+          </Form.Item>
+          <Form.Item {...tailFormItemLayout}>
+            <Button type="primary" htmlType="submit">
+              Save
+            </Button>
+          </Form.Item>
+        </Form>
+        <PreferedCategories />
+      </div>
+    );
+  }
 };
 const mapStateToProps = (state) => {
   return {
-    user_profile: state.user.user_profile,
+    // user_profile: state.user.user_profile,
     edit_user_profile: state.user.edit_user_profile,
     location: state.job.location,
     temp_jobpost: state.job.temp_jobpost,
     categories: state.job.categories,
+    auth: state.auth,
   };
 };
 export default connect(mapStateToProps, {

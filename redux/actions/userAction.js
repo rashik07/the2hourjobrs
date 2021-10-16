@@ -15,24 +15,25 @@ const getConfig = () => {
   return config;
 };
 export const updateProfile = () => async (dispatch) => {
- // console.log(store.getState().auth.id);
+  // console.log(store.getState().auth.id);
   try {
     const response = await backend.get(
       `/v1/user/me/?user=${store.getState().auth.id}`,
       getConfig()
     );
     dispatch({ type: types.UPDATE_USER_PROFILE, payload: response.data });
-    store.getState().auth.id = response.data.id
-    store.getState().auth.username = response.data.username
-    store.getState().auth.email = response.data.email
-    store.getState().auth.phone = response.data.phone
+    store.getState().auth.id = response.data.id;
+    store.getState().auth.username = response.data.username;
+    store.getState().auth.email = response.data.email;
+    store.getState().auth.phone = response.data.phone;
+    return response.data;
     //console.log("user data callll");
   } catch (error) {
     console.log(error);
     console.log(error.response);
   }
 };
-export const editPhone = (values,id) => async (dispatch) => {
+export const editPhone = (values, id) => async (dispatch) => {
   try {
     const response = await backend.patch(
       `/v1/user/signup/${id}/`,
@@ -72,7 +73,7 @@ export const getSpecificProfile = (profile_id) => async (dispatch) => {
   }
 };
 
-export const editUserProfile = (values,id) => async (dispatch) => {
+export const editUserProfile = (values, id) => async (dispatch) => {
   console.log(values);
 
   try {
@@ -115,7 +116,6 @@ export const getThana = () => async (dispatch) => {
   try {
     const response = await backend.get("/v1/category/thana/", getConfig());
     dispatch({ type: types.GET_THANA, payload: response.data });
-  
   } catch (error) {
     console.log(error);
     console.log(error.response);
@@ -129,7 +129,7 @@ export const getOtherWorkers = () => async (dispatch) => {
     // if (store.getState().auth.isSignedIn) {
     //   response = await backend.get("/v1/user/other_users/", getConfig());
     // } else {
-    const  response = await backend.get("/v1/user/other_users/", getConfig());
+    const response = await backend.get("/v1/user/other_users/", getConfig());
     // }
 
     dispatch({ type: types.GET_OTHER_WORKERS, payload: response.data });

@@ -20,10 +20,10 @@ export const googleLogin = (accesstoken) => async (dispatch) => {
   console.log(accesstoken);
   try {
     const response = await backend.post("v1/user/rest-auth/google/", {
-      access_token : accesstoken,
+      access_token: accesstoken,
     });
-    const data = {'token': response.data.key, 'social_auth': true}
-    console.log('data');
+    const data = { token: response.data.key, social_auth: true };
+    console.log("data");
     console.log(data);
     dispatch({ type: types.SIGN_IN, payload: data });
     console.log(response.data);
@@ -39,10 +39,10 @@ export const facebookLogin = (accesstoken) => async (dispatch) => {
   console.log(accesstoken);
   try {
     const response = await backend.post("v1/user/rest-auth/facebook/", {
-      access_token : accesstoken,
+      access_token: accesstoken,
     });
-    const data = {'token': response.data.key, 'social_auth': true}
-    console.log('data');
+    const data = { token: response.data.key, social_auth: true };
+    console.log("data");
     console.log(data);
     dispatch({ type: types.SIGN_IN, payload: data });
     console.log(response.data);
@@ -89,7 +89,7 @@ export const signUp = (formValues, router) => async (dispatch) => {
     await backend.post("v1/user/signup/", {
       ...formValues,
     });
-    
+
     const { username, password } = formValues;
 
     dispatch(signIn({ username, password }));

@@ -17,7 +17,7 @@ const getConfig = () => {
 
 export const getJobCategories = () => async (dispatch) => {
   try {
-    const response = await backend.get("v1/category/jobcategory/", getConfig());
+    const response = await backend.get("v1/category/jobcategory/");
 
     //ref: https://stackoverflow.com/a/54203304/8666088
     const list = response.data.reduce(
@@ -37,6 +37,7 @@ export const getJobCategories = () => async (dispatch) => {
     }
 
     dispatch({ type: types.GET_JOB_CATEGORIES, payload: allCategories });
+    return allCategories;
   } catch (error) {
     console.log(error);
   }
@@ -200,6 +201,7 @@ export const getLocationList = () => async (dispatch) => {
     const response = await backend.get("v1/category/division/");
 
     dispatch({ type: types.GET_LOCATION_LIST, payload: response.data });
+    return response.data;
   } catch (error) {
     console.log(error);
   }
@@ -444,7 +446,6 @@ export const getJobDetails = (job_id) => async (dispatch) => {
         type: types.GET_SINGLE_JOB,
         payload: response.data,
       });
-     
     }
   } catch (error) {
     console.log(error);

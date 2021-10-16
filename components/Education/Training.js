@@ -38,6 +38,7 @@ const Training = ({
       training_year: values["training_year"].format("YYYY"),
     };
     createTraining(values);
+    form.resetFields();
     setloader(true);
     // console.log("Success:", values);
   };
@@ -118,7 +119,7 @@ const Training = ({
               key="ellipsis"
               onClick={() => {
                 deleteTraining(details.id);
-                setloader(true);;
+                setloader(true);
               }}
             />
           </Space>

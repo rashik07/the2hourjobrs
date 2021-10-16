@@ -15,6 +15,7 @@ import {
   Divider,
   Tooltip,
   InputNumber,
+  Skeleton,
 } from "antd";
 import { connect } from "react-redux";
 import Link from "next/link";
@@ -33,25 +34,38 @@ import Profile_adress from "./Profile_adress";
 
 const Profile_info = ({
   updateProfile,
-  user_profile,
+  // user_profile,
   editUserProfile,
   editPhone,
   edit_phone,
+  auth,
 }) => {
+  const [user_profile, setuser_profile] = useState([]);
+  const [loading, setloading] = useState(true);
   const [loader, setloader] = useState(false);
+  const dateFormat = "YYYY-MM-DD";
   const router = useRouter();
+
   useEffect(() => {
-    updateProfile();
-    setloader(false);
+    if (!auth.isSignedIn) {
+      router.push({
+        pathname: "/auth/login",
+      });
+    } else {
+      setloading(true);
+      updateProfile().then((result) => {
+        if (result.birthday == null) {
+          // result.birthday = moment("2015/01/01", dateFormat);
+        } else {
+          result.birthday = moment(result.birthday, dateFormat);
+        }
+        setuser_profile(result);
+        console.log(user_profile);
+        setloading(false);
+      });
+    }
   }, [loader]);
 
-  console.log(user_profile);
-  const dateFormat = "YYYY-MM-DD";
-  if (user_profile.birthday == null) {
-    user_profile.birthday = moment("2015/01/01", dateFormat);
-  } else {
-    user_profile.birthday = moment(user_profile.birthday, dateFormat);
-  }
   const onFinish = (values) => {
     const formData = new FormData();
 
@@ -85,7 +99,6 @@ const Profile_info = ({
     alert("successfully saved");
     // console.log(values)
   };
-  console.log(edit_phone);
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
@@ -159,94 +172,96 @@ const Profile_info = ({
 
     return e && e.fileList;
   };
-
-  return (
-    <>
-      <Form
-        {...formItemLayout}
-        layout={formLayout}
-        form={form}
-        name="register"
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-        initialValues={user_profile}
-        //   setloader={setloader}
-      >
-        <Divider>
-          {" "}
-          <Title>Basic Info</Title>
-        </Divider>
-        {/* <Image
+  if (loading) {
+    return <Skeleton active />;
+  } else {
+    return (
+      <>
+        <Form
+          {...formItemLayout}
+          layout={formLayout}
+          form={form}
+          name="register"
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+          initialValues={user_profile}
+          //   setloader={setloader}
+        >
+          <Divider>
+            {" "}
+            <Title>Basic Info</Title>
+          </Divider>
+          {/* <Image
           width={200}
           height={200}
           src={"http://127.0.0.1:8000" + user_profile.image}
         /> */}
-        <Link href={`/Profile/Profile_details/${user_profile.id}`}>
-          <Tooltip title="View My Profile" className="button_eye">
-            <Button
-              // onClick={() =>
-              //   router.push(`/Profile/Profile_details/${user_profile.id}`)
-              // }
-              type="primary"
-              shape="circle"
-              icon={<EyeOutlined />}
-            ></Button>
-          </Tooltip>
-        </Link>
-        <Form.Item
-          name="photo"
-          label="Upload Photo"
-          valuePropName="fileList"
-          getValueFromEvent={normFile}
-          extra="upload photo"
-        >
-          <Upload name="image" listType="picture" maxCount={1}>
-            <Button icon={<UploadOutlined />}>Click to upload</Button>
-          </Upload>
-        </Form.Item>
-        <Form.Item label="Name" name="name">
-          <Input
-            style={{
-              width: "100%",
-              color: "black",
-            }}
-            placeholder="name"
-          />
-        </Form.Item>
-        <Form.Item label="User Name" name="username">
-          <Input
-            style={{
-              width: "100%",
-              color: "black",
-            }}
-            placeholder="name"
-            disabled
-          />
-        </Form.Item>
-        <Form.Item
-          name="email"
-          label="E-mail"
-          rules={[
-            {
-              type: "email",
-              message: "The input is not valid E-mail!",
-            },
-            {
-              //  required: true,
-              message: "Please input your E-mail!",
-            },
-          ]}
-        >
-          <Input
-            style={{
-              width: "100%",
-              color: "black",
-            }}
-            placeholder="e-mail"
-            disabled
-          />
-        </Form.Item>
-    
+          <Link href={`/Profile/Profile_details/${user_profile.id}`}>
+            <Tooltip title="View My Profile" className="button_eye">
+              <Button
+                // onClick={() =>
+                //   router.push(`/Profile/Profile_details/${user_profile.id}`)
+                // }
+                type="primary"
+                shape="circle"
+                icon={<EyeOutlined />}
+              ></Button>
+            </Tooltip>
+          </Link>
+          <Form.Item
+            name="photo"
+            label="Upload Photo"
+            valuePropName="fileList"
+            getValueFromEvent={normFile}
+            extra="upload photo"
+          >
+            <Upload name="image" listType="picture" maxCount={1}>
+              <Button icon={<UploadOutlined />}>Click to upload</Button>
+            </Upload>
+          </Form.Item>
+          <Form.Item label="Name" name="name">
+            <Input
+              style={{
+                width: "100%",
+                color: "black",
+              }}
+              placeholder="name"
+            />
+          </Form.Item>
+          <Form.Item label="User Name" name="username">
+            <Input
+              style={{
+                width: "100%",
+                color: "black",
+              }}
+              placeholder="name"
+              disabled
+            />
+          </Form.Item>
+          <Form.Item
+            name="email"
+            label="E-mail"
+            rules={[
+              {
+                type: "email",
+                message: "The input is not valid E-mail!",
+              },
+              {
+                //  required: true,
+                message: "Please input your E-mail!",
+              },
+            ]}
+          >
+            <Input
+              style={{
+                width: "100%",
+                color: "black",
+              }}
+              placeholder="e-mail"
+              disabled
+            />
+          </Form.Item>
+
           <Form.Item
             name="phone"
             label="Phone Number"
@@ -256,7 +271,6 @@ const Profile_info = ({
                 message: "Please input your phone number!",
               },
             ]}
-           
           >
             <Input
               // addonBefore={prefixSelector}
@@ -264,85 +278,82 @@ const Profile_info = ({
               style={{
                 width: "35%",
                 color: "black",
-                marginRight:"3px"
+                marginRight: "3px",
               }}
             />
-             <Button type="primary" >
-              Verify
-            </Button>
+            <Button type="primary">Verify</Button>
           </Form.Item>
 
-          
-     
-        <Form.Item
-          label="NID Number"
-          name="nid"
-          rules={[
-            {
-              type: "number",
-              message: "The input is not valid NID!",
-            },
-            {
-              required: true,
-              message: "Please input your NID!",
-            },
-          ]}
-        >
-          <InputNumber
-            placeholder="input NID number"
-            style={{
-              width: 200,
-            }}
-          />
-        </Form.Item>
-        <Form.Item label="Gender" name="gender">
-          <Radio.Group
-            options={plainOptions}
-            onChange={onChange}
-            value={value}
-          ></Radio.Group>
-        </Form.Item>
-        <Form.Item
-          label="Date of Birth"
-          name="birthday"
-          rules={[
-            {
-              type: "date",
-              message: "The input is not valid BOD!",
-            },
-            {
-              required: true,
-              message: "Please input your BOD!",
-            },
-          ]}
-        >
-          <DatePicker format={dateFormat} />
-        </Form.Item>
-        <Form.Item label="Facebook Link" name="facebook_link">
-          <Input placeholder="input Facebook Link" />
-        </Form.Item>
-        <Form.Item label="Website Link" name="website_link">
-          <Input placeholder="input Website Link" />
-        </Form.Item>
-        <Form.Item label="Youtube Link" name="youtube_link">
-          <Input placeholder="input Youtube Link" />
-        </Form.Item>
-        <Form.Item label="Portfolio Link" name="portfolio_link">
-          <Input placeholder="input Portfolio Link" />
-        </Form.Item>
+          <Form.Item
+            label="NID Number"
+            name="nid"
+            rules={[
+              {
+                type: "number",
+                message: "The input is not valid NID!",
+              },
+              {
+                required: true,
+                message: "Please input your NID!",
+              },
+            ]}
+          >
+            <InputNumber
+              placeholder="input NID number"
+              style={{
+                width: 200,
+              }}
+            />
+          </Form.Item>
+          <Form.Item label="Gender" name="gender">
+            <Radio.Group
+              options={plainOptions}
+              onChange={onChange}
+              value={value}
+            ></Radio.Group>
+          </Form.Item>
+          <Form.Item
+            label="Date of Birth"
+            name="birthday"
+            rules={[
+              {
+                type: "date",
+                message: "The input is not valid BOD!",
+              },
+              {
+                required: true,
+                message: "Please input your BOD!",
+              },
+            ]}
+          >
+            <DatePicker format={dateFormat} />
+          </Form.Item>
+          <Form.Item label="Facebook Link" name="facebook_link">
+            <Input placeholder="input Facebook Link" />
+          </Form.Item>
+          <Form.Item label="Website Link" name="website_link">
+            <Input placeholder="input Website Link" />
+          </Form.Item>
+          <Form.Item label="Youtube Link" name="youtube_link">
+            <Input placeholder="input Youtube Link" />
+          </Form.Item>
+          <Form.Item label="Portfolio Link" name="portfolio_link">
+            <Input placeholder="input Portfolio Link" />
+          </Form.Item>
 
-        <Form.Item label="Bio" name="bio">
-          <TextArea rows={4} />
-        </Form.Item>
-        <Form.Item {...tailFormItemLayout}>
-          <Button type="primary" htmlType="submit">
-            Save
-          </Button>
-        </Form.Item>
-      </Form>
-      <Profile_adress />
-    </>
-  );
+          <Form.Item label="Bio" name="bio">
+            <TextArea rows={4} />
+          </Form.Item>
+          <Form.Item {...tailFormItemLayout}>
+            <Button type="primary" htmlType="submit">
+              Save
+            </Button>
+          </Form.Item>
+        </Form>
+        <Profile_adress />
+      </>
+    );
+  }
 };
 
 const mapStateToProps = (state) => {
@@ -350,9 +361,10 @@ const mapStateToProps = (state) => {
     get_district: state.user.get_district,
     get_division: state.user.get_division,
     get_thana: state.user.get_thana,
-    user_profile: state.user.user_profile,
+    // user_profile: state.user.user_profile,
     edit_user_profile: state.user.edit_user_profile,
     edit_phone: state.user.edit_phone,
+    auth: state.auth,
   };
 };
 

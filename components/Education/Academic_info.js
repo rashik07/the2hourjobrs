@@ -49,7 +49,9 @@ const Academic_info = ({
       year_of_passing: values["year_of_passing"].format("YYYY"),
     };
     createEducation(values);
+    form.resetFields();
     setloader(true);
+
     //       console.log('Success:', values);
   };
 
