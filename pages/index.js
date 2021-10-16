@@ -16,8 +16,12 @@ import ExperienceFilter from "components/Home/list/ExperienceFilter";
 import AgeFilter from "components/jobs/list/AgeFilter";
 import { filterJobs } from "redux/actions/jobAction";
 import { Layout, Breadcrumb, Row, Col, Divider } from "antd";
+import Link from "next/link";
 
 import { useRouter } from "next/router";
+import Notification_bar from "container/Notification_bar/Notification_bar";
+import { Button } from "antd/lib/radio";
+import Footer from "container/footer/footer";
 
 const { Content } = Layout;
 
@@ -44,6 +48,7 @@ const Jobs = ({ filterJobs }) => {
 
         <div style={{ marginTop: "64px" }}>
           <Row>
+            <Notification_bar />
             {/*1st part*/}
 
             <KeywordSearch
@@ -69,7 +74,9 @@ const Jobs = ({ filterJobs }) => {
           className="site-layout"
           style={{ backgroundColor: "white", margin: "16px 66px" }}
         >
-          <h2 style={{ color: "#773EA9",marginTop:"15px" }}>Job Categories</h2>
+          <h2 style={{ color: "#773EA9", marginTop: "15px" }}>
+            Job Categories
+          </h2>
           <Row>
             <JobCategoryFilter
               filter={filter}
@@ -78,9 +85,15 @@ const Jobs = ({ filterJobs }) => {
             />
           </Row>
           <Divider />
-          
+          <div style={{ backgroundImage: `url('/img/banner2.png')`, height: "280px",marginBottom: "15px"}}>
+            <Button className="jobpost_btn">
+              <Link href="/jobs/post">Post a Job</Link>
+            </Button>
+          </div>
         </Content>
+        
       </Layout>
+      <Footer/>
     </>
   );
 };

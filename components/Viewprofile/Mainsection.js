@@ -75,89 +75,96 @@ const Mainsection = ({
   };
 
   const employment = () => {
-    if (view_employment == "") {
-      return " ";
+    if (view_employment ) {
+      return (
+        <p>
+          <div>
+            <Divider
+              style={{ fontWeight: "bold", borderTopColor: "#F0F0F0" }}
+              orientation="left"
+            >
+              Experience
+            </Divider>
+          </div>
+          <br />
+          <ol>
+            {view_employment.map((view_employment) => (
+              <li>
+                <p>
+                  <span
+                    style={{ fontWeight: "bold", textDecoration: "underline" }}
+                  >
+                    {view_employment.designation}(
+                    {view_employment.employment_period_from} to{" "}
+                    {view_employment.employment_period_to})
+                  </span>
+                  -
+                  <span style={{ fontWeight: "bold" }}>
+                    {view_employment.company_name}
+                  </span>{" "}
+                  <br />
+                  {view_employment.department}
+                  <br />
+                  {view_employment.company_location}
+                  <br />
+                  <span
+                    style={{ fontWeight: "bold", textDecoration: "underline" }}
+                  >
+                    {" "}
+                    Duties/Responsibilities:
+                  </span>{" "}
+                  <br />
+                  {view_employment.responsibilities}
+                </p>
+              </li>
+            ))}
+          </ol>
+        </p>
+      );
     }
-    return (
-      <p>
-        <div>
-          <Divider
-            style={{ fontWeight: "bold", borderTopColor: "#F0F0F0" }}
-            orientation="left"
-          >
-            Experience
-          </Divider>
-        </div>
-        <br />
-        <ol>
-          {view_employment.map((view_employment) => (
-            <li>
-              <p>
-                <span
-                  style={{ fontWeight: "bold", textDecoration: "underline" }}
-                >
-                  {view_employment.designation}(
-                  {view_employment.employment_period_from} to{" "}
-                  {view_employment.employment_period_to})
-                </span>
-                -
-                <span style={{ fontWeight: "bold" }}>
-                  {view_employment.company_name}
-                </span>{" "}
-                <br />
-                {view_employment.department}
-                <br />
-                {view_employment.company_location}
-                <br />
-                <span
-                  style={{ fontWeight: "bold", textDecoration: "underline" }}
-                >
-                  {" "}
-                  Duties/Responsibilities:
-                </span>{" "}
-                <br />
-                {view_employment.responsibilities}
-              </p>
-            </li>
-          ))}
-        </ol>
-      </p>
-    );
+    if (view_employment == ""){
+      return "";
+    }
+    
   };
 
   const project = () => {
-    if (view_project == "") {
-      return " ";
-    }
-    return (
-      <div className="site-card-wrapper">
-        <div>
-          <Divider
-            style={{ fontWeight: "bold", borderTopColor: "#F0F0F0" }}
-            orientation="left"
-          >
-            Projects
-          </Divider>
+    if (view_project ) {
+      return (
+        <div className="site-card-wrapper">
+          <div>
+            <Divider
+              style={{ fontWeight: "bold", borderTopColor: "#F0F0F0" }}
+              orientation="left"
+            >
+              Projects
+            </Divider>
+          </div>
+          <Row gutter={16}>
+            {view_project.map((view_project) => (
+              <Col span={8} style={{ paddingBottom: "20px" }}>
+                <Card
+                  style={{ boxShadow: "2px 2px #FAFAFA" }}
+                  title={view_project.title}
+                >
+                  {view_project.description}
+                </Card>
+              </Col>
+            ))}
+          </Row>
         </div>
-        <Row gutter={16}>
-          {view_project.map((view_project) => (
-            <Col span={8} style={{ paddingBottom: "20px" }}>
-              <Card
-                style={{ boxShadow: "2px 2px #FAFAFA" }}
-                title={view_project.title}
-              >
-                {view_project.description}
-              </Card>
-            </Col>
-          ))}
-        </Row>
-      </div>
-    );
+      );
+    }
+    else if(view_project=""){
+      return "";
+    }
+  
   };
   const objective = () => {
     if (user_profile.objective == null) {
       return " ";
     }
+
     return (
       <p>
         <div>

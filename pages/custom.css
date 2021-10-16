@@ -25,11 +25,12 @@
   margin-bottom: 0%;
 }
 .ant-layout-header {
-  background: #ff3155;
+  background: #a93ea6;
   height: 65px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .ant-menu {
-  background: #ff3155;
+  background: #a93ea6;
   color: white;
 }
 .ant-menu-horizontal > .ant-menu-item a {
@@ -61,17 +62,17 @@
   margin-bottom: 0;
 }
 .job_title:hover {
-  color: #ff3155;
+  color: #A93EA6;
   text-decoration: underline;
 }
 .ant-select:not(.ant-select-customize-input) .ant-select-selector {
-  border: 0px solid #70bdf2;
-  border-bottom: 1px solid #ff3155;
+  border: 0px solid #A93EA6;
+  border-bottom: 1px solid #A93EA6;
 }
 .ant-select:not(.ant-select-customize-input) .ant-select-selector:hover {
-  border: 0px solid #70bdf2;
-  border-bottom: 1px solid #ff3155;
-  border-right: 1px solid #ff3155;
+  border: 0px solid #A93EA6;
+  border-bottom: 1px solid #A93EA6;
+  border-right: 1px solid #A93EA6;
 }
 .ant-steps {
   width: 100%;
@@ -145,17 +146,91 @@
   box-shadow: 0 0 0 2px rgb(24 144 255 20%);
 }
 .ant-menu-horizontal {
-
   border-bottom: 0px solid #f0f0f0;
   box-shadow: none;
 }
 
-.quick_link{
-  margin-bottom:15px ;
+.quick_link {
+  margin-bottom: 15px;
 }
-.quick_link a{
-  color:white;
+.quick_link a {
+  color: white;
 }
-.quick_link a:hover{
-  text-decoration:underline;
+.quick_link a:hover {
+  text-decoration: underline;
+}
+.home_category a {
+  color: #757575;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.home_category a {
+  color: #757575;
+}
+.jobpost_btn {
+  background-color: #ffc800;
+  color: #1e1e1e;
+  margin-left: 290px;
+}
+.jobpost_btn:hover {
+  background-color: #ffc800;
+  color: #ffffff;
+  margin-left: 290px;
+  
+}
+/* (A) FIXED WRAPPER */
+.hwrap {
+  overflow: hidden; /* HIDE SCROLL BAR */
+  background: #eee;
+}
+ 
+/* (B) MOVING TICKER WRAPPER */
+.hmove { display: flex; }
+
+/* (C) ITEMS - INTO A LONG HORIZONTAL ROW */
+.hitem {
+  flex-shrink: 0;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px;
+  text-align: center;
+}
+ 
+/* (D) ANIMATION - MOVE ITEMS FROM RIGHT TO LEFT */
+/* 4 ITEMS -400%, CHANGE THIS IF YOU ADD/REMOVE ITEMS */
+@keyframes tickerh {
+  0% { transform: translate3d(100%, 0, 0); }
+  100% { transform: translate3d(-400%, 0, 0); }
+}
+.hmove { animation: tickerh linear 55s infinite; }
+.hmove:hover { animation-play-state: paused; }
+
+.ant-radio-button-wrapper:first-child:last-child {
+
+  margin-top: 113px;
+  margin-left: 865px;
+  font-size: 29px;
+  height: 50px;
+  border-radius: 5px;
+  text-align: center;
+  padding-top: 7px;
+  width: 169px;
+
+}
+.ant-layout-sider-trigger {
+  background: #A93EA6;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.ant-layout-sider {
+  background: #A93EA6;
+}
+.ant-menu.ant-menu-dark, .ant-menu-dark .ant-menu-sub, .ant-menu.ant-menu-dark .ant-menu-sub {
+ 
+  background: #A93EA6;
+}
+.notifi_bar  a{
+  color: #000000;
+}
+.notifi_bar a li:hover{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }

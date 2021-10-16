@@ -6,6 +6,7 @@ import { getJobCategories } from "redux/actions/jobAction";
 import { useRouter } from "next/router";
 import { Row, Col, Divider, Button, Skeleton } from "antd";
 import actions from "redux-form/lib/actions";
+import { CaretRightOutlined } from "@ant-design/icons";
 
 const JobCategoryFilter = ({
   filter,
@@ -58,11 +59,9 @@ const JobCategoryFilter = ({
                   handleChange(JSON.stringify(subcategory));
                 }}
                 style={{ margin: "0rem 0rem" }}
+                className="home_category"
               >
-                <p>
-                  {" "}
-                  <li> {subcategory.name}</li>
-                </p>
+                <CaretRightOutlined /> <a>{subcategory.name}</a>
               </Col>
             );
           });

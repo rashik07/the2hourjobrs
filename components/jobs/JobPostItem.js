@@ -187,17 +187,16 @@ const JobPostItem = ({
     if (router.pathname === "/jobs/my_posts") {
       return (
         <>
-             {applyShow()}
-        {deleteShow()}
-        {saveShow()}
-        <Button
-          onClick={() => router.push(`/jobs/edit/${id}`)}
-          type="primary"
-          shape="round"
-         
-        >
-          Edit
-        </Button>
+          {applyShow()}
+          {deleteShow()}
+          {saveShow()}
+          <Button
+            onClick={() => router.push(`/jobs/edit/${id}`)}
+            type="primary"
+            shape="round"
+          >
+            Edit
+          </Button>
         </>
       );
     }
@@ -205,9 +204,8 @@ const JobPostItem = ({
     return (
       <>
         {applyShow()}
-      
+
         {saveShow()}
-      
 
         {/* <button
           onClick={() => router.push(`/jobs/detail/${id}`)}
@@ -225,7 +223,7 @@ const JobPostItem = ({
       </>
     );
   };
-
+  {console.log(poster)}
   return (
     <Row className="job_post">
       <Col span={24}>
@@ -238,7 +236,8 @@ const JobPostItem = ({
         <h4 style={{ color: "gray" }}>
           <UserOutlined />{" "}
           <Link href={`/Profile/Profile_details/${poster.id}`}>
-            {poster.name}
+           
+            {poster.username}
           </Link>{" "}
           <EnvironmentOutlined /> {getLocations(job.job_location)}
         </h4>
