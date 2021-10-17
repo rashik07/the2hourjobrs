@@ -1,5 +1,5 @@
 import React from "react";
-import { Select, Row, Col } from "antd";
+import { Select, Row, Col, Checkbox } from "antd";
 import { connect } from "react-redux";
 import { saveTemporayJobPost } from "redux/actions/jobAction";
 import TagInput from "components/TagInput";
@@ -118,39 +118,63 @@ const renderItem = (item, children, saveTemporayJobPost, temp_jobpost) => {
         );
 
       case "salary":
+        const negotiation_options = [true];
         return (
           <>
             <label className="form-label">Salary</label>
             <br />
+
             <Row>
+              {temp_jobpost.negotiable ? (
+                ""
+              ) : (
+                <>
+                  <Col>
+                    <input
+                      type="number"
+                      className="form-control col-5"
+                      placeholder="To"
+                      onChange={(e) =>
+                        saveTemporayJobPost({
+                          min_salary: temp_jobpost.min_salary,
+                          max_salary: e.target.value,
+                        })
+                      }
+                      defaultValue={temp_jobpost.max_salary}
+                    />
+                  </Col>
+
+                  <Col> _ </Col>
+                  <Col>
+                    <input
+                      type="number"
+                      className="form-control col-5"
+                      placeholder="From"
+                      onChange={(e) =>
+                        saveTemporayJobPost({
+                          min_salary: e.target.value,
+                          max_salary: temp_jobpost.max_salary,
+                        })
+                      }
+                      defaultValue={temp_jobpost.min_salary}
+                    />
+                  </Col>
+                </>
+              )}
+
               <Col>
-                <input
-                  type="number"
-                  className="form-control col-5"
-                  placeholder="From"
-                  onChange={(e) =>
-                    saveTemporayJobPost({
-                      min_salary: e.target.value,
-                      max_salary: temp_jobpost.max_salary,
-                    })
-                  }
-                  defaultValue={temp_jobpost.min_salary}
-                />
-              </Col>
-              <div className="col-1 mt-1">&mdash;</div>
-              <Col>
-                <input
-                  type="number"
-                  className="form-control col-5"
-                  placeholder="To"
-                  onChange={(e) =>
-                    saveTemporayJobPost({
-                      min_salary: temp_jobpost.min_salary,
-                      max_salary: e.target.value,
-                    })
-                  }
-                  defaultValue={temp_jobpost.max_salary}
-                />
+                <Checkbox
+                  checked={temp_jobpost.negotiable}
+                  onChange={(e) => {
+                    if (e.target.checked) {
+                      saveTemporayJobPost({ negotiable: true });
+                    } else {
+                      saveTemporayJobPost({ negotiable: false });
+                    }
+                  }}
+                >
+                  Negotiable
+                </Checkbox>
               </Col>
             </Row>
           </>
@@ -161,7 +185,7 @@ const renderItem = (item, children, saveTemporayJobPost, temp_jobpost) => {
           <>
             <label className="form-label">Years of Experience</label>
             <br />
-            <Row style={{paddingBottom:"0px"}}>
+            <Row style={{ paddingBottom: "0px" }}>
               <Col>
                 <input
                   type="number"

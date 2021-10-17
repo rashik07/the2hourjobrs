@@ -42,7 +42,7 @@ const AnnouncementDetails = ({ getSpecificAnnouncement, announcment }) => {
     if (announcment.image.length > 0) {
       return announcment.image.map((announcment) => {
         if (announcment.cover) {
-          return <Image src={"http://127.0.0.1:8000" + announcment.photo} />;
+          return <Image src={announcment.photo} />;
         }
       });
     } else {
@@ -87,7 +87,7 @@ const AnnouncementDetails = ({ getSpecificAnnouncement, announcment }) => {
                         xl={8}
                         style={{ padding: "3px" }}
                       >
-                        <Image src={"http://127.0.0.1:8000" + imagee.photo} />
+                        <Image src={imagee.photo} />
                       </Col>
                     );
                   }

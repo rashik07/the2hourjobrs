@@ -34,7 +34,7 @@ const AllAnnouncements = ({
     if (announcments.image) {
       return announcments.image.map((announcment) => {
         if (announcment.cover) {
-          return <Image src={"http://127.0.0.1:8000" + announcment.photo} />;
+          return <Image src={announcment.photo} />;
         }
       });
     } else {
@@ -109,7 +109,11 @@ const AllAnnouncements = ({
                           "/announcement/myannouncement/" + announcment.id + "/"
                         }
                       >
-                        <Button type="primary" block style={{marginBottom:"15px"}}>
+                        <Button
+                          type="primary"
+                          block
+                          style={{ marginBottom: "15px" }}
+                        >
                           Edit
                         </Button>
                       </Link>
@@ -118,7 +122,7 @@ const AllAnnouncements = ({
                         onClick={() =>
                           archiveAnnouncement(announcment, true, setUpdatelist)
                         }
-                        style={{backgroundColor:"black",color:"white"}}
+                        style={{ backgroundColor: "black", color: "white" }}
                       >
                         Move to Archive
                       </Button>
@@ -193,7 +197,11 @@ const AllAnnouncements = ({
                           "/announcement/myannouncement/" + announcment.id + "/"
                         }
                       >
-                        <Button type="primary" block style={{marginBottom:"15px"}}>
+                        <Button
+                          type="primary"
+                          block
+                          style={{ marginBottom: "15px" }}
+                        >
                           Edit
                         </Button>
                       </Link>
@@ -202,7 +210,7 @@ const AllAnnouncements = ({
                         onClick={() =>
                           archiveAnnouncement(announcment, false, setUpdatelist)
                         }
-                        style={{backgroundColor:"black",color:"white"}}
+                        style={{ backgroundColor: "black", color: "white" }}
                       >
                         Move to Active Archives
                       </Button>

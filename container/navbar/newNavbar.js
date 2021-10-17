@@ -32,31 +32,28 @@ const getItems = (isSignedIn, signOut, user_profile) => {
   const { Header, Content, Footer } = Layout;
 
   const image = () => {
-    if (user_profile.image === null) {
+    if (
+      user_profile.image ==
+      `http://127.0.0.1:8000/api/v1/user/me/?user=${user_profile.id}`
+    ) {
       return (
-        console.log("get image"),
-        (
-          <Link href="/Profile">
-            <a>
-              {" "}
-              {/* <UserOutlined />  */}
-              {"  "}
-              {user_profile.username}
-            </a>
-          </Link>
-        )
+        <Link href="/Profile">
+          <a>
+            <UserOutlined />
+
+            {user_profile.username}
+          </a>
+        </Link>
       );
     }
     return (
       <Link href="/Profile">
         <a>
-          {" "}
-          {/* <UserOutlined />  */}
           <Image
             preview={false}
             width={35}
             height={35}
-            src={"http://127.0.0.1:8000" + user_profile.image}
+            src={user_profile.image}
             style={{ marginTop: "10px", borderRadius: "50%" }}
           />
           {"  "}
@@ -132,14 +129,17 @@ const navbar = ({
         overflowY: "scroll",
         height: "200px",
         width: "300px",
-        boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
-        
+        boxShadow:
+          "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
       }}
     >
-      {allnotificationList.map((notification, index) => (      
-        <li >
+      {allnotificationList.map((notification, index) => (
+        <li>
           {/* {console.log(notification)} */}
-          <Link href={"/jobs/detail/" + notification["description"]} style={{color:"white"}}>
+          <Link
+            href={"/jobs/detail/" + notification["description"]}
+            style={{ color: "white" }}
+          >
             {notification["verb"]}
           </Link>{" "}
         </li>
@@ -169,7 +169,7 @@ const navbar = ({
           </a>
         </Col>
         <Col xs={24} sm={24} md={18} lg={18} xl={18}>
-          <Button className="jobpost_btn" >
+          <Button className="jobpost_btn">
             <Link href="/jobs/post">Post a Job</Link>
           </Button>
           <Menu
