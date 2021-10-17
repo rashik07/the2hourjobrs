@@ -33,6 +33,7 @@ const JobPostItem = ({
   saveJob,
   deleteJob,
   getSelfPostedJobs,
+
   show_save_button,
   self_posted_jobs,
   getAppliedJobsPerson,
@@ -85,18 +86,21 @@ const JobPostItem = ({
   const applyJobBtnClick = () => {
     if (!isSignedIn) {
       alert("You must log in to access this feature");
-      return;
-    }
-
-    applyJob(id, userid, appliedStatus, setAppliedStatus);
+      
+    }else{
+    console.log(userid);
+    applyJob(id, userid, appliedStatus,setAppliedStatus);
     alert("successfully");
+    }
   };
+
   const saveJobBtnClick = () => {
     if (!isSignedIn) {
       alert("You must log in to access this feature");
-      return;
-    }
+      
+    }else{
     saveJob(id, userid, savedStatus, setSavedStatus, applied_saved_id);
+    }
   };
   const deleteJobBtnClick = () => {
     const { confirm } = Modal;
@@ -134,6 +138,7 @@ const JobPostItem = ({
   };
 
   const applyShow = () => {
+    
     if (appliedStatus) {
       return (
         <Button
@@ -223,7 +228,9 @@ const JobPostItem = ({
       </>
     );
   };
-  {console.log(poster)}
+  // {
+  //   console.log(poster);
+  // }
   return (
     <Row className="job_post">
       <Col span={24}>
@@ -236,7 +243,6 @@ const JobPostItem = ({
         <h4 style={{ color: "gray" }}>
           <UserOutlined />{" "}
           <Link href={`/Profile/Profile_details/${poster.id}`}>
-           
             {poster.username}
           </Link>{" "}
           <EnvironmentOutlined /> {getLocations(job.job_location)}
@@ -264,6 +270,7 @@ const JobPostItem = ({
 
 const mapStateToProps = (state) => {
   return {
+    
     userid: state.auth.id,
     isSignedIn: state.auth.isSignedIn,
     self_posted_jobs: Object.values(state.job.self_posted_jobs),

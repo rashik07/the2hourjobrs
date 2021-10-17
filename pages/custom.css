@@ -171,11 +171,13 @@
   background-color: #ffc800;
   color: #1e1e1e;
   margin-left: 290px;
+  border:1px solid #ffffff;
 }
 .jobpost_btn:hover {
-  background-color: #ffc800;
+  background-color: #757575;
   color: #ffffff;
   margin-left: 290px;
+  border:1px solid #ffffff;
   
 }
 /* (A) FIXED WRAPPER */
@@ -215,6 +217,11 @@
   padding-top: 7px;
   width: 169px;
 }
+.ant-radio-button-wrapper:first-child:last-child:hover {
+ 
+  background-color: #757575;
+  color: #ffffff;
+}
 .ant-layout-sider-trigger {
   background: #A93EA6;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -226,11 +233,22 @@
  
   background: #A93EA6;
 }
-.notifi_bar  a{
-  color: #000000;
+.notifi_bar a{
+  color: black;
 }
-.notifi_bar a li:hover{
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+.notifi_bar a:hover{
+  color: white;
+}
+
+.notifi_bar{
+  border-bottom: 1px solid rgb(236, 235, 235);
+  padding: 5px;
+  margin-bottom: 2px;
+}
+.notifi_bar:hover{
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+  background-color: #773ea9;
+  border-radius: 3px;
 }
 .social_media_btn{
   display: block;
