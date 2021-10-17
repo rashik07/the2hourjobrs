@@ -16,6 +16,7 @@ import {
   Tooltip,
   InputNumber,
   Skeleton,
+  Checkbox
 } from "antd";
 import { connect } from "react-redux";
 import Link from "next/link";
@@ -25,7 +26,7 @@ import {
   getThana,
   updateProfile,
   editUserProfile,
-  editPhone,
+  updatePhone,
 } from "@/redux/actions/userAction";
 import { UploadOutlined, EyeOutlined, ContactsFilled } from "@ant-design/icons";
 import { useRouter } from "next/router";
@@ -36,7 +37,7 @@ const Profile_info = ({
   updateProfile,
   // user_profile,
   editUserProfile,
-  editPhone,
+  updatePhone,
   edit_phone,
   auth,
 }) => {
@@ -59,12 +60,18 @@ const Profile_info = ({
         } else {
           result.birthday = moment(result.birthday, dateFormat);
         }
+        // if (result.facebook_link == "null") {
+        //   " "// result.birthday = moment("2015/01/01", dateFormat);
+        // } else {
+        //   result.facebook_link = result.facebook_link;
+        // }
         setuser_profile(result);
-        console.log(user_profile);
+        //  console.log(user_profile);
         setloading(false);
       });
     }
   }, [loader]);
+  console.log(edit_phone);
 
   const onFinish = (values) => {
     const formData = new FormData();
@@ -95,9 +102,9 @@ const Profile_info = ({
     }
     editUserProfile(formData, user_profile.id);
     setloader(true);
-   // editPhone(values, user_profile.id);
+    updatePhone(values, user_profile.id);
     alert("successfully saved");
-    // console.log(values)
+      console.log(values);
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
@@ -281,7 +288,17 @@ const Profile_info = ({
                 marginRight: "3px",
               }}
             />
-            <Button type="primary">Verify</Button>
+            {/* <Button type="primary">Verify</Button> */}
+          </Form.Item>
+          <Form.Item
+            name="hide_phone"
+            valuePropName="checked"
+            wrapperCol={{
+              offset: 4,
+              span: 12,
+            }}
+          >
+            <Checkbox>Hide phone no</Checkbox>
           </Form.Item>
 
           <Form.Item
@@ -374,5 +391,5 @@ export default connect(mapStateToProps, {
   getDistrict,
   getDivision,
   getThana,
-  editPhone,
+  updatePhone,
 })(Profile_info);

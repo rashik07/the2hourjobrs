@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { updateProfile } from "@/redux/actions/userAction";
+import { updatePhone } from "@/redux/actions/userAction";
 import { Layout, Row, Col, Image, Typography, Space } from "antd";
 import { PhoneFilled, HomeFilled } from "@ant-design/icons";
 
-const Topsection = ({ updateProfile, user_profile }) => {
+const Topsection = ({ updateProfile, user_profile ,updatePhone,edit_phone}) => {
   const { Text, Link, Title } = Typography;
   const { Content } = Layout;
 
-  //console.log(user_profile);
+
   return (
     <div>
       <Row justify="center" align="top">
@@ -58,5 +58,17 @@ const Topsection = ({ updateProfile, user_profile }) => {
     </div>
   );
 };
+const mapStateToProps = (state) => {
+  return {
+ 
+    edit_phone: state.user.edit_phone,
+    
+  };
+};
 
-export default Topsection;
+
+export default connect(mapStateToProps, {
+
+  updatePhone
+})(Topsection);
+

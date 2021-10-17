@@ -15,13 +15,13 @@ import JobIndustryFilter from "components/Home/list/JobIndustryFilter";
 import ExperienceFilter from "components/Home/list/ExperienceFilter";
 import AgeFilter from "components/jobs/list/AgeFilter";
 import { filterJobs } from "redux/actions/jobAction";
-import { Layout, Breadcrumb, Row, Col, Divider } from "antd";
+import { Layout, Breadcrumb, Row, Col, Divider,BackTop } from "antd";
 import Link from "next/link";
-
 import { useRouter } from "next/router";
 import Notification_bar from "container/Notification_bar/Notification_bar";
 import { Button } from "antd/lib/radio";
 import Footer from "container/footer/footer";
+import { UpOutlined } from "@ant-design/icons";
 
 const { Content } = Layout;
 
@@ -37,6 +37,16 @@ const Jobs = ({ filterJobs }) => {
       setShowFilterJobs(false);
     }
   }, [filter]);
+  const style = {
+    height: 40,
+    width: 40,
+    lineHeight: '40px',
+    borderRadius: 4,
+    backgroundColor: '#773ea9',
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: 14,
+  };
 
   return (
     <>
@@ -85,15 +95,23 @@ const Jobs = ({ filterJobs }) => {
             />
           </Row>
           <Divider />
-          <div style={{ backgroundImage: `url('/img/banner2.png')`, height: "280px",marginBottom: "15px"}}>
+          <div
+            style={{
+              backgroundImage: `url('/img/banner2.png')`,
+              height: "280px",
+              marginBottom: "15px",
+            }}
+          >
             <Button className="jobpost_btn">
               <Link href="/jobs/post">Post a Job</Link>
             </Button>
           </div>
         </Content>
-        
+        <Footer />
+        <BackTop>
+          <div style={style}><UpOutlined /></div>
+        </BackTop>
       </Layout>
-      <Footer/>
     </>
   );
 };

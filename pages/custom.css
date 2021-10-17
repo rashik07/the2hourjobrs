@@ -206,8 +206,7 @@
 .hmove:hover { animation-play-state: paused; }
 
 .ant-radio-button-wrapper:first-child:last-child {
-
-  margin-top: 113px;
+  margin-top: 150px;
   margin-left: 865px;
   font-size: 29px;
   height: 50px;
@@ -215,7 +214,6 @@
   text-align: center;
   padding-top: 7px;
   width: 169px;
-
 }
 .ant-layout-sider-trigger {
   background: #A93EA6;
@@ -233,4 +231,17 @@
 }
 .notifi_bar a li:hover{
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.social_media_btn{
+  display: block;
+  margin-left: 80px;
+  margin-right: auto;
+}
+.social_media_btn button{
+  padding: 12px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+footer{
+  padding: 40px 0px;
+  
 }

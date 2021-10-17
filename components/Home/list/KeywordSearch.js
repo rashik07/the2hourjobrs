@@ -4,7 +4,6 @@ import { SearchOutlined } from "@ant-design/icons";
 import { connect } from "react-redux";
 import { SetfilterAction } from "../../../redux/actions/jobAction";
 import { useRouter } from "next/router";
-import Image from 'next/image';
 
 const KeywordSearch = ({
   filter,

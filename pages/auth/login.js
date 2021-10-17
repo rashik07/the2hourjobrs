@@ -128,7 +128,7 @@ const Login = ({
                 </Link>
                 {/* <button onClick={() => handleOnClick(facebookProvider)}>facebook</button> */}
               </div>
-              <div className="d-grid gap-2 d-flex " style={{ height: "50px" }}>
+              <div className="d-grid gap-2 d-flex social_media_btn" style={{ height: "50px",marginTop:"10px"}}>
                 <GoogleLogin
                   clientId={REACT_APP_GOOGLE_CLIENT_ID}
                   buttonText="Join with Google"

@@ -57,7 +57,7 @@ const LocationFilter = ({
         <Col
           span={6}
           style={{
-            backgroundColor: "#773EA9",
+            backgroundColor: "#A93EA6",
             padding: "10px 33px",
           }}
         >
