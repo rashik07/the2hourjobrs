@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Table, Modal, Button, Card, Row, Col, Divider } from "antd";
+import { updatePhone } from "@/redux/actions/userAction";
+import { connect } from "react-redux";
 
 const Mainsection = ({
   user_profile,
   view_education,
   view_employment,
   view_project,
+  updatePhone,
+  edit_phone,
 }) => {
+ 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const showModal = () => {
@@ -75,7 +80,7 @@ const Mainsection = ({
   };
 
   const employment = () => {
-    if (view_employment ) {
+    if (view_employment) {
       return (
         <p>
           <div>
@@ -122,14 +127,13 @@ const Mainsection = ({
         </p>
       );
     }
-    if (view_employment == ""){
+    if (view_employment == "") {
       return "";
     }
-    
   };
 
   const project = () => {
-    if (view_project ) {
+    if (view_project) {
       return (
         <div className="site-card-wrapper">
           <div>
@@ -154,11 +158,9 @@ const Mainsection = ({
           </Row>
         </div>
       );
-    }
-    else if(view_project=""){
+    } else if ((view_project = "")) {
       return "";
     }
-  
   };
   const objective = () => {
     if (user_profile.objective == null) {
@@ -180,6 +182,13 @@ const Mainsection = ({
       </p>
     );
   };
+  // const phone = () => {
+  //   if (edit_phone.hide_phone == true) {
+  //     return "";
+  //   } else {
+  //     return ;
+  //   }
+  // };
 
   return (
     <div>
@@ -195,7 +204,6 @@ const Mainsection = ({
           display: "block",
           marginRight: "auto",
           marginLeft: "auto",
-          
         }}
       >
         Contact With Me
@@ -208,10 +216,20 @@ const Mainsection = ({
         footer={null}
       >
         <p><a href={`tel:${user_profile.phone}`}>{user_profile.phone}</a></p>
-        <p><a href={`mailto:${user_profile.email}`}>{user_profile.email}</a></p>
+        <p>
+          <a href={`mailto:${user_profile.email}`}>{user_profile.email}</a>
+        </p>
       </Modal>
     </div>
   );
 };
+const mapStateToProps = (state) => {
+  return {
+    edit_phone: state.user.edit_phone,
+  };
+};
 
-export default Mainsection;
+export default connect(mapStateToProps, {
+  updatePhone,
+})(Mainsection);
+//export default Mainsection;

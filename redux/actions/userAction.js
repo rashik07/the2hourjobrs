@@ -33,7 +33,7 @@ export const updateProfile = () => async (dispatch) => {
     console.log(error.response);
   }
 };
-export const editPhone = (values, id) => async (dispatch) => {
+export const updatePhone = (values, id) => async (dispatch) => {
   try {
     const response = await backend.patch(
       `/v1/user/signup/${id}/`,
