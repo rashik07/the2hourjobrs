@@ -49,8 +49,6 @@ const PopupDetails = ({ job, getAppliedJobsPerson, applied_jobs_person }) => {
         <button
           onClick={() => router.push(`/jobs/detail/${job.id}`)}
           className="btn button-home mt-2 rounded"
-      
-          
         >
           Detail
         </button>
@@ -91,7 +89,13 @@ const PopupDetails = ({ job, getAppliedJobsPerson, applied_jobs_person }) => {
                 <h4>Salary : </h4>
               </Col>
               <Col span={12}>
-                {job.min_salary} - {job.max_salary} taka
+                {job.negotiable ? (
+                  "Negotiable"
+                ) : (
+                  <>
+                    {job.min_salary} - {job.max_salary} taka
+                  </>
+                )}
               </Col>
             </Row>
             <Row>

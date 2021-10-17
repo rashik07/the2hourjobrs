@@ -35,7 +35,7 @@ const renderDeadline = (date) => {
   );
 };
 
-const renderSalary = (min, max) => {
+const renderSalary = (min, max, negotiable) => {
   let salary = "";
 
   if (min && max) {
@@ -47,7 +47,8 @@ const renderSalary = (min, max) => {
 
   return (
     <Descriptions.Item label="Salary" labelStyle={{ fontWeight: 700 }}>
-      {salary}
+      {/* {salary} */}
+      {negotiable ? "Negotiable" : <>{salary}</>}
     </Descriptions.Item>
   );
 };
@@ -164,7 +165,11 @@ const JobDetail = ({
             <Descriptions.Item label="Vacancy" labelStyle={labelStyle}>
               {temp_job.vacancy}
             </Descriptions.Item>
-            {renderSalary(temp_job.min_salary, temp_job.max_salary)}
+            {renderSalary(
+              temp_job.min_salary,
+              temp_job.max_salary,
+              temp_job.negotiable
+            )}
             {renderDeadline(temp_job.deadline)}
             {renderJobLocation(
               temp_job.job_location_inside_dhaka,

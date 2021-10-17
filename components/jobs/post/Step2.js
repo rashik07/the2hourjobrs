@@ -6,15 +6,17 @@ import { Select, Row, Col, Space } from "antd";
 const Step2 = ({ postStep, setPostStep, temp_jobpost }) => {
   console.log(temp_jobpost);
   const onSubmit = () => {
-    const { min_salary, max_salary, job_description } = temp_jobpost;
-
-    if (!min_salary) {
-      alert("You must enter minimum salary");
-      return;
-    }
-    if (min_salary < max_salary) {
-      alert("Max salary should be greater than min salary");
-      return;
+    const { min_salary, max_salary, job_description, negotiable } =
+      temp_jobpost;
+    if (!negotiable) {
+      if (!min_salary) {
+        alert("You must enter minimum salary");
+        return;
+      }
+      if (min_salary < max_salary) {
+        alert("Max salary should be greater than min salary");
+        return;
+      }
     }
     if (!job_description) {
       alert("You must write description");
