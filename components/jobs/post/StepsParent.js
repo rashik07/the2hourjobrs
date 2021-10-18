@@ -382,6 +382,7 @@ const renderCategories = (categories, temp_jobpost, setValue) => {
         </label>
         <br />
         <Select
+         showSearch
           placeholder="Select Category"
           onChange={(value) => setValue({ category: JSON.parse(value) })}
           defaultValue={JSON.stringify(temp_jobpost.category)}

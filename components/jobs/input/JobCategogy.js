@@ -35,12 +35,13 @@ const JobCategogy = ({
 
   return (
     <Select
+      showSearch
       placeholder="Select Category"
       className="filtter-items"
       onChange={setValue}
       onClear={onClear}
       allowClear
-      
+     
     >
       {getOptions(categories)}
     </Select>

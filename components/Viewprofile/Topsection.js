@@ -13,8 +13,7 @@ const Topsection = ({ updateProfile, user_profile ,updatePhone,edit_phone}) => {
     <div>
       <Row justify="center" align="top">
         <Col span={4}>
-          {user_profile.image !=
-          `http://127.0.0.1:8000/api/v1/user/other_users/${user_profile.id}/` ? (
+          {user_profile.image  ? (
             <Image
               shape="circle"
               width={100}

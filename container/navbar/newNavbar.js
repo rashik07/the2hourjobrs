@@ -30,11 +30,11 @@ const { SubMenu } = Menu;
 
 const getItems = (isSignedIn, signOut, user_profile) => {
   const { Header, Content, Footer } = Layout;
+  console.log(user_profile);
 
   const image = () => {
     if (
-      user_profile.image ==
-      `http://127.0.0.1:8000/api/v1/user/me/?user=${user_profile.id}`
+      !user_profile.image
     ) {
       return (
         <Link href="/Profile">
@@ -69,14 +69,15 @@ const getItems = (isSignedIn, signOut, user_profile) => {
         <Menu.Item key="setting:12">{image()}</Menu.Item>
 
         <Menu.Item key="setting:13">
-          <a
-            href="#"
-            onClick={() => {
-              signOut();
-            }}
-          >
-            Logout
-          </a>
+          <Link href="/jobs/list">
+            <a
+              onClick={() => {
+                signOut();
+              }}
+            >
+              Logout
+            </a>
+          </Link>
         </Menu.Item>
       </>
     );
@@ -112,6 +113,7 @@ const navbar = ({
   useEffect(() => {
     getAllNotification();
     getAllUnreadNotification();
+    updateProfile();
   }, []);
   const data = [
     "Racing car sprays burning fuel into crowd.",
@@ -123,18 +125,17 @@ const navbar = ({
 
   const notification = (
     <Row
-      
       style={{
         backgroundColor: "white",
         overflowY: "scroll",
         height: "200px",
         width: "400px",
-        boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+        boxShadow:
+          "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
         padding: "5px",
-        
       }}
     >
-      {allnotificationList.map((notification, index) => (      
+      {allnotificationList.map((notification, index) => (
         <Col span={24} className="notifi_bar">
           {/* {console.log(notification)} */}
           <Link
@@ -147,9 +148,7 @@ const navbar = ({
       ))}
     </Row>
   );
-  useEffect(() => {
-    updateProfile();
-  }, []);
+  
   // const createPost=()=>{
   //   if (!isSignedIn) {
   //     alert("You must log in to access this feature");

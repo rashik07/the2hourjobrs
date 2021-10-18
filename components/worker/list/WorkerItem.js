@@ -62,8 +62,8 @@ const renderButtons = (
 };
 
 const WorkerItem = ({ worker, saveWorker, isSignedIn }) => {
-  // console.log(worker);
-  const { id, name, phone, email, saved_user_instance_id, image } = worker;
+   console.log(worker);
+  const { id, name,username, phone, email, saved_user_instance_id, image } = worker;
 
   const router = useRouter();
 
@@ -79,7 +79,7 @@ const WorkerItem = ({ worker, saveWorker, isSignedIn }) => {
     <>
       <Row className="job_post">
         <Col span={4}>
-          {image != "http://127.0.0.1:8000/api/v1/user/other_users/" ? (
+          {image  ? (
             <Image
               shape="circle"
               width={100}
@@ -113,7 +113,7 @@ const WorkerItem = ({ worker, saveWorker, isSignedIn }) => {
           )}
           <h4 style={{ color: "gray" }}>
             <UserOutlined />{" "}
-            <Link href={`/Profile/Profile_details/${id}`}>{name}</Link>{" "}
+            <Link href={`/Profile/Profile_details/${id}`}>{username}</Link>{" "}
             {/* <EnvironmentOutlined /> {getLocations(job.job_location)} */}
           </h4>
           <p style={{ marginTop: "1rem", marginBottom: "1rem" }}>

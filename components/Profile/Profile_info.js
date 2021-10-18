@@ -60,18 +60,14 @@ const Profile_info = ({
         } else {
           result.birthday = moment(result.birthday, dateFormat);
         }
-        // if (result.facebook_link == "null") {
-        //   " "// result.birthday = moment("2015/01/01", dateFormat);
-        // } else {
-        //   result.facebook_link = result.facebook_link;
-        // }
+      
         setuser_profile(result);
-        //  console.log(user_profile);
+          console.log(result);
         setloading(false);
       });
     }
   }, [loader]);
-  console.log(edit_phone);
+ // console.log(edit_phone);
 
   const onFinish = (values) => {
     const formData = new FormData();
@@ -84,13 +80,43 @@ const Profile_info = ({
     //formData.append("phone", values.phone);
     formData.append("nid", values.nid);
     formData.append("gender", values.gender);
+    if (typeof values.facebook_link === "null"||  values.facebook_link === null) {
+    
+    } else {
+
     formData.append("facebook_link", values.facebook_link);
+    }
+    if (typeof values.bio === "null"||  values.bio === null) {
+    
+    } else {
+
+      formData.append("bio", values.bio);
+    }
+    if (typeof values.youtube_link === "null"||  values.youtube_link === null) {
+    
+    } else {
+
+      formData.append("youtube_link", values.youtube_link);
+    }
+    if (typeof values.website_link === "null"||  values.website_link === null) {
+    
+    } else {
+
+      formData.append("website_link", values.website_link);
+    }
+    if (typeof values.portfolio_link === "null"||  values.portfolio_link === null) {
+    
+    } else {
+
+      formData.append("portfolio_link", values.portfolio_link);
+    }
+
 
     formData.append("birthday", values.birthday);
-    formData.append("bio", values.bio);
-    formData.append("youtube_link", values.youtube_link);
-    formData.append("website_link", values.website_link);
-    formData.append("portfolio_link", values.portfolio_link);
+    
+   
+  
+    
 
     if (typeof values.photo === "undefined") {
     } else {
