@@ -26,7 +26,7 @@ class AllAnnouncements extends Component {
     if (announcment.image.length > 0) {
       return announcment.image.map((announcment) => {
         if (announcment.cover) {
-          return <Image src={"http://127.0.0.1:8000" + announcment.photo} />;
+          return <Image src={announcment.photo} />;
         }
       });
     } else {
@@ -97,11 +97,20 @@ class AllAnnouncements extends Component {
                   <Row>
                     <Col span={18} offset={3}>
                       <Link href={"/announcement/" + announcment.id + "/"}>
-                        <Button type="primary" block style={{marginBottom:"15px"}}>
+                        <Button
+                          type="primary"
+                          block
+                          style={{ marginBottom: "15px" }}
+                        >
                           View
                         </Button>
                       </Link>
-                      <Button block style={{backgroundColor:"black",color:"white"}}>Save</Button>
+                      <Button
+                        block
+                        style={{ backgroundColor: "black", color: "white" }}
+                      >
+                        Save
+                      </Button>
                     </Col>
                   </Row>
                 </Col>
@@ -181,11 +190,20 @@ class AllAnnouncements extends Component {
                           "/"
                         }
                       >
-                        <Button type="primary" block style={{marginBottom:"15px"}}>
+                        <Button
+                          type="primary"
+                          block
+                          style={{ marginBottom: "15px" }}
+                        >
                           View
                         </Button>
                       </Link>
-                      <Button block style={{backgroundColor:"black",color:"white"}}>Remove</Button>
+                      <Button
+                        block
+                        style={{ backgroundColor: "black", color: "white" }}
+                      >
+                        Remove
+                      </Button>
                     </Col>
                   </Row>
                 </Col>

@@ -21,6 +21,7 @@ const INITIAL_STATE = {
     max_experience: "",
     education: [],
     gender: [],
+    negotiable: false,
   },
   education: [],
   location: [],
