@@ -4,9 +4,9 @@ import { connect } from "react-redux";
 import { getAllJobs } from "redux/actions/jobAction";
 import JobPostItem from "../JobPostItem";
 
-const JobList = ({ getAllJobs, all_jobs, filtered_jobs, showFilterJobs }) => {
+const JobList = ({ getAllJobs, all_jobs, filtered_jobs, showFilterJobs, auth}) => {
   useEffect(() => {
-    getAllJobs();
+    getAllJobs(auth.isSignedIn);
   }, []);
 
   if (showFilterJobs) {
@@ -27,6 +27,7 @@ const mapStateToProps = (state) => {
   return {
     all_jobs: Object.values(state.job.all_jobs),
     filtered_jobs: state.job.filtered_jobs,
+    auth: state.auth,
   };
 };
 

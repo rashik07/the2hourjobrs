@@ -125,26 +125,27 @@ const navbar = ({
   ];
 
   const notification = (
-    <ul
-      className="notifi_bar"
+    <Row
+      
       style={{
         backgroundColor: "white",
         overflowY: "scroll",
         height: "200px",
-        width: "300px",
+        width: "400px",
         boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+        padding: "5px",
         
       }}
     >
       {allnotificationList.map((notification, index) => (      
-        <li >
+        <Col span={24} className="notifi_bar">
           {/* {console.log(notification)} */}
           <Link href={"/jobs/detail/" + notification["description"]} style={{color:"white"}}>
             {notification["verb"]}
           </Link>{" "}
-        </li>
+        </Col>
       ))}
-    </ul>
+    </Row>
   );
   useEffect(() => {
     updateProfile();

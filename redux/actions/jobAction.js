@@ -53,9 +53,14 @@ export const getIndustries = () => async (dispatch) => {
   }
 };
 
-export const getAllJobs = () => async (dispatch) => {
+export const getAllJobs = (logged_in) => async (dispatch) => {
   try {
-    const response = await backend.get("v1/jobpost/data/");
+    console.log(logged_in);
+    if(logged_in){
+      const response = await backend.get("v1/jobpost/data/",getConfig());
+    }else{
+      const response = await backend.get("v1/jobpost/data/");
+    }
 
     dispatch({ type: types.GET_ALL_JOB, payload: response.data });
   } catch (error) {
@@ -339,9 +344,10 @@ export const updateJob = (data, router) => async (dispatch) => {
 };
 
 export const applyJob =
-  (job_id, userid, setAppliedStatus) => async (dispatch) => {
+  (job_id, userid,appliedStatus,setAppliedStatus) => async (dispatch) => {
     try {
       const formData = { applied: true, job: job_id, user: userid };
+     // console.log(applied);
 
       const response = await backend.post(
         "v1/jobpost/user_apply_save_jobs/",
