@@ -123,12 +123,16 @@ const JobDetail = ({
   getAppliedJobsPerson,
   applied_jobs_person,
   userid,
+  isSignedIn,
 }) => {
   // const { Paragraph, Title } = Typography;
   const [user, setUser] = useState(null);
   //  console.log(user);
   useEffect(() => {
-    getAppliedJobsPerson(temp_job).then((u) => setUser(u));
+    if(isSignedIn){
+      getAppliedJobsPerson(temp_job).then((u) => setUser(u));
+    }
+    
   }, [temp_job]);
 
   console.log(temp_job);
@@ -258,6 +262,7 @@ const mapStateToProps = (state) => {
     education: state.job.education,
     applied_jobs_person: state.job.applied_jobs_person,
     userid: state.auth.id,
+    isSignedIn: state.auth.isSignedIn,
   };
 };
 export default connect(mapStateToProps, {

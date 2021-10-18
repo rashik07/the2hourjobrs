@@ -1,12 +1,23 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import _ from "lodash";
 import { connect } from "react-redux";
-import { getAllJobs } from "redux/actions/jobAction";
+import { getAllJobs, getAllJobs_withoutlogin } from "redux/actions/jobAction";
 import JobPostItem from "../JobPostItem";
 
-const JobList = ({ getAllJobs, all_jobs, filtered_jobs, showFilterJobs, auth}) => {
+const JobList = ({ getAllJobs,getAllJobs_withoutlogin, filtered_jobs, showFilterJobs, auth}) => {
+  const [all_jobs, setall_jobs] = useState();
   useEffect(() => {
-    getAllJobs(auth.isSignedIn);
+    if(auth.isSignedIn){
+      getAllJobs().then(result => {
+        setall_jobs(result);
+      })
+    }else{
+      getAllJobs_withoutlogin().then(result => {
+        setall_jobs(result);
+      })
+    }
+    
+    
   }, []);
 
   if (showFilterJobs) {
@@ -25,10 +36,10 @@ const JobList = ({ getAllJobs, all_jobs, filtered_jobs, showFilterJobs, auth}) =
 
 const mapStateToProps = (state) => {
   return {
-    all_jobs: Object.values(state.job.all_jobs),
+    // all_jobs: Object.values(state.job.all_jobs),
     filtered_jobs: state.job.filtered_jobs,
     auth: state.auth,
   };
 };
 
-export default connect(mapStateToProps, { getAllJobs })(JobList);
+export default connect(mapStateToProps, { getAllJobs,getAllJobs_withoutlogin })(JobList);

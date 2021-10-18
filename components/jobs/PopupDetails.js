@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import { getAppliedJobsPerson } from "@/redux/actions/jobAction";
 
-const PopupDetails = ({ job, getAppliedJobsPerson, applied_jobs_person }) => {
+const PopupDetails = ({ job, getAppliedJobsPerson, applied_jobs_person,isSignedIn }) => {
   const router = useRouter();
   const [visible, setVisible] = useState(false);
   //  console.log(job);
@@ -19,7 +19,10 @@ const PopupDetails = ({ job, getAppliedJobsPerson, applied_jobs_person }) => {
     setVisible(false);
   };
   useEffect(() => {
-    getAppliedJobsPerson(job);
+    if(isSignedIn){
+      getAppliedJobsPerson(job);
+    }
+    
   }, []);
   const appliedPerson = () => {
     return applied_jobs_person.map((applied_jobs_person) => {
@@ -148,6 +151,7 @@ const PopupDetails = ({ job, getAppliedJobsPerson, applied_jobs_person }) => {
 const mapStateToProps = (state) => {
   return {
     applied_jobs_person: state.job.applied_jobs_person,
+    isSignedIn: state.auth.isSignedIn,
   };
 };
 

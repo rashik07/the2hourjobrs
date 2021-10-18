@@ -53,16 +53,31 @@ export const getIndustries = () => async (dispatch) => {
   }
 };
 
-export const getAllJobs = (logged_in) => async (dispatch) => {
+export const getAllJobs = () => async (dispatch) => {
   try {
-    console.log(logged_in);
-    if(logged_in){
-      const response = await backend.get("v1/jobpost/data/",getConfig());
-    }else{
-      const response = await backend.get("v1/jobpost/data/");
+   
+ 
+      const response = await backend.get("v1/jobpost/data/", getConfig());
+   
+    if (response.status === 200) {
+      dispatch({ type: types.GET_ALL_JOB, payload: response.data });
+      return response.data;
     }
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-    dispatch({ type: types.GET_ALL_JOB, payload: response.data });
+export const getAllJobs_withoutlogin = () => async (dispatch) => {
+  try {
+   
+ 
+      const response = await backend.get("v1/jobpost/data/");
+   
+    if (response.status === 200) {
+      dispatch({ type: types.GET_ALL_JOB, payload: response.data });
+      return response.data;
+    }
   } catch (error) {
     console.log(error);
   }

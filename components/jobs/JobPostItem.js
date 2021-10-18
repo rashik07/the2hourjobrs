@@ -33,7 +33,7 @@ const JobPostItem = ({
   saveJob,
   deleteJob,
   getSelfPostedJobs,
-  
+
   show_save_button,
   self_posted_jobs,
   getAppliedJobsPerson,
@@ -44,7 +44,7 @@ const JobPostItem = ({
   const { id, title, poster, applied, saved, applied_saved_id } = job;
 
   const btn_disable = userid === poster.id ? "disabled" : "";
-  console.log(applied);
+
   const [appliedStatus, setAppliedStatus] = useState(applied);
   const [savedStatus, setSavedStatus] = useState(saved);
 
@@ -86,19 +86,21 @@ const JobPostItem = ({
   const applyJobBtnClick = () => {
     if (!isSignedIn) {
       alert("You must log in to access this feature");
-      return;
-    }
+      
+    }else{
     console.log(userid);
     applyJob(id, userid, appliedStatus,setAppliedStatus);
     alert("successfully");
+    }
   };
 
   const saveJobBtnClick = () => {
     if (!isSignedIn) {
       alert("You must log in to access this feature");
-      return;
-    }
+      
+    }else{
     saveJob(id, userid, savedStatus, setSavedStatus, applied_saved_id);
+    }
   };
   const deleteJobBtnClick = () => {
     const { confirm } = Modal;
@@ -136,7 +138,7 @@ const JobPostItem = ({
   };
 
   const applyShow = () => {
-    console.log(appliedStatus);
+    
     if (appliedStatus) {
       return (
         <Button
@@ -268,6 +270,7 @@ const JobPostItem = ({
 
 const mapStateToProps = (state) => {
   return {
+    
     userid: state.auth.id,
     isSignedIn: state.auth.isSignedIn,
     self_posted_jobs: Object.values(state.job.self_posted_jobs),
