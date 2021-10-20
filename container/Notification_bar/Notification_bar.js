@@ -5,14 +5,12 @@ const Notification_bar = () => {
     <div>
       <div class="hwrap">
         <div class="hmove">
+          <div class="hitem">Don't Just Wish For It, Work For It </div>
+          <div class="hitem">Get connected to your potential worker</div>
           <div class="hitem">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            We Ensure Secure Assignments And The Right Expertise For Your
+            Project. Take The First Step
           </div>
-          <div class="hitem">Aliquam consequat varius consequat.</div>
-          <div class="hitem">
-            Fusce dapibus turpis vel nisi malesuada sollicitudin.
-          </div>
-          <div class="hitem">Pellentesque auctor molestie orci ut blandit.</div>
         </div>
       </div>
     </div>

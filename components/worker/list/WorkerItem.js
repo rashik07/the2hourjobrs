@@ -14,6 +14,7 @@ import {
   PushpinFilled,
   SaveOutlined,
 } from "@ant-design/icons";
+import { PhoneFilled, HomeFilled } from "@ant-design/icons";
 
 const renderButtons = (
   id,
@@ -62,8 +63,18 @@ const renderButtons = (
 };
 
 const WorkerItem = ({ worker, saveWorker, isSignedIn }) => {
-   console.log(worker);
-  const { id, name,username, phone, email, saved_user_instance_id, image } = worker;
+  console.log(worker);
+  const {
+    id,
+    name,
+    username,
+    phone,
+    bio,
+    email,
+    saved_user_instance_id,
+    address,
+    image,
+  } = worker;
 
   const router = useRouter();
 
@@ -79,7 +90,7 @@ const WorkerItem = ({ worker, saveWorker, isSignedIn }) => {
     <>
       <Row className="job_post">
         <Col span={4}>
-          {image  ? (
+          {image ? (
             <Image
               shape="circle"
               width={100}
@@ -117,18 +128,19 @@ const WorkerItem = ({ worker, saveWorker, isSignedIn }) => {
             {/* <EnvironmentOutlined /> {getLocations(job.job_location)} */}
           </h4>
           <p style={{ marginTop: "1rem", marginBottom: "1rem" }}>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry.
+            {bio === "null" ? "" : bio}
           </p>
 
           <p>
             {/* <EditOutlined /> {getEducation(job.education)} */}
-            {phone}
+            <PhoneFilled /> {"  "} {phone}
+            {"      "}
+            <HomeFilled /> {"  "}
             {email}
           </p>
 
           <p>
-            <ScheduleOutlined />{" "}
+            <ScheduleOutlined />{" "}{address}
             {/* {getExperience(job.min_experience, job.max_experience)} */}
           </p>
         </Col>

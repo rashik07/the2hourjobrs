@@ -61,7 +61,7 @@ const JobCategoryFilter = ({
                 style={{ margin: "0rem 0rem" }}
                 className="home_category"
               >
-                <CaretRightOutlined /> <a>{subcategory.name}</a>
+                <CaretRightOutlined style={{color: "#6db784"}} /> <a>{subcategory.name}</a>
               </Col>
             );
           });

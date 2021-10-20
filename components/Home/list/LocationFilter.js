@@ -57,7 +57,7 @@ const LocationFilter = ({
         <Col
           span={6}
           style={{
-            backgroundColor: "#A93EA6",
+            backgroundColor: "#95D5D2",
             padding: "10px 33px",
           }}
         >
@@ -76,10 +76,10 @@ const LocationFilter = ({
                   console.log(divison);
                 }}
                 style={{
-                  backgroundColor: "#773EA9",
+                  backgroundColor: "#ffc800",
                   border: "1px solid #ffffff",
                   margin: "3px",
-                  color: "#ffffff",
+                  color: "#000000",
                 }}
               >
                 {" "}

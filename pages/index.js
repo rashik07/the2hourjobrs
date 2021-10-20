@@ -42,7 +42,7 @@ const Jobs = ({ filterJobs }) => {
     width: 40,
     lineHeight: '40px',
     borderRadius: 4,
-    backgroundColor: '#773ea9',
+    backgroundColor: ' rgb(109, 183, 132)',
     color: '#fff',
     textAlign: 'center',
     fontSize: 14,
@@ -84,7 +84,7 @@ const Jobs = ({ filterJobs }) => {
           className="site-layout"
           style={{ backgroundColor: "white", margin: "16px 66px" }}
         >
-          <h2 style={{ color: "#773EA9", marginTop: "15px" }}>
+          <h2 style={{ color: "darkblue", marginTop: "15px" }}>
             Job Categories
           </h2>
           <Row>

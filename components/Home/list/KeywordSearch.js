@@ -63,11 +63,11 @@ const KeywordSearch = ({
           height: "auto",
           borderTopRightRadius: "8px",
           borderBottomRightRadius: "8px",
-          background: "#773EA9",
-          color: "white",
+          background: "#ffc800",
+          color: "#000000",
           borderColor: "#000000",
         }}
-        icon={<SearchOutlined />}
+        icon={<SearchOutlined style={{color: "#000000"}} />}
         onClick={(e) => {
         //  onKeywordSubmit(e);
         handleChange(e);

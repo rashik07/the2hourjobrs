@@ -44,8 +44,8 @@ const KeywordSearch = ({
           height: "auto",
           borderTopRightRadius: "8px",
           borderBottomRightRadius: "8px",
-          background: "#773EA9",
-          color: "white",
+          background: "#ffc800",
+          color: "black",
           borderColor: "#000000",
         }}
         icon={<SearchOutlined />}

@@ -25,12 +25,12 @@
   margin-bottom: 0%;
 }
 .ant-layout-header {
-  background: #a93ea6;
+  background: #95d5d2;
   height: 65px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .ant-menu {
-  background: #a93ea6;
+  background: #95d5d2;
   color: white;
 }
 .ant-menu-horizontal > .ant-menu-item a {
@@ -62,17 +62,17 @@
   margin-bottom: 0;
 }
 .job_title:hover {
-  color: #A93EA6;
+  color: darkblue;
   text-decoration: underline;
 }
 .ant-select:not(.ant-select-customize-input) .ant-select-selector {
-  border: 0px solid #A93EA6;
-  border-bottom: 1px solid #A93EA6;
+  border: 0px solid #95d5d2;
+  border-bottom: 1px solid #95d5d2;
 }
 .ant-select:not(.ant-select-customize-input) .ant-select-selector:hover {
-  border: 0px solid #A93EA6;
-  border-bottom: 1px solid #A93EA6;
-  border-right: 1px solid #A93EA6;
+  border: 0px solid darkblue;
+  border-bottom: 1px solid darkblue;
+  border-right: 1px solid darkblue;
 }
 .ant-steps {
   width: 100%;
@@ -135,8 +135,9 @@
   padding-bottom: 15px;
 }
 .ant-btn {
-  background-color: #773ea9;
-  border: #773ea9;
+  background-color: #ffc800;
+  border: #ffc800;
+  color: black;
 }
 
 .ant-select_focused:not(.ant-select-disabled).ant-select:not(.ant-select-customize-input).ant-select-selector {
@@ -171,23 +172,24 @@
   background-color: #ffc800;
   color: #1e1e1e;
   margin-left: 290px;
-  border:1px solid #ffffff;
+  border: 1px solid #ffffff;
 }
 .jobpost_btn:hover {
-  background-color: #757575;
+  background-color: darkblue;
   color: #ffffff;
   margin-left: 290px;
-  border:1px solid #ffffff;
-  
+  border: 1px solid #ffffff;
 }
 /* (A) FIXED WRAPPER */
 .hwrap {
   overflow: hidden; /* HIDE SCROLL BAR */
   background: #eee;
 }
- 
+
 /* (B) MOVING TICKER WRAPPER */
-.hmove { display: flex; }
+.hmove {
+  display: flex;
+}
 
 /* (C) ITEMS - INTO A LONG HORIZONTAL ROW */
 .hitem {
@@ -197,15 +199,23 @@
   padding: 10px;
   text-align: center;
 }
- 
+
 /* (D) ANIMATION - MOVE ITEMS FROM RIGHT TO LEFT */
 /* 4 ITEMS -400%, CHANGE THIS IF YOU ADD/REMOVE ITEMS */
 @keyframes tickerh {
-  0% { transform: translate3d(100%, 0, 0); }
-  100% { transform: translate3d(-400%, 0, 0); }
+  0% {
+    transform: translate3d(100%, 0, 0);
+  }
+  100% {
+    transform: translate3d(-400%, 0, 0);
+  }
 }
-.hmove { animation: tickerh linear 55s infinite; }
-.hmove:hover { animation-play-state: paused; }
+.hmove {
+  animation: tickerh linear 55s infinite;
+}
+.hmove:hover {
+  animation-play-state: paused;
+}
 
 .ant-radio-button-wrapper:first-child:last-child {
   margin-top: 150px;
@@ -218,48 +228,57 @@
   width: 169px;
 }
 .ant-radio-button-wrapper:first-child:last-child:hover {
- 
-  background-color: #757575;
+  background-color:darkblue;
   color: #ffffff;
 }
 .ant-layout-sider-trigger {
-  background: #A93EA6;
+  background: #95d5d2;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .ant-layout-sider {
-  background: #A93EA6;
+  background: #95d5d2;
 }
-.ant-menu.ant-menu-dark, .ant-menu-dark .ant-menu-sub, .ant-menu.ant-menu-dark .ant-menu-sub {
- 
-  background: #A93EA6;
+.ant-menu.ant-menu-dark,
+.ant-menu-dark .ant-menu-sub,
+.ant-menu.ant-menu-dark .ant-menu-sub {
+  background: #95d5d2;
 }
-.notifi_bar a{
+.notifi_bar a {
   color: black;
 }
-.notifi_bar a:hover{
+.notifi_bar a:hover {
   color: white;
 }
 
-.notifi_bar{
+.notifi_bar {
   border-bottom: 1px solid rgb(236, 235, 235);
   padding: 5px;
   margin-bottom: 2px;
 }
-.notifi_bar:hover{
+.notifi_bar:hover {
   /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
   background-color: #773ea9;
   border-radius: 3px;
 }
-.social_media_btn{
+.social_media_btn {
   display: block;
   margin-left: 80px;
   margin-right: auto;
 }
-.social_media_btn button{
+.social_media_btn button {
   padding: 12px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-footer{
+footer {
   padding: 40px 0px;
-  
+}
+.ant-menu-dark.ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-item-selected {
+  background-color: darkblue;
+  color:white;
+}
+.ant-menu-dark .ant-menu-item,
+.ant-menu-dark .ant-menu-item-group-title,
+.ant-menu-dark .ant-menu-item > a,
+.ant-menu-dark .ant-menu-item > span > a {
+  color: black;
 }
