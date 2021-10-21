@@ -75,12 +75,8 @@ const LocationFilter = ({
                   onLocationSelect(JSON.stringify(divison));
                   console.log(divison);
                 }}
-                style={{
-                  backgroundColor: "#ffc800",
-                  border: "1px solid #ffffff",
-                  margin: "3px",
-                  color: "#000000",
-                }}
+                className="location_btn"
+              
               >
                 {" "}
                 {divison.name}

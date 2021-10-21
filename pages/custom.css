@@ -228,7 +228,7 @@
   width: 169px;
 }
 .ant-radio-button-wrapper:first-child:last-child:hover {
-  background-color:darkblue;
+  background-color: darkblue;
   color: #ffffff;
 }
 .ant-layout-sider-trigger {
@@ -274,11 +274,53 @@ footer {
 }
 .ant-menu-dark.ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-item-selected {
   background-color: darkblue;
-  color:white;
+  color: white;
 }
 .ant-menu-dark .ant-menu-item,
 .ant-menu-dark .ant-menu-item-group-title,
 .ant-menu-dark .ant-menu-item > a,
 .ant-menu-dark .ant-menu-item > span > a {
   color: black;
+}
+.search_button {
+  height: auto;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  background: #ffc800;
+  color: #000000;
+  border-color: #000000;
+}
+.search_button:hover {
+  height: auto;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  background: darkblue;
+  color: #ffffff;
+  border-color: #000000;
+}
+.location_btn{
+  background-color: #ffc800;
+  border: 1px solid #ffffff;
+  margin: 3px;
+  color: #000000;
+}
+.location_btn:hover{
+  background-color: darkblue;
+  border: 1px solid #ffffff;
+  margin: 3px;
+  color: #ffffff;
+}
+.data_section{
+  margin-top:20px;
+}
+.home_icon{
+  font-size: 45px;
+  border: 1px solid black;
+  padding: 10px;
+  border-radius: 60px;
+  border-width: medium;
+  float: left;
+  margin-right: 5px;
+ 
+
 }
