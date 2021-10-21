@@ -89,7 +89,7 @@ const Jobs = ({ filterJobs }) => {
               <Title
                 level={2}
                 style={{
-                  marginTop: "10px",
+                  marginTop: "-3px",
                   color: "darkblue",
                   fontWeight: "bold",
 
@@ -106,7 +106,7 @@ const Jobs = ({ filterJobs }) => {
               <Title
                 level={2}
                 style={{
-                  marginTop: "10px",
+                  marginTop: "-3px",
                   color: "darkblue",
                   fontWeight: "bold",
                 }}
@@ -122,7 +122,7 @@ const Jobs = ({ filterJobs }) => {
               <Title
                 level={2}
                 style={{
-                  marginTop: "10px",
+                  marginTop: "-3px",
                   color: "darkblue",
                   fontWeight: "bold",
                 }}
@@ -138,7 +138,7 @@ const Jobs = ({ filterJobs }) => {
               <Title
                 level={2}
                 style={{
-                  marginTop: "10px",
+                  marginTop: "-3px",
                   color: "darkblue",
                   fontWeight: "bold",
                 }}
