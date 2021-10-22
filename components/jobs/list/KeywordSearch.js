@@ -40,14 +40,8 @@ const KeywordSearch = ({
       />
 
       <Button
-        style={{
-          height: "auto",
-          borderTopRightRadius: "8px",
-          borderBottomRightRadius: "8px",
-          background: "#ffc800",
-          color: "black",
-          borderColor: "#000000",
-        }}
+      className="search_button"
+      
         icon={<SearchOutlined />}
         onClick={(e) => {
           onKeywordSubmit(e);

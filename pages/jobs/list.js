@@ -16,9 +16,10 @@ import ExperienceFilter from "components/jobs/list/ExperienceFilter";
 import AgeFilter from "components/jobs/list/AgeFilter";
 import { filterJobs } from "redux/actions/jobAction";
 import { SetfilterAction } from "../../redux/actions/jobAction";
-import { Layout, Breadcrumb, Row, Col, Divider } from "antd";
+import { Layout, Breadcrumb, Row, Col,  BackTop,Divider } from "antd";
 import Index from "../index";
 import { useRouter } from "next/router";
+import { UpOutlined} from "@ant-design/icons";
 
 const { Content } = Layout;
 
@@ -28,6 +29,17 @@ const Jobs = ({ filterJobs, filterfromState, SetfilterAction }) => {
   const [filter, setFilter] = useState({});
   const [showFilterJobs, setShowFilterJobs] = useState(false);
   const showPage = useRef("job_list");
+  const style = {
+    height: 40,
+    width: 40,
+    lineHeight: "40px",
+    borderRadius: 4,
+    backgroundColor: " rgb(109, 183, 132)",
+    color: "#fff",
+    textAlign: "center",
+    fontSize: 14,
+  };
+
 
   useEffect(() => {
     if (_.isEmpty(filter)) {
@@ -70,8 +82,7 @@ const Jobs = ({ filterJobs, filterfromState, SetfilterAction }) => {
                   setFilter={setFilter}
                   reload={setShowFilterJobs}
                   showPage={showPage}
-               //   query={location}
-         
+                  //   query={location}
                 />
                 <PostTimeFilter
                   filter={filter}
@@ -112,7 +123,7 @@ const Jobs = ({ filterJobs, filterfromState, SetfilterAction }) => {
                   setShowFilter={setShowFilterJobs}
                   getFilteredList={filterJobs}
                   showFilterJobs={showFilterJobs}
-                 // query={location}
+                  // query={location}
                   //reload={setShowFilterJobs}
                 />
                 <KeywordSearch
@@ -125,6 +136,11 @@ const Jobs = ({ filterJobs, filterfromState, SetfilterAction }) => {
                 />
                 <Divider />
                 <JobList filter={filter} showFilterJobs={showFilterJobs} />
+                <BackTop>
+                  <div style={style}>
+                    <UpOutlined />
+                  </div>
+                </BackTop>
               </Col>
             </Row>
           </div>

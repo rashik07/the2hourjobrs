@@ -135,6 +135,7 @@ const Login = ({
                   onSuccess={responseGoogle}
                   onFailure={responseGoogle}
                   cookiePolicy={"single_host_origin"}
+                  style={{  width:"194px"}}
                 />
 
                 <FacebookLogin

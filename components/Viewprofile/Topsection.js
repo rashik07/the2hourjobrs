@@ -19,7 +19,7 @@ const Topsection = ({ updateProfile, user_profile ,updatePhone,edit_phone}) => {
               width={100}
               height={100}
               src={user_profile.image}
-              preview={false}
+             
             />
           ) : (
             <Image

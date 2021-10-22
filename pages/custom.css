@@ -139,7 +139,11 @@
   border: #ffc800;
   color: black;
 }
-
+.ant-btn:hover {
+  background-color: darkblue;
+  border: #ffc800;
+  color: white;
+}
 .ant-select_focused:not(.ant-select-disabled).ant-select:not(.ant-select-customize-input).ant-select-selector {
   border-color: #ff3155;
   border-right-width: 1px !important;
@@ -257,17 +261,21 @@
 }
 .notifi_bar:hover {
   /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
-  background-color: #773ea9;
+  background-color: darkblue;
   border-radius: 3px;
 }
 .social_media_btn {
   display: block;
-  margin-left: 80px;
+  margin-left: 52px;
   margin-right: auto;
+  
 }
 .social_media_btn button {
-  padding: 12px;
+  padding: 11px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  font-size: 14px;
+  width:194px;
+
 }
 footer {
   padding: 40px 0px;
@@ -314,13 +322,11 @@ footer {
   margin-top:20px;
 }
 .home_icon{
-  font-size: 45px;
-  border: 1px solid black;
+  font-size: 15px;
+  border: 2px solid white;
   padding: 10px;
-  border-radius: 60px;
-  border-width: medium;
+  border-radius: 130px;
   float: left;
   margin-right: 5px;
- 
-
+  background-color: #95d5d2;
 }
