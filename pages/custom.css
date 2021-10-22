@@ -85,7 +85,7 @@
   margin-bottom: 2rem;
   width: 100%;
   border: 0px solid;
-  border-bottom: 1px solid #773ea9;
+  border-bottom: 1px solid #95d5d2;
   border-radius: 0px;
 }
 .form-label {
@@ -175,7 +175,7 @@
 .jobpost_btn {
   background-color: #ffc800;
   color: #1e1e1e;
-  margin-left: 290px;
+  margin-left: 270px;
   border: 1px solid #ffffff;
 }
 .jobpost_btn:hover {
