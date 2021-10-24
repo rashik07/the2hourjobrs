@@ -1,7 +1,9 @@
 import React from "react";
+import Link from "next/link";
 
 const Footer = () => {
   return (
+  
           <footer
             className="footer-navbar-wrapper footer-default ng-scope"
             role="contentinfo"
@@ -15,42 +17,23 @@ const Footer = () => {
                 <div>
                   <ul className="footer-list">
                     <li className="footer-list-item">
-                      <a className="footer-list-link" href="" target="_self">
+                      <Link className="footer-list-link" href="/FooterPages/About_us" target="_self">
                         About Us
-                      </a>
+                      </Link>
                     </li>
                     <li className="footer-list-item">
-                      <a className="footer-list-link" href="">
-                        Feedback
-                      </a>
+                      <Link className="footer-list-link" href="/FooterPages/WorkFlow">
+                        How it Works
+                      </Link>
                     </li>
                     <li className="footer-list-item">
-                      <a className="footer-list-link" href="" target="_self">
+                      <Link className="footer-list-link" href="" target="_self">
                         Community
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </div>
-                <div>
-                  <ul className="footer-list">
-                    <li className="footer-list-item">
-                      <a className="footer-list-link" href="" target="_self">
-                        Trust, Safety &amp; Security
-                      </a>
-                    </li>
-                    <li className="footer-list-item">
-                      <a className="footer-list-link" href="" target="_self">
-                        Help &amp; Support
-                      </a>
-                    </li>
-                    <li className="footer-list-item">
-                      <a className="footer-list-link" href="" target="_self">
-                        {" "}
-                        Foundation
-                      </a>
-                    </li>
-                  </ul>
-                </div>
+               
                 <div>
                   <ul className="footer-list">
                     <li className="footer-list-item">
@@ -59,9 +42,9 @@ const Footer = () => {
                       </a>
                     </li>
                     <li className="footer-list-item">
-                      <a className="footer-list-link" href="" target="_self">
+                      <Link className="footer-list-link" href="/FooterPages/Privacy" target="_self">
                         Privacy Policy
-                      </a>
+                      </Link>
                     </li>
                     <li className="footer-list-item">
                       <a className="footer-list-link" href="" target="_self">

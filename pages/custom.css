@@ -181,7 +181,7 @@
 .jobpost_btn:hover {
   background-color: darkblue;
   color: #ffffff;
-  margin-left: 290px;
+  margin-left: 270px;
   border: 1px solid #ffffff;
 }
 /* (A) FIXED WRAPPER */
@@ -252,6 +252,7 @@
 }
 .notifi_bar a:hover {
   color: white;
+  
 }
 
 .notifi_bar {

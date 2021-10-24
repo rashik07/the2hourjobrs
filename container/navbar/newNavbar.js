@@ -1,15 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  Layout,
-  Menu,
-  Row,
-  Col,
-  Popover,
-  Image,
-  Button,
-  Dropdown,
-  Select,
-} from "antd";
+import { Layout, Menu, Row, Col, Image, Button, Dropdown, Select } from "antd";
 import Link from "next/link";
 import { connect } from "react-redux";
 import { signOut } from "../../redux/actions/authAction";
@@ -18,12 +8,7 @@ import {
   getAllNotification,
   getAllUnreadNotification,
 } from "@/redux/actions/notoficationAction";
-
-import {
-  UserOutlined,
-  NotificationOutlined,
-  NotificationFilled,
-} from "@ant-design/icons";
+import { UserOutlined, NotificationFilled } from "@ant-design/icons";
 
 const { Header } = Layout;
 const { SubMenu } = Menu;
@@ -33,9 +18,7 @@ const getItems = (isSignedIn, signOut, user_profile) => {
   console.log(user_profile);
 
   const image = () => {
-    if (
-      !user_profile.image
-    ) {
+    if (!user_profile.image) {
       return (
         <Link href="/Profile">
           <a>
@@ -148,7 +131,7 @@ const navbar = ({
       ))}
     </Row>
   );
-  
+
   // const createPost=()=>{
   //   if (!isSignedIn) {
   //     alert("You must log in to access this feature");
