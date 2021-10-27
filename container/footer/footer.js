@@ -37,9 +37,9 @@ const Footer = () => {
                 <div>
                   <ul className="footer-list">
                     <li className="footer-list-item">
-                      <a className="footer-list-link" href="" target="_self">
+                      <Link className="footer-list-link" href="/FooterPages/TermOfService" target="_self">
                         Terms of Service
-                      </a>
+                      </Link>
                     </li>
                     <li className="footer-list-item">
                       <Link className="footer-list-link" href="/FooterPages/Privacy" target="_self">
@@ -47,31 +47,34 @@ const Footer = () => {
                       </Link>
                     </li>
                     <li className="footer-list-item">
-                      <a className="footer-list-link" href="" target="_self">
+                      <Link className="footer-list-link" href="" target="_self">
                         Accessibility
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </div>
                 <div>
                   <ul className="footer-list">
                     <li className="footer-list-item">
-                      <a className="footer-list-link" href="" target="_self">
-                        Desktop App
-                      </a>
+                      <Link className="footer-list-link" href="/jobs/list" target="_self">
+                        Job List
+                      </Link>
                     </li>
                     <li className="footer-list-item">
-                      <a className="footer-list-link" href="" target="_self">
-                        Cookie Policy
-                      </a>
+                      <Link className="footer-list-link" href="/worker/list" target="_self">
+                        Worker List
+                      </Link>
                     </li>
                     <li className="footer-list-item">
-                      <a className="footer-list-link" href="" target="_self">
-                        Enterprise Solutions
-                      </a>
+                      <Link className="footer-list-link" href="/announcement" target="_self">
+                        All Announcements
+                      </Link>
                     </li>
                   </ul>
                 </div>
+                <div className="logo">
+              <img src="/img/logo.png" alt="Logo" height={40} />
+            </div>
               </div>
             </div>
           </footer>

@@ -70,7 +70,7 @@ export const getSpecificProfile = (profile_id) => async (dispatch) => {
   }
 };
 
-export const editUserProfile = (values, id) => async (dispatch) => {
+export const editUserProfile = (values, id,fileList) => async (dispatch) => {
   console.log(values);
 
   try {

@@ -15,7 +15,7 @@ const { SubMenu } = Menu;
 
 const getItems = (isSignedIn, signOut, user_profile) => {
   const { Header, Content, Footer } = Layout;
-  console.log(user_profile);
+ // console.log(user_profile);
 
   const image = () => {
     if (!user_profile.image) {
@@ -144,14 +144,14 @@ const navbar = ({
   return (
     <Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
       <Row>
-        <Col xs={24} sm={24} md={6} lg={6} xl={6}>
+        <Col xs={6} sm={6} md={6} lg={6} xl={6}>
           <a href="/">
             <div className="logo">
               <img src="/img/logo.png" alt="Logo" height={40} />
             </div>
           </a>
         </Col>
-        <Col xs={24} sm={24} md={18} lg={18} xl={18}>
+        <Col xs={18} sm={18} md={18} lg={18} xl={18}>
           <Button className="jobpost_btn">
             <Link href="/jobs/post">Post a Job</Link>
           </Button>

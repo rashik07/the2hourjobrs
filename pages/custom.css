@@ -1,6 +1,8 @@
 .site-layout {
   padding: 0 50px;
   margin-top: 64px;
+  background-color: white;
+   margin: 16px 66px;
 }
 .breadcrumb_main {
   margin: 16px 0;

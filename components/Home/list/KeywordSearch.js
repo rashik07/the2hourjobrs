@@ -28,7 +28,6 @@ const KeywordSearch = ({
     }
   }
 
-
   const onKeywordSubmit = (e) => {
     e.preventDefault();
     if (keyword) {
@@ -42,7 +41,7 @@ const KeywordSearch = ({
   }
 
   return (
-    <Col span={18} style={{ padding: "100px"  ,backgroundImage: `url('/img/banner.jpg')`, }}> 
+    <Col xs={24} sm={24} md={18} lg={18} xl={18} style={{ padding: "100px"  ,backgroundImage: `url('/img/banner.jpg')`, }}> 
     <form style={{ display: "flex", width: "100%" }}>
       <input
         // className="form-control mt-2"

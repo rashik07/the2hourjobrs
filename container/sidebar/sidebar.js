@@ -16,7 +16,7 @@ const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 const sidebar = ({ selector, setloader }) => {
   const { Title } = Typography;
-  const [collapsed, setcollapsed] = useState(false);
+  const [collapsed, setcollapsed] = useState(true);
 
   const collapse = () => {
     setcollapsed({ collapsed });
@@ -29,6 +29,14 @@ const sidebar = ({ selector, setloader }) => {
         width={200}
         collapsible
         collapse={collapse}
+        // breakpoint="lg"
+        // collapsedWidth="0"
+        // onBreakpoint={broken => {
+        //   console.log(broken);
+        // }}
+        // onCollapse={(collapsed, type) => {
+        //   console.log(collapsed, type);
+        // }}
       >
         <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
           <Menu.Item key="1" icon={<UserOutlined />}>

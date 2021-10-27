@@ -22,7 +22,13 @@ import { useRouter } from "next/router";
 import Notification_bar from "container/Notification_bar/Notification_bar";
 import { Button } from "antd/lib/radio";
 import Footer from "container/footer/footer";
-import { UpOutlined, TeamOutlined ,AreaChartOutlined,UsergroupAddOutlined,GlobalOutlined} from "@ant-design/icons";
+import {
+  UpOutlined,
+  TeamOutlined,
+  AreaChartOutlined,
+  UsergroupAddOutlined,
+  GlobalOutlined,
+} from "@ant-design/icons";
 
 const { Content } = Layout;
 const { Title } = Typography;
@@ -83,75 +89,78 @@ const Jobs = ({ filterJobs }) => {
         </div>
         <Row justify="space-around" className="data_section">
           {/* <TeamOutlined className="home_icon" /> */}
-          <Col span={4}>
-         
-              <Title level={4}><TeamOutlined className="home_icon" />Workers  </Title>{" "}
-              <Title
-                level={2}
-                style={{
-                  marginTop: "-3px",
-                  color: "darkblue",
-                  fontWeight: "bold",
-
-                }}
-              >
-                10946
-              </Title>
-         
+          <Col xs={12} sm={12} md={4} lg={4} xl={4}>
+            <Title level={4}>
+              <TeamOutlined className="home_icon" />
+              Workers{" "}
+            </Title>{" "}
+            <Title
+              level={2}
+              style={{
+                marginTop: "-3px",
+                color: "darkblue",
+                fontWeight: "bold",
+              }}
+            >
+              10946
+            </Title>
           </Col>
           {/* <TeamOutlined className="home_icon" /> */}
-          <Col span={4}>
-    
-              <Title level={4}><UsergroupAddOutlined className="home_icon"/>Employers</Title>{" "}
-              <Title
-                level={2}
-                style={{
-                  marginTop: "-3px",
-                  color: "darkblue",
-                  fontWeight: "bold",
-                }}
-              >
-                2222
-              </Title>
-            
+          <Col xs={12} sm={12} md={4} lg={4} xl={4}>
+            <Title level={4}>
+              <UsergroupAddOutlined className="home_icon" />
+              Employers
+            </Title>{" "}
+            <Title
+              level={2}
+              style={{
+                marginTop: "-3px",
+                color: "darkblue",
+                fontWeight: "bold",
+              }}
+            >
+              2222
+            </Title>
           </Col>
           {/* <TeamOutlined className="home_icon" /> */}
-          <Col span={4}>
-       
-              <Title level={4}><GlobalOutlined className="home_icon"/>Ongoing Jobs</Title>{" "}
-              <Title
-                level={2}
-                style={{
-                  marginTop: "-3px",
-                  color: "darkblue",
-                  fontWeight: "bold",
-                }}
-              >
-                318
-              </Title>
-         
+          <Col xs={12} sm={12} md={4} lg={4} xl={4}>
+            <Title level={4}>
+              <GlobalOutlined className="home_icon" />
+              Ongoing Jobs
+            </Title>{" "}
+            <Title
+              level={2}
+              style={{
+                marginTop: "-3px",
+                color: "darkblue",
+                fontWeight: "bold",
+              }}
+            >
+              318
+            </Title>
           </Col>
           {/* <TeamOutlined className="home_icon" /> */}
-          <Col span={4}>
-     
-              <Title level={4}><AreaChartOutlined className="home_icon"/>Total Visitors</Title>{" "}
-              <Title
-                level={2}
-                style={{
-                  marginTop: "-3px",
-                  color: "darkblue",
-                  fontWeight: "bold",
-                }}
-              >
-                240816
-              </Title>
-         
+          <Col xs={12} sm={12} md={4} lg={4} xl={4}>
+            <Title level={4}>
+              <AreaChartOutlined className="home_icon" />
+              Total Visitors
+            </Title>{" "}
+            <Title
+              level={2}
+              style={{
+                marginTop: "-3px",
+                color: "darkblue",
+                fontWeight: "bold",
+              }}
+            >
+              240816
+            </Title>
           </Col>
         </Row>
 
         <Content
           className="site-layout"
-          style={{ backgroundColor: "white", margin: "16px 66px" }}
+        
         >
           <h2 style={{ color: "darkblue", marginTop: "15px" }}>
             Job Categories
@@ -162,20 +171,22 @@ const Jobs = ({ filterJobs }) => {
               setFilter={setFilter}
               reload={setShowFilterJobs}
             />
-          </Row>
-          <Divider />
 
-          <div
-            style={{
-              backgroundImage: `url('/img/banner2.png')`,
-              height: "280px",
-              marginBottom: "15px",
-            }}
-          >
-            <Button className="jobpost_btn">
-              <Link href="/jobs/post">Post a Job</Link>
-            </Button>
-          </div>
+            <Divider />
+            <Col xs={24} sm={24} md={24} lg={24} xl={24}>
+            <div
+              style={{
+                backgroundImage: `url('/img/banner2.png')`,
+                height: "280px",
+                marginBottom: "15px",
+              }}
+            >
+              <Button className="jobpost_btn">
+                <Link href="/jobs/post">Post a Job</Link>
+              </Button>
+            </div>
+            </Col>
+          </Row>
         </Content>
 
         <Footer />

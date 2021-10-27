@@ -54,14 +54,19 @@ const JobCategoryFilter = ({
           return category.list.map((subcategory) => {
             return (
               <Col
-                span={6}
+                xs={24}
+                sm={24}
+                md={6}
+                lg={6}
+                xl={6}
                 onClick={() => {
                   handleChange(JSON.stringify(subcategory));
                 }}
                 style={{ margin: "0rem 0rem" }}
                 className="home_category"
               >
-                <CaretRightOutlined style={{color: "#6db784"}} /> <a>{subcategory.name}</a>
+                <CaretRightOutlined style={{ color: "#6db784" }} />{" "}
+                <a>{subcategory.name}</a>
               </Col>
             );
           });

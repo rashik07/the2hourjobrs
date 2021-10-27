@@ -16,7 +16,7 @@ import {
   Tooltip,
   InputNumber,
   Skeleton,
-  Checkbox
+  Checkbox,
 } from "antd";
 import { connect } from "react-redux";
 import Link from "next/link";
@@ -32,6 +32,8 @@ import { UploadOutlined, EyeOutlined, ContactsFilled } from "@ant-design/icons";
 import { useRouter } from "next/router";
 import moment from "moment";
 import Profile_adress from "./Profile_adress";
+import ImgCrop from "antd-img-crop";
+import PicturesWall from "components/annoucement/PicturesWall";
 
 const Profile_info = ({
   updateProfile,
@@ -44,8 +46,16 @@ const Profile_info = ({
   const [user_profile, setuser_profile] = useState([]);
   const [loading, setloading] = useState(true);
   const [loader, setloader] = useState(false);
+  const [cover, setcover] = useState([]);
   const dateFormat = "YYYY-MM-DD";
+
   const router = useRouter();
+
+  const uploadcover = (fileList) => {
+    setcover(fileList);
+    console.log(fileList);
+  };
+
 
   useEffect(() => {
     if (!auth.isSignedIn) {
@@ -60,14 +70,14 @@ const Profile_info = ({
         } else {
           result.birthday = moment(result.birthday, dateFormat);
         }
-      
+
         setuser_profile(result);
-          console.log(result);
+        console.log(result);
         setloading(false);
       });
     }
   }, [loader]);
- // console.log(edit_phone);
+  // console.log(edit_phone);
 
   const onFinish = (values) => {
     const formData = new FormData();
@@ -80,49 +90,41 @@ const Profile_info = ({
     //formData.append("phone", values.phone);
     formData.append("nid", values.nid);
     formData.append("gender", values.gender);
-    if (typeof values.facebook_link === "null"||  values.facebook_link === null) {
-    
+    if (
+      typeof values.facebook_link === "null" ||
+      values.facebook_link === null
+    ) {
     } else {
-
-    formData.append("facebook_link", values.facebook_link);
+      formData.append("facebook_link", values.facebook_link);
     }
-    if (typeof values.bio === "null"||  values.bio === null) {
-    
+    if (typeof values.bio === "null" || values.bio === null) {
     } else {
-
       formData.append("bio", values.bio);
     }
-    if (typeof values.youtube_link === "null"||  values.youtube_link === null) {
-    
+    if (typeof values.youtube_link === "null" || values.youtube_link === null) {
     } else {
-
       formData.append("youtube_link", values.youtube_link);
     }
-    if (typeof values.website_link === "null"||  values.website_link === null) {
-    
+    if (typeof values.website_link === "null" || values.website_link === null) {
     } else {
-
       formData.append("website_link", values.website_link);
     }
-    if (typeof values.portfolio_link === "null"||  values.portfolio_link === null) {
-    
+    if (
+      typeof values.portfolio_link === "null" ||
+      values.portfolio_link === null
+    ) {
     } else {
-
       formData.append("portfolio_link", values.portfolio_link);
     }
 
-
     formData.append("birthday", values.birthday);
-    
-   
-  
-    
 
     if (typeof values.photo === "undefined") {
     } else {
-      console.log("image");
-      formData.append("image", values.photo[0].originFileObj);
+      console.log("cover");
+      formData.append("cover", values.photo[0].originFileObj);
     }
+    formData.append("photo", cover[0].originFileObj);
     for (var value of formData.values()) {
       console.log(value);
     }
@@ -130,7 +132,7 @@ const Profile_info = ({
     setloader(true);
     updatePhone(values, user_profile.id);
     alert("successfully saved");
-      console.log(values);
+    console.log(values);
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
@@ -210,6 +212,7 @@ const Profile_info = ({
   } else {
     return (
       <>
+       <PicturesWall setImages={uploadcover} />
         <Form
           {...formItemLayout}
           layout={formLayout}
@@ -218,17 +221,12 @@ const Profile_info = ({
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
           initialValues={user_profile}
-          //   setloader={setloader}
+          //setloader={setloader}
         >
           <Divider>
             {" "}
             <Title>Basic Info</Title>
           </Divider>
-          {/* <Image
-          width={200}
-          height={200}
-          src={"http://127.0.0.1:8000" + user_profile.image}
-        /> */}
           <Link href={`/Profile/Profile_details/${user_profile.id}`}>
             <Tooltip title="View My Profile" className="button_eye">
               <Button
@@ -241,17 +239,19 @@ const Profile_info = ({
               ></Button>
             </Tooltip>
           </Link>
+
           <Form.Item
             name="photo"
-            label="Upload Photo"
+            label="Upload"
             valuePropName="fileList"
             getValueFromEvent={normFile}
-            extra="upload photo"
+            extra="long"
           >
             <Upload name="image" listType="picture" maxCount={1}>
               <Button icon={<UploadOutlined />}>Click to upload</Button>
             </Upload>
           </Form.Item>
+          
           <Form.Item label="Name" name="name">
             <Input
               style={{

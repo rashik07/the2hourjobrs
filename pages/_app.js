@@ -10,6 +10,7 @@ import "components/jobs/list/SelectedFilter.css";
 import "./../styles/header.css";
 import "./Landing_page/Landing_page.css";
 import "./custom.css";
+import "./responsive.css";
 function MyApp({ Component, pageProps }) {
   return (
     <Provider store={store}>
