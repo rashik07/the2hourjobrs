@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import { getAppliedJobsPerson } from "@/redux/actions/jobAction";
 
-const PopupDetails = ({ job, getAppliedJobsPerson, applied_jobs_person,isSignedIn }) => {
+const PopupDetails = ({ job, getAppliedJobsPerson, applied_jobs_person,isSignedIn ,size}) => {
   const router = useRouter();
   const [visible, setVisible] = useState(false);
   //  console.log(job);
@@ -48,6 +48,7 @@ const PopupDetails = ({ job, getAppliedJobsPerson, applied_jobs_person,isSignedI
         closable={false}
         onClose={onClose}
         visible={visible}
+        size={size}
       >
         <button
           onClick={() => router.push(`/jobs/detail/${job.id}`)}
@@ -56,20 +57,20 @@ const PopupDetails = ({ job, getAppliedJobsPerson, applied_jobs_person,isSignedI
           Detail
         </button>
         <Row>
-          <Col span={10}>
+          <Col xs={24} sm={24} md={10} lg={10} xl={10}>
             <h4>Type :</h4> {job.category.name}
             <br />
           </Col>
 
-          <Col span={4}>
+          <Col xs={24} sm={24} md={4} lg={4} xl={4}>
             <h4>Posted on :</h4>{" "}
             <span>{dateformat(job.posting_timestamp, "mmmm dS, yyyy")}</span>
           </Col>
-          <Col span={4}>
+          <Col xs={24} sm={24} md={4} lg={4} xl={4}>
             <h4>Deadline :</h4>{" "}
             <span style={{ fontWeight: "600" }}>{job.deadline}</span>
           </Col>
-          <Col span={2}>
+          <Col xs={24} sm={24} md={2} lg={2} xl={2}>
             <h4>Vacancy : </h4>
             <span style={{ fontWeight: "600" }}>{job.vacancy}</span>
           </Col>
@@ -86,7 +87,7 @@ const PopupDetails = ({ job, getAppliedJobsPerson, applied_jobs_person,isSignedI
         </Descriptions.Item>
         <Divider />
         <Row>
-          <Col span={10}>
+          <Col xs={24} sm={24} md={10} lg={10} xl={10}>
             <Row>
               <Col span={12}>
                 <h4>Salary : </h4>

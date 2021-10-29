@@ -68,7 +68,7 @@ const Jobs = ({ filterJobs, filterfromState, SetfilterAction }) => {
           <div className="site-layout-background">
             <Row>
               {/*1st part*/}
-              <Col xs={4} sm={4} md={6} lg={6} xl={6} className="Jobfilter">
+              <Col xs={24} sm={24} md={6} lg={6} xl={6} className="Jobfilter">
                 <h2>Filter By</h2>
 
                 <JobCategoryFilter

@@ -64,6 +64,19 @@ const JobCreateUpdate = ({ getJobCategories, getEducation, editJob }) => {
               size="medium"
               current={postStep}
               style={{ alignItems: "end" }}
+              className="stepJobPostPc"
+            >
+              <Step title="Primary Information" />
+              <Step title="More Job Information" />
+              <Step title="Candidates Requirements" />
+              <Step title="Preview" />
+            </Steps>
+            <Steps
+              size="medium"
+              current={postStep}
+           
+              className="stepJobPostMobile"
+              direction="vertical"
             >
               <Step title="Primary Information" />
               <Step title="More Job Information" />

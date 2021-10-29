@@ -43,7 +43,7 @@ const Workers = ({ filterWorkers }) => {
           </Breadcrumb>
           <div className="site-layout-background">
             <Row>
-              <Col span={6} className="Jobfilter">
+              <Col xs={24} sm={24} md={6} lg={6} xl={6} className="Jobfilter">
                 <h2>Filter By</h2>
                 <JobCategoryFilter
                   filter={filter}
@@ -80,7 +80,7 @@ const Workers = ({ filterWorkers }) => {
                 />
               </Col>
               {/*2nd part*/}
-              <Col span={17} offset={1}>
+              <Col xs={24} sm={24} md={17} lg={17} xl={17} offset={1}>
                 <SelectedFilter
                   filter={filter}
                   setFilter={setFilter}

@@ -231,14 +231,20 @@ const JobPostItem = ({
   // {
   //   console.log(poster);
   // }
+ 
+  const [size, setSize] = useState();
+  const showDefaultDrawer = () => {
+    setSize('default');
+ 
+  };
   return (
     <Row className="job_post">
       <Col span={24}>
         <Row>
-          <Col span={21}>
-            <PopupDetails job={job} />
+          <Col xs={24} sm={24} md={20} lg={20} xl={20}>
+            <PopupDetails job={job}   onClick={showDefaultDrawer}   size={size}/>
           </Col>
-          <Col span={3}>{renderButtons()}</Col>
+          <Col span={4}>{renderButtons()}</Col>
         </Row>
         <h4 style={{ color: "gray" }}>
           <UserOutlined />{" "}

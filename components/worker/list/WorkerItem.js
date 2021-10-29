@@ -89,7 +89,7 @@ const WorkerItem = ({ worker, saveWorker, isSignedIn }) => {
   return (
     <>
       <Row className="job_post">
-        <Col span={4}>
+        <Col xs={24} sm={24} md={4} lg={4} xl={4} >
           {image ? (
             <Image
               shape="circle"
@@ -107,7 +107,7 @@ const WorkerItem = ({ worker, saveWorker, isSignedIn }) => {
             />
           )}
         </Col>
-        <Col span={20}>
+        <Col xs={24} sm={24} md={20} lg={20} xl={20}>
           {/* <Row>
             <Col span={21}>
               <PopupDetails job={job} />

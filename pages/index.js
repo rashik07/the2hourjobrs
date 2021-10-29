@@ -16,6 +16,7 @@ import {
   Divider,
   BackTop,
   Typography,
+  Affix
 } from "antd";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -28,6 +29,7 @@ import {
   AreaChartOutlined,
   UsergroupAddOutlined,
   GlobalOutlined,
+  PlusCircleOutlined
 } from "@ant-design/icons";
 
 const { Content } = Layout;
@@ -38,6 +40,7 @@ const Jobs = ({ filterJobs }) => {
   let query = Object.keys(router.query)[0];
   const [filter, setFilter] = useState({});
   const [showFilterJobs, setShowFilterJobs] = useState(false);
+  const [bottom, setBottom] = useState(10);
   const showPage = useRef("job_list");
 
   useEffect(() => {
@@ -158,36 +161,40 @@ const Jobs = ({ filterJobs }) => {
           </Col>
         </Row>
 
-        <Content
-          className="site-layout"
-        
-        >
-          <h2 style={{ color: "darkblue", marginTop: "15px" }}>
-            Job Categories
-          </h2>
-          <Row>
-            <JobCategoryFilter
-              filter={filter}
-              setFilter={setFilter}
-              reload={setShowFilterJobs}
-            />
+        <Content className="site-layout-home ">
+          <div className="site-layout-background">
+            <h2 style={{ color: "darkblue", marginTop: "15px" }}>
+              Job Categories
+            </h2>
+            <Row>
+              <JobCategoryFilter
+                filter={filter}
+                setFilter={setFilter}
+                reload={setShowFilterJobs}
+              />
 
-            <Divider />
-            <Col xs={24} sm={24} md={24} lg={24} xl={24}>
-            <div
-              style={{
-                backgroundImage: `url('/img/banner2.png')`,
-                height: "280px",
-                marginBottom: "15px",
-              }}
-            >
-              <Button className="jobpost_btn">
-                <Link href="/jobs/post">Post a Job</Link>
-              </Button>
-            </div>
-            </Col>
-          </Row>
+              <Divider />
+              <Col xs={24} sm={24} md={24} lg={24} xl={24}>
+                <div
+                  style={{
+                    backgroundImage: `url('/img/banner2.png')`,
+                    height: "280px",
+                    marginBottom: "15px",
+                  }}
+                >
+                  <Button className="jobpost_btn">
+                    <Link href="/jobs/post">Post a Job</Link>
+                  </Button>
+                </div>
+              </Col>
+            </Row>
+          </div>
         </Content>
+        <Affix offsetBottom={bottom}>
+          <Button className="jobpost_btn_mobile">
+          <PlusCircleOutlined /> <Link href="/jobs/post">Post a Job</Link>
+          </Button>
+        </Affix>
 
         <Footer />
         <BackTop>
