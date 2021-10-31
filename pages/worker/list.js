@@ -10,10 +10,10 @@ import AgeFilter from "components/jobs/list/AgeFilter";
 import WorkerList from "components/worker/list/WorkerList";
 import Navbar from "../../container/navbar/newNavbar";
 import Head from "next/head";
-import React, { useState, useEffect ,useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { connect } from "react-redux";
-import { Layout, Breadcrumb, Row, Col, Divider } from "antd";
-import { useRouter } from 'next/router';
+import { Layout, Breadcrumb, Row, Col, Divider, Collapse } from "antd";
+import { useRouter } from "next/router";
 
 const { Content } = Layout;
 
@@ -21,6 +21,10 @@ const Workers = ({ filterWorkers }) => {
   const [filter, setFilter] = useState({});
   const [showFilterWorker, setShowFilterWorker] = useState(false);
   const showPage = useRef("job_list");
+  const { Panel } = Collapse;
+  function callback(key) {
+    console.log(key);
+  }
 
   useEffect(() => {
     if (_.isEmpty(filter)) {
@@ -43,7 +47,7 @@ const Workers = ({ filterWorkers }) => {
           </Breadcrumb>
           <div className="site-layout-background">
             <Row>
-              <Col xs={24} sm={24} md={6} lg={6} xl={6} className="Jobfilter">
+              <Col xs={24} sm={24} md={6} lg={6} xl={6} className="Jobfilter jobfilter_pc">
                 <h2>Filter By</h2>
                 <JobCategoryFilter
                   filter={filter}
@@ -79,6 +83,57 @@ const Workers = ({ filterWorkers }) => {
                   reload={setShowFilterWorker}
                 />
               </Col>
+              <Collapse
+                className="stepJobPostMobile"
+                defaultActiveKey={["1"]}
+                onChange={callback}
+              >
+                <Panel header="Searching Option" key="1">
+                  <Col
+                    xs={24}
+                    sm={24}
+                    md={6}
+                    lg={6}
+                    xl={6}
+                    className="Jobfilter"
+                  >
+                    <h2>Filter By</h2>
+                    <JobCategoryFilter
+                      filter={filter}
+                      setFilter={setFilter}
+                      reload={setShowFilterWorker}
+                    />
+                    {/* <JobIndustryFilter filter={filter} setFilter={setFilter} /> */}
+                    <LocationFilter
+                      filter={filter}
+                      setFilter={setFilter}
+                      reload={setShowFilterWorker}
+                      showPage={showPage}
+                    />
+
+                    <GenderFilter
+                      filter={filter}
+                      setFilter={setFilter}
+                      reload={setShowFilterWorker}
+                    />
+                    <EmploymentStatusFilter
+                      filter={filter}
+                      setFilter={setFilter}
+                      reload={setShowFilterWorker}
+                    />
+                    <ExperienceFilter
+                      filter={filter}
+                      setFilter={setFilter}
+                      reload={setShowFilterWorker}
+                    />
+                    <AgeFilter
+                      filter={filter}
+                      setFilter={setFilter}
+                      reload={setShowFilterWorker}
+                    />
+                  </Col>
+                </Panel>
+              </Collapse>
               {/*2nd part*/}
               <Col xs={24} sm={24} md={17} lg={17} xl={17} offset={1}>
                 <SelectedFilter
@@ -104,7 +159,6 @@ const Workers = ({ filterWorkers }) => {
             </Row>
           </div>
         </Content>
-     
       </Layout>
     </>
   );

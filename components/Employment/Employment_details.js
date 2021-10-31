@@ -58,14 +58,14 @@ const Employment_details= ({viewEmployment, view_employment, employment , delete
         title: 'From',
         dataIndex: 'employment_period_from',
         key: 'employment_period_from',
-        width: '150px',
+        width: '120px',
 
       },
       {
         title: 'To',
         dataIndex: 'employment_period_to',
         key: 'employment_period_to',
-        width: '150px',
+        width: '120px',
       },
       {
         title: 'Action',

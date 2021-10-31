@@ -114,10 +114,10 @@
   min-height: 100%;
 }
 
-.button_eye {
+/* .button_eye {
   position: absolute;
   right: 100px;
-}
+} */
 .profile_image {
   border-radius: 50%;
 }

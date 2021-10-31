@@ -25,7 +25,7 @@ const View_profile = ({ user_profile, view_education,view_employment ,view_proje
             <Breadcrumb.Item>Profile</Breadcrumb.Item>
             <Breadcrumb.Item>View Profile</Breadcrumb.Item>
           </Breadcrumb>
-          <div className="site-layout-background">
+          <div className="site-layout-background site-layout-background-view-profile">
             <Topsection user_profile={user_profile} />
             <Divider />
             <Row justify="left" align="top">

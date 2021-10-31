@@ -25,7 +25,6 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border: 1px solid #ffffff;
     font-weight: bold;
-    
   }
   .jobpost_btn_mobile:hover {
     background-color: darkblue;
@@ -67,5 +66,17 @@
   }
   .jobpost_btn {
     display: none;
+  }
+  .jobfilter_pc {
+    display: none;
+  }
+  .stepJobPostMobile {
+    width: 335px;
+  }
+  .site-layout-background-profile-mobile {
+    width: 985px;
+  }
+  .site-layout-background-view-profile {
+    width: 775px;
   }
 }

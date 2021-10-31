@@ -56,7 +56,6 @@ const Profile_info = ({
     console.log(fileList);
   };
 
-
   useEffect(() => {
     if (!auth.isSignedIn) {
       router.push({
@@ -124,7 +123,8 @@ const Profile_info = ({
       console.log("cover");
       formData.append("cover", values.photo[0].originFileObj);
     }
-    formData.append("photo", cover[0].originFileObj);
+    formData.append("image", cover[0].originFileObj);
+    console.log(cover[0].originFileObj);
     for (var value of formData.values()) {
       console.log(value);
     }
@@ -212,21 +212,14 @@ const Profile_info = ({
   } else {
     return (
       <>
-       <PicturesWall setImages={uploadcover} />
-        <Form
-          {...formItemLayout}
-          layout={formLayout}
-          form={form}
-          name="register"
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
-          initialValues={user_profile}
-          //setloader={setloader}
-        >
-          <Divider>
-            {" "}
-            <Title>Basic Info</Title>
-          </Divider>
+        <Divider>
+          {" "}
+          <Title>Basic Info</Title>
+        </Divider>
+
+        <div style={{ float: "right" }}>
+          <p>Upload picture</p>
+          <PicturesWall setImages={uploadcover} />
           <Link href={`/Profile/Profile_details/${user_profile.id}`}>
             <Tooltip title="View My Profile" className="button_eye">
               <Button
@@ -239,8 +232,18 @@ const Profile_info = ({
               ></Button>
             </Tooltip>
           </Link>
-
-          <Form.Item
+        </div>
+        <Form
+          {...formItemLayout}
+          layout={formLayout}
+          form={form}
+          name="register"
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+          initialValues={user_profile}
+          //setloader={setloader}
+        >
+          {/* <Form.Item
             name="photo"
             label="Upload"
             valuePropName="fileList"
@@ -250,8 +253,8 @@ const Profile_info = ({
             <Upload name="image" listType="picture" maxCount={1}>
               <Button icon={<UploadOutlined />}>Click to upload</Button>
             </Upload>
-          </Form.Item>
-          
+          </Form.Item> */}
+
           <Form.Item label="Name" name="name">
             <Input
               style={{

@@ -16,15 +16,20 @@ import ExperienceFilter from "components/jobs/list/ExperienceFilter";
 import AgeFilter from "components/jobs/list/AgeFilter";
 import { filterJobs } from "redux/actions/jobAction";
 import { SetfilterAction } from "../../redux/actions/jobAction";
-import { Layout, Breadcrumb, Row, Col,  BackTop,Divider } from "antd";
+import { Layout, Breadcrumb, Row, Col, BackTop, Divider, Collapse } from "antd";
 import Index from "../index";
 import { useRouter } from "next/router";
-import { UpOutlined} from "@ant-design/icons";
+import { UpOutlined } from "@ant-design/icons";
 
 const { Content } = Layout;
 
 const Jobs = ({ filterJobs, filterfromState, SetfilterAction }) => {
   const router = useRouter();
+  const { Panel } = Collapse;
+
+  function callback(key) {
+    console.log(key);
+  }
 
   const [filter, setFilter] = useState({});
   const [showFilterJobs, setShowFilterJobs] = useState(false);
@@ -39,7 +44,6 @@ const Jobs = ({ filterJobs, filterfromState, SetfilterAction }) => {
     textAlign: "center",
     fontSize: 14,
   };
-
 
   useEffect(() => {
     if (_.isEmpty(filter)) {
@@ -68,7 +72,7 @@ const Jobs = ({ filterJobs, filterfromState, SetfilterAction }) => {
           <div className="site-layout-background">
             <Row>
               {/*1st part*/}
-              <Col xs={24} sm={24} md={6} lg={6} xl={6} className="Jobfilter">
+              <Col xs={24} sm={24} md={6} lg={6} xl={6} className="Jobfilter jobfilter_pc">
                 <h2>Filter By</h2>
 
                 <JobCategoryFilter
@@ -115,8 +119,74 @@ const Jobs = ({ filterJobs, filterfromState, SetfilterAction }) => {
                   reload={setShowFilterJobs}
                 />
               </Col>
+              <Collapse className="stepJobPostMobile" defaultActiveKey={["1"]} onChange={callback}>
+                <Panel header="Searching Option" key="1">
+                  <Col
+                    xs={24}
+                    sm={24}
+                    md={6}
+                    lg={6}
+                    xl={6}
+                    className="Jobfilter"
+                  >
+                    <h2>Filter By</h2>
+
+                    <JobCategoryFilter
+                      filter={filter}
+                      setFilter={setFilter}
+                      reload={setShowFilterJobs}
+                    />
+                    {/* <JobIndustryFilter filter={filter} setFilter={setFilter} /> */}
+                    <LocationFilter
+                      filter={filter}
+                      setFilter={setFilter}
+                      reload={setShowFilterJobs}
+                      showPage={showPage}
+                      //   query={location}
+                    />
+                    <PostTimeFilter
+                      filter={filter}
+                      setFilter={setFilter}
+                      reload={setShowFilterJobs}
+                    />
+                    <DeadlineFilter
+                      filter={filter}
+                      setFilter={setFilter}
+                      reload={setShowFilterJobs}
+                    />
+                    <GenderFilter
+                      filter={filter}
+                      setFilter={setFilter}
+                      reload={setShowFilterJobs}
+                    />
+                    <EmploymentStatusFilter
+                      filter={filter}
+                      setFilter={setFilter}
+                      reload={setShowFilterJobs}
+                    />
+                    <ExperienceFilter
+                      filter={filter}
+                      setFilter={setFilter}
+                      reload={setShowFilterJobs}
+                    />
+                    <AgeFilter
+                      filter={filter}
+                      setFilter={setFilter}
+                      reload={setShowFilterJobs}
+                    />
+                  </Col>
+                </Panel>
+              </Collapse>
               {/*2nd part*/}
-              <Col xs={24} sm={24} md={17} lg={17} xl={17} offset={1}>
+              <Col
+                xs={24}
+                sm={24}
+                md={17}
+                lg={17}
+                xl={17}
+                offset={1}
+                className="container"
+              >
                 <SelectedFilter
                   filter={filter}
                   setFilter={setFilter}

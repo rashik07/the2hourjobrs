@@ -74,7 +74,7 @@ const Profile = ({ auth }) => {
                 <Breadcrumb.Item>Profile</Breadcrumb.Item>
                 <Breadcrumb.Item>{selector.current}</Breadcrumb.Item>
               </Breadcrumb>
-              <div className="site-layout-background">
+              <div className="site-layout-background site-layout-background-profile-mobile">
                 {clickPage(selector.current)}
               </div>
             </Content>
