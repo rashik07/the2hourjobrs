@@ -129,10 +129,10 @@ const renderItem = (item, children, saveTemporayJobPost, temp_jobpost) => {
                 ""
               ) : (
                 <>
-                  <Col>
+                  <Col xs={11} sm={11} md={8} lg={8} xl={8}> 
                     <input
                       type="number"
-                      className="form-control col-5"
+                      className="form-control "
                       placeholder="To"
                       onChange={(e) =>
                         saveTemporayJobPost({
@@ -143,12 +143,11 @@ const renderItem = (item, children, saveTemporayJobPost, temp_jobpost) => {
                       defaultValue={temp_jobpost.max_salary}
                     />
                   </Col>
-
-                  <Col> _ </Col>
-                  <Col>
+                  &mdash;
+                  <Col xs={11} sm={11} md={8} lg={8} xl={8}>
                     <input
                       type="number"
-                      className="form-control col-5"
+                      className="form-control "
                       placeholder="From"
                       onChange={(e) =>
                         saveTemporayJobPost({
@@ -162,7 +161,7 @@ const renderItem = (item, children, saveTemporayJobPost, temp_jobpost) => {
                 </>
               )}
 
-              <Col>
+              <Col xs={24} sm={24} md={24} lg={24} xl={24}>
                 <Checkbox
                   checked={temp_jobpost.negotiable}
                   onChange={(e) => {
@@ -186,7 +185,7 @@ const renderItem = (item, children, saveTemporayJobPost, temp_jobpost) => {
             <label className="form-label">Years of Experience</label>
             <br />
             <Row style={{ paddingBottom: "0px" }}>
-              <Col>
+              <Col xs={11} sm={11} md={3} lg={3} xl={3}>
                 <input
                   type="number"
                   className="form-control "
@@ -200,8 +199,8 @@ const renderItem = (item, children, saveTemporayJobPost, temp_jobpost) => {
                   defaultValue={temp_jobpost.min_experience}
                 />
               </Col>
-              <div className="col-1 mt-1">&mdash;</div>
-              <Col>
+              &mdash;
+              <Col xs={11} sm={11} md={3} lg={3} xl={3}>
                 <input
                   type="number"
                   className="form-control col-5"
@@ -329,10 +328,10 @@ const renderItem = (item, children, saveTemporayJobPost, temp_jobpost) => {
             <label className="form-label">Age</label>
             <br />
             <Row>
-              <Col>
+              <Col  xs={11} sm={11} md={3} lg={3} xl={3} >
                 <Select
                   onChange={(val) => saveTemporayJobPost({ min_age: val })}
-                  style={{ width: 200 }}
+                  style={{ width: 130 }}
                   placeholder="Minimum age"
                   defaultValue={temp_jobpost.min_age}
                   allowClear
@@ -344,11 +343,11 @@ const renderItem = (item, children, saveTemporayJobPost, temp_jobpost) => {
                   ))}
                 </Select>
               </Col>
-              <div className="col-1 mt-1">&mdash;</div>
-              <Col>
+              &mdash;
+              <Col xs={11} sm={11} md={3} lg={3} xl={3}>
                 <Select
                   onChange={(val) => saveTemporayJobPost({ max_age: val })}
-                  style={{ width: 200 }}
+                  style={{ width: 130 }}
                   placeholder="Maximum age"
                   defaultValue={temp_jobpost.max_age}
                   allowClear
@@ -386,7 +385,7 @@ const renderCategories = (categories, temp_jobpost, setValue) => {
           placeholder="Select Category"
           onChange={(value) => setValue({ category: JSON.parse(value) })}
           defaultValue={JSON.stringify(temp_jobpost.category)}
-          style={{ width: "200px" }}
+          style={{ width: "285px" }}
         >
           {categories.map((subCategory) => (
             <OptGroup

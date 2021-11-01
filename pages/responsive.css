@@ -13,6 +13,9 @@
   .jobpost_btn_mobile {
     display: none;
   }
+  #jobpost_category{
+    padding-left: 35px;
+  }
 }
 
 @media only screen and (max-width: 900px) {
@@ -78,5 +81,8 @@
   }
   .site-layout-background-view-profile {
     width: 775px;
+  }
+  #jobpost_category{
+    padding-bottom: 38px;
   }
 }

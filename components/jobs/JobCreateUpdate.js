@@ -58,7 +58,7 @@ const JobCreateUpdate = ({ getJobCategories, getEducation, editJob }) => {
           </Breadcrumb>
           <div
             className="site-layout-background"
-            style={{ padding: "15px 50px" }}
+            style={{ padding: "45px 50px" }}
           >
             <Steps
               size="medium"

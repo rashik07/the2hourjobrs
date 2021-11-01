@@ -49,7 +49,7 @@ const Step2 = ({ postStep, setPostStep, temp_jobpost }) => {
         </Row>
       </Space>
 
-      <div className="col-4 mt-4">
+      <div style={{float:"right"}}>
         <button
           onClick={() => setPostStep(postStep - 1)}
           className="btn btn-secondary mr-3"

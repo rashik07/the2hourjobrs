@@ -42,7 +42,7 @@ const Step1 = ({ postStep, setPostStep, temp_jobpost }) => {
           <Col xs={24} sm={24} md={8} lg={8} xl={8}>
             <StepsParent item="vacancy" />
           </Col>
-          <Col xs={24} sm={24} md={8} lg={8} xl={8}>
+          <Col xs={24} sm={24} md={8} lg={8} xl={8}  id="jobpost_category">
             <StepsParent item="category" />
           </Col>
           <Col xs={24} sm={24} md={8} lg={8} xl={8}>

@@ -56,6 +56,13 @@ const AnnouncementCreateForm = ({ createAnnouncement }) => {
   return (
     <>
       <Row>
+        <Col xs={24} sm={24} md={7} lg={7} xl={7} offset={1}>
+          <p>Cover image ( 1 image )</p>
+          <PicturesWall setImages={uploadcover} limit={1} />
+          <Divider></Divider>
+          <p>Gallery images ( 4 images )</p>
+          <PicturesWall setImages={uploadgallery} limit={4} />
+        </Col>
         <Col xs={24} sm={24} md={16} lg={16} xl={16}>
           <Form
             layout="vertical"
@@ -123,13 +130,6 @@ const AnnouncementCreateForm = ({ createAnnouncement }) => {
               </Button>
             </Form.Item>
           </Form>
-        </Col>
-        <Col xs={24} sm={24} md={7} lg={7} xl={7} offset={1}>
-          <p>Cover image ( 1 image )</p>
-          <PicturesWall setImages={uploadcover} limit={1} />
-          <Divider></Divider>
-          <p>Gallery images ( 4 images )</p>
-          <PicturesWall setImages={uploadgallery} limit={4} />
         </Col>
       </Row>
     </>

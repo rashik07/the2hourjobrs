@@ -131,7 +131,6 @@ const navbar = ({
       ))}
     </Row>
   );
-
   // const createPost=()=>{
   //   if (!isSignedIn) {
   //     alert("You must log in to access this feature");
