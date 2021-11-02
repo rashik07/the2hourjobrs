@@ -118,13 +118,14 @@ const Profile_info = ({
 
     formData.append("birthday", values.birthday);
 
-    if (typeof values.photo === "undefined") {
+    if (typeof values.image === "undefined") {
+      console.log("not cover");
     } else {
       console.log("cover");
-      formData.append("cover", values.photo[0].originFileObj);
+      formData.append("image", cover[0].originFileObj);
+      console.log(cover[0].originFileObj);
     }
-    formData.append("image", cover[0].originFileObj);
-    console.log(cover[0].originFileObj);
+   
     for (var value of formData.values()) {
       console.log(value);
     }

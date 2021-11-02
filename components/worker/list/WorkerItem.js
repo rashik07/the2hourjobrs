@@ -67,6 +67,7 @@ const WorkerItem = ({ worker, saveWorker, isSignedIn }) => {
   const {
     id,
     name,
+    hide_phone,
     username,
     phone,
     bio,
@@ -75,6 +76,8 @@ const WorkerItem = ({ worker, saveWorker, isSignedIn }) => {
     address,
     image,
   } = worker;
+
+  console.log(hide_phone);
 
   const router = useRouter();
 
@@ -89,7 +92,7 @@ const WorkerItem = ({ worker, saveWorker, isSignedIn }) => {
   return (
     <>
       <Row className="job_post">
-        <Col xs={24} sm={24} md={4} lg={4} xl={4} >
+        <Col xs={24} sm={24} md={4} lg={4} xl={4}>
           {image ? (
             <Image
               shape="circle"
@@ -133,14 +136,16 @@ const WorkerItem = ({ worker, saveWorker, isSignedIn }) => {
 
           <p>
             {/* <EditOutlined /> {getEducation(job.education)} */}
-            <PhoneFilled /> {"  "} {phone}
+            {hide_phone== true
+            ? " "
+            :( phone)}
             {"      "}
             <HomeFilled /> {"  "}
             {email}
           </p>
 
           <p>
-            <ScheduleOutlined />{" "}{address}
+            <ScheduleOutlined /> {address}
             {/* {getExperience(job.min_experience, job.max_experience)} */}
           </p>
         </Col>

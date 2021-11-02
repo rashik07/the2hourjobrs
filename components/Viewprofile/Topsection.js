@@ -4,22 +4,25 @@ import { updatePhone } from "@/redux/actions/userAction";
 import { Layout, Row, Col, Image, Typography, Space } from "antd";
 import { PhoneFilled, HomeFilled } from "@ant-design/icons";
 
-const Topsection = ({ updateProfile, user_profile ,updatePhone,edit_phone}) => {
+const Topsection = ({
+  updateProfile,
+  user_profile,
+  updatePhone,
+  edit_phone,
+}) => {
   const { Text, Link, Title } = Typography;
   const { Content } = Layout;
-
 
   return (
     <div>
       <Row justify="center" align="top">
         <Col span={4}>
-          {user_profile.image  ? (
+          {user_profile.image ? (
             <Image
               shape="circle"
               width={100}
               height={100}
               src={user_profile.image}
-             
             />
           ) : (
             <Image
@@ -36,7 +39,9 @@ const Topsection = ({ updateProfile, user_profile ,updatePhone,edit_phone}) => {
           <Space>
             <Text>
               <PhoneFilled /> {"  "}
-              {user_profile.phone}
+              {user_profile.hide_phone==true
+                ? " "
+                : (user_profile.phone)}
             </Text>
             <Text>
               <HomeFilled /> {"  "}
@@ -59,15 +64,10 @@ const Topsection = ({ updateProfile, user_profile ,updatePhone,edit_phone}) => {
 };
 const mapStateToProps = (state) => {
   return {
- 
     edit_phone: state.user.edit_phone,
-    
   };
 };
 
-
 export default connect(mapStateToProps, {
-
-  updatePhone
+  updatePhone,
 })(Topsection);
-

@@ -11,7 +11,6 @@ const Mainsection = ({
   updatePhone,
   edit_phone,
 }) => {
- 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const showModal = () => {
@@ -215,7 +214,11 @@ const Mainsection = ({
         onCancel={handleCancel}
         footer={null}
       >
-        <p><a href={`tel:${user_profile.phone}`}>{user_profile.phone}</a></p>
+        <p>
+        {user_profile.hide_phone==true
+        ?" " : <a href={`tel:${user_profile.phone}`}>{user_profile.phone}</a>
+        }
+        </p>
         <p>
           <a href={`mailto:${user_profile.email}`}>{user_profile.email}</a>
         </p>

@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { Button, Tooltip } from "antd";
-import {
-  FacebookFilled,
-  YoutubeFilled,
-  GoogleCircleFilled,
-  DownloadOutlined,
-} from "@ant-design/icons";
+import { Button } from "antd";
+import {  DownloadOutlined } from "@ant-design/icons";
 import { viewSinglePreferedCategories } from "redux/actions/preferedcategoriesAction";
 import {
   FacebookShareButton,
@@ -156,9 +151,7 @@ const Sidesection = ({
         <span style={{ fontWeight: "bold" }}>Prefered Location: </span>
         {location_list}
       </p> */}
-      <p>
-        {resume_link()}
-      </p>
+      <p>{resume_link()}</p>
       <div
         style={{
           background: "#0000",
