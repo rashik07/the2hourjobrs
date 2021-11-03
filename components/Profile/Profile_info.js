@@ -77,6 +77,13 @@ const Profile_info = ({
     }
   }, [loader]);
   // console.log(edit_phone);
+  const uploadPhoto = (values) => {
+    const formData = new FormData();
+    formData.append("image", cover[0].originFileObj);
+    console.log(cover[0].originFileObj);
+    editUserProfile(formData, user_profile.id);
+    setloader(true);
+  };
 
   const onFinish = (values) => {
     const formData = new FormData();
@@ -118,14 +125,14 @@ const Profile_info = ({
 
     formData.append("birthday", values.birthday);
 
-    if (typeof values.image === "undefined") {
+    if (typeof values.cover === "undefined") {
       console.log("not cover");
     } else {
       console.log("cover");
       formData.append("image", cover[0].originFileObj);
       console.log(cover[0].originFileObj);
     }
-   
+
     for (var value of formData.values()) {
       console.log(value);
     }
@@ -221,6 +228,14 @@ const Profile_info = ({
         <div style={{ float: "right" }}>
           <p>Upload picture</p>
           <PicturesWall setImages={uploadcover} />
+          <Button
+            onClick={() =>uploadPhoto()
+            }
+            type="primary"
+            style={{marginRight:"10px"}}
+          >
+              Save Picture
+          </Button>
           <Link href={`/Profile/Profile_details/${user_profile.id}`}>
             <Tooltip title="View My Profile" className="button_eye">
               <Button

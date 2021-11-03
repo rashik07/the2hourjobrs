@@ -33,7 +33,6 @@ const JobPostItem = ({
   saveJob,
   deleteJob,
   getSelfPostedJobs,
-
   show_save_button,
   self_posted_jobs,
   getAppliedJobsPerson,

@@ -129,10 +129,9 @@ const JobDetail = ({
   const [user, setUser] = useState(null);
   //  console.log(user);
   useEffect(() => {
-    if(isSignedIn){
+    if (isSignedIn) {
       getAppliedJobsPerson(temp_job).then((u) => setUser(u));
     }
-    
   }, [temp_job]);
 
   console.log(temp_job);
@@ -166,6 +165,13 @@ const JobDetail = ({
             <Descriptions.Item label="Title" labelStyle={labelStyle}>
               {temp_job.title}
             </Descriptions.Item>
+
+            <Descriptions.Item label="Job Poster" labelStyle={labelStyle}>
+              <Link href={`/Profile/Profile_details/${temp_job.poster.id}`}>
+                {temp_job.poster.username}
+              </Link>
+            </Descriptions.Item>
+
             <Descriptions.Item label="Vacancy" labelStyle={labelStyle}>
               {temp_job.vacancy}
             </Descriptions.Item>
@@ -209,8 +215,13 @@ const JobDetail = ({
             <Descriptions.Item label="Age" labelStyle={labelStyle}>
               {renderAge(temp_job.min_age, temp_job.max_age)}
             </Descriptions.Item>
-
-            {renderEducation(education, temp_job.education)}
+            <Descriptions.Item label="Education" labelStyle={labelStyle}>
+              {temp_job.education.map(() => {
+                return temp_job.education[0].name;
+              // return  console.log(temp_job.education[0].name);
+              })}
+              {/* {renderEducation(education, temp_job.education)} */}
+            </Descriptions.Item>
           </Descriptions>
         );
 
