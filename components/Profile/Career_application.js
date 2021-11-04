@@ -60,7 +60,7 @@ const Career_application = ({
       formData.append("resume", values.upload[0].originFileObj);
     }
 
-    // console.log("Received values of form: ", values);
+     console.log("Received values of form: ", values);
     editUserProfile(formData, user_profile.id);
     alert("successfully saved");
 
