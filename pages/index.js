@@ -181,6 +181,7 @@ const Jobs = ({ filterJobs }) => {
                     height: "280px",
                     marginBottom: "15px",
                   }}
+                  className="stepJobPostPc"
                 >
                   <Button className="jobpost_btn">
                     <Link href="/jobs/post">Post a Job</Link>

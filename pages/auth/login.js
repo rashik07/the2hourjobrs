@@ -103,7 +103,7 @@ const Login = ({
                 className="d-none d-md-block forgot-password pb-10 mb-5"
                 data-v-e52648b8
               >
-                <a href="#">Forgot password?</a>
+                <Link href="/auth/Forgot_password">Forgot password?</Link>
               </div>
             </div>
             <div>
@@ -128,14 +128,17 @@ const Login = ({
                 </Link>
                 {/* <button onClick={() => handleOnClick(facebookProvider)}>facebook</button> */}
               </div>
-              <div className="d-grid gap-2 d-flex social_media_btn" style={{ height: "50px",marginTop:"10px"}}>
+              <div
+                className="d-grid gap-2 d-flex social_media_btn"
+                style={{ height: "50px", marginTop: "10px" }}
+              >
                 <GoogleLogin
                   clientId={REACT_APP_GOOGLE_CLIENT_ID}
                   buttonText="Join with Google"
                   onSuccess={responseGoogle}
                   onFailure={responseGoogle}
                   cookiePolicy={"single_host_origin"}
-                  style={{  width:"194px"}}
+                  style={{ width: "194px" }}
                 />
 
                 <FacebookLogin
