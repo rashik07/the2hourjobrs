@@ -73,7 +73,7 @@ const Sidesection = ({
       return "  ";
     } else
       return (
-        <a href={"http://127.0.0.1:8000" + user_profile.resume} download>
+        <a href={user_profile.resume} download>
           <Button
             type="primary"
             icon={

@@ -193,7 +193,7 @@ const Career_application = ({
           >
             <Upload name="resume" listType="picture" maxCount={1}>
               <Button icon={<UploadOutlined />}>Click to upload</Button> <br />
-              <a href={"http://127.0.0.1:8000" + user_profile.resume} download>
+              <a href={user_profile.resume} download>
                 Click to download
               </a>
             </Upload>
