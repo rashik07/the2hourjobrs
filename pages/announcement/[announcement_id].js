@@ -26,11 +26,22 @@ import { getSpecificAnnouncement } from "../../redux/actions/announcementAction"
 import dateformat from "dateformat";
 import Link from "next/link";
 const { Content } = Layout;
+import {
+  FacebookShareButton,
+  WhatsappShareButton,
+  WhatsappIcon,
+  FacebookIcon,
+  FacebookMessengerShareButton,
+  FacebookMessengerIcon,
+  EmailShareButton,
+  EmailIcon,
+} from "react-share";
 
 const AnnouncementDetails = ({ getSpecificAnnouncement, announcment }) => {
   const router = useRouter();
   const [loader, setLoader] = useState(true);
   const { announcement_id } = router.query;
+  const shareUrl = `https://www.google.com/announcement/${announcement_id}`;
 
   useEffect(() => {
     getSpecificAnnouncement(announcement_id).then(() => {
@@ -170,6 +181,46 @@ const AnnouncementDetails = ({ getSpecificAnnouncement, announcment }) => {
             style={{ padding: 24, minHeight: 380 }}
           >
             {renderAnnounements()}
+            <div
+        style={{
+          background: "#0000",
+          height: "100vh",
+          width: "100%",
+        }}
+      >
+        <h1>I hope you like it</h1>
+
+        <FacebookShareButton
+          url={shareUrl}
+          quote={"Title or jo bhi aapko likhna ho"}
+          hashtag={"#portfolio..."}
+        >
+          <FacebookIcon size={40} round={true} />
+        </FacebookShareButton>
+
+        <WhatsappShareButton
+          url={shareUrl}
+          quote={"Title or jo bhi aapko likhna ho"}
+          hashtag={"#portfolio..."}
+        >
+          <WhatsappIcon size={40} round={true} />
+        </WhatsappShareButton>
+        <EmailShareButton
+          url={shareUrl}
+          quote={"Title or jo bhi aapko likhna ho"}
+          hashtag={"#portfolio..."}
+        >
+          <EmailIcon size={40} round={true} />
+        </EmailShareButton>
+        <FacebookMessengerShareButton
+          url={shareUrl}
+          quote={"Title or jo bhi aapko likhna ho"}
+          hashtag={"#portfolio..."}
+        >
+          <FacebookMessengerIcon size={40} round={true} />
+        </FacebookMessengerShareButton>
+      </div>
+            
           </div>
         </Content>
         <Footer />

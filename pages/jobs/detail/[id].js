@@ -21,7 +21,7 @@ const JobPostDetail = ({ job, getJobDetails }) => {
       sethasData(true);
     }
   }, [job]);
- console.log(job);
+ //console.log(job);
  
   if (hasData) {
     return <JobDetail temp_job={job} />;

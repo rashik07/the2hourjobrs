@@ -42,6 +42,7 @@ const JobPostItem = ({
 
   const { id, title, poster, applied, saved, applied_saved_id } = job;
 
+
   const btn_disable = userid === poster.id ? "disabled" : "";
 
   const [appliedStatus, setAppliedStatus] = useState(applied);
