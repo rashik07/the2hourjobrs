@@ -1,13 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Row, Col, Image, Divider, Button, Space, Tabs } from "antd";
-import {
-  PhoneOutlined,
-  ScheduleOutlined,
-  HomeOutlined,
-  UserOutlined,
-  FieldTimeOutlined,
-} from "@ant-design/icons";
+import { ScheduleOutlined, UserOutlined } from "@ant-design/icons";
 import {
   getAllAnnouncement,
   getAllSavedAnnouncement,
@@ -52,6 +46,7 @@ class AllAnnouncements extends Component {
                   <Row>
                     <Col span={12} offset={6}>
                       {this.renderimage(announcment)}
+                      {console.log(announcment)}
                     </Col>
                   </Row>
                 </Col>
@@ -67,7 +62,12 @@ class AllAnnouncements extends Component {
                   <p>
                     <Space size={"large"}>
                       <div>
-                        <UserOutlined /> {announcment.user.name}
+                        <UserOutlined />{" "}
+                        <Link
+                          href={`/Profile/Profile_details/${announcment.user.id}`}
+                        >
+                          {announcment.user.name}
+                        </Link>
                       </div>
                       {/* <div>
                       <FieldTimeOutlined /> {announcment.created_timestamp}
@@ -169,9 +169,6 @@ class AllAnnouncements extends Component {
                     </Space>
                   </p>
                   <p>{announcment.announcement_data.description}</p>
-                  {/* <p>
-                  <PhoneOutlined /> {announcment.contact_information}
-                </p> */}
                 </Col>
                 <Col
                   xs={24}
@@ -215,6 +212,7 @@ class AllAnnouncements extends Component {
       });
     }
   }
+
   render() {
     return (
       <>

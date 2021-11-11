@@ -60,6 +60,7 @@ const AllAnnouncements = ({
                   <Row>
                     <Col span={12} offset={6}>
                       {renderimage(announcment)}
+                      {console.log(announcment)}
                     </Col>
                   </Row>
                 </Col>

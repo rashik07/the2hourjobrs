@@ -108,8 +108,12 @@ const AnnouncementDetails = ({ getSpecificAnnouncement, announcment }) => {
           </Col>
           <Col xs={24} sm={24} md={12} lg={12} xl={12} offset={1}>
             <h2>{announcment.title}</h2>
-            <p style={{ marginBottom: "1px", color: "blue" }}>
-              posted by {announcment.user.name}
+            <p style={{ marginBottom: "1px" }}>
+              posted by{" "}
+            
+              <Link href={`/Profile/Profile_details/${announcment.user.id}`}>
+                {announcment.user.name}
+              </Link>
             </p>
             <p>
               {/* <EnvironmentOutlined /> {announcment.user.profile.address} */}
@@ -118,7 +122,7 @@ const AnnouncementDetails = ({ getSpecificAnnouncement, announcment }) => {
             <h3>Description</h3>
             <p>{announcment.description}</p>
             <Divider />
-            <h3>Other annoucement from the same user</h3>
+            {/* <h3>Other annoucement from the same user</h3> */}
           </Col>
           <Col xs={24} sm={24} md={4} lg={4} xl={4} offset={1}>
             <h3>location</h3>
@@ -182,45 +186,44 @@ const AnnouncementDetails = ({ getSpecificAnnouncement, announcment }) => {
           >
             {renderAnnounements()}
             <div
-        style={{
-          background: "#0000",
-          height: "100vh",
-          width: "100%",
-        }}
-      >
-        <h1>I hope you like it</h1>
+              style={{
+                background: "#0000",
+                height: "100vh",
+                width: "100%",
+              }}
+            >
+              <h1>I hope you like it</h1>
 
-        <FacebookShareButton
-          url={shareUrl}
-          quote={"Title or jo bhi aapko likhna ho"}
-          hashtag={"#portfolio..."}
-        >
-          <FacebookIcon size={40} round={true} />
-        </FacebookShareButton>
+              <FacebookShareButton
+                url={shareUrl}
+                quote={"Title or jo bhi aapko likhna ho"}
+                hashtag={"#portfolio..."}
+              >
+                <FacebookIcon size={40} round={true} />
+              </FacebookShareButton>
 
-        <WhatsappShareButton
-          url={shareUrl}
-          quote={"Title or jo bhi aapko likhna ho"}
-          hashtag={"#portfolio..."}
-        >
-          <WhatsappIcon size={40} round={true} />
-        </WhatsappShareButton>
-        <EmailShareButton
-          url={shareUrl}
-          quote={"Title or jo bhi aapko likhna ho"}
-          hashtag={"#portfolio..."}
-        >
-          <EmailIcon size={40} round={true} />
-        </EmailShareButton>
-        <FacebookMessengerShareButton
-          url={shareUrl}
-          quote={"Title or jo bhi aapko likhna ho"}
-          hashtag={"#portfolio..."}
-        >
-          <FacebookMessengerIcon size={40} round={true} />
-        </FacebookMessengerShareButton>
-      </div>
-            
+              <WhatsappShareButton
+                url={shareUrl}
+                quote={"Title or jo bhi aapko likhna ho"}
+                hashtag={"#portfolio..."}
+              >
+                <WhatsappIcon size={40} round={true} />
+              </WhatsappShareButton>
+              <EmailShareButton
+                url={shareUrl}
+                quote={"Title or jo bhi aapko likhna ho"}
+                hashtag={"#portfolio..."}
+              >
+                <EmailIcon size={40} round={true} />
+              </EmailShareButton>
+              <FacebookMessengerShareButton
+                url={shareUrl}
+                quote={"Title or jo bhi aapko likhna ho"}
+                hashtag={"#portfolio..."}
+              >
+                <FacebookMessengerIcon size={40} round={true} />
+              </FacebookMessengerShareButton>
+            </div>
           </div>
         </Content>
         <Footer />

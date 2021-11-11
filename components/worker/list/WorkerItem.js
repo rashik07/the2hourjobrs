@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
-
 import { Layout, Breadcrumb, Row, Col, Image } from "antd";
 import {
   PhoneOutlined,

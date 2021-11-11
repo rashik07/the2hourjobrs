@@ -228,9 +228,6 @@ const JobPostItem = ({
       </>
     );
   };
-  // {
-  //   console.log(poster);
-  // }
  
   const [size, setSize] = useState();
   const showDefaultDrawer = () => {
