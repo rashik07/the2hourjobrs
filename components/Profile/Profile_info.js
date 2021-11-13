@@ -274,7 +274,7 @@ const Profile_info = ({
           <Form.Item label="Name" name="name">
             <Input
               style={{
-                width: "100%",
+                width: "70%",
                 color: "black",
               }}
               placeholder="name"
@@ -283,7 +283,7 @@ const Profile_info = ({
           <Form.Item label="User Name" name="username">
             <Input
               style={{
-                width: "100%",
+                width: "70%",
                 color: "black",
               }}
               placeholder="name"
@@ -306,7 +306,7 @@ const Profile_info = ({
           >
             <Input
               style={{
-                width: "100%",
+                width: "70%",
                 color: "black",
               }}
               placeholder="e-mail"
@@ -328,7 +328,7 @@ const Profile_info = ({
               // addonBefore={prefixSelector}
 
               style={{
-                width: "35%",
+                width: "45%",
                 color: "black",
                 marginRight: "3px",
               }}
@@ -343,7 +343,7 @@ const Profile_info = ({
               span: 12,
             }}
           >
-            <Checkbox>Hide phone no</Checkbox>
+            <Checkbox>Hide phone number</Checkbox>
           </Form.Item>
 
           <Form.Item

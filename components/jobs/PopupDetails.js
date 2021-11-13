@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { Drawer, Button, Divider, Row, Col } from "antd";
 import dateformat from "dateformat";
-import { Descriptions } from "antd";
+import { Descriptions, Space } from "antd";
 import Link from "next/link";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import { getAppliedJobsPerson } from "@/redux/actions/jobAction";
 
-const PopupDetails = ({ job, getAppliedJobsPerson, applied_jobs_person,isSignedIn ,size}) => {
+const PopupDetails = ({
+  job,
+  getAppliedJobsPerson,
+  applied_jobs_person,
+  isSignedIn,
+  size,
+}) => {
   const router = useRouter();
   const [visible, setVisible] = useState(false);
   //  console.log(job);
@@ -19,10 +25,9 @@ const PopupDetails = ({ job, getAppliedJobsPerson, applied_jobs_person,isSignedI
     setVisible(false);
   };
   useEffect(() => {
-    if(isSignedIn){
+    if (isSignedIn) {
       getAppliedJobsPerson(job);
     }
-    
   }, []);
   const appliedPerson = () => {
     return applied_jobs_person.map((applied_jobs_person) => {
@@ -45,10 +50,15 @@ const PopupDetails = ({ job, getAppliedJobsPerson, applied_jobs_person,isSignedI
         title={job.title}
         placement="right"
         width="900"
-        closable={false}
+       
         onClose={onClose}
         visible={visible}
         size={size}
+        extra={
+          <Space>
+            <Button onClick={onClose}>Cancel</Button>
+          </Space>
+        }
       >
         <button
           onClick={() => router.push(`/jobs/detail/${job.id}`)}

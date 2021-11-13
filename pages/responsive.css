@@ -22,6 +22,11 @@
   /* .site-layout {
     margin: 16px 30px !important;
   } */
+  .ant-drawer .ant-drawer-content {
+    width: 39%;
+    height: 100%;
+    margin: 0px 550px;
+}
   .jobpost_btn_mobile {
     background-color: #ffc800;
     color: #1e1e1e;
