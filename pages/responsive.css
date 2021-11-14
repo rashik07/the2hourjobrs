@@ -13,7 +13,7 @@
   .jobpost_btn_mobile {
     display: none;
   }
-  #jobpost_category{
+  #jobpost_category {
     padding-left: 35px;
   }
 }
@@ -22,11 +22,14 @@
   /* .site-layout {
     margin: 16px 30px !important;
   } */
+  .form-signin {
+    margin-top: 25%;
+  }
   .ant-drawer .ant-drawer-content {
     width: 39%;
     height: 100%;
     margin: 0px 550px;
-}
+  }
   .jobpost_btn_mobile {
     background-color: #ffc800;
     color: #1e1e1e;
@@ -87,7 +90,7 @@
   .site-layout-background-view-profile {
     width: 775px;
   }
-  #jobpost_category{
+  #jobpost_category {
     padding-bottom: 38px;
   }
 }

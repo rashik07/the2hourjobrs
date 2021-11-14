@@ -142,7 +142,7 @@ const AnnouncementDetails = ({ getSpecificAnnouncement, announcment }) => {
             </p>
 
             <Divider />
-            <h3>User details</h3>
+            {/* <h3>User details</h3>
             <p>
               Phone:{" "}
               {announcment.user.phone == null ? "-" : announcment.user.phone}
@@ -153,7 +153,7 @@ const AnnouncementDetails = ({ getSpecificAnnouncement, announcment }) => {
             </p>
             <p>
               Bio: {announcment.user.bio == null ? "-" : announcment.user.bio}
-            </p>
+            </p> */}
           </Col>
         </Row>
       );

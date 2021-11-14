@@ -46,7 +46,7 @@ class AllAnnouncements extends Component {
                   <Row>
                     <Col span={12} offset={6}>
                       {this.renderimage(announcment)}
-                      {console.log(announcment)}
+                      {/* {console.log(announcment)} */}
                     </Col>
                   </Row>
                 </Col>
@@ -108,6 +108,7 @@ class AllAnnouncements extends Component {
                       <Button
                         block
                         style={{ backgroundColor: "black", color: "white" }}
+                        onClick={()=>console.log("click")}
                       >
                         Save
                       </Button>
