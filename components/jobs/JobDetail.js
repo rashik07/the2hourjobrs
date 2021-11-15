@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import { connect } from "react-redux";
-import { Descriptions, Layout, Breadcrumb, Typography } from "antd";
+import { Descriptions, Layout, Breadcrumb, Typography, Button } from "antd";
 import dateformat from "dateformat";
 import Navbar from "container/navbar/newNavbar";
-import { getAppliedJobsPerson,applyJob } from "@/redux/actions/jobAction";
+import { getAppliedJobsPerson, applyJob } from "@/redux/actions/jobAction";
 import Link from "next/link";
 
 const renderJobLocation = (inside_dhaka, locations) => {
@@ -118,18 +118,17 @@ const renderEducation = (education, job_post_education) => {
 };
 
 const JobDetail = ({
-  
   temp_job,
   education,
   getAppliedJobsPerson,
   applied_jobs_person,
   userid,
   isSignedIn,
-  applyJob
+  applyJob,
 }) => {
   // const { Paragraph, Title } = Typography;
   const [user, setUser] = useState(null);
- 
+
   useEffect(() => {
     if (isSignedIn) {
       getAppliedJobsPerson(temp_job).then((u) => setUser(u));
@@ -220,13 +219,11 @@ const JobDetail = ({
             <Descriptions.Item label="Education" labelStyle={labelStyle}>
               {temp_job.education.map(() => {
                 return temp_job.education[0].name;
-              // return  console.log(temp_job.education[0].name);
+                // return  console.log(temp_job.education[0].name);
               })}
               {/* {renderEducation(education, temp_job.education)} */}
             </Descriptions.Item>
           </Descriptions>
-          
-   
         );
 
       default:
@@ -241,19 +238,17 @@ const JobDetail = ({
 
   const btn_disable = userid === poster.id ? "disabled" : "";
   const [appliedStatus, setAppliedStatus] = useState(applied);
-  
+  console.log(temp_job);
   const applyJobBtnClick = () => {
     if (!isSignedIn) {
       alert("You must log in to access this feature");
-      
-    }else{
-    console.log(userid);
-    applyJob(id, userid, appliedStatus,setAppliedStatus);
-    alert("successfully");
+    } else {
+      console.log(appliedStatus);
+      applyJob(id, userid, appliedStatus, setAppliedStatus);
+      // alert("successfully");
     }
   };
   const applyShow = () => {
-    
     if (appliedStatus) {
       return (
         <Button
@@ -274,7 +269,7 @@ const JobDetail = ({
       </Button>
     );
   };
-  
+
   return (
     <>
       <Head>
@@ -295,18 +290,14 @@ const JobDetail = ({
               {renderItem("job_detail")} <hr />
               {renderItem("employee_requirement")}
               {applyShow()}
-                   <Button>hghg</Button>
-
               {typeof applied_jobs_person == "undefined" ? (
                 ""
               ) : (
                 <>
                   <span style={{ fontWeight: "bold" }}>Applied Person:</span>{" "}
                   {userid == applied_jobs_person.id ? appliedPerson() : ""}
-             
                 </>
               )}
-               
             </div>
           </div>
         </Content>
@@ -324,6 +315,7 @@ const mapStateToProps = (state) => {
   };
 };
 export default connect(mapStateToProps, {
-  getAppliedJobsPerson, applyJob
+  getAppliedJobsPerson,
+  applyJob,
 })(JobDetail);
 //export default connect(mapStateToProps)(JobDetail);
