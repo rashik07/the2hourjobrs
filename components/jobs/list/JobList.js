@@ -31,7 +31,7 @@ const JobList = ({
   }
 
   if (all_jobs)
-    return all_jobs.map((job) => {
+    return all_jobs.reverse().map((job) => {
       return <JobPostItem key={job.id} job={job} />;
     });
 

@@ -41,7 +41,7 @@ const JobPostItem = ({
   const router = useRouter();
 
   const { id, title, poster, applied, saved, applied_saved_id } = job;
-
+  console.log(job);
 
   const btn_disable = userid === poster.id ? "disabled" : "";
 
@@ -208,7 +208,7 @@ const JobPostItem = ({
 
     return (
       <>
-        {/* {applyShow()} */}
+        {applyShow()}
 
         {saveShow()}
 

@@ -238,7 +238,7 @@ const JobDetail = ({
 
   const btn_disable = userid === poster.id ? "disabled" : "";
   const [appliedStatus, setAppliedStatus] = useState(applied);
-  console.log(temp_job);
+  console.log(applied_jobs_person);
   const applyJobBtnClick = () => {
     if (!isSignedIn) {
       alert("You must log in to access this feature");
@@ -289,13 +289,14 @@ const JobDetail = ({
             <div className="text-secondary">
               {renderItem("job_detail")} <hr />
               {renderItem("employee_requirement")}
-              {applyShow()}
+              {/* {applyShow()} */}
               {typeof applied_jobs_person == "undefined" ? (
                 ""
               ) : (
                 <>
-                  <span style={{ fontWeight: "bold" }}>Applied Person:</span>{" "}
-                  {userid == applied_jobs_person.id ? appliedPerson() : ""}
+                {userid == poster.id ?
+                  <span style={{ fontWeight: "bold" }}>Applied Person:{appliedPerson()}</span>: ""}
+                  {/* {appliedPerson()} */}
                 </>
               )}
             </div>
