@@ -69,7 +69,7 @@ const Sidesection = ({
       );
   };
   const resume_link = () => {
-    if (user_profile.resume == "null" || user_profile.resume == null) {
+    if (user_profile.resume == "null" || user_profile.resume == null || user_profile.resume == false) {
       return "  ";
     } else
       return (

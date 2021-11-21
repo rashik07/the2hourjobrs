@@ -11,9 +11,9 @@ import Link from "next/link";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import PopupDetails from "./PopupDetails";
-import { Modal, Button } from "antd";
+import { Modal, Button, Pagination } from "antd";
 import { ExclamationCircleOutlined, PushpinFilled } from "@ant-design/icons";
-import { Row, Col } from "antd";
+import { Row, Col, List } from "antd";
 import {
   PhoneOutlined,
   ScheduleOutlined,
@@ -86,20 +86,18 @@ const JobPostItem = ({
   const applyJobBtnClick = () => {
     if (!isSignedIn) {
       alert("You must log in to access this feature");
-      
-    }else{
-    console.log(userid);
-    applyJob(id, userid, appliedStatus,setAppliedStatus);
-    alert("successfully");
+    } else {
+      console.log(userid);
+      applyJob(id, userid, appliedStatus, setAppliedStatus);
+      alert("successfully");
     }
   };
 
   const saveJobBtnClick = () => {
     if (!isSignedIn) {
       alert("You must log in to access this feature");
-      
-    }else{
-    saveJob(id, userid, savedStatus, setSavedStatus, applied_saved_id);
+    } else {
+      saveJob(id, userid, savedStatus, setSavedStatus, applied_saved_id);
     }
   };
   const deleteJobBtnClick = () => {
@@ -138,7 +136,6 @@ const JobPostItem = ({
   };
 
   const applyShow = () => {
-    
     if (appliedStatus) {
       return (
         <Button
@@ -228,52 +225,53 @@ const JobPostItem = ({
       </>
     );
   };
- 
+
   const [size, setSize] = useState();
   const showDefaultDrawer = () => {
-    setSize('default');
- 
+    setSize("default");
   };
   return (
-    <Row className="job_post">
-      <Col span={24}>
-        <Row>
-          <Col xs={24} sm={24} md={20} lg={20} xl={20}>
-            <PopupDetails job={job}   onClick={showDefaultDrawer}   size={size}/>
-          </Col>
-          <Col span={4}>{renderButtons()}</Col>
-        </Row>
-        <h4 style={{ color: "gray" }}>
-          <UserOutlined />{" "}
-          <Link href={`/Profile/Profile_details/${poster.id}`}>
-            {poster.username}
-          </Link>{" "}
-          <EnvironmentOutlined /> {getLocations(job.job_location)}
-        </h4>
-        {/* onClick={() => router.push(`/jobs/detail/${job.id}`)} */}
-        {/* <p style={{ marginTop: "1rem", marginBottom: "1rem" }}>
+    <>
+      <Row className="job_post">
+        <Col span={24}>
+          <Row>
+            <Col xs={24} sm={24} md={20} lg={20} xl={20}>
+              <PopupDetails job={job} onClick={showDefaultDrawer} size={size} />
+            </Col>
+            <Col span={4}>{renderButtons()}</Col>
+          </Row>
+          <h4 style={{ color: "gray" }}>
+            <UserOutlined />{" "}
+            <Link href={`/Profile/Profile_details/${poster.id}`}>
+              {poster.username}
+            </Link>{" "}
+            <EnvironmentOutlined /> {getLocations(job.job_location)}
+          </h4>
+          {/* onClick={() => router.push(`/jobs/detail/${job.id}`)} */}
+          {/* <p style={{ marginTop: "1rem", marginBottom: "1rem" }}>
           {job.skills} {" "}
         </p> */}
 
-        <p>
-          <EditOutlined /> {getEducation(job.education)}
-        </p>
-        <p>
-          <ScheduleOutlined />{" "}
-          {getExperience(job.min_experience, job.max_experience)}
-        </p>
-        <p>
-          <CalendarOutlined /> Deadline: {job.deadline}
-        </p>
-        {/* {appliedPerson()} */}
-      </Col>
-    </Row>
+          <p>
+            <EditOutlined /> {getEducation(job.education)}
+          </p>
+          <p>
+            <ScheduleOutlined />{" "}
+            {getExperience(job.min_experience, job.max_experience)}
+          </p>
+          <p>
+            <CalendarOutlined /> Deadline: {job.deadline}
+          </p>
+          {/* {appliedPerson()} */}
+        </Col>
+      </Row>
+      
+    </>
   );
 };
 
 const mapStateToProps = (state) => {
   return {
-    
     userid: state.auth.id,
     isSignedIn: state.auth.isSignedIn,
     self_posted_jobs: Object.values(state.job.self_posted_jobs),

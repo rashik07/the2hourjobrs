@@ -32,6 +32,7 @@ const Career_application = ({
 }) => {
   const [user_profile, setuser_profile] = useState([]);
   const [loading, setloading] = useState(true);
+  console.log(user_profile);
   useEffect(() => {
     if (!auth.isSignedIn) {
       router.push({
