@@ -1,4 +1,9 @@
 @media only screen and (min-width: 900px) {
+  .applied_person{
+    font-weight: bold;
+    display:flex;
+   
+  }
   .stepJobPostMobile {
     display: none;
   }
@@ -22,6 +27,10 @@
   /* .site-layout {
     margin: 16px 30px !important;
   } */
+  .applied_person{
+    font-weight: bold;
+    display:grid !important;
+  }
   .form-signin {
     margin-top: 25%;
   }

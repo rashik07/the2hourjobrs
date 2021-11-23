@@ -17,7 +17,7 @@ const renderJobLocation = (inside_dhaka, locations) => {
   locations.forEach((element) => extract_location.push(element.name));
 
   locations = extract_location.join(", ");
-  locations += ` (${inside_dhaka})`;
+  // locations += ` (${inside_dhaka})`;
 
   return (
     <Descriptions.Item label="Job location" labelStyle={{ fontWeight: 700 }}>
@@ -146,13 +146,14 @@ const JobDetail = ({
       //  console.log(user);
 
       return (
-        <Link href={`/Profile/Profile_details/${applied_jobs_person.user.id}`}>
-          <a>
-            {" "}
-            {applied_jobs_person.user.username}
-            {", "}
-          </a>
-        </Link>
+        <div style={{ marginLeft: "5px" }}>
+          <Link
+            href={`/Profile/Profile_details/${applied_jobs_person.user.id}`}
+          >
+            <a> {applied_jobs_person.user.username}</a>
+          </Link>
+          {", "}
+        </div>
       );
     });
   };
@@ -162,10 +163,10 @@ const JobDetail = ({
     switch (item) {
       case "job_detail":
         return (
-          <Descriptions title="Job Detail" layout="vertical">
-            <Descriptions.Item label="Title" labelStyle={labelStyle}>
+          <Descriptions title={temp_job.title} layout="horizontal">
+            {/* <Descriptions.Item label="Title" labelStyle={labelStyle}>
               {temp_job.title}
-            </Descriptions.Item>
+            </Descriptions.Item> */}
 
             <Descriptions.Item label="Job Poster" labelStyle={labelStyle}>
               <Link href={`/Profile/Profile_details/${temp_job.poster.id}`}>
@@ -201,15 +202,24 @@ const JobDetail = ({
             <Descriptions.Item label="Skills" labelStyle={labelStyle}>
               {temp_job.skills.length ? temp_job.skills.join(", ") : ""}
             </Descriptions.Item>
-            <Descriptions.Item label="Description" labelStyle={labelStyle}>
+            {/* <Descriptions.Item label="Description" labelStyle={labelStyle}>
               {temp_job.job_description}
-            </Descriptions.Item>
+            </Descriptions.Item> */}
           </Descriptions>
         );
+        case "job_description":
+          return (
+            <Descriptions title="Job Description" layout="vertical">
+            
+              <Descriptions.Item label="" labelStyle={labelStyle}>
+                {temp_job.job_description}
+              </Descriptions.Item>
+            </Descriptions>
+          );
 
       case "employee_requirement":
         return (
-          <Descriptions title="Employee Requirement" layout="vertical">
+          <Descriptions title="Employee Requirement" layout="horizontal">
             <Descriptions.Item label="Gender" labelStyle={labelStyle}>
               {temp_job.gender.length ? temp_job.gender.join(", ") : ""}
             </Descriptions.Item>
@@ -217,11 +227,11 @@ const JobDetail = ({
               {renderAge(temp_job.min_age, temp_job.max_age)}
             </Descriptions.Item>
             <Descriptions.Item label="Education" labelStyle={labelStyle}>
-              {temp_job.education.map(() => {
-                return temp_job.education[0].name;
-                // return  console.log(temp_job.education[0].name);
-              })}
-              {/* {renderEducation(education, temp_job.education)} */}
+              {/* {temp_job.education.map(() => {
+                return " "+temp_job.education[0].name + ",";
+                
+              })} */}
+              {renderEducation(education, temp_job.education)}
             </Descriptions.Item>
           </Descriptions>
         );
@@ -288,14 +298,21 @@ const JobDetail = ({
           <div className="site-layout-background">
             <div className="text-secondary">
               {renderItem("job_detail")} <hr />
+              {renderItem("job_description")} <hr />
+              
               {renderItem("employee_requirement")}
               {/* {applyShow()} */}
               {typeof applied_jobs_person == "undefined" ? (
                 ""
               ) : (
                 <>
-                {userid == poster.id ?
-                  <span style={{ fontWeight: "bold" }}>Applied Person:{appliedPerson()}</span>: ""}
+                  {userid == poster.id ? (
+                    <span className="applied_person">
+                      Applied Person: {appliedPerson()}
+                    </span>
+                  ) : (
+                    ""
+                  )}
                   {/* {appliedPerson()} */}
                 </>
               )}
