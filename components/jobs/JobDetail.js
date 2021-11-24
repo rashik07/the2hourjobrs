@@ -207,15 +207,14 @@ const JobDetail = ({
             </Descriptions.Item> */}
           </Descriptions>
         );
-        case "job_description":
-          return (
-            <Descriptions title="Job Description" layout="vertical">
-            
-              <Descriptions.Item label="" labelStyle={labelStyle}>
-                {temp_job.job_description}
-              </Descriptions.Item>
-            </Descriptions>
-          );
+      case "job_description":
+        return (
+          <Descriptions title="Job Description" layout="vertical">
+            <Descriptions.Item label="" labelStyle={labelStyle}>
+              {temp_job.job_description}
+            </Descriptions.Item>
+          </Descriptions>
+        );
 
       case "employee_requirement":
         return (
@@ -299,7 +298,6 @@ const JobDetail = ({
             <div className="text-secondary">
               {renderItem("job_detail")} <hr />
               {renderItem("job_description")} <hr />
-              
               {renderItem("employee_requirement")}
               {/* {applyShow()} */}
               {typeof applied_jobs_person == "undefined" ? (

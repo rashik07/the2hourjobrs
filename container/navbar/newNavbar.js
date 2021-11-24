@@ -118,9 +118,10 @@ const navbar = ({
         padding: "5px",
       }}
     >
+      <h1 style={{weight: "bold"}}>Notifications</h1>
+      <Link href={"/Notification/SeeAllNotification"}>See All</Link>
       {allnotificationList.map((notification, index) => (
         <Col span={24} className="notifi_bar">
-          {/* {console.log(notification)} */}
           <Link
             href={"/jobs/detail/" + notification["description"]}
             style={{ color: "white" }}
@@ -131,12 +132,12 @@ const navbar = ({
       ))}
     </Row>
   );
+  
   // const createPost=()=>{
   //   if (!isSignedIn) {
   //     alert("You must log in to access this feature");
   //     return;
   //   }
-
   // }
 
   // console.log(user_profile.name);

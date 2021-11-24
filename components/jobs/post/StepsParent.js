@@ -129,7 +129,7 @@ const renderItem = (item, children, saveTemporayJobPost, temp_jobpost) => {
                 ""
               ) : (
                 <>
-                  <Col xs={11} sm={11} md={8} lg={8} xl={8}> 
+                  <Col xs={11} sm={11} md={8} lg={8} xl={8}>
                     <input
                       type="number"
                       className="form-control "
@@ -328,7 +328,7 @@ const renderItem = (item, children, saveTemporayJobPost, temp_jobpost) => {
             <label className="form-label">Age</label>
             <br />
             <Row>
-              <Col  xs={11} sm={11} md={3} lg={3} xl={3} >
+              <Col xs={11} sm={11} md={3} lg={3} xl={3}>
                 <Select
                   onChange={(val) => saveTemporayJobPost({ min_age: val })}
                   style={{ width: 130 }}
@@ -381,7 +381,7 @@ const renderCategories = (categories, temp_jobpost, setValue) => {
         </label>
         <br />
         <Select
-         showSearch
+          showSearch
           placeholder="Select Category"
           onChange={(value) => setValue({ category: JSON.parse(value) })}
           defaultValue={JSON.stringify(temp_jobpost.category)}
