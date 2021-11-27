@@ -1,15 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Card, Avatar, Modal, Table, Space } from "antd";
-import {
-  EditOutlined,
-  EllipsisOutlined,
-  SettingOutlined,
-  DeleteOutlined,
-} from "@ant-design/icons";
+import { Table, Space, Divider, Typography } from "antd";
+import { DeleteOutlined } from "@ant-design/icons";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import { viewProject, deleteProject } from "@/redux/actions/projectAction";
-import { ExclamationCircleOutlined } from "@ant-design/icons";
 
 const Project_details = ({
   viewProject,
@@ -19,6 +13,7 @@ const Project_details = ({
   setloader,
 }) => {
   const router = useRouter();
+  const { Title } = Typography;
 
   useEffect(() => {
     viewProject();
@@ -70,8 +65,12 @@ const Project_details = ({
   ];
 
   return (
-    <div>
-      <Table columns={columns} dataSource={view_project} />
+    <div style={{ marginBottom: "15px" }}>
+      <Divider>
+        {" "}
+        <Title>Add Portfolio</Title>
+      </Divider>
+      <Table columns={columns} dataSource={view_project} pagination={false} />
     </div>
   );
 };

@@ -129,17 +129,20 @@ const Training = ({
   ];
   return (
     <div>
+      <div style={{ marginBottom: "15px" }}>
+        <Divider>
+          {" "}
+          <Title>Training</Title>
+        </Divider>
+        <Table columns={columns} dataSource={view_training} pagination={false}/>
+      </div>
+
       <Form
         {...formItemLayout}
         layout={formLayout}
         form={form}
         onFinish={onFinish}
       >
-        <Divider>
-          {" "}
-          <Title>Training</Title>
-        </Divider>
-        <Table columns={columns} dataSource={view_training} />
         <Form.Item label="Title" name="title">
           <Input />
         </Form.Item>

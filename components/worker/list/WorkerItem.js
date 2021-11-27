@@ -76,7 +76,7 @@ const WorkerItem = ({ worker, saveWorker, isSignedIn }) => {
     image,
   } = worker;
 
-  console.log(hide_phone);
+  // console.log(hide_phone);
 
   const router = useRouter();
 

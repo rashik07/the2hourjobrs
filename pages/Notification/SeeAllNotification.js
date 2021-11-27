@@ -35,7 +35,7 @@ const SeeAllNotification = ({
     <div>
       <Navbar />
       <Head>
-        <title>Post a job</title>
+        <title>All Notifications</title>
       </Head>
       <Layout>
         <Navbar />

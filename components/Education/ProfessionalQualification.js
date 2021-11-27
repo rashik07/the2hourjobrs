@@ -96,24 +96,18 @@ const ProfessionalQualification = ({
       dataIndex: "institute",
       key: "institute",
       width: "30%",
-
-      // ...this.getColumnSearchProps('age'),
     },
     {
       title: "location",
       dataIndex: "location",
       key: "institute",
       width: "100%",
-
-      // ...this.getColumnSearchProps('age'),
     },
     {
       title: "duration",
       dataIndex: "duration",
       key: "duration",
       width: "100%",
-
-      // ...this.getColumnSearchProps('age'),
     },
 
     {
@@ -121,9 +115,6 @@ const ProfessionalQualification = ({
       dataIndex: "year_of_passing",
       key: "year_of_passing",
       width: "150px",
-      //  ...this.getColumnSearchProps('address'),
-      //   sorter: (a, b) => a.address.length - b.address.length,
-      //sortDirections: ['descend', 'ascend'],
     },
 
     {
@@ -148,17 +139,19 @@ const ProfessionalQualification = ({
   ];
   return (
     <div>
+      <div style={{ marginBottom: "15px" }}>
+        <Divider>
+          {" "}
+          <Title>Professional Qualification</Title>
+        </Divider>
+        <Table columns={columns} dataSource={view_qualification} pagination={false}/>
+      </div>
       <Form
         {...formItemLayout}
         layout={formLayout}
         form={form}
         onFinish={onFinish}
       >
-        <Divider>
-          {" "}
-          <Title>Professional Qualification</Title>
-        </Divider>
-        <Table columns={columns} dataSource={view_qualification} />
         <Form.Item label="Certification" name="certification_title">
           <Input />
         </Form.Item>

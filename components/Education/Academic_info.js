@@ -162,6 +162,18 @@ const Academic_info = ({
   ];
   return (
     <div>
+      <div style={{marginBottom: "15px"}}>
+        <Divider>
+          {" "}
+          <Title>Academic Info</Title>
+        </Divider>
+        <Table
+          columns={columns}
+          dataSource={view_education}
+          pagination={false}
+        />
+      </div>
+
       <Form
         {...formItemLayout}
         layout={formLayout}
@@ -169,11 +181,6 @@ const Academic_info = ({
         name="register"
         onFinish={onFinish}
       >
-        <Divider>
-          {" "}
-          <Title>Academic Info</Title>
-        </Divider>
-        <Table columns={columns} dataSource={view_education} />
         <Form.Item label="Level of Education" name="degree_parent">
           <Select
             showSearch

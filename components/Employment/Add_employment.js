@@ -78,10 +78,7 @@ const Add_employment = ({ createEmployment, view_employment, setloader }) => {
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
       >
-        <Divider>
-          {" "}
-          <Title>Add Experience</Title>
-        </Divider>
+        
         <Form.Item label="Company Name:" name="company_name">
           <Input placeholder="company name" />
         </Form.Item>

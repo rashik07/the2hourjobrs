@@ -62,10 +62,7 @@ const Add_project = ({ createProject, create_project, setloader }) => {
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
       >
-        <Divider>
-          {" "}
-          <Title>Add Portfolio</Title>
-        </Divider>
+       
         <Form.Item label="Project Title:" name={"title"}>
           <Input placeholder="project title" />
         </Form.Item>
