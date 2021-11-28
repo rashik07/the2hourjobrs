@@ -32,7 +32,7 @@ const renderButtons = (
     saveWorker(id, saved_user_instance_id, setSavedStatus);
   };
   const saveShow = () => {
-    if (saved_user_instance_id) {
+    if (saved_user_instance_id ) {
       return (
         <SaveOutlined
           onClick={saveWorkerBtnClick}

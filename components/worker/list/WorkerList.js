@@ -15,17 +15,19 @@ const JobList = ({
   console.log(all_workers);
   if (showFilterWorker) {
     return filtered_workers.map((worker) => {
+      if (worker.available_for_work == true) {
       return <WorkerItem key={worker.id} worker={worker} />;
+      }
     });
   }
 
   if (all_workers)
     return all_workers.map((worker) => {
-      //  if(  worker.available_for_work==true){
-      //   // console.log(worker.available_for_work);
-      // return <WorkerItem key={worker.id} worker={worker} />;
-      //  }
-       return <WorkerItem key={worker.id} worker={worker} />;
+      if (worker.available_for_work == true) {
+        // console.log(worker.available_for_work);
+        return <WorkerItem key={worker.id} worker={worker} />;
+      }
+      //  return <WorkerItem key={worker.id} worker={worker} />;
     });
 
   return null;
