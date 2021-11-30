@@ -130,7 +130,7 @@ export const getOtherWorkers = () => async (dispatch) => {
     // }
 
     dispatch({ type: types.GET_OTHER_WORKERS, payload: response.data });
-    console.log(response.data);
+    // console.log(response.data);
   } catch (error) {
     console.log(error);
     console.log(error.response);
@@ -235,7 +235,7 @@ export const getSavedWorkers = () => async (dispatch) => {
     const data = response.data.map((instance) => instance.saved_user_profile);
 
     dispatch({ type: types.GET_SAVED_WORKERS, payload: data });
-    console.log(response.data);
+    // console.log(response.data);
   } catch (error) {
     console.log(error);
     console.log(error.response);

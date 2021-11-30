@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import { connect } from "react-redux";
-import { Descriptions, Layout, Breadcrumb, Typography, Button } from "antd";
+import {
+  Descriptions,
+  Layout,
+  Breadcrumb,
+  Typography,
+  Button,
+  List,
+} from "antd";
 import dateformat from "dateformat";
 import Navbar from "container/navbar/newNavbar";
 import { getAppliedJobsPerson, applyJob } from "@/redux/actions/jobAction";
@@ -91,6 +98,7 @@ const renderAge = (min, max) => {
 };
 
 const renderEducation = (education, job_post_education) => {
+
   education = education.map((edu) => {
     return edu.child.map((child) => {
       if (job_post_education.includes(child.id)) return child;
@@ -103,16 +111,16 @@ const renderEducation = (education, job_post_education) => {
       if (subelement) child_educations.push(subelement.name);
     });
   });
+  console.log(job_post_education);
 
   return (
     <Descriptions.Item label="Education" labelStyle={{ fontWeight: 700 }}>
-      {/* <List
-          size="small"
-          bordered
-          dataSource={child_educations}
-          renderItem={(item) => <List.Item>{item}</List.Item>}
-        /> */}
-      {child_educations.join(", ")}
+      <List
+        size="small"
+        dataSource={job_post_education}
+        renderItem={(item) => <List.Item>{item.name}</List.Item>}
+      />
+      {/* {job_post_education.join(", ")} */}
     </Descriptions.Item>
   );
 };
@@ -247,7 +255,7 @@ const JobDetail = ({
 
   const btn_disable = userid === poster.id ? "disabled" : "";
   const [appliedStatus, setAppliedStatus] = useState(applied);
-  console.log(applied_jobs_person);
+  // console.log(applied_jobs_person);
   const applyJobBtnClick = () => {
     if (!isSignedIn) {
       alert("You must log in to access this feature");

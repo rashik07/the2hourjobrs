@@ -27,13 +27,15 @@ const SavedWorkerList = ({
   }, []);
 
   const showSavedWorkers = () => {
-    if (all_workers)
-      return all_workers.map((worker) => {
-    if(worker.saved_user_instance_id){
-          console.log(worker);
-          return <WorkerItem key={worker.id} worker={worker} />;
-         
-      }
+    if (saved_workers)
+      return saved_workers.map((worker) => {
+        console.log(worker);
+        // if(worker.saved_user_instance_id){
+        //       console.log(worker);
+        //       return <WorkerItem key={worker.id} worker={worker} />;
+
+        //   }
+        return <WorkerItem key={worker.id} worker={worker} />;
       });
 
     return (

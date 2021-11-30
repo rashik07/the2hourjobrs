@@ -15,7 +15,7 @@ const { SubMenu } = Menu;
 
 const getItems = (isSignedIn, signOut, user_profile) => {
   const { Header, Content, Footer } = Layout;
- // console.log(user_profile);
+  // console.log(user_profile);
 
   const image = () => {
     if (!user_profile.image) {
@@ -118,9 +118,12 @@ const navbar = ({
         padding: "5px",
       }}
     >
-      <h1 style={{weight: "bold"}}>Notifications</h1>
+      <h1 style={{ weight: "bold" }}>Notifications</h1>
       <Link href={"/Notification/SeeAllNotification"}>See All</Link>
-      {allnotificationList.map((notification, index) => (
+      {console.log(allnotificationList)}
+      
+      {allnotificationList.length==0? <h5>You have no notification here</h5>: allnotificationList.map((notification, index) => (
+        console.log("ase notification"),
         <Col span={24} className="notifi_bar">
           <Link
             href={"/jobs/detail/" + notification["description"]}
@@ -132,7 +135,7 @@ const navbar = ({
       ))}
     </Row>
   );
-  
+
   // const createPost=()=>{
   //   if (!isSignedIn) {
   //     alert("You must log in to access this feature");
@@ -151,7 +154,7 @@ const navbar = ({
             </div>
           </a>
         </Col>
-        <Col xs={22} sm={24} md={18} lg={18} xl={18}>
+        <Col xs={22} sm={22} md={18} lg={18} xl={18}>
           <Button className="jobpost_btn">
             <Link href="/jobs/post">Post a Job</Link>
           </Button>
@@ -159,7 +162,7 @@ const navbar = ({
             theme=""
             mode="horizontal"
             defaultSelectedKeys={["2"]}
-            style={{ float: "right" }}
+            style={{ float: "right", backgroundColor: "#95D5D2" }}
           >
             {/* <Menu.Item key="setting:1"></Menu.Item> */}
             <SubMenu key="1" title="Jobs">
@@ -206,7 +209,11 @@ const navbar = ({
                 <Link href="/announcement/create">Create Announcement</Link>
               </Menu.Item>
             </SubMenu>
-            <Dropdown overlay={notification} placement="bottomLeft">
+            <Dropdown
+              className="notificationIcon"
+              overlay={notification}
+              placement="bottomLeft"
+            >
               <NotificationFilled />
             </Dropdown>
 
