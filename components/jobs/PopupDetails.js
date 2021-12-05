@@ -93,7 +93,7 @@ const PopupDetails = ({
         <Divider />
         <h4>Skills</h4>
         <Descriptions.Item label="Skills">
-          {job.skills.length ? job.skills.join(" ") : ""}
+          {job.skills.length ? job.skills.join(", ") : ""}
         </Descriptions.Item>
         <Divider />
         <Row>
@@ -116,13 +116,13 @@ const PopupDetails = ({
               <Col span={12}>
                 <h4>Gender : </h4>
               </Col>
-              <Col span={12}>{job.gender}</Col>
+              <Col span={12}>{job.gender.join(", ")}</Col>
             </Row>
             <Row>
               <Col span={12}>
                 <h4>Employment Status</h4>
               </Col>
-              <Col span={12}>{job.employment_status}</Col>
+              <Col span={12}>{job.employment_status.join(", ")}</Col>
             </Row>
           </Col>
           <Col span={10} offset={2}>

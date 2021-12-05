@@ -265,7 +265,6 @@ const JobPostItem = ({
           {/* {appliedPerson()} */}
         </Col>
       </Row>
-      
     </>
   );
 };
