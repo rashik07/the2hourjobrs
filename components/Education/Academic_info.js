@@ -18,7 +18,6 @@ import {
   viewEducation,
   deleteEducation,
 } from "@/redux/actions/usereducationAction";
-import moment from "moment";
 import { DeleteOutlined } from "@ant-design/icons";
 
 const Academic_info = ({
@@ -55,7 +54,7 @@ const Academic_info = ({
     //       console.log('Success:', values);
   };
 
-  //user_profile.birthday=moment(user_profile.birthday, dateFormat);
+
 
   function onChangeNum(value) {
     console.log("changed", value);
@@ -125,19 +124,19 @@ const Academic_info = ({
     },
 
     {
-      title: "institute_name",
+      title: "Institute Name",
       dataIndex: "institute_name",
       key: "institute_name",
       width: "150px",
     },
     {
-      title: "result",
+      title: "Result",
       dataIndex: "result",
       key: "result",
       width: "150px",
     },
     {
-      title: "year_of_passing",
+      title: "year of passing",
       dataIndex: "year_of_passing",
       key: "year_of_passing",
       width: "150px",

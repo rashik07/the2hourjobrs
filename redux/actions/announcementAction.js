@@ -79,7 +79,7 @@ export const getAllAnnouncement = () => async (dispatch) => {
 export const getAllAnnouncementOfUser = (id) => async (dispatch) => {
   try {
     const response = await backend.get(
-      `v1/announcement/user_annoucements/${id}`
+      `v1/announcement/user_annoucements/${id}`,getConfig()
     );
     if (response.status === 200) {
       dispatch({

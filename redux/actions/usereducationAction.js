@@ -14,6 +14,7 @@ const getConfig = () => {
 
   return config;
 };
+
 /*education */
 export const viewEducation = () => async (dispatch) => {
   try {
@@ -74,6 +75,7 @@ export const deleteEducation = (education_id) => async (dispatch) => {
     console.log(error);
   }
 };
+
 /*training */
 export const viewTraining = (data) => async (dispatch) => {
   try {
@@ -125,6 +127,7 @@ export const deleteTraining = (training_id) => async (dispatch) => {
   }
 };
 
+
 /*ProfessionalQualification */
 export const viewQualification = (data) => async (dispatch) => {
   try {
@@ -159,7 +162,7 @@ export const createQualification = (formValues) => async (dispatch) => {
 };
 
 export const deleteQualification = (qualification_id) => async (dispatch) => {
-  //console.log('bal')
+  
   try {
     const response = await backend.delete(
       `/v1/user/professional-qualification/${qualification_id}/`,

@@ -1,18 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { connect } from "react-redux";
-import { getJobDetails } from "@/redux/actions/jobAction";
+import { getJobDetails ,getJobDetails_withoutlogin} from "@/redux/actions/jobAction";
 import JobDetail from "components/jobs/JobDetail";
 
-const JobPostDetail = ({ job, getJobDetails }) => {
+const JobPostDetail = ({ job, getJobDetails ,getJobDetails_withoutlogin,auth }) => {
   const router = useRouter();
 
   const { id } = router.query;
   const [hasData, sethasData] = useState(false);
 
   useEffect(() => {
+    if (auth.isSignedIn) {
     if (id) {
       getJobDetails(id);
+    }}
+    else{
+      if (id) {
+        getJobDetails_withoutlogin(id);
+      }
+
     }
   }, [router.query.id]);
 
@@ -34,7 +41,8 @@ const JobPostDetail = ({ job, getJobDetails }) => {
 const mapStateToProps = (state) => {
   return {
     job: state.job.fetched_job,
+    auth: state.auth,
   };
 };
 
-export default connect(mapStateToProps, { getJobDetails })(JobPostDetail);
+export default connect(mapStateToProps, { getJobDetails ,getJobDetails_withoutlogin})(JobPostDetail);
