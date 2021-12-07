@@ -32,7 +32,7 @@ export const viewPreferedCategories = () => async (dispatch) => {
 export const viewSinglePreferedCategories = (id) => async (dispatch) => {
   try {
     const response = await backend.get(
-      `/v1/user/prefered-options/?user=${id}`,
+      `/v1/user/prefered-options/${id}/`,
       getConfig()
     );
     dispatch({ type: types.VIEW_SINGLE_PREFERED_CATEGORIES, payload: response.data[0] });

@@ -116,7 +116,8 @@ const editAnnouncementForm = ({ announcement, updateAnnouncement }) => {
           <h3>Upload New image</h3>
           <Image.PreviewGroup>
             <Row>
-              {announcement.image.map((imagee) => {
+              
+            {  announcement.image.map((imagee) => {
                 console.log(imagee);
                 if (imagee.cover) {
                   return (

@@ -246,5 +246,5 @@ export default connect(mapStateToProps, {
   createEducation,
   viewEducation,
   deleteEducation,
-  deleteEducation,
+  
 })(Academic_info);
