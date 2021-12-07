@@ -109,7 +109,32 @@ export const signUp = (formValues, router) => async (dispatch) => {
     });
   }
 };
-
+export const password_reset = (logInformValues) => async (dispatch) => {
+  console.log(logInformValues);
+  try {
+    const response = await backend.post("v1/user/password_reset/", {
+      ...logInformValues,
+    });
+    if (response.status === 200) {
+      console.log(response.data);
+      alert("Password reset link sent to your email");
+    }
+    else
+    {
+      console.log(response.data);
+      alert("Email not found");
+    }
+    
+  } catch (error) {
+    console.log(error);
+    alert("Email not found");
+    // if (response.status === 400) {
+    //   console.log(response.data);
+    //   alert("Password reset link sent to your email");
+    //   alert("Email not found");
+    // }
+  }
+};
 export const signOut = () => (dispatch) => {
   // dispatch({ type: types.RESET_JOB_STATE });
   dispatch({ type: types.SIGN_OUT });
