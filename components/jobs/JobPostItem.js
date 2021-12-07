@@ -205,7 +205,7 @@ const JobPostItem = ({
 
     return (
       <>
-        {applyShow()}
+        {/* {applyShow()} */}
 
         {saveShow()}
 

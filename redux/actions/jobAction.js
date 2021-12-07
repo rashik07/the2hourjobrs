@@ -457,6 +457,20 @@ export const getJob = (job_id) => async (dispatch) => {
 
 export const getJobDetails = (job_id) => async (dispatch) => {
   try {
+    const response = await backend.get(`v1/jobpost/data/${job_id}/`,getConfig());
+
+    if (response.status == 200) {
+      dispatch({
+        type: types.GET_SINGLE_JOB,
+        payload: response.data,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const getJobDetails_withoutlogin = (job_id) => async (dispatch) => {
+  try {
     const response = await backend.get(`v1/jobpost/data/${job_id}/`);
 
     if (response.status == 200) {

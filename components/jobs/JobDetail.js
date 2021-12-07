@@ -111,7 +111,7 @@ const renderEducation = (education, job_post_education) => {
       if (subelement) child_educations.push(subelement.name);
     });
   });
-  console.log(job_post_education);
+  // console.log(job_post_education);
 
   return (
     <Descriptions.Item label="Education" labelStyle={{ fontWeight: 700 }}>
@@ -136,6 +136,7 @@ const JobDetail = ({
 }) => {
   // const { Paragraph, Title } = Typography;
   const [user, setUser] = useState(null);
+  console.log(temp_job);
 
   useEffect(() => {
     if (isSignedIn) {
@@ -307,7 +308,7 @@ const JobDetail = ({
               {renderItem("job_detail")} <hr />
               {renderItem("job_description")} <hr />
               {renderItem("employee_requirement")}
-              {/* {applyShow()} */}
+              {applyShow()}
               {typeof applied_jobs_person == "undefined" ? (
                 ""
               ) : (
