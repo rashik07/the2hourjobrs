@@ -82,6 +82,13 @@ const JobPostItem = ({
 
     return education_list.join(", ");
   };
+  const getPostTime = () => {
+    const moment = require("moment");
+
+    const m = moment(new Date(job.posting_timestamp));
+
+    return m.format("LL");
+  };
 
   const applyJobBtnClick = () => {
     if (!isSignedIn) {
@@ -239,7 +246,11 @@ const JobPostItem = ({
               <PopupDetails job={job} onClick={showDefaultDrawer} size={size} />
             </Col>
             <Col span={4}>{renderButtons()}</Col>
+            <p><strong>Published on:</strong> {getPostTime()}</p>
           </Row>
+
+          {/* {job.posting_timestamp} */}
+         
           <h4 style={{ color: "gray" }}>
             <UserOutlined />{" "}
             <Link href={`/Profile/Profile_details/${poster.id}`}>
