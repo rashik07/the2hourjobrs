@@ -45,7 +45,7 @@ const KeywordSearch = ({
         icon={<SearchOutlined />}
         onClick={(e) => {
           onKeywordSubmit(e);
-          getFilteredList(filter);
+          // getFilteredList(filter);
           setShowFilter(true);
         }}
       >
