@@ -121,18 +121,26 @@ const navbar = ({
       <h1 style={{ weight: "bold" }}>Notifications</h1>
       <Link href={"/Notification/SeeAllNotification"}>See All</Link>
       {console.log(allnotificationList)}
-      
-      {allnotificationList.length==0? <h5>You have no notification here</h5>: allnotificationList.map((notification, index) => (
-        console.log("ase notification"),
-        <Col span={24} className="notifi_bar">
-          <Link
-            href={"/jobs/detail/" + notification["description"]}
-            style={{ color: "white" }}
-          >
-            {notification["verb"]}
-          </Link>{" "}
-        </Col>
-      ))}
+
+      {allnotificationList.length == 0 ? (
+        <h5>You have no notification here</h5>
+      ) : (
+        allnotificationList.map(
+          (notification, index) => (
+            console.log("ase notification"),
+            (
+              <Col span={24} className="notifi_bar">
+                <Link
+                  href={"/jobs/detail/" + notification["description"]}
+                  style={{ color: "white" }}
+                >
+                  {notification["verb"]}
+                </Link>{" "}
+              </Col>
+            )
+          )
+        )
+      )}
     </Row>
   );
 
@@ -146,81 +154,81 @@ const navbar = ({
   // console.log(user_profile.name);
   return (
     <Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
-      <Row>
-        <Col xs={2} sm={2} md={6} lg={6} xl={6}>
-          <a href="/">
-            <div className="logo">
-              <img src="/img/logo.png" alt="Logo" height={40} />
-            </div>
-          </a>
-        </Col>
-        <Col xs={22} sm={22} md={18} lg={18} xl={18}>
-          <Button className="jobpost_btn">
+      {/* <Row>
+        <Col xs={2} sm={2} md={6} lg={6} xl={6}> */}
+      <a href="/">
+        <div className="logo" style={{ float: "left" }}>
+          <img src="/img/logo.png" alt="Logo" height={40} />
+        </div>
+      </a>
+      {/* </Col>
+        <Col xs={22} sm={22} md={18} lg={18} xl={18}> */}
+      {/* <Button className="jobpost_btn">
             <Link href="/jobs/post">Post a Job</Link>
-          </Button>
-          <Menu
-            theme=""
-            mode="horizontal"
-            defaultSelectedKeys={["2"]}
-            style={{ float: "right", backgroundColor: "#95D5D2" }}
-          >
-            {/* <Menu.Item key="setting:1"></Menu.Item> */}
-            <SubMenu key="1" title="Jobs">
-              <Menu.Item key="setting:2">
-                {" "}
-                <Link href="/jobs/list">Job list</Link>
-              </Menu.Item>
-              <Menu.Item key="setting:3">
-                {" "}
-                <Link href="/jobs/saved">Saved Jobs</Link>
-              </Menu.Item>
-              <Menu.Item key="setting:4">
-                {" "}
-                <Link href="/jobs/applied">Applied Jobs</Link>
-              </Menu.Item>
-              <Menu.Item key="setting:5">
-                {" "}
-                <Link href="/jobs/my_posts">My Posted Jobs</Link>
-              </Menu.Item>
-            </SubMenu>
+          </Button> */}
+      <Menu
+        mode="horizontal"
+        defaultSelectedKeys={["2"]}
+        style={{ backgroundColor: "#95D5D2", width: "85%", marginLeft: "27%" }}
+      >
+        <Button className="jobpost_btn">
+          <Link href="/jobs/post">Post a Job</Link>
+        </Button>
+        {/* <Menu.Item key="setting:1"></Menu.Item> */}
+        <SubMenu key="1" title="Jobs">
+          <Menu.Item key="setting:2">
+            {" "}
+            <Link href="/jobs/list">Job list</Link>
+          </Menu.Item>
+          <Menu.Item key="setting:3">
+            {" "}
+            <Link href="/jobs/saved">Saved Jobs</Link>
+          </Menu.Item>
+          <Menu.Item key="setting:4">
+            {" "}
+            <Link href="/jobs/applied">Applied Jobs</Link>
+          </Menu.Item>
+          <Menu.Item key="setting:5">
+            {" "}
+            <Link href="/jobs/my_posts">My Posted Jobs</Link>
+          </Menu.Item>
+        </SubMenu>
 
-            <SubMenu key="2" title="Workers">
-              <Menu.Item key="setting:7">
-                <Link href="/worker/list">List</Link>
-              </Menu.Item>
-              <Menu.Item key="setting:8">
-                {" "}
-                <Link href="/worker/saved">Saved workers</Link>
-              </Menu.Item>
-            </SubMenu>
+        <SubMenu key="2" title="Workers">
+          <Menu.Item key="setting:7">
+            <Link href="/worker/list">List</Link>
+          </Menu.Item>
+          <Menu.Item key="setting:8">
+            {" "}
+            <Link href="/worker/saved">Saved workers</Link>
+          </Menu.Item>
+        </SubMenu>
 
-            <SubMenu key="3" title="Announcements">
-              <Menu.Item key="setting:9">
-                <Link href="/announcement">All Announcements</Link>
-              </Menu.Item>
-              <Menu.Item key="setting:10">
-                {" "}
-                <Link href="/announcement/myannouncement">
-                  My Announcements
-                </Link>
-              </Menu.Item>
-              <Menu.Item key="setting:11">
-                {" "}
-                <Link href="/announcement/create">Create Announcement</Link>
-              </Menu.Item>
-            </SubMenu>
-            <Dropdown
-              className="notificationIcon"
-              overlay={notification}
-              placement="bottomLeft"
-            >
-              <NotificationFilled />
-            </Dropdown>
+        <SubMenu key="3" title="Announcements">
+          <Menu.Item key="setting:9">
+            <Link href="/announcement">All Announcements</Link>
+          </Menu.Item>
+          <Menu.Item key="setting:10">
+            {" "}
+            <Link href="/announcement/myannouncement">My Announcements</Link>
+          </Menu.Item>
+          <Menu.Item key="setting:11">
+            {" "}
+            <Link href="/announcement/create">Create Announcement</Link>
+          </Menu.Item>
+        </SubMenu>
+        <Dropdown
+          className="notificationIcon"
+          overlay={notification}
+          placement="bottomLeft"
+        >
+          <NotificationFilled />
+        </Dropdown>
 
-            {getItems(isSignedIn, signOut, user_profile)}
-          </Menu>
-        </Col>
-      </Row>
+        {getItems(isSignedIn, signOut, user_profile)}
+      </Menu>
+      {/* </Col>
+      </Row> */}
     </Header>
   );
 };

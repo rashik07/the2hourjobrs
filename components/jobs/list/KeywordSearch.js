@@ -13,6 +13,7 @@ const KeywordSearch = ({
 
   const onKeywordSubmit = (e) => {
     e.preventDefault();
+
     if (keyword) {
       const new_filter = { ...filter, keyword };
       setFilter(new_filter);
@@ -22,7 +23,12 @@ const KeywordSearch = ({
   if (reload) {
     getFilteredList(filter);
   }
-
+  // const handleKeypress = (e) => {
+  //   //it triggers by pressing the enter key
+  //   if (e.keyCode === 13) {
+  //     onKeywordSubmit();
+  //   }
+  // };
   return (
     <form style={{ display: "flex", width: "100%" }}>
       <input
@@ -37,15 +43,15 @@ const KeywordSearch = ({
         placeholder="Type and hit Enter"
         onChange={(e) => setKeyword(e.target.value)}
         value={keyword}
+        // onKeyPress={handleKeypress}
       />
 
       <Button
-      className="search_button"
-      
+        className="search_button"
         icon={<SearchOutlined />}
         onClick={(e) => {
           onKeywordSubmit(e);
-          // getFilteredList(filter);
+          //getFilteredList(filter);
           setShowFilter(true);
         }}
       >
