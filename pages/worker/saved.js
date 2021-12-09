@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import Navbar from "../../container/navbar/newNavbar";
 import { useRouter } from "next/router";
@@ -16,7 +16,9 @@ const SavedWorkerList = ({
 }) => {
   const router = useRouter();
   const { Content } = Layout;
+  const [reaload, setReload] = useState(false);
 
+  
   useEffect(() => {
     if (!isSignedIn) {
       router.push("/auth/login");
@@ -24,18 +26,19 @@ const SavedWorkerList = ({
 
     getSavedWorkers();
     getOtherWorkers();
-  }, []);
+  }, [reaload]);
 
   const showSavedWorkers = () => {
     if (saved_workers)
       return saved_workers.map((worker) => {
-        console.log(worker);
+        console.log(worker.saved_user_profile);
+        let worker_profile = worker.saved_user_profile;
         // if(worker.saved_user_instance_id){
         //       console.log(worker);
         //       return <WorkerItem key={worker.id} worker={worker} />;
 
         //   }
-        return <WorkerItem key={worker.id} worker={worker} />;
+        return <WorkerItem key={worker_profile.id} worker={worker_profile} setReload={setReload} />;
       });
 
     return (

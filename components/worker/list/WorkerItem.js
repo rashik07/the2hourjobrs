@@ -21,18 +21,29 @@ const renderButtons = (
   setSavedStatus,
   saveWorker,
   isSignedIn,
-  show_save_button,
-  savedStatus
+  savedStatus,
+  savedWorkerList,
+  setReload,
 ) => {
+  console.log(savedWorkerList);
+  
+  let isSaved = false;
+  let savedId = null;
+  savedWorkerList.forEach((item) => {
+    if (item.saved_user_profile.id === id) {
+      isSaved = true;
+      savedId = item.id;
+    }
+  });
   const saveWorkerBtnClick = () => {
     if (!isSignedIn) {
       alert("You must log in to access this feature");
       return;
     }
-    saveWorker(id, saved_user_instance_id, setSavedStatus);
+    saveWorker(id, saved_user_instance_id, setSavedStatus, isSaved, savedId, setReload);
   };
   const saveShow = () => {
-    if (savedStatus) {
+    if (isSaved) {
       return (
         <SaveOutlined
           onClick={saveWorkerBtnClick}
@@ -61,7 +72,7 @@ const renderButtons = (
   return <>{saveShow()}</>;
 };
 
-const WorkerItem = ({ worker, saveWorker, isSignedIn }) => {
+const WorkerItem = ({ worker, saveWorker, isSignedIn, savedWorkerList, setReload }) => {
   console.log(worker);
   const {
     id,
@@ -122,7 +133,9 @@ const WorkerItem = ({ worker, saveWorker, isSignedIn }) => {
             setSavedStatus,
             saveWorker,
             isSignedIn,
-            show_save_button
+            show_save_button,
+            savedWorkerList,
+            setReload,
           )}
           <h4 style={{ color: "gray" }}>
             <UserOutlined />{" "}
@@ -156,6 +169,7 @@ const WorkerItem = ({ worker, saveWorker, isSignedIn }) => {
 const mapStateToProps = (state) => {
   return {
     isSignedIn: state.auth.isSignedIn,
+    savedWorkerList: state.user.saved_workers,
   };
 };
 

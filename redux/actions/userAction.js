@@ -3,6 +3,7 @@ import backend from "./../../api/backend";
 import { store } from "./../store";
 import _ from "lodash";
 
+
 const getConfig = () => {
   const token = store.getState().auth.token;
 
@@ -181,25 +182,27 @@ export const filterWorkers = (filter) => async (dispatch) => {
 };
 
 export const saveWorker =
-  (worker_id, saved_user_instance_id, setSavedStatus) => async (dispatch) => {
+  (worker_id, saved_user_instance_id, setSavedStatus, isSaved, savedId, setReload) => async (dispatch) => {
     const formData = { saved_user: worker_id, saved_by: null };
 
     let response = null;
-
+    let saved = false;
     try {
-      if (saved_user_instance_id) {
+      if (isSaved && savedId!=null) {
         response = await backend.delete(
-          `v1/user/save_user/${saved_user_instance_id}/`,
+          `v1/user/save_user/${savedId}/`,
           getConfig()
         );
+        saved = false;
       } else {
         response = await backend.post(
           `v1/user/save_user/`,
           formData,
           getConfig()
-        );
+        ); 
+        saved = true;
       }
-
+      getSavedWorkers();
       if (response.status === 201) {
         setSavedStatus(response.data.id);
         dispatch({
@@ -217,6 +220,7 @@ export const saveWorker =
           payload: { saved_user: worker_id, saved_user_instance_id: null },
         });
       }
+      setReload(true);
     } catch (error) {
       console.log(error);
       console.log(error.response);
@@ -234,7 +238,7 @@ export const getSavedWorkers = () => async (dispatch) => {
 
     const data = response.data.map((instance) => instance.saved_user_profile);
 
-    dispatch({ type: types.GET_SAVED_WORKERS, payload: data });
+    dispatch({ type: types.GET_SAVED_WORKERS, payload: response.data });
     // console.log(response.data);
   } catch (error) {
     console.log(error);
