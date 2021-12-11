@@ -332,15 +332,15 @@ const Profile_info = ({
           >
             <Input
               // addonBefore={prefixSelector}
-
+              disabled
               style={{
                 width: "45%",
                 color: "black",
                 marginRight: "3px",
               }}
             />
-            <a href="../Profile/Mobile_verify"><Button type="primary">Verify</Button></a>
           </Form.Item>
+          <a href="../Profile/Mobile_verify"><Button type="primary">Verify/Update</Button></a>
           <Form.Item
             name="hide_phone"
             valuePropName="checked"

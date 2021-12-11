@@ -48,6 +48,24 @@ export const updatePhone = (values, id) => async (dispatch) => {
     console.log(error.response);
   }
 };
+export const PhoneVerifyUpdate = (data) => async (dispatch) => {
+  console.log(data);
+  try {
+    const response = await backend.put(
+      `/v1/user/mobile_verify_update/`,
+      data,
+      getConfig()
+    );
+
+    dispatch({ type: types.EDIT_PHONE, payload: response.data });
+    console.log("Mobile Verified");
+    return true;
+  } catch (error) {
+    console.log(error);
+    console.log(error.response);
+    return false;
+  }
+};
 export const getSpecificProfile = (profile_id) => async (dispatch) => {
   try {
     const response = await backend.get(`/v1/user/other_users/${profile_id}/`);
