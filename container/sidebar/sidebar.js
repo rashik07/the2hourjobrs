@@ -29,18 +29,9 @@ const sidebar = ({ selector, setloader }) => {
         width={200}
         collapsible
         collapse={collapse}
-        // breakpoint="lg"
-        // collapsedWidth="0"
-        // onBreakpoint={broken => {
-        //   console.log(broken);
-        // }}
-        // onCollapse={(collapsed, type) => {
-        //   console.log(collapsed, type);
-        // }}
       >
-        <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
+        <Menu defaultSelectedKeys={["1"]} mode="inline">
           <Menu.Item key="1" icon={<UserOutlined />}>
-        
             <a
               href="#"
               onClick={() => {

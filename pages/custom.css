@@ -1,8 +1,7 @@
 .site-layout {
   padding: 0 50px;
 
-
-   margin: 60px 36px;
+  margin: 60px 36px;
 }
 .breadcrumb_main {
   margin: 16px 0;
@@ -254,7 +253,6 @@
 }
 .notifi_bar a:hover {
   color: white;
-  
 }
 
 .notifi_bar {
@@ -271,26 +269,25 @@
   display: block;
   margin-left: 52px;
   margin-right: auto;
-  
 }
 .social_media_btn button {
   padding: 11px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   font-size: 14px;
-  width:194px;
-
+  width: 194px;
 }
 footer {
   padding: 40px 0px;
 }
-.ant-menu-dark.ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-item-selected {
+
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
   background-color: darkblue;
-  color: white;
+  color: #ffffff;
 }
-.ant-menu-dark .ant-menu-item,
-.ant-menu-dark .ant-menu-item-group-title,
-.ant-menu-dark .ant-menu-item > a,
-.ant-menu-dark .ant-menu-item > span > a {
+.ant-menu-item,
+.ant-menu-item-group-title,
+.ant-menu-item > a,
+.ant-menu-item > span > a {
   color: black;
 }
 .search_button {
@@ -309,22 +306,22 @@ footer {
   color: #ffffff;
   border-color: #000000;
 }
-.location_btn{
+.location_btn {
   background-color: #ffc800;
   border: 1px solid #ffffff;
   margin: 3px;
   color: #000000;
 }
-.location_btn:hover{
+.location_btn:hover {
   background-color: darkblue;
   border: 1px solid #ffffff;
   margin: 3px;
   color: #ffffff;
 }
-.data_section{
-  margin-top:20px;
+.data_section {
+  margin-top: 20px;
 }
-.home_icon{
+.home_icon {
   font-size: 15px;
   border: 2px solid white;
   padding: 10px;

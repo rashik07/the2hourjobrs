@@ -180,7 +180,7 @@ const Profile_info = ({
             span: 4,
           },
           wrapperCol: {
-            span: 12,
+            span: 14,
           },
         }
       : null;
@@ -258,6 +258,7 @@ const Profile_info = ({
           onFinishFailed={onFinishFailed}
           initialValues={user_profile}
           //setloader={setloader}
+          
         >
           {/* <Form.Item
             name="photo"
@@ -271,20 +272,22 @@ const Profile_info = ({
             </Upload>
           </Form.Item> */}
 
-          <Form.Item label="Name" name="name">
+          <Form.Item label="Name" name="name" style={{marginLeft:"50px"}}>
             <Input
               style={{
                 width: "70%",
                 color: "black",
+                
               }}
               placeholder="name"
             />
           </Form.Item>
-          <Form.Item label="User Name" name="username">
+          <Form.Item label="User Name" name="username" style={{marginLeft:"50px"}}>
             <Input
               style={{
                 width: "70%",
                 color: "black",
+               
               }}
               placeholder="name"
               disabled
@@ -293,6 +296,7 @@ const Profile_info = ({
           <Form.Item
             name="email"
             label="E-mail"
+            style={{marginLeft:"50px"}}
             rules={[
               {
                 type: "email",
@@ -313,6 +317,8 @@ const Profile_info = ({
               disabled
             />
           </Form.Item>
+          
+          
 
           <Form.Item
             name="phone"
@@ -333,7 +339,7 @@ const Profile_info = ({
                 marginRight: "3px",
               }}
             />
-            {/* <Button type="primary">Verify</Button> */}
+            <a href="../Profile/Mobile_verify"><Button type="primary">Verify</Button></a>
           </Form.Item>
           <Form.Item
             name="hide_phone"
