@@ -73,7 +73,7 @@ const Sidesection = ({
       return "  ";
     } else
       return (
-        <a href={user_profile.resume} download>
+        <a href={user_profile.resume} download target="_blank">
           <Button
             type="primary"
             icon={
@@ -151,6 +151,11 @@ const Sidesection = ({
         <span style={{ fontWeight: "bold" }}>Prefered Location: </span>
         {location_list}
       </p>
+      <p><span style={{ fontWeight: "bold" }}>Present salary: </span>
+        {user_profile.present_salary} bdt</p>
+        
+        <p><span style={{ fontWeight: "bold" }}>Expected salary: </span>
+        {user_profile.expected_salary} bdt</p>
       <p>{resume_link()}</p>
       <div
         style={{
@@ -159,7 +164,7 @@ const Sidesection = ({
           width: "100%",
         }}
       >
-        <h1>I hope you like it</h1>
+        <h1>Hire me</h1>
 
         <FacebookShareButton
           url={shareUrl}

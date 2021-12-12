@@ -280,16 +280,17 @@ footer {
   padding: 40px 0px;
 }
 
-.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+/* .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
   background-color: darkblue;
   color: #ffffff;
-}
+} */
 .ant-menu-item,
 .ant-menu-item-group-title,
 .ant-menu-item > a,
 .ant-menu-item > span > a {
   color: black;
 }
+
 .search_button {
   height: auto;
   border-top-right-radius: 8px;

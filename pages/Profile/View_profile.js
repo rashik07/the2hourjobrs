@@ -6,6 +6,7 @@ import Topsection from "components/Viewprofile/Topsection";
 import Sidesection from "components/Viewprofile/Sidesection";
 import Mainsection from "components/Viewprofile/Mainsection";
 
+
 const View_profile = ({ user_profile, view_education,view_employment ,view_project}) => {
   const { Text, Link, Title } = Typography;
   const { Content } = Layout;

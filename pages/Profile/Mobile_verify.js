@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { firebaseApp } from './firebaseConfig';
 import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { PhoneVerifyUpdate } from "@/redux/actions/userAction";
+import { useRouter } from "next/router";
 
 const Mobile_verify = ({ PhoneVerifyUpdate }) => {
     // Inputs
@@ -12,7 +13,7 @@ const Mobile_verify = ({ PhoneVerifyUpdate }) => {
     const [final, setfinal] = useState('');
   
     const auth = getAuth();
-    
+    const router = useRouter();
     // Sent OTP
     const signin = () => {
         let phoneNumber = mynumber;
@@ -58,7 +59,7 @@ const Mobile_verify = ({ PhoneVerifyUpdate }) => {
         final.confirm(otp).then((result) => {
             // success
             let data = { 'phone': mynumber };
-            let status = PhoneVerifyUpdate(data);
+            let status = PhoneVerifyUpdate(data, router);
             if (status)
             {
                 alert("Mobile Verified");
@@ -82,6 +83,7 @@ const Mobile_verify = ({ PhoneVerifyUpdate }) => {
                     <input type="text" placeholder={"Enter your OTP"}
                         onChange={(e) => { setotp(e.target.value) }}></input>
                     <br /><br />
+
                     <button onClick={ValidateOtp}>Verify</button>
                 </div>
             </center>

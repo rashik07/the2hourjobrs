@@ -229,12 +229,11 @@ const Profile_info = ({
           <p>Upload picture</p>
           <PicturesWall setImages={uploadcover} />
           <Button
-            onClick={() =>uploadPhoto()
-            }
+            onClick={() => uploadPhoto()}
             type="primary"
-            style={{marginRight:"10px"}}
+            style={{ marginRight: "10px" }}
           >
-              Save Picture
+            Save Picture
           </Button>
           <Link href={`/Profile/Profile_details/${user_profile.id}`}>
             <Tooltip title="View My Profile" className="button_eye">
@@ -258,7 +257,6 @@ const Profile_info = ({
           onFinishFailed={onFinishFailed}
           initialValues={user_profile}
           //setloader={setloader}
-          
         >
           {/* <Form.Item
             name="photo"
@@ -272,22 +270,24 @@ const Profile_info = ({
             </Upload>
           </Form.Item> */}
 
-          <Form.Item label="Name" name="name" style={{marginLeft:"50px"}}>
+          <Form.Item label="Name" name="name" style={{ marginLeft: "50px" }}>
             <Input
               style={{
                 width: "70%",
                 color: "black",
-                
               }}
               placeholder="name"
             />
           </Form.Item>
-          <Form.Item label="User Name" name="username" style={{marginLeft:"50px"}}>
+          <Form.Item
+            label="User Name"
+            name="username"
+            style={{ marginLeft: "50px" }}
+          >
             <Input
               style={{
                 width: "70%",
                 color: "black",
-               
               }}
               placeholder="name"
               disabled
@@ -296,7 +296,7 @@ const Profile_info = ({
           <Form.Item
             name="email"
             label="E-mail"
-            style={{marginLeft:"50px"}}
+            style={{ marginLeft: "50px" }}
             rules={[
               {
                 type: "email",
@@ -317,8 +317,6 @@ const Profile_info = ({
               disabled
             />
           </Form.Item>
-          
-          
 
           <Form.Item
             name="phone"
@@ -340,7 +338,10 @@ const Profile_info = ({
               }}
             />
           </Form.Item>
-          <a href="../Profile/Mobile_verify"><Button type="primary">Verify/Update</Button></a>
+          <a href="../Profile/Mobile_verify" style={{marginLeft:"155px"}}>
+            <Button type="primary">Verify/Update</Button>
+          </a>
+
           <Form.Item
             name="hide_phone"
             valuePropName="checked"
@@ -348,6 +349,7 @@ const Profile_info = ({
               offset: 4,
               span: 12,
             }}
+            style={{paddingTop:"15px"}}
           >
             <Checkbox>Hide phone number</Checkbox>
           </Form.Item>

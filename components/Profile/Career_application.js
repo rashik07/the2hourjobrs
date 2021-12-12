@@ -203,10 +203,28 @@ const Career_application = ({
           <Form.Item label="Objective" name="objective">
             <TextArea rows={4} />
           </Form.Item>
-          <Form.Item label="Present Salary" name="present_salary">
+          <Form.Item label="Present Salary" name="present_salary"   rules={[
+              {
+                type: "number",
+                message: "The input is not valid Present Salary",
+              },
+              {
+                required: true,
+                message: "Please input your Present Salary",
+              },
+            ]}>
             <Input placeholder="present salary" />
           </Form.Item>
-          <Form.Item label="Expected Salary" name="expected_salary">
+          <Form.Item label="Expected Salary" name="expected_salary"  rules={[
+              {
+                type: "number",
+                message: "The input is not valid Expected Salary",
+              },
+              {
+                required: true,
+                message: "Please input your Expected Salary",
+              },
+            ]}>
             <Input placeholder="expected salary" />
           </Form.Item>
           <Form.Item label="Job level" name="job_level">
