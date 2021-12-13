@@ -204,10 +204,7 @@ const Career_application = ({
             <TextArea rows={4} />
           </Form.Item>
           <Form.Item label="Present Salary" name="present_salary"   rules={[
-              {
-                type: "number",
-                message: "The input is not valid Present Salary",
-              },
+           
               {
                 required: true,
                 message: "Please input your Present Salary",
@@ -216,10 +213,7 @@ const Career_application = ({
             <Input placeholder="present salary" />
           </Form.Item>
           <Form.Item label="Expected Salary" name="expected_salary"  rules={[
-              {
-                type: "number",
-                message: "The input is not valid Expected Salary",
-              },
+            
               {
                 required: true,
                 message: "Please input your Expected Salary",

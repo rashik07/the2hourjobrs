@@ -21,6 +21,7 @@ const renderItem = (item, children, saveTemporayJobPost, temp_jobpost) => {
               type="text"
               className="form-control"
               defaultValue={temp_jobpost.title}
+              
             />
           </>
         );
@@ -137,10 +138,10 @@ const renderItem = (item, children, saveTemporayJobPost, temp_jobpost) => {
                       onChange={(e) =>
                         saveTemporayJobPost({
                           min_salary: temp_jobpost.min_salary,
-                          max_salary: e.target.value,
+                          min_salary: e.target.value,
                         })
                       }
-                      defaultValue={temp_jobpost.max_salary}
+                      defaultValue={temp_jobpost.min_salary}
                     />
                   </Col>
                   &mdash;
@@ -151,11 +152,12 @@ const renderItem = (item, children, saveTemporayJobPost, temp_jobpost) => {
                       placeholder="From"
                       onChange={(e) =>
                         saveTemporayJobPost({
-                          min_salary: e.target.value,
                           max_salary: temp_jobpost.max_salary,
+                          max_salary: e.target.value,
+                          
                         })
                       }
-                      defaultValue={temp_jobpost.min_salary}
+                      defaultValue={temp_jobpost.max_salary}
                     />
                   </Col>
                 </>

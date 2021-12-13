@@ -1,25 +1,40 @@
 import React from "react";
 import StepsParent from "./StepsParent";
 import { connect } from "react-redux";
-import { Select, Row, Col, Space } from "antd";
+import { Select, Row, Col, Space,message } from "antd";
 
 const Step2 = ({ postStep, setPostStep, temp_jobpost }) => {
   console.log(temp_jobpost);
   const onSubmit = () => {
-    const { min_salary, max_salary, job_description, negotiable } =
-      temp_jobpost;
+    const {
+      min_salary,
+      max_salary,
+      job_description,
+      negotiable,
+      job_location,
+    } = temp_jobpost;
+    // console.log(min_salary);
+    // console.log(max_salary);
+    if (job_location.length == 0) {
+      message.warning("You must select Job location");
+      return;
+    }
     if (!negotiable) {
       if (!min_salary) {
-        alert("You must enter minimum salary");
+        message.warning("You must enter minimum salary");
+        // alert("You must enter minimum salary");
         return;
       }
-      if (min_salary < max_salary) {
-        alert("Max salary should be greater than min salary");
+      if (min_salary > max_salary) {
+        message.warning("Max salary should be greater than min salary");
+        // alert("Max salary should be greater than min salary");
         return;
       }
+    
     }
     if (!job_description) {
-      alert("You must write description");
+      message.warning("You must write description");
+      // alert("You must write description");
       return;
     }
 
@@ -49,7 +64,7 @@ const Step2 = ({ postStep, setPostStep, temp_jobpost }) => {
         </Row>
       </Space>
 
-      <div style={{float:"right"}}>
+      <div style={{ float: "right" }}>
         <button
           onClick={() => setPostStep(postStep - 1)}
           className="btn btn-secondary mr-3"
