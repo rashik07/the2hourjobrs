@@ -339,7 +339,7 @@ const Profile_info = ({
             />
           </Form.Item>
           <a href="../Profile/Mobile_verify" style={{marginLeft:"155px"}}>
-            <Button type="primary">Verify/Update</Button>
+            <Button type="primary">Update</Button>
           </a>
 
           <Form.Item

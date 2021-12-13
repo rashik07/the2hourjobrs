@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from "react-redux";
-import { firebaseApp } from './firebaseConfig';
+import { initializeApp } from 'firebase/app';
 import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { PhoneVerifyUpdate } from "@/redux/actions/userAction";
 import { useRouter } from "next/router";
@@ -11,7 +11,18 @@ const Mobile_verify = ({ PhoneVerifyUpdate }) => {
     const [otp, setotp] = useState('');
     const [show, setshow] = useState(false);
     const [final, setfinal] = useState('');
-  
+    
+    var config = {
+        apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+        authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+        projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+        storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+        messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+        appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+        measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
+    }
+    const firebaseApp = initializeApp(config);
+
     const auth = getAuth();
     const router = useRouter();
     // Sent OTP
