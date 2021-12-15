@@ -8,6 +8,7 @@ import {
   Typography,
   Button,
   List,
+  message
 } from "antd";
 import dateformat from "dateformat";
 import Navbar from "container/navbar/newNavbar";
@@ -98,7 +99,6 @@ const renderAge = (min, max) => {
 };
 
 const renderEducation = (education, job_post_education) => {
-
   education = education.map((edu) => {
     return edu.child.map((child) => {
       if (job_post_education.includes(child.id)) return child;
@@ -111,7 +111,6 @@ const renderEducation = (education, job_post_education) => {
       if (subelement) child_educations.push(subelement.name);
     });
   });
-  // console.log(job_post_education);
 
   return (
     <Descriptions.Item label="Education" labelStyle={{ fontWeight: 700 }}>
@@ -120,7 +119,6 @@ const renderEducation = (education, job_post_education) => {
         dataSource={job_post_education}
         renderItem={(item) => <List.Item>{item.name}</List.Item>}
       />
-      {/* {job_post_education.join(", ")} */}
     </Descriptions.Item>
   );
 };
@@ -134,9 +132,8 @@ const JobDetail = ({
   isSignedIn,
   applyJob,
 }) => {
-  // const { Paragraph, Title } = Typography;
   const [user, setUser] = useState(null);
-  console.log(temp_job);
+ 
 
   useEffect(() => {
     if (isSignedIn) {
@@ -144,16 +141,11 @@ const JobDetail = ({
     }
   }, [temp_job]);
 
-  //console.log(temp_job);
-  // if(applied_jobs_person)
   const appliedPerson = () => {
     if (user === null) {
       return <p>Loading profile...</p>;
     }
     return applied_jobs_person.map((applied_jobs_person) => {
-      //  console.log(applied_jobs_person.user.username);
-      //  console.log(user);
-
       return (
         <div style={{ marginLeft: "5px" }}>
           <Link
@@ -256,14 +248,13 @@ const JobDetail = ({
 
   const btn_disable = userid === poster.id ? "disabled" : "";
   const [appliedStatus, setAppliedStatus] = useState(applied);
-  // console.log(applied_jobs_person);
+
   const applyJobBtnClick = () => {
     if (!isSignedIn) {
-      alert("You must log in to access this feature");
+      message.error("You must log in to access this feature");
     } else {
-      console.log(appliedStatus);
+     
       applyJob(id, userid, appliedStatus, setAppliedStatus);
-      // alert("successfully");
     }
   };
   const applyShow = () => {
@@ -343,4 +334,3 @@ export default connect(mapStateToProps, {
   getAppliedJobsPerson,
   applyJob,
 })(JobDetail);
-//export default connect(mapStateToProps)(JobDetail);

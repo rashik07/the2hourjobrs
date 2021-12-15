@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import Head from "next/head";
 import Navbar from "../../container/navbar/newNavbar";
 import Sidebar from "../../container/sidebar/sidebar";
-import { Layout, Breadcrumb, Row, Col } from "antd";
+import { Layout, Breadcrumb, Button } from "antd";
 import Profile_info from "components/Profile/Profile_info";
 import Career_application from "components/Profile/Career_application";
 import Education from "components/Profile/Education";
@@ -11,13 +11,14 @@ import Employment from "components/Profile/Employment";
 import Portfolio from "components/Profile/Portfolio";
 import Setting from "components/Profile/Setting";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 const Profile = ({ auth }) => {
   const router = useRouter();
   const { Content } = Layout;
   const selector = useRef("");
   const [loader, setloader] = useState(false);
-
+  console.log(auth.id);
   useEffect(() => {
     if (!auth.isSignedIn) {
       router.push({
@@ -73,7 +74,22 @@ const Profile = ({ auth }) => {
               <Breadcrumb className="breadcrumb_main">
                 <Breadcrumb.Item>Profile</Breadcrumb.Item>
                 <Breadcrumb.Item>{selector.current}</Breadcrumb.Item>
+
+                <a href={`/Profile/Profile_details/${auth.id}`} target="_blank">
+                  <Button
+                    type="primary"
+                    style={{
+                      float: "right",
+                      backgroundColor: "#f5222d",
+                      border: "1px solid #ffffff",
+                      color: "#ffffff",
+                    }}
+                  >
+                    Preview My Profile
+                  </Button>
+                </a>
               </Breadcrumb>
+
               <div className="site-layout-background site-layout-background-profile-mobile">
                 {clickPage(selector.current)}
               </div>

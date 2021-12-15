@@ -1,7 +1,7 @@
 import React from "react";
 import StepsParent from "./StepsParent";
 import { connect } from "react-redux";
-import { Select, Row, Col, Space, message } from "antd";
+import { Button, message } from "antd";
 
 const Step3 = ({ postStep, setPostStep, temp_jobpost }) => {
   const onSubmit = () => {
@@ -36,15 +36,28 @@ const Step3 = ({ postStep, setPostStep, temp_jobpost }) => {
 
       <StepsParent item="experience" />
       <div style={{ float: "right" }}>
-        <button
+        <Button
           onClick={() => setPostStep(postStep - 1)}
           className="btn btn-secondary mr-3"
+          style={{
+            marginRight: "10px",
+            backgroundColor: "#f5222d",
+            color: "#ffffff",
+          }}
         >
           Prev
-        </button>
-        <button onClick={onSubmit} className="btn btn-primary mr-3">
+        </Button>
+        <Button
+          onClick={onSubmit}
+          className="btn btn-primary mr-3"
+          style={{
+         
+            backgroundColor: "#389e0d",
+            color: "#ffffff",
+          }}
+        >
           Next
-        </button>
+        </Button>
       </div>
     </>
   );

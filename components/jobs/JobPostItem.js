@@ -11,7 +11,7 @@ import Link from "next/link";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import PopupDetails from "./PopupDetails";
-import { Modal, Button, Pagination } from "antd";
+import { Modal, Button, Pagination, message } from "antd";
 import { ExclamationCircleOutlined, PushpinFilled } from "@ant-design/icons";
 import { Row, Col, List } from "antd";
 import {
@@ -41,7 +41,6 @@ const JobPostItem = ({
   const router = useRouter();
 
   const { id, title, poster, applied, saved, applied_saved_id } = job;
-  console.log(job);
 
   const btn_disable = userid === poster.id ? "disabled" : "";
 
@@ -94,7 +93,6 @@ const JobPostItem = ({
     if (!isSignedIn) {
       alert("You must log in to access this feature");
     } else {
-      console.log(userid);
       applyJob(id, userid, appliedStatus, setAppliedStatus);
       alert("successfully");
     }
@@ -102,7 +100,7 @@ const JobPostItem = ({
 
   const saveJobBtnClick = () => {
     if (!isSignedIn) {
-      alert("You must log in to access this feature");
+      message.error("You must log in to access this feature");
     } else {
       saveJob(id, userid, savedStatus, setSavedStatus, applied_saved_id);
     }
@@ -177,7 +175,7 @@ const JobPostItem = ({
         />
       );
     }
-    //  console.log(self_posted_jobs);
+
     return (
       <PushpinFilled
         onClick={saveJobBtnClick}
@@ -246,11 +244,13 @@ const JobPostItem = ({
               <PopupDetails job={job} onClick={showDefaultDrawer} size={size} />
             </Col>
             <Col span={4}>{renderButtons()}</Col>
-            <p><strong>Published on:</strong> {getPostTime()}</p>
+            <p>
+              <strong>Published on:</strong> {getPostTime()}
+            </p>
           </Row>
 
           {/* {job.posting_timestamp} */}
-         
+
           <h4 style={{ color: "gray" }}>
             <UserOutlined />{" "}
             <Link href={`/Profile/Profile_details/${poster.id}`}>

@@ -1,13 +1,12 @@
-import CropImageUploader from "components/CropImageUploader";
 import React, { useState } from "react";
 import StepsParent from "./StepsParent";
 import { connect } from "react-redux";
-import { Space, Row, Col, Alert, message } from "antd";
+import {  Row, Col, message,Button } from "antd";
 
 const Step1 = ({ postStep, setPostStep, temp_jobpost }) => {
   const onSubmit = () => {
     if (!temp_jobpost.title) {
-      message.warning("You must enter title");
+      message.warning('You must enter "what am i looking for?"');
       return;
     }
 
@@ -62,9 +61,9 @@ const Step1 = ({ postStep, setPostStep, temp_jobpost }) => {
 
       <br />
 
-      <button onClick={onSubmit} style={{ float: "right" }}>
+      <Button onClick={onSubmit} style={{ float: "right" , backgroundColor:"#389e0d" , color:"#ffffff" }}  >
         Next
-      </button>
+      </Button>
 
       <br />
       <br />

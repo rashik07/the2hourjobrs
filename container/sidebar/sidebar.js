@@ -1,13 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Layout, Menu, Breadcrumb, Typography } from "antd";
-
+import { Layout, Menu, Button, Typography } from "antd";
 import {
   DesktopOutlined,
   RadiusSettingOutlined,
   PieChartOutlined,
   FolderOpenOutlined,
-  FileOutlined,
-  TeamOutlined,
   BookOutlined,
   UserOutlined,
 } from "@ant-design/icons";
@@ -30,7 +27,9 @@ const sidebar = ({ selector, setloader }) => {
         collapsible
         collapse={collapse}
       >
+  
         <Menu defaultSelectedKeys={["1"]} mode="inline">
+         
           <Menu.Item key="1" icon={<UserOutlined />}>
             <a
               href="#"

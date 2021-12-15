@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
-import { Layout, Breadcrumb, Row, Col, Image } from "antd";
+import { Row, Col, Image } from "antd";
 import {
   PhoneOutlined,
   ScheduleOutlined,
@@ -41,6 +41,7 @@ const renderButtons = (
       return;
     }
     saveWorker(id, saved_user_instance_id, setSavedStatus, isSaved, savedId, setReload);
+    window.location.reload();
   };
   const saveShow = () => {
     if (isSaved) {

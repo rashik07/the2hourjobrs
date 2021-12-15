@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
   Select,
-  Row,
-  Col,
-  Image,
-  Upload,
-  Space,
   Form,
   Input,
   Button,
@@ -235,18 +230,6 @@ const Profile_info = ({
           >
             Save Picture
           </Button>
-          <Link href={`/Profile/Profile_details/${user_profile.id}`}>
-            <Tooltip title="View My Profile" className="button_eye">
-              <Button
-                // onClick={() =>
-                //   router.push(`/Profile/Profile_details/${user_profile.id}`)
-                // }
-                type="primary"
-                shape="circle"
-                icon={<EyeOutlined />}
-              ></Button>
-            </Tooltip>
-          </Link>
         </div>
         <Form
           {...formItemLayout}
@@ -338,7 +321,7 @@ const Profile_info = ({
               }}
             />
           </Form.Item>
-          <a href="../Profile/Mobile_verify" style={{marginLeft:"155px"}}>
+          <a href="../Profile/Mobile_verify" style={{ marginLeft: "155px" }}>
             <Button type="primary">Update</Button>
           </a>
 
@@ -349,7 +332,7 @@ const Profile_info = ({
               offset: 4,
               span: 12,
             }}
-            style={{paddingTop:"15px"}}
+            style={{ paddingTop: "15px" }}
           >
             <Checkbox>Hide phone number</Checkbox>
           </Form.Item>

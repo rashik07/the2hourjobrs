@@ -53,8 +53,6 @@ const Jobs = ({ filterJobs, filterfromState, SetfilterAction }) => {
 
   useEffect(() => {
     if(!_.isEmpty(filterfromState)){
-      console.log("filterfromState")
-      console.log(filterfromState);
       setFilter(filterfromState);
       setShowFilterJobs(true);
     }

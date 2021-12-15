@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Descriptions } from "antd";
+import { Descriptions , Button} from "antd";
 import dateformat from "dateformat";
 import { postJob, updateJob } from "redux/actions/jobAction";
 import { useRouter } from "next/router";
@@ -209,26 +209,41 @@ const Step4 = ({
           {renderItem("job_detail")} <hr />
           {renderItem("employee_requirement")}
         </div>
-        <button
+        <Button
           onClick={() => setPostStep(postStep - 1)}
           className="btn btn-secondary mr-3"
+          style={{
+            marginRight: "10px",
+            backgroundColor: "#f5222d",
+            color: "#ffffff",
+          }}
         >
           Prev
-        </button>
+        </Button>
         {editJob ? (
-          <button
+          <Button
             onClick={() => updateJob(temp_jobpost, router)}
             className="btn btn-primary mr-3"
+            style={{
+              marginRight: "10px",
+              backgroundColor: "#f5222d",
+              color: "#ffffff",
+            }}
           >
             Update
-          </button>
+          </Button>
         ) : (
-          <button
+          <Button
             onClick={() => postJob(temp_jobpost, router)}
             className="btn btn-primary mr-3"
+            style={{
+             
+              backgroundColor: "#389e0d",
+              color: "#ffffff",
+            }}
           >
             Post
-          </button>
+          </Button>
         )}
         <br />
         <br />

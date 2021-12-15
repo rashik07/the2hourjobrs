@@ -144,37 +144,32 @@ const navbar = ({
     </Row>
   );
 
-  // const createPost=()=>{
-  //   if (!isSignedIn) {
-  //     alert("You must log in to access this feature");
-  //     return;
-  //   }
-  // }
+  const createPost=()=>{
+    if (!isSignedIn) {
+      alert("You must log in to access this feature");
+    } 
+  }
+  
 
-  // console.log(user_profile.name);
+
   return (
     <Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
-      {/* <Row>
-        <Col xs={2} sm={2} md={6} lg={6} xl={6}> */}
+
       <a href="/">
         <div className="logo" style={{ float: "left" }}>
           <img src="/img/logo.png" alt="Logo" height={40} />
         </div>
       </a>
-      {/* </Col>
-        <Col xs={22} sm={22} md={18} lg={18} xl={18}> */}
-      {/* <Button className="jobpost_btn">
-            <Link href="/jobs/post">Post a Job</Link>
-          </Button> */}
+    
       <Menu
         mode="horizontal"
         defaultSelectedKeys={["2"]}
         style={{ backgroundColor: "#95D5D2", width: "85%", marginLeft: "27%" }}
       >
-        <Button className="jobpost_btn">
+        <Button className="jobpost_btn"  disabled={!isSignedIn}>
           <Link href="/jobs/post">Post a Job</Link>
         </Button>
-        {/* <Menu.Item key="setting:1"></Menu.Item> */}
+      
         <SubMenu key="1" title="Jobs">
           <Menu.Item key="setting:2">
             {" "}
@@ -194,13 +189,13 @@ const navbar = ({
           </Menu.Item>
         </SubMenu>
 
-        <SubMenu key="2" title="Workers">
+        <SubMenu key="2" title="Employees">
           <Menu.Item key="setting:7">
             <Link href="/worker/list">List</Link>
           </Menu.Item>
           <Menu.Item key="setting:8">
             {" "}
-            <Link href="/worker/saved">Saved workers</Link>
+            <Link href="/worker/saved">Saved employees</Link>
           </Menu.Item>
         </SubMenu>
 
