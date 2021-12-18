@@ -8,13 +8,12 @@ import {
   DatePicker,
   Typography,
   Divider,
-  Tooltip,
+  message,
   InputNumber,
   Skeleton,
   Checkbox,
 } from "antd";
 import { connect } from "react-redux";
-import Link from "next/link";
 import {
   getDistrict,
   getDivision,
@@ -23,11 +22,9 @@ import {
   editUserProfile,
   updatePhone,
 } from "@/redux/actions/userAction";
-import { UploadOutlined, EyeOutlined, ContactsFilled } from "@ant-design/icons";
 import { useRouter } from "next/router";
 import moment from "moment";
 import Profile_adress from "./Profile_adress";
-import ImgCrop from "antd-img-crop";
 import PicturesWall from "components/annoucement/PicturesWall";
 
 const Profile_info = ({
@@ -66,18 +63,32 @@ const Profile_info = ({
         }
 
         setuser_profile(result);
-        console.log(result);
         setloading(false);
       });
     }
   }, [loader]);
-  // console.log(edit_phone);
+
   const uploadPhoto = (values) => {
     const formData = new FormData();
-    formData.append("image", cover[0].originFileObj);
-    console.log(cover[0].originFileObj);
-    editUserProfile(formData, user_profile.id);
-    setloader(true);
+
+    console.log(cover.length);
+    if (cover.length===0) {
+      message.warning("Please select your photo");
+    } else {
+      formData.append("image", cover[0].originFileObj);
+      editUserProfile(formData, user_profile.id);
+      setloader(true);
+      message.success("successfully added your profile pic");
+      window.location.reload();
+    }
+    // window.location.reload();
+    // if (typeof values.cover === "undefined") {
+    //   console.log("not cover");
+    // } else {
+    //   console.log("cover");
+    //   formData.append("image", cover[0].originFileObj);
+    //   console.log(cover[0].originFileObj);
+    // }
   };
 
   const onFinish = (values) => {
@@ -89,56 +100,57 @@ const Profile_info = ({
       birthday: values["birthday"].format("YYYY-MM-DD"),
     };
     //formData.append("phone", values.phone);
-    formData.append("nid", values.nid);
-    formData.append("gender", values.gender);
-    if (
-      typeof values.facebook_link === "null" ||
-      values.facebook_link === null
-    ) {
-    } else {
-      formData.append("facebook_link", values.facebook_link);
-    }
-    if (typeof values.bio === "null" || values.bio === null) {
-    } else {
-      formData.append("bio", values.bio);
-    }
-    if (typeof values.youtube_link === "null" || values.youtube_link === null) {
-    } else {
-      formData.append("youtube_link", values.youtube_link);
-    }
-    if (typeof values.website_link === "null" || values.website_link === null) {
-    } else {
-      formData.append("website_link", values.website_link);
-    }
-    if (
-      typeof values.portfolio_link === "null" ||
-      values.portfolio_link === null
-    ) {
-    } else {
-      formData.append("portfolio_link", values.portfolio_link);
-    }
+    // formData.append("nid", values.nid);
+    // formData.append("gender", values.gender);
+    // if (
+    //   typeof values.facebook_link === "null" ||
+    //   values.facebook_link === null
+    // ) {
+    // } else {
+    //   formData.append("facebook_link", values.facebook_link);
+    // }
+    // if (typeof values.bio === "null" || values.bio === null) {
+    // } else {
+    //   formData.append("bio", values.bio);
+    // }
+    // if (typeof values.youtube_link === "null" || values.youtube_link === null) {
+    // } else {
+    //   formData.append("youtube_link", values.youtube_link);
+    // }
+    // if (typeof values.website_link === "null" || values.website_link === null) {
+    // } else {
+    //   formData.append("website_link", values.website_link);
+    // }
+    // if (
+    //   typeof values.portfolio_link === "null" ||
+    //   values.portfolio_link === null
+    // ) {
+    // } else {
+    //   formData.append("portfolio_link", values.portfolio_link);
+    // }
 
-    formData.append("birthday", values.birthday);
+    // formData.append("birthday", values.birthday);
 
-    if (typeof values.cover === "undefined") {
-      console.log("not cover");
-    } else {
-      console.log("cover");
-      formData.append("image", cover[0].originFileObj);
-      console.log(cover[0].originFileObj);
-    }
+    // if (typeof values.cover === "undefined") {
+    //   console.log("not cover");
+    // } else {
+    //   console.log("cover");
+    //   formData.append("image", cover[0].originFileObj);
+    //   console.log(cover[0].originFileObj);
+    // }
 
-    for (var value of formData.values()) {
-      console.log(value);
-    }
-    editUserProfile(formData, user_profile.id);
+    // for (var value of formData.values()) {
+    //   console.log(value);
+    // }
+    editUserProfile(values, user_profile.id);
     setloader(true);
     updatePhone(values, user_profile.id);
-    alert("successfully saved");
-    console.log(values);
+    message.success("successfully saved your basic info");
+    // console.log(values);
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
+    message.error("not saved your basic info");
   };
   const { Option } = Select;
   const { TextArea } = Input;
@@ -239,7 +251,6 @@ const Profile_info = ({
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
           initialValues={user_profile}
-          //setloader={setloader}
         >
           {/* <Form.Item
             name="photo"
@@ -253,7 +264,7 @@ const Profile_info = ({
             </Upload>
           </Form.Item> */}
 
-          <Form.Item label="Name" name="name" style={{ marginLeft: "50px" }}>
+          <Form.Item label="Name" name="name" style={{ marginLeft: "43px" }}>
             <Input
               style={{
                 width: "70%",
@@ -265,7 +276,7 @@ const Profile_info = ({
           <Form.Item
             label="User Name"
             name="username"
-            style={{ marginLeft: "50px" }}
+            style={{ marginLeft: "43px" }}
           >
             <Input
               style={{
@@ -279,7 +290,7 @@ const Profile_info = ({
           <Form.Item
             name="email"
             label="E-mail"
-            style={{ marginLeft: "50px" }}
+            style={{ marginLeft: "43px" }}
             rules={[
               {
                 type: "email",
@@ -322,7 +333,7 @@ const Profile_info = ({
             />
           </Form.Item>
           <a href="../Profile/Mobile_verify" style={{ marginLeft: "155px" }}>
-            <Button type="primary">Update</Button>
+            <Button type="primary">Update Phone Number</Button>
           </a>
 
           <Form.Item
@@ -414,7 +425,6 @@ const mapStateToProps = (state) => {
     get_district: state.user.get_district,
     get_division: state.user.get_division,
     get_thana: state.user.get_thana,
-    // user_profile: state.user.user_profile,
     edit_user_profile: state.user.edit_user_profile,
     edit_phone: state.user.edit_phone,
     auth: state.auth,

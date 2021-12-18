@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Table, Space, Divider, Typography } from "antd";
+import { Table, Space, Divider, Typography,message } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
@@ -57,6 +57,7 @@ const Project_details = ({
             onClick={() => {
               deleteProject(details.id);
               setloader(true);
+              message.success("successfully delete");
             }}
           />
         </Space>

@@ -9,10 +9,8 @@ import {
   Switch,
   Button,
   Radio,
-  DatePicker,
   Typography,
   Divider,
-  TextArea,
   Upload,
 } from "antd";
 import { getJobCategories } from "redux/actions/jobAction";
@@ -32,7 +30,7 @@ const Career_application = ({
 }) => {
   const [user_profile, setuser_profile] = useState([]);
   const [loading, setloading] = useState(true);
-  console.log(user_profile);
+
   useEffect(() => {
     if (!auth.isSignedIn) {
       router.push({
@@ -55,17 +53,12 @@ const Career_application = ({
     formData.append("job_nature", values.job_nature);
     formData.append("available_for_work", values.available_for_work);
     if (typeof values.upload === "undefined") {
-      console.log("not resume");
     } else {
-      console.log("resume");
       formData.append("resume", values.upload[0].originFileObj);
     }
 
-     console.log("Received values of form: ", values);
     editUserProfile(formData, user_profile.id);
     alert("successfully saved");
-
-    //   console.log('update: ', editUserProfile);
   };
   const onFinish1 = (values) => {
     console.log("Received values of form: ", values);
@@ -148,9 +141,9 @@ const Career_application = ({
       },
     },
   };
-  const setJobLocation = (value) => {
-    saveTemporayJobPost({ job_location: value });
-  };
+  // const setJobLocation = (value) => {
+  //   saveTemporayJobPost({ job_location: value });
+  // };
   const normFile = (e) => {
     console.log("Upload event:", e);
 
@@ -203,22 +196,28 @@ const Career_application = ({
           <Form.Item label="Objective" name="objective">
             <TextArea rows={4} />
           </Form.Item>
-          <Form.Item label="Present Salary" name="present_salary"   rules={[
-           
+          <Form.Item
+            label="Present Salary"
+            name="present_salary"
+            rules={[
               {
                 required: true,
                 message: "Please input your Present Salary",
               },
-            ]}>
+            ]}
+          >
             <Input placeholder="present salary" />
           </Form.Item>
-          <Form.Item label="Expected Salary" name="expected_salary"  rules={[
-            
+          <Form.Item
+            label="Expected Salary"
+            name="expected_salary"
+            rules={[
               {
                 required: true,
                 message: "Please input your Expected Salary",
               },
-            ]}>
+            ]}
+          >
             <Input placeholder="expected salary" />
           </Form.Item>
           <Form.Item label="Job level" name="job_level">

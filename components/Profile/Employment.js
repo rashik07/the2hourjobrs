@@ -1,6 +1,4 @@
-import Head from "next/head";
 import React, { useEffect, useState } from "react";
-
 import { connect } from "react-redux";
 import { viewEmployment } from "@/redux/actions/employmentAction";
 import Employment_details from "components/Employment/Employment_details";

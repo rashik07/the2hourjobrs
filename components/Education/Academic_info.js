@@ -11,6 +11,7 @@ import {
   Select,
   Table,
   Space,
+  message,
 } from "antd";
 import { getEducation } from "redux/actions/jobAction";
 import {
@@ -50,7 +51,7 @@ const Academic_info = ({
     createEducation(values);
     form.resetFields();
     setloader(true);
-
+    message.success("successfully added your academic info");
     //       console.log('Success:', values);
   };
 
@@ -136,7 +137,7 @@ const Academic_info = ({
       width: "150px",
     },
     {
-      title: "year of passing",
+      title: "Year of passing",
       dataIndex: "year_of_passing",
       key: "year_of_passing",
       width: "150px",
@@ -153,6 +154,7 @@ const Academic_info = ({
             onClick={() => {
               deleteEducation(details.id);
               setloader(true);
+              message.success("successfully delete");
             }}
           />
         </Space>

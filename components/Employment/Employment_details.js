@@ -1,11 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { Typography, Space, Table,Divider } from "antd";
-import {
-  EditOutlined,
-  EllipsisOutlined,
-  SettingOutlined,
-  DeleteOutlined,
-} from "@ant-design/icons";
+import React, { useEffect } from "react";
+import { Typography, Space, Table, Divider, message } from "antd";
+import { DeleteOutlined } from "@ant-design/icons";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import {
@@ -79,6 +74,7 @@ const Employment_details = ({
             onClick={() => {
               deleteEmployment(details.id);
               setloader(true);
+              message.success("successfully delete");
             }}
           />
         </Space>
@@ -87,12 +83,16 @@ const Employment_details = ({
   ];
 
   return (
-    <div style={{marginBottom: "15px" }}>
+    <div style={{ marginBottom: "15px" }}>
       <Divider>
-          {" "}
-          <Title>Add Experience</Title>
-        </Divider>
-      <Table columns={columns} dataSource={view_employment} pagination={false}/>
+        {" "}
+        <Title>Add Experience</Title>
+      </Divider>
+      <Table
+        columns={columns}
+        dataSource={view_employment}
+        pagination={false}
+      />
     </div>
   );
 };

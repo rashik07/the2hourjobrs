@@ -9,7 +9,7 @@ import {
   Typography,
   Divider,
   InputNumber,
-  Select,
+  message,
   Table,
   Space,
 } from "antd";
@@ -41,6 +41,7 @@ const ProfessionalQualification = ({
     form.resetFields();
     setloader(true);
     // console.log("Success:", values);
+    message.success("successfully added");
   };
   const { TextArea } = Input;
 
@@ -98,20 +99,20 @@ const ProfessionalQualification = ({
       width: "30%",
     },
     {
-      title: "location",
+      title: "Location",
       dataIndex: "location",
       key: "institute",
       width: "100%",
     },
     {
-      title: "duration",
+      title: "Duration",
       dataIndex: "duration",
       key: "duration",
       width: "100%",
     },
 
     {
-      title: "year_of_passing",
+      title: "Year of passing",
       dataIndex: "year_of_passing",
       key: "year_of_passing",
       width: "150px",
@@ -130,6 +131,7 @@ const ProfessionalQualification = ({
               onClick={() => {
                 deleteQualification(details.id);
                 setloader(true);
+                message.success("successfully delete");
               }}
             />
           </Space>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Select, Form, Button, Divider,Typography,Input } from "antd";
+import { Select, Form, Button, Divider,Typography,Input,message } from "antd";
 import { connect } from "react-redux";
 import {
   getDistrict,
@@ -39,7 +39,7 @@ const Profile_adress = ({
   const onFinish2 = (values) => {
     editUserProfile(values,user_profile.id);
     setloader(true);
-    alert("successfully address saved");
+    message.success("successfully added your address");
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);

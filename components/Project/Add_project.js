@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { Form, Input, Button, DatePicker, Typography, Divider } from "antd";
+import { Form, Input, Button, DatePicker, Typography,message } from "antd";
 import { connect } from "react-redux";
 import { createProject } from "@/redux/actions/projectAction";
 
@@ -15,9 +15,10 @@ const Add_project = ({ createProject, create_project, setloader }) => {
     };
     // console.log('Success:', values );
     createProject(values);
-    alert("successfully added");
+    
     form.resetFields();
     setloader(true);
+    message.success("successfully added");
   };
 
   const onFinishFailed = (errorInfo) => {

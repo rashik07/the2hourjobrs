@@ -32,10 +32,10 @@ const PreferedCategories = ({
     viewPreferedCategories();
     setloader(false);
   }, [loader]);
-  console.log(view_prefered_categories);
+
   const { Option, OptGroup } = Select;
   const onFinish = (values) => {
-    console.log("Received values of form: ", values);
+
     createPreferedCategories(values);
     setloader(true);
     alert("This is a success message");
@@ -194,7 +194,7 @@ const PreferedCategories = ({
     locations: location_list,
     skill: skill_list,
   };
-  // console.log(form_init);
+
 
   return (
     <div>

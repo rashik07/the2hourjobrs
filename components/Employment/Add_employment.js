@@ -5,13 +5,9 @@ import {
   Input,
   Button,
   DatePicker,
-  Radio,
+  message,
   Typography,
-  Divider,
-  Space,
-  TextArea,
-  Card,
-  Avatar,
+ 
 } from "antd";
 import { connect } from "react-redux";
 import {
@@ -34,6 +30,7 @@ const Add_employment = ({ createEmployment, view_employment, setloader }) => {
     createEmployment(values);
     form.resetFields();
     setloader(true);
+    message.success("successfully added");
   };
 
   const onFinishFailed = (errorInfo) => {

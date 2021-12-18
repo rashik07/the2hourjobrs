@@ -18,7 +18,7 @@ const Profile = ({ auth }) => {
   const { Content } = Layout;
   const selector = useRef("");
   const [loader, setloader] = useState(false);
-  console.log(auth.id);
+  
   useEffect(() => {
     if (!auth.isSignedIn) {
       router.push({
@@ -29,33 +29,33 @@ const Profile = ({ auth }) => {
   }, [loader]);
   const clickPage = () => {
     if (selector.current == "") {
-      console.log(selector.current);
+     
       return <Profile_info />;
     }
 
     if (selector.current == "Profile_info") {
-      console.log(selector.current);
+    
       return <Profile_info />;
     }
     if (selector.current == "career") {
-      //console.log(selector.current);
+   
       return <Career_application />;
     }
 
     if (selector.current == "education") {
-      //console.log(selector.current);
+    
       return <Education />;
     }
     if (selector.current == "employment") {
-      // console.log(selector.current);
+ 
       return <Employment />;
     }
     if (selector.current == "portfolio") {
-      // console.log(selector.current);
+  
       return <Portfolio />;
     }
     if (selector.current == "setting") {
-      // console.log(selector.current);
+
       return <Setting />;
     }
   };

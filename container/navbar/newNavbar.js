@@ -120,14 +120,14 @@ const navbar = ({
     >
       <h1 style={{ weight: "bold" }}>Notifications</h1>
       <Link href={"/Notification/SeeAllNotification"}>See All</Link>
-      {console.log(allnotificationList)}
+      {/* {console.log(allnotificationList)} */}
 
       {allnotificationList.length == 0 ? (
         <h5>You have no notification here</h5>
       ) : (
         allnotificationList.map(
           (notification, index) => (
-            console.log("ase notification"),
+            // console.log("ase notification"),
             (
               <Col span={24} className="notifi_bar">
                 <Link

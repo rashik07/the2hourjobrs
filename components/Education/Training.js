@@ -13,8 +13,7 @@ import {
   DatePicker,
   Typography,
   Divider,
-  InputNumber,
-  Select,
+  message,
   Table,
   Space,
 } from "antd";
@@ -40,6 +39,7 @@ const Training = ({
     createTraining(values);
     form.resetFields();
     setloader(true);
+    message.success("successfully added");
     // console.log("Success:", values);
   };
 
@@ -98,7 +98,7 @@ const Training = ({
     },
 
     {
-      title: "Training_year",
+      title: "Training year",
       dataIndex: "training_year",
       key: "training_year",
       width: "150px",
@@ -120,6 +120,7 @@ const Training = ({
               onClick={() => {
                 deleteTraining(details.id);
                 setloader(true);
+                message.success("successfully delete");
               }}
             />
           </Space>
