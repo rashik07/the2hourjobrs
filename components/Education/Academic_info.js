@@ -128,7 +128,7 @@ const Academic_info = ({
       title: "Institute Name",
       dataIndex: "institute_name",
       key: "institute_name",
-      width: "150px",
+      width: "200px",
     },
     {
       title: "Result",
@@ -172,6 +172,8 @@ const Academic_info = ({
           columns={columns}
           dataSource={view_education}
           pagination={false}
+          style={{textAlign: 'center'}}
+          bordered
         />
       </div>
 

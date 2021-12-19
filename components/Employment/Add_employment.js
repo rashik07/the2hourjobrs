@@ -79,7 +79,7 @@ const Add_employment = ({ createEmployment, view_employment, setloader }) => {
         <Form.Item label="Company Name:" name="company_name">
           <Input placeholder="company name" />
         </Form.Item>
-        <Form.Item label="designation:" name="designation">
+        <Form.Item label="Designation:" name="designation">
           <Input placeholder="designation" />
         </Form.Item>
 

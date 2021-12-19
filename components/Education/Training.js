@@ -135,7 +135,7 @@ const Training = ({
           {" "}
           <Title>Training</Title>
         </Divider>
-        <Table columns={columns} dataSource={view_training} pagination={false}/>
+        <Table columns={columns} dataSource={view_training} pagination={false} bordered/>
       </div>
 
       <Form

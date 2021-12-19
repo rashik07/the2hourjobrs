@@ -146,7 +146,7 @@ const ProfessionalQualification = ({
           {" "}
           <Title>Professional Qualification</Title>
         </Divider>
-        <Table columns={columns} dataSource={view_qualification} pagination={false}/>
+        <Table columns={columns} dataSource={view_qualification} pagination={false} bordered/>
       </div>
       <Form
         {...formItemLayout}

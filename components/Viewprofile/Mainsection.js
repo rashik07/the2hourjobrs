@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Table, Modal, Button, Card, Row, Col, Divider } from "antd";
 import { updatePhone } from "@/redux/actions/userAction";
 import { connect } from "react-redux";
@@ -8,8 +8,6 @@ const Mainsection = ({
   view_education,
   view_employment,
   view_project,
-  updatePhone,
-  edit_phone,
 }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -77,9 +75,57 @@ const Mainsection = ({
       </p>
     );
   };
+  // const columns = [
+  //   {
+  //     title: "Title",
+  //     dataIndex: "title",
+  //     key: "title",
+  //     width: "30%",
+  //     //...this.getColumnSearchProps('name'),
+  //   },
+  //   {
+  //     title: "Institution",
+  //     dataIndex: "institution",
+  //     key: "institution",
+  //     width: "100%",
 
+  //     // ...this.getColumnSearchProps('age'),
+  //   },
+
+  //   {
+  //     title: "Training year",
+  //     dataIndex: "training_year",
+  //     key: "training_year",
+  //     width: "150px",
+  //     //  ...this.getColumnSearchProps('address'),
+  //     //   sorter: (a, b) => a.address.length - b.address.length,
+  //     //sortDirections: ['descend', 'ascend'],
+  //   },
+
+  //   {
+  //     title: "Action",
+  //     key: "action",
+
+  //     render: (details) => (
+  //       console.log("training id:", details.id),
+  //       (
+  //         <Space size="middle">
+  //           <DeleteOutlined
+  //             key="ellipsis"
+  //             onClick={() => {
+  //               deleteTraining(details.id);
+  //               setloader(true);
+  //               message.success("successfully delete");
+  //             }}
+  //           />
+  //         </Space>
+  //       )
+  //     ),
+  //   },
+  // ];
+  // <Table columns={columns} dataSource={view_training} pagination={false} bordered/>
   const employment = () => {
-    if (view_employment) {
+    if (view_employment.length > 0) {
       return (
         <p>
           <div>
@@ -126,13 +172,14 @@ const Mainsection = ({
         </p>
       );
     }
-    if (view_employment == "") {
+    if (view_employment.length == 0) {
       return "";
     }
   };
 
   const project = () => {
-    if (view_project) {
+    if (view_project.length > 0) {
+     
       return (
         <div className="site-card-wrapper">
           <div>
@@ -147,17 +194,20 @@ const Mainsection = ({
             {view_project.map((view_project) => (
               <Col span={8} style={{ paddingBottom: "20px" }}>
                 <Card
-                  style={{ boxShadow: "2px 2px #FAFAFA" }}
+                  style={{ boxShadow: "1px 1px 1px 1px #D8D8D8" }}
                   title={view_project.title}
                 >
-                  {view_project.description}
+                  <p> {view_project.description} </p>
+                  <br />
+                  <p>Start date: {view_project.start_date}</p>
+                  <p>End date: {view_project.end_date}</p>
                 </Card>
               </Col>
             ))}
           </Row>
         </div>
       );
-    } else if ((view_project = "")) {
+    } else if (view_project.length == 0) {
       return "";
     }
   };
@@ -170,7 +220,7 @@ const Mainsection = ({
       <p>
         <div>
           <Divider
-            style={{ fontWeight: "bold", borderTopColor: "#F0F0F0" }}
+            style={{ fontWeight: "bold", borderTopColor: "#F0F0F0"}}
             orientation="left"
           >
             Objective
@@ -215,9 +265,11 @@ const Mainsection = ({
         footer={null}
       >
         <p>
-        {user_profile.hide_phone==true
-        ?" " : <a href={`tel:${user_profile.phone}`}>{user_profile.phone}</a>
-        }
+          {user_profile.hide_phone == true ? (
+            " "
+          ) : (
+            <a href={`tel:${user_profile.phone}`}>{user_profile.phone}</a>
+          )}
         </p>
         <p>
           <a href={`mailto:${user_profile.email}`}>{user_profile.email}</a>

@@ -35,16 +35,21 @@ const Topsection = ({
         </Col>
 
         <Col span={20}>
-          <Title level={2}>{user_profile.name}</Title>
+          <Title level={2} >{user_profile.name}</Title>
           <Space>
             <Text>
-              <PhoneFilled /> {"  "}
-              {user_profile.hide_phone==true
-                ? " "
-                : (user_profile.phone)}
+              {user_profile.hide_phone == true ? (
+                " "
+              ) : (
+                <>
+                  {" "}
+                  <PhoneFilled /> {"  "} {user_profile.phone}
+                </>
+              )}
             </Text>
             <Text>
               <HomeFilled /> {"  "}
+              {user_profile.address == null ? "-" : user_profile.address + ", "}
               {user_profile.Thana == null
                 ? "-"
                 : user_profile.Thana.name + ", "}

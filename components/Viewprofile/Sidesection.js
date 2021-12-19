@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Button } from "antd";
-import {  DownloadOutlined } from "@ant-design/icons";
+import { DownloadOutlined } from "@ant-design/icons";
 import { viewSinglePreferedCategories } from "redux/actions/preferedcategoriesAction";
 import {
   FacebookShareButton,
@@ -69,7 +69,11 @@ const Sidesection = ({
       );
   };
   const resume_link = () => {
-    if (user_profile.resume == "null" || user_profile.resume == null || user_profile.resume == false) {
+    if (
+      user_profile.resume == "null" ||
+      user_profile.resume == null ||
+      user_profile.resume == false
+    ) {
       return "  ";
     } else
       return (
@@ -131,31 +135,61 @@ const Sidesection = ({
         <span style={{ fontWeight: "bold" }}>Email : </span>
         {user_profile.email}
       </p>
-      <p>
-        <span style={{ fontWeight: "bold" }}>Gender: </span>{" "}
-        {user_profile.gender}
-      </p>
-      <p>
-        <span style={{ fontWeight: "bold" }}>Date of Birth: </span>{" "}
-        {user_profile.birthday}
-      </p>
-
-      <p>
-        <span style={{ fontWeight: "bold" }}>Skills: </span> {skill_list}
-      </p>
-      <p>
-        <span style={{ fontWeight: "bold" }}>Prefered Categories: </span>
-        {category_list}
-      </p>
-      <p>
-        <span style={{ fontWeight: "bold" }}>Prefered Location: </span>
-        {location_list}
-      </p>
-      <p><span style={{ fontWeight: "bold" }}>Present salary: </span>
-        {user_profile.present_salary} bdt</p>
-        
-        <p><span style={{ fontWeight: "bold" }}>Expected salary: </span>
-        {user_profile.expected_salary} bdt</p>
+      {user_profile.gender == null ? (
+        " "
+      ) : (
+        <p>
+          <span style={{ fontWeight: "bold" }}>Gender: </span>{" "}
+          {user_profile.gender}
+        </p>
+      )}
+      {user_profile.birthday == null ? (
+        " "
+      ) : (
+        <p>
+          <span style={{ fontWeight: "bold" }}>Date of Birth: </span>{" "}
+          {user_profile.birthday}
+        </p>
+      )}
+      {skill_list.length == 0 ? (
+        " "
+      ) : (
+        <p>
+          <span style={{ fontWeight: "bold" }}>Skills: </span> {skill_list}
+        </p>
+      )}
+      {category_list.length == 0 ? (
+        " "
+      ) : (
+        <p>
+          <span style={{ fontWeight: "bold" }}>Prefered Categories: </span>
+          {category_list}
+        </p>
+      )}
+      {location_list.length == 0 ? (
+        " "
+      ) : (
+        <p>
+          <span style={{ fontWeight: "bold" }}>Prefered Location: </span>
+          {location_list}
+        </p>
+      )}
+      {user_profile.present_salary == null ? (
+        " "
+      ) : (
+        <p>
+          <span style={{ fontWeight: "bold" }}>Present salary: </span>
+          {user_profile.present_salary} bdt
+        </p>
+      )}
+      {user_profile.expected_salary == null ? (
+        " "
+      ) : (
+        <p>
+          <span style={{ fontWeight: "bold" }}>Expected salary: </span>
+          {user_profile.expected_salary} bdt
+        </p>
+      )}
       <p>{resume_link()}</p>
       <div
         style={{

@@ -27,45 +27,49 @@ const Employment_details = ({
       title: "Name",
       dataIndex: "company_name",
       key: "company_name",
-      width: "30%",
+      width: "12%",
     },
     {
       title: "Designation",
       dataIndex: "designation",
       key: "designation",
-      width: "20%",
+      width: "12%",
     },
     {
-      title: "department",
+      title: "Department",
       dataIndex: "department",
-      key: "address",
+      key: "department",
+      width: "12%",
     },
 
     {
-      title: "responsibilities",
+      title: "Responsibilities",
       dataIndex: "responsibilities",
       key: "responsibilities",
+      width: "12%",
     },
     {
-      title: "company_location",
+      title: "Company location",
       dataIndex: "company_location",
       key: "company_location",
+      width: "12%",
     },
     {
       title: "From",
       dataIndex: "employment_period_from",
       key: "employment_period_from",
-      width: "120px",
+      width: "12%",
     },
     {
       title: "To",
       dataIndex: "employment_period_to",
       key: "employment_period_to",
-      width: "120px",
+      width: "12%",
     },
     {
       title: "Action",
       key: "action",
+      width: "12%",
 
       render: (details) => (
         <Space size="middle">
@@ -92,6 +96,8 @@ const Employment_details = ({
         columns={columns}
         dataSource={view_employment}
         pagination={false}
+        style={{width: '100%'}}
+        bordered 
       />
     </div>
   );
