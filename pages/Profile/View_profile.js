@@ -6,8 +6,14 @@ import Topsection from "components/Viewprofile/Topsection";
 import Sidesection from "components/Viewprofile/Sidesection";
 import Mainsection from "components/Viewprofile/Mainsection";
 
-
-const View_profile = ({ user_profile, view_education,view_employment ,view_project}) => {
+const View_profile = ({
+  user_profile,
+  view_education,
+  view_employment,
+  view_project,
+  view_single_training,
+  view_single_qualification,
+}) => {
   const { Text, Link, Title } = Typography;
   const { Content } = Layout;
   //  console.log(user_profile)
@@ -42,7 +48,8 @@ const View_profile = ({ user_profile, view_education,view_employment ,view_proje
                   view_education={view_education}
                   view_employment={view_employment}
                   view_project={view_project}
-                 
+                  view_single_training={view_single_training}
+                  view_single_qualification={view_single_qualification}
                 />
               </Col>
             </Row>

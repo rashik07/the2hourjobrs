@@ -3,7 +3,11 @@ import { useRouter } from "next/router";
 import { connect } from "react-redux";
 import { getSpecificProfile } from "@/redux/actions/userAction";
 import View_profile from "../View_profile";
-import { viewSingleEducation } from "@/redux/actions/usereducationAction";
+import {
+  viewSingleEducation,
+  viewSingleTraining,
+  viewSingleQualification,
+} from "@/redux/actions/usereducationAction";
 import { viewSingleEmployment } from "@/redux/actions/employmentAction";
 import { viewSingleProject } from "@/redux/actions/projectAction";
 
@@ -16,6 +20,10 @@ const ProfileDetails = ({
   view_employment,
   viewSingleProject,
   view_project,
+  viewSingleTraining,
+  view_single_training,
+  viewSingleQualification,
+  view_single_qualification,
 }) => {
   const router = useRouter();
 
@@ -25,6 +33,8 @@ const ProfileDetails = ({
     viewSingleEmployment(id);
     viewSingleEducation(id);
     getSpecificProfile(id);
+    viewSingleTraining(id);
+    viewSingleQualification(id);
   }, [router.query.id]);
   //console.log(view_project);
   return (
@@ -34,6 +44,8 @@ const ProfileDetails = ({
         view_education={view_education}
         view_employment={view_employment}
         view_project={view_project}
+        view_single_training={view_single_training}
+        view_single_qualification={view_single_qualification}
       />
     </div>
   );
@@ -45,6 +57,8 @@ const mapStateToProps = (state) => {
     view_education: state.education.view_single_education,
     view_employment: state.employment.view_single_employment,
     view_project: state.project.view_single_project,
+    view_single_training: state.education.view_single_training,
+    view_single_qualification: state.education.view_single_qualification,
   };
 };
 
@@ -53,4 +67,6 @@ export default connect(mapStateToProps, {
   viewSingleEducation,
   viewSingleEmployment,
   viewSingleProject,
+  viewSingleTraining,
+  viewSingleQualification,
 })(ProfileDetails);

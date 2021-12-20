@@ -90,25 +90,28 @@ const ProfessionalQualification = ({
       dataIndex: "certification_title",
       key: "certification_title",
       width: "30%",
-      //...this.getColumnSearchProps('name'),
+      align:"center",
     },
     {
       title: "Institution",
       dataIndex: "institute",
       key: "institute",
       width: "30%",
+      align:"center",
     },
     {
       title: "Location",
       dataIndex: "location",
       key: "institute",
       width: "100%",
+      align:"center",
     },
     {
       title: "Duration",
       dataIndex: "duration",
       key: "duration",
       width: "100%",
+      align:"center",
     },
 
     {
@@ -116,12 +119,13 @@ const ProfessionalQualification = ({
       dataIndex: "year_of_passing",
       key: "year_of_passing",
       width: "150px",
+      align:"center",
     },
 
     {
       title: "Action",
       key: "action",
-
+      align:"center",
       render: (details) => (
         console.log("training id:", details.id),
         (

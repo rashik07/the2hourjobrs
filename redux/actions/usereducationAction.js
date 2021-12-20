@@ -89,6 +89,17 @@ export const viewTraining = (data) => async (dispatch) => {
   }
 };
 
+export const viewSingleTraining = (id) => async (dispatch) => {
+  try {
+    const response = await backend.get(`/v1/user/training/?user=${id}`);
+    dispatch({ type: types.VIEW_SINGLE_TRAINING, payload: response.data });
+  } catch (error) {
+    console.log(error);
+    console.log(error.response);
+  }
+};
+
+
 export const createTraining = (formValues) => async (dispatch) => {
   console.log(formValues);
   try {
@@ -140,6 +151,19 @@ export const viewQualification = (data) => async (dispatch) => {
     console.log(error.response);
   }
 };
+
+export const viewSingleQualification = (id) => async (dispatch) => {
+  try {
+    const response = await backend.get(`/v1/user/professional-qualification/?user=${id}`);
+    dispatch({ type: types.VIEW_SINGLE_QUALIFICATION, payload: response.data });
+    console.log(response.data);
+  } catch (error) {
+    console.log(error);
+    console.log(error.response);
+    
+  }
+};
+
 
 export const createQualification = (formValues) => async (dispatch) => {
   console.log(formValues);

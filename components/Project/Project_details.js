@@ -25,13 +25,14 @@ const Project_details = ({
       dataIndex: "title",
       key: "title",
       width: "30%",
-      //...this.getColumnSearchProps('name'),
+      align:"center",
     },
     {
       title: "Description",
       dataIndex: "description",
       key: "description",
       width: "100%",
+      align:"center",
     },
 
     {
@@ -39,17 +40,19 @@ const Project_details = ({
       dataIndex: "start_date",
       key: "start_date",
       width: "150px",
+      align:"center",
     },
     {
       title: "To",
       dataIndex: "end_date",
       key: "end_date",
       width: "150px",
+      align:"center",
     },
     {
       title: "Action",
       key: "action",
-
+      align:"center",
       render: (details) => (
         <Space size="middle">
           <DeleteOutlined
@@ -71,7 +74,7 @@ const Project_details = ({
         {" "}
         <Title>Add Portfolio</Title>
       </Divider>
-      <Table columns={columns} dataSource={view_project} pagination={false} />
+      <Table columns={columns} dataSource={view_project} pagination={false} bordered/>
     </div>
   );
 };

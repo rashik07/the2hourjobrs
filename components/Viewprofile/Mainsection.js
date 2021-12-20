@@ -8,9 +8,11 @@ const Mainsection = ({
   view_education,
   view_employment,
   view_project,
+  view_single_training,
+  view_single_qualification,
 }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
-
+  console.log(view_single_qualification);
   const showModal = () => {
     setIsModalVisible(true);
   };
@@ -22,36 +24,42 @@ const Mainsection = ({
   const handleCancel = () => {
     setIsModalVisible(false);
   };
-
+//education_table start
   const eduColumns = [
     {
       title: "Level of Education",
       dataIndex: "Education",
       key: "Education",
+      align:"center",
     },
     {
       title: "Exam/Degree Title",
       dataIndex: "Degree",
       key: "Degree",
+      align:"center",
     },
 
     {
-      title: "institute_name",
+      title: "Institute Name",
       dataIndex: "institute_name",
       key: "institute_name",
+      align:"center",
     },
     {
-      title: "result",
+      title: "Result",
       dataIndex: "result",
       key: "result",
+      align:"center",
     },
     {
       title: "Year of Passing",
       dataIndex: "year_of_passing",
       key: "year_of_passing",
       width: "150px",
+      align:"center",
     },
   ];
+  
   const education = () => {
     if (view_education == "") {
       return " ";
@@ -71,59 +79,127 @@ const Mainsection = ({
           columns={eduColumns}
           dataSource={view_education}
           pagination={false}
+          bordered
         />
       </p>
     );
   };
-  // const columns = [
-  //   {
-  //     title: "Title",
-  //     dataIndex: "title",
-  //     key: "title",
-  //     width: "30%",
-  //     //...this.getColumnSearchProps('name'),
-  //   },
-  //   {
-  //     title: "Institution",
-  //     dataIndex: "institution",
-  //     key: "institution",
-  //     width: "100%",
+  //education_table end
+  //training_table start
+  const trainColumns = [
+    {
+      title: "Title",
+      dataIndex: "title",
+      key: "title",
+      width: "30%",
+      align:"center",
+    },
+    {
+      title: "Institution",
+      dataIndex: "institution",
+      key: "institution",
+      width: "100%",
+      align:"center",
+    },
 
-  //     // ...this.getColumnSearchProps('age'),
-  //   },
+    {
+      title: "Training year",
+      dataIndex: "training_year",
+      key: "training_year",
+      width: "150px",
+      align:"center",
+    },
+  ];
+  const training = () => {
+    if (view_single_training == "") {
+      return " ";
+    }
+    return (
+      <p>
+        <div>
+          <Divider
+            style={{ fontWeight: "bold", borderTopColor: "#F0F0F0" }}
+            orientation="left"
+          >
+            Training
+          </Divider>
+        </div>
+        <br />
+        <Table
+          columns={trainColumns}
+          dataSource={view_single_training}
+          pagination={false}
+          bordered
+        />
+      </p>
+    );
+  };
+  //training_table end
+  //qualilification_table start
+  const columns = [
+    {
+      title: "Title",
+      dataIndex: "certification_title",
+      key: "certification_title",
+      width: "30%",
+      align:"center",
+    },
+    {
+      title: "Institution",
+      dataIndex: "institute",
+      key: "institute",
+      width: "30%",
+      align:"center",
+    },
+    {
+      title: "Location",
+      dataIndex: "location",
+      key: "institute",
+      width: "100%",
+      align:"center",
+    },
+    {
+      title: "Duration",
+      dataIndex: "duration",
+      key: "duration",
+      width: "100%",
+      align:"center",
+    },
 
-  //   {
-  //     title: "Training year",
-  //     dataIndex: "training_year",
-  //     key: "training_year",
-  //     width: "150px",
-  //     //  ...this.getColumnSearchProps('address'),
-  //     //   sorter: (a, b) => a.address.length - b.address.length,
-  //     //sortDirections: ['descend', 'ascend'],
-  //   },
-
-  //   {
-  //     title: "Action",
-  //     key: "action",
-
-  //     render: (details) => (
-  //       console.log("training id:", details.id),
-  //       (
-  //         <Space size="middle">
-  //           <DeleteOutlined
-  //             key="ellipsis"
-  //             onClick={() => {
-  //               deleteTraining(details.id);
-  //               setloader(true);
-  //               message.success("successfully delete");
-  //             }}
-  //           />
-  //         </Space>
-  //       )
-  //     ),
-  //   },
-  // ];
-  // <Table columns={columns} dataSource={view_training} pagination={false} bordered/>
+    {
+      title: "Year of passing",
+      dataIndex: "year_of_passing",
+      key: "year_of_passing",
+      width: "150px",
+      align:"center",
+    },
+  ];
+  const qualilification = () => {
+    if (view_single_qualification == "") {
+      return " ";
+    }
+    return (
+      <p>
+        <div>
+          <Divider
+            style={{ fontWeight: "bold", borderTopColor: "#F0F0F0" }}
+            orientation="left"
+          >
+            Qualification
+          </Divider>
+        </div>
+        <br />
+        <Table
+          columns={columns}
+          dataSource={view_single_qualification}
+          pagination={false}
+          bordered
+        />
+      </p>
+    );
+  };
+  //qualilification_table end
+  //emploment start
   const employment = () => {
     if (view_employment.length > 0) {
       return (
@@ -176,10 +252,10 @@ const Mainsection = ({
       return "";
     }
   };
-
+  //employment end
+  //project start
   const project = () => {
     if (view_project.length > 0) {
-     
       return (
         <div className="site-card-wrapper">
           <div>
@@ -211,6 +287,8 @@ const Mainsection = ({
       return "";
     }
   };
+  //project end
+  // object start
   const objective = () => {
     if (user_profile.objective == null) {
       return " ";
@@ -220,7 +298,7 @@ const Mainsection = ({
       <p>
         <div>
           <Divider
-            style={{ fontWeight: "bold", borderTopColor: "#F0F0F0"}}
+            style={{ fontWeight: "bold", borderTopColor: "#F0F0F0" }}
             orientation="left"
           >
             Objective
@@ -231,13 +309,8 @@ const Mainsection = ({
       </p>
     );
   };
-  // const phone = () => {
-  //   if (edit_phone.hide_phone == true) {
-  //     return "";
-  //   } else {
-  //     return ;
-  //   }
-  // };
+  //project end
+
 
   return (
     <div>
@@ -245,6 +318,8 @@ const Mainsection = ({
       {employment()}
 
       {education()}
+      {training()}
+      {qualilification()}
       {project()}
       <Button
         type="primary"

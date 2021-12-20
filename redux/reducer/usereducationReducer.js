@@ -9,6 +9,7 @@ const INITIAL_STATE = {
 const usereduReducer = (state = INITIAL_STATE, action) => {
   
   switch (action.type) {
+
     //EDUCATION
     case types.CREATE_EDUCATION:
       return { ...state, create_education: action.payload };
@@ -29,9 +30,13 @@ const usereduReducer = (state = INITIAL_STATE, action) => {
           user_education: Object.values(user_education),
          // self_posted_jobs: Object.values(self_posted_jobs),
         };
+
         //TRAINING
         case types.CREATE_TRAINING:
           return { ...state, create_training: action.payload };
+
+        case types.VIEW_SINGLE_TRAINING:
+          return { ...state, view_single_training: action.payload }; 
     
         case types.VIEW_TRAINING:
           return { ...state, view_training: action.payload }; 
@@ -47,9 +52,13 @@ const usereduReducer = (state = INITIAL_STATE, action) => {
               user_training: Object.values(user_training),
              // self_posted_jobs: Object.values(self_posted_jobs),
             };
+
         //Qualification
         case types.CREATE_QUALIFICATION:
           return { ...state, create_qualification: action.payload };
+
+        case types.VIEW_SINGLE_QUALIFICATION:
+          return { ...state, view_single_qualification: action.payload }; 
     
         case types.VIEW_QUALIFICATION:
           return { ...state, view_qualification: action.payload }; 

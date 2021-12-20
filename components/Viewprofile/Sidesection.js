@@ -20,12 +20,11 @@ const Sidesection = ({
   view_prefered_categories,
 }) => {
   const shareUrl = `https://www.google.com/Profile/Profile_details/${user_profile.id}`;
-  console.log(shareUrl);
 
   useEffect(() => {
     viewSinglePreferedCategories(user_profile.id);
   }, []);
-  console.log(user_profile);
+
   const facebook_link = () => {
     if (
       user_profile.facebook_link == "null" ||

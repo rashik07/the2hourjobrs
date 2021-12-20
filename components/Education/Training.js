@@ -86,15 +86,14 @@ const Training = ({
       dataIndex: "title",
       key: "title",
       width: "30%",
-      //...this.getColumnSearchProps('name'),
+      align:"center",
     },
     {
       title: "Institution",
       dataIndex: "institution",
       key: "institution",
       width: "100%",
-
-      // ...this.getColumnSearchProps('age'),
+      align:"center",
     },
 
     {
@@ -102,15 +101,13 @@ const Training = ({
       dataIndex: "training_year",
       key: "training_year",
       width: "150px",
-      //  ...this.getColumnSearchProps('address'),
-      //   sorter: (a, b) => a.address.length - b.address.length,
-      //sortDirections: ['descend', 'ascend'],
+      align:"center",
     },
 
     {
       title: "Action",
       key: "action",
-
+      align:"center",
       render: (details) => (
         console.log("training id:", details.id),
         (

@@ -19,7 +19,7 @@ import {
   viewEducation,
   deleteEducation,
 } from "@/redux/actions/usereducationAction";
-import { DeleteOutlined } from "@ant-design/icons";
+import { DeleteOutlined, PicCenterOutlined } from "@ant-design/icons";
 
 const Academic_info = ({
   education,
@@ -54,8 +54,6 @@ const Academic_info = ({
     message.success("successfully added your academic info");
     //       console.log('Success:', values);
   };
-
-
 
   function onChangeNum(value) {
     console.log("changed", value);
@@ -116,12 +114,14 @@ const Academic_info = ({
       dataIndex: "Education",
       key: "Education",
       width: "30%",
+      align:"center",
     },
     {
       title: "Exam/Degree Title",
       dataIndex: "Degree",
       key: "Degree",
       width: "100%",
+      align:"center",
     },
 
     {
@@ -129,25 +129,29 @@ const Academic_info = ({
       dataIndex: "institute_name",
       key: "institute_name",
       width: "200px",
+      align:"center",
     },
     {
       title: "Result",
       dataIndex: "result",
       key: "result",
       width: "150px",
+      align:"center",
     },
     {
       title: "Year of passing",
       dataIndex: "year_of_passing",
       key: "year_of_passing",
       width: "150px",
+      align:"center",
     },
     {
       title: "Action",
       key: "action",
+      align:"center",
 
+      
       render: (details) => (
-        //  console.log('education id:',details.id),
         <Space size="middle">
           <DeleteOutlined
             key="ellipsis"
@@ -163,7 +167,7 @@ const Academic_info = ({
   ];
   return (
     <div>
-      <div style={{marginBottom: "15px"}}>
+      <div style={{ marginBottom: "15px" }}>
         <Divider>
           {" "}
           <Title>Academic Info</Title>
@@ -172,7 +176,7 @@ const Academic_info = ({
           columns={columns}
           dataSource={view_education}
           pagination={false}
-          style={{textAlign: 'center'}}
+          style={{ textAlign: "center" }}
           bordered
         />
       </div>
@@ -250,5 +254,4 @@ export default connect(mapStateToProps, {
   createEducation,
   viewEducation,
   deleteEducation,
-  
 })(Academic_info);

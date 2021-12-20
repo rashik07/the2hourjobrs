@@ -28,18 +28,21 @@ const Employment_details = ({
       dataIndex: "company_name",
       key: "company_name",
       width: "12%",
+      align:"center",
     },
     {
       title: "Designation",
       dataIndex: "designation",
       key: "designation",
       width: "12%",
+      align:"center",
     },
     {
       title: "Department",
       dataIndex: "department",
       key: "department",
       width: "12%",
+      align:"center",
     },
 
     {
@@ -47,30 +50,34 @@ const Employment_details = ({
       dataIndex: "responsibilities",
       key: "responsibilities",
       width: "12%",
+      align:"center",
     },
     {
       title: "Company location",
       dataIndex: "company_location",
       key: "company_location",
       width: "12%",
+      align:"center",
     },
     {
       title: "From",
       dataIndex: "employment_period_from",
       key: "employment_period_from",
       width: "12%",
+      align:"center",
     },
     {
       title: "To",
       dataIndex: "employment_period_to",
       key: "employment_period_to",
       width: "12%",
+      align:"center",
     },
     {
       title: "Action",
       key: "action",
       width: "12%",
-
+      align:"center",
       render: (details) => (
         <Space size="middle">
           <DeleteOutlined
