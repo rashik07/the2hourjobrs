@@ -136,9 +136,10 @@
   padding-bottom: 15px;
 }
 .ant-btn {
-  background-color: #ffc800;
+  /* background-color: #389e0d; */
+  background-color: darkblue;
   border: #ffc800;
-  color: black;
+  color: white ;
 }
 .ant-btn:hover {
   background-color: darkblue;
@@ -160,7 +161,7 @@
   margin-bottom: 15px;
 }
 .quick_link a {
-  color: white;
+  color: black;
 }
 .quick_link a:hover {
   text-decoration: underline;
@@ -295,8 +296,8 @@ footer {
   height: auto;
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
-  background: #ffc800;
-  color: #000000;
+  background: #7d7da7;
+  color: whitesmoke;
   border-color: #000000;
 }
 .search_button:hover {
@@ -308,10 +309,10 @@ footer {
   border-color: #000000;
 }
 .location_btn {
-  background-color: #ffc800;
-  border: 1px solid #ffffff;
+  background-color: rgb(149, 213, 210);
+  border: 1px solid black;
   margin: 3px;
-  color: #000000;
+  color: black;
 }
 .location_btn:hover {
   background-color: darkblue;

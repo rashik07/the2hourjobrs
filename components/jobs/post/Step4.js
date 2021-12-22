@@ -226,7 +226,7 @@ const Step4 = ({
             className="btn btn-primary mr-3"
             style={{
               marginRight: "10px",
-              backgroundColor: "#f5222d",
+              backgroundColor: "#389e0d",
               color: "#ffffff",
             }}
           >

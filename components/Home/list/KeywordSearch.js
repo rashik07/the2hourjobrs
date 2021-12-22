@@ -58,7 +58,7 @@ const KeywordSearch = ({
             padding: ".5rem",
             borderTopLeftRadius: "8px",
             borderBottomLeftRadius: "8px",
-            border: "1px solid #000000",
+            border: "0px solid #000000",
           }}
           placeholder="Type and hit Enter"
           onChange={(e) => setKeyword(e.target.value)}
@@ -67,7 +67,7 @@ const KeywordSearch = ({
 
         <Button
           className="search_button"
-          icon={<SearchOutlined style={{ color: "#000000" }} />}
+          icon={<SearchOutlined  />}
           onClick={(e) => {
             //  onKeywordSubmit(e);
             handleChange(e);
