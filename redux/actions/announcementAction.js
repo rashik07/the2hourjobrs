@@ -100,6 +100,7 @@ export const getSpecificAnnouncement = (id) => async (dispatch) => {
         type: types.GET_SINGLE_ANNOUNCEMENT,
         payload: response.data,
       });
+      console.log(response.data);
     }
   } catch (error) {
     console.log(error);

@@ -29,12 +29,14 @@ const ProfileDetails = ({
 
   const { id } = router.query;
   useEffect(() => {
-    viewSingleProject(id);
+    getSpecificProfile(id);
+    
     viewSingleEmployment(id);
     viewSingleEducation(id);
-    getSpecificProfile(id);
+    
     viewSingleTraining(id);
     viewSingleQualification(id);
+    viewSingleProject(id);
   }, [router.query.id]);
   //console.log(view_project);
   return (
@@ -43,9 +45,10 @@ const ProfileDetails = ({
         user_profile={profile}
         view_education={view_education}
         view_employment={view_employment}
-        view_project={view_project}
+        
         view_single_training={view_single_training}
         view_single_qualification={view_single_qualification}
+        view_project={view_project}
       />
     </div>
   );

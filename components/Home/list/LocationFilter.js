@@ -86,7 +86,7 @@ const LocationFilter = ({
           <h3 style={{ marginTop: "15px " }}>Quick links</h3>
           <div className="quick_link">
             <ForwardOutlined />
-            <Link href="/worker/list"> Worker list </Link>
+            <Link href="/worker/list"> Employees List </Link>
             <ForwardOutlined />
             <Link href="/announcement"> All Announcements </Link>
           </div>

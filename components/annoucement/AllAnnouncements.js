@@ -105,13 +105,13 @@ class AllAnnouncements extends Component {
                           View
                         </Button>
                       </Link>
-                      <Button
+                      {/* <Button
                         block
                         style={{ backgroundColor: "black", color: "white" }}
                         onClick={()=>console.log("click")}
                       >
                         Save
-                      </Button>
+                      </Button> */}
                     </Col>
                   </Row>
                 </Col>
@@ -223,9 +223,9 @@ class AllAnnouncements extends Component {
               <TabPane tab="All Announcements" key="1">
                 {this.renderAnnounements(this.props.announcments)}
               </TabPane>
-              <TabPane tab="Saved Announcements" key="2">
+              {/* <TabPane tab="Saved Announcements" key="2">
                 {this.renderSavedAnnounements(this.props.savedannouncments)}
-              </TabPane>
+              </TabPane> */}
             </Tabs>
           </Col>
         </Row>

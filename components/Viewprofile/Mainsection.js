@@ -5,14 +5,15 @@ import { connect } from "react-redux";
 
 const Mainsection = ({
   user_profile,
-  view_education,
   view_employment,
-  view_project,
+  view_education,
+
   view_single_training,
   view_single_qualification,
+  view_project,
 }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
-  console.log(view_single_qualification);
+  // console.log(view_single_qualification);
   const showModal = () => {
     setIsModalVisible(true);
   };
@@ -24,42 +25,42 @@ const Mainsection = ({
   const handleCancel = () => {
     setIsModalVisible(false);
   };
-//education_table start
+  //education_table start
   const eduColumns = [
     {
       title: "Level of Education",
       dataIndex: "Education",
       key: "Education",
-      align:"center",
+      align: "center",
     },
     {
       title: "Exam/Degree Title",
       dataIndex: "Degree",
       key: "Degree",
-      align:"center",
+      align: "center",
     },
 
     {
       title: "Institute Name",
       dataIndex: "institute_name",
       key: "institute_name",
-      align:"center",
+      align: "center",
     },
     {
       title: "Result",
       dataIndex: "result",
       key: "result",
-      align:"center",
+      align: "center",
     },
     {
       title: "Year of Passing",
       dataIndex: "year_of_passing",
       key: "year_of_passing",
       width: "150px",
-      align:"center",
+      align: "center",
     },
   ];
-  
+
   const education = () => {
     if (view_education == "") {
       return " ";
@@ -92,14 +93,14 @@ const Mainsection = ({
       dataIndex: "title",
       key: "title",
       width: "30%",
-      align:"center",
+      align: "center",
     },
     {
       title: "Institution",
       dataIndex: "institution",
       key: "institution",
       width: "100%",
-      align:"center",
+      align: "center",
     },
 
     {
@@ -107,7 +108,7 @@ const Mainsection = ({
       dataIndex: "training_year",
       key: "training_year",
       width: "150px",
-      align:"center",
+      align: "center",
     },
   ];
   const training = () => {
@@ -142,28 +143,28 @@ const Mainsection = ({
       dataIndex: "certification_title",
       key: "certification_title",
       width: "30%",
-      align:"center",
+      align: "center",
     },
     {
       title: "Institution",
       dataIndex: "institute",
       key: "institute",
       width: "30%",
-      align:"center",
+      align: "center",
     },
     {
       title: "Location",
       dataIndex: "location",
       key: "institute",
       width: "100%",
-      align:"center",
+      align: "center",
     },
     {
       title: "Duration",
       dataIndex: "duration",
       key: "duration",
       width: "100%",
-      align:"center",
+      align: "center",
     },
 
     {
@@ -171,7 +172,7 @@ const Mainsection = ({
       dataIndex: "year_of_passing",
       key: "year_of_passing",
       width: "150px",
-      align:"center",
+      align: "center",
     },
   ];
   const qualilification = () => {
@@ -199,95 +200,6 @@ const Mainsection = ({
     );
   };
   //qualilification_table end
-  //emploment start
-  const employment = () => {
-    if (view_employment.length > 0) {
-      return (
-        <p>
-          <div>
-            <Divider
-              style={{ fontWeight: "bold", borderTopColor: "#F0F0F0" }}
-              orientation="left"
-            >
-              Experience
-            </Divider>
-          </div>
-          <br />
-          <ol>
-            {view_employment.map((view_employment) => (
-              <li>
-                <p>
-                  <span
-                    style={{ fontWeight: "bold", textDecoration: "underline" }}
-                  >
-                    {view_employment.designation}(
-                    {view_employment.employment_period_from} to{" "}
-                    {view_employment.employment_period_to})
-                  </span>
-                  -
-                  <span style={{ fontWeight: "bold" }}>
-                    {view_employment.company_name}
-                  </span>{" "}
-                  <br />
-                  {view_employment.department}
-                  <br />
-                  {view_employment.company_location}
-                  <br />
-                  <span
-                    style={{ fontWeight: "bold", textDecoration: "underline" }}
-                  >
-                    {" "}
-                    Duties/Responsibilities:
-                  </span>{" "}
-                  <br />
-                  {view_employment.responsibilities}
-                </p>
-              </li>
-            ))}
-          </ol>
-        </p>
-      );
-    }
-    if (view_employment.length == 0) {
-      return "";
-    }
-  };
-  //employment end
-  //project start
-  const project = () => {
-    if (view_project.length > 0) {
-      return (
-        <div className="site-card-wrapper">
-          <div>
-            <Divider
-              style={{ fontWeight: "bold", borderTopColor: "#F0F0F0" }}
-              orientation="left"
-            >
-              Projects
-            </Divider>
-          </div>
-          <Row gutter={16}>
-            {view_project.map((view_project) => (
-              <Col span={8} style={{ paddingBottom: "20px" }}>
-                <Card
-                  style={{ boxShadow: "1px 1px 1px 1px #D8D8D8" }}
-                  title={view_project.title}
-                >
-                  <p> {view_project.description} </p>
-                  <br />
-                  <p>Start date: {view_project.start_date}</p>
-                  <p>End date: {view_project.end_date}</p>
-                </Card>
-              </Col>
-            ))}
-          </Row>
-        </div>
-      );
-    } else if (view_project.length == 0) {
-      return "";
-    }
-  };
-  //project end
   // object start
   const objective = () => {
     if (user_profile.objective == null) {
@@ -311,6 +223,107 @@ const Mainsection = ({
   };
   //project end
 
+  //emploment start
+
+  const employment = () => {
+    console.log(view_employment);
+    if (view_employment) {
+      if (view_employment.length > 0) {
+        return (
+          <p>
+            <div>
+              <Divider
+                style={{ fontWeight: "bold", borderTopColor: "#F0F0F0" }}
+                orientation="left"
+              >
+                Experience
+              </Divider>
+            </div>
+            <br />
+            <ol>
+              {view_employment.map((view_employment) => (
+                <li>
+                  <p>
+                    <span
+                      style={{
+                        fontWeight: "bold",
+                        textDecoration: "underline",
+                      }}
+                    >
+                      {view_employment.designation}(
+                      {view_employment.employment_period_from} to{" "}
+                      {view_employment.employment_period_to})
+                    </span>
+                    -
+                    <span style={{ fontWeight: "bold" }}>
+                      {view_employment.company_name}
+                    </span>{" "}
+                    <br />
+                    {view_employment.department}
+                    <br />
+                    {view_employment.company_location}
+                    <br />
+                    <span
+                      style={{
+                        fontWeight: "bold",
+                        textDecoration: "underline",
+                      }}
+                    >
+                      {" "}
+                      Duties/Responsibilities:
+                    </span>{" "}
+                    <br />
+                    {view_employment.responsibilities}
+                  </p>
+                </li>
+              ))}
+            </ol>
+          </p>
+        );
+      }
+      if (view_employment.length === 0) {
+        return "";
+      }
+    }
+  };
+  //employment end
+  //project start
+  const project = () => {
+    if (view_project) {
+      if (view_project.length > 0) {
+        return (
+          <div className="site-card-wrapper">
+            <div>
+              <Divider
+                style={{ fontWeight: "bold", borderTopColor: "#F0F0F0" }}
+                orientation="left"
+              >
+                Projects
+              </Divider>
+            </div>
+            <Row gutter={16}>
+              {view_project.map((view_project) => (
+                <Col span={8} style={{ paddingBottom: "20px" }}>
+                  <Card
+                    style={{ boxShadow: "1px 1px 1px 1px #D8D8D8" }}
+                    title={view_project.title}
+                  >
+                    <p> {view_project.description} </p>
+                    <br />
+                    <p>Start date: {view_project.start_date}</p>
+                    <p>End date: {view_project.end_date}</p>
+                  </Card>
+                </Col>
+              ))}
+            </Row>
+          </div>
+        );
+      } else if (view_project.length === 0) {
+        return "";
+      }
+    }
+  };
+  //project end
 
   return (
     <div>

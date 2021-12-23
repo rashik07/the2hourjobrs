@@ -45,11 +45,13 @@ const View_profile = ({
               >
                 <Mainsection
                   user_profile={user_profile}
-                  view_education={view_education}
                   view_employment={view_employment}
-                  view_project={view_project}
+                  view_education={view_education}
+                 
+                  
                   view_single_training={view_single_training}
                   view_single_qualification={view_single_qualification}
+                  view_project={view_project}
                 />
               </Col>
             </Row>

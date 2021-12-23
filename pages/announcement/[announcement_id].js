@@ -125,7 +125,7 @@ const AnnouncementDetails = ({ getSpecificAnnouncement, announcment }) => {
             {/* <h3>Other annoucement from the same user</h3> */}
           </Col>
           <Col xs={24} sm={24} md={4} lg={4} xl={4} offset={1}>
-            <h3>location</h3>
+            {/* <h3>location</h3>
             <p>
               Address:{" "}
               {announcment.Thana == null ? "-" : announcment.Thana.name + ", "}
@@ -133,12 +133,12 @@ const AnnouncementDetails = ({ getSpecificAnnouncement, announcment }) => {
                 ? "-"
                 : announcment.District.name + ", "}
               {announcment.Division == null ? "-" : announcment.Division.name}
-            </p>
+            </p> */}
             <p>
               Contact:{" "}
               {announcment.contact_information == null
                 ? "-"
-                : announcment.contact_information}
+                :  <a href={`tel:${announcment.contact_information}`}>{announcment.contact_information}</a>}
             </p>
 
             <Divider />
