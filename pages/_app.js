@@ -11,11 +11,13 @@ import "./../styles/header.css";
 import "./Landing_page/Landing_page.css";
 import "./custom.css";
 import "./responsive.css";
+import Footer from "container/footer/footer";
 function MyApp({ Component, pageProps }) {
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor}>
         <Component {...pageProps} />
+        <Footer/>
       </PersistGate>
     </Provider>
   );

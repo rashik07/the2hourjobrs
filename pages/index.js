@@ -177,7 +177,7 @@ const Jobs = ({ filterJobs }) => {
               <Col xs={24} sm={24} md={24} lg={24} xl={24}>
                 <div
                   style={{
-                    backgroundImage: `url('/img/banner2.png')`,
+                    backgroundImage: `url('/img/banner4.png')`,
                     height: "280px",
                     marginBottom: "15px",
                   }}
@@ -197,7 +197,6 @@ const Jobs = ({ filterJobs }) => {
           </Button>
         </Affix>
 
-        <Footer />
         <BackTop>
           <div style={style}>
             <UpOutlined />

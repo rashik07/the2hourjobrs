@@ -24,6 +24,7 @@ const ProfileDetails = ({
   view_single_training,
   viewSingleQualification,
   view_single_qualification,
+  auth
 }) => {
   const router = useRouter();
 
@@ -49,6 +50,7 @@ const ProfileDetails = ({
         view_single_training={view_single_training}
         view_single_qualification={view_single_qualification}
         view_project={view_project}
+        auth={auth}
       />
     </div>
   );
@@ -62,6 +64,7 @@ const mapStateToProps = (state) => {
     view_project: state.project.view_single_project,
     view_single_training: state.education.view_single_training,
     view_single_qualification: state.education.view_single_qualification,
+    auth: state.auth,
   };
 };
 
@@ -72,4 +75,5 @@ export default connect(mapStateToProps, {
   viewSingleProject,
   viewSingleTraining,
   viewSingleQualification,
+  
 })(ProfileDetails);

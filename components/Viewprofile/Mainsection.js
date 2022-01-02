@@ -226,7 +226,7 @@ const Mainsection = ({
   //emploment start
 
   const employment = () => {
-    console.log(view_employment);
+    // console.log(view_employment);
     if (view_employment) {
       if (view_employment.length > 0) {
         return (

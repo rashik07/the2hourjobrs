@@ -50,7 +50,7 @@ const KeywordSearch = ({
       style={{ padding: "100px", backgroundImage: `url('/img/banner.jpg')` }}
       className="search_bar"
     >
-      <form style={{ display: "flex", width: "100%" }}>
+      <form className="search_form">
         <input
           // className="form-control mt-2"
           style={{
@@ -60,7 +60,7 @@ const KeywordSearch = ({
             borderBottomLeftRadius: "8px",
             border: "0px solid #000000",
           }}
-          placeholder="Type and hit Enter"
+          placeholder=" What I am looking for"
           onChange={(e) => setKeyword(e.target.value)}
           value={keyword}
         />

@@ -1,4 +1,9 @@
 @media only screen and (min-width: 900px) {
+  .search_form{
+    display: flex;
+    width: 55% ;
+    margin-left: 205px;
+  }
   .applied_person {
     font-weight: bold;
     display: flex;
@@ -26,6 +31,10 @@
   /* .site-layout {
     margin: 16px 30px !important;
   } */
+  .search_form{
+    display: flex;
+    width: 100% ;
+  }
   .notificationIcon{
     padding-left: 20px;
   }
