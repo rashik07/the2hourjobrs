@@ -25,7 +25,7 @@ const renderButtons = (
   savedWorkerList,
   setReload,
 ) => {
-  console.log(savedWorkerList);
+  // console.log(savedWorkerList);
   
   let isSaved = false;
   let savedId = null;

@@ -125,51 +125,49 @@ const navbar = ({
       {allnotificationList.length == 0 ? (
         <h5>You have no notification here</h5>
       ) : (
-        allnotificationList.map(
-          (notification, index) => (
-            // console.log("ase notification"),
-            (
-              <Col span={24} className="notifi_bar">
-                <Link
-                  href={"/jobs/detail/" + notification["description"]}
-                  style={{ color: "white" }}
-                >
-                  {notification["verb"]}
-                </Link>{" "}
-              </Col>
-            )
-          )
-        )
+        allnotificationList.map((notification, index) => (
+          // console.log("ase notification"),
+          <Col span={24} className="notifi_bar">
+            <Link
+              href={"/jobs/detail/" + notification["description"]}
+              style={{ color: "white" }}
+            >
+              {notification["verb"]}
+            </Link>{" "}
+          </Col>
+        ))
       )}
     </Row>
   );
 
-  const createPost=()=>{
+  const createPost = () => {
     if (!isSignedIn) {
       alert("You must log in to access this feature");
-    } 
-  }
-  
-
+    }
+  };
 
   return (
     <Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
-
       <a href="/">
         <div className="logo" style={{ float: "left" }}>
           <img src="/img/logo.png" alt="Logo" height={40} />
         </div>
       </a>
-    
+
       <Menu
         mode="horizontal"
         defaultSelectedKeys={["2"]}
         style={{ backgroundColor: "#95D5D2", width: "85%", marginLeft: "27%" }}
       >
+        {/* <Menu.Item key="setting:1">
+          <Button className="jobpost_btn" disabled={!isSignedIn}>
+            <Link href="/jobs/post">Post a Job</Link>
+          </Button>
+        </Menu.Item> */}
         <Button className="jobpost_btn"  disabled={!isSignedIn}>
           <Link href="/jobs/post">Post a Job</Link>
         </Button>
-      
+
         <SubMenu key="1" title="Jobs">
           <Menu.Item key="setting:2">
             {" "}

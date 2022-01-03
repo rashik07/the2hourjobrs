@@ -49,7 +49,7 @@ const JobList = ({
   };
 
   if (showFilterJobs) {
-    return filtered_jobs.reverse().map((job) => {
+    return filtered_jobs.map((job) => {
       return <JobPostItem key={job.id} job={job} />;
     });
   }

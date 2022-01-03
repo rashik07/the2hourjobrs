@@ -53,6 +53,7 @@ const Workers = ({ filterWorkers }) => {
                   filter={filter}
                   setFilter={setFilter}
                   reload={setShowFilterWorker}
+                  showPage={showPage}
                 />
                 {/* <JobIndustryFilter filter={filter} setFilter={setFilter} /> */}
                 <LocationFilter

@@ -167,7 +167,14 @@ export const filterWorkers = (filter) => async (dispatch) => {
         url += `profile__gender=${gender}&`;
         return url;
       },
-
+      job_nature: (url, job_nature) => {
+        url += `profile__job_nature=${job_nature}&`;
+        return url;
+      },
+      // category: (url, category) => {
+      //   url += `category=${category.id}&`;
+      //   return url;
+      // },
       location: (url, location) => {
         const { id, type } = location;
 
@@ -175,7 +182,7 @@ export const filterWorkers = (filter) => async (dispatch) => {
 
         return url;
       },
-
+   
       keyword: (url, keyword) => {
         url += `keyword=${keyword}&`;
         return url;
@@ -185,7 +192,7 @@ export const filterWorkers = (filter) => async (dispatch) => {
     for (let i in filter) {
       url = createURL[i](url, filter[i]);
     }
-
+    // dispatch({ type: types.FILTERED_WORKERS, payload: response.data });
     if (store.getState().auth.isSignedIn) {
       response = await backend.get(url);
     } else {

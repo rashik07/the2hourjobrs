@@ -243,6 +243,7 @@
 }
 .ant-layout-sider {
   background: #95d5d2;
+  position: relative;
 }
 .ant-menu.ant-menu-dark,
 .ant-menu-dark .ant-menu-sub,
@@ -334,4 +335,10 @@ footer {
 }
 .ant-radio-button-wrapper a:hover {
   color: white;
+}
+
+.ant-layout-sider-trigger {
+  position: absolute;
+  z-index: 0!important;
+
 }
