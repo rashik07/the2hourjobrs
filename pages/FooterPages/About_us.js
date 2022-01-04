@@ -76,7 +76,7 @@ const About_us = () => {
             resources to improve infrastructure.
           </p>
         </Content>
-        <Footer />
+       
       </Layout>
     </>
   );

@@ -30,7 +30,9 @@ const WorkFlow = () => {
             padding: "36px 50px",
           }}
         >
-          <h1 style={{color:"darkblue", textAlign: "center"}} >As A Worker</h1>
+          <h1 style={{ color: "darkblue", textAlign: "center" }}>
+            As A Worker
+          </h1>
           <h1> Join</h1>
           <p>
             {" "}
@@ -77,9 +79,9 @@ const WorkFlow = () => {
             feedback to the employer.
           </p>
 
-
-
-          <h1 style={{color:"darkblue", textAlign: "center"}} strong>As An Employer</h1>
+          <h1 style={{ color: "darkblue", textAlign: "center" }} strong>
+            As An Employer
+          </h1>
           <h1> Join</h1>
           <p>
             {" "}
@@ -125,9 +127,7 @@ const WorkFlow = () => {
             Whenever the project is finish, worker can place a rating and
             feedback to the employer.
           </p>
-          
         </Content>
-        <Footer />
       </Layout>
     </>
   );

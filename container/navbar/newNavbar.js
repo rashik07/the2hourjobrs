@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Layout, Menu, Row, Col, Image, Button, Dropdown, Select } from "antd";
+import { Layout, Menu, Row, Col, Image, Button, Dropdown, Select ,message} from "antd";
 import Link from "next/link";
 import { connect } from "react-redux";
 import { signOut } from "../../redux/actions/authAction";
@@ -139,10 +139,28 @@ const navbar = ({
       )}
     </Row>
   );
+  
+  const phoneNumberAlert = () =>{
+    message.error("Please login or update/verify your phone number ");
+  }
+
 
   const createPost = () => {
-    if (!isSignedIn) {
-      alert("You must log in to access this feature");
+    console.log(user_profile.phone);
+    if (user_profile.phone == null || !isSignedIn){
+      return (
+        <Button className="jobpost_btn" onClick={() =>phoneNumberAlert()} >
+          <Link href="">Post a Job</Link>
+        </Button>
+      );
+      
+    } else{
+      return (
+        <Button className="jobpost_btn" disabled={!isSignedIn}>
+          <Link href="/jobs/post">Post a Job</Link>
+        </Button>
+      );
+
     }
   };
 
@@ -164,10 +182,7 @@ const navbar = ({
             <Link href="/jobs/post">Post a Job</Link>
           </Button>
         </Menu.Item> */}
-        <Button className="jobpost_btn"  disabled={!isSignedIn}>
-          <Link href="/jobs/post">Post a Job</Link>
-        </Button>
-
+        {createPost()}
         <SubMenu key="1" title="Jobs">
           <Menu.Item key="setting:2">
             {" "}

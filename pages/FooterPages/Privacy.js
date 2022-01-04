@@ -410,7 +410,7 @@ const Privacy = () => {
           [c]Applicable for Client’s too<br/> 
           [d]Please CONFIRM
         </Content>
-        <Footer />
+        
       </Layout>
     </>
   );

@@ -38,20 +38,23 @@ const JobList = ({
   };
   const jobPostItem = (job) => {
     if (all_jobs) {
-      
-        return (
-         
-            <JobPostItem key={job.id} job={job} />
-       
-        );
-  
+      return <JobPostItem key={job.id} job={job} />;
     }
   };
 
   if (showFilterJobs) {
-    return filtered_jobs.map((job) => {
-      return <JobPostItem key={job.id} job={job} />;
-    });
+    if (filtered_jobs.length > 0) {
+      return filtered_jobs.reverse().map((job) => {
+        console.log(filtered_jobs);
+        return <JobPostItem key={job.id} job={job} />;
+      });
+    } else {
+      return (
+        <h1 style={{ color: "#AEB6BF", marginTop: "20%", marginLeft: "20%" }}>
+          You have no jobs found.
+        </h1>
+      );
+    }
   }
 
   if (all_jobs) {
@@ -69,13 +72,9 @@ const JobList = ({
             pageSize: 5,
           }}
           dataSource={all_jobs.reverse()}
-          renderItem={((job)=>jobPostItem(job))}
-   
-      
+          renderItem={(job) => jobPostItem(job)}
         />
-          {/* {jobPostItem1()} */}
-          
-     
+        {/* {jobPostItem1()} */}
       </>
     );
   }

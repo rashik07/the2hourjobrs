@@ -411,7 +411,7 @@ const TermOfService = () => {
           <br />
           [d]Please CONFIRM
         </Content>
-        <Footer />
+        
       </Layout>
     </div>
   );

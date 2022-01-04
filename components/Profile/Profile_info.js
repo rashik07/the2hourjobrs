@@ -40,6 +40,7 @@ const Profile_info = ({
   const [loader, setloader] = useState(false);
   const [cover, setcover] = useState([]);
   const dateFormat = "YYYY-MM-DD";
+  console.log(user_profile);
 
   const router = useRouter();
 
