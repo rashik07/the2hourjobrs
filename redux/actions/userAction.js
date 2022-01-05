@@ -146,7 +146,7 @@ export const getOtherWorkers = () => async (dispatch) => {
     // if (store.getState().auth.isSignedIn) {
     //   response = await backend.get("/v1/user/other_users/", getConfig());
     // } else {
-    const response = await backend.get("/v1/user/other_users/");
+    const response = await backend.get("/v1/user/other_users/", getConfig());
     // }
 
     dispatch({ type: types.GET_OTHER_WORKERS, payload: response.data });

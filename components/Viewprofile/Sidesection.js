@@ -85,7 +85,7 @@ const Sidesection = ({
               />
             }
           >
-            Download CV
+            Download CV/File
           </Button>
         </a>
       );

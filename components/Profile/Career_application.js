@@ -180,10 +180,10 @@ const Career_application = ({
           </Form.Item>
           <Form.Item
             name="upload"
-            label="CV Upload"
+            label="CV Upload/File Upload"
             valuePropName="fileList"
             getValueFromEvent={normFile}
-            extra="Please Upload PDF Format"
+            extra="You Can Upload PDF/Powerpoint/Jpg/Png/ Format"
           >
             <Upload name="resume" listType="picture" maxCount={1}>
               <Button icon={<UploadOutlined />}>Click to upload</Button> <br />

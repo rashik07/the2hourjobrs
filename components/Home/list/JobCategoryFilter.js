@@ -51,7 +51,7 @@ const JobCategoryFilter = ({
     return (
       <>
         {categories.map((category) => {
-          return category.list.map((subcategory) => {
+          return category.list.reverse().map((subcategory) => {
             return (
               <Col
                 xs={24}
@@ -66,6 +66,7 @@ const JobCategoryFilter = ({
                 className="home_category"
               >
                 <CaretRightOutlined style={{ color: "#6db784" }} />{" "}
+                {console.log(subcategory.name)}
                 <a>{subcategory.name}</a>
               </Col>
             );
