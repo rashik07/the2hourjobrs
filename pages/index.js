@@ -16,7 +16,7 @@ import {
   Divider,
   BackTop,
   Typography,
-  Affix
+  Affix,
 } from "antd";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -29,7 +29,7 @@ import {
   AreaChartOutlined,
   UsergroupAddOutlined,
   GlobalOutlined,
-  PlusCircleOutlined
+  PlusCircleOutlined,
 } from "@ant-design/icons";
 
 const { Content } = Layout;
@@ -163,16 +163,24 @@ const Jobs = ({ filterJobs }) => {
 
         <Content className="site-layout-home ">
           <div className="site-layout-background">
-            <h2 style={{ color: "darkblue", marginTop: "15px" }}>
+            <h2 style={{ color: "darkblue", marginTop: "15px" , fontWeight: "bold"}}>
               Job Categories
             </h2>
-            <Row>
+            
               <JobCategoryFilter
                 filter={filter}
                 setFilter={setFilter}
                 reload={setShowFilterJobs}
               />
-
+              {/* <h2 style={{ color: "darkblue", marginTop: "15px" }}>
+                Job Categories
+              </h2>
+              <JobCategoryFilter
+                filter={filter}
+                setFilter={setFilter}
+                reload={setShowFilterJobs}
+              /> */}
+            <Row>
               <Divider />
               <Col xs={24} sm={24} md={24} lg={24} xl={24}>
                 <div
@@ -193,7 +201,7 @@ const Jobs = ({ filterJobs }) => {
         </Content>
         <Affix offsetBottom={bottom}>
           <Button className="jobpost_btn_mobile">
-          <PlusCircleOutlined /> <Link href="/jobs/post">Post a Job</Link>
+            <PlusCircleOutlined /> <Link href="/jobs/post">Post a Job</Link>
           </Button>
         </Affix>
 
