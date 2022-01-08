@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Select, Skeleton } from "antd";
-import { connect } from "react-redux";
-import { updateProfile, editUserProfile } from "@/redux/actions/userAction";
-import { saveTemporayJobPost } from "redux/actions/jobAction";
 import {
+  Select,
+  Skeleton,
   Form,
   Input,
   Switch,
@@ -12,8 +10,11 @@ import {
   Typography,
   Divider,
   Upload,
+  message,
 } from "antd";
-import { getJobCategories } from "redux/actions/jobAction";
+import { connect } from "react-redux";
+import { updateProfile, editUserProfile } from "@/redux/actions/userAction";
+import { saveTemporayJobPost, getJobCategories } from "redux/actions/jobAction";
 import { UploadOutlined } from "@ant-design/icons";
 import PreferedCategories from "components/PreferedCategories";
 
@@ -25,8 +26,6 @@ const Career_application = ({
   saveTemporayJobPost,
   temp_jobpost,
   getJobCategories,
-  categories,
-  onClear,
 }) => {
   const [user_profile, setuser_profile] = useState([]);
   const [loading, setloading] = useState(true);
@@ -58,11 +57,10 @@ const Career_application = ({
     }
 
     editUserProfile(formData, user_profile.id);
-    alert("successfully saved");
+    
+    message.success("successfully added");
   };
-  const onFinish1 = (values) => {
-    console.log("Received values of form: ", values);
-  };
+
   const { OptGroup } = Select;
 
   useEffect(() => {
@@ -104,11 +102,6 @@ const Career_application = ({
 
   const [form] = Form.useForm();
   const [formLayout, setFormLayout] = useState("horizontal");
-
-  const onFormLayoutChange = ({ layout }) => {
-    setFormLayout(layout);
-  };
-
   const formItemLayout =
     formLayout === "horizontal"
       ? {
@@ -141,9 +134,7 @@ const Career_application = ({
       },
     },
   };
-  // const setJobLocation = (value) => {
-  //   saveTemporayJobPost({ job_location: value });
-  // };
+
   const normFile = (e) => {
     console.log("Upload event:", e);
 

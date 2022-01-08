@@ -40,7 +40,6 @@ const Training = ({
     form.resetFields();
     setloader(true);
     message.success("successfully added");
-    // console.log("Success:", values);
   };
 
   const { TextArea } = Input;

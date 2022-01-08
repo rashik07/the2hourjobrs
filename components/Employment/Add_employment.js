@@ -1,24 +1,14 @@
 import React from "react";
 import { useState } from "react";
-import {
-  Form,
-  Input,
-  Button,
-  DatePicker,
-  message,
-  Typography,
- 
-} from "antd";
+import { Form, Input, Button, DatePicker, message, Typography } from "antd";
 import { connect } from "react-redux";
 import {
   viewProject,
   createEmployment,
 } from "@/redux/actions/employmentAction";
-import moment from "moment";
+
 const Add_employment = ({ createEmployment, view_employment, setloader }) => {
   const dateFormat = "YYYY-MM-DD";
-  // view_employment.employment_period_from=moment(view_employment.employment_period_from, dateFormat);
-  // view_employment.employment_period_to=moment(view_employment.employment_period_to, dateFormat);
   const onFinish = (values) => {
     values = {
       ...values,
@@ -35,6 +25,7 @@ const Add_employment = ({ createEmployment, view_employment, setloader }) => {
 
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
+    message.error("not saved your experience");
   };
 
   const { TextArea } = Input;
@@ -75,7 +66,6 @@ const Add_employment = ({ createEmployment, view_employment, setloader }) => {
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
       >
-        
         <Form.Item label="Company Name:" name="company_name">
           <Input placeholder="company name" />
         </Form.Item>

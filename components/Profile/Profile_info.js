@@ -29,7 +29,6 @@ import PicturesWall from "components/annoucement/PicturesWall";
 
 const Profile_info = ({
   updateProfile,
-  // user_profile,
   editUserProfile,
   updatePhone,
   edit_phone,
@@ -58,7 +57,6 @@ const Profile_info = ({
       setloading(true);
       updateProfile().then((result) => {
         if (result.birthday == null) {
-          // result.birthday = moment("2015/01/01", dateFormat);
         } else {
           result.birthday = moment(result.birthday, dateFormat);
         }
@@ -73,7 +71,7 @@ const Profile_info = ({
     const formData = new FormData();
 
     console.log(cover.length);
-    if (cover.length===0) {
+    if (cover.length === 0) {
       message.warning("Please select your photo");
     } else {
       formData.append("image", cover[0].originFileObj);
@@ -95,11 +93,13 @@ const Profile_info = ({
   const onFinish = (values) => {
     const formData = new FormData();
 
-    values = {
-      ...values,
+      values = {
+        ...values,
 
-      birthday: values["birthday"].format("YYYY-MM-DD"),
-    };
+        birthday: values["birthday"].format(""),
+      };
+      
+    
     //formData.append("phone", values.phone);
     // formData.append("nid", values.nid);
     // formData.append("gender", values.gender);
@@ -147,7 +147,7 @@ const Profile_info = ({
     setloader(true);
     updatePhone(values, user_profile.id);
     message.success("successfully saved your basic info");
-    // console.log(values);
+    console.log(values["birthday"].format("YYYY-MM-DD"));
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
@@ -357,10 +357,10 @@ const Profile_info = ({
                 type: "number",
                 message: "The input is not valid NID!",
               },
-              {
-                required: true,
-                message: "Please input your NID!",
-              },
+              // {
+              //   required: true,
+              //   message: "Please input your NID!",
+              // },
             ]}
           >
             <InputNumber

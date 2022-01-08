@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Select } from "antd";
 import { connect } from "react-redux";
-import { getJobCategories } from "redux/actions/jobAction";
+import { getJobCategories ,getLocationList} from "redux/actions/jobAction";
 import { Form, TreeSelect, Button, Typography, Divider, message } from "antd";
 import { TagsInput } from "react-tag-input-component";
-import { getLocationList } from "redux/actions/jobAction";
 import {
   createPreferedCategories,
   viewPreferedCategories,
@@ -38,7 +37,7 @@ const PreferedCategories = ({
 
     createPreferedCategories(values);
     setloader(true);
-    alert("This is a success message");
+    message.success("successfully added");
   };
   const onFinishFailed = () => {
     message.error("something error");

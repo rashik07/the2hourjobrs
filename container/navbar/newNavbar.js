@@ -146,7 +146,7 @@ const navbar = ({
 
 
   const createPost = () => {
-    console.log(user_profile.phone);
+    // console.log(user_profile.phone);
     if (user_profile.phone == null || !isSignedIn){
       return (
         <Button className="jobpost_btn" onClick={() =>phoneNumberAlert()} >

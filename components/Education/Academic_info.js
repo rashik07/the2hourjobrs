@@ -39,7 +39,6 @@ const Academic_info = ({
     setloader(false);
   }, [loader]);
 
-  console.log(view_education);
   const { Option, OptGroup } = Select;
   const dateFormat = "YYYY";
 
