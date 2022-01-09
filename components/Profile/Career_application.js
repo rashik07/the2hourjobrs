@@ -11,6 +11,7 @@ import {
   Divider,
   Upload,
   message,
+  InputNumber ,
 } from "antd";
 import { connect } from "react-redux";
 import { updateProfile, editUserProfile } from "@/redux/actions/userAction";
@@ -190,14 +191,20 @@ const Career_application = ({
           <Form.Item
             label="Present Salary"
             name="present_salary"
+            
             rules={[
               {
                 required: true,
                 message: "Please input your Present Salary",
               },
+                {
+                  type: 'number',
+                  min: 0,
+                  max: 99999999999,
+                },
             ]}
           >
-            <Input placeholder="present salary" />
+            <InputNumber  placeholder="present salary" />
           </Form.Item>
           <Form.Item
             label="Expected Salary"
@@ -209,7 +216,7 @@ const Career_application = ({
               },
             ]}
           >
-            <Input placeholder="expected salary" />
+            <InputNumber placeholder="expected salary" />
           </Form.Item>
           <Form.Item label="Job level" name="job_level">
             <Radio.Group
