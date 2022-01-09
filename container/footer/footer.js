@@ -9,8 +9,7 @@ import {
   InstagramFilled,
   TwitterSquareFilled
 } from "@ant-design/icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { facebook } from "@fortawesome/free-solid-svg-icons";
+
 const Footer = () => {
 
   return (

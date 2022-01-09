@@ -96,7 +96,7 @@ const Profile_info = ({
       values = {
         ...values,
 
-        birthday: values["birthday"].format(""),
+        birthday: values["birthday"].format("YYYY-MM-DD"),
       };
       
     

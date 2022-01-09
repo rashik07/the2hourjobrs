@@ -62,7 +62,8 @@ const LocationFilter = ({
           }}
         >
           <h3>Location</h3>
-          {location.map((divison) => {
+          {if(location)
+          location.map((divison) => {
             return (
               <Button
                 key={JSON.stringify({
