@@ -62,7 +62,7 @@ const LocationFilter = ({
           }}
         >
           <h3>Location</h3>
-          {if(location)
+          {
           location.map((divison) => {
             return (
               <Button
