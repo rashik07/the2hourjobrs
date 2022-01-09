@@ -42,28 +42,9 @@ const LocationFilter = ({
       });
     }
   };
-
-  const onClear = () => {
-    filter = _.omit(filter, ["location"]);
-    setFilter(filter);
-    reload(true);
-  };
-
-  if (loading) {
-    return <Skeleton active />;
-  } else {
-    return (
-      <>
-        <Col
-          xs={24} sm={24} md={6} lg={6} xl={6}
-          style={{
-            backgroundColor: "#95D5D2",
-            padding: "10px 33px",
-          }}
-        >
-          <h3>Location</h3>
-          {
-          location.map((divison) => {
+  const locationList =()=>{
+    if(location){
+    return  location.map((divison) => {
             return (
               <Button
                 key={JSON.stringify({
@@ -84,6 +65,28 @@ const LocationFilter = ({
               </Button>
             );
           })}
+  }
+
+  const onClear = () => {
+    filter = _.omit(filter, ["location"]);
+    setFilter(filter);
+    reload(true);
+  };
+
+  if (loading) {
+    return <Skeleton active />;
+  } else {
+    return (
+      <>
+        <Col
+          xs={24} sm={24} md={6} lg={6} xl={6}
+          style={{
+            backgroundColor: "#95D5D2",
+            padding: "10px 33px",
+          }}
+        >
+          <h3>Location</h3>
+          {locationList()}
           <h3 style={{ marginTop: "15px " }}>Quick links</h3>
           <div className="quick_link">
             <ForwardOutlined />
