@@ -161,20 +161,20 @@ export const filterWorkers = (filter) => async (dispatch) => {
   try {
     let url = "v1/user/filter_worker/?";
     let response = null;
-
+    console.log(filter);
     const createURL = {
       gender: (url, gender) => {
         url += `profile__gender=${gender}&`;
         return url;
       },
-      job_nature: (url, job_nature) => {
+      employmentStatus: (url, job_nature) => {
         url += `profile__job_nature=${job_nature}&`;
         return url;
       },
-      // category: (url, category) => {
-      //   url += `category=${category.id}&`;
-      //   return url;
-      // },
+      category: (url, category) => {
+        url += `category=${category.id}&`;
+        return url;
+      },
       location: (url, location) => {
         const { id, type } = location;
 
