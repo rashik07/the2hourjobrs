@@ -73,7 +73,7 @@ const Workers = ({ filterWorkers }) => {
                   setFilter={setFilter}
                   reload={setShowFilterWorker}
                 />
-                <ExperienceFilter
+                {/* <ExperienceFilter
                   filter={filter}
                   setFilter={setFilter}
                   reload={setShowFilterWorker}
@@ -82,7 +82,7 @@ const Workers = ({ filterWorkers }) => {
                   filter={filter}
                   setFilter={setFilter}
                   reload={setShowFilterWorker}
-                />
+                /> */}
               </Col>
               <Collapse
                 className="stepJobPostMobile"
