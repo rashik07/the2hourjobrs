@@ -166,7 +166,7 @@ const Jobs = ({ filterJobs, filterfromState, SetfilterAction }) => {
                       setFilter={setFilter}
                       reload={setShowFilterJobs}
                     />
-                    <ExperienceFilter
+                    {/* <ExperienceFilter
                       filter={filter}
                       setFilter={setFilter}
                       reload={setShowFilterJobs}
@@ -175,7 +175,7 @@ const Jobs = ({ filterJobs, filterfromState, SetfilterAction }) => {
                       filter={filter}
                       setFilter={setFilter}
                       reload={setShowFilterJobs}
-                    />
+                    /> */}
                   </Col>
                 </Panel>
               </Collapse>

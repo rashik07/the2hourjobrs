@@ -12,6 +12,7 @@ import {
   Upload,
   message,
   InputNumber ,
+  Checkbox
 } from "antd";
 import { connect } from "react-redux";
 import { updateProfile, editUserProfile } from "@/redux/actions/userAction";
@@ -169,6 +170,12 @@ const Career_application = ({
               checkedChildren="available for work"
               unCheckedChildren="not available for work"
             />
+          </Form.Item>
+          <Form.Item name="empoyeer" >
+            <Checkbox >Empoyeer</Checkbox>
+          </Form.Item>
+          <Form.Item name="worker" >
+            <Checkbox >Worker</Checkbox>
           </Form.Item>
           <Form.Item
             name="upload"

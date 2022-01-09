@@ -2,6 +2,7 @@ import React from "react";
 import StepsParent from "./StepsParent";
 import { connect } from "react-redux";
 import { Button, Row, Col, Space, message } from "antd";
+import CheckBox from "components/CheckBox";
 
 const Step2 = ({ postStep, setPostStep, temp_jobpost }) => {
   console.log(temp_jobpost);

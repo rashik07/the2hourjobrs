@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { Form, Input, Button, DatePicker, message, Typography } from "antd";
+import { Form, Input, Button, DatePicker, message, Typography ,Checkbox} from "antd";
 import { connect } from "react-redux";
 import {
   viewProject,
@@ -9,6 +9,7 @@ import {
 
 const Add_employment = ({ createEmployment, view_employment, setloader }) => {
   const dateFormat = "YYYY-MM-DD";
+  
   const onFinish = (values) => {
     values = {
       ...values,
@@ -32,6 +33,8 @@ const Add_employment = ({ createEmployment, view_employment, setloader }) => {
   const { Title } = Typography;
   const [form] = Form.useForm();
   const [formLayout, setFormLayout] = useState("horizontal");
+  
+  const [present, setParent] = useState(false);
 
   const formItemLayout =
     formLayout === "horizontal"
@@ -86,8 +89,21 @@ const Add_employment = ({ createEmployment, view_employment, setloader }) => {
         <Form.Item label="From" name="employment_period_from">
           <DatePicker format={dateFormat} />
         </Form.Item>
+        {present ? (
+                ""
+              ) : (
         <Form.Item label="To" name="employment_period_to">
           <DatePicker format={dateFormat} />
+        </Form.Item>
+              )}
+        <Form.Item label="Present" name="">
+          <Checkbox  onChange={(e) => {
+                    if (e.target.checked) {
+                     setParent(true)
+                    } else {
+                     setParent(false)
+                    }
+                  }}></Checkbox>
         </Form.Item>
 
         <Form.Item className="text-center" {...tailFormItemLayout}>
