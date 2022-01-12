@@ -49,9 +49,9 @@ const getItems = (isSignedIn, signOut, user_profile) => {
     return (
       <>
         {/* {console.log(user_profile.name)} */}
-        <Menu.Item key="setting:12">{image()}</Menu.Item>
+        <Menu.Item key="setting:11">{image()}</Menu.Item>
 
-        <Menu.Item key="setting:13">
+        <Menu.Item key="setting:12">
           <Link href="/jobs/list">
             <a
               onClick={() => {
@@ -67,12 +67,12 @@ const getItems = (isSignedIn, signOut, user_profile) => {
   }
   return (
     <>
-      <Menu.Item key="setting:14">
+      <Menu.Item key="setting:13">
         <Link href="/auth/login" onClick={() => router.push("/auth/login")}>
           Login
         </Link>
       </Menu.Item>
-      <Menu.Item key="setting:15">
+      <Menu.Item key="setting:14">
         <Link href="/auth/signup" onClick={() => router.push("/auth/signup")}>
           Sign up
         </Link>
@@ -203,24 +203,24 @@ const navbar = ({
         </SubMenu>
 
         <SubMenu key="2" title="Employees">
-          <Menu.Item key="setting:7">
+          <Menu.Item key="setting:6">
             <Link href="/worker/list">List</Link>
           </Menu.Item>
-          <Menu.Item key="setting:8">
+          <Menu.Item key="setting:7">
             {" "}
             <Link href="/worker/saved">Saved employees</Link>
           </Menu.Item>
         </SubMenu>
 
         <SubMenu key="3" title="Announcements">
-          <Menu.Item key="setting:9">
+          <Menu.Item key="setting:8">
             <Link href="/announcement">All Announcements</Link>
           </Menu.Item>
-          <Menu.Item key="setting:10">
+          <Menu.Item key="setting:9">
             {" "}
             <Link href="/announcement/myannouncement">My Announcements</Link>
           </Menu.Item>
-          <Menu.Item key="setting:11">
+          <Menu.Item key="setting:10">
             {" "}
             <Link href="/announcement/create">Create Announcement</Link>
           </Menu.Item>

@@ -21,7 +21,7 @@ const JobCategoryFilter = ({
   useEffect(() => {
     setloading(true);
     getJobCategories().then((result) => {
-      console.log(result);
+     
       setcategories(result);
       setloading(false);
     });
@@ -49,7 +49,7 @@ const JobCategoryFilter = ({
         <Row>
         
         {categories.map((category) => {
-          console.log(category);
+          // console.log(category);
           // return <h1>jdnvjdkj</h1>
           if (category.type === "Skilled") {
             return category.list.map((subcategory) => {
@@ -77,7 +77,7 @@ const JobCategoryFilter = ({
       <p style={{ color: "black", marginTop: "15px",fontWeight: "bold" }}>Funcational Base</p>
       <Row>
         {categories.map((category) => {
-          console.log(category);
+          // console.log(category);
 
           if (category.type === "Funcational") {
             return category.list.map((subcategory) => {
