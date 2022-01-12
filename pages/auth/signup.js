@@ -37,8 +37,8 @@ const Signup = (props) => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    props.signUp({ name, username, email, phone, password }, router);
-    console.log(name, username, email, phone, password );
+    props.signUp({ name, username, email, password }, router);
+    console.log(name, username, email, password );
   };
   
 
@@ -76,12 +76,12 @@ const Signup = (props) => {
             onChange={setEmail}
             alert={props.email}
           />
-          <Form
+          {/* <Form
             type="phone"
             placeholder="Phone"
             onChange={setPhone}
             alert={props.phone}
-          />
+          /> */}
           <Form
             type="password"
             placeholder="Password"

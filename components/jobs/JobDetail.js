@@ -149,7 +149,8 @@ const JobDetail = ({
       return (
         <div style={{ marginLeft: "5px" }}>
           <Link
-            href={`/Profile/Profile_details/${applied_jobs_person.user.id}`}
+            href={"/Profile/Profile_details/[id]"}
+            as={`/Profile/Profile_details/${applied_jobs_person.user.id}`}
           >
             <a> {applied_jobs_person.user.username}</a>
           </Link>
@@ -170,7 +171,7 @@ const JobDetail = ({
             </Descriptions.Item> */}
 
             <Descriptions.Item label="Job Poster" labelStyle={labelStyle}>
-              <Link href={`/Profile/Profile_details/${temp_job.poster.id}`}>
+              <Link href={"/Profile/Profile_details/[id]"} as={`/Profile/Profile_details/${temp_job.poster.id}`}>
                 {temp_job.poster.username}
               </Link>
             </Descriptions.Item>

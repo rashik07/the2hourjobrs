@@ -64,7 +64,7 @@ class AllAnnouncements extends Component {
                       <div>
                         <UserOutlined />{" "}
                         <Link
-                          href={`/Profile/Profile_details/${announcment.user.id}`}
+                          href={"/Profile/Profile_details/[id]"} as={`/Profile/Profile_details/${announcment.user.id}`}
                         >
                           {announcment.user.name}
                         </Link>
@@ -96,7 +96,7 @@ class AllAnnouncements extends Component {
                 >
                   <Row>
                     <Col span={18} offset={3}>
-                      <Link href={"/announcement/" + announcment.id + "/"}>
+                      <Link href= {"/announcement/[announcement_id]"} as={`/announcement/${announcment.id}`}>
                         <Button
                           type="primary"
                           block

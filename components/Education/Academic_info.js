@@ -225,7 +225,13 @@ const Academic_info = ({
         <Form.Item label="Institution" name="institute_name">
           <Input></Input>
         </Form.Item>
-        <Form.Item label="Result" name="result">
+        <Form.Item label="Result" name="result"   rules={[
+         
+              {
+                  required: true,
+                message: "Please input your result",
+              },
+            ]}>
           <InputNumber min={1} max={5} onChange={onChangeNum} />
         </Form.Item>
         <Form.Item label="Year of Passing" name="year_of_passing">

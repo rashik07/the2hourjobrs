@@ -197,13 +197,17 @@ const JobPostItem = ({
           {applyShow()}
           {deleteShow()}
           {saveShow()}
-          <Button
-            onClick={() => router.push(`/jobs/edit/${id}`)}
-            type="primary"
-            shape="round"
-          >
-            Edit
-          </Button>
+          <Link
+                        href={"/jobs/edit/[id]"} as={`/jobs/edit/${id}`}
+                      >
+                        <Button
+                          type="primary"
+                          block
+                          style={{ marginBottom: "15px" }}
+                        >
+                          Edit
+                        </Button>
+          </Link>
         </>
       );
     }
@@ -253,7 +257,7 @@ const JobPostItem = ({
 
           <h4 style={{ color: "gray" }}>
             <UserOutlined />{" "}
-            <Link href={`/Profile/Profile_details/${poster.id}`}>
+            <Link href={"/Profile/Profile_details/[id]" } as={`/Profile/Profile_details/${poster.id}` }>
               {poster.username}
             </Link>{" "}
             <EnvironmentOutlined /> {getLocations(job.job_location)}

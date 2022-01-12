@@ -21,7 +21,6 @@ const JobCategoryFilter = ({
   useEffect(() => {
     setloading(true);
     getJobCategories().then((result) => {
-     
       setcategories(result);
       setloading(false);
     });
@@ -45,62 +44,73 @@ const JobCategoryFilter = ({
   } else {
     return (
       <>
-        <p style={{ color: "black", marginTop: "15px" , fontWeight: "bold" }}>Skill base</p>
+        <p style={{ color: "black", marginTop: "15px", fontWeight: "bold" }}>
+          Skill base
+        </p>
         <Row>
-        
-        {categories.map((category) => {
-          // console.log(category);
-          // return <h1>jdnvjdkj</h1>
-          if (category.type === "Skilled") {
-            return category.list.map((subcategory) => {
-              return (
-                <Col
-                  xs={24}
-                  sm={24}
-                  md={6}
-                  lg={6}
-                  xl={6}
-                  onClick={() => {
-                    handleChange(JSON.stringify(subcategory));
-                  }}
-                  style={{ margin: "0rem 0rem" }}
-                  className="home_category"
-                >
-                  <CaretRightOutlined style={{ color: "#6db784" }} />{" "}
-                  <a>{subcategory.name}</a>
-                </Col>
-              );
-            });
-          }
-        })}
-      </Row>
-      <p style={{ color: "black", marginTop: "15px",fontWeight: "bold" }}>Funcational Base</p>
-      <Row>
-        {categories.map((category) => {
-          // console.log(category);
+          {categories.map((category) => {
+            // console.log(category);
+            // return <h1>jdnvjdkj</h1>
+            if (category.type === "Skilled") {
+              return category.list.map((subcategory) => {
+                return (
+                  <Col
+                    xs={24}
+                    sm={24}
+                    md={6}
+                    lg={6}
+                    xl={6}
+                    onClick={() => {
+                      handleChange(JSON.stringify(subcategory));
+                    }}
+                    style={{ margin: "0rem 0rem" }}
+                    className="home_category"
+                    
+                  >
+                    
+                    <CaretRightOutlined style={{ color: "#6db784" }} />{" "}
+                    <a>{subcategory.name}</a>
 
-          if (category.type === "Funcational") {
-            return category.list.map((subcategory) => {
-              return (
-                <Col
-                  xs={24}
-                  sm={24}
-                  md={6}
-                  lg={6}
-                  xl={6}
-                  onClick={() => {
-                    handleChange(JSON.stringify(subcategory));
-                  }}
-                  style={{ margin: "0rem 0rem" }}
-                  className="home_category"
-                >
-                  <CaretRightOutlined style={{ color: "#6db784" }} />{" "}
-                  <a>{subcategory.name}</a>
-                </Col>
-              );
-            });
-          }
-        })}
+                    
+                  </Col>
+                );
+              });
+            }
+          })}
+        </Row>
+        <p style={{ color: "black", marginTop: "15px", fontWeight: "bold" }}>
+          Funcational Base
+        </p>
+        <Row>
+          {categories.map((category) => {
+            // console.log(category);
+
+            if (category.type === "Funcational") {
+              return category.list.map((subcategory) => {
+                return (
+                  <Col
+                    xs={24}
+                    sm={24}
+                    md={6}
+                    lg={6}
+                    xl={6}
+                    onClick={() => {
+                      handleChange(JSON.stringify(subcategory));
+                    }}
+                    style={{ margin: "0rem 0rem" }}
+                    className="home_category"
+                  >
+                    
+                    <CaretRightOutlined style={{ color: "#6db784" }} />{" "}
+                    <a>{subcategory.name}</a>
+
+                 
+                    
+                  </Col>
+                );
+              });
+            }
+          })}
         </Row>
       </>
     );

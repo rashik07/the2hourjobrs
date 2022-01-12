@@ -105,10 +105,8 @@ const AllAnnouncements = ({
                 >
                   <Row>
                     <Col span={18} offset={3}>
-                      <Link
-                        href={
-                          "/announcement/myannouncement/" + announcment.id + "/"
-                        }
+                    <Link
+                        href={"/announcement/myannouncement/[announcement_id]"} as={`/announcement/myannouncement/${announcment.id}`}
                       >
                         <Button
                           type="primary"
@@ -118,6 +116,18 @@ const AllAnnouncements = ({
                           Edit
                         </Button>
                       </Link>
+                      {/* <Link
+                        href={"/announcement/myannouncement/" + announcment.id + "/"
+                        }
+                      >
+                        <Button
+                          type="primary"
+                          block
+                          style={{ marginBottom: "15px" }}
+                        >
+                          Edit
+                        </Button>
+                      </Link> */}
                       <Button
                         block
                         onClick={() =>

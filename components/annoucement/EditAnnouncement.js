@@ -117,7 +117,9 @@ const editAnnouncementForm = ({ announcement, updateAnnouncement }) => {
           <Image.PreviewGroup>
             <Row>
               
-            {  announcement.image.map((imagee) => {
+            {  
+            
+            announcement.image? announcement.image.map((imagee) => {
                 console.log(imagee);
                 if (imagee.cover) {
                   return (
@@ -132,7 +134,7 @@ const editAnnouncementForm = ({ announcement, updateAnnouncement }) => {
                     </>
                   );
                 }
-              })}
+              }) : ""}
               <Col span={8}>
                 <PicturesWall setImages={setImages} />
               </Col>
@@ -142,7 +144,7 @@ const editAnnouncementForm = ({ announcement, updateAnnouncement }) => {
           <h3>Gallery images</h3>
           <Image.PreviewGroup>
             <Row>
-              {announcement.image.map((imagee) => {
+              {announcement.image? announcement.image.map((imagee) => {
                 console.log(imagee);
                 if (!imagee.cover) {
                   return (
@@ -157,7 +159,7 @@ const editAnnouncementForm = ({ announcement, updateAnnouncement }) => {
                     </>
                   );
                 }
-              })}
+              }): ""}
             </Row>
           </Image.PreviewGroup>
         </Col>

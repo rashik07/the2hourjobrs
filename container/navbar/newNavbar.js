@@ -149,16 +149,23 @@ const navbar = ({
     // console.log(user_profile.phone);
     if (user_profile.phone == null || !isSignedIn){
       return (
-        <Button className="jobpost_btn" onClick={() =>phoneNumberAlert()} >
-          <Link href="">Post a Job</Link>
+        // <Button className="jobpost_btn" onClick={() =>phoneNumberAlert()} >
+        //   <Link href="">Post a Job</Link>
+        // </Button>
+        <Menu.Item key="setting:1" className="jobpost_list" >
+        <Button className="jobpost_btn"onClick={() =>phoneNumberAlert()}>
+          <Link href="/jobs/post">Post a Job</Link>
         </Button>
+      </Menu.Item>
       );
       
     } else{
       return (
-        <Button className="jobpost_btn" disabled={!isSignedIn}>
+        <Menu.Item key="setting:1" className="jobpost_list" >
+        <Button className="jobpost_btn" >
           <Link href="/jobs/post">Post a Job</Link>
         </Button>
+      </Menu.Item>
       );
 
     }
@@ -177,12 +184,12 @@ const navbar = ({
         defaultSelectedKeys={["2"]}
         style={{ backgroundColor: "#95D5D2", marginLeft: "27%" }}
       >
-        <Menu.Item key="setting:1" className="jobpost_list" >
+        {/* <Menu.Item key="setting:1" className="jobpost_list" >
           <Button className="jobpost_btn" disabled={!isSignedIn}>
             <Link href="/jobs/post">Post a Job</Link>
           </Button>
-        </Menu.Item>
-        {/* {createPost()} */}
+        </Menu.Item> */}
+        {createPost()}
         <SubMenu key="1" title="Jobs">
           <Menu.Item key="setting:2">
             {" "}

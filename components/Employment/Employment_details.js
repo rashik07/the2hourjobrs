@@ -21,6 +21,7 @@ const Employment_details = ({
   useEffect(() => {
     viewEmployment();
   }, []);
+  if(view_employment)
   view_employment.map((view_employment) =>{
     // console.log(view_employment.employment_period_to);
     if(view_employment.employment_period_to== null){

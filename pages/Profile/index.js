@@ -18,7 +18,7 @@ const Profile = ({ auth }) => {
   const { Content } = Layout;
   const selector = useRef("");
   const [loader, setloader] = useState(false);
-  
+
   useEffect(() => {
     if (!auth.isSignedIn) {
       router.push({
@@ -29,33 +29,26 @@ const Profile = ({ auth }) => {
   }, [loader]);
   const clickPage = () => {
     if (selector.current == "") {
-     
       return <Profile_info />;
     }
 
     if (selector.current == "Profile_info") {
-    
       return <Profile_info />;
     }
     if (selector.current == "career") {
-   
       return <Career_application />;
     }
 
     if (selector.current == "education") {
-    
       return <Education />;
     }
     if (selector.current == "employment") {
- 
       return <Employment />;
     }
     if (selector.current == "portfolio") {
-  
       return <Portfolio />;
     }
     if (selector.current == "setting") {
-
       return <Setting />;
     }
   };
@@ -75,19 +68,25 @@ const Profile = ({ auth }) => {
                 <Breadcrumb.Item>Profile</Breadcrumb.Item>
                 <Breadcrumb.Item>{selector.current}</Breadcrumb.Item>
 
-                <a href={`/Profile/Profile_details/${auth.id}`} target="_blank">
-                  <Button
-                    type="primary"
+                <Link
+                  href={"/Profile/Profile_details/[id]"}
+                  as={`/Profile/Profile_details/${auth.id}`}
+                >
+                  <a
+                    target="_blank"
                     style={{
                       float: "right",
                       backgroundColor: "#f5222d",
                       border: "1px solid #ffffff",
                       color: "#ffffff",
+                      padding: "5px",
+                      border:"1px solid white"
                     }}
                   >
+                    {" "}
                     Preview My Profile
-                  </Button>
-                </a>
+                  </a>
+                </Link>
               </Breadcrumb>
 
               <div className="site-layout-background site-layout-background-profile-mobile">
