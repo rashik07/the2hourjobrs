@@ -21,6 +21,26 @@ const Employment_details = ({
   useEffect(() => {
     viewEmployment();
   }, []);
+  view_employment.map((view_employment) =>{
+    // console.log(view_employment.employment_period_to);
+    if(view_employment.employment_period_to== null){
+      view_employment.employment_period_to = "Present"
+      // console.log(view_employment.employment_period_to)
+    }
+    else{
+      view_employment.employment_period_to=view_employment.employment_period_to
+    }
+  })
+ 
+ 
+  // if(view_employment.employment_period_to== null){
+  //   view_employment.employment_period_to = "Present"
+  //   console.log(view_employment.employment_period_to)
+  // }
+  // else{
+  //   view_employment.employment_period_to=view_employment.employment_period_to
+  // }
+  
 
   const columns = [
     {
@@ -65,9 +85,10 @@ const Employment_details = ({
       width: "12%",
       align: "center",
     },
+    
     {
       title: "To",
-      dataIndex: "employment_period_to",
+      dataIndex:"employment_period_to",
       key: "employment_period_to",
       width: "12%",
       align: "center",

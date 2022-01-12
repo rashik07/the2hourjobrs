@@ -155,6 +155,7 @@
 .ant-menu-horizontal {
   border-bottom: 0px solid #f0f0f0;
   box-shadow: none;
+  text-align: right;
 }
 
 .quick_link {
@@ -180,14 +181,20 @@
 .jobpost_btn {
   background-color: #ffc800;
   color: #1e1e1e;
-  margin-left: 270px;
+  margin-left: auto;
   border: 1px solid #ffffff;
 }
 .jobpost_btn:hover {
   background-color: darkblue;
   color: #ffffff;
-  margin-left: 270px;
+  margin-left: auto;
   border: 1px solid #ffffff;
+}
+.ant-menu-item .jobpost_btn  a{
+  color: #1e1e1e !important;
+}
+.ant-menu-item .jobpost_btn  a:hover{
+  color: #ffffff !important;
 }
 /* (A) FIXED WRAPPER */
 .hwrap {
@@ -344,4 +351,8 @@ footer {
   position: absolute;
   z-index: 0!important;
 
+}
+
+.jobpost_list:hover{
+   border-bottom: 2px solid transparent !important;
 }

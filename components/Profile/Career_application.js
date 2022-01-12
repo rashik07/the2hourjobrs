@@ -31,6 +31,7 @@ const Career_application = ({
 }) => {
   const [user_profile, setuser_profile] = useState([]);
   const [loading, setloading] = useState(true);
+  console.log(user_profile);
 
   useEffect(() => {
     if (!auth.isSignedIn) {
@@ -52,6 +53,8 @@ const Career_application = ({
     formData.append("expected_salary", values.expected_salary);
     formData.append("job_level", values.job_level);
     formData.append("job_nature", values.job_nature);
+    formData.append("employeer", values.employeer);
+    formData.append("worker", values.worker);
     formData.append("available_for_work", values.available_for_work);
     if (typeof values.upload === "undefined") {
     } else {
@@ -90,11 +93,11 @@ const Career_application = ({
   };
   //job nature
   const natureOptions = [
-    "Full time",
-    "Part time",
+   "Full Time",
+    "Part Time",
     "Contractual",
-    "Freelance",
     "Internship",
+    "Freelance",
   ];
   const [value2, setValue2] = React.useState();
   const onChange2 = (e) => {
@@ -171,11 +174,11 @@ const Career_application = ({
               unCheckedChildren="not available for work"
             />
           </Form.Item>
-          <Form.Item name="empoyeer" >
-            <Checkbox >Empoyeer</Checkbox>
+          <Form.Item name="employeer" valuePropName="checked">
+            <Checkbox >Click here if you are an Empoyeer</Checkbox>
           </Form.Item>
-          <Form.Item name="worker" >
-            <Checkbox >Worker</Checkbox>
+          <Form.Item name="worker" valuePropName="checked">
+            <Checkbox >Click here if you are a Worker</Checkbox>
           </Form.Item>
           <Form.Item
             name="upload"

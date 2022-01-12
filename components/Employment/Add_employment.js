@@ -1,23 +1,42 @@
 import React from "react";
 import { useState } from "react";
-import { Form, Input, Button, DatePicker, message, Typography ,Checkbox} from "antd";
+import {
+  Form,
+  Input,
+  Button,
+  DatePicker,
+  message,
+  Typography,
+  Checkbox,
+} from "antd";
 import { connect } from "react-redux";
 import {
-  viewProject,
   createEmployment,
 } from "@/redux/actions/employmentAction";
 
-const Add_employment = ({ createEmployment, view_employment, setloader }) => {
+const Add_employment = ({
+  createEmployment,
+  create_employment,
+  view_employment,
+  setloader,
+}) => {
   const dateFormat = "YYYY-MM-DD";
-  
+  // const Employment_period_to =()=>{
+  //   if(present){
+  //     employment_period_to: values["employment_period_to"].format("YYYY-MM-DD"),
+  //   }
+  // }
+
   const onFinish = (values) => {
+    // console.log(values["employment_period_from"].format("YYYY-MM-DD"))
     values = {
       ...values,
-      employment_period_from:
-        values["employment_period_from"].format("YYYY-MM-DD"),
-      employment_period_to: values["employment_period_to"].format("YYYY-MM-DD"),
+
+      employment_period_from:values["employment_period_from"].format("YYYY-MM-DD"),
+      employment_period_to: present ? null : values["employment_period_to"].format("YYYY-MM-DD"),
+     
     };
-    console.log("Success:", values);
+    // console.log("Success:", values);
     createEmployment(values);
     form.resetFields();
     setloader(true);
@@ -33,8 +52,8 @@ const Add_employment = ({ createEmployment, view_employment, setloader }) => {
   const { Title } = Typography;
   const [form] = Form.useForm();
   const [formLayout, setFormLayout] = useState("horizontal");
-  
-  const [present, setParent] = useState(false);
+
+  const [present, setPresent] = useState();
 
   const formItemLayout =
     formLayout === "horizontal"
@@ -90,20 +109,26 @@ const Add_employment = ({ createEmployment, view_employment, setloader }) => {
           <DatePicker format={dateFormat} />
         </Form.Item>
         {present ? (
-                ""
-              ) : (
-        <Form.Item label="To" name="employment_period_to">
-          <DatePicker format={dateFormat} />
-        </Form.Item>
-              )}
-        <Form.Item label="Present" name="">
-          <Checkbox  onChange={(e) => {
-                    if (e.target.checked) {
-                     setParent(true)
-                    } else {
-                     setParent(false)
-                    }
-                  }}></Checkbox>
+          ""
+        ) : (
+          <Form.Item label="To" name="employment_period_to">
+            <DatePicker format={dateFormat} />
+          </Form.Item>
+        )}
+        <Form.Item
+          label="Present"
+          name="currently_working"
+          valuePropName="checked"
+        >
+          <Checkbox
+            onChange={(e) => {
+              if (e.target.checked) {
+                setPresent(true);
+              } else {
+                setPresent(false);
+              }
+            }}
+          ></Checkbox>
         </Form.Item>
 
         <Form.Item className="text-center" {...tailFormItemLayout}>

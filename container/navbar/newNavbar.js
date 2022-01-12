@@ -175,14 +175,14 @@ const navbar = ({
       <Menu
         mode="horizontal"
         defaultSelectedKeys={["2"]}
-        style={{ backgroundColor: "#95D5D2", width: "85%", marginLeft: "27%" }}
+        style={{ backgroundColor: "#95D5D2", marginLeft: "27%" }}
       >
-        {/* <Menu.Item key="setting:1">
+        <Menu.Item key="setting:1" className="jobpost_list" >
           <Button className="jobpost_btn" disabled={!isSignedIn}>
             <Link href="/jobs/post">Post a Job</Link>
           </Button>
-        </Menu.Item> */}
-        {createPost()}
+        </Menu.Item>
+        {/* {createPost()} */}
         <SubMenu key="1" title="Jobs">
           <Menu.Item key="setting:2">
             {" "}

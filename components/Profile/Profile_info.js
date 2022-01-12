@@ -93,13 +93,12 @@ const Profile_info = ({
   const onFinish = (values) => {
     const formData = new FormData();
 
-      values = {
-        ...values,
+    values = {
+      ...values,
 
-        birthday: values["birthday"].format("YYYY-MM-DD"),
-      };
-      
-    
+      birthday: values["birthday"].format("YYYY-MM-DD"),
+    };
+
     //formData.append("phone", values.phone);
     // formData.append("nid", values.nid);
     // formData.append("gender", values.gender);

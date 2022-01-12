@@ -252,7 +252,7 @@ const Mainsection = ({
                     >
                       {view_employment.designation}(
                       {view_employment.employment_period_from} to{" "}
-                      {view_employment.employment_period_to})
+                      {view_employment.employment_period_to==null? "Present":view_employment.employment_period_to})
                     </span>
                     -
                     <span style={{ fontWeight: "bold" }}>
