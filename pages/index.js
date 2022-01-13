@@ -33,7 +33,7 @@ const Jobs = ({ filterJobs, getOtherWorkers, all_workers }) => {
   const showPage = useRef("job_list");
   const workers = useRef(0);
 
-    console.log(workers.current);
+  console.log(workers.current);
 
   useEffect(() => {
     getOtherWorkers();
@@ -52,13 +52,13 @@ const Jobs = ({ filterJobs, getOtherWorkers, all_workers }) => {
     fontSize: 14,
   };
   {
-    all_workers.map((worker) => {
-      if (worker.worker == true) {
-      workers.current= worker.worker;
-      console.log(workers.current);
-      }
-      // Object.keys(worker.worker.length);
-    });
+    all_workers
+      ? all_workers.map((worker) => {
+          if (worker.worker == true) {
+            workers.current++;
+          }
+        })
+      : " ";
   }
   return (
     <>
