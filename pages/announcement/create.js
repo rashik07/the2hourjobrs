@@ -47,7 +47,7 @@ const JobCategogy = ({ categories }) => {
             <AnnouncementCreateForm />
           </div>
         </Content>
-        <Footer />
+       
       </Layout>
     </>
   );

@@ -36,7 +36,7 @@ const myannouncement = () => {
             <MyAnnouncments />
           </div>
         </Content>
-        <Footer />
+        
       </Layout>
     </>
   );

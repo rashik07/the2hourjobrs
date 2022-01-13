@@ -2,27 +2,16 @@ import Head from "next/head";
 import React, { useState, useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import Navbar from "../container/navbar/newNavbar";
-import JobList from "components/Home/list/JobList";
 import KeywordSearch from "components/Home/list/KeywordSearch";
-import SelectedFilter from "components/Home/list/SelectedFilter";
 import LocationFilter from "components/Home/list/LocationFilter";
 import JobCategoryFilter from "components/Home/list/JobCategoryFilter";
 import { filterJobs } from "redux/actions/jobAction";
-import {
-  Layout,
-  Breadcrumb,
-  Row,
-  Col,
-  Divider,
-  BackTop,
-  Typography,
-  Affix,
-} from "antd";
+import { Layout, Row, Col, Divider, BackTop, Typography, Affix } from "antd";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Notification_bar from "container/Notification_bar/Notification_bar";
 import { Button } from "antd/lib/radio";
-import Footer from "container/footer/footer";
+import { getOtherWorkers } from "redux/actions/userAction";
 import {
   UpOutlined,
   TeamOutlined,
@@ -35,15 +24,19 @@ import {
 const { Content } = Layout;
 const { Title } = Typography;
 
-const Jobs = ({ filterJobs }) => {
+const Jobs = ({ filterJobs, getOtherWorkers, all_workers }) => {
   const router = useRouter();
   let query = Object.keys(router.query)[0];
   const [filter, setFilter] = useState({});
   const [showFilterJobs, setShowFilterJobs] = useState(false);
   const [bottom, setBottom] = useState(10);
   const showPage = useRef("job_list");
+  const workers = useRef(0);
+
+    console.log(workers.current);
 
   useEffect(() => {
+    getOtherWorkers();
     if (_.isEmpty(filter)) {
       setShowFilterJobs(false);
     }
@@ -58,7 +51,15 @@ const Jobs = ({ filterJobs }) => {
     textAlign: "center",
     fontSize: 14,
   };
-
+  {
+    all_workers.map((worker) => {
+      if (worker.worker == true) {
+      workers.current= worker.worker;
+      console.log(workers.current);
+      }
+      // Object.keys(worker.worker.length);
+    });
+  }
   return (
     <>
       <Head>
@@ -105,7 +106,7 @@ const Jobs = ({ filterJobs }) => {
                 fontWeight: "bold",
               }}
             >
-              10946
+              {10946 + workers.current}
             </Title>
           </Col>
           {/* <TeamOutlined className="home_icon" /> */}
@@ -163,16 +164,22 @@ const Jobs = ({ filterJobs }) => {
 
         <Content className="site-layout-home ">
           <div className="site-layout-background">
-            <h2 style={{ color: "darkblue", marginTop: "15px" , fontWeight: "bold"}}>
+            <h2
+              style={{
+                color: "darkblue",
+                marginTop: "15px",
+                fontWeight: "bold",
+              }}
+            >
               Job Categories
             </h2>
-            
-              <JobCategoryFilter
-                filter={filter}
-                setFilter={setFilter}
-                reload={setShowFilterJobs}
-              />
-              {/* <h2 style={{ color: "darkblue", marginTop: "15px" }}>
+
+            <JobCategoryFilter
+              filter={filter}
+              setFilter={setFilter}
+              reload={setShowFilterJobs}
+            />
+            {/* <h2 style={{ color: "darkblue", marginTop: "15px" }}>
                 Job Categories
               </h2>
               <JobCategoryFilter
@@ -215,4 +222,11 @@ const Jobs = ({ filterJobs }) => {
   );
 };
 
-export default connect(null, { filterJobs })(Jobs);
+const mapStateToProps = (state) => {
+  return {
+    // all_workers: Object.values(state.user.all_workers),
+    all_workers: state.user.all_workers,
+  };
+};
+
+export default connect(mapStateToProps, { filterJobs, getOtherWorkers })(Jobs);

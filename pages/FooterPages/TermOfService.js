@@ -16,7 +16,7 @@ const TermOfService = () => {
         <Navbar />
         <div style={{ paddingTop: "100px", textAlign: "center" }}>
           <h1
-            style={{ borderBottom: "4px solid #ffc800", margin: "0px 570px" }}
+            className="footer_title"
           >
             TERM OF SERVICE
           </h1>

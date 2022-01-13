@@ -154,7 +154,7 @@ const navbar = ({
         // </Button>
         <Menu.Item key="setting:1" className="jobpost_list" >
         <Button className="jobpost_btn"onClick={() =>phoneNumberAlert()}>
-          <Link href="/jobs/post">Post a Job</Link>
+          <Link href="">Post a Job</Link>
         </Button>
       </Menu.Item>
       );

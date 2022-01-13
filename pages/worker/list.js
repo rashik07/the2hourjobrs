@@ -5,8 +5,6 @@ import LocationFilter from "components/jobs/list/LocationFilter";
 import GenderFilter from "components/jobs/list/GenderFilter";
 import EmploymentStatusFilter from "components/jobs/list/EmploymentStatusFilter";
 import JobCategoryFilter from "components/jobs/list/JobCategoryFilter";
-import ExperienceFilter from "components/jobs/list/ExperienceFilter";
-import AgeFilter from "components/jobs/list/AgeFilter";
 import WorkerList from "components/worker/list/WorkerList";
 import Navbar from "../../container/navbar/newNavbar";
 import Head from "next/head";
