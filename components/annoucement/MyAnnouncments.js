@@ -106,8 +106,9 @@ const AllAnnouncements = ({
                   <Row>
                     <Col span={18} offset={3}>
                     <Link
-                        href={"/announcement/myannouncement/[announcement_id]"} as={`/announcement/myannouncement/${announcment.id}`}
-                      >
+                        // href={"/announcement/myannouncement/[announcement_id]"} as={`/announcement/myannouncement/${announcment.id}`}
+                        href={{ pathname: '/announcement/myannouncement/announcement_id', query: { announcement_id: announcment.id} }}
+                    >
                         <Button
                           type="primary"
                           block
@@ -204,9 +205,7 @@ const AllAnnouncements = ({
                   <Row>
                     <Col span={18} offset={3}>
                       <Link
-                        href={
-                          "/announcement/myannouncement/" + announcment.id + "/"
-                        }
+                        href={{ pathname: '/announcement/myannouncement/announcement_id', query: { announcement_id: announcment.id} }}
                       >
                         <Button
                           type="primary"

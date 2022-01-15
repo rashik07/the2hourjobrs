@@ -69,8 +69,9 @@ const Profile = ({ auth }) => {
                 <Breadcrumb.Item>{selector.current}</Breadcrumb.Item>
 
                 <Link
-                  href={"/Profile/Profile_details/[id]"}
-                  as={`/Profile/Profile_details/${auth.id}`}
+                  // href={"/Profile/Profile_details/[id]"}
+                  // as={`/Profile/Profile_details/${auth.id}`}
+                  href={{ pathname: '/Profile/Profile_details/', query: { id: auth.id } }}
                 >
                   <a
                     target="_blank"
@@ -103,6 +104,7 @@ const Profile = ({ auth }) => {
 const mapStateToProps = (state) => {
   return {
     auth: state.auth,
+    
   };
 };
 export default connect(mapStateToProps)(Profile);

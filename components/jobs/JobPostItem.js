@@ -257,7 +257,7 @@ const JobPostItem = ({
 
           <h4 style={{ color: "gray" }}>
             <UserOutlined />{" "}
-            <Link href={"/Profile/Profile_details/[id]" } as={`/Profile/Profile_details/${poster.id}` }>
+            <Link  href={{ pathname: '/Profile/Profile_details/', query: { id: poster.id } }}>
               {poster.username}
             </Link>{" "}
             <EnvironmentOutlined /> {getLocations(job.job_location)}

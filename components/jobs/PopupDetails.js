@@ -60,7 +60,7 @@ const PopupDetails = ({
           </Space>
         }
       >
-         <Link href={"/jobs/detail/[id]"} as={`/jobs/detail/${job.id}`}>
+         <Link   href={{ pathname: '/jobs/detail/', query: { id: job.id } }}>
          Details
               </Link>
         {/* <button

@@ -129,7 +129,8 @@ const navbar = ({
           // console.log("ase notification"),
           <Col span={24} className="notifi_bar">
             <Link
-              href={"/jobs/detail/" + notification["description"]}
+              // href={"/jobs/detail/" + notification["description"]}
+              href={{ pathname: '/jobs/detail/', query: { id: notification["description"]} }}
               style={{ color: "white" }}
             >
               {notification["verb"]}

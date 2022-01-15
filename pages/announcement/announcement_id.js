@@ -111,7 +111,10 @@ const AnnouncementDetails = ({ getSpecificAnnouncement, announcment }) => {
             <p style={{ marginBottom: "1px" }}>
               posted by{" "}
             
-              <Link href={"/Profile/Profile_details/[id]"} as={`/Profile/Profile_details/${announcment.user.id}`}>
+              <Link 
+                // href={"/Profile/Profile_details/[id]"} as={`/Profile/Profile_details/${announcment.user.id}`}
+                href={{ pathname: '/Profile/Profile_details/', query: { id: announcment.user.id } }}
+              >
                 {announcment.user.name}
               </Link>
             </p>

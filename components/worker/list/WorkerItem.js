@@ -140,7 +140,7 @@ const WorkerItem = ({ worker, saveWorker, isSignedIn, savedWorkerList, setReload
           )}
           <h4 style={{ color: "gray" }}>
             <UserOutlined />{" "}
-            <Link href={"/Profile/Profile_details/[id]"} as={`/Profile/Profile_details/${id}`}>{username}</Link>{" "}
+            <Link  href={{ pathname: '/Profile/Profile_details/', query: { id: id } }}>{username}</Link>{" "}
             {/* <EnvironmentOutlined /> {getLocations(job.job_location)} */}
           </h4>
           <p style={{ marginTop: "1rem", marginBottom: "1rem" }}>

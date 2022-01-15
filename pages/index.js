@@ -12,6 +12,7 @@ import { useRouter } from "next/router";
 import Notification_bar from "container/Notification_bar/Notification_bar";
 import { Button } from "antd/lib/radio";
 import { getOtherWorkers } from "redux/actions/userAction";
+import { getAllJobs, getAllJobs_withoutlogin } from "redux/actions/jobAction";
 import {
   UpOutlined,
   TeamOutlined,
@@ -24,18 +25,28 @@ import {
 const { Content } = Layout;
 const { Title } = Typography;
 
-const Jobs = ({ filterJobs, getOtherWorkers, all_workers }) => {
+const Jobs = ({ filterJobs, getOtherWorkers, all_workers,all_jobs,auth ,getAllJobs,getAllJobs_withoutlogin}) => {
   const router = useRouter();
   let query = Object.keys(router.query)[0];
   const [filter, setFilter] = useState({});
   const [showFilterJobs, setShowFilterJobs] = useState(false);
   const [bottom, setBottom] = useState(10);
   const showPage = useRef("job_list");
+  // const [workers, setWorkers] = useState(0);
   const workers = useRef(0);
+  const employeer = useRef(0);
 
-  console.log(workers.current);
+
+
+  console.log(all_jobs);
 
   useEffect(() => {
+    if (auth.isSignedIn) {
+      getAllJobs();
+    } else {
+      getAllJobs_withoutlogin();
+      
+    }
     getOtherWorkers();
     if (_.isEmpty(filter)) {
       setShowFilterJobs(false);
@@ -56,6 +67,15 @@ const Jobs = ({ filterJobs, getOtherWorkers, all_workers }) => {
       ? all_workers.map((worker) => {
           if (worker.worker == true) {
             workers.current++;
+          }
+        })
+      : " ";
+  }
+  {
+    all_workers
+      ? all_workers.map((worker) => {
+          if (worker.employeer == true) {
+            employeer.current++;
           }
         })
       : " ";
@@ -123,7 +143,7 @@ const Jobs = ({ filterJobs, getOtherWorkers, all_workers }) => {
                 fontWeight: "bold",
               }}
             >
-              2222
+             { 2222 + employeer.current}
             </Title>
           </Col>
           {/* <TeamOutlined className="home_icon" /> */}
@@ -140,7 +160,7 @@ const Jobs = ({ filterJobs, getOtherWorkers, all_workers }) => {
                 fontWeight: "bold",
               }}
             >
-              318
+              {318 + all_jobs.length}
             </Title>
           </Col>
           {/* <TeamOutlined className="home_icon" /> */}
@@ -226,7 +246,10 @@ const mapStateToProps = (state) => {
   return {
     // all_workers: Object.values(state.user.all_workers),
     all_workers: state.user.all_workers,
+    all_jobs: state.job.all_jobs,
+    auth: state.auth,
   };
 };
 
-export default connect(mapStateToProps, { filterJobs, getOtherWorkers })(Jobs);
+export default connect(mapStateToProps, { filterJobs, getOtherWorkers, getAllJobs,
+  getAllJobs_withoutlogin })(Jobs);
