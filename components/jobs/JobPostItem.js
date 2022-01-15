@@ -195,19 +195,21 @@ const JobPostItem = ({
       return (
         <>
           {applyShow()}
-          {deleteShow()}
-          {saveShow()}
+          {/* {deleteShow()} */}
+          {/* {saveShow()} */}
           <Link
-                        href={"/jobs/edit/[id]"} as={`/jobs/edit/${id}`}
+                        // href={"/jobs/edit/[id]"} as={`/jobs/edit/${id}`}
+                        href={{ pathname: '/jobs/edit/', query: { id: id } }}
                       >
                         <Button
                           type="primary"
                           block
-                          style={{ marginBottom: "15px" }}
+                          style={{ marginBottom: "15px", width:"100px" }}
                         >
                           Edit
                         </Button>
           </Link>
+          {deleteShow()}
         </>
       );
     }
