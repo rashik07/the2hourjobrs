@@ -59,20 +59,12 @@ const PopupDetails = ({
           </Space>
         }
       >
-        <div  className="details_btn">
-          <Link
-            href={{ pathname: "/jobs/detail/", query: { id: job.id } }}
-           
-          >
+        <div className="details_btn">
+          <Link href={{ pathname: "/jobs/detail/", query: { id: job.id } }}>
             Details
           </Link>
         </div>
-        {/* <button
-          onClick={() => router.push(`/jobs/detail/${job.id}`)}
-          className="btn button-home mt-2 rounded"
-        >
-          Detail
-        </button> */}
+
         <Row>
           <Col xs={24} sm={24} md={10} lg={10} xl={10}>
             <h4>Type :</h4> {job.category.name}

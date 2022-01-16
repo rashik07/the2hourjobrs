@@ -8,12 +8,14 @@ import {
   Typography,
   Button,
   List,
-  message
+  message,
+  Modal,
 } from "antd";
 import dateformat from "dateformat";
 import Navbar from "container/navbar/newNavbar";
 import { getAppliedJobsPerson, applyJob } from "@/redux/actions/jobAction";
 import Link from "next/link";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
 
 const renderJobLocation = (inside_dhaka, locations) => {
   inside_dhaka
@@ -251,15 +253,31 @@ const JobDetail = ({
   // }
   const { id, title, poster, applied, saved, applied_saved_id } = temp_job;
 
+  console.log(applied);
+  console.log(temp_job);
   const btn_disable = userid === poster.id ? "disabled" : "";
   const [appliedStatus, setAppliedStatus] = useState(applied);
-
+  
+  console.log(appliedStatus);
   const applyJobBtnClick = () => {
     if (!isSignedIn) {
       message.error("You must log in to access this feature");
     } else {
-     
-      applyJob(id, userid, appliedStatus, setAppliedStatus);
+      const { confirm } = Modal;
+
+    confirm({
+      title: "Are you sure apply this job?",
+      icon: <ExclamationCircleOutlined />,
+      content: "Some descriptions",
+      okText: "Yes",
+      okType: "danger",
+      cancelText: "No",
+      onOk() {
+        applyJob(id, userid, appliedStatus, setAppliedStatus,applied_saved_id);
+        window.location.reload();
+      },
+    });
+    
     }
   };
   const applyShow = () => {
@@ -277,7 +295,7 @@ const JobDetail = ({
     } else if (btn_disable) {
       return "";
     }
-    return (
+    else return (
       <Button type="primary" shape="round" onClick={applyJobBtnClick}>
         Apply
       </Button>

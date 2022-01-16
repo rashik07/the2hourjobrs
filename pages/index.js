@@ -41,6 +41,7 @@ const Jobs = ({ filterJobs, getOtherWorkers, all_workers,all_jobs,auth ,getAllJo
   console.log(all_jobs);
 
   useEffect(() => {
+   
     if (auth.isSignedIn) {
       getAllJobs();
     } else {
@@ -62,6 +63,8 @@ const Jobs = ({ filterJobs, getOtherWorkers, all_workers,all_jobs,auth ,getAllJo
     textAlign: "center",
     fontSize: 14,
   };
+  workers.current=0;
+  employeer.current=0;
   {
     all_workers
       ? all_workers.map((worker) => {

@@ -359,21 +359,29 @@ export const updateJob = (data, router) => async (dispatch) => {
 };
 
 export const applyJob =
-  (job_id, userid,appliedStatus,setAppliedStatus) => async (dispatch) => {
+  (job_id, userid,appliedStatus,setAppliedStatus,applied_saved_id) => async (dispatch) => {
     try {
       const formData = { applied: true, job: job_id, user: userid };
-     // console.log(applied);
-
-      const response = await backend.post(
+      // console.log(applied);
+      let response = null;
+      if (applied_saved_id) {
+        response = await backend.patch(
+          `v1/jobpost/user_apply_save_jobs/${applied_saved_id}/`,
+          formData,
+          getConfig()
+        );
+      } else {
+       response = await backend.post(
         "v1/jobpost/user_apply_save_jobs/",
         formData,
         getConfig()
       );
+      }
 
       if (response.status == 200 || response.status == 201) {
         setAppliedStatus(true);
       }
-
+   
       dispatch({ type: types.APPLY_JOB, payload: job_id });
     } catch (error) {
       console.log(error);
