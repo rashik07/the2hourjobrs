@@ -12,7 +12,7 @@ const SelfPostedJobs = ({ self_posted_jobs, getSelfPostedJobs ,getAppliedJobsPer
   const { Content } = Layout;
   useEffect(() => {
     getSelfPostedJobs();
-    getAppliedJobsPerson();
+ 
     dispatch({ type: types.RESET_TEMP_JOB_STATE });
   }, []);
 //  console.log(self_posted_jobs);

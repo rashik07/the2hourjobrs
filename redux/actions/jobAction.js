@@ -306,7 +306,9 @@ export const updateJob = (data, router) => async (dispatch) => {
       job_location,
       education,
       gender,
+      
     } = data;
+   
 
     data = _.omit(data, [
       "skills",
@@ -344,12 +346,10 @@ export const updateJob = (data, router) => async (dispatch) => {
       },
     };
 
-    const response = await backend.patch(
-      `v1/jobpost/data/${id}/`,
-      data,
-      getConfig()
-    );
-
+    const response = await backend.patch(`v1/jobpost/data/${id}/`,data,getConfig());
+    console.log(response.data);
+    // const { id } = response.data;
+    // dispatch({ type: types.UPDATE_JOB, payload: id });
     dispatch({ type: types.UNSAVE_TEMPORARY_JOBPOST });
 
     router.push("/jobs/my_posts");
