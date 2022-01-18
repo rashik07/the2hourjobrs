@@ -39,7 +39,7 @@ const Profile_info = ({
   const [loader, setloader] = useState(false);
   const [cover, setcover] = useState([]);
   const dateFormat = "YYYY-MM-DD";
-  console.log(user_profile);
+  // console.log(user_profile);
 
   const router = useRouter();
 
@@ -146,7 +146,7 @@ const Profile_info = ({
     setloader(true);
     updatePhone(values, user_profile.id);
     message.success("successfully saved your basic info");
-    console.log(values["birthday"].format("YYYY-MM-DD"));
+   
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);

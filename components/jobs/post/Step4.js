@@ -222,7 +222,9 @@ const Step4 = ({
         </Button>
         {editJob ? (
           <Button
-            onClick={() => updateJob(temp_jobpost, router)}
+            onClick={() => {
+              updateJob(temp_jobpost, router);
+              }}
             className="btn btn-primary mr-3"
             style={{
               marginRight: "10px",

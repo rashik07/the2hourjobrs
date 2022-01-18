@@ -21,11 +21,20 @@ import {
   GlobalOutlined,
   PlusCircleOutlined,
 } from "@ant-design/icons";
+import AnimatedNumber from "animated-number-react";
 
 const { Content } = Layout;
 const { Title } = Typography;
 
-const Jobs = ({ filterJobs, getOtherWorkers, all_workers,all_jobs,auth ,getAllJobs,getAllJobs_withoutlogin}) => {
+const Jobs = ({
+  filterJobs,
+  getOtherWorkers,
+  all_workers,
+  all_jobs,
+  auth,
+  getAllJobs,
+  getAllJobs_withoutlogin,
+}) => {
   const router = useRouter();
   let query = Object.keys(router.query)[0];
   const [filter, setFilter] = useState({});
@@ -36,17 +45,13 @@ const Jobs = ({ filterJobs, getOtherWorkers, all_workers,all_jobs,auth ,getAllJo
   const workers = useRef(0);
   const employeer = useRef(0);
 
-
-
   console.log(all_jobs);
 
   useEffect(() => {
-   
     if (auth.isSignedIn) {
       getAllJobs();
     } else {
       getAllJobs_withoutlogin();
-      
     }
     getOtherWorkers();
     if (_.isEmpty(filter)) {
@@ -63,8 +68,8 @@ const Jobs = ({ filterJobs, getOtherWorkers, all_workers,all_jobs,auth ,getAllJo
     textAlign: "center",
     fontSize: 14,
   };
-  workers.current=0;
-  employeer.current=0;
+  workers.current = 0;
+  employeer.current = 0;
   {
     all_workers
       ? all_workers.map((worker) => {
@@ -129,7 +134,15 @@ const Jobs = ({ filterJobs, getOtherWorkers, all_workers,all_jobs,auth ,getAllJo
                 fontWeight: "bold",
               }}
             >
-              {10946 + workers.current}
+              <AnimatedNumber
+                value={10946 + workers.current}
+                duration={1000}
+                formatValue={(n) => n.toFixed(0)}
+                frameStyle={(percentage) =>
+                  percentage > 20 && percentage < 80 ? { opacity: 0.5 } : {}
+                }
+              />
+              {/* {10946 + workers.current} */}
             </Title>
           </Col>
           {/* <TeamOutlined className="home_icon" /> */}
@@ -146,7 +159,15 @@ const Jobs = ({ filterJobs, getOtherWorkers, all_workers,all_jobs,auth ,getAllJo
                 fontWeight: "bold",
               }}
             >
-             { 2222 + employeer.current}
+              <AnimatedNumber
+                value={2222 + employeer.current}
+                duration={1000}
+                formatValue={(n) => n.toFixed(0)}
+                frameStyle={(percentage) =>
+                  percentage > 20 && percentage < 80 ? { opacity: 0.5 } : {}
+                }
+              />
+              
             </Title>
           </Col>
           {/* <TeamOutlined className="home_icon" /> */}
@@ -163,7 +184,15 @@ const Jobs = ({ filterJobs, getOtherWorkers, all_workers,all_jobs,auth ,getAllJo
                 fontWeight: "bold",
               }}
             >
-              {318 + all_jobs.length}
+              <AnimatedNumber
+                value= {318 + all_jobs.length}
+                duration={1000}
+                formatValue={(n) => n.toFixed(0)}
+                frameStyle={(percentage) =>
+                  percentage > 20 && percentage < 80 ? { opacity: 0.5 } : {}
+                }
+              />
+             
             </Title>
           </Col>
           {/* <TeamOutlined className="home_icon" /> */}
@@ -180,7 +209,15 @@ const Jobs = ({ filterJobs, getOtherWorkers, all_workers,all_jobs,auth ,getAllJo
                 fontWeight: "bold",
               }}
             >
-              240816
+             
+              <AnimatedNumber
+                value= { 240816}
+                duration={1000}
+                formatValue={(n) => n.toFixed(0)}
+                frameStyle={(percentage) =>
+                  percentage > 20 && percentage < 80 ? { opacity: 0.5 } : {}
+                }
+              />
             </Title>
           </Col>
         </Row>
@@ -254,5 +291,9 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { filterJobs, getOtherWorkers, getAllJobs,
-  getAllJobs_withoutlogin })(Jobs);
+export default connect(mapStateToProps, {
+  filterJobs,
+  getOtherWorkers,
+  getAllJobs,
+  getAllJobs_withoutlogin,
+})(Jobs);

@@ -142,6 +142,14 @@ const Sidesection = ({
           {user_profile.gender}
         </p>
       )}
+      {user_profile.nid == null ? (
+        " "
+      ) : (
+        <p>
+          <span style={{ fontWeight: "bold" }}>NID: </span>{" "}
+          {user_profile.nid}
+        </p>
+      )}
       {user_profile.birthday == null ? (
         " "
       ) : (

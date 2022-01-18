@@ -50,6 +50,7 @@ export const updatePhone = (values, id) => async (dispatch) => {
 };
 export const PhoneVerifyUpdate = (data, router) => async (dispatch) => {
   console.log(data);
+  
   try {
     const response = await backend.put(
       `/v1/user/mobile_verify_update/`,
@@ -59,7 +60,8 @@ export const PhoneVerifyUpdate = (data, router) => async (dispatch) => {
 
     dispatch({ type: types.EDIT_PHONE, payload: response.data });
     console.log("Mobile Verified");
-    router.push("/Profile");
+    // router.push("/Profile");
+    
     return true;
   } catch (error) {
     console.log(error);

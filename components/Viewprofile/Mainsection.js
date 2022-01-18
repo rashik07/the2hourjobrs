@@ -186,7 +186,7 @@ const Mainsection = ({
             style={{ fontWeight: "bold", borderTopColor: "#F0F0F0" }}
             orientation="left"
           >
-            Qualification
+            Professional Certifications
           </Divider>
         </div>
         <br />

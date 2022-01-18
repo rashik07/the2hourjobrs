@@ -80,10 +80,15 @@ const Mobile_verify = ({ PhoneVerifyUpdate }) => {
         // success
         let data = { phone: mynumber };
         let status = PhoneVerifyUpdate(data, router);
+        console.log(result);
         if (status) {
           message.success("Mobile Verified");
           // re-route to profile
         }
+        // else if (status== false) {
+        //   message.error("Mobile Verified");
+        //   // re-route to profile
+        // }
       })
       .catch((err) => {
         message.error("Wrong code");

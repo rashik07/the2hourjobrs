@@ -18,6 +18,7 @@ const Profile = ({ auth }) => {
   const { Content } = Layout;
   const selector = useRef("");
   const [loader, setloader] = useState(false);
+  console.log(auth);
 
   useEffect(() => {
     if (!auth.isSignedIn) {

@@ -148,7 +148,7 @@ const ProfessionalQualification = ({
       <div style={{ marginBottom: "15px" }}>
         <Divider>
           {" "}
-          <Title>Professional Qualification</Title>
+          <Title>Professional Certifications</Title>
         </Divider>
         <Table columns={columns} dataSource={view_qualification} pagination={false} bordered/>
       </div>

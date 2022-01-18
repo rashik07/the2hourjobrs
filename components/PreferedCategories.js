@@ -234,6 +234,7 @@ const PreferedCategories = ({
         </Form.Item>
         <Form.Item label="Special Skills " name="skill">
           <TagsInput></TagsInput>
+          <em>press enter to add new skills</em>
         </Form.Item>
         <Form.Item label="Location " name="locations">
           {locationList()}
