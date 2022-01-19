@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { getOtherWorkers } from "redux/actions/userAction";
 import { getSavedWorkers } from "redux/actions/userAction";
-
 import WorkerItem from "./WorkerItem";
+import { List, Pagination } from "antd";
 
 const JobList = ({
   getOtherWorkers,
@@ -15,6 +15,7 @@ const JobList = ({
   isSignedIn,
 }) => {
   const [reaload, setReload] = useState(false);
+  // const [all_workers, setAll_workers] = useState();
 
   useEffect(() => {
     getOtherWorkers();
@@ -22,23 +23,23 @@ const JobList = ({
   }, [reaload]);
 
   console.log(all_workers);
- 
-    if (showFilterWorker) {
-      return filtered_workers.map((worker) => {
-        if (worker.available_for_work == true) {
-          return (
-            <WorkerItem key={worker.id} worker={worker} setReload={setReload} />
-          );
-        }
-      });
-    }
-    if (!isSignedIn) {
-      return (
-        <h1 style={{ color: "#AEB6BF", marginTop: "20%", marginLeft: "20%" }}>
-          Please login to access this feature
-        </h1>
-      );
-     } else {
+
+  if (showFilterWorker) {
+    return filtered_workers.map((worker) => {
+      if (worker.available_for_work == true) {
+        return (
+          <WorkerItem key={worker.id} worker={worker} setReload={setReload} />
+        );
+      }
+    });
+  }
+  if (!isSignedIn) {
+    return (
+      <h1 style={{ color: "#AEB6BF", marginTop: "20%", marginLeft: "20%" }}>
+        Please login to access this feature
+      </h1>
+    );
+  } else {
     if (all_workers) {
       return all_workers.map((worker) => {
         if (worker.available_for_work == true) {
@@ -49,14 +50,22 @@ const JobList = ({
         }
         //  return <WorkerItem key={worker.id} worker={worker} />;
       });
+      // return (
+      //   <>
+      //     <List
+      //       className="demo-loadmore-list"
+      //       loading={initLoading}
+      //       itemLayout="horizontal"
+      //       loadMore={loadMore}
+      //       dataSource={list}
+      //       renderItem={(worker) => jobPostItem(worker)}
+      //     />
+      //     {/* {jobPostItem1()} */}
+      //   </>
+      // );
     }
-    // else{
-    //   return "please login";
-    // }
   }
-    return null;
-  
-  
+  return null;
 };
 
 const mapStateToProps = (state) => {

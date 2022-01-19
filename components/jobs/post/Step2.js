@@ -20,15 +20,19 @@ const Step2 = ({ postStep, setPostStep, temp_jobpost }) => {
       return;
     }
     if (!negotiable) {
+      // console.log(parseInt(min_salary),parseInt(max_salary))
       if (!min_salary) {
         message.warning("You must enter minimum salary");
 
         return;
       }
-      if (min_salary > max_salary) {
+      else if (parseInt(min_salary) > parseInt(max_salary)) {
         message.warning("Max salary should be greater than min salary");
 
         return;
+      }
+      else {
+        return   setPostStep(postStep + 1);;
       }
     }
     if (!job_description) {

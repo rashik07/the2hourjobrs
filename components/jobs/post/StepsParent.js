@@ -1,10 +1,9 @@
 import React from "react";
-import { Select, Row, Col, Checkbox } from "antd";
+import { Select, Row, Col, Checkbox,Radio } from "antd";
 import { connect } from "react-redux";
 import { saveTemporayJobPost } from "redux/actions/jobAction";
 import TagInput from "components/TagInput";
 import CheckBox from "components/CheckBox";
-import { Radio } from "antd";
 import EducationField from "components/jobs/input/EducationField";
 import _ from "lodash";
 import LocationList from "../input/LocationList";
@@ -134,7 +133,7 @@ const renderItem = (item, children, saveTemporayJobPost, temp_jobpost) => {
                     <input
                       type="number"
                       className="form-control "
-                      placeholder="To"
+                      placeholder="From"
                       onChange={(e) =>
                         saveTemporayJobPost({
                           min_salary: temp_jobpost.min_salary,
@@ -149,7 +148,7 @@ const renderItem = (item, children, saveTemporayJobPost, temp_jobpost) => {
                     <input
                       type="number"
                       className="form-control "
-                      placeholder="From"
+                      placeholder="To"
                       onChange={(e) =>
                         saveTemporayJobPost({
                           max_salary: temp_jobpost.max_salary,

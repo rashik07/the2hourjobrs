@@ -66,14 +66,16 @@ const JobList = ({
             onChange: (all_jobs) => {
               console.log(all_jobs);
             },
+           
             pageSize: 3,
             defaultCurrent: 1,
             total: all_jobs.length,
             pageSize: 5,
           }}
           dataSource={all_jobs.reverse()}
-          renderItem={(job) => jobPostItem(job)}
+          renderItem={(job) => jobPostItem(job,console.log(job))}
         />
+         
         {/* {jobPostItem1()} */}
       </>
     );

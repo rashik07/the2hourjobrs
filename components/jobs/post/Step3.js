@@ -11,21 +11,27 @@ const Step3 = ({ postStep, setPostStep, temp_jobpost }) => {
       message.warning("You must select education");
       return;
     }
-    if (!min_experience && !max_experience) {
-      if (min_experience >= max_experience) {
-        alert("Max experience should be greater than Min experience");
+    // if (!min_experience && !max_experience) {
+     
+    //   } 
+    if (parseInt(min_experience) >= parseInt(max_experience)) {
+        message.warning("Max experience should be greater than Min experience");
         return;
       }
-    }
+    console.log(min_age, max_age)
+    if (!min_age && !max_age && min_age==undefined && max_age==undefined) {
 
-    if (!min_age && !max_age) {
-      if (min_age >= max_age) {
-        alert("Max age should be greater than Min age");
+      
+        message.warning("please enter Max age , Min age");
         return;
-      }
+    }
+    if (min_age >= max_age) {
+      message.warning("Max age should be greater than Min age");
+      return;
     }
 
     setPostStep(postStep + 1);
+    console.log(temp_jobpost);
   };
 
   return (

@@ -1,9 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Descriptions , Button} from "antd";
+import { Descriptions, Button, Modal} from "antd";
 import dateformat from "dateformat";
 import { postJob, updateJob } from "redux/actions/jobAction";
 import { useRouter } from "next/router";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
 
 const renderJobLocation = (inside_dhaka, locations) => {
   inside_dhaka
@@ -201,7 +202,38 @@ const Step4 = ({
         break;
     }
   };
+  const postJobBtnClick = () => {
+    const { confirm } = Modal;
 
+    confirm({
+      title: "Are you sure apply this job?",
+      icon: <ExclamationCircleOutlined />,
+      content: "Some descriptions",
+      okText: "Yes",
+      okType: "danger",
+      cancelText: "No",
+      onOk() {
+        postJob(temp_jobpost, router);
+      
+      },
+    });
+  };
+  const updateJobBtnClick = () => {
+    const { confirm } = Modal;
+
+    confirm({
+      title: "Are you sure apply this job?",
+      icon: <ExclamationCircleOutlined />,
+      content: "Some descriptions",
+      okText: "Yes",
+      okType: "danger",
+      cancelText: "No",
+      onOk() {
+        updateJob(temp_jobpost, router);
+      
+      },
+    });
+  };
   return (
     <>
       <div className="col-8 mt-4">
@@ -222,9 +254,7 @@ const Step4 = ({
         </Button>
         {editJob ? (
           <Button
-            onClick={() => {
-              updateJob(temp_jobpost, router);
-              }}
+            onClick={updateJobBtnClick}
             className="btn btn-primary mr-3"
             style={{
               marginRight: "10px",
@@ -236,10 +266,9 @@ const Step4 = ({
           </Button>
         ) : (
           <Button
-            onClick={() => postJob(temp_jobpost, router)}
+            onClick={postJobBtnClick}
             className="btn btn-primary mr-3"
             style={{
-             
               backgroundColor: "#389e0d",
               color: "#ffffff",
             }}
