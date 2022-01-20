@@ -146,7 +146,6 @@ const Profile_info = ({
     setloader(true);
     updatePhone(values, user_profile.id);
     message.success("successfully saved your basic info");
-   
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
@@ -232,7 +231,7 @@ const Profile_info = ({
           <Title>Basic Info</Title>
         </Divider>
 
-        <div style={{ float: "right" }}>
+        <div className="picture_upload">
           <p>Upload picture</p>
           <PicturesWall setImages={uploadcover} />
           <Button
@@ -264,7 +263,18 @@ const Profile_info = ({
             </Upload>
           </Form.Item> */}
 
-          <Form.Item label="Name" name="name" style={{ marginLeft: "43px" }}>
+          <Form.Item
+            name="employeer"
+            label="Click here"
+            valuePropName="checked"
+          >
+            <Checkbox>if you are an Empoyeer</Checkbox>
+          </Form.Item>
+          <Form.Item name="worker" label="Click here" valuePropName="checked">
+            <Checkbox>if you are a Worker</Checkbox>
+          </Form.Item>
+
+          <Form.Item label="Name" name="name">
             <Input
               style={{
                 width: "70%",
@@ -273,11 +283,7 @@ const Profile_info = ({
               placeholder="name"
             />
           </Form.Item>
-          <Form.Item
-            label="User Name"
-            name="username"
-            style={{ marginLeft: "43px" }}
-          >
+          <Form.Item label="User Name" name="username">
             <Input
               style={{
                 width: "70%",
@@ -290,7 +296,6 @@ const Profile_info = ({
           <Form.Item
             name="email"
             label="E-mail"
-            style={{ marginLeft: "43px" }}
             rules={[
               {
                 type: "email",
@@ -332,7 +337,7 @@ const Profile_info = ({
               }}
             />
           </Form.Item>
-          <a href="../Profile/Mobile_verify" style={{ marginLeft: "155px" }}>
+          <a href="../Profile/Mobile_verify" style={{ marginLeft: "180px" }}>
             <Button type="primary">Update Phone Number</Button>
           </a>
 

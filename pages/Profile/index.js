@@ -13,12 +13,12 @@ import Setting from "components/Profile/Setting";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-const Profile = ({ auth }) => {
+const Profile = ({ auth,user_profile }) => {
   const router = useRouter();
   const { Content } = Layout;
   const selector = useRef("");
   const [loader, setloader] = useState(false);
-  console.log(auth);
+  console.log(user_profile);
 
   useEffect(() => {
     if (!auth.isSignedIn) {
@@ -72,7 +72,7 @@ const Profile = ({ auth }) => {
                 <Link
                   // href={"/Profile/Profile_details/[id]"}
                   // as={`/Profile/Profile_details/${auth.id}`}
-                  href={{ pathname: '/Profile/Profile_details/', query: { id: auth.id } }}
+                  href={{ pathname: '/Profile/Profile_details/', query: { id: user_profile.id } }}
                 >
                   <a
                     target="_blank"
@@ -105,6 +105,7 @@ const Profile = ({ auth }) => {
 const mapStateToProps = (state) => {
   return {
     auth: state.auth,
+    user_profile: state.user.user_profile,
     
   };
 };

@@ -1,4 +1,8 @@
 @media only screen and (min-width: 900px) {
+  .picture_upload{
+    position: absolute;
+    margin-left: 50%;
+  }
   .footer_title{
     border-bottom: "4px solid #ffc800";
     margin: "0px 610px"; 
@@ -35,6 +39,10 @@
   /* .site-layout {
     margin: 16px 30px !important;
   } */
+  .picture_upload{
+    position: absolute;
+    margin-left: 100%;
+  }
   .search_form{
     display: flex;
     width: 100% ;

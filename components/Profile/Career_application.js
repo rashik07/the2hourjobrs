@@ -11,8 +11,8 @@ import {
   Divider,
   Upload,
   message,
-  InputNumber ,
-  Checkbox
+  InputNumber,
+  Checkbox,
 } from "antd";
 import { connect } from "react-redux";
 import { updateProfile, editUserProfile } from "@/redux/actions/userAction";
@@ -47,14 +47,24 @@ const Career_application = ({
     }
   }, []);
   const onFinish = (values) => {
+
     const formData = new FormData();
     formData.append("objective", values.objective);
-    formData.append("present_salary", values.present_salary);
-    formData.append("expected_salary", values.expected_salary);
+    console.log(values);
+    if (values.present_salary == null) {
+      console.log("present salary")
+      // formData.append("present_salary",setNull(6, Types.INTEGER));
+    } else { 
+      formData.append("present_salary", values.present_salary);
+    }
+    if (values.expected_salary == null) {
+      console.log("expected salary")
+    } else {
+      formData.append("expected_salary", values.expected_salary);
+    }
+
     formData.append("job_level", values.job_level);
     formData.append("job_nature", values.job_nature);
-    formData.append("employeer", values.employeer);
-    formData.append("worker", values.worker);
     formData.append("available_for_work", values.available_for_work);
     if (typeof values.upload === "undefined") {
     } else {
@@ -62,7 +72,8 @@ const Career_application = ({
     }
 
     editUserProfile(formData, user_profile.id);
-    
+    console.log(values);
+
     message.success("successfully added");
   };
 
@@ -93,7 +104,7 @@ const Career_application = ({
   };
   //job nature
   const natureOptions = [
-   "Full Time",
+    "Full Time",
     "Part Time",
     "Contractual",
     "Internship",
@@ -174,12 +185,6 @@ const Career_application = ({
               unCheckedChildren="not available for work"
             />
           </Form.Item>
-          <Form.Item name="employeer" valuePropName="checked">
-            <Checkbox >Click here if you are an Empoyeer</Checkbox>
-          </Form.Item>
-          <Form.Item name="worker" valuePropName="checked">
-            <Checkbox >Click here if you are a Worker</Checkbox>
-          </Form.Item>
           <Form.Item
             name="upload"
             label="CV Upload/File Upload"
@@ -201,30 +206,31 @@ const Career_application = ({
           <Form.Item
             label="Present Salary"
             name="present_salary"
-            
             rules={[
+              // {
+              //   required: true,
+              //   message: "Please input your Present Salary",
+              // },
               {
-                required: true,
-                message: "Please input your Present Salary",
+                type: "number",
+                min: 0,
+                max: 99999999999,
               },
-                {
-                  type: 'number',
-                  min: 0,
-                  max: 99999999999,
-                },
             ]}
           >
-            <InputNumber  placeholder="present salary" />
+            <InputNumber placeholder="present salary" />
           </Form.Item>
           <Form.Item
             label="Expected Salary"
             name="expected_salary"
-            rules={[
-              {
-                required: true,
-                message: "Please input your Expected Salary",
-              },
-            ]}
+            rules={
+              [
+                // {
+                //   required: true,
+                //   message: "Please input your Expected Salary",
+                // },
+              ]
+            }
           >
             <InputNumber placeholder="expected salary" />
           </Form.Item>
