@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Layout, Menu, Row, Col, Image, Button, Dropdown, Select ,message} from "antd";
+import { Layout, Menu, Row, Col, Image, Button, Divider, Dropdown, Select ,message, Badge, Avatar} from "antd";
 import Link from "next/link";
 import { connect } from "react-redux";
 import { signOut } from "../../redux/actions/authAction";
@@ -7,13 +7,15 @@ import { updateProfile } from "@/redux/actions/userAction";
 import {
   getAllNotification,
   getAllUnreadNotification,
+  markAllasRead,
+  markasRead,
 } from "@/redux/actions/notoficationAction";
 import { UserOutlined, NotificationFilled } from "@ant-design/icons";
 
 const { Header } = Layout;
 const { SubMenu } = Menu;
 
-const getItems = (isSignedIn, signOut, user_profile) => {
+const getItems = (isSignedIn, signOut, user_profile, ) => {
   const { Header, Content, Footer } = Layout;
   // console.log(user_profile);
 
@@ -91,6 +93,7 @@ const navbar = ({
   temp_jobpost,
   getAllNotification,
   getAllUnreadNotification,
+  markasRead,
 }) => {
   const { Option } = Select;
   useEffect(() => {
@@ -105,39 +108,43 @@ const navbar = ({
     "Man charged over missing wedding girl.",
     "Los Angeles battles huge wildfires.",
   ];
-
+  const NotificationOnClick = ({ key }) => {
+    message.info(`Click on item ${key}`);
+  };
+  const notificationRead = (id) => {
+    console.log("notification reading:" + id);
+    markasRead(id);
+  };
   const notification = (
     <Row
       style={{
         backgroundColor: "white",
         overflowY: "scroll",
-        height: "200px",
-        width: "400px",
-        boxShadow:
-          "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
-        padding: "5px",
+        height: "auto",
+        maxHeight: "60vh",
+        width: "500px",
+        padding: "15px",
       }}
     >
       <h1 style={{ weight: "bold" }}>Notifications</h1>
       <Link href={"/Notification/SeeAllNotification"}>See All</Link>
-      {/* {console.log(allnotificationList)} */}
+      <Divider />
 
-      {allnotificationList.length == 0 ? (
-        <h5>You have no notification here</h5>
-      ) : (
-        allnotificationList.map((notification, index) => (
-          // console.log("ase notification"),
-          <Col span={24} className="notifi_bar">
-            <Link
-              // href={"/jobs/detail/" + notification["description"]}
-              href={{ pathname: '/jobs/detail/', query: { id: notification["description"]} }}
-              style={{ color: "white" }}
-            >
-              {notification["verb"]}
-            </Link>{" "}
-          </Col>
-        ))
-      )}
+      {allnotificationList.map((notification, index) => (
+        <Row span={24} className="notifi_bar">
+          <Link
+            href={{ pathname: '/jobs/detail/', query: { id: notification["description"]} }}
+          >
+          <a onClick={(e) => notificationRead(notification["id"])}>
+            {notification["unread"] ? (
+                <p style={{backgroundColor: "skyblue"}}>{notification["verb"]}</p>
+            ) : (
+              <p>{notification["verb"]}</p>
+            )}
+          </a>
+          </Link>
+        </Row>
+      ))}
     </Row>
   );
   
@@ -233,13 +240,21 @@ const navbar = ({
             <Link href="/announcement/create">Create Announcement</Link>
           </Menu.Item>
         </SubMenu>
-        <Dropdown
-          className="notificationIcon"
-          overlay={notification}
-          placement="bottomLeft"
-        >
-          <NotificationFilled />
-        </Dropdown>
+        <Badge count={unreadnotificationList.length}>
+          <Dropdown overlay={notification} placement="bottomLeft">
+            <Avatar
+              shape="square"
+              size="default"
+              style={{
+                backgroundColor: "transparent",
+                border: "1px solid #1890FF",
+                marginTop: "-2px",
+              }}
+            >
+              <NotificationFilled style={{ color: "#1890FF" }} />
+            </Avatar>
+          </Dropdown>
+        </Badge>
 
         {getItems(isSignedIn, signOut, user_profile)}
       </Menu>
@@ -263,4 +278,5 @@ export default connect(mapStateToProps, {
   signOut,
   getAllNotification,
   getAllUnreadNotification,
+  markasRead,
 })(navbar);
