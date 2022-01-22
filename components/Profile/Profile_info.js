@@ -35,6 +35,7 @@ import moment from "moment";
 import Profile_adress from "./Profile_adress";
 import PicturesWall from "components/annoucement/PicturesWall";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
+import Blink from "react-blink-text";
 
 const Profile_info = ({
   updateProfile,
@@ -67,6 +68,21 @@ const Profile_info = ({
 
   const firebaseAuth = getAuth();
   const router = useRouter();
+  const phoneNotsave = () => {
+    if (!user_profile.phone) {
+      return (
+        <Blink
+          color="red"
+          text=" Please update/verify your phone number "
+          fontSize="20"
+        ></Blink>
+      );
+    }
+  };
+ 
+    
+ 
+
 
   const signin = () => {
     let phoneNumber = mynumber;
@@ -124,7 +140,7 @@ const Profile_info = ({
             error({
               title: res.data.error,
               icon: <ExclamationCircleOutlined />,
-              
+
               okText: "OK",
               okType: "danger",
               cancelText: "No",
@@ -360,8 +376,11 @@ const Profile_info = ({
               style={{ width: "250px" }}
             />
             <Button onClick={signin}>Send OTP</Button>
+            {phoneNotsave()}
+          
             <div id="recaptcha-container"></div>
           </Form.Item>
+
           <Form.Item
             style={{ display: show ? "" : "none" }}
             label="Phone Number"
@@ -387,7 +406,7 @@ const Profile_info = ({
               offset: 4,
               span: 12,
             }}
-            style={{ paddingTop: "15px" }}
+            style={{ marginTop: "-35px" }}
           >
             <Checkbox>Hide phone number</Checkbox>
           </Form.Item>

@@ -16,6 +16,8 @@ const SeeAllNotification = ({
   getAllUnreadNotification,
   markasRead,
 }) => {
+    
+    console.log(allnotificationList)
   const { Content } = Layout;
   const notificationRead = (id) => {
     console.log("notification reading:" + id);
@@ -62,7 +64,7 @@ const SeeAllNotification = ({
       </Head>
       <Layout>
         <Navbar />
-        <Content className="site-layout" style={{ padding: "45px 400px" }}>
+        <Content className="site-layout" style={{ padding: "45px 345px" }}>
           <div
             className="site-layout-background"
             style={{ padding: "15px 40px" }}
