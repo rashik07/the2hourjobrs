@@ -206,7 +206,7 @@ const Step4 = ({
     const { confirm } = Modal;
 
     confirm({
-      title: "Are you sure apply this job?",
+      title: "Are you sure post this job?",
       icon: <ExclamationCircleOutlined />,
       content: "Some descriptions",
       okText: "Yes",
@@ -222,7 +222,7 @@ const Step4 = ({
     const { confirm } = Modal;
 
     confirm({
-      title: "Are you sure apply this job?",
+      title: "Are you sure update this job?",
       icon: <ExclamationCircleOutlined />,
       content: "Some descriptions",
       okText: "Yes",

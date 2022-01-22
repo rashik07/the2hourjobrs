@@ -59,11 +59,7 @@ const PopupDetails = ({
           </Space>
         }
       >
-        <div className="details_btn">
-          <Link href={{ pathname: "/jobs/detail/", query: { id: job.id } }}>
-            Details
-          </Link>
-        </div>
+       
 
         <Row>
           <Col xs={24} sm={24} md={10} lg={10} xl={10}>
@@ -153,6 +149,11 @@ const PopupDetails = ({
               {/* {appliedPerson()} */}
             </Row>
           </Col>
+          <div className="ant-btn">
+          <Link href={{ pathname: "/jobs/detail/", query: { id: job.id } }}>
+            See More
+          </Link>
+        </div>
         </Row>
       </Drawer>
     </>

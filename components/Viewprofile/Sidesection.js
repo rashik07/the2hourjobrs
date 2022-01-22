@@ -124,7 +124,7 @@ const Sidesection = ({
   let location_list = [...division_list, ...district_list, ...thana_list];
   return (
     <div>
-      <p>
+      <p style={{lineBreak:"anywhere"}}>
         {facebook_link()} {"  "}
         {youtube_link()} {"  "}
         {website_link()}

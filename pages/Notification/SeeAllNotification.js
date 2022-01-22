@@ -1,11 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 import Head from "next/head";
-import { Steps, Layout, Breadcrumb, Row, Col } from "antd";
+import { Steps, Layout, Breadcrumb, Row, Col , Divider} from "antd";
 import Navbar from "container/navbar/newNavbar";
 import {
   getAllNotification,
   getAllUnreadNotification,
+  markasRead,
 } from "@/redux/actions/notoficationAction";
 import Link from "next/link";
 
@@ -13,20 +14,42 @@ const SeeAllNotification = ({
   allnotificationList,
   getAllNotification,
   getAllUnreadNotification,
+  markasRead,
 }) => {
   const { Content } = Layout;
+  const notificationRead = (id) => {
+    console.log("notification reading:" + id);
+    markasRead(id);
+  };
   const notification = (
-    <Row>
-         <h1 style={{weight: "bold"}}>All Notifications</h1>
+    <Row
+      style={{
+        backgroundColor: "white",
+      
+        height: "auto",
+     
+        width: "500px",
+        padding: "15px",
+      }}
+    >
+      <h1 style={{ weight: "bold" }}>Notifications</h1>
+    
+      <Divider />
+
       {allnotificationList.map((notification, index) => (
-        <Col span={24} className="notifi_bar">
+        <Row span={24} className="notifi_bar">
           <Link
-            href={"/jobs/detail/" + notification["description"]}
-            // style={{ color: "white" }}
+            href={{ pathname: '/jobs/detail/', query: { id: notification["description"]} }}
           >
-            {notification["verb"]}
-          </Link>{" "}
-        </Col>
+          <a onClick={(e) => notificationRead(notification["id"])}>
+            {notification["unread"] ? (
+                <p style={{backgroundColor: "skyblue"}}>{notification["verb"]}</p>
+            ) : (
+              <p>{notification["verb"]}</p>
+            )}
+          </a>
+          </Link>
+        </Row>
       ))}
     </Row>
   );
@@ -62,6 +85,7 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
   getAllNotification,
   getAllUnreadNotification,
+  markasRead,
 })(SeeAllNotification);
 
 //export default SeeAllNotification;

@@ -90,28 +90,28 @@ const ProfessionalQualification = ({
       dataIndex: "certification_title",
       key: "certification_title",
       width: "30%",
-      align:"center",
+      align: "center",
     },
     {
       title: "Institution",
       dataIndex: "institute",
       key: "institute",
       width: "30%",
-      align:"center",
+      align: "center",
     },
     {
       title: "Location",
       dataIndex: "location",
       key: "institute",
       width: "100%",
-      align:"center",
+      align: "center",
     },
     {
-      title: "Duration",
+      title: "Duration(Month)",
       dataIndex: "duration",
       key: "duration",
       width: "100%",
-      align:"center",
+      align: "center",
     },
 
     {
@@ -119,13 +119,13 @@ const ProfessionalQualification = ({
       dataIndex: "year_of_passing",
       key: "year_of_passing",
       width: "150px",
-      align:"center",
+      align: "center",
     },
 
     {
       title: "Action",
       key: "action",
-      align:"center",
+      align: "center",
       render: (details) => (
         console.log("training id:", details.id),
         (
@@ -150,7 +150,12 @@ const ProfessionalQualification = ({
           {" "}
           <Title>Professional Certifications</Title>
         </Divider>
-        <Table columns={columns} dataSource={view_qualification} pagination={false} bordered/>
+        <Table
+          columns={columns}
+          dataSource={view_qualification}
+          pagination={false}
+          bordered
+        />
       </div>
       <Form
         {...formItemLayout}
@@ -167,8 +172,8 @@ const ProfessionalQualification = ({
         <Form.Item label="Location:" name="location">
           <Input placeholder="Location" />
         </Form.Item>
-        <Form.Item label="Duration" name="duration">
-          <InputNumber min={1} max={10} onChange={onChangeNum} />
+        <Form.Item label="Duration(Month)" name="duration">
+          <InputNumber min={1} max={1000} onChange={onChangeNum} />
         </Form.Item>
         <Form.Item name="year_of_passing" label="Year of Passing" {...config}>
           <DatePicker format={dateFormat} picker="year" />

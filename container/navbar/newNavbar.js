@@ -149,13 +149,30 @@ const navbar = ({
   );
   
   const phoneNumberAlert = () =>{
-    message.error("Please login or update/verify your phone number ");
+    message.error("update/verify your phone number for access this feature");
   }
+  const loginAlert = () =>{
+    message.error("Please login for access this feature");
+  }
+
 
 
   const createPost = () => {
     // console.log(user_profile.phone);
-    if (user_profile.phone == null || !isSignedIn){
+    if (!isSignedIn){
+      return (
+        // <Button className="jobpost_btn" onClick={() =>phoneNumberAlert()} >
+        //   <Link href="">Post a Job</Link>
+        // </Button>
+        <Menu.Item key="setting:1" className="jobpost_list" >
+        <Button className="jobpost_btn"onClick={() =>loginAlert()}>
+          <Link href="">Post a Job</Link>
+        </Button>
+      </Menu.Item>
+      );
+      
+    }
+    else if (user_profile.phone == null ){
       return (
         // <Button className="jobpost_btn" onClick={() =>phoneNumberAlert()} >
         //   <Link href="">Post a Job</Link>
@@ -167,7 +184,9 @@ const navbar = ({
       </Menu.Item>
       );
       
-    } else{
+    } 
+     
+    else{
       return (
         <Menu.Item key="setting:1" className="jobpost_list" >
         <Button className="jobpost_btn" >

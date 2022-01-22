@@ -12,6 +12,7 @@ import {
   InputNumber,
   Skeleton,
   Checkbox,
+  Modal,
 } from "antd";
 import { connect } from "react-redux";
 import {
@@ -33,6 +34,7 @@ import { useRouter } from "next/router";
 import moment from "moment";
 import Profile_adress from "./Profile_adress";
 import PicturesWall from "components/annoucement/PicturesWall";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
 
 const Profile_info = ({
   updateProfile,
@@ -74,7 +76,7 @@ const Profile_info = ({
 
     if (phoneNumber === "" || phoneNumber.length < 14) {
       message.error("Please enter a valid phone number");
-      
+
       return;
     }
     let verify = new RecaptchaVerifier(
@@ -117,10 +119,20 @@ const Profile_info = ({
         let status = PhoneVerifyUpdate(data, router).then((res) => {
           console.log(res);
           if (res.status == 226) {
-            message.error(res.data.error);
-            window.location.reload();
-          }
-          else{
+            // message.error(res.data.error);
+            const { error } = Modal;
+            error({
+              title: res.data.error,
+              icon: <ExclamationCircleOutlined />,
+              
+              okText: "OK",
+              okType: "danger",
+              cancelText: "No",
+              onOk() {
+                window.location.reload();
+              },
+            });
+          } else {
             message.success(res.data.success);
             window.location.reload();
           }
@@ -169,14 +181,6 @@ const Profile_info = ({
       message.success("successfully added your profile pic");
       window.location.reload();
     }
-    // window.location.reload();
-    // if (typeof values.cover === "undefined") {
-    //   console.log("not cover");
-    // } else {
-    //   console.log("cover");
-    //   formData.append("image", cover[0].originFileObj);
-    //   console.log(cover[0].originFileObj);
-    // }
   };
 
   const onFinish = (values) => {
@@ -188,49 +192,6 @@ const Profile_info = ({
       birthday: values["birthday"].format("YYYY-MM-DD"),
     };
 
-    //formData.append("phone", values.phone);
-    // formData.append("nid", values.nid);
-    // formData.append("gender", values.gender);
-    // if (
-    //   typeof values.facebook_link === "null" ||
-    //   values.facebook_link === null
-    // ) {
-    // } else {
-    //   formData.append("facebook_link", values.facebook_link);
-    // }
-    // if (typeof values.bio === "null" || values.bio === null) {
-    // } else {
-    //   formData.append("bio", values.bio);
-    // }
-    // if (typeof values.youtube_link === "null" || values.youtube_link === null) {
-    // } else {
-    //   formData.append("youtube_link", values.youtube_link);
-    // }
-    // if (typeof values.website_link === "null" || values.website_link === null) {
-    // } else {
-    //   formData.append("website_link", values.website_link);
-    // }
-    // if (
-    //   typeof values.portfolio_link === "null" ||
-    //   values.portfolio_link === null
-    // ) {
-    // } else {
-    //   formData.append("portfolio_link", values.portfolio_link);
-    // }
-
-    // formData.append("birthday", values.birthday);
-
-    // if (typeof values.cover === "undefined") {
-    //   console.log("not cover");
-    // } else {
-    //   console.log("cover");
-    //   formData.append("image", cover[0].originFileObj);
-    //   console.log(cover[0].originFileObj);
-    // }
-
-    // for (var value of formData.values()) {
-    //   console.log(value);
-    // }
     editUserProfile(values, user_profile.id);
     setloader(true);
     updatePhone(values, user_profile.id);
@@ -243,15 +204,7 @@ const Profile_info = ({
   const { Option } = Select;
   const { TextArea } = Input;
   const { Title } = Typography;
-  const config = {
-    rules: [
-      {
-        type: "object",
-        required: true,
-        message: "Please select time!",
-      },
-    ],
-  };
+
   //gender
   const plainOptions = ["Male", "Female"];
   const [value, setValue] = React.useState();
@@ -340,18 +293,6 @@ const Profile_info = ({
           onFinishFailed={onFinishFailed}
           initialValues={user_profile}
         >
-          {/* <Form.Item
-            name="photo"
-            label="Upload"
-            valuePropName="fileList"
-            getValueFromEvent={normFile}
-            extra="long"
-          >
-            <Upload name="image" listType="picture" maxCount={1}>
-              <Button icon={<UploadOutlined />}>Click to upload</Button>
-            </Upload>
-          </Form.Item> */}
-
           <Form.Item
             name="employeer"
             label="Click here"
@@ -406,7 +347,10 @@ const Profile_info = ({
             />
           </Form.Item>
 
-          <div style={{ display: !show ? "block" : "none" }}>
+          <Form.Item
+            style={{ display: !show ? "" : "none" }}
+            label="Phone Number"
+          >
             <Input
               value={mynumber}
               onChange={(e) => {
@@ -417,8 +361,11 @@ const Profile_info = ({
             />
             <Button onClick={signin}>Send OTP</Button>
             <div id="recaptcha-container"></div>
-          </div>
-          <div style={{ display: show ? "block" : "none" }}>
+          </Form.Item>
+          <Form.Item
+            style={{ display: show ? "" : "none" }}
+            label="Phone Number"
+          >
             <Input
               type="text"
               placeholder={"Enter your OTP"}
@@ -428,7 +375,7 @@ const Profile_info = ({
               style={{ width: "250px" }}
             />
             <Button onClick={ValidateOtp}>Verify</Button>
-          </div>
+          </Form.Item>
           {/* <a href="../Profile/Mobile_verify" style={{ marginLeft: "180px" }}>
             <Button type="primary">Update Phone Number</Button>
           </a> */}

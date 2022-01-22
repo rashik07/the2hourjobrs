@@ -160,7 +160,7 @@ const Mainsection = ({
       align: "center",
     },
     {
-      title: "Duration",
+      title: "Duration(Month)",
       dataIndex: "duration",
       key: "duration",
       width: "100%",
