@@ -62,11 +62,10 @@ export const PhoneVerifyUpdate = (data, router) => async (dispatch) => {
     console.log("Mobile Verified");
     // router.push("/Profile");
     
-    return true;
+    return response;
   } catch (error) {
     console.log(error);
     console.log(error.response);
-    return false;
   }
 };
 export const getSpecificProfile = (profile_id) => async (dispatch) => {

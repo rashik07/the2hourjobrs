@@ -21,7 +21,14 @@ import {
   updateProfile,
   editUserProfile,
   updatePhone,
+  PhoneVerifyUpdate,
 } from "@/redux/actions/userAction";
+import { initializeApp } from "firebase/app";
+import {
+  getAuth,
+  RecaptchaVerifier,
+  signInWithPhoneNumber,
+} from "firebase/auth";
 import { useRouter } from "next/router";
 import moment from "moment";
 import Profile_adress from "./Profile_adress";
@@ -33,15 +40,96 @@ const Profile_info = ({
   updatePhone,
   edit_phone,
   auth,
+  PhoneVerifyUpdate,
 }) => {
   const [user_profile, setuser_profile] = useState([]);
   const [loading, setloading] = useState(true);
   const [loader, setloader] = useState(false);
   const [cover, setcover] = useState([]);
   const dateFormat = "YYYY-MM-DD";
+  const [mynumber, setnumber] = useState("");
+  const [otp, setotp] = useState("");
+  const [show, setshow] = useState(false);
+  const [final, setfinal] = useState("");
   // console.log(user_profile);
+  var FirebaseConfig = {
+    apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+    authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+    projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+    storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+    appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+    measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
+  };
+  const firebaseApp = initializeApp(FirebaseConfig);
 
+  const firebaseAuth = getAuth();
   const router = useRouter();
+
+  const signin = () => {
+    let phoneNumber = mynumber;
+    if (!phoneNumber.includes("+88")) {
+      phoneNumber = "+88" + mynumber;
+    }
+
+    if (phoneNumber === "" || phoneNumber.length < 14) {
+      message.error("Please enter a valid phone number");
+      
+      return;
+    }
+    let verify = new RecaptchaVerifier(
+      "recaptcha-container",
+      {
+        size: "normal",
+        callback: (response) => {
+          // reCAPTCHA solved, allow signInWithPhoneNumber.
+          // ...
+        },
+        "expired-callback": () => {
+          // Response expired. Ask user to solve reCAPTCHA again.
+          // ...
+        },
+      },
+      firebaseAuth
+    );
+
+    signInWithPhoneNumber(firebaseAuth, phoneNumber, verify)
+      .then((confirmationResult) => {
+        setfinal(confirmationResult);
+        // console.log(confirmationResult);
+        message.success("code sent");
+        setshow(true);
+      })
+      .catch((err) => {
+        alert(err);
+        window.location.reload();
+      });
+  };
+
+  // Validate OTP
+  const ValidateOtp = () => {
+    if (otp === null || final === null) return;
+    final
+      .confirm(otp)
+      .then((result) => {
+        // success
+        let data = { phone: mynumber };
+        let status = PhoneVerifyUpdate(data, router).then((res) => {
+          console.log(res);
+          if (res.status == 226) {
+            message.error(res.data.error);
+            window.location.reload();
+          }
+          else{
+            message.success(res.data.success);
+            window.location.reload();
+          }
+        });
+      })
+      .catch((err) => {
+        message.error("Wrong code");
+      });
+  };
 
   const uploadcover = (fileList) => {
     setcover(fileList);
@@ -60,7 +148,8 @@ const Profile_info = ({
         } else {
           result.birthday = moment(result.birthday, dateFormat);
         }
-
+        console.log(result);
+        setnumber(result.phone);
         setuser_profile(result);
         setloading(false);
       });
@@ -317,29 +406,32 @@ const Profile_info = ({
             />
           </Form.Item>
 
-          <Form.Item
-            name="phone"
-            label="Phone Number"
-            rules={[
-              {
-                //  required: true,
-                message: "Please input your phone number!",
-              },
-            ]}
-          >
+          <div style={{ display: !show ? "block" : "none" }}>
             <Input
-              // addonBefore={prefixSelector}
-              disabled
-              style={{
-                width: "45%",
-                color: "black",
-                marginRight: "3px",
+              value={mynumber}
+              onChange={(e) => {
+                setnumber(e.target.value);
               }}
+              placeholder="phone number"
+              style={{ width: "250px" }}
             />
-          </Form.Item>
-          <a href="../Profile/Mobile_verify" style={{ marginLeft: "180px" }}>
+            <Button onClick={signin}>Send OTP</Button>
+            <div id="recaptcha-container"></div>
+          </div>
+          <div style={{ display: show ? "block" : "none" }}>
+            <Input
+              type="text"
+              placeholder={"Enter your OTP"}
+              onChange={(e) => {
+                setotp(e.target.value);
+              }}
+              style={{ width: "250px" }}
+            />
+            <Button onClick={ValidateOtp}>Verify</Button>
+          </div>
+          {/* <a href="../Profile/Mobile_verify" style={{ marginLeft: "180px" }}>
             <Button type="primary">Update Phone Number</Button>
-          </a>
+          </a> */}
 
           <Form.Item
             name="hide_phone"
@@ -443,4 +535,5 @@ export default connect(mapStateToProps, {
   getDivision,
   getThana,
   updatePhone,
+  PhoneVerifyUpdate,
 })(Profile_info);
