@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Layout, Menu, Row, Col, Image, Button, Divider, Dropdown, Select ,message, Badge, Avatar} from "antd";
+import { Layout, Menu, Row, Col, Image, Button, Divider, Dropdown, Select ,message, Badge, Avatar,Modal} from "antd";
 import Link from "next/link";
 import { connect } from "react-redux";
 import { signOut } from "../../redux/actions/authAction";
@@ -10,7 +10,8 @@ import {
   markAllasRead,
   markasRead,
 } from "@/redux/actions/notoficationAction";
-import { UserOutlined, NotificationFilled } from "@ant-design/icons";
+import { UserOutlined, NotificationFilled, ExclamationCircleOutlined} from "@ant-design/icons";
+import { useRouter } from "next/router";
 
 const { Header } = Layout;
 const { SubMenu } = Menu;
@@ -95,6 +96,7 @@ const navbar = ({
   getAllUnreadNotification,
   markasRead,
 }) => {
+  const router = useRouter();
   const { Option } = Select;
   useEffect(() => {
     getAllNotification();
@@ -149,7 +151,19 @@ const navbar = ({
   );
   
   const phoneNumberAlert = () =>{
-    message.error("update/verify your phone number for access this feature");
+    const { warning } = Modal;
+
+    warning({
+      title: "please update/verify your phone number",
+      icon: <ExclamationCircleOutlined />,
+
+      okText: "Yes",
+      okType: "danger",
+      cancelText: "No",
+      onOk() {
+        router.push("/Profile")
+      },
+    });
   }
   const loginAlert = () =>{
     message.error("Please login for access this feature");

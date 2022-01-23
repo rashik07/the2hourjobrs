@@ -33,7 +33,7 @@ const View_profile = ({
             type="primary"
             style={{
               float: "right",
-              backgroundColor: "#f5222d",
+              backgroundColor: "#C24AAC",
               border: "1px solid #ffffff",
               color: "#ffffff",
             }}

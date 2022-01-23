@@ -63,6 +63,23 @@ const KeywordSearch = ({
           placeholder=" What I am looking for"
           onChange={(e) => setKeyword(e.target.value)}
           value={keyword}
+          onKeyPress={(e) => {
+            if (e.key === "Enter") {
+              e.preventDefault();
+              if (keyword) {
+                const new_filter = { ...filter, keyword };
+                SetfilterAction(new_filter);
+                router.push({
+                  pathname: "/jobs/list",
+                  // query: filter,
+                });
+                // setFilter(new_filter);
+                // reload(true);
+              }
+              // getFilteredList(filter);
+              setShowFilter(true);
+            }
+          }}
         />
 
         <Button

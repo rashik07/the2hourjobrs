@@ -47,7 +47,7 @@ const Step3 = ({ postStep, setPostStep, temp_jobpost }) => {
           className="btn btn-secondary mr-3"
           style={{
             marginRight: "10px",
-            backgroundColor: "#f5222d",
+            backgroundColor: "dodgerblue",
             color: "#ffffff",
           }}
         >
@@ -56,11 +56,7 @@ const Step3 = ({ postStep, setPostStep, temp_jobpost }) => {
         <Button
           onClick={onSubmit}
           className="btn btn-primary mr-3"
-          style={{
          
-            backgroundColor: "#389e0d",
-            color: "#ffffff",
-          }}
         >
           Next
         </Button>

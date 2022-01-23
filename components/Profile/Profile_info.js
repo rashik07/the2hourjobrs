@@ -79,10 +79,6 @@ const Profile_info = ({
       );
     }
   };
- 
-    
- 
-
 
   const signin = () => {
     let phoneNumber = mynumber;
@@ -373,11 +369,14 @@ const Profile_info = ({
                 setnumber(e.target.value);
               }}
               placeholder="phone number"
-              style={{ width: "250px" }}
+              style={{
+                width: "54%",
+                color: "black",
+              }}
             />
             <Button onClick={signin}>Send OTP</Button>
             {phoneNotsave()}
-          
+
             <div id="recaptcha-container"></div>
           </Form.Item>
 
@@ -391,7 +390,10 @@ const Profile_info = ({
               onChange={(e) => {
                 setotp(e.target.value);
               }}
-              style={{ width: "250px" }}
+              style={{
+                width: "54%",
+                color: "black",
+              }}
             />
             <Button onClick={ValidateOtp}>Verify</Button>
           </Form.Item>
@@ -456,20 +458,50 @@ const Profile_info = ({
             <DatePicker format={dateFormat} />
           </Form.Item>
           <Form.Item label="Facebook Link" name="facebook_link">
-            <Input placeholder="input Facebook Link" />
+            <Input
+              placeholder="input Facebook Link"
+              style={{
+                width: "70%",
+                color: "black",
+              }}
+            />
           </Form.Item>
           <Form.Item label="Website Link" name="website_link">
-            <Input placeholder="input Website Link" />
+            <Input
+              placeholder="input Website Link"
+              style={{
+                width: "70%",
+                color: "black",
+              }}
+            />
           </Form.Item>
           <Form.Item label="Youtube Link" name="youtube_link">
-            <Input placeholder="input Youtube Link" />
+            <Input
+              placeholder="input Youtube Link"
+              style={{
+                width: "70%",
+                color: "black",
+              }}
+            />
           </Form.Item>
           <Form.Item label="Portfolio Link" name="portfolio_link">
-            <Input placeholder="input Portfolio Link" />
+            <Input
+              placeholder="input Portfolio Link"
+              style={{
+                width: "70%",
+                color: "black",
+              }}
+            />
           </Form.Item>
 
           <Form.Item label="Bio" name="bio">
-            <TextArea rows={4} />
+            <TextArea
+              rows={4}
+              style={{
+                width: "70%",
+                color: "black",
+              }}
+            />
           </Form.Item>
           <Form.Item {...tailFormItemLayout}>
             <Button type="primary" htmlType="submit">

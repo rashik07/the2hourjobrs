@@ -78,7 +78,7 @@ const Profile = ({ auth,user_profile }) => {
                     target="_blank"
                     style={{
                       float: "right",
-                      backgroundColor: "#f5222d",
+                      backgroundColor: "#C24AAC",
                       border: "1px solid #ffffff",
                       color: "#ffffff",
                       padding: "5px",

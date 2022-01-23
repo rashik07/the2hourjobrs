@@ -61,7 +61,7 @@ const Step1 = ({ postStep, setPostStep, temp_jobpost }) => {
 
       <br />
 
-      <Button onClick={onSubmit} style={{ float: "right" , backgroundColor:"#389e0d" , color:"#ffffff" }}  >
+      <Button onClick={onSubmit} style={{ float: "right" }}  >
         Next
       </Button>
 

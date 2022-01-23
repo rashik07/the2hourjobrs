@@ -10,6 +10,7 @@ const KeywordSearch = ({
   reload,
 }) => {
   const [keyword, setKeyword] = useState("");
+  const [message, setMessage] = useState("");
 
   const onKeywordSubmit = (e) => {
     e.preventDefault();
@@ -40,10 +41,20 @@ const KeywordSearch = ({
           borderBottomLeftRadius: "8px",
           border: "1px solid #000000",
         }}
-        placeholder="Type and hit Enter"
+        placeholder="What I am looking for"
         onChange={(e) => setKeyword(e.target.value)}
         value={keyword}
-        // onKeyPress={handleKeypress}
+        onKeyPress={(e) => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            if (keyword) {
+              const new_filter = { ...filter, keyword };
+              setFilter(new_filter);
+              setKeyword("");
+            }
+            setShowFilter(true);
+          }
+        }}
       />
 
       <Button

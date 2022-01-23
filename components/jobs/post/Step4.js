@@ -258,8 +258,7 @@ const Step4 = ({
             className="btn btn-primary mr-3"
             style={{
               marginRight: "10px",
-              backgroundColor: "#389e0d",
-              color: "#ffffff",
+              
             }}
           >
             Update
@@ -268,10 +267,7 @@ const Step4 = ({
           <Button
             onClick={postJobBtnClick}
             className="btn btn-primary mr-3"
-            style={{
-              backgroundColor: "#389e0d",
-              color: "#ffffff",
-            }}
+          
           >
             Post
           </Button>
