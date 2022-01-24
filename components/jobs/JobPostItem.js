@@ -13,7 +13,7 @@ import { useRouter } from "next/router";
 import PopupDetails from "./PopupDetails";
 import { Modal, Button, Pagination, message } from "antd";
 import { ExclamationCircleOutlined, PushpinFilled } from "@ant-design/icons";
-import { Row, Col, List } from "antd";
+import { Row, Col, List,Tooltip  } from "antd";
 import {
   PhoneOutlined,
   ScheduleOutlined,
@@ -33,10 +33,13 @@ const JobPostItem = ({
   saveJob,
   deleteJob,
   getSelfPostedJobs,
+  loader,
   show_save_button,
   self_posted_jobs,
   getAppliedJobsPerson,
   applied_jobs_person,
+
+
 }) => {
   const router = useRouter();
 
@@ -103,6 +106,10 @@ const JobPostItem = ({
       message.error("You must log in to access this feature");
     } else {
       saveJob(id, userid, savedStatus, setSavedStatus, applied_saved_id);
+
+      // window.location.reload();
+      loader(savedStatus);
+     
     }
   };
   const deleteJobBtnClick = () => {
@@ -125,6 +132,7 @@ const JobPostItem = ({
   const deleteShow = () => {
     if (btn_disable) {
       return (
+        
         <DeleteOutlined
           onClick={deleteJobBtnClick}
           style={{
@@ -164,6 +172,7 @@ const JobPostItem = ({
   const saveShow = () => {
     if (savedStatus) {
       return (
+        <Tooltip title="press to unsave">
         <SaveOutlined
           onClick={saveJobBtnClick}
           style={{
@@ -172,11 +181,12 @@ const JobPostItem = ({
             marginTop: "5px",
             float: "right",
           }}
-        />
+        /></Tooltip>
       );
     }
 
     return (
+      <Tooltip title="press to save">
       <PushpinFilled
         onClick={saveJobBtnClick}
         style={{
@@ -185,7 +195,7 @@ const JobPostItem = ({
           marginTop: "5px",
           float: "right",
         }}
-      />
+      /></Tooltip>
     );
   };
 

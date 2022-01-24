@@ -53,11 +53,11 @@ export const getIndustries = () => async (dispatch) => {
   }
 };
 
-export const getAllJobs = () => async (dispatch) => {
+export const getAllJobs = (page, pageSize) => async (dispatch) => {
   try {
    
  
-      const response = await backend.get("v1/jobpost/data/", getConfig());
+      const response = await backend.get(`v1/jobpost/data/?page=${page}&page_size=${pageSize}`, getConfig());
    
     if (response.status === 200) {
       dispatch({ type: types.GET_ALL_JOB, payload: response.data });

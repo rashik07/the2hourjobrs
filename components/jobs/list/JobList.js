@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import _ from "lodash";
 import { connect } from "react-redux";
 import { getAllJobs, getAllJobs_withoutlogin } from "redux/actions/jobAction";
@@ -11,34 +11,33 @@ const JobList = ({
   filtered_jobs,
   showFilterJobs,
   auth,
+ 
 }) => {
   const [all_jobs, setall_jobs] = useState();
+  const pageSize = useRef(5);
+  const [page_no, setPageNo] = useState(1);
+  const totaldata = useRef();
+  const [reload, setReload] = useState(false);
+  console.log(pageSize.current);
   useEffect(() => {
+    totaldata.current = 0;
     if (auth.isSignedIn) {
-      getAllJobs().then((result) => {
-        setall_jobs(result);
+      getAllJobs(page_no, pageSize.current).then((result) => {
+        totaldata.current = result.count;
+        setall_jobs(result.results);
       });
     } else {
       getAllJobs_withoutlogin().then((result) => {
-        setall_jobs(result);
+        totaldata.current = result.count;
+        setall_jobs(result.results);
       });
     }
-  }, []);
-  const jobPostItem1 = () => {
-    if (all_jobs) {
-      return all_jobs.reverse().map((job) => {
-        return (
-          <List.Item>
-            {" "}
-            <JobPostItem key={job.id} job={job} />{" "}
-          </List.Item>
-        );
-      });
-    }
-  };
+  }, [page_no,reload]);
+
+  console.log(all_jobs);
   const jobPostItem = (job) => {
     if (all_jobs) {
-      return <JobPostItem key={job.id} job={job} />;
+      return <JobPostItem key={job.id} job={job} loader={setReload}/>;
     }
   };
 
@@ -46,7 +45,7 @@ const JobList = ({
     if (filtered_jobs.length > 0) {
       return filtered_jobs.reverse().map((job) => {
         console.log(filtered_jobs);
-        return <JobPostItem key={job.id} job={job} />;
+        return <JobPostItem key={job.id} job={job}  loader={setReload}/>;
       });
     } else {
       return (
@@ -61,21 +60,20 @@ const JobList = ({
     return (
       <>
         <List
-          // onChange={jobPostItem}
           pagination={{
-            onChange: (all_jobs) => {
-              console.log(all_jobs);
+            onChange: (page_no) => {
+              console.log(page_no);
+              setPageNo(page_no);
             },
-           
-            pageSize: 3,
-            defaultCurrent: 1,
-            total: all_jobs.length,
-            pageSize: 5,
+
+            pageSize: pageSize.current,
+            defaultCurrent: page_no,
+            total: totaldata.current,
           }}
-          dataSource={all_jobs.reverse()}
-          renderItem={(job) => jobPostItem(job,console.log(job))}
+          dataSource={all_jobs}
+          renderItem={(job) => jobPostItem(job)}
         />
-         
+
         {/* {jobPostItem1()} */}
       </>
     );

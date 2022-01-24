@@ -52,7 +52,7 @@ const Jobs = ({ filterJobs, filterfromState, SetfilterAction }) => {
   }, [filter]);
 
   useEffect(() => {
-    if(!_.isEmpty(filterfromState)){
+    if (!_.isEmpty(filterfromState)) {
       setFilter(filterfromState);
       setShowFilterJobs(true);
     }
@@ -74,7 +74,14 @@ const Jobs = ({ filterJobs, filterfromState, SetfilterAction }) => {
           <div className="site-layout-background">
             <Row>
               {/*1st part*/}
-              <Col xs={24} sm={24} md={6} lg={6} xl={6} className="Jobfilter jobfilter_pc">
+              <Col
+                xs={24}
+                sm={24}
+                md={6}
+                lg={6}
+                xl={6}
+                className="Jobfilter jobfilter_pc"
+              >
                 <h2>Filter By</h2>
 
                 <JobCategoryFilter
@@ -121,7 +128,11 @@ const Jobs = ({ filterJobs, filterfromState, SetfilterAction }) => {
                   reload={setShowFilterJobs}
                 />
               </Col>
-              <Collapse className="stepJobPostMobile" defaultActiveKey={["1"]} onChange={callback}>
+              <Collapse
+                className="stepJobPostMobile"
+                defaultActiveKey={["1"]}
+                onChange={callback}
+              >
                 <Panel header="Searching Option" key="1">
                   <Col
                     xs={24}
