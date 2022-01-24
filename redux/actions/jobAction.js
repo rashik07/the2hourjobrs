@@ -128,9 +128,9 @@ export const getAppliedJobsPerson = (temp_jobpost) => async (dispatch) => {
   }
 };
 
-export const filterJobs = (filter) => async (dispatch) => {
+export const filterJobs = (filter, page, pageSize) => async (dispatch) => {
   try {
-    let url = "v1/jobpost/filter/?";
+    let url = `v1/jobpost/filter/?page=${page}&page_size=${pageSize}&`;
 
     const createURL = {
       location: (url, location) => {
@@ -200,7 +200,8 @@ export const filterJobs = (filter) => async (dispatch) => {
 
     const response = await backend.get(url);
 
-    dispatch({ type: types.FILTER_JOB, payload: response.data });
+    // dispatch({ type: types.FILTER_JOB, payload: response.data });
+    return response.data;
   } catch (error) {
     console.log(error);
   }

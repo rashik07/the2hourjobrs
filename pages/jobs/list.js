@@ -34,6 +34,12 @@ const Jobs = ({ filterJobs, filterfromState, SetfilterAction }) => {
   const [filter, setFilter] = useState({});
   const [showFilterJobs, setShowFilterJobs] = useState(false);
   const showPage = useRef("job_list");
+  const pageSize = useRef(5);
+  const [page_no, setPageNo] = useState(1);
+  const totaldata = useRef();
+  const [filtered_jobs, setfiltered_jobs] = useState([]);
+
+
   const style = {
     height: 40,
     width: 40,
@@ -206,6 +212,7 @@ const Jobs = ({ filterJobs, filterfromState, SetfilterAction }) => {
                   setShowFilter={setShowFilterJobs}
                   getFilteredList={filterJobs}
                   showFilterJobs={showFilterJobs}
+
                   // query={location}
                   //reload={setShowFilterJobs}
                 />
@@ -215,10 +222,17 @@ const Jobs = ({ filterJobs, filterfromState, SetfilterAction }) => {
                   setShowFilter={setShowFilterJobs}
                   getFilteredList={filterJobs}
                   reload={showFilterJobs}
-                  //reload={setShowFilterJobs}
+                  pageSize={pageSize}
+                  page_no={page_no}
+                  totaldata={totaldata}
+                  setPageNo={setPageNo}
+                  setfiltered_jobs={setfiltered_jobs}
+                  // setreload={setShowFilterJobs}
                 />
                 <Divider />
-                <JobList filter={filter} showFilterJobs={showFilterJobs} />
+                <JobList filter={filter} showFilterJobs={showFilterJobs} pageSize={pageSize}
+                  page_no={page_no}
+                  totaldata={totaldata} setPageNo={setPageNo} filtered_jobs={filtered_jobs}/>
                 <BackTop>
                   <div style={style}>
                     <UpOutlined />

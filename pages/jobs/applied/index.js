@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import { getAppliedJobs } from "@/redux/actions/jobAction";
 import { connect } from "react-redux";
@@ -8,14 +8,15 @@ import { Layout, Breadcrumb } from "antd";
 
 const AppliedJobs = ({ applied_jobs, getAppliedJobs }) => {
   const { Content } = Layout;
+  const [reload, setReload] = useState(false);
   useEffect(() => {
     getAppliedJobs();
-  }, []);
+  }, [reload]);
 
   const showAppliedJobs = () => {
     if (applied_jobs.length)
       return applied_jobs.map((job) => {
-        return <JobPostItem key={job.id} job={job} />;
+        return <JobPostItem key={job.id} job={job} loader={setReload}/>;
       });
 
     return (

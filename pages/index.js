@@ -185,7 +185,7 @@ const Jobs = ({
               }}
             >
               <AnimatedNumber
-                value= {318 + all_jobs.length}
+                value= {318 + all_jobs.count}
                 duration={1000}
                 formatValue={(n) => n.toFixed(0)}
                 frameStyle={(percentage) =>

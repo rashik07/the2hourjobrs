@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Tooltip } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 
@@ -8,6 +8,12 @@ const KeywordSearch = ({
   getFilteredList,
   setShowFilter,
   reload,
+  setreload,
+  pageSize,
+  page_no,
+  totaldata,
+  setPageNo,
+  setfiltered_jobs,
 }) => {
   const [keyword, setKeyword] = useState("");
   const [message, setMessage] = useState("");
@@ -21,9 +27,16 @@ const KeywordSearch = ({
       setKeyword("");
     }
   };
-  if (reload) {
-    getFilteredList(filter);
-  }
+ 
+  useEffect(() => {
+    if (reload) {
+      getFilteredList(filter, page_no, pageSize.current).then((result) => {
+        totaldata.current = result.count;
+        setfiltered_jobs(result.results);
+        console.log(result);
+      });
+    }
+  }, [page_no, reload]);
   // const handleKeypress = (e) => {
   //   //it triggers by pressing the enter key
   //   if (e.keyCode === 13) {

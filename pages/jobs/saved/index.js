@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect ,useState} from "react";
 import Head from "next/head";
 import { getSavedJobs } from "@/redux/actions/jobAction";
 import { connect } from "react-redux";
@@ -10,18 +10,19 @@ import { Layout ,Breadcrumb} from "antd";
 const SavedJobs = ({ saved_jobs, getSavedJobs, isSignedIn }) => {
   const router = useRouter();
   const { Content } = Layout;
+  const [reload, setReload] = useState(false);
   useEffect(() => {
     if (!isSignedIn) {
       router.push("/auth/login");
     }
 
     getSavedJobs();
-  }, []);
+  }, [reload]);
 
   const showSavedJobs = () => {
     if (saved_jobs.length)
       return saved_jobs.map((job) => {
-        return <JobPostItem key={job.id} job={job} />;
+        return <JobPostItem key={job.id} job={job} loader={setReload}/>;
       });
 
     return (
