@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import { Row, Col, Image, Divider, Button, Space, Tabs } from "antd";
 import { ScheduleOutlined, UserOutlined } from "@ant-design/icons";
@@ -9,14 +9,24 @@ import {
 import dateformat from "dateformat";
 import Link from "next/link";
 const { TabPane } = Tabs;
+import { List, Pagination } from "antd";
 
-class AllAnnouncements extends Component {
-  componentDidMount() {
-    this.props.getAllAnnouncement();
-    this.props.getAllSavedAnnouncement(5);
-  }
+const AllAnnouncements = ({ getAllAnnouncement }) => {
+  const [announcments, setannouncment] = useState([]);
+  const pageSize = useRef(5);
+  const [page_no, setPageNo] = useState(1);
+  const totaldata = useRef();
 
-  renderimage(announcment) {
+  useEffect(() => {
+    totaldata.current = 0;
+
+    getAllAnnouncement(page_no, pageSize.current).then((result) => {
+      totaldata.current = result.count;
+      setannouncment(result.results);
+    });
+  }, [page_no]);
+
+  const renderimage = (announcment) => {
     if (announcment.image.length > 0) {
       return announcment.image.map((announcment) => {
         if (announcment.cover) {
@@ -33,11 +43,11 @@ class AllAnnouncements extends Component {
         />
       );
     }
-  }
+  };
 
-  renderAnnounements(data) {
-    if (data) {
-      return data.map((announcment) => {
+  const renderAnnounements = (announcment) => {
+    if (announcment) {
+     
         if (!announcment.archive) {
           return (
             <>
@@ -45,7 +55,7 @@ class AllAnnouncements extends Component {
                 <Col xs={24} sm={4} md={6} lg={8} xl={6}>
                   <Row>
                     <Col span={12} offset={6}>
-                      {this.renderimage(announcment)}
+                      {renderimage(announcment)}
                       {/* {console.log(announcment)} */}
                     </Col>
                   </Row>
@@ -64,8 +74,10 @@ class AllAnnouncements extends Component {
                       <div>
                         <UserOutlined />{" "}
                         <Link
-                       
-                          href={{ pathname: '/Profile/Profile_details/', query: { id: announcment.user.id } }}
+                          href={{
+                            pathname: "/Profile/Profile_details/",
+                            query: { id: announcment.user.id },
+                          }}
                         >
                           {announcment.user.name}
                         </Link>
@@ -97,9 +109,12 @@ class AllAnnouncements extends Component {
                 >
                   <Row>
                     <Col span={18} offset={3}>
-                      <Link 
+                      <Link
                         // href= {"/announcement/[announcement_id]"} as={`/announcement/${announcment.id}`}
-                        href={{ pathname: '/announcement/announcement_id', query: { announcement_id:announcment.id} }}
+                        href={{
+                          pathname: "/announcement/announcement_id",
+                          query: { announcement_id: announcment.id },
+                        }}
                       >
                         <Button
                           type="primary"
@@ -124,11 +139,11 @@ class AllAnnouncements extends Component {
             </>
           );
         }
-      });
+    
     }
-  }
+  };
 
-  renderSavedAnnounements(data) {
+  const renderSavedAnnounements = (data) => {
     if (data) {
       return data.map((announcment) => {
         console.log(announcment.announcement_data);
@@ -142,7 +157,7 @@ class AllAnnouncements extends Component {
                 <Col xs={24} sm={4} md={6} lg={8} xl={6}>
                   <Row>
                     <Col span={12} offset={6}>
-                      {this.renderimage(announcment.announcement_data)}
+                      {renderimage(announcment.announcement_data)}
                     </Col>
                   </Row>
                 </Col>
@@ -216,31 +231,42 @@ class AllAnnouncements extends Component {
         }
       });
     }
-  }
+  };
 
-  render() {
-    return (
-      <>
-        <Row>
-          <Col span={24} className="announcement_frame">
-            <Tabs defaultActiveKey="1">
-              <TabPane tab="All Announcements" key="1">
-                {this.renderAnnounements(this.props.announcments)}
-              </TabPane>
-              {/* <TabPane tab="Saved Announcements" key="2">
-                {this.renderSavedAnnounements(this.props.savedannouncments)}
+  return (
+    <>
+      <Row>
+        <Col span={24} className="announcement_frame">
+          <Tabs defaultActiveKey="1">
+            <TabPane tab="All Announcements" key="1">
+              {/* {renderAnnounements(announcments)} */}
+              <List
+                pagination={{
+                  onChange: (page_no) => {
+                    setPageNo(page_no);
+                  },
+                  current: page_no,
+                  pageSize: pageSize.current,
+                  defaultCurrent: page_no,
+                  total: totaldata.current,
+                }}
+                dataSource={announcments}
+                renderItem={(announcments) => renderAnnounements(announcments)}
+              />
+            </TabPane>
+            {/* <TabPane tab="Saved Announcements" key="2">
+                {renderSavedAnnounements(savedannouncments)}
               </TabPane> */}
-            </Tabs>
-          </Col>
-        </Row>
-      </>
-    );
-  }
-}
+          </Tabs>
+        </Col>
+      </Row>
+    </>
+  );
+};
 
 const mapStateToProps = (state) => {
   return {
-    announcments: Object.values(state.announcement.annountmentList),
+    // announcments: Object.values(state.announcement.annountmentList),
     savedannouncments: state.announcement.savedannountmentList,
   };
 };

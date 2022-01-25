@@ -20,13 +20,18 @@ const JobList = ({
   totaldata,
   setPageNo,
   filtered_jobs,
+  listreload,
+  pageSizeFiltered,
+  page_no_filter,
+  totaldataFilter,
+  setPageNoFilter,
 }) => {
   const [all_jobs, setall_jobs] = useState([]);
  
   // const [filtered_jobs, setall_jobs] = useState();
 
   const [reload, setReload] = useState(false);
-  console.log(pageSize.current);
+  // console.log(pageSize.current);
   useEffect(() => {
     totaldata.current = 0;
     if (auth.isSignedIn) {
@@ -34,17 +39,14 @@ const JobList = ({
         totaldata.current = result.count;
         setall_jobs(result.results);
       });
-      // filterJobs(page_no, pageSize.current).then((filterResult) => {
-      //   // totaldata.current = filterResult.count;
-      //   setall_jobs(filterResult.results);
-      // });
+  
     } else {
       getAllJobs_withoutlogin(page_no, pageSize.current).then((result) => {
         totaldata.current = result.count;
         setall_jobs(result.results);
       });
     }
-  }, [page_no, reload]);
+  }, [page_no, reload, listreload]);
 
   console.log(all_jobs);
   const jobPostItem = (job) => {
@@ -60,13 +62,12 @@ const JobList = ({
         <List
           pagination={{
             onChange: (page_no) => {
-              console.log(page_no);
-              setPageNo(page_no);
+              setPageNoFilter(page_no);
             },
-
-            pageSize: pageSize.current,
-            defaultCurrent: page_no,
-            total: totaldata.current,
+            current: page_no_filter,
+            pageSize: pageSizeFiltered.current,
+            defaultCurrent: page_no_filter,
+            total: totaldataFilter.current,
           }}
           dataSource={filtered_jobs}
           renderItem={(job) => jobPostItem(job)}
@@ -88,10 +89,9 @@ const JobList = ({
         <List
           pagination={{
             onChange: (page_no) => {
-              console.log(page_no);
               setPageNo(page_no);
             },
-
+            current: page_no,
             pageSize: pageSize.current,
             defaultCurrent: page_no,
             total: totaldata.current,

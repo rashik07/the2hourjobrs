@@ -13,7 +13,7 @@ import { useRouter } from "next/router";
 import PopupDetails from "./PopupDetails";
 import { Modal, Button, Pagination, message } from "antd";
 import { ExclamationCircleOutlined, PushpinFilled } from "@ant-design/icons";
-import { Row, Col, List,Tooltip  } from "antd";
+import { Row, Col, List, Tooltip } from "antd";
 import {
   PhoneOutlined,
   ScheduleOutlined,
@@ -38,8 +38,6 @@ const JobPostItem = ({
   self_posted_jobs,
   getAppliedJobsPerson,
   applied_jobs_person,
-
-
 }) => {
   const router = useRouter();
 
@@ -109,7 +107,6 @@ const JobPostItem = ({
 
       // window.location.reload();
       loader(savedStatus);
-     
     }
   };
   const deleteJobBtnClick = () => {
@@ -132,7 +129,6 @@ const JobPostItem = ({
   const deleteShow = () => {
     if (btn_disable) {
       return (
-        
         <DeleteOutlined
           onClick={deleteJobBtnClick}
           style={{
@@ -165,7 +161,7 @@ const JobPostItem = ({
     }
     return (
       <Button type="primary" shape="round" onClick={applyJobBtnClick}>
-        Apply
+        Apply Now
       </Button>
     );
   };
@@ -173,29 +169,31 @@ const JobPostItem = ({
     if (savedStatus) {
       return (
         <Tooltip title="press to unsave">
-        <SaveOutlined
-          onClick={saveJobBtnClick}
-          style={{
-            fontSize: "20px",
-            // color: "#0E8044",
-            marginTop: "5px",
-            float: "right",
-          }}
-        /></Tooltip>
+          <SaveOutlined
+            onClick={saveJobBtnClick}
+            style={{
+              fontSize: "20px",
+              // color: "#0E8044",
+              marginTop: "5px",
+              float: "right",
+            }}
+          />
+        </Tooltip>
       );
     }
 
     return (
       <Tooltip title="press to save">
-      <PushpinFilled
-        onClick={saveJobBtnClick}
-        style={{
-          fontSize: "20px",
-          color: "#FF3155",
-          marginTop: "5px",
-          float: "right",
-        }}
-      /></Tooltip>
+        <PushpinFilled
+          onClick={saveJobBtnClick}
+          style={{
+            fontSize: "20px",
+            color: "#FF3155",
+            marginTop: "5px",
+            float: "right",
+          }}
+        />
+      </Tooltip>
     );
   };
 
@@ -208,16 +206,16 @@ const JobPostItem = ({
           {/* {deleteShow()} */}
           {/* {saveShow()} */}
           <Link
-                        // href={"/jobs/edit/[id]"} as={`/jobs/edit/${id}`}
-                        href={{ pathname: '/jobs/edit/', query: { id: id } }}
-                      >
-                        <Button
-                          type="primary"
-                          block
-                          style={{ marginBottom: "15px", width:"100px" }}
-                        >
-                          Edit
-                        </Button>
+            // href={"/jobs/edit/[id]"} as={`/jobs/edit/${id}`}
+            href={{ pathname: "/jobs/edit/", query: { id: id } }}
+          >
+            <Button
+              type="primary"
+              block
+              style={{ marginBottom: "15px", width: "100px" }}
+            >
+              Edit
+            </Button>
           </Link>
           {deleteShow()}
         </>
@@ -256,24 +254,43 @@ const JobPostItem = ({
       <Row className="job_post">
         <Col span={24}>
           <Row>
-            <Col xs={24} sm={24} md={20} lg={20} xl={20}>
+            <Col xs={24} sm={24} md={22} lg={22} xl={22}>
               <PopupDetails job={job} onClick={showDefaultDrawer} size={size} />
             </Col>
-            <Col span={4}>{renderButtons()}</Col>
-            <p>
-              <strong>Published on:</strong> {getPostTime()}
+            <Col span={2}>{renderButtons()}</Col>
+            <p style={{fontWeight: "700"}}>
+            <UserOutlined />{" "}
+          
+            <Link
+              href={{
+                pathname: "/Profile/Profile_details/",
+                query: { id: poster.id },
+              }}
+              
+              
+            >
+              {poster.username}
+            </Link></p>{"   "}{"   "}<p><CalendarOutlined style={{marginLeft: "10px" }}/>{" "}Published on: {getPostTime()}
             </p>
           </Row>
 
           {/* {job.posting_timestamp} */}
 
-          <h4 style={{ color: "gray" }}>
+          {/* <h4 style={{ color: "gray" }}>
             <UserOutlined />{" "}
-            <Link  href={{ pathname: '/Profile/Profile_details/', query: { id: poster.id } }}>
+            <Link
+              href={{
+                pathname: "/Profile/Profile_details/",
+                query: { id: poster.id },
+              }}
+            >
               {poster.username}
             </Link>{" "}
-            <EnvironmentOutlined /> {getLocations(job.job_location)}
-          </h4>
+          </h4> */}
+          <p>
+            <EnvironmentOutlined />
+            {getLocations(job.job_location)}
+          </p>
           {/* onClick={() => router.push(`/jobs/detail/${job.id}`)} */}
           {/* <p style={{ marginTop: "1rem", marginBottom: "1rem" }}>
           {job.skills} {" "}
@@ -282,13 +299,15 @@ const JobPostItem = ({
           <p>
             <EditOutlined /> {getEducation(job.education)}
           </p>
-          <p>
+          <div style={{display: "flex"}}>
+          <p style={{marginRight:"10px"}}>
             <ScheduleOutlined />{" "}
             {getExperience(job.min_experience, job.max_experience)}
           </p>
           <p>
             <CalendarOutlined /> Deadline: {job.deadline}
           </p>
+          </div>
           {/* {appliedPerson()} */}
         </Col>
       </Row>

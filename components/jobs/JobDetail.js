@@ -135,7 +135,6 @@ const JobDetail = ({
   applyJob,
 }) => {
   const [user, setUser] = useState(null);
- 
 
   useEffect(() => {
     if (isSignedIn) {
@@ -153,7 +152,10 @@ const JobDetail = ({
           <Link
             // href={"/Profile/Profile_details/[id]"}
             // as={`/Profile/Profile_details/${applied_jobs_person.user.id}`}
-            href={{ pathname: '/Profile/Profile_details/', query: { id: applied_jobs_person.user.id } }}
+            href={{
+              pathname: "/Profile/Profile_details/",
+              query: { id: applied_jobs_person.user.id },
+            }}
           >
             <a> {applied_jobs_person.user.username}</a>
           </Link>
@@ -168,52 +170,62 @@ const JobDetail = ({
     switch (item) {
       case "job_detail":
         return (
-          <Descriptions title={temp_job.title} layout="horizontal">
-            {/* <Descriptions.Item label="Title" labelStyle={labelStyle}>
+          <>
+            {" "}
+            {applyShow()}
+            <Descriptions title={temp_job.title} layout="horizontal">
+              {/* <Descriptions.Item label="Title" labelStyle={labelStyle}>
               {temp_job.title}
             </Descriptions.Item> */}
 
-            <Descriptions.Item label="Job Poster" labelStyle={labelStyle}>
-              <Link 
-                // href={"/Profile/Profile_details/[id]"} as={`/Profile/Profile_details/${temp_job.poster.id}`}
-                href={{ pathname: '/Profile/Profile_details/', query: { id: temp_job.poster.id } }}
-              >
-                {temp_job.poster.username}
-              </Link>
-            </Descriptions.Item>
+              <Descriptions.Item label="Job Poster" labelStyle={labelStyle}>
+                <Link
+                  // href={"/Profile/Profile_details/[id]"} as={`/Profile/Profile_details/${temp_job.poster.id}`}
+                  href={{
+                    pathname: "/Profile/Profile_details/",
+                    query: { id: temp_job.poster.id },
+                  }}
+                >
+                  {temp_job.poster.username}
+                </Link>
+              </Descriptions.Item>
 
-            <Descriptions.Item label="Vacancy" labelStyle={labelStyle}>
-              {temp_job.vacancy}
-            </Descriptions.Item>
-            {renderSalary(
-              temp_job.min_salary,
-              temp_job.max_salary,
-              temp_job.negotiable
-            )}
-            {renderDeadline(temp_job.deadline)}
-            {renderJobLocation(
-              temp_job.job_location_inside_dhaka,
-              temp_job.job_location
-            )}
-            {renderExperience(temp_job.min_experience, temp_job.max_experience)}
-            <Descriptions.Item label="Workplace" labelStyle={labelStyle}>
-              {temp_job.workplace.length ? temp_job.workplace.join(", ") : ""}
-            </Descriptions.Item>
-            <Descriptions.Item
-              label="Employment Status"
-              labelStyle={labelStyle}
-            >
-              {temp_job.employment_status.length
-                ? temp_job.employment_status.join(", ")
-                : ""}
-            </Descriptions.Item>
-            <Descriptions.Item label="Skills" labelStyle={labelStyle}>
-              {temp_job.skills.length ? temp_job.skills.join(", ") : ""}
-            </Descriptions.Item>
-            {/* <Descriptions.Item label="Description" labelStyle={labelStyle}>
+              <Descriptions.Item label="Vacancy" labelStyle={labelStyle}>
+                {temp_job.vacancy}
+              </Descriptions.Item>
+              {renderSalary(
+                temp_job.min_salary,
+                temp_job.max_salary,
+                temp_job.negotiable
+              )}
+              {renderDeadline(temp_job.deadline)}
+              {renderJobLocation(
+                temp_job.job_location_inside_dhaka,
+                temp_job.job_location
+              )}
+              {renderExperience(
+                temp_job.min_experience,
+                temp_job.max_experience
+              )}
+              <Descriptions.Item label="Workplace" labelStyle={labelStyle}>
+                {temp_job.workplace.length ? temp_job.workplace.join(", ") : ""}
+              </Descriptions.Item>
+              <Descriptions.Item
+                label="Employment Status"
+                labelStyle={labelStyle}
+              >
+                {temp_job.employment_status.length
+                  ? temp_job.employment_status.join(", ")
+                  : ""}
+              </Descriptions.Item>
+              <Descriptions.Item label="Skills" labelStyle={labelStyle}>
+                {temp_job.skills.length ? temp_job.skills.join(", ") : ""}
+              </Descriptions.Item>
+              {/* <Descriptions.Item label="Description" labelStyle={labelStyle}>
               {temp_job.job_description}
             </Descriptions.Item> */}
-          </Descriptions>
+            </Descriptions>
+          </>
         );
       case "job_description":
         return (
@@ -257,7 +269,7 @@ const JobDetail = ({
   console.log(temp_job);
   const btn_disable = userid === poster.id ? "disabled" : "";
   const [appliedStatus, setAppliedStatus] = useState(applied);
-  
+
   console.log(appliedStatus);
   const applyJobBtnClick = () => {
     if (!isSignedIn) {
@@ -265,19 +277,24 @@ const JobDetail = ({
     } else {
       const { confirm } = Modal;
 
-    confirm({
-      title: "Are you sure apply this job?",
-      icon: <ExclamationCircleOutlined />,
-      content: "Some descriptions",
-      okText: "Yes",
-      okType: "danger",
-      cancelText: "No",
-      onOk() {
-        applyJob(id, userid, appliedStatus, setAppliedStatus,applied_saved_id);
-        window.location.reload();
-      },
-    });
-    
+      confirm({
+        title: "Are you sure apply this job?",
+        icon: <ExclamationCircleOutlined />,
+        content: "Some descriptions",
+        okText: "Yes",
+        okType: "danger",
+        cancelText: "No",
+        onOk() {
+          applyJob(
+            id,
+            userid,
+            appliedStatus,
+            setAppliedStatus,
+            applied_saved_id
+          );
+          window.location.reload();
+        },
+      });
     }
   };
   const applyShow = () => {
@@ -285,21 +302,22 @@ const JobDetail = ({
       return (
         <Button
           type="primary"
-          shape="round"
+        
           onClick={applyJobBtnClick}
           disabled
+          style={{ float: "right" }}
         >
           Applied
         </Button>
       );
     } else if (btn_disable) {
       return "";
-    }
-    else return (
-      <Button type="primary" shape="round" onClick={applyJobBtnClick}>
-        Apply
-      </Button>
-    );
+    } else
+      return (
+        <Button type="primary"  onClick={applyJobBtnClick} style={{ float: "right" }}>
+          Apply Now
+        </Button>
+      );
   };
 
   return (
@@ -322,7 +340,6 @@ const JobDetail = ({
               {renderItem("job_detail")} <hr />
               {renderItem("job_description")} <hr />
               {renderItem("employee_requirement")}
-              {applyShow()}
               {typeof applied_jobs_person == "undefined" ? (
                 ""
               ) : (

@@ -11,7 +11,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import Notification_bar from "container/Notification_bar/Notification_bar";
 import { Button } from "antd/lib/radio";
-import { getOtherWorkers } from "redux/actions/userAction";
+import { getOtherWorkers, getWorkers } from "redux/actions/userAction";
 import { getAllJobs, getAllJobs_withoutlogin } from "redux/actions/jobAction";
 import {
   UpOutlined,
@@ -29,8 +29,9 @@ const { Title } = Typography;
 const Jobs = ({
   filterJobs,
   getOtherWorkers,
-  all_workers,
-  all_jobs,
+  getWorkers,
+  // all_workers,
+  // all_jobs,
   auth,
   getAllJobs,
   getAllJobs_withoutlogin,
@@ -40,24 +41,42 @@ const Jobs = ({
   const [filter, setFilter] = useState({});
   const [showFilterJobs, setShowFilterJobs] = useState(false);
   const [bottom, setBottom] = useState(10);
+  const [all_jobs, setall_jobs] = useState([]);
   const showPage = useRef("job_list");
-  // const [workers, setWorkers] = useState(0);
-  const workers = useRef(0);
-  const employeer = useRef(0);
+  const [workers,setworkers] = useState([]);
+ 
+ 
+  const [employeer ,setemployeer] = useState([]);
 
-  console.log(all_jobs);
+  // console.log(all_jobs);
+ 
 
   useEffect(() => {
+    
+    getWorkers(1,5,true,false,null).then((result) => {
+      setemployeer(result.count);
+      console.log( employeer );
+    });
+    getWorkers(1,5,false,true,null).then((result) => {
+      setworkers(result.count);
+      console.log( workers );
+    });
     if (auth.isSignedIn) {
-      getAllJobs();
+      getAllJobs(1, 5).then((result) => {
+        setall_jobs(result.count);
+      });
+  
     } else {
-      getAllJobs_withoutlogin();
+      getAllJobs_withoutlogin(1,5).then((result) => {
+      
+        setall_jobs(result.count);
+      });
     }
-    getOtherWorkers();
-    if (_.isEmpty(filter)) {
-      setShowFilterJobs(false);
-    }
-  }, [filter]);
+
+  }, []);
+  
+  
+  
   const style = {
     height: 40,
     width: 40,
@@ -68,26 +87,7 @@ const Jobs = ({
     textAlign: "center",
     fontSize: 14,
   };
-  workers.current = 0;
-  employeer.current = 0;
-  {
-    all_workers
-      ? all_workers.map((worker) => {
-          if (worker.worker == true) {
-            workers.current++;
-          }
-        })
-      : " ";
-  }
-  {
-    all_workers
-      ? all_workers.map((worker) => {
-          if (worker.employeer == true) {
-            employeer.current++;
-          }
-        })
-      : " ";
-  }
+ 
   return (
     <>
       <Head>
@@ -120,7 +120,7 @@ const Jobs = ({
           </Row>
         </div>
         <Row justify="space-around" className="data_section">
-          {/* <TeamOutlined className="home_icon" /> */}
+
           <Col xs={12} sm={12} md={4} lg={4} xl={4}>
             <Title level={4}>
               <TeamOutlined className="home_icon" />
@@ -134,18 +134,19 @@ const Jobs = ({
                 fontWeight: "bold",
               }}
             >
+              {console.log(workers)}
               <AnimatedNumber
-                value={10946 + workers.current}
-                duration={1000}
+                value={10946+workers}
+                duration={2000}
                 formatValue={(n) => n.toFixed(0)}
                 frameStyle={(percentage) =>
                   percentage > 20 && percentage < 80 ? { opacity: 0.5 } : {}
                 }
               />
-              {/* {10946 + workers.current} */}
+          
             </Title>
           </Col>
-          {/* <TeamOutlined className="home_icon" /> */}
+       
           <Col xs={12} sm={12} md={4} lg={4} xl={4}>
             <Title level={4}>
               <UsergroupAddOutlined className="home_icon" />
@@ -160,8 +161,8 @@ const Jobs = ({
               }}
             >
               <AnimatedNumber
-                value={2222 + employeer.current}
-                duration={1000}
+                value={2222+employeer}
+                duration={2000}
                 formatValue={(n) => n.toFixed(0)}
                 frameStyle={(percentage) =>
                   percentage > 20 && percentage < 80 ? { opacity: 0.5 } : {}
@@ -170,7 +171,7 @@ const Jobs = ({
               
             </Title>
           </Col>
-          {/* <TeamOutlined className="home_icon" /> */}
+       
           <Col xs={12} sm={12} md={4} lg={4} xl={4}>
             <Title level={4}>
               <GlobalOutlined className="home_icon" />
@@ -185,7 +186,7 @@ const Jobs = ({
               }}
             >
               <AnimatedNumber
-                value= {318 + all_jobs.count}
+                value= {318 + all_jobs}
                 duration={1000}
                 formatValue={(n) => n.toFixed(0)}
                 frameStyle={(percentage) =>
@@ -195,7 +196,7 @@ const Jobs = ({
              
             </Title>
           </Col>
-          {/* <TeamOutlined className="home_icon" /> */}
+       
           <Col xs={12} sm={12} md={4} lg={4} xl={4}>
             <Title level={4}>
               <AreaChartOutlined className="home_icon" />
@@ -212,7 +213,7 @@ const Jobs = ({
              
               <AnimatedNumber
                 value= { 240816}
-                duration={1000}
+                duration={2000}
                 formatValue={(n) => n.toFixed(0)}
                 frameStyle={(percentage) =>
                   percentage > 20 && percentage < 80 ? { opacity: 0.5 } : {}
@@ -285,8 +286,8 @@ const Jobs = ({
 const mapStateToProps = (state) => {
   return {
     // all_workers: Object.values(state.user.all_workers),
-    all_workers: state.user.all_workers,
-    all_jobs: state.job.all_jobs,
+    // all_workers: state.user.all_workers,
+    // all_jobs: state.job.all_jobs,
     auth: state.auth,
   };
 };
@@ -296,4 +297,5 @@ export default connect(mapStateToProps, {
   getOtherWorkers,
   getAllJobs,
   getAllJobs_withoutlogin,
+  getWorkers,
 })(Jobs);

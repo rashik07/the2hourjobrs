@@ -91,6 +91,7 @@ export const getSelfPostedJobs = () => async (dispatch) => {
     );
 
     dispatch({ type: types.GET_SELF_POSTED_JOB, payload: response.data });
+    return response.data;
   } catch (error) {
     console.log(error);
   }

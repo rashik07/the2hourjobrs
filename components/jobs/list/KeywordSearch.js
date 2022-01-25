@@ -13,18 +13,18 @@ const KeywordSearch = ({
   page_no,
   totaldata,
   setPageNo,
-  setfiltered_jobs,
+  setfiltered_data,
 }) => {
   const [keyword, setKeyword] = useState("");
   const [message, setMessage] = useState("");
 
   const onKeywordSubmit = (e) => {
     e.preventDefault();
-
     if (keyword) {
       const new_filter = { ...filter, keyword };
       setFilter(new_filter);
       setKeyword("");
+      
     }
   };
  
@@ -32,7 +32,7 @@ const KeywordSearch = ({
     if (reload) {
       getFilteredList(filter, page_no, pageSize.current).then((result) => {
         totaldata.current = result.count;
-        setfiltered_jobs(result.results);
+        setfiltered_data(result.results);
         console.log(result);
       });
     }
@@ -58,6 +58,8 @@ const KeywordSearch = ({
         onChange={(e) => setKeyword(e.target.value)}
         value={keyword}
         onKeyPress={(e) => {
+          console.log("changing page no to 1");
+          setPageNo(1);
           if (e.key === "Enter") {
             e.preventDefault();
             if (keyword) {

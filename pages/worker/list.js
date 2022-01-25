@@ -19,16 +19,28 @@ const Workers = ({ filterWorkers }) => {
   const [filter, setFilter] = useState({});
   const [showFilterWorker, setShowFilterWorker] = useState(false);
   const showPage = useRef("job_list");
+
+  const pageSize = useRef(5);
+  const [page_no, setPageNo] = useState(1);
+  const totaldata = useRef();
+  const pageSizeFiltered = useRef(5);
+  const [page_no_filter, setPageNoFilter] = useState(1);
+  const totaldataFilter = useRef();
+  const [filtered_workers, setfiltered_worker] = useState([]);
+  const [reload, setReload] = useState(false);
+
   const { Panel } = Collapse;
   function callback(key) {
     console.log(key);
   }
-
+ 
   useEffect(() => {
+    console.log("reload");
     if (_.isEmpty(filter)) {
       setShowFilterWorker(false);
     }
-  }, [filter]);
+    setReload(false);
+  }, [filter, reload]);
 
   return (
     <>
@@ -141,6 +153,7 @@ const Workers = ({ filterWorkers }) => {
                   setShowFilter={setShowFilterWorker}
                   getFilteredList={filterWorkers}
                   showFilterJobs={showFilterWorker}
+                  setReload={setReload}
                 />
                 <KeywordSearch
                   filter={filter}
@@ -148,11 +161,26 @@ const Workers = ({ filterWorkers }) => {
                   setShowFilter={setShowFilterWorker}
                   reload={showFilterWorker}
                   getFilteredList={filterWorkers}
+                  pageSize={pageSizeFiltered}
+                  page_no={page_no_filter}
+                  totaldata={totaldataFilter}
+                  setPageNo={setPageNoFilter}
+                  setfiltered_data={setfiltered_worker}
                 />
                 <Divider />
                 <WorkerList
                   filter={filter}
                   showFilterWorker={showFilterWorker}
+                  page_no={page_no}
+                  pageSize={pageSize}
+                  totaldata={totaldata}
+                  setPageNo={setPageNo}
+                  pageSizeFiltered={pageSizeFiltered}
+                  page_no_filter={page_no_filter}
+                  totaldataFilter={totaldataFilter}
+                  setPageNoFilter={setPageNoFilter}
+                  filtered_worker={filtered_workers}
+                  listreload={reload}
                 />
               </Col>
             </Row>

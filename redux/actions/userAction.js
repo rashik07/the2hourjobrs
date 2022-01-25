@@ -140,27 +140,43 @@ export const getThana = () => async (dispatch) => {
   }
 };
 
-export const getOtherWorkers = () => async (dispatch) => {
+export const getOtherWorkers = (page,pageSize) => async (dispatch) => {
   try {
     // let response = null;
 
     // if (store.getState().auth.isSignedIn) {
     //   response = await backend.get("/v1/user/other_users/", getConfig());
     // } else {
-    const response = await backend.get("/v1/user/other_users/", getConfig());
+
+    const response = await backend.get(`/v1/user/other_users/?page=${page}&page_size=${pageSize}&profile__available_for_work=${true}`, getConfig());
     // }
 
     dispatch({ type: types.GET_OTHER_WORKERS, payload: response.data });
     // console.log(response.data);
+    return response.data;
   } catch (error) {
     console.log(error);
     console.log(error.response);
   }
 };
-
-export const filterWorkers = (filter) => async (dispatch) => {
+export const getWorkers = (page=1,pageSize=5,employeer=false,worker=false,available=null) => async (dispatch) => {
   try {
-    let url = "v1/user/filter_worker/?";
+
+    let url = `/v1/user/other_users/?page=${page}&page_size=${pageSize}&profile__employeer=${employeer}&profile__worker=${worker}&`;
+    if(available!=null)
+    {
+      url += `profile__available_for_work=${available}&`;
+    }
+    const response = await backend.get(url);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    console.log(error.response);
+  }
+};
+export const filterWorkers = (filter, page, pageSize) => async (dispatch) => {
+  try {
+    let url = `v1/user/filter_worker/?page=${page}&page_size=${pageSize}&profile__available_for_work=${true}&`;
     let response = null;
     console.log(filter);
     const createURL = {
@@ -203,6 +219,7 @@ export const filterWorkers = (filter) => async (dispatch) => {
       console.log(response);
       dispatch({ type: types.FILTERED_WORKERS, payload: response.data });
     }
+    return response.data;
   } catch (error) {
     console.log(error);
   }

@@ -37,8 +37,11 @@ const Jobs = ({ filterJobs, filterfromState, SetfilterAction }) => {
   const pageSize = useRef(5);
   const [page_no, setPageNo] = useState(1);
   const totaldata = useRef();
+  const pageSizeFiltered = useRef(5);
+  const [page_no_filter, setPageNoFilter] = useState(1);
+  const totaldataFilter = useRef();
   const [filtered_jobs, setfiltered_jobs] = useState([]);
-
+  const [reload, setReload] = useState(false);
 
   const style = {
     height: 40,
@@ -52,10 +55,11 @@ const Jobs = ({ filterJobs, filterfromState, SetfilterAction }) => {
   };
 
   useEffect(() => {
+    console.log("reload");
     if (_.isEmpty(filter)) {
       setShowFilterJobs(false);
     }
-  }, [filter]);
+  }, [filter, reload]);
 
   useEffect(() => {
     if (!_.isEmpty(filterfromState)) {
@@ -212,7 +216,7 @@ const Jobs = ({ filterJobs, filterfromState, SetfilterAction }) => {
                   setShowFilter={setShowFilterJobs}
                   getFilteredList={filterJobs}
                   showFilterJobs={showFilterJobs}
-
+                  setReload={setReload}
                   // query={location}
                   //reload={setShowFilterJobs}
                 />
@@ -222,17 +226,28 @@ const Jobs = ({ filterJobs, filterfromState, SetfilterAction }) => {
                   setShowFilter={setShowFilterJobs}
                   getFilteredList={filterJobs}
                   reload={showFilterJobs}
+                  pageSize={pageSizeFiltered}
+                  page_no={page_no_filter}
+                  totaldata={totaldataFilter}
+                  setPageNo={setPageNoFilter}
+                  setfiltered_data={setfiltered_jobs}
+                  // setreload={setShowFilterJobs}
+                />
+                <Divider />
+                <JobList
+                  filter={filter}
+                  showFilterJobs={showFilterJobs}
                   pageSize={pageSize}
                   page_no={page_no}
                   totaldata={totaldata}
                   setPageNo={setPageNo}
-                  setfiltered_jobs={setfiltered_jobs}
-                  // setreload={setShowFilterJobs}
+                  pageSizeFiltered={pageSizeFiltered}
+                  page_no_filter={page_no_filter}
+                  totaldataFilter={totaldataFilter}
+                  setPageNoFilter={setPageNoFilter}
+                  filtered_jobs={filtered_jobs}
+                  listreload={reload}
                 />
-                <Divider />
-                <JobList filter={filter} showFilterJobs={showFilterJobs} pageSize={pageSize}
-                  page_no={page_no}
-                  totaldata={totaldata} setPageNo={setPageNo} filtered_jobs={filtered_jobs}/>
                 <BackTop>
                   <div style={style}>
                     <UpOutlined />
