@@ -150,8 +150,6 @@ const JobDetail = ({
       return (
         <div style={{ marginLeft: "5px" }}>
           <Link
-            // href={"/Profile/Profile_details/[id]"}
-            // as={`/Profile/Profile_details/${applied_jobs_person.user.id}`}
             href={{
               pathname: "/Profile/Profile_details/",
               query: { id: applied_jobs_person.user.id },
@@ -159,7 +157,7 @@ const JobDetail = ({
           >
             <a> {applied_jobs_person.user.username}</a>
           </Link>
-          {", "}
+          {" , "}
         </div>
       );
     });
@@ -174,13 +172,12 @@ const JobDetail = ({
             {" "}
             {applyShow()}
             <Descriptions title={temp_job.title} layout="horizontal">
-              {/* <Descriptions.Item label="Title" labelStyle={labelStyle}>
-              {temp_job.title}
-            </Descriptions.Item> */}
-
-              <Descriptions.Item label="Job Poster" labelStyle={labelStyle}>
+              <Descriptions.Item
+                label="Job Poster"
+                labelStyle={labelStyle}
+                style={{ fontWeight: "700" }}
+              >
                 <Link
-                  // href={"/Profile/Profile_details/[id]"} as={`/Profile/Profile_details/${temp_job.poster.id}`}
                   href={{
                     pathname: "/Profile/Profile_details/",
                     query: { id: temp_job.poster.id },
@@ -265,12 +262,9 @@ const JobDetail = ({
   // }
   const { id, title, poster, applied, saved, applied_saved_id } = temp_job;
 
-  console.log(applied);
-  console.log(temp_job);
   const btn_disable = userid === poster.id ? "disabled" : "";
   const [appliedStatus, setAppliedStatus] = useState(applied);
 
-  console.log(appliedStatus);
   const applyJobBtnClick = () => {
     if (!isSignedIn) {
       message.error("You must log in to access this feature");
@@ -302,7 +296,6 @@ const JobDetail = ({
       return (
         <Button
           type="primary"
-        
           onClick={applyJobBtnClick}
           disabled
           style={{ float: "right" }}
@@ -314,7 +307,11 @@ const JobDetail = ({
       return "";
     } else
       return (
-        <Button type="primary"  onClick={applyJobBtnClick} style={{ float: "right" }}>
+        <Button
+          type="primary"
+          onClick={applyJobBtnClick}
+          style={{ float: "right" }}
+        >
           Apply Now
         </Button>
       );
@@ -333,27 +330,30 @@ const JobDetail = ({
             <Breadcrumb.Item>Home</Breadcrumb.Item>
             <Breadcrumb.Item>Job</Breadcrumb.Item>
             <Breadcrumb.Item>Job Details</Breadcrumb.Item>
-            <Breadcrumb.Item>{temp_job.title}</Breadcrumb.Item>
+            <Breadcrumb.Item>{temp_job.title.slice(0, 15)+"..."}</Breadcrumb.Item>
           </Breadcrumb>
           <div className="site-layout-background">
             <div className="text-secondary">
-              {renderItem("job_detail")} <hr />
-              {renderItem("job_description")} <hr />
-              {renderItem("employee_requirement")}
               {typeof applied_jobs_person == "undefined" ? (
                 ""
               ) : (
                 <>
                   {userid == poster.id ? (
-                    <span className="applied_person">
-                      Applied Person: {appliedPerson()}
-                    </span>
+                    <>
+                      {" "}
+                      <span className="applied_person">
+                        Applied Person: {appliedPerson()}
+                      </span>
+                      <hr />
+                    </>
                   ) : (
                     ""
                   )}
-                  {/* {appliedPerson()} */}
                 </>
               )}
+              {renderItem("job_detail")} <hr />
+              {renderItem("job_description")} <hr />
+              {renderItem("employee_requirement")}
             </div>
           </div>
         </Content>

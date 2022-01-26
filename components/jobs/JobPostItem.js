@@ -169,11 +169,12 @@ const JobPostItem = ({
     if (savedStatus) {
       return (
         <Tooltip title="press to unsave">
+          
           <SaveOutlined
             onClick={saveJobBtnClick}
             style={{
               fontSize: "20px",
-              // color: "#0E8044",
+               color: "#0E8044",
               marginTop: "5px",
               float: "right",
             }}
@@ -188,7 +189,7 @@ const JobPostItem = ({
           onClick={saveJobBtnClick}
           style={{
             fontSize: "20px",
-            color: "#FF3155",
+            color: "#0E8044",
             marginTop: "5px",
             float: "right",
           }}
@@ -202,9 +203,8 @@ const JobPostItem = ({
     if (router.pathname === "/jobs/my_posts") {
       return (
         <>
-          {applyShow()}
-          {/* {deleteShow()} */}
-          {/* {saveShow()} */}
+          {/* {applyShow()} */}
+      
           <Link
             // href={"/jobs/edit/[id]"} as={`/jobs/edit/${id}`}
             href={{ pathname: "/jobs/edit/", query: { id: id } }}
@@ -212,7 +212,7 @@ const JobPostItem = ({
             <Button
               type="primary"
               block
-              style={{ marginBottom: "15px", width: "100px" }}
+              style={{ marginBottom: "5px", width: "50px" }}
             >
               Edit
             </Button>
@@ -258,19 +258,21 @@ const JobPostItem = ({
               <PopupDetails job={job} onClick={showDefaultDrawer} size={size} />
             </Col>
             <Col span={2}>{renderButtons()}</Col>
-            <p style={{fontWeight: "700"}}>
-            <UserOutlined />{" "}
-          
-            <Link
-              href={{
-                pathname: "/Profile/Profile_details/",
-                query: { id: poster.id },
-              }}
-              
-              
-            >
-              {poster.username}
-            </Link></p>{"   "}{"   "}<p><CalendarOutlined style={{marginLeft: "10px" }}/>{" "}Published on: {getPostTime()}
+            <p style={{ fontWeight: "700" }}>
+              <UserOutlined />{" "}
+              <Link
+                href={{
+                  pathname: "/Profile/Profile_details/",
+                  query: { id: poster.id },
+                }}
+              >
+                {poster.username}
+              </Link>
+            </p>
+            {"   "}
+            <p>
+              <CalendarOutlined style={{ marginLeft: "10px" }} /> Published on:{" "}
+              {getPostTime()}
             </p>
           </Row>
 
@@ -299,14 +301,14 @@ const JobPostItem = ({
           <p>
             <EditOutlined /> {getEducation(job.education)}
           </p>
-          <div style={{display: "flex"}}>
-          <p style={{marginRight:"10px"}}>
-            <ScheduleOutlined />{" "}
-            {getExperience(job.min_experience, job.max_experience)}
-          </p>
-          <p>
-            <CalendarOutlined /> Deadline: {job.deadline}
-          </p>
+          <div style={{ display: "flex" }}>
+            <p style={{ marginRight: "10px" }}>
+              <ScheduleOutlined />{" "}
+              {getExperience(job.min_experience, job.max_experience)}
+            </p>
+            <p>
+              <CalendarOutlined /> Deadline: {job.deadline}
+            </p>
           </div>
           {/* {appliedPerson()} */}
         </Col>

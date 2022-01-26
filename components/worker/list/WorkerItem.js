@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
-import { Row, Col, Image } from "antd";
+import { Row, Col, Image,Tooltip} from "antd";
 import {
   PhoneOutlined,
   ScheduleOutlined,
@@ -46,6 +46,7 @@ const renderButtons = (
   const saveShow = () => {
     if (isSaved) {
       return (
+        <Tooltip title="press to unsave">
         <SaveOutlined
           onClick={saveWorkerBtnClick}
           style={{
@@ -55,10 +56,12 @@ const renderButtons = (
             float: "right",
           }}
         />
+        </Tooltip>
       );
     }
     //  console.log(self_posted_jobs);
     return (
+      <Tooltip title="press to save">
       <PushpinFilled
         onClick={saveWorkerBtnClick}
         style={{
@@ -67,7 +70,7 @@ const renderButtons = (
           marginTop: "5px",
           float: "right",
         }}
-      />
+      /></Tooltip>
     );
   };
   return <>{saveShow()}</>;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { Button } from "antd";
-import { DownloadOutlined } from "@ant-design/icons";
+import { Button ,Popover} from "antd";
+import { DownloadOutlined ,ShareAltOutlined} from "@ant-design/icons";
 import { viewSinglePreferedCategories } from "redux/actions/preferedcategoriesAction";
 import {
   FacebookShareButton,
@@ -20,6 +20,39 @@ const Sidesection = ({
   view_prefered_categories,
 }) => {
   const shareUrl = `https://www.google.com/Profile/Profile_details/${user_profile.id}`;
+  const content = (
+    <div>
+     <FacebookShareButton
+          url={shareUrl}
+          quote={"Title or jo bhi aapko likhna ho"}
+          hashtag={"#portfolio..."}
+        >
+          <FacebookIcon size={40} round={true} />
+        </FacebookShareButton>
+
+        <WhatsappShareButton
+          url={shareUrl}
+          quote={"Title or jo bhi aapko likhna ho"}
+          hashtag={"#portfolio..."}
+        >
+          <WhatsappIcon size={40} round={true} />
+        </WhatsappShareButton>
+        <EmailShareButton
+          url={shareUrl}
+          quote={"Title or jo bhi aapko likhna ho"}
+          hashtag={"#portfolio..."}
+        >
+          <EmailIcon size={40} round={true} />
+        </EmailShareButton>
+        <FacebookMessengerShareButton
+          url={shareUrl}
+          quote={"Title or jo bhi aapko likhna ho"}
+          hashtag={"#portfolio..."}
+        >
+          <FacebookMessengerIcon size={40} round={true} />
+        </FacebookMessengerShareButton>
+    </div>
+  );
 
   useEffect(() => {
     viewSinglePreferedCategories(user_profile.id);
@@ -124,16 +157,17 @@ const Sidesection = ({
   let location_list = [...division_list, ...district_list, ...thana_list];
   return (
     <div>
+       <p>
+        <span style={{ fontWeight: "bold" }}>Email : </span>
+        <a href={`mailto:${user_profile.email}`}>{user_profile.email}</a>
+      </p>
       <p style={{lineBreak:"anywhere"}}>
         {facebook_link()} {"  "}
         {youtube_link()} {"  "}
         {website_link()}
       </p>
 
-      <p>
-        <span style={{ fontWeight: "bold" }}>Email : </span>
-        {user_profile.email}
-      </p>
+     
       {user_profile.gender == null ? (
         " "
       ) : (
@@ -205,37 +239,11 @@ const Sidesection = ({
           width: "100%",
         }}
       >
-        <h1>Hire me</h1>
-
-        <FacebookShareButton
-          url={shareUrl}
-          quote={"Title or jo bhi aapko likhna ho"}
-          hashtag={"#portfolio..."}
-        >
-          <FacebookIcon size={40} round={true} />
-        </FacebookShareButton>
-
-        <WhatsappShareButton
-          url={shareUrl}
-          quote={"Title or jo bhi aapko likhna ho"}
-          hashtag={"#portfolio..."}
-        >
-          <WhatsappIcon size={40} round={true} />
-        </WhatsappShareButton>
-        <EmailShareButton
-          url={shareUrl}
-          quote={"Title or jo bhi aapko likhna ho"}
-          hashtag={"#portfolio..."}
-        >
-          <EmailIcon size={40} round={true} />
-        </EmailShareButton>
-        <FacebookMessengerShareButton
-          url={shareUrl}
-          quote={"Title or jo bhi aapko likhna ho"}
-          hashtag={"#portfolio..."}
-        >
-          <FacebookMessengerIcon size={40} round={true} />
-        </FacebookMessengerShareButton>
+{/*      
+      <Popover placement="bottom" content={content} trigger="click">
+      <h1> <ShareAltOutlined /> Share</h1>
+        </Popover> */}
+     
       </div>
     </div>
   );

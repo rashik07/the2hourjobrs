@@ -408,7 +408,7 @@ const Profile_info = ({
               offset: 4,
               span: 12,
             }}
-            style={{ marginTop: "-35px" }}
+            style={{ marginTop: "-25px" }}
           >
             <Checkbox>Hide phone number</Checkbox>
           </Form.Item>

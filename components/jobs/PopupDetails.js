@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Drawer, Button, Divider, Row, Col } from "antd";
+import { Drawer, Button, Divider, Row, Col, Descriptions, Space } from "antd";
 import dateformat from "dateformat";
-import { Descriptions, Space } from "antd";
 import Link from "next/link";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
@@ -29,23 +28,13 @@ const PopupDetails = ({
       getAppliedJobsPerson(job);
     }
   }, []);
-  const appliedPerson = () => {
-    return applied_jobs_person.map((applied_jobs_person) => {
-      console.log(applied_jobs_person.user.username);
-
-      return (
-        <p>
-          {applied_jobs_person.user.username} {" ,"}
-        </p>
-      );
-    });
-  };
 
   return (
     <>
       <h3 className="job_title" onClick={showDrawer}>
         {job.title}
       </h3>
+
       <Drawer
         title={job.title}
         placement="right"
@@ -59,8 +48,7 @@ const PopupDetails = ({
           </Space>
         }
       >
-       
-
+    
         <Row>
           <Col xs={24} sm={24} md={10} lg={10} xl={10}>
             <h4>Type :</h4> {job.category.name}
@@ -150,10 +138,10 @@ const PopupDetails = ({
             </Row>
           </Col>
           <div className="ant-btn">
-          <Link href={{ pathname: "/jobs/detail/", query: { id: job.id } }}>
-            See More
-          </Link>
-        </div>
+            <Link href={{ pathname: "/jobs/detail/", query: { id: job.id } }}>
+              See More
+            </Link>
+          </div>
         </Row>
       </Drawer>
     </>

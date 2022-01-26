@@ -1,9 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { updatePhone } from "@/redux/actions/userAction";
-import { Layout, Row, Col, Image, Typography, Space } from "antd";
+import { Layout, Row, Col, Image, Typography, Space, Popover } from "antd";
 import { PhoneFilled, HomeFilled } from "@ant-design/icons";
-
+import {
+  FacebookShareButton,
+  WhatsappShareButton,
+  WhatsappIcon,
+  FacebookIcon,
+  FacebookMessengerShareButton,
+  FacebookMessengerIcon,
+  EmailShareButton,
+  EmailIcon,
+} from "react-share";
+import { DownloadOutlined, ShareAltOutlined } from "@ant-design/icons";
 const Topsection = ({
   updateProfile,
   user_profile,
@@ -12,7 +22,41 @@ const Topsection = ({
 }) => {
   const { Text, Link, Title } = Typography;
   const { Content } = Layout;
+  const shareUrl = `https://web.the2hourjob.com/Profile/Profile_details?id=${user_profile.id}`;
+  const content = (
+    <div>
+      <FacebookShareButton
+        url={shareUrl}
+        quote={"Title or jo bhi aapko likhna ho"}
+        hashtag={"#portfolio..."}
+      >
+        <FacebookIcon size={40} round={true} />
+      </FacebookShareButton>
 
+      <WhatsappShareButton
+        url={shareUrl}
+        quote={"Title or jo bhi aapko likhna ho"}
+        hashtag={"#portfolio..."}
+      >
+        <WhatsappIcon size={40} round={true} />
+      </WhatsappShareButton>
+      <EmailShareButton
+        url={shareUrl}
+        quote={"Title or jo bhi aapko likhna ho"}
+        hashtag={"#portfolio..."}
+      >
+        <EmailIcon size={40} round={true} />
+      </EmailShareButton>
+      <FacebookMessengerShareButton
+        url={shareUrl}
+        quote={"Title or jo bhi aapko likhna ho"}
+        hashtag={"#portfolio..."}
+      >
+        <FacebookMessengerIcon size={40} round={true} />
+      </FacebookMessengerShareButton>
+    </div>
+  );
+  console.log(user_profile);
   return (
     <div>
       <Row justify="center" align="top">
@@ -35,7 +79,24 @@ const Topsection = ({
         </Col>
 
         <Col span={20}>
-          <Title level={2} >{user_profile.name}</Title>
+          <Title level={2}>
+            {user_profile.name}{" "}
+           
+          </Title>
+          <div
+              style={{
+                float: "right",
+                marginRight: "45px",
+                marginTop:"-52px",
+              }}
+            >
+              <Popover placement="bottom" content={content} trigger="click">
+                <h1>
+                  {" "}
+                  <ShareAltOutlined /> Share
+                </h1>
+              </Popover>
+            </div>
           <Space>
             <Text>
               {user_profile.hide_phone == true ? (
@@ -43,24 +104,40 @@ const Topsection = ({
               ) : (
                 <>
                   {" "}
-                  <PhoneFilled /> {"  "} {user_profile.phone}
+                  <PhoneFilled /> {"  "}{" "}
+                  <a href={`tel:${user_profile.phone}`}>{user_profile.phone}</a>
                 </>
               )}
             </Text>
+
             <Text>
-              <HomeFilled /> {"  "}
-              {user_profile.address == null ? "-" : user_profile.address + ", "}
+              {user_profile.address == null &&
+              user_profile.Thana == null &&
+              user_profile.District == null &&
+              user_profile.Division == null ? (
+                " "
+              ) : (
+                <HomeFilled />
+              )}{" "}
+              {"  "}
+              {user_profile.address == null || user_profile.address == ""
+                ? " "
+                : user_profile.address + ", "}
               {user_profile.Thana == null
-                ? "-"
+                ? " "
                 : user_profile.Thana.name + ", "}
               {user_profile.District == null
-                ? "-"
+                ? " "
                 : user_profile.District.name + ", "}
-              {user_profile.Division == null ? "-" : user_profile.Division.name}
+              {user_profile.Division == null ? " " : user_profile.Division.name}
             </Text>
           </Space>
           <Text>
-            <p>{user_profile.bio}</p>
+            <p>
+              {user_profile.bio == null || user_profile.bio == "null"
+                ? ""
+                : user_profile.bio}
+            </p>
           </Text>
         </Col>
       </Row>

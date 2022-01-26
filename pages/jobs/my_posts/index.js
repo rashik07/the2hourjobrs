@@ -6,7 +6,7 @@ import Navbar from "container/navbar/newNavbar";
 import JobPostItem from "components/jobs/JobPostItem";
 import { Layout, Breadcrumb } from "antd";
 import * as types from "@/redux/types";
-import { List, Pagination } from "antd";
+import { List } from "antd";
 
 const SelfPostedJobs = ({ self_posted_jobs, getSelfPostedJobs ,getAppliedJobsPerson,applied_jobs_person,job }) => {
   const dispatch = useDispatch();

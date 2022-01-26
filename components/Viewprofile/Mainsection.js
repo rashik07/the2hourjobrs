@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { Table, Modal, Button, Card, Row, Col, Divider } from "antd";
 import { updatePhone } from "@/redux/actions/userAction";
 import { connect } from "react-redux";
+import { MailOutlined, PhoneOutlined } from "@ant-design/icons";
 
 const Mainsection = ({
   user_profile,
   view_employment,
   view_education,
-
   view_single_training,
   view_single_qualification,
   view_project,
@@ -202,7 +202,7 @@ const Mainsection = ({
   //qualilification_table end
   // object start
   const objective = () => {
-    if (user_profile.objective == null) {
+    if (user_profile.objective == null || user_profile.objective == "null") {
       return " ";
     }
 
@@ -252,7 +252,10 @@ const Mainsection = ({
                     >
                       {view_employment.designation}(
                       {view_employment.employment_period_from} to{" "}
-                      {view_employment.employment_period_to==null? "Present":view_employment.employment_period_to})
+                      {view_employment.employment_period_to == null
+                        ? "Present"
+                        : view_employment.employment_period_to}
+                      )
                     </span>
                     -
                     <span style={{ fontWeight: "bold" }}>
@@ -356,11 +359,15 @@ const Mainsection = ({
           {user_profile.hide_phone == true ? (
             " "
           ) : (
-            <a href={`tel:${user_profile.phone}`}>{user_profile.phone}</a>
+            <>
+            <h3>  <PhoneOutlined />{" "}
+              <a href={`tel:${user_profile.phone}`}>{user_profile.phone}</a></h3>
+            </>
           )}
         </p>
         <p>
-          <a href={`mailto:${user_profile.email}`}>{user_profile.email}</a>
+        <h3>   <MailOutlined />{" "}
+          <a href={`mailto:${user_profile.email}`}>{user_profile.email}</a></h3>
         </p>
       </Modal>
     </div>
