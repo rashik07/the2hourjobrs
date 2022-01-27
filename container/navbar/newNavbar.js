@@ -174,7 +174,7 @@ const navbar = ({
     const { warning } = Modal;
 
     warning({
-      title: "please update/verify your phone number",
+      title: "please save/verify your phone number",
       icon: <ExclamationCircleOutlined />,
 
       okText: "OK",

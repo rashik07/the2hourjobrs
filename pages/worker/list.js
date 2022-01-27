@@ -21,7 +21,7 @@ const Workers = ({ filterWorkers }) => {
   const [showFilterWorker, setShowFilterWorker] = useState(false);
   const showPage = useRef("job_list");
 
-  const pageSize = useRef(5);
+  const pageSize = useRef(10);
   const [page_no, setPageNo] = useState(1);
   const totaldata = useRef();
   const pageSizeFiltered = useRef(5);
