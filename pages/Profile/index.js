@@ -12,8 +12,9 @@ import Portfolio from "components/Profile/Portfolio";
 import Setting from "components/Profile/Setting";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import {  HomeOutlined } from "@ant-design/icons";
 
-const Profile = ({ auth,user_profile }) => {
+const Profile = ({ auth, user_profile }) => {
   const router = useRouter();
   const { Content } = Layout;
   const selector = useRef("");
@@ -66,13 +67,18 @@ const Profile = ({ auth,user_profile }) => {
           <Layout>
             <Content className="site-layout" style={{ padding: "0 50px" }}>
               <Breadcrumb className="breadcrumb_main">
+              <Breadcrumb.Item href="/">
+              {" "}
+              <HomeOutlined />
+            </Breadcrumb.Item>
                 <Breadcrumb.Item>Profile</Breadcrumb.Item>
                 <Breadcrumb.Item>{selector.current}</Breadcrumb.Item>
 
                 <Link
-                  // href={"/Profile/Profile_details/[id]"}
-                  // as={`/Profile/Profile_details/${auth.id}`}
-                  href={{ pathname: '/Profile/Profile_details/', query: { id: user_profile.id } }}
+                  href={{
+                    pathname: "/Profile/Profile_details/",
+                    query: { id: user_profile.id },
+                  }}
                 >
                   <a
                     target="_blank"
@@ -82,7 +88,7 @@ const Profile = ({ auth,user_profile }) => {
                       border: "1px solid #ffffff",
                       color: "#ffffff",
                       padding: "5px",
-                      border:"1px solid white"
+                      border: "1px solid white",
                     }}
                   >
                     {" "}
@@ -106,7 +112,6 @@ const mapStateToProps = (state) => {
   return {
     auth: state.auth,
     user_profile: state.user.user_profile,
-    
   };
 };
 export default connect(mapStateToProps)(Profile);

@@ -157,7 +157,7 @@ const navbar = ({
       title: "please update/verify your phone number",
       icon: <ExclamationCircleOutlined />,
 
-      okText: "Yes",
+      okText: "OK",
       okType: "danger",
       cancelText: "No",
       onOk() {

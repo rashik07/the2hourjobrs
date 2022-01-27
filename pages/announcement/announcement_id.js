@@ -41,7 +41,7 @@ const AnnouncementDetails = ({ getSpecificAnnouncement, announcment }) => {
   const router = useRouter();
   const [loader, setLoader] = useState(true);
   const { announcement_id } = router.query;
-  const shareUrl = `https://www.google.com/announcement/${announcement_id}`;
+  const shareUrl = `https://web.the2hourjob.com/announcement/announcement_id?announcement_id=${announcement_id}`;
 
   useEffect(() => {
     getSpecificAnnouncement(announcement_id).then(() => {
@@ -110,10 +110,11 @@ const AnnouncementDetails = ({ getSpecificAnnouncement, announcment }) => {
             <h2>{announcment.title}</h2>
             <p style={{ marginBottom: "1px" }}>
               posted by{" "}
-            
-              <Link 
-                // href={"/Profile/Profile_details/[id]"} as={`/Profile/Profile_details/${announcment.user.id}`}
-                href={{ pathname: '/Profile/Profile_details/', query: { id: announcment.user.id } }}
+              <Link
+                href={{
+                  pathname: "/Profile/Profile_details/",
+                  query: { id: announcment.user.id },
+                }}
               >
                 {announcment.user.name}
               </Link>
@@ -139,9 +140,13 @@ const AnnouncementDetails = ({ getSpecificAnnouncement, announcment }) => {
             </p> */}
             <p>
               Contact:{" "}
-              {announcment.contact_information == null
-                ? "-"
-                :  <a href={`tel:${announcment.contact_information}`}>{announcment.contact_information}</a>}
+              {announcment.contact_information == null ? (
+                "-"
+              ) : (
+                <a href={`tel:${announcment.contact_information}`}>
+                  {announcment.contact_information}
+                </a>
+              )}
             </p>
 
             <Divider />
@@ -177,9 +182,12 @@ const AnnouncementDetails = ({ getSpecificAnnouncement, announcment }) => {
           style={{ padding: "0 50px", marginTop: 64 }}
         >
           <Breadcrumb style={{ margin: "16px 0" }}>
-            <Breadcrumb.Item>Home</Breadcrumb.Item>
+            <Breadcrumb.Item href="/">
+              {" "}
+              <HomeOutlined />
+            </Breadcrumb.Item>
             <Breadcrumb.Item>
-              <Link href="/announcement">Announcement</Link>
+              <Link href="/announcement">Announcement List</Link>
             </Breadcrumb.Item>
             <Breadcrumb.Item>{announcment.title}</Breadcrumb.Item>
           </Breadcrumb>
@@ -195,34 +203,34 @@ const AnnouncementDetails = ({ getSpecificAnnouncement, announcment }) => {
                 width: "100%",
               }}
             >
-              <h1>I hope you like it</h1>
+              <h1>Share</h1>
 
               <FacebookShareButton
                 url={shareUrl}
-                quote={"Title or jo bhi aapko likhna ho"}
-                hashtag={"#portfolio..."}
+                quote={""}
+                hashtag={"#the2hourjob"}
               >
                 <FacebookIcon size={40} round={true} />
               </FacebookShareButton>
 
               <WhatsappShareButton
                 url={shareUrl}
-                quote={"Title or jo bhi aapko likhna ho"}
-                hashtag={"#portfolio..."}
+                quote={""}
+                hashtag={"#the2hourjob"}
               >
                 <WhatsappIcon size={40} round={true} />
               </WhatsappShareButton>
               <EmailShareButton
                 url={shareUrl}
-                quote={"Title or jo bhi aapko likhna ho"}
-                hashtag={"#portfolio..."}
+                quote={""}
+                hashtag={"#the2hourjob"}
               >
                 <EmailIcon size={40} round={true} />
               </EmailShareButton>
               <FacebookMessengerShareButton
                 url={shareUrl}
-                quote={"Title or jo bhi aapko likhna ho"}
-                hashtag={"#portfolio..."}
+                quote={""}
+                hashtag={"#the2hourjob"}
               >
                 <FacebookMessengerIcon size={40} round={true} />
               </FacebookMessengerShareButton>

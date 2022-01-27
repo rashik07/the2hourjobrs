@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import Navbar from "container/navbar/newNavbar";
 import JobPostItem from "components/jobs/JobPostItem";
 import { Layout, Breadcrumb } from "antd";
+import {  HomeOutlined } from "@ant-design/icons";
 
 const AppliedJobs = ({ applied_jobs, getAppliedJobs }) => {
   const { Content } = Layout;
@@ -35,8 +36,11 @@ const AppliedJobs = ({ applied_jobs, getAppliedJobs }) => {
         <Navbar />
         <Content className="site-layout">
           <Breadcrumb className="breadcrumb_main">
-            <Breadcrumb.Item>Home</Breadcrumb.Item>
-            <Breadcrumb.Item>Job</Breadcrumb.Item>
+          <Breadcrumb.Item href="/">
+              {" "}
+              <HomeOutlined />
+            </Breadcrumb.Item>
+            <Breadcrumb.Item href="/jobs/list">Job List</Breadcrumb.Item>
             <Breadcrumb.Item>Applied Jobs</Breadcrumb.Item>
           </Breadcrumb>
           <div className="site-layout-background">

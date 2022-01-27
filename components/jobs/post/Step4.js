@@ -208,7 +208,7 @@ const Step4 = ({
     confirm({
       title: "Are you sure post this job?",
       icon: <ExclamationCircleOutlined />,
-      content: "Some descriptions",
+      // content: "Some descriptions",
       okText: "Yes",
       okType: "danger",
       cancelText: "No",
@@ -246,7 +246,7 @@ const Step4 = ({
           className="btn btn-secondary mr-3"
           style={{
             marginRight: "10px",
-            backgroundColor: "#f5222d",
+            backgroundColor: "dodgerblue",
             color: "#ffffff",
           }}
         >

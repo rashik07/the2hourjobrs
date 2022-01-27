@@ -23,7 +23,7 @@ export const createAnnouncement =
         getConfig()
       );
       if (response.status === 201) {
-        router.push("/announcement");
+      router.push("/announcement");
         dispatch({
           type: types.CREATE_ANNOUNCEMENT,
           payload: { ...response.data },

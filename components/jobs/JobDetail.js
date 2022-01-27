@@ -16,6 +16,7 @@ import Navbar from "container/navbar/newNavbar";
 import { getAppliedJobsPerson, applyJob } from "@/redux/actions/jobAction";
 import Link from "next/link";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
+import { HomeOutlined } from "@ant-design/icons";
 
 const renderJobLocation = (inside_dhaka, locations) => {
   inside_dhaka
@@ -135,11 +136,17 @@ const JobDetail = ({
   applyJob,
 }) => {
   const [user, setUser] = useState(null);
+  const { id, title, poster, applied, saved, applied_saved_id } = temp_job;
+
+  const btn_disable = userid === poster.id ? "disabled" : "";
+
+  const [appliedStatus, setAppliedStatus] = useState(applied);
 
   useEffect(() => {
     if (isSignedIn) {
       getAppliedJobsPerson(temp_job).then((u) => setUser(u));
     }
+    // applyJob();
   }, [temp_job]);
 
   const appliedPerson = () => {
@@ -260,10 +267,6 @@ const JobDetail = ({
   // if (user === null) {
   //   return <p>Loading profile...</p>;
   // }
-  const { id, title, poster, applied, saved, applied_saved_id } = temp_job;
-
-  const btn_disable = userid === poster.id ? "disabled" : "";
-  const [appliedStatus, setAppliedStatus] = useState(applied);
 
   const applyJobBtnClick = () => {
     if (!isSignedIn) {
@@ -274,7 +277,7 @@ const JobDetail = ({
       confirm({
         title: "Are you sure apply this job?",
         icon: <ExclamationCircleOutlined />,
-        content: "Some descriptions",
+        // content: "Some descriptions",
         okText: "Yes",
         okType: "danger",
         cancelText: "No",
@@ -327,10 +330,13 @@ const JobDetail = ({
 
         <Content className="site-layout">
           <Breadcrumb className="breadcrumb_main">
-            <Breadcrumb.Item>Home</Breadcrumb.Item>
-            <Breadcrumb.Item>Job</Breadcrumb.Item>
-            <Breadcrumb.Item>Job Details</Breadcrumb.Item>
-            <Breadcrumb.Item>{temp_job.title.slice(0, 15)+"..."}</Breadcrumb.Item>
+            <Breadcrumb.Item href="/">
+              {" "}
+              <HomeOutlined />
+            </Breadcrumb.Item>
+            <Breadcrumb.Item href="/jobs/list">Job List</Breadcrumb.Item>
+            <Breadcrumb.Item>Job Details - {temp_job.title.slice(0, 15) + "..."}</Breadcrumb.Item>
+           
           </Breadcrumb>
           <div className="site-layout-background">
             <div className="text-secondary">

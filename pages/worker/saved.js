@@ -5,7 +5,9 @@ import { useRouter } from "next/router";
 import { getSavedWorkers, getOtherWorkers } from "@/redux/actions/userAction";
 import { connect } from "react-redux";
 import WorkerItem from "components/worker/list/WorkerItem";
-import { Layout, Breadcrumb, Row, Col, Divider } from "antd";
+import { Layout, Breadcrumb } from "antd";
+import { HomeOutlined } from "@ant-design/icons";
+
 
 const SavedWorkerList = ({
   getSavedWorkers,
@@ -18,7 +20,6 @@ const SavedWorkerList = ({
   const { Content } = Layout;
   const [reaload, setReload] = useState(false);
 
-  
   useEffect(() => {
     if (!isSignedIn) {
       router.push("/auth/login");
@@ -38,7 +39,13 @@ const SavedWorkerList = ({
         //       return <WorkerItem key={worker.id} worker={worker} />;
 
         //   }
-        return <WorkerItem key={worker_profile.id} worker={worker_profile} setReload={setReload} />;
+        return (
+          <WorkerItem
+            key={worker_profile.id}
+            worker={worker_profile}
+            setReload={setReload}
+          />
+        );
       });
 
     return (
@@ -57,7 +64,11 @@ const SavedWorkerList = ({
         <Navbar />
         <Content className="site-layout">
           <Breadcrumb className="breadcrumb_main">
-            <Breadcrumb.Item>Home</Breadcrumb.Item>
+            <Breadcrumb.Item href="/">
+              {" "}
+              <HomeOutlined />
+            </Breadcrumb.Item>
+            <Breadcrumb.Item href="/worker/list">Worker List</Breadcrumb.Item>
             <Breadcrumb.Item>Saved Worker</Breadcrumb.Item>
           </Breadcrumb>
           <div className="site-layout-background">{showSavedWorkers()}</div>

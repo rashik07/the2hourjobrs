@@ -27,30 +27,30 @@ const Topsection = ({
     <div>
       <FacebookShareButton
         url={shareUrl}
-        quote={"Title or jo bhi aapko likhna ho"}
-        hashtag={"#portfolio..."}
+        quote={""}
+        hashtag={"#the2hourjob"}
       >
         <FacebookIcon size={40} round={true} />
       </FacebookShareButton>
 
       <WhatsappShareButton
         url={shareUrl}
-        quote={"Title or jo bhi aapko likhna ho"}
-        hashtag={"#portfolio..."}
+        quote={""}
+        hashtag={"#the2hourjob"}
       >
         <WhatsappIcon size={40} round={true} />
       </WhatsappShareButton>
       <EmailShareButton
         url={shareUrl}
-        quote={"Title or jo bhi aapko likhna ho"}
-        hashtag={"#portfolio..."}
+        quote={""}
+        hashtag={"#the2hourjob"}
       >
         <EmailIcon size={40} round={true} />
       </EmailShareButton>
       <FacebookMessengerShareButton
         url={shareUrl}
-        quote={"Title or jo bhi aapko likhna ho"}
-        hashtag={"#portfolio..."}
+        quote={""}
+        hashtag={"#the2hourjob"}
       >
         <FacebookMessengerIcon size={40} round={true} />
       </FacebookMessengerShareButton>
@@ -87,7 +87,7 @@ const Topsection = ({
               style={{
                 float: "right",
                 marginRight: "45px",
-                marginTop:"-52px",
+                // marginTop:"-52px",
               }}
             >
               <Popover placement="bottom" content={content} trigger="click">

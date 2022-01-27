@@ -12,6 +12,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import { Layout, Breadcrumb, Row, Col, Divider, Collapse } from "antd";
 import { useRouter } from "next/router";
+import {  HomeOutlined } from "@ant-design/icons";
 
 const { Content } = Layout;
 
@@ -33,7 +34,7 @@ const Workers = ({ filterWorkers }) => {
   function callback(key) {
     console.log(key);
   }
- 
+
   useEffect(() => {
     console.log("reload");
     if (_.isEmpty(filter)) {
@@ -51,13 +52,22 @@ const Workers = ({ filterWorkers }) => {
         <Navbar />
         <Content className="site-layout">
           <Breadcrumb className="breadcrumb_main">
-            <Breadcrumb.Item>Home</Breadcrumb.Item>
-            <Breadcrumb.Item>Worker</Breadcrumb.Item>
-            <Breadcrumb.Item>List</Breadcrumb.Item>
+            <Breadcrumb.Item href="/">
+              {" "}
+              <HomeOutlined />
+            </Breadcrumb.Item>
+            <Breadcrumb.Item>Worker List</Breadcrumb.Item>
           </Breadcrumb>
           <div className="site-layout-background">
             <Row>
-              <Col xs={24} sm={24} md={6} lg={6} xl={6} className="Jobfilter jobfilter_pc">
+              <Col
+                xs={24}
+                sm={24}
+                md={6}
+                lg={6}
+                xl={6}
+                className="Jobfilter jobfilter_pc"
+              >
                 <h2>Filter By</h2>
                 <JobCategoryFilter
                   filter={filter}

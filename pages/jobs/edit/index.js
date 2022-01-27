@@ -5,6 +5,7 @@ import _ from "lodash";
 import { getJobForUpdate } from "@/redux/actions/jobAction";
 import JobCreateUpdate from "components/jobs/JobCreateUpdate";
 
+
 const UpdateJobPost = ({ job, getJobForUpdate }) => {
   const router = useRouter();
 

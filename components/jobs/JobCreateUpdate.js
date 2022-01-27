@@ -8,6 +8,7 @@ import Step3 from "components/jobs/post/Step3";
 import Step4 from "components/jobs/post/Step4";
 import { getEducation, getJobCategories } from "@/redux/actions/jobAction";
 import { connect } from "react-redux";
+import { HomeOutlined } from "@ant-design/icons";
 
 const JobCreateUpdate = ({ getJobCategories, getEducation, editJob }) => {
   const { Step } = Steps;
@@ -52,9 +53,12 @@ const JobCreateUpdate = ({ getJobCategories, getEducation, editJob }) => {
         <Navbar />
         <Content className="site-layout">
           <Breadcrumb className="breadcrumb_main">
-            <Breadcrumb.Item>Home</Breadcrumb.Item>
-            <Breadcrumb.Item>Job</Breadcrumb.Item>
-            <Breadcrumb.Item>List</Breadcrumb.Item>
+            <Breadcrumb.Item href="/">
+              {" "}
+              <HomeOutlined />
+            </Breadcrumb.Item>
+            <Breadcrumb.Item href="/jobs/list">Job List</Breadcrumb.Item>
+            <Breadcrumb.Item>Job Post</Breadcrumb.Item>
           </Breadcrumb>
           <div
             className="site-layout-background"
@@ -74,7 +78,6 @@ const JobCreateUpdate = ({ getJobCategories, getEducation, editJob }) => {
             <Steps
               size="medium"
               current={postStep}
-           
               className="stepJobPostMobile"
               direction="vertical"
             >
@@ -86,7 +89,6 @@ const JobCreateUpdate = ({ getJobCategories, getEducation, editJob }) => {
             {renderInputForms()}
           </div>
         </Content>
-       
       </Layout>
     </>
   );

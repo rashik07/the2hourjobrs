@@ -19,7 +19,7 @@ import { SetfilterAction } from "../../redux/actions/jobAction";
 import { Layout, Breadcrumb, Row, Col, BackTop, Divider, Collapse } from "antd";
 import Index from "../index";
 import { useRouter } from "next/router";
-import { UpOutlined } from "@ant-design/icons";
+import { UpOutlined, HomeOutlined } from "@ant-design/icons";
 
 const { Content } = Layout;
 
@@ -77,9 +77,11 @@ const Jobs = ({ filterJobs, filterfromState, SetfilterAction }) => {
         <Navbar />
         <Content className="site-layout">
           <Breadcrumb className="breadcrumb_main">
-            <Breadcrumb.Item>Home</Breadcrumb.Item>
-            <Breadcrumb.Item>Job</Breadcrumb.Item>
-            <Breadcrumb.Item>List</Breadcrumb.Item>
+            <Breadcrumb.Item href="/">
+              {" "}
+              <HomeOutlined />
+            </Breadcrumb.Item>
+            <Breadcrumb.Item>Job List</Breadcrumb.Item>
           </Breadcrumb>
           <div className="site-layout-background">
             <Row>

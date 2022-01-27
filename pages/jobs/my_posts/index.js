@@ -7,6 +7,7 @@ import JobPostItem from "components/jobs/JobPostItem";
 import { Layout, Breadcrumb } from "antd";
 import * as types from "@/redux/types";
 import { List } from "antd";
+import {  HomeOutlined } from "@ant-design/icons";
 
 const SelfPostedJobs = ({ self_posted_jobs, getSelfPostedJobs ,getAppliedJobsPerson,applied_jobs_person,job }) => {
   const dispatch = useDispatch();
@@ -44,7 +45,11 @@ const SelfPostedJobs = ({ self_posted_jobs, getSelfPostedJobs ,getAppliedJobsPer
 
         <Content className="site-layout" style={{ padding: "0 50px" }}>
           <Breadcrumb style={{ margin: "16px 0" }}>
-            <Breadcrumb.Item>Jobs</Breadcrumb.Item>
+          <Breadcrumb.Item href="/">
+              {" "}
+              <HomeOutlined />
+            </Breadcrumb.Item>
+            <Breadcrumb.Item href="/jobs/list">Job List</Breadcrumb.Item>
             <Breadcrumb.Item>Self posted jobs</Breadcrumb.Item>
           </Breadcrumb>
           <div className="site-layout-content">

@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Input, Form, Button, Row, Col, Image, Space } from "antd";
 import { updateAnnouncement } from "../../redux/actions/announcementAction";
 import PicturesWall from "./PicturesWall";
+import { useRouter } from "next/router";
 
 const tailLayout = {
   wrapperCol: {
@@ -32,12 +33,11 @@ const editAnnouncementForm = ({ announcement, updateAnnouncement }) => {
   const setImages = (fileList) => {
     setfilelist(fileList);
   };
-
+  const router = useRouter();
   const onFinish = (values) => {
     updateAnnouncement(announcement.id, values);
-    // this.state.fileList.map((file) => {
-    //   this.props.uploadimage(this.props.announcementResponse.id, file);
-    // });
+    router.push("/announcement/myannouncement");
+
   };
 
   const onFinishFailed = (errorInfo) => {

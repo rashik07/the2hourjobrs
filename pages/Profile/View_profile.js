@@ -13,6 +13,7 @@ import {
 import Topsection from "components/Viewprofile/Topsection";
 import Sidesection from "components/Viewprofile/Sidesection";
 import Mainsection from "components/Viewprofile/Mainsection";
+import {  HomeOutlined } from "@ant-design/icons";
 
 const View_profile = ({
   user_profile,
@@ -26,7 +27,7 @@ const View_profile = ({
   const { Text, Link, Title } = Typography;
   const { Content } = Layout;
   const editProfileButton = () => {
-    if (user_profile.id===auth.id) {
+    if (user_profile.id === auth.id) {
       return (
         <a href={"/Profile"} target="_blank">
           <Button
@@ -59,8 +60,12 @@ const View_profile = ({
           style={{ padding: "0 50px" }}
         >
           <Breadcrumb className="breadcrumb_main">
-            <Breadcrumb.Item>Profile</Breadcrumb.Item>
-            <Breadcrumb.Item>View Profile</Breadcrumb.Item>
+            <Breadcrumb.Item href="/">
+              {" "}
+              <HomeOutlined />
+            </Breadcrumb.Item>
+            <Breadcrumb.Item href="/worker/list">Employee List</Breadcrumb.Item>
+            <Breadcrumb.Item>Profile Details</Breadcrumb.Item>
             {editProfileButton()}
           </Breadcrumb>
 
