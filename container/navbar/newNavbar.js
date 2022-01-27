@@ -1,5 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { Layout, Menu, Row, Col, Image, Button, Divider, Dropdown, Select ,message, Badge, Avatar,Modal} from "antd";
+import {
+  Layout,
+  Menu,
+  Row,
+  Col,
+  Image,
+  Button,
+  Divider,
+  Dropdown,
+  Select,
+  message,
+  Badge,
+  Avatar,
+  Modal,
+} from "antd";
 import Link from "next/link";
 import { connect } from "react-redux";
 import { signOut } from "../../redux/actions/authAction";
@@ -10,15 +24,18 @@ import {
   markAllasRead,
   markasRead,
 } from "@/redux/actions/notoficationAction";
-import { UserOutlined, NotificationFilled, ExclamationCircleOutlined} from "@ant-design/icons";
+import {
+  UserOutlined,
+  NotificationFilled,
+  ExclamationCircleOutlined,
+} from "@ant-design/icons";
 import { useRouter } from "next/router";
 
 const { Header } = Layout;
 const { SubMenu } = Menu;
 
-const getItems = (isSignedIn, signOut, user_profile, ) => {
+const getItems = (isSignedIn, signOut, user_profile) => {
   const { Header, Content, Footer } = Layout;
-  // console.log(user_profile);
 
   const image = () => {
     if (!user_profile.image) {
@@ -51,7 +68,6 @@ const getItems = (isSignedIn, signOut, user_profile, ) => {
   if (isSignedIn) {
     return (
       <>
-        {/* {console.log(user_profile.name)} */}
         <Menu.Item key="setting:11">{image()}</Menu.Item>
 
         <Menu.Item key="setting:12">
@@ -114,7 +130,6 @@ const navbar = ({
     message.info(`Click on item ${key}`);
   };
   const notificationRead = (id) => {
-    // console.log("notification reading:" + id);
     markasRead(id);
   };
   const notification = (
@@ -135,22 +150,27 @@ const navbar = ({
       {allnotificationList.map((notification, index) => (
         <Row span={24} className="notifi_bar">
           <Link
-            href={{ pathname: '/jobs/detail/', query: { id: notification["description"]} }}
+            href={{
+              pathname: "/jobs/detail/",
+              query: { id: notification["description"] },
+            }}
           >
-          <a onClick={(e) => notificationRead(notification["id"])}>
-            {notification["unread"] ? (
-                <p style={{backgroundColor: "skyblue"}}>{notification["verb"]}</p>
-            ) : (
-              <p>{notification["verb"]}</p>
-            )}
-          </a>
+            <a onClick={(e) => notificationRead(notification["id"])}>
+              {notification["unread"] ? (
+                <p style={{ backgroundColor: "skyblue" }}>
+                  {notification["verb"]}
+                </p>
+              ) : (
+                <p>{notification["verb"]}</p>
+              )}
+            </a>
           </Link>
         </Row>
       ))}
     </Row>
   );
-  
-  const phoneNumberAlert = () =>{
+
+  const phoneNumberAlert = () => {
     const { warning } = Modal;
 
     warning({
@@ -161,54 +181,45 @@ const navbar = ({
       okType: "danger",
       cancelText: "No",
       onOk() {
-        router.push("/Profile")
+        router.push("/Profile");
       },
     });
-  }
-  const loginAlert = () =>{
+  };
+  const loginAlert = () => {
     message.error("Please login for access this feature");
-  }
-
-
+  };
 
   const createPost = () => {
-    // console.log(user_profile.phone);
-    if (!isSignedIn){
+    if (!isSignedIn) {
       return (
         // <Button className="jobpost_btn" onClick={() =>phoneNumberAlert()} >
         //   <Link href="">Post a Job</Link>
         // </Button>
-        <Menu.Item key="setting:1" className="jobpost_list" >
-        <Button className="jobpost_btn"onClick={() =>loginAlert()}>
-          <Link href="">Post a Job</Link>
-        </Button>
-      </Menu.Item>
+        <Menu.Item key="setting:1" className="jobpost_list">
+          <Button className="jobpost_btn" onClick={() => loginAlert()}>
+            <Link href="">Post a Job</Link>
+          </Button>
+        </Menu.Item>
       );
-      
-    }
-    else if (user_profile.phone == null ){
+    } else if (user_profile.phone == null) {
       return (
         // <Button className="jobpost_btn" onClick={() =>phoneNumberAlert()} >
         //   <Link href="">Post a Job</Link>
         // </Button>
-        <Menu.Item key="setting:1" className="jobpost_list" >
-        <Button className="jobpost_btn"onClick={() =>phoneNumberAlert()}>
-          <Link href="">Post a Job</Link>
-        </Button>
-      </Menu.Item>
+        <Menu.Item key="setting:1" className="jobpost_list">
+          <Button className="jobpost_btn" onClick={() => phoneNumberAlert()}>
+            <Link href="">Post a Job</Link>
+          </Button>
+        </Menu.Item>
       );
-      
-    } 
-     
-    else{
+    } else {
       return (
-        <Menu.Item key="setting:1" className="jobpost_list" >
-        <Button className="jobpost_btn" >
-          <Link href="/jobs/post">Post a Job</Link>
-        </Button>
-      </Menu.Item>
+        <Menu.Item key="setting:1" className="jobpost_list">
+          <Button className="jobpost_btn">
+            <Link href="/jobs/post">Post a Job</Link>
+          </Button>
+        </Menu.Item>
       );
-
     }
   };
 
@@ -220,16 +231,7 @@ const navbar = ({
         </div>
       </a>
 
-      <Menu
-        mode="horizontal"
-        // defaultSelectedKeys={["2"]}
-        style={{ backgroundColor: "#95D5D2", marginLeft: "27%" }}
-      >
-        {/* <Menu.Item key="setting:1" className="jobpost_list" >
-          <Button className="jobpost_btn" disabled={!isSignedIn}>
-            <Link href="/jobs/post">Post a Job</Link>
-          </Button>
-        </Menu.Item> */}
+      <Menu mode="horizontal" style={{ backgroundColor: "#95D5D2" ,paddingLeft:"35%"}}>
         {createPost()}
         <SubMenu key="1" title="Jobs">
           <Menu.Item key="setting:2">
@@ -274,21 +276,21 @@ const navbar = ({
           </Menu.Item>
         </SubMenu>
         <Menu.Item key="setting:15">
-        <Badge count={unreadnotificationList.length}>
-          <Dropdown overlay={notification} placement="bottomLeft">
-            <Avatar
-              shape="square"
-              size="default"
-              style={{
-                backgroundColor: "transparent",
-                border: "1px solid #1890FF",
-                // marginTop: "-2px",
-              }}
-            >
-              <NotificationFilled style={{ color: "#1890FF" }} />
-            </Avatar>
-          </Dropdown>
-        </Badge>
+          <Badge count={unreadnotificationList.length}>
+            <Dropdown overlay={notification} placement="bottomLeft">
+              <Avatar
+                shape="square"
+                size="default"
+                style={{
+                  backgroundColor: "transparent",
+                  border: "1px solid #1890FF",
+                  // marginTop: "-2px",
+                }}
+              >
+                <NotificationFilled style={{ color: "#1890FF" }} />
+              </Avatar>
+            </Dropdown>
+          </Badge>
         </Menu.Item>
 
         {getItems(isSignedIn, signOut, user_profile)}
