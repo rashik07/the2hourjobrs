@@ -41,13 +41,13 @@ const SeeAllNotification = ({
       {allnotificationList.map((notification, index) => (
         <Row span={24} className="notifi_bar">
           <Link
-            href={{ pathname: '/jobs/detail/', query: { id: notification["description"]} }}
+            href={{ pathname: '/jobs/detail/', query: { id: notification["verb"]} }}
           >
           <a onClick={(e) => notificationRead(notification["id"])}>
             {notification["unread"] ? (
-                <p style={{backgroundColor: "skyblue"}}>{notification["verb"]}</p>
+                <p style={{backgroundColor: "skyblue"}}>{notification["description"]}</p>
             ) : (
-              <p>{notification["verb"]}</p>
+              <p>{notification["description"]}</p>
             )}
           </a>
           </Link>

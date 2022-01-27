@@ -20,6 +20,7 @@ import {
   UsergroupAddOutlined,
   GlobalOutlined,
   PlusCircleOutlined,
+  
 } from "@ant-design/icons";
 import AnimatedNumber from "animated-number-react";
 
@@ -35,6 +36,7 @@ const Jobs = ({
   auth,
   getAllJobs,
   getAllJobs_withoutlogin,
+  user_profile,
 }) => {
   const router = useRouter();
   let query = Object.keys(router.query)[0];
@@ -74,6 +76,58 @@ const Jobs = ({
     }
 
   }, []);
+  const phoneNumberAlert = () => {
+    const { warning } = Modal;
+
+    warning({
+      title: "please save/verify your phone number",
+      icon: <ExclamationCircleOutlined />,
+
+      okText: "OK",
+      okType: "danger",
+      cancelText: "No",
+      onOk() {
+        router.push("/Profile");
+      },
+    });
+  };
+  const loginAlert = () => {
+    message.error("Please login for access this feature");
+  };
+
+  const createPost = () => {
+    if (!auth.isSignedIn) {
+      return (
+        // <Button className="jobpost_btn" onClick={() =>phoneNumberAlert()} >
+        //   <Link href="">Post a Job</Link>
+        // </Button>
+   
+          <Button className="jobpost_btn_mobile" onClick={() => loginAlert()}>
+            <Link href="">Post a Job</Link>
+          </Button>
+
+      );
+    } else if (user_profile.phone == null) {
+      return (
+        // <Button className="jobpost_btn" onClick={() =>phoneNumberAlert()} >
+        //   <Link href="">Post a Job</Link>
+        // </Button>
+
+          <Button className="jobpost_btn_mobile" onClick={() => phoneNumberAlert()}>
+            <Link href="">Post a Job</Link>
+          </Button>
+  
+      );
+    } else {
+      return (
+     
+          <Button className="jobpost_btn_mobile">
+            <Link href="/jobs/post">Post a Job</Link>
+          </Button>
+     
+      );
+    }
+  };
   
   
   
@@ -87,7 +141,7 @@ const Jobs = ({
     textAlign: "center",
     fontSize: 14,
   };
- 
+
   return (
     <>
       <Head>
@@ -268,9 +322,10 @@ const Jobs = ({
           </div>
         </Content>
         <Affix offsetBottom={bottom}>
-          <Button className="jobpost_btn_mobile">
-            <PlusCircleOutlined /> <Link href="/jobs/post">Post a Job</Link>
-          </Button>
+          {/* <Button className="jobpost_btn_mobile">
+            <PlusCircleOutlined />
+          </Button> */}
+           {createPost()}
         </Affix>
 
         <BackTop>
@@ -289,6 +344,7 @@ const mapStateToProps = (state) => {
     // all_workers: state.user.all_workers,
     // all_jobs: state.job.all_jobs,
     auth: state.auth,
+    user_profile: state.user.user_profile,
   };
 };
 
@@ -298,4 +354,5 @@ export default connect(mapStateToProps, {
   getAllJobs,
   getAllJobs_withoutlogin,
   getWorkers,
+ 
 })(Jobs);
