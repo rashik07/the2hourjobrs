@@ -37,6 +37,7 @@ const JobList = ({
     if (auth.isSignedIn) {
       getAllJobs(page_no, pageSize.current).then((result) => {
         totaldata.current = result.count;
+        // console.log(result.count);
         setall_jobs(result.results);
       });
   
@@ -53,7 +54,7 @@ const JobList = ({
     return <JobPostItem key={job.id} job={job} loader={setReload} />;
   };
 
-  if (showFilterJobs) {
+  if (showFilterJobs&&filtered_jobs) {
     
     console.log(filtered_jobs);
     if (filtered_jobs.length > 0) {

@@ -63,8 +63,10 @@ export const getAllJobs = (page, pageSize) => async (dispatch) => {
       dispatch({ type: types.GET_ALL_JOB, payload: response.data });
       return response.data;
     }
+    return [];
   } catch (error) {
     console.log(error);
+    return [];
   }
 };
 
@@ -78,8 +80,10 @@ export const getAllJobs_withoutlogin = () => async (dispatch) => {
       dispatch({ type: types.GET_ALL_JOB, payload: response.data });
       return response.data;
     }
+    return [];
   } catch (error) {
     console.log(error);
+    return [];
   }
 };
 
@@ -89,18 +93,21 @@ export const getSelfPostedJobs = () => async (dispatch) => {
       `v1/jobpost/data/?poster=${store.getState().auth.id}`,
       getConfig()
     );
-
+    if (response.status === 200) {
     dispatch({ type: types.GET_SELF_POSTED_JOB, payload: response.data });
     return response.data;
+    }
+    return [];
   } catch (error) {
     console.log(error);
+    return [];
   }
 };
 
 export const getSavedJobs = () => async (dispatch) => {
   try {
     const response = await backend.get("v1/jobpost/saved_jobs/", getConfig());
-
+   
     dispatch({ type: types.GET_SAVED_JOB, payload: response.data });
   } catch (error) {
     console.log(error);
@@ -202,9 +209,13 @@ export const filterJobs = (filter, page, pageSize) => async (dispatch) => {
     const response = await backend.get(url);
 
     // dispatch({ type: types.FILTER_JOB, payload: response.data });
+    if (response.status === 200) {
     return response.data;
+    } 
+    return [];
   } catch (error) {
     console.log(error);
+    return [];
   }
 };
 

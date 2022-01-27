@@ -27,11 +27,16 @@ export const updateProfile = () => async (dispatch) => {
     store.getState().auth.username = response.data.username;
     store.getState().auth.email = response.data.email;
     store.getState().auth.phone = response.data.phone;
+
+    if(response.status == 200){
     return response.data;
+    } 
+    return [];
     //console.log("user data callll");
   } catch (error) {
     console.log(error);
     console.log(error.response);
+    return [];
   }
 };
 export const updatePhone = (values, id) => async (dispatch) => {
@@ -153,10 +158,14 @@ export const getOtherWorkers = (page,pageSize) => async (dispatch) => {
 
     dispatch({ type: types.GET_OTHER_WORKERS, payload: response.data });
     // console.log(response.data);
+    if(response.status === 200){
     return response.data;
+    } 
+    return [];
   } catch (error) {
     console.log(error);
     console.log(error.response);
+    return [];
   }
 };
 export const getWorkers = (page=1,pageSize=5,employeer=false,worker=false,available=null) => async (dispatch) => {
@@ -168,10 +177,14 @@ export const getWorkers = (page=1,pageSize=5,employeer=false,worker=false,availa
       url += `profile__available_for_work=${available}&`;
     }
     const response = await backend.get(url);
+    if(response.status === 200){
     return response.data;
+    } 
+    return [];
   } catch (error) {
     console.log(error);
     console.log(error.response);
+    return [];
   }
 };
 export const filterWorkers = (filter, page, pageSize) => async (dispatch) => {
@@ -216,12 +229,14 @@ export const filterWorkers = (filter, page, pageSize) => async (dispatch) => {
       response = await backend.get(url);
     }
     if (response.status == 200) {
-      console.log(response);
+      // console.log(response);
       dispatch({ type: types.FILTERED_WORKERS, payload: response.data });
+      return response.data;
     }
-    return response.data;
+   return [];
   } catch (error) {
     console.log(error);
+    return [];
   }
 };
 

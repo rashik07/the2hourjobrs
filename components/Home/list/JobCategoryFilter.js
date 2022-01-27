@@ -38,7 +38,7 @@ const JobCategoryFilter = ({
       // reload(true);
     }
   }
-console.log(categories);
+// console.log(categories);
   if (loading) {
     return <Skeleton active />;
   } else {
@@ -48,7 +48,7 @@ console.log(categories);
           Skill base
         </p>
         <Row>
-          {categories.map((category) => {
+          {categories?categories.map((category) => {
             // console.log(category);
             // return <h1>jdnvjdkj</h1>
             if (category.type === "Skilled") {
@@ -77,13 +77,13 @@ console.log(categories);
                 );
               });
             }
-          })}
+          }):""}
         </Row>
         <p style={{ color: "black", marginTop: "15px", fontWeight: "bold" }}>
           Funcational Base
         </p>
         <Row>
-          {categories.map((category) => {
+          {categories?categories.map((category) => {
             // console.log(category);
 
             if (category.type === "Funcational") {
@@ -112,7 +112,7 @@ console.log(categories);
                 );
               });
             }
-          })}
+          }):""}
         </Row>
       </>
     );

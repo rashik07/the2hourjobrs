@@ -71,9 +71,13 @@ export const getAllAnnouncement = (page,pageSize) => async (dispatch) => {
         payload: response.data,
       });
     }
+    if(response.data===200){
     return response.data;
+    } 
+    return [];
   } catch (error) {
     console.log(error);
+    return [];
   }
 };
 
