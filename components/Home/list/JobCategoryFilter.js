@@ -38,7 +38,7 @@ const JobCategoryFilter = ({
       // reload(true);
     }
   }
-
+console.log(categories);
   if (loading) {
     return <Skeleton active />;
   } else {
@@ -63,6 +63,7 @@ const JobCategoryFilter = ({
                     onClick={() => {
                       handleChange(JSON.stringify(subcategory));
                     }}
+                    key={subcategory.id}
                     style={{ margin: "0rem 0rem" }}
                     className="home_category"
                     
@@ -97,6 +98,7 @@ const JobCategoryFilter = ({
                     onClick={() => {
                       handleChange(JSON.stringify(subcategory));
                     }}
+                    key={subcategory.id}
                     style={{ margin: "0rem 0rem" }}
                     className="home_category"
                   >

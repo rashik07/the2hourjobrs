@@ -56,7 +56,7 @@ const Topsection = ({
       </FacebookMessengerShareButton>
     </div>
   );
-  console.log(user_profile);
+  // console.log(user_profile);
   return (
     <div>
       <Row justify="center" align="top">

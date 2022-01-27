@@ -114,7 +114,7 @@ const navbar = ({
     message.info(`Click on item ${key}`);
   };
   const notificationRead = (id) => {
-    console.log("notification reading:" + id);
+    // console.log("notification reading:" + id);
     markasRead(id);
   };
   const notification = (
@@ -222,7 +222,7 @@ const navbar = ({
 
       <Menu
         mode="horizontal"
-        defaultSelectedKeys={["2"]}
+        // defaultSelectedKeys={["2"]}
         style={{ backgroundColor: "#95D5D2", marginLeft: "27%" }}
       >
         {/* <Menu.Item key="setting:1" className="jobpost_list" >

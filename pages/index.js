@@ -55,11 +55,11 @@ const Jobs = ({
     
     getWorkers(1,5,true,false,null).then((result) => {
       setemployeer(result.count);
-      console.log( employeer );
+      // console.log( employeer );
     });
     getWorkers(1,5,false,true,null).then((result) => {
       setworkers(result.count);
-      console.log( workers );
+      // console.log( workers );
     });
     if (auth.isSignedIn) {
       getAllJobs(1, 5).then((result) => {
@@ -134,7 +134,7 @@ const Jobs = ({
                 fontWeight: "bold",
               }}
             >
-              {console.log(workers)}
+              {/* {console.log(workers)} */}
               <AnimatedNumber
                 value={10946+workers}
                 duration={2000}

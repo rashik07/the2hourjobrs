@@ -28,13 +28,13 @@ const Jobs = ({ filterJobs, filterfromState, SetfilterAction }) => {
   const { Panel } = Collapse;
 
   function callback(key) {
-    console.log(key);
+    // console.log(key);
   }
 
   const [filter, setFilter] = useState({});
   const [showFilterJobs, setShowFilterJobs] = useState(false);
   const showPage = useRef("job_list");
-  const pageSize = useRef(5);
+  const pageSize = useRef(10);
   const [page_no, setPageNo] = useState(1);
   const totaldata = useRef();
   const pageSizeFiltered = useRef(5);
@@ -55,7 +55,7 @@ const Jobs = ({ filterJobs, filterfromState, SetfilterAction }) => {
   };
 
   useEffect(() => {
-    console.log("reload");
+    // console.log("reload");
     if (_.isEmpty(filter)) {
       setShowFilterJobs(false);
     }
