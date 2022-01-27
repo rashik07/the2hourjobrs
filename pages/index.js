@@ -6,7 +6,17 @@ import KeywordSearch from "components/Home/list/KeywordSearch";
 import LocationFilter from "components/Home/list/LocationFilter";
 import JobCategoryFilter from "components/Home/list/JobCategoryFilter";
 import { filterJobs } from "redux/actions/jobAction";
-import { Layout, Row, Col, Divider, BackTop, Typography, Affix } from "antd";
+import {
+  Layout,
+  Row,
+  Col,
+  Divider,
+  BackTop,
+  Typography,
+  Affix,
+  Modal,
+  message,
+} from "antd";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Notification_bar from "container/Notification_bar/Notification_bar";
@@ -20,9 +30,14 @@ import {
   UsergroupAddOutlined,
   GlobalOutlined,
   PlusCircleOutlined,
-  
 } from "@ant-design/icons";
 import AnimatedNumber from "animated-number-react";
+import {
+  UserOutlined,
+  NotificationFilled,
+  ExclamationCircleOutlined,
+} from "@ant-design/icons";
+
 
 const { Content } = Layout;
 const { Title } = Typography;
@@ -31,8 +46,7 @@ const Jobs = ({
   filterJobs,
   getOtherWorkers,
   getWorkers,
-  // all_workers,
-  // all_jobs,
+
   auth,
   getAllJobs,
   getAllJobs_withoutlogin,
@@ -45,36 +59,31 @@ const Jobs = ({
   const [bottom, setBottom] = useState(10);
   const [all_jobs, setall_jobs] = useState([]);
   const showPage = useRef("job_list");
-  const [workers,setworkers] = useState([]);
- 
- 
-  const [employeer ,setemployeer] = useState([]);
+  const [workers, setworkers] = useState([]);
 
-  // console.log(all_jobs);
- 
+  const [employeer, setemployeer] = useState([]);
+  
+
+
 
   useEffect(() => {
-    
-    getWorkers(1,5,true,false,null).then((result) => {
+    getWorkers(1, 5, true, false, null).then((result) => {
       setemployeer(result.count);
-      // console.log( employeer );
+    
     });
-    getWorkers(1,5,false,true,null).then((result) => {
+    getWorkers(1, 5, false, true, null).then((result) => {
       setworkers(result.count);
-      // console.log( workers );
+    
     });
     if (auth.isSignedIn) {
       getAllJobs(1, 5).then((result) => {
         setall_jobs(result.count);
       });
-  
     } else {
-      getAllJobs_withoutlogin(1,5).then((result) => {
-      
+      getAllJobs_withoutlogin(1, 5).then((result) => {
         setall_jobs(result.count);
       });
     }
-
   }, []);
   const phoneNumberAlert = () => {
     const { warning } = Modal;
@@ -98,39 +107,28 @@ const Jobs = ({
   const createPost = () => {
     if (!auth.isSignedIn) {
       return (
-        // <Button className="jobpost_btn" onClick={() =>phoneNumberAlert()} >
-        //   <Link href="">Post a Job</Link>
-        // </Button>
-   
-          <Button className="jobpost_btn_mobile" onClick={() => loginAlert()}>
-            <Link href="">Post a Job</Link>
-          </Button>
-
+        <Button className="jobpost_btn_mobile" onClick={() => loginAlert()}>
+          <PlusCircleOutlined /> <Link href="">Post a Job</Link>
+        </Button>
       );
     } else if (user_profile.phone == null) {
       return (
-        // <Button className="jobpost_btn" onClick={() =>phoneNumberAlert()} >
-        //   <Link href="">Post a Job</Link>
-        // </Button>
-
-          <Button className="jobpost_btn_mobile" onClick={() => phoneNumberAlert()}>
-            <Link href="">Post a Job</Link>
-          </Button>
-  
+        <Button
+          className="jobpost_btn_mobile"
+          onClick={() => phoneNumberAlert()}
+        >
+          <PlusCircleOutlined /> <Link href="">Post a Job</Link>
+        </Button>
       );
     } else {
       return (
-     
-          <Button className="jobpost_btn_mobile">
-            <Link href="/jobs/post">Post a Job</Link>
-          </Button>
-     
+        <Button className="jobpost_btn_mobile">
+          <PlusCircleOutlined /> <Link href="/jobs/post">Post a Job</Link>
+        </Button>
       );
     }
   };
-  
-  
-  
+
   const style = {
     height: 40,
     width: 40,
@@ -174,7 +172,6 @@ const Jobs = ({
           </Row>
         </div>
         <Row justify="space-around" className="data_section">
-
           <Col xs={12} sm={12} md={4} lg={4} xl={4}>
             <Title level={4}>
               <TeamOutlined className="home_icon" />
@@ -190,17 +187,16 @@ const Jobs = ({
             >
               {/* {console.log(workers)} */}
               <AnimatedNumber
-                value={10946+workers}
+                value={10946 + workers}
                 duration={2000}
                 formatValue={(n) => n.toFixed(0)}
                 frameStyle={(percentage) =>
                   percentage > 20 && percentage < 80 ? { opacity: 0.5 } : {}
                 }
               />
-          
             </Title>
           </Col>
-       
+
           <Col xs={12} sm={12} md={4} lg={4} xl={4}>
             <Title level={4}>
               <UsergroupAddOutlined className="home_icon" />
@@ -215,17 +211,16 @@ const Jobs = ({
               }}
             >
               <AnimatedNumber
-                value={2222+employeer}
+                value={2222 + employeer}
                 duration={2000}
                 formatValue={(n) => n.toFixed(0)}
                 frameStyle={(percentage) =>
                   percentage > 20 && percentage < 80 ? { opacity: 0.5 } : {}
                 }
               />
-              
             </Title>
           </Col>
-       
+
           <Col xs={12} sm={12} md={4} lg={4} xl={4}>
             <Title level={4}>
               <GlobalOutlined className="home_icon" />
@@ -240,17 +235,16 @@ const Jobs = ({
               }}
             >
               <AnimatedNumber
-                value= {318 + all_jobs}
+                value={318 + all_jobs}
                 duration={1000}
                 formatValue={(n) => n.toFixed(0)}
                 frameStyle={(percentage) =>
                   percentage > 20 && percentage < 80 ? { opacity: 0.5 } : {}
                 }
               />
-             
             </Title>
           </Col>
-       
+
           <Col xs={12} sm={12} md={4} lg={4} xl={4}>
             <Title level={4}>
               <AreaChartOutlined className="home_icon" />
@@ -264,9 +258,8 @@ const Jobs = ({
                 fontWeight: "bold",
               }}
             >
-             
               <AnimatedNumber
-                value= { 240816}
+                value={240816}
                 duration={2000}
                 formatValue={(n) => n.toFixed(0)}
                 frameStyle={(percentage) =>
@@ -323,9 +316,9 @@ const Jobs = ({
         </Content>
         <Affix offsetBottom={bottom}>
           {/* <Button className="jobpost_btn_mobile">
-            <PlusCircleOutlined />
+            
           </Button> */}
-           {createPost()}
+          {createPost()}
         </Affix>
 
         <BackTop>
@@ -354,5 +347,4 @@ export default connect(mapStateToProps, {
   getAllJobs,
   getAllJobs_withoutlogin,
   getWorkers,
- 
 })(Jobs);
