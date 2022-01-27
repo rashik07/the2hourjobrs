@@ -273,6 +273,7 @@ const navbar = ({
             <Link href="/announcement/create">Create Announcement</Link>
           </Menu.Item>
         </SubMenu>
+        <Menu.Item key="setting:15">
         <Badge count={unreadnotificationList.length}>
           <Dropdown overlay={notification} placement="bottomLeft">
             <Avatar
@@ -281,13 +282,14 @@ const navbar = ({
               style={{
                 backgroundColor: "transparent",
                 border: "1px solid #1890FF",
-                marginTop: "-2px",
+                // marginTop: "-2px",
               }}
             >
               <NotificationFilled style={{ color: "#1890FF" }} />
             </Avatar>
           </Dropdown>
         </Badge>
+        </Menu.Item>
 
         {getItems(isSignedIn, signOut, user_profile)}
       </Menu>
