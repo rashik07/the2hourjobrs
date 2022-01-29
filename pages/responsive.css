@@ -47,9 +47,21 @@
   /* .site-layout {
     margin: 16px 30px !important;
   } */
+  /* .section_menu_mobile .ant-menu-item-only-child{
+
+    display:none;
+  
+
+  } */
   .section_menu_mobile .ant-drawer-body{
 
     padding: 0px !important;
+  
+
+  }
+  .section_menu_mobile .ant-drawer-header{
+
+    background-color: #95d5d2;
   
 
   }

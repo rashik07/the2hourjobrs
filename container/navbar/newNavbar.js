@@ -371,7 +371,7 @@ const navbar = ({
                 <Link href="/announcement/create">Create Announcement</Link>
               </Menu.Item>
             </SubMenu>
-            <Menu.Item key="setting:15" style={{paddingTop:"17px", paddingBottom:"51px"}}>
+            <Menu.Item key="setting:15" style={{paddingTop:"30px", paddingBottom:"40px"}}>
               <Badge count={unreadnotificationList.length}>
                 <Dropdown overlay={notification} placement="bottomLeft">
                   <Avatar
