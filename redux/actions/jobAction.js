@@ -301,10 +301,10 @@ export const postJob = (data, router,setDisable) => async (dispatch) => {
 
     dispatch({ type: types.CREATE_JOB, payload: id });
     dispatch({ type: types.UNSAVE_TEMPORARY_JOBPOST });
-    setDisable(true);
     router.push("/jobs/list");
    
   } catch (error) {
+    setDisable(false);
     console.log(error.response);
   }
 };

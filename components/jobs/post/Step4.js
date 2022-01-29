@@ -216,6 +216,7 @@ const Step4 = ({
       okType: "danger",
       cancelText: "No",
       onOk() {
+        setDisable(true);
         postJob(temp_jobpost, router,setDisable);
       
       },
