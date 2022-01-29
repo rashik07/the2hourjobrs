@@ -313,22 +313,19 @@ const navbar = ({
         {getItems(isSignedIn, signOut, user_profile)}
       </Menu>
       <div style={{ float: "right" }}>
-        <Button type="primary" onClick={showDrawer}   className="menu_mobile">
+        <Button type="primary" onClick={showDrawer} className="menu_mobile">
           <MenuOutlined />
         </Button>
         <Drawer
-          title="menu bar"
+          title=""
           placement="right"
           onClose={onClose}
           visible={visible}
           width="900"
+          drawerStyle={{ backgroundColor: "#95D5D2" }}
+          className="section_menu_mobile" 
         >
-          <Menu
-            mode="inline"
-    
-          
-            style={{ backgroundColor: "#95D5D2"}}
-          >
+          <Menu mode="inline" style={{ backgroundColor: "#95D5D2" }}>
             {createPost()}
             <SubMenu key="1" title="Jobs">
               <Menu.Item key="setting:2">
@@ -374,7 +371,7 @@ const navbar = ({
                 <Link href="/announcement/create">Create Announcement</Link>
               </Menu.Item>
             </SubMenu>
-            <Menu.Item key="setting:15">
+            <Menu.Item key="setting:15" style={{paddingTop:"17px", paddingBottom:"51px"}}>
               <Badge count={unreadnotificationList.length}>
                 <Dropdown overlay={notification} placement="bottomLeft">
                   <Avatar
