@@ -53,6 +53,9 @@
   
 
   } */
+  .jobpost_list{
+    display:none;
+  }
   .section_menu_mobile .ant-drawer-body{
 
     padding: 0px !important;

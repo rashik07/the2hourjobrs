@@ -208,7 +208,7 @@ const navbar = ({
         // <Button className="jobpost_btn" onClick={() =>phoneNumberAlert()} >
         //   <Link href="">Post a Job</Link>
         // </Button>
-        <Menu.Item key="setting:1" className="jobpost_list">
+        <Menu.Item key="setting:1" className="jobpost_list jobpost_btn">
           <Button className="jobpost_btn" onClick={() => loginAlert()}>
             <Link href="">Post a Job</Link>
           </Button>
@@ -227,7 +227,7 @@ const navbar = ({
       );
     } else {
       return (
-        <Menu.Item key="setting:1" className="jobpost_list">
+        <Menu.Item key="setting:1" className="jobpost_list ">
           <Button className="jobpost_btn">
             <Link href="/jobs/post">Post a Job</Link>
           </Button>
