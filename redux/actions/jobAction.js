@@ -248,7 +248,7 @@ export const saveTemporayJobPost = (data) => async (dispatch) => {
   }
 };
 
-export const postJob = (data, router) => async (dispatch) => {
+export const postJob = (data, router,setDisable) => async (dispatch) => {
   try {
     const {
       category,
@@ -301,8 +301,9 @@ export const postJob = (data, router) => async (dispatch) => {
 
     dispatch({ type: types.CREATE_JOB, payload: id });
     dispatch({ type: types.UNSAVE_TEMPORARY_JOBPOST });
-
+    setDisable(true);
     router.push("/jobs/list");
+   
   } catch (error) {
     console.log(error.response);
   }

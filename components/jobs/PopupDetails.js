@@ -128,14 +128,14 @@ const PopupDetails = ({
                 </Descriptions.Item>
               </Col>
             </Row>
-            <Row>
+            {/* <Row>
               <Col span={12}>
                 {" "}
                 <h4>Job Location :</h4>
               </Col>
               <Col span={12}>{job.job_location[0].name}</Col>
-              {/* {appliedPerson()} */}
-            </Row>
+           
+            </Row> */}
           </Col>
           <div className="ant-btn">
             <Link href={{ pathname: "/jobs/detail/", query: { id: job.id } }}>

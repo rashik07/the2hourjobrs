@@ -1,4 +1,4 @@
-import React from "react";
+import React,{ useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { Descriptions, Button, Modal} from "antd";
 import dateformat from "dateformat";
@@ -126,6 +126,9 @@ const Step4 = ({
   updateJob,
   editJob,
 }) => {
+
+
+  const [disable, setDisable] = useState(false);
   const router = useRouter();
 
   const renderItem = (item) => {
@@ -213,7 +216,7 @@ const Step4 = ({
       okType: "danger",
       cancelText: "No",
       onOk() {
-        postJob(temp_jobpost, router);
+        postJob(temp_jobpost, router,setDisable);
       
       },
     });
@@ -267,7 +270,7 @@ const Step4 = ({
           <Button
             onClick={postJobBtnClick}
             className="btn btn-primary mr-3"
-          
+            disabled={disable}
           >
             Post
           </Button>

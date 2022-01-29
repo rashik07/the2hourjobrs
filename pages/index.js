@@ -32,12 +32,8 @@ import {
   PlusCircleOutlined,
 } from "@ant-design/icons";
 import AnimatedNumber from "animated-number-react";
-import {
-  UserOutlined,
-  NotificationFilled,
-  ExclamationCircleOutlined,
-} from "@ant-design/icons";
-
+import { ExclamationCircleOutlined } from "@ant-design/icons";
+import { updateProfile } from "@/redux/actions/userAction";
 
 const { Content } = Layout;
 const { Title } = Typography;
@@ -46,6 +42,7 @@ const Jobs = ({
   filterJobs,
   getOtherWorkers,
   getWorkers,
+  updateProfile,
 
   auth,
   getAllJobs,
@@ -62,18 +59,17 @@ const Jobs = ({
   const [workers, setworkers] = useState([]);
 
   const [employeer, setemployeer] = useState([]);
-  
 
-
+  useEffect(() => {
+    updateProfile();
+  }, []);
 
   useEffect(() => {
     getWorkers(1, 5, true, false, null).then((result) => {
       setemployeer(result.count);
-    
     });
     getWorkers(1, 5, false, true, null).then((result) => {
       setworkers(result.count);
-    
     });
     if (auth.isSignedIn) {
       getAllJobs(1, 5).then((result) => {
@@ -85,6 +81,7 @@ const Jobs = ({
       });
     }
   }, []);
+
   const phoneNumberAlert = () => {
     const { warning } = Modal;
 
@@ -102,13 +99,18 @@ const Jobs = ({
   };
   const loginAlert = () => {
     message.error("Please login for access this feature");
+    router.push("/");
   };
 
   const createPost = () => {
     if (!auth.isSignedIn) {
       return (
-        <Button className="jobpost_btn_mobile" onClick={() => loginAlert()}>
-          <PlusCircleOutlined /> <Link href="">Post a Job</Link>
+        <Button 
+          className="jobpost_btn_mobile"
+          onClick={() => loginAlert()}
+        >
+          <PlusCircleOutlined />
+          Post a Job
         </Button>
       );
     } else if (user_profile.phone == null) {
@@ -117,12 +119,44 @@ const Jobs = ({
           className="jobpost_btn_mobile"
           onClick={() => phoneNumberAlert()}
         >
-          <PlusCircleOutlined /> <Link href="">Post a Job</Link>
+          <PlusCircleOutlined /> Post a Job
         </Button>
       );
     } else {
       return (
-        <Button className="jobpost_btn_mobile">
+        <Button
+        className="jobpost_btn_mobile"
+        >
+          <PlusCircleOutlined /> <Link href="/jobs/post">Post a Job</Link>
+        </Button>
+      );
+    }
+  };
+  const createPostBottominpc = () => {
+    if (!auth.isSignedIn) {
+      return (
+        <Button 
+          className="jobpost_btn"
+          onClick={() => loginAlert()}
+        >
+          <PlusCircleOutlined />
+          Post a Job
+        </Button>
+      );
+    } else if (user_profile.phone == null) {
+      return (
+        <Button
+          className="jobpost_btn"
+          onClick={() => phoneNumberAlert()}
+        >
+          <PlusCircleOutlined /> Post a Job
+        </Button>
+      );
+    } else {
+      return (
+        <Button
+        className="jobpost_btn"
+        >
           <PlusCircleOutlined /> <Link href="/jobs/post">Post a Job</Link>
         </Button>
       );
@@ -306,9 +340,12 @@ const Jobs = ({
                   }}
                   className="stepJobPostPc"
                 >
-                  <Button className="jobpost_btn">
+                  {/* <Button className="jobpost_btn">
                     <Link href="/jobs/post">Post a Job</Link>
-                  </Button>
+                  </Button> */}
+                  {/* <Button className="jobpost_btn"> */}
+                  {createPostBottominpc()}
+                  {/* </Button> */}
                 </div>
               </Col>
             </Row>
@@ -347,4 +384,5 @@ export default connect(mapStateToProps, {
   getAllJobs,
   getAllJobs_withoutlogin,
   getWorkers,
+  updateProfile,
 })(Jobs);

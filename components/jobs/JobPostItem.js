@@ -121,6 +121,7 @@ const JobPostItem = ({
       cancelText: "No",
       onOk() {
         deleteJob(id);
+        window.location.reload();
       },
     });
 
