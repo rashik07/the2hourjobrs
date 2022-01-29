@@ -44,7 +44,12 @@ const PopupDetails = ({
         size={size}
         extra={
           <Space>
-            <Button onClick={onClose}>Cancel</Button>
+            {/* <Button onClick={onClose}>Cancel</Button> */}
+            <div className="ant-btn">
+            <Link href={{ pathname: "/jobs/detail/", query: { id: job.id } }}>
+              See More
+            </Link>
+          </div>
           </Space>
         }
       >
@@ -137,11 +142,11 @@ const PopupDetails = ({
            
             </Row> */}
           </Col>
-          <div className="ant-btn">
+          {/* <div className="ant-btn">
             <Link href={{ pathname: "/jobs/detail/", query: { id: job.id } }}>
               See More
             </Link>
-          </div>
+          </div> */}
         </Row>
       </Drawer>
     </>
