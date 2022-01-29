@@ -13,6 +13,7 @@ import {
   Badge,
   Avatar,
   Modal,
+  Drawer,
 } from "antd";
 import Link from "next/link";
 import { connect } from "react-redux";
@@ -28,6 +29,7 @@ import {
   UserOutlined,
   NotificationFilled,
   ExclamationCircleOutlined,
+  MenuOutlined,
 } from "@ant-design/icons";
 import { useRouter } from "next/router";
 
@@ -113,7 +115,18 @@ const navbar = ({
   markasRead,
 }) => {
   const router = useRouter();
+
   const { Option } = Select;
+  const [visible, setVisible] = useState(false);
+
+  const showDrawer = () => {
+    setVisible(true);
+  };
+
+  const onClose = () => {
+    setVisible(false);
+  };
+
   useEffect(() => {
     getAllNotification();
     getAllUnreadNotification();
@@ -231,7 +244,11 @@ const navbar = ({
         </div>
       </a>
 
-      <Menu mode="horizontal" style={{ backgroundColor: "#95D5D2" ,paddingLeft:"35%"}}>
+      <Menu
+        mode="horizontal"
+        className="menu_pc"
+        style={{ backgroundColor: "#95D5D2", paddingLeft: "35%" }}
+      >
         {createPost()}
         <SubMenu key="1" title="Jobs">
           <Menu.Item key="setting:2">
@@ -295,6 +312,90 @@ const navbar = ({
 
         {getItems(isSignedIn, signOut, user_profile)}
       </Menu>
+      <div style={{ float: "right" }}>
+        <Button type="primary" onClick={showDrawer}   className="menu_mobile">
+          <MenuOutlined />
+        </Button>
+        <Drawer
+          title="menu bar"
+          placement="right"
+          onClose={onClose}
+          visible={visible}
+          width="900"
+        >
+          <Menu
+            mode="inline"
+    
+          
+            style={{ backgroundColor: "#95D5D2"}}
+          >
+            {createPost()}
+            <SubMenu key="1" title="Jobs">
+              <Menu.Item key="setting:2">
+                {" "}
+                <Link href="/jobs/list">Job list</Link>
+              </Menu.Item>
+              <Menu.Item key="setting:3">
+                {" "}
+                <Link href="/jobs/saved">Saved Jobs</Link>
+              </Menu.Item>
+              <Menu.Item key="setting:4">
+                {" "}
+                <Link href="/jobs/applied">Applied Jobs</Link>
+              </Menu.Item>
+              <Menu.Item key="setting:5">
+                {" "}
+                <Link href="/jobs/my_posts">My Posted Jobs</Link>
+              </Menu.Item>
+            </SubMenu>
+
+            <SubMenu key="2" title="Employees">
+              <Menu.Item key="setting:6">
+                <Link href="/worker/list">List</Link>
+              </Menu.Item>
+              <Menu.Item key="setting:7">
+                {" "}
+                <Link href="/worker/saved">Saved employees</Link>
+              </Menu.Item>
+            </SubMenu>
+
+            <SubMenu key="3" title="Announcements">
+              <Menu.Item key="setting:8">
+                <Link href="/announcement">All Announcements</Link>
+              </Menu.Item>
+              <Menu.Item key="setting:9">
+                {" "}
+                <Link href="/announcement/myannouncement">
+                  My Announcements
+                </Link>
+              </Menu.Item>
+              <Menu.Item key="setting:10">
+                {" "}
+                <Link href="/announcement/create">Create Announcement</Link>
+              </Menu.Item>
+            </SubMenu>
+            <Menu.Item key="setting:15">
+              <Badge count={unreadnotificationList.length}>
+                <Dropdown overlay={notification} placement="bottomLeft">
+                  <Avatar
+                    shape="square"
+                    size="default"
+                    style={{
+                      backgroundColor: "transparent",
+                      border: "1px solid #1890FF",
+                      // marginTop: "-2px",
+                    }}
+                  >
+                    <NotificationFilled style={{ color: "#1890FF" }} />
+                  </Avatar>
+                </Dropdown>
+              </Badge>
+            </Menu.Item>
+
+            {getItems(isSignedIn, signOut, user_profile)}
+          </Menu>
+        </Drawer>
+      </div>
       {/* </Col>
       </Row> */}
     </Header>

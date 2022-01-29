@@ -219,7 +219,7 @@ const Jobs = ({
                 fontWeight: "bold",
               }}
             >
-              {/* {console.log(workers)} */}
+             
               <AnimatedNumber
                 value={10946 + workers}
                 duration={2000}

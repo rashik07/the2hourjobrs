@@ -47,7 +47,8 @@ const KeywordSearch = ({
       md={18}
       lg={18}
       xl={18}
-      style={{ padding: "100px", backgroundImage: `url('/img/banner2.jpg')` }}
+    
+
       className="search_bar"
     >
       <form className="search_form">

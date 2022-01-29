@@ -65,22 +65,24 @@ const JobPostItem = ({
 
   const getLocations = (location) => {
     const location_list = [];
+    if (location) {
+      location.forEach((loc) => {
+        location_list.push(loc.name);
+      });
 
-    location.forEach((loc) => {
-      location_list.push(loc.name);
-    });
-
-    return location_list.join(", ");
+      return location_list.join(", ");
+    }
   };
 
   const getEducation = (education) => {
     const education_list = [];
+    if (education) {
+      education.forEach((edu) => {
+        education_list.push(edu.name);
+      });
 
-    education.forEach((edu) => {
-      education_list.push(edu.name);
-    });
-
-    return education_list.join(", ");
+      return education_list.join(", ");
+    }
   };
   const getPostTime = () => {
     const moment = require("moment");
@@ -170,12 +172,11 @@ const JobPostItem = ({
     if (savedStatus) {
       return (
         <Tooltip title="press to unsave">
-          
           <SaveOutlined
             onClick={saveJobBtnClick}
             style={{
               fontSize: "20px",
-               color: "#0E8044",
+              color: "#0E8044",
               marginTop: "5px",
               float: "right",
             }}
@@ -205,7 +206,7 @@ const JobPostItem = ({
       return (
         <>
           {/* {applyShow()} */}
-      
+
           <Link
             // href={"/jobs/edit/[id]"} as={`/jobs/edit/${id}`}
             href={{ pathname: "/jobs/edit/", query: { id: id } }}
@@ -308,7 +309,7 @@ const JobPostItem = ({
               {getExperience(job.min_experience, job.max_experience)}
             </p>
             <p>
-              <CalendarOutlined /> Deadline: {job.deadline}
+              <CalendarOutlined /> Deadline: {job.deadline ? job.deadline :" "}
             </p>
           </div>
           {/* {appliedPerson()} */}

@@ -1,4 +1,12 @@
 @media only screen and (min-width: 900px) {
+  .menu_mobile{
+    display: none;
+  }
+
+  .search_bar {
+    padding: 100px;
+    background-image: url('/img/banner2.jpg')
+  }
   .picture_upload{
     position: absolute;
     margin-left: 50%;
@@ -39,6 +47,9 @@
   /* .site-layout {
     margin: 16px 30px !important;
   } */
+  .menu_pc{
+    display: none;
+  }
   .picture_upload{
     position: absolute;
     margin-left: 100%;
@@ -103,6 +114,8 @@
   }
   .search_bar {
     padding: 50px !important;
+    background-image: url('/img/banner1.jpg');
+    background-size: cover;
   }
   .data_section {
     margin: 20px;

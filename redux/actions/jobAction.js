@@ -234,9 +234,14 @@ export const getLocationList = () => async (dispatch) => {
     const response = await backend.get("v1/category/division/");
 
     dispatch({ type: types.GET_LOCATION_LIST, payload: response.data });
+    if (response.status === 200) {
     return response.data;
+    }
+    return [];
   } catch (error) {
+    
     console.log(error);
+    return [];
   }
 };
 
