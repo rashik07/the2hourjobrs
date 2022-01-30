@@ -160,26 +160,28 @@ const navbar = ({
       <Link href={"/Notification/SeeAllNotification"}>See All</Link>
       <Divider />
 
-      {allnotificationList.map((notification, index) => (
-        <Row span={24} className="notifi_bar">
-          <Link
-            href={{
-              pathname: "/jobs/detail/",
-              query: { id: notification["verb"] },
-            }}
-          >
-            <a onClick={(e) => notificationRead(notification["id"])}>
-              {notification["unread"] ? (
-                <p style={{ backgroundColor: "skyblue" }}>
-                  {notification["description"]}
-                </p>
-              ) : (
-                <p>{notification["description"]}</p>
-              )}
-            </a>
-          </Link>
-        </Row>
-      ))}
+      {allnotificationList
+        ? allnotificationList.map((notification, index) => (
+            <Row span={24} className="notifi_bar">
+              <Link
+                href={{
+                  pathname: "/jobs/detail/",
+                  query: { id: notification["verb"] },
+                }}
+              >
+                <a onClick={(e) => notificationRead(notification["id"])}>
+                  {notification["unread"] ? (
+                    <p style={{ backgroundColor: "skyblue" }}>
+                      {notification["description"]}
+                    </p>
+                  ) : (
+                    <p>{notification["description"]}</p>
+                  )}
+                </a>
+              </Link>
+            </Row>
+          ))
+        : ""}
     </Row>
   );
 
@@ -208,7 +210,7 @@ const navbar = ({
         // <Button className="jobpost_btn" onClick={() =>phoneNumberAlert()} >
         //   <Link href="">Post a Job</Link>
         // </Button>
-        <Menu.Item key="setting:1" className="jobpost_list jobpost_btn">
+        <Menu.Item key="setting:1" className="jobpost_list ">
           <Button className="jobpost_btn" onClick={() => loginAlert()}>
             <Link href="">Post a Job</Link>
           </Button>
@@ -323,7 +325,7 @@ const navbar = ({
           visible={visible}
           width="900"
           drawerStyle={{ backgroundColor: "#95D5D2" }}
-          className="section_menu_mobile" 
+          className="section_menu_mobile"
         >
           <Menu mode="inline" style={{ backgroundColor: "#95D5D2" }}>
             {createPost()}
@@ -371,7 +373,10 @@ const navbar = ({
                 <Link href="/announcement/create">Create Announcement</Link>
               </Menu.Item>
             </SubMenu>
-            <Menu.Item key="setting:15" style={{paddingTop:"30px", paddingBottom:"40px"}}>
+            <Menu.Item
+              key="setting:15"
+              style={{ paddingTop: "30px", paddingBottom: "40px" }}
+            >
               <Badge count={unreadnotificationList.length}>
                 <Dropdown overlay={notification} placement="bottomLeft">
                   <Avatar

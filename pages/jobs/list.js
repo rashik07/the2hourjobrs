@@ -233,7 +233,8 @@ const Jobs = ({ filterJobs, filterfromState, SetfilterAction }) => {
                   totaldata={totaldataFilter}
                   setPageNo={setPageNoFilter}
                   setfiltered_data={setfiltered_jobs}
-                  // setreload={setShowFilterJobs}
+                  setreload={setShowFilterJobs}
+                   setlistreload={setReload}
                 />
                 <Divider />
                 <JobList

@@ -100,7 +100,7 @@ const Login = ({
             <div data-v-e52648b8 className="right">
               <div
                 data-v-58ebcdf7
-                className="d-none d-md-block forgot-password pb-10 mb-5"
+                className="d-none d-md-block forgot-password pb-10 mb-3"
                 data-v-e52648b8
               >
                 <Link href="/auth/Forgot_password">Forgot password?</Link>

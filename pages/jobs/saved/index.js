@@ -6,25 +6,28 @@ import Navbar from "container/navbar/newNavbar";
 import JobPostItem from "components/jobs/JobPostItem";
 import { useRouter } from "next/router";
 import { Layout, Breadcrumb } from "antd";
-import {  HomeOutlined } from "@ant-design/icons";
+import { HomeOutlined } from "@ant-design/icons";
 
 const SavedJobs = ({ saved_jobs, getSavedJobs, isSignedIn }) => {
   const router = useRouter();
   const { Content } = Layout;
   const [reload, setReload] = useState(false);
+
   useEffect(() => {
     if (!isSignedIn) {
       router.push("/auth/login");
     }
 
     getSavedJobs();
+    setReload(false);
   }, [reload]);
 
   const showSavedJobs = () => {
-    if (saved_jobs.length)
+    if (saved_jobs.length) {
       return saved_jobs.map((job) => {
         return <JobPostItem key={job.id} job={job} loader={setReload} />;
       });
+    }
 
     return (
       <h1 style={{ color: "#AEB6BF", marginTop: "20%", marginLeft: "20%" }}>

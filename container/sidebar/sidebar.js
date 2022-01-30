@@ -25,6 +25,7 @@ const sidebar = ({ selector, setloader }) => {
         className="sidebar-layout-background"
         width={200}
         collapsible
+        collapsed
         collapse={collapse}
       >
   

@@ -54,7 +54,7 @@ const JobList = ({
     return <JobPostItem key={job.id} job={job} loader={setReload} />;
   };
 
-  if (showFilterJobs&&filtered_jobs) {
+  if (showFilterJobs && filtered_jobs) {
     
     console.log(filtered_jobs);
     if (filtered_jobs.length > 0) {

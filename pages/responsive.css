@@ -1,4 +1,21 @@
 @media only screen and (min-width: 900px) {
+
+  .site-layout {
+    padding: 0 50px;
+  
+    margin: 60px 36px;
+  }
+  .site-layout .site-layout-background {
+    background: #fff;
+  }
+  .profile-site-layout{
+    padding: 0 50px;
+  
+    margin: 60px 36px;
+  }
+  .profile-site-layout .site-layout-background {
+    background: #fff;
+  }
   .menu_mobile{
     display: none;
   }
@@ -41,9 +58,48 @@
   #jobpost_category {
     padding-left: 35px;
   }
+  main.form-signin.text-center h1 {
+    text-transform: capitalize;
+    font-size: 30px;
+    font-weight: 700;
+}
+main.form-signin.text-center label {
+    display: block;
+    margin-bottom: 10px;
+    text-align: left;
+    font-weight: 500 !important;
+}
+.d-grid.gap-2.d-flex {
+    width: 452px;
+    margin: 0 auto;
+}
+.d-grid.gap-2.d-flex.social_media_btn {
+    display: flex;
+    justify-content: space-between;
+}
+.d-grid.gap-2.d-flex.social_media_btn button {
+    width: 222px;
+    height: 50px;
+    text-transform: capitalize;
+    font-weight: 500;
+    border-radius: .3rem !important;
+}
+.d-grid.gap-2.d-flex.social_media_btn button:first-child {
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%) !important;
+}
 }
 
 @media only screen and (max-width: 900px) {
+  footer {
+    position: relative;
+    margin-top: 15%;
+    margin-bottom: -50px;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+    text-align: center;
+}
   /* .site-layout {
     margin: 16px 30px !important;
   } */
@@ -51,8 +107,15 @@
 
     display:none;
   
-
   } */
+  .profile-site-layout{
+    padding: 0 50px;
+    margin: 60px 36px;
+    width: 890px;
+  }
+  .profile-site-layout .site-layout-background {
+    background: #fff;
+  }
   .jobpost_list{
     display:none;
   }

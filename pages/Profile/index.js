@@ -12,7 +12,7 @@ import Portfolio from "components/Profile/Portfolio";
 import Setting from "components/Profile/Setting";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import {  HomeOutlined } from "@ant-design/icons";
+import { HomeOutlined } from "@ant-design/icons";
 
 const Profile = ({ auth, user_profile }) => {
   const router = useRouter();
@@ -65,12 +65,12 @@ const Profile = ({ auth, user_profile }) => {
         <Layout style={{ minHeight: "100vh" }}>
           <Sidebar setloader={setloader} selector={selector} />
           <Layout>
-            <Content className="site-layout" style={{ padding: "0 50px" }}>
+            <Content className="profile-site-layout" style={{ padding: "0 50px" }}>
               <Breadcrumb className="breadcrumb_main">
-              <Breadcrumb.Item href="/">
-              {" "}
-              <HomeOutlined />
-            </Breadcrumb.Item>
+                <Breadcrumb.Item href="/">
+                  {" "}
+                  <HomeOutlined />
+                </Breadcrumb.Item>
                 <Breadcrumb.Item>Profile</Breadcrumb.Item>
                 <Breadcrumb.Item>{selector.current}</Breadcrumb.Item>
 

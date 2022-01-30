@@ -14,6 +14,7 @@ const KeywordSearch = ({
   totaldata,
   setPageNo,
   setfiltered_data,
+  setlistreload,
 }) => {
   const [keyword, setKeyword] = useState("");
   const [message, setMessage] = useState("");
@@ -24,11 +25,11 @@ const KeywordSearch = ({
       const new_filter = { ...filter, keyword };
       setFilter(new_filter);
       setKeyword("");
-      
     }
   };
- 
+
   useEffect(() => {
+    //  setreload(false);
     if (reload) {
       getFilteredList(filter, page_no, pageSize.current).then((result) => {
         totaldata.current = result.count;
@@ -36,13 +37,8 @@ const KeywordSearch = ({
         console.log(result);
       });
     }
-  }, [page_no, reload]);
-  // const handleKeypress = (e) => {
-  //   //it triggers by pressing the enter key
-  //   if (e.keyCode === 13) {
-  //     onKeywordSubmit();
-  //   }
-  // };
+  }, [page_no, reload, filter]);
+
   return (
     <form style={{ display: "flex", width: "100%" }}>
       <input
@@ -77,7 +73,7 @@ const KeywordSearch = ({
         icon={<SearchOutlined />}
         onClick={(e) => {
           onKeywordSubmit(e);
-          //getFilteredList(filter);
+          // getFilteredList(filter);
           setShowFilter(true);
         }}
       >

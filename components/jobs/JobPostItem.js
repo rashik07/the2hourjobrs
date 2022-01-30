@@ -38,6 +38,7 @@ const JobPostItem = ({
   self_posted_jobs,
   getAppliedJobsPerson,
   applied_jobs_person,
+  
 }) => {
   const router = useRouter();
 
