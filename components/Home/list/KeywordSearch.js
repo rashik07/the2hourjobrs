@@ -44,9 +44,9 @@ const KeywordSearch = ({
     <Col
       xs={24}
       sm={24}
-      md={18}
-      lg={18}
-      xl={18}
+      md={24}
+      lg={24}
+      xl={24}
     
 
       className="search_bar"
@@ -55,7 +55,7 @@ const KeywordSearch = ({
         <input
           // className="form-control mt-2"
           style={{
-            width: "90%",
+            width: "100%",
             padding: ".5rem",
             borderTopLeftRadius: "8px",
             borderBottomLeftRadius: "8px",
@@ -96,6 +96,7 @@ const KeywordSearch = ({
           Search
         </Button>
       </form>
+      
     </Col>
   );
 };

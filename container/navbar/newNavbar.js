@@ -250,6 +250,7 @@ const navbar = ({
         mode="horizontal"
         className="menu_pc"
         style={{ backgroundColor: "#95D5D2", paddingLeft: "35%" }}
+        
       >
         {createPost()}
         <SubMenu key="1" title="Jobs">

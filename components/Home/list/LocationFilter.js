@@ -46,7 +46,7 @@ const LocationFilter = ({
     if(location){
     return  location.map((divison) => {
             return (
-              <Button
+              <a
                 key={JSON.stringify({
                   id: divison.id,
                   name: divison.name,
@@ -62,7 +62,7 @@ const LocationFilter = ({
               >
                 {" "}
                 {divison.name}
-              </Button>
+              </a>
             );
           })}
   }
@@ -79,21 +79,22 @@ const LocationFilter = ({
     return (
       <>
         <Col
-          xs={24} sm={24} md={6} lg={6} xl={6}
+          xs={24} sm={24} md={24} lg={24} xl={24}
           style={{
-            backgroundColor: "#95D5D2",
-            padding: "10px 33px",
+            // backgroundColor: "#95D5D2",
+            padding: "10px 40px",
+
           }}
         >
-          <h3>Location</h3>
+          <span style={{fontWeight:"bold"}}>Location:</span>
           {locationList()}
-          <h3 style={{ marginTop: "15px " }}>Quick links</h3>
+          {/* <h3 style={{ marginTop: "15px " }}>Quick links</h3>
           <div className="quick_link">
             <ForwardOutlined />
             <Link href="/worker/list"> Employees List </Link>
             <ForwardOutlined />
             <Link href="/announcement"> All Announcements </Link>
-          </div>
+          </div> */}
         </Col>
       </>
     );

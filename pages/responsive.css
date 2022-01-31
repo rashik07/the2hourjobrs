@@ -21,8 +21,20 @@
   }
 
   .search_bar {
-    padding: 100px;
-    background-image: url('/img/banner2.jpg')
+    padding: 0px 40px;
+ 
+  }
+  .slider_pic{
+    background-image: url('/img/banner1.jpg');
+    background-size: cover;
+    height: 90vh;
+  }
+  .slider_pic h1{
+    color: black;
+    margin-left: 40px;
+    margin-top: 25vh;
+    font-size: xx-large;
+
   }
   .picture_upload{
     position: absolute;
@@ -34,8 +46,8 @@
   }
   .search_form{
     display: flex;
-    width: 55% ;
-    margin-left: 205px;
+    /* width: 55% ; */
+    /* margin-left: 205px; */
   }
   .applied_person {
     font-weight: bold;
