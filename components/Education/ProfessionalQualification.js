@@ -155,6 +155,7 @@ const ProfessionalQualification = ({
           dataSource={view_qualification}
           pagination={false}
           bordered
+          scroll={{ x: 800 }}
         />
       </div>
       <Form

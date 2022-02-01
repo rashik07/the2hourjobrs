@@ -13,6 +13,7 @@ import Setting from "components/Profile/Setting";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { HomeOutlined } from "@ant-design/icons";
+import Sidebar_mobile from "container/sidebar/Sidebar_mobile";
 
 const Profile = ({ auth, user_profile }) => {
   const router = useRouter();
@@ -64,8 +65,10 @@ const Profile = ({ auth, user_profile }) => {
         <Navbar />
         <Layout style={{ minHeight: "100vh" }}>
           <Sidebar setloader={setloader} selector={selector} />
+          {/* <Sidebar_mobile  setloader={setloader} selector={selector}/> */}
           <Layout>
-            <Content className="profile-site-layout" style={{ padding: "0 50px" }}>
+            <Content className="profile-site-layout" >
+        
               <Breadcrumb className="breadcrumb_main">
                 <Breadcrumb.Item href="/">
                   {" "}
@@ -98,10 +101,13 @@ const Profile = ({ auth, user_profile }) => {
               </Breadcrumb>
 
               <div className="site-layout-background site-layout-background-profile-mobile">
+              {/* <Sidebar /> */}
+             
                 {clickPage(selector.current)}
               </div>
             </Content>
           </Layout>
+          <Sidebar_mobile  setloader={setloader} selector={selector}/>
         </Layout>
       </Layout>
     </div>

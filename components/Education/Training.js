@@ -85,14 +85,14 @@ const Training = ({
       dataIndex: "title",
       key: "title",
       width: "30%",
-      align:"center",
+      align: "center",
     },
     {
       title: "Institution",
       dataIndex: "institution",
       key: "institution",
       width: "100%",
-      align:"center",
+      align: "center",
     },
 
     {
@@ -100,13 +100,13 @@ const Training = ({
       dataIndex: "training_year",
       key: "training_year",
       width: "150px",
-      align:"center",
+      align: "center",
     },
 
     {
       title: "Action",
       key: "action",
-      align:"center",
+      align: "center",
       render: (details) => (
         console.log("training id:", details.id),
         (
@@ -131,7 +131,13 @@ const Training = ({
           {" "}
           <Title>Training</Title>
         </Divider>
-        <Table columns={columns} dataSource={view_training} pagination={false} bordered/>
+        <Table
+          columns={columns}
+          dataSource={view_training}
+          pagination={false}
+          bordered
+          scroll={{ x: 500 }}
+        />
       </div>
 
       <Form

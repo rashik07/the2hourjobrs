@@ -11,7 +11,7 @@ import {
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
-const sidebar = ({ selector, setloader }) => {
+const Sidebar_mobile = ({ selector, setloader }) => {
   const { Title } = Typography;
   const [collapsed, setcollapsed] = useState(true);
 
@@ -22,14 +22,14 @@ const sidebar = ({ selector, setloader }) => {
   return (
     <div>
       <Sider
-        className="sidebar-layout-background"
-        width={200}
-        collapsible
-        // collapsed
-        collapse={collapse}
+        className="sidebar-layout-background-mobile"
+        // width={200}
+        // collapsible
+        // // collapsed
+        // collapse={collapse}
       >
   
-        <Menu defaultSelectedKeys={["1"]} mode="inline">
+        <Menu defaultSelectedKeys={["1"]} mode="vertical">
          
           <Menu.Item key="1" icon={<UserOutlined />}>
             <a
@@ -39,7 +39,7 @@ const sidebar = ({ selector, setloader }) => {
                 setloader(true);
               }}
             >
-              Personal Info
+              {/* Personal Info */}
             </a>
           </Menu.Item>
           <Menu.Item key="2" icon={<DesktopOutlined />}>
@@ -50,7 +50,7 @@ const sidebar = ({ selector, setloader }) => {
                 setloader(true);
               }}
             >
-              Career &amp; Application
+              {/* Career &amp; Application */}
             </a>{" "}
           </Menu.Item>
           <Menu.Item key="3" icon={<BookOutlined />}>
@@ -62,7 +62,7 @@ const sidebar = ({ selector, setloader }) => {
                 setloader(true);
               }}
             >
-              Education
+              {/* Education */}
             </a>
           </Menu.Item>
           <Menu.Item key="4" icon={<PieChartOutlined />}>
@@ -74,7 +74,7 @@ const sidebar = ({ selector, setloader }) => {
                 setloader(true);
               }}
             >
-              Employment
+              {/* Employment */}
             </a>
           </Menu.Item>
           <Menu.Item key="5" icon={<FolderOpenOutlined />}>
@@ -85,7 +85,7 @@ const sidebar = ({ selector, setloader }) => {
                 setloader(true);
               }}
             >
-              Portfolio
+              {/* Portfolio */}
             </a>
           </Menu.Item>
 
@@ -98,7 +98,7 @@ const sidebar = ({ selector, setloader }) => {
                 setloader(true);
               }}
             >
-              Settings
+              {/* Settings */}
             </a>
           </Menu.Item>
         </Menu>
@@ -107,4 +107,4 @@ const sidebar = ({ selector, setloader }) => {
   );
 };
 
-export default sidebar;
+export default Sidebar_mobile;

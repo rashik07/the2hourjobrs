@@ -46,7 +46,7 @@ const getItems = (isSignedIn, signOut, user_profile) => {
           <a>
             <UserOutlined />
 
-            {user_profile.username}
+            {/* {user_profile.username} */}
           </a>
         </Link>
       );
@@ -249,7 +249,7 @@ const navbar = ({
       <Menu
         mode="horizontal"
         className="menu_pc"
-        style={{ backgroundColor: "#95D5D2", paddingLeft: "35%" }}
+        style={{ backgroundColor: "#95D5D2", paddingLeft: "34%" }}
         
       >
         {createPost()}
@@ -298,17 +298,20 @@ const navbar = ({
         <Menu.Item key="setting:15">
           <Badge count={unreadnotificationList.length}>
             <Dropdown overlay={notification} placement="bottomLeft">
-              <Avatar
+              {/* <Avatar
                 shape="square"
                 size="default"
                 style={{
                   backgroundColor: "transparent",
-                  border: "1px solid #1890FF",
+                  // border: "1px solid #1890FF",
                   // marginTop: "-2px",
                 }}
               >
                 <NotificationFilled style={{ color: "#1890FF" }} />
-              </Avatar>
+              
+              </Avatar> */}
+              <span>Notifications</span>
+              
             </Dropdown>
           </Badge>
         </Menu.Item>

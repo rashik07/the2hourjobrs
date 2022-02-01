@@ -83,7 +83,7 @@ const Employment_details = ({
       title: "From",
       dataIndex: "employment_period_from",
       key: "employment_period_from",
-      width: "12%",
+      width: "10%",
       align: "center",
     },
     
@@ -91,13 +91,13 @@ const Employment_details = ({
       title: "To",
       dataIndex:"employment_period_to",
       key: "employment_period_to",
-      width: "12%",
+      width: "10%",
       align: "center",
     },
     {
       title: "Action",
       key: "action",
-      width: "12%",
+      width: "5%",
       align: "center",
       render: (details) => (
         <Space size="middle">
@@ -126,6 +126,7 @@ const Employment_details = ({
         pagination={false}
         style={{ width: "100%" }}
         bordered
+        scroll={{ x: 1000 }}
       />
     </div>
   );

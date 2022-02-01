@@ -60,7 +60,7 @@ const LocationFilter = ({
                 className="location_btn"
               
               >
-                {" "}
+      
                 {divison.name}
               </a>
             );
@@ -83,10 +83,11 @@ const LocationFilter = ({
           style={{
             // backgroundColor: "#95D5D2",
             padding: "10px 40px",
+            lineBreak: "anywhere",
 
           }}
         >
-          <span style={{fontWeight:"bold"}}>Location:</span>
+          <span style={{fontWeight:"bold", color:"white"}}>Location:</span>
           {locationList()}
           {/* <h3 style={{ marginTop: "15px " }}>Quick links</h3>
           <div className="quick_link">

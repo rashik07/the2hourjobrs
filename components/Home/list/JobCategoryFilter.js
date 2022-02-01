@@ -44,7 +44,7 @@ const JobCategoryFilter = ({
   } else {
     return (
       <>
-        <p style={{ color: "black", marginTop: "15px", fontWeight: "bold" }}>
+        <p style={{ color: "black", fontWeight: "bold" }}>
           Skill base
         </p>
         <Row>
@@ -64,7 +64,7 @@ const JobCategoryFilter = ({
                       handleChange(JSON.stringify(subcategory));
                     }}
                     key={subcategory.id}
-                    style={{ margin: "0rem 0rem" }}
+                    style={{ margin: "5px 0px" }}
                     className="home_category"
                     
                   >
@@ -99,7 +99,7 @@ const JobCategoryFilter = ({
                       handleChange(JSON.stringify(subcategory));
                     }}
                     key={subcategory.id}
-                    style={{ margin: "0rem 0rem" }}
+                    style={{ margin: "5px 0px" }}
                     className="home_category"
                   >
                     

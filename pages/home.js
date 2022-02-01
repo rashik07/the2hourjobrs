@@ -124,7 +124,7 @@ const Home = ({
     } else {
       return (
         <Button className="jobpost_btn_mobile">
-          <PlusCircleOutlined /> <Link href="/jobs/post">Post a Job</Link>
+           <Link href="/jobs/post"><PlusCircleOutlined />Post a Job</Link>
         </Button>
       );
     }
@@ -132,21 +132,49 @@ const Home = ({
   const createPostBottominpc = () => {
     if (!auth.isSignedIn) {
       return (
-        <Button className="jobpost_btn" onClick={() => loginAlert()}>
-          <PlusCircleOutlined />
+        <Button
+          className="jobpost_btn"
+          onClick={() => loginAlert()}
+          style={{
+            marginTop: "165px",
+            marginLeft: "855px",
+            width: "10%",
+            height: "13%",
+          }}
+        >
+          {/* <PlusCircleOutlined /> */}
           Post a Job
         </Button>
       );
     } else if (user_profile.phone == null) {
       return (
-        <Button className="jobpost_btn" onClick={() => phoneNumberAlert()}>
-          <PlusCircleOutlined /> Post a Job
+        <Button
+          className="jobpost_btn"
+          onClick={() => phoneNumberAlert()}
+          style={{
+            marginTop: "165px",
+            marginLeft: "855px",
+            width: "10%",
+            height: "13%",
+          }}
+        >
+          {/* <PlusCircleOutlined />  */}
+          Post a Job
         </Button>
       );
     } else {
       return (
-        <Button className="jobpost_btn">
-          <PlusCircleOutlined /> <Link href="/jobs/post">Post a Job</Link>
+        <Button
+          className="jobpost_btn"
+          style={{
+            marginTop: "165px",
+            marginLeft: "855px",
+            width: "10%",
+            height: "13%",
+          }}
+        >
+          {/* <PlusCircleOutlined />  */}
+          <Link href="/jobs/post">Post a Job</Link>
         </Button>
       );
     }
@@ -195,8 +223,16 @@ const Home = ({
                 showPage={showPage}
               />
               <Space className="search_bar" style={{ marginTop: "15vh" }}>
-                <Button>Find talent</Button>
-                <Button>Find jobs</Button>
+                <Button style={{ borderRadius: "10px" }}>Find jobs</Button>
+                <Button
+                  style={{
+                    borderRadius: "10px",
+                    backgroundColor: "transparent",
+                    border: "1px solid",
+                  }}
+                >
+                  Find talent
+                </Button>
               </Space>
             </Col>
             {/* <Col span={12}><img src="/img/landing.png"style={{  width: "100vh", marginTop: "7vh"}}/></Col> */}

@@ -16,11 +16,13 @@ import {
   Affix,
   Modal,
   message,
+  Space,
+  Button,
 } from "antd";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Notification_bar from "container/Notification_bar/Notification_bar";
-import { Button } from "antd/lib/radio";
+// import { Button } from "antd/lib/radio";
 import { getOtherWorkers, getWorkers } from "redux/actions/userAction";
 import { getAllJobs, getAllJobs_withoutlogin } from "redux/actions/jobAction";
 import {
@@ -38,7 +40,7 @@ import { updateProfile } from "@/redux/actions/userAction";
 const { Content } = Layout;
 const { Title } = Typography;
 
-const Jobs = ({
+const jobs = ({
   filterJobs,
   getOtherWorkers,
   getWorkers,
@@ -105,10 +107,7 @@ const Jobs = ({
   const createPost = () => {
     if (!auth.isSignedIn) {
       return (
-        <Button 
-          className="jobpost_btn_mobile"
-          onClick={() => loginAlert()}
-        >
+        <Button className="jobpost_btn_mobile" onClick={() => loginAlert()}>
           <PlusCircleOutlined />
           Post a Job
         </Button>
@@ -125,9 +124,11 @@ const Jobs = ({
     } else {
       return (
         <Button
-        className="jobpost_btn_mobile"
+          className="jobpost_btn_mobile"
+          onClick={() => router.push("/jobs/post")}
         >
-          <PlusCircleOutlined /> <Link href="/jobs/post">Post a Job</Link>
+          <PlusCircleOutlined />
+          Post a Job
         </Button>
       );
     }
@@ -135,11 +136,17 @@ const Jobs = ({
   const createPostBottominpc = () => {
     if (!auth.isSignedIn) {
       return (
-        <Button 
+        <Button
           className="jobpost_btn"
           onClick={() => loginAlert()}
+          style={{
+            marginTop: "190px",
+            marginLeft: "920px",
+            width: "10%",
+            height: "13%",
+          }}
         >
-          <PlusCircleOutlined />
+          {/* <PlusCircleOutlined /> */}
           Post a Job
         </Button>
       );
@@ -148,16 +155,30 @@ const Jobs = ({
         <Button
           className="jobpost_btn"
           onClick={() => phoneNumberAlert()}
+          style={{
+            marginTop: "190px",
+            marginLeft: "920px",
+            width: "10%",
+            height: "13%",
+          }}
         >
-          <PlusCircleOutlined /> Post a Job
+          {/* <PlusCircleOutlined />  */}
+          Post a Job
         </Button>
       );
     } else {
       return (
         <Button
-        className="jobpost_btn"
+          className="jobpost_btn"
+          style={{
+            marginTop: "190px",
+            marginLeft: "920px",
+            width: "10%",
+            height: "13%",
+          }}
         >
-          <PlusCircleOutlined /> <Link href="/jobs/post">Post a Job</Link>
+          {/* <PlusCircleOutlined />  */}
+          <Link href="/jobs/post">Post a Job</Link>
         </Button>
       );
     }
@@ -167,7 +188,7 @@ const Jobs = ({
     height: 40,
     width: 40,
     lineHeight: "40px",
-    borderRadius: 4,
+    borderRadius: 5,
     backgroundColor: " rgb(109, 183, 132)",
     color: "#fff",
     textAlign: "center",
@@ -182,10 +203,11 @@ const Jobs = ({
       <Layout className="layout">
         <Navbar />
 
-        <div style={{ marginTop: "64px" }}>
+        <div className="slider_pic" style={{ marginTop: "64px" }}>
           <Row>
-            <Notification_bar />
+            {/* <Notification_bar /> */}
             {/*1st part*/}
+            <h1>Find jobs & hire talent. Anywhere.</h1>
 
             <KeywordSearch
               filter={filter}
@@ -203,12 +225,26 @@ const Jobs = ({
               //setShowPage={setShowPage}
               showPage={showPage}
             />
+            <Space className="search_bar banner_button">
+              <Button style={{ borderRadius: "5px" }}>Find jobs</Button>
+              <Button
+                style={{
+                  borderRadius: "5px",
+                  backgroundColor: "transparent",
+                  border: "1px solid",
+                }}
+              >
+                Find talent
+              </Button>
+            </Space>
+
+            {/* <Col span={12}><img src="/img/landing.png"style={{  width: "100vh", marginTop: "7vh"}}/></Col> */}
           </Row>
         </div>
         <Row justify="space-around" className="data_section">
           <Col xs={12} sm={12} md={4} lg={4} xl={4}>
             <Title level={4}>
-              <TeamOutlined className="home_icon" />
+              {/* <TeamOutlined className="home_icon" /> */}
               Workers{" "}
             </Title>{" "}
             <Title
@@ -219,7 +255,6 @@ const Jobs = ({
                 fontWeight: "bold",
               }}
             >
-             
               <AnimatedNumber
                 value={10946 + workers}
                 duration={2000}
@@ -233,7 +268,7 @@ const Jobs = ({
 
           <Col xs={12} sm={12} md={4} lg={4} xl={4}>
             <Title level={4}>
-              <UsergroupAddOutlined className="home_icon" />
+              {/* <UsergroupAddOutlined className="home_icon" /> */}
               Employers
             </Title>{" "}
             <Title
@@ -257,7 +292,7 @@ const Jobs = ({
 
           <Col xs={12} sm={12} md={4} lg={4} xl={4}>
             <Title level={4}>
-              <GlobalOutlined className="home_icon" />
+              {/* <GlobalOutlined className="home_icon" /> */}
               Ongoing Jobs
             </Title>{" "}
             <Title
@@ -281,7 +316,7 @@ const Jobs = ({
 
           <Col xs={12} sm={12} md={4} lg={4} xl={4}>
             <Title level={4}>
-              <AreaChartOutlined className="home_icon" />
+              {/* <AreaChartOutlined className="home_icon" /> */}
               Total Visitors
             </Title>{" "}
             <Title
@@ -309,7 +344,7 @@ const Jobs = ({
             <h2
               style={{
                 color: "darkblue",
-                marginTop: "15px",
+                margin: "30px 0px 15px 0px",
                 fontWeight: "bold",
               }}
             >
@@ -329,14 +364,18 @@ const Jobs = ({
                 setFilter={setFilter}
                 reload={setShowFilterJobs}
               /> */}
-            <Row>
-              <Divider />
+          
+          </div>
+          <Row>
+              {/* <Divider /> */}
               <Col xs={24} sm={24} md={24} lg={24} xl={24}>
                 <div
                   style={{
                     backgroundImage: `url('/img/banner4.png')`,
                     height: "280px",
                     marginBottom: "15px",
+                    borderRadius: "5px",
+                    backgroundSize:"cover",
                   }}
                   className="stepJobPostPc"
                 >
@@ -349,9 +388,8 @@ const Jobs = ({
                 </div>
               </Col>
             </Row>
-          </div>
         </Content>
-        <Affix offsetBottom={bottom}>
+        <Affix offsetBottom={bottom} style={{ textAlign: "center" }}>
           {/* <Button className="jobpost_btn_mobile">
             
           </Button> */}
@@ -385,4 +423,4 @@ export default connect(mapStateToProps, {
   getAllJobs_withoutlogin,
   getWorkers,
   updateProfile,
-})(Jobs);
+})(jobs);

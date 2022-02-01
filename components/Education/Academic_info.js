@@ -177,6 +177,7 @@ const Academic_info = ({
           pagination={false}
           style={{ textAlign: "center" }}
           bordered
+          scroll={{ x: 900 }}
         />
       </div>
 

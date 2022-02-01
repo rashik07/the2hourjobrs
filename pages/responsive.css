@@ -1,52 +1,69 @@
 @media only screen and (min-width: 900px) {
+  .location_btn {
+    /* background-color: rgb(149, 213, 210); */
+    border: 1px solid white;
+    margin: 3px;
+    padding: 2px 6px;
+    color: white;
+    font-weight: 400;
+    border-radius: 5px;
+  }
+  .location_btn:hover {
+    /* background-color: darkblue;
+    border: 1px solid #ffffff; */
+    margin: 3px;
+    color: #ffffff;
+    background-color: darkblue;
+  }
 
+  .data_section {
+    margin: 50px 0px;
+  }
   .site-layout {
     padding: 0 50px;
-  
+
     margin: 60px 36px;
   }
   .site-layout .site-layout-background {
     background: #fff;
   }
-  .profile-site-layout{
+  .profile-site-layout {
     padding: 0 50px;
-  
-    margin: 60px 36px;
+
+    margin: 60px 0px;
   }
   .profile-site-layout .site-layout-background {
     background: #fff;
   }
-  .menu_mobile{
+  .menu_mobile {
     display: none;
   }
 
   .search_bar {
     padding: 0px 40px;
- 
   }
-  .slider_pic{
-    background-image: url('/img/banner1.jpg');
+  .slider_pic {
+    background-image: url("/img/banner1.jpg");
     background-size: cover;
     height: 90vh;
   }
-  .slider_pic h1{
+  .slider_pic h1 {
     color: black;
     margin-left: 40px;
     margin-top: 25vh;
     font-size: xx-large;
-
   }
-  .picture_upload{
+  .picture_upload {
     position: absolute;
     margin-left: 50%;
   }
-  .footer_title{
+  .footer_title {
     border-bottom: "4px solid #ffc800";
-    margin: "0px 610px"; 
+    margin: "0px 610px";
   }
-  .search_form{
+  .search_form {
     display: flex;
-    /* width: 55% ; */
+    width: 50%;
     /* margin-left: 205px; */
   }
   .applied_person {
@@ -74,34 +91,47 @@
     text-transform: capitalize;
     font-size: 30px;
     font-weight: 700;
-}
-main.form-signin.text-center label {
+  }
+  main.form-signin.text-center label {
     display: block;
     margin-bottom: 10px;
     text-align: left;
     font-weight: 500 !important;
-}
-.d-grid.gap-2.d-flex {
+  }
+  .d-grid.gap-2.d-flex {
     width: 452px;
     margin: 0 auto;
-}
-.d-grid.gap-2.d-flex.social_media_btn {
+  }
+  .d-grid.gap-2.d-flex.social_media_btn {
     display: flex;
     justify-content: space-between;
-}
-.d-grid.gap-2.d-flex.social_media_btn button {
+  }
+  .d-grid.gap-2.d-flex.social_media_btn button {
     width: 222px;
     height: 50px;
     text-transform: capitalize;
     font-weight: 500;
-    border-radius: .3rem !important;
-}
-.d-grid.gap-2.d-flex.social_media_btn button:first-child {
+    border-radius: 0.3rem !important;
+  }
+  .d-grid.gap-2.d-flex.social_media_btn button:first-child {
     box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%) !important;
-}
+  }
+  .banner_button {
+    margin-top: 15vh;
+  }
+  .sidebar-layout-background-mobile {
+    display: none;
+  }
 }
 
 @media only screen and (max-width: 900px) {
+  .sidebar-layout-background-mobile {
+    width: 15% !important;
+    max-width: 15% !important;
+    min-width: 15% !important;
+    margin-top:50%;
+    position: fixed;
+  }
   footer {
     position: relative;
     margin-top: 15%;
@@ -111,7 +141,21 @@ main.form-signin.text-center label {
     width: 100%;
     background-color: white;
     text-align: center;
-}
+  }
+  .slider_pic h1 {
+    color: black;
+    margin-left: 40px;
+    margin-top: 18vh;
+    font-size: xx-large;
+  }
+  .slider_pic {
+    background-image: url("/img/banner1.jpg");
+    background-size: cover;
+    height: 100vh;
+  }
+  .banner_button {
+    margin-top: 15vh;
+  }
   /* .site-layout {
     margin: 16px 30px !important;
   } */
@@ -120,45 +164,42 @@ main.form-signin.text-center label {
     display:none;
   
   } */
-  .profile-site-layout{
-    padding: 0 50px;
-    margin: 60px 36px;
-    width: 890px;
+  .profile-site-layout {
+    /* padding: 0 50px; */
+    margin: 60px 0px;
+    width: 400px;
   }
   .profile-site-layout .site-layout-background {
     background: #fff;
   }
-  .jobpost_list{
-    display:none;
-  }
-  .section_menu_mobile .ant-drawer-body{
-
-    padding: 0px !important;
-  
-
-  }
-  .section_menu_mobile .ant-drawer-header{
-
-    background-color: #95d5d2;
-  
-
-  }
-  .menu_pc{
+  .jobpost_list {
     display: none;
   }
-  .picture_upload{
+  .section_menu_mobile .ant-drawer-body {
+    padding: 0px !important;
+  }
+  .section_menu_mobile .ant-drawer-header {
+    background-color: #95d5d2;
+  }
+  .menu_pc {
+    display: none;
+  }
+  /* .picture_upload{
     position: absolute;
     margin-left: 100%;
+  } */
+  .sidebar-layout-background {
+    display: none;
   }
-  .search_form{
+  .search_form {
     display: flex;
-    width: 100% ;
+    width: 100%;
   }
-  .notificationIcon{
+  .notificationIcon {
     padding-left: 20px;
   }
   .ant-menu-submenu-popup > .ant-menu {
-    background-color: #95D5D2;
+    background-color: #95d5d2;
   }
   .applied_person {
     font-weight: bold;
@@ -178,12 +219,14 @@ main.form-signin.text-center label {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border: 1px solid #ffffff;
     font-weight: bold;
+    border-radius: 5px;
   }
   .jobpost_btn_mobile:hover {
     background-color: darkblue;
     color: #ffffff;
     margin-left: 270px;
     border: 1px solid #ffffff;
+    border-radius: 5px;
   }
   .site-layout-home {
     padding: 0 20px;
@@ -209,9 +252,7 @@ main.form-signin.text-center label {
     width: 195px;
   }
   .search_bar {
-    padding: 50px !important;
-    background-image: url('/img/banner1.jpg');
-    background-size: cover;
+    padding: 0px 40px;
   }
   .data_section {
     margin: 20px;
@@ -229,7 +270,7 @@ main.form-signin.text-center label {
     width: 335px;
   }
   .site-layout-background-profile-mobile {
-    width: 985px;
+    width: 360px;
   }
   .site-layout-background-view-profile {
     width: 775px;
@@ -237,4 +278,34 @@ main.form-signin.text-center label {
   #jobpost_category {
     padding-bottom: 38px;
   }
+  .location_btn {
+    /* background-color: rgb(149, 213, 210); */
+    border: 1px solid white;
+    margin: 3px;
+    padding: 0px 1px;
+    color: white;
+    font-weight: 400;
+    border-radius: 5px;
+  }
+  .location_btn:hover {
+    /* background-color: darkblue;
+    border: 1px solid #ffffff; */
+    margin: 3px;
+    color: #ffffff;
+  }
+  .site-layout-background-profile-mobile h1 {
+    font-size: 15px;
+  }
+  .ant-table-thead > tr > th,
+  .ant-table-tbody > tr > td,
+  .ant-table tfoot > tr > th,
+  .ant-table tfoot > tr > td {
+    position: relative;
+    padding: 5px 0px;
+    overflow-wrap: break-word;
+  }
+  .breadcrumb_main {
+    margin: 16px 0;
+    padding-right: 40px;
+}
 }

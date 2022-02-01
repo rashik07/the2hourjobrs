@@ -49,7 +49,7 @@
 }
 .job_post {
   border: 1px solid #7171714d;
-  border-radius: 10px;
+  border-radius:5px;
   padding: 1rem;
   margin-bottom: 1rem;
 }
@@ -96,12 +96,12 @@
 }
 .ant-badge {
   color: black;
-  background-color: #f9be02;
+  /* background-color: #f9be02; */
   padding: 0.5rem;
   border-radius: 5px;
   margin-right: 0.5rem;
   margin-bottom: 0.5rem;
-  box-shadow: 0 0 0 1px #d9d9d9 inset;
+  /* box-shadow: 0 0 0 1px #d9d9d9 inset; */
 }
 
 .sidebar-layout-background a {
@@ -182,12 +182,14 @@
   margin-left: auto;
   border: 1px solid #ffffff;
   font-weight: 700;
+  border-radius: 5px;
 }
 .jobpost_btn:hover {
   background-color: darkblue;
   color: #ffffff;
   margin-left: auto;
   border: 1px solid #ffffff;
+  border-radius: 5px;
 }
 .ant-menu-item .jobpost_btn a {
   color: #1e1e1e !important;
@@ -199,6 +201,7 @@
 .hwrap {
   overflow: hidden; /* HIDE SCROLL BAR */
   background: #eee;
+  width: 100vw;
 }
 
 /* (B) MOVING TICKER WRAPPER */
@@ -315,24 +318,7 @@ footer {
   color: #ffffff;
   border-color: #000000;
 }
-.location_btn {
-  /* background-color: rgb(149, 213, 210); */
-  /* border: 1px solid black; */
-  margin: 1px;
-  padding: 5px;
-  color: black;
-  font-weight: 500;
-}
 
-.location_btn:hover {
-  /* background-color: darkblue;
-  border: 1px solid #ffffff; */
-  margin: 1px;
-  color: #ffffff;
-}
-.data_section {
-  margin-top: 20px;
-}
 .home_icon {
   font-size: 15px;
   border: 2px solid white;
