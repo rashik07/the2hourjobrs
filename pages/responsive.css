@@ -1,10 +1,10 @@
 @media only screen and (min-width: 900px) {
   .location_btn {
     /* background-color: rgb(149, 213, 210); */
-    border: 1px solid white;
+    border: 1px solid #333131;
     margin: 3px;
     padding: 2px 6px;
-    color: white;
+    color: #333131;
     font-weight: 400;
     border-radius: 5px;
   }
@@ -12,7 +12,7 @@
     /* background-color: darkblue;
     border: 1px solid #ffffff; */
     margin: 3px;
-    color: #ffffff;
+    color: white;
     background-color: darkblue;
   }
 
@@ -280,10 +280,10 @@
   }
   .location_btn {
     /* background-color: rgb(149, 213, 210); */
-    border: 1px solid white;
+    border: 1px solid #333131;
     margin: 3px;
     padding: 0px 1px;
-    color: white;
+    color: #333131;
     font-weight: 400;
     border-radius: 5px;
   }
@@ -291,7 +291,8 @@
     /* background-color: darkblue;
     border: 1px solid #ffffff; */
     margin: 3px;
-    color: #ffffff;
+    color: white;
+    background-color: darkblue;
   }
   .site-layout-background-profile-mobile h1 {
     font-size: 15px;

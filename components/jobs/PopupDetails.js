@@ -46,14 +46,13 @@ const PopupDetails = ({
           <Space>
             {/* <Button onClick={onClose}>Cancel</Button> */}
             <div className="ant-btn">
-            <Link href={{ pathname: "/jobs/detail/", query: { id: job.id } }}>
-              See More
-            </Link>
-          </div>
+              <Link href={{ pathname: "/jobs/detail/", query: { id: job.id } }}>
+                <a target="_blank">See More</a>
+              </Link>
+            </div>
           </Space>
         }
       >
-    
         <Row>
           <Col xs={24} sm={24} md={10} lg={10} xl={10}>
             <h4>Type :</h4> {job.category.name}
@@ -66,16 +65,20 @@ const PopupDetails = ({
           </Col>
           <Col xs={24} sm={24} md={4} lg={4} xl={4}>
             <h4>Deadline :</h4>{" "}
-            <span style={{ fontWeight: "600" }}>{job.deadline ? job.deadline:""}</span>
+            <span style={{ fontWeight: "600" }}>
+              {job.deadline ? job.deadline : ""}
+            </span>
           </Col>
           <Col xs={24} sm={24} md={2} lg={2} xl={2}>
             <h4>Vacancy : </h4>
-            <span style={{ fontWeight: "600" }}>{job.vacancy ?job.vacancy:""}</span>
+            <span style={{ fontWeight: "600" }}>
+              {job.vacancy ? job.vacancy : ""}
+            </span>
           </Col>
         </Row>
         <Divider />
         <h4>Job description</h4>
-        <p>{job.job_description?job.job_description:""}</p>
+        <p>{job.job_description ? job.job_description : ""}</p>
         {/* <h4>Job Responsibilities</h4>
         <p>{job.job_responsibilities}</p> */}
         <Divider />

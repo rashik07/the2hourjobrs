@@ -269,7 +269,7 @@ const JobPostItem = ({
                   query: { id: poster.id },
                 }}
               >
-                {poster.username}
+               <a target="_blank"> {poster.username}</a>
               </Link>
             </p>
             {"   "}

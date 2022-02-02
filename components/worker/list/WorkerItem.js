@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
-import { Row, Col, Image,Tooltip} from "antd";
+import { Row, Col, Image, Tooltip } from "antd";
 import {
   PhoneOutlined,
   ScheduleOutlined,
@@ -23,10 +23,10 @@ const renderButtons = (
   isSignedIn,
   savedStatus,
   savedWorkerList,
-  setReload,
+  setReload
 ) => {
   // console.log(savedWorkerList);
-  
+
   let isSaved = false;
   let savedId = null;
   savedWorkerList.forEach((item) => {
@@ -40,14 +40,36 @@ const renderButtons = (
       alert("You must log in to access this feature");
       return;
     }
-    saveWorker(id, saved_user_instance_id, setSavedStatus, isSaved, savedId, setReload);
+    saveWorker(
+      id,
+      saved_user_instance_id,
+      setSavedStatus,
+      isSaved,
+      savedId,
+      setReload
+    );
     window.location.reload();
   };
   const saveShow = () => {
     if (isSaved) {
       return (
         <Tooltip title="press to unsave">
-        <SaveOutlined
+          <SaveOutlined
+            onClick={saveWorkerBtnClick}
+            style={{
+              fontSize: "20px",
+              color: "#0E8044",
+              marginTop: "5px",
+              float: "right",
+            }}
+          />
+        </Tooltip>
+      );
+    }
+    //  console.log(self_posted_jobs);
+    return (
+      <Tooltip title="press to save">
+        <PushpinFilled
           onClick={saveWorkerBtnClick}
           style={{
             fontSize: "20px",
@@ -56,27 +78,19 @@ const renderButtons = (
             float: "right",
           }}
         />
-        </Tooltip>
-      );
-    }
-    //  console.log(self_posted_jobs);
-    return (
-      <Tooltip title="press to save">
-      <PushpinFilled
-        onClick={saveWorkerBtnClick}
-        style={{
-          fontSize: "20px",
-          color: "#0E8044",
-          marginTop: "5px",
-          float: "right",
-        }}
-      /></Tooltip>
+      </Tooltip>
     );
   };
   return <>{saveShow()}</>;
 };
 
-const WorkerItem = ({ worker, saveWorker, isSignedIn, savedWorkerList, setReload }) => {
+const WorkerItem = ({
+  worker,
+  saveWorker,
+  isSignedIn,
+  savedWorkerList,
+  setReload,
+}) => {
   console.log(worker);
   const {
     id,
@@ -139,11 +153,18 @@ const WorkerItem = ({ worker, saveWorker, isSignedIn, savedWorkerList, setReload
             isSignedIn,
             show_save_button,
             savedWorkerList,
-            setReload,
+            setReload
           )}
           <h4 style={{ color: "gray" }}>
             <UserOutlined />{" "}
-            <Link  href={{ pathname: '/Profile/Profile_details/', query: { id: id } }}>{username}</Link>{" "}
+            <Link
+              href={{
+                pathname: "/Profile/Profile_details/",
+                query: { id: id },
+              }}
+            >
+              <a target="_blank">{username}</a>
+            </Link>{" "}
             {/* <EnvironmentOutlined /> {getLocations(job.job_location)} */}
           </h4>
           <p style={{ marginTop: "1rem", marginBottom: "1rem" }}>
@@ -152,9 +173,7 @@ const WorkerItem = ({ worker, saveWorker, isSignedIn, savedWorkerList, setReload
 
           <p>
             {/* <EditOutlined /> {getEducation(job.education)} */}
-            {hide_phone== true
-            ? " "
-            :( phone)}
+            {hide_phone == true ? " " : phone}
             {"      "}
             <HomeFilled /> {"  "}
             {email}

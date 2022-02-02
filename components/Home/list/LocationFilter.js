@@ -42,30 +42,31 @@ const LocationFilter = ({
       });
     }
   };
-  const locationList =()=>{
-    if(location){
-    return  location.map((divison) => {
-            return (
-              <a
-                key={JSON.stringify({
-                  id: divison.id,
-                  name: divison.name,
-                  type: divison.type,
-                })}
-                onClick={() => {
-                  //delete divison.districts;
-                  onLocationSelect(JSON.stringify(divison));
-                  console.log(divison);
-                }}
-                className="location_btn"
-              
-              >
-      
-                {divison.name}
-              </a>
-            );
-          })}
-  }
+  const locationList = () => {
+    if (location) {
+      return location.map((divison) => {
+        return (
+          // <div>
+          <a
+            key={JSON.stringify({
+              id: divison.id,
+              name: divison.name,
+              type: divison.type,
+            })}
+            onClick={() => {
+              //delete divison.districts;
+              onLocationSelect(JSON.stringify(divison));
+              console.log(divison);
+            }}
+            className="location_btn"
+          >
+            {divison.name}
+          </a>
+          // </div>
+        );
+      });
+    }
+  };
 
   const onClear = () => {
     filter = _.omit(filter, ["location"]);
@@ -79,15 +80,18 @@ const LocationFilter = ({
     return (
       <>
         <Col
-          xs={24} sm={24} md={24} lg={24} xl={24}
+          xs={24}
+          sm={24}
+          md={24}
+          lg={24}
+          xl={24}
           style={{
             // backgroundColor: "#95D5D2",
             padding: "10px 40px",
             lineBreak: "anywhere",
-
           }}
         >
-          <span style={{fontWeight:"bold", color:"white"}}>Location:</span>
+          <span style={{ fontWeight: "bold", color: "#333131" }}>Location:</span>
           {locationList()}
           {/* <h3 style={{ marginTop: "15px " }}>Quick links</h3>
           <div className="quick_link">
