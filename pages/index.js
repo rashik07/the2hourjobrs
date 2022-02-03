@@ -226,7 +226,7 @@ const jobs = ({
               showPage={showPage}
             />
             <Space className="search_bar banner_button">
-              <Button style={{ borderRadius: "5px" }}>Find jobs</Button>
+              <Button style={{ borderRadius: "5px" }}> <Link href="/jobs/list">Find jobs</Link></Button>
               <Button
                 style={{
                   borderRadius: "5px",
@@ -234,7 +234,7 @@ const jobs = ({
                   border: "1px solid",
                 }}
               >
-                Find talent
+              <Link href="/worker/list"> Find talent</Link> 
               </Button>
             </Space>
 
