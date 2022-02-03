@@ -46,7 +46,7 @@ const getItems = (isSignedIn, signOut, user_profile) => {
           <a>
             <UserOutlined />
 
-            {/* {user_profile.username} */}
+            {user_profile.username}
           </a>
         </Link>
       );
