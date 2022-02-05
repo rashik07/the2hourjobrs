@@ -9,7 +9,10 @@ import { useRouter } from "next/router";
 import * as types from "redux/types";
 import Form from "../../components/Form";
 import { signUp } from "redux/actions/authAction";
-import { Layout, Button, Input } from "antd";
+import { Layout, Button, Input, Checkbox } from "antd";
+import showPwdImg from "./show-password.svg";
+import hidePwdImg from "./hide-password.svg";
+
 // import { facebookProvider } from "config/authMethods";
 // import socialMediaAuth from "service/auth";
 
@@ -18,7 +21,7 @@ const Signup = (props) => {
     const res = await socialMediaAuth(provider);
     console.log(res);
   };
-  
+
   const dispatch = useDispatch();
   let start = 0;
 
@@ -34,13 +37,15 @@ const Signup = (props) => {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
 
+  const [pwd, setPwd] = useState("");
+  const [isRevealPwd, setIsRevealPwd] = useState(false);
+
   const onSubmit = (e) => {
     e.preventDefault();
 
     props.signUp({ name, username, email, password }, router);
-    console.log(name, username, email, password );
+    console.log(name, username, email, password);
   };
-  
 
   return (
     <>
@@ -52,63 +57,76 @@ const Signup = (props) => {
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
           crossorigin="anonymous"
         ></link>
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+        ></link>
       </Head>
       <Layout className="layout">
-      <Navbar />
-      <main className="form-signin text-center mb-5">
-        <form>
-          <h1>Signup</h1>
-          <Form
-            type="text"
-            placeholder="Username"
-            onChange={setUsername}
-            alert={props.username}
-          />
-          <Form
-            type="text"
-            placeholder="Full name"
-            onChange={setName}
-            alert={props.name}
-          />
-          <Form
-            type="email"
-            placeholder="Email address"
-            onChange={setEmail}
-            alert={props.email}
-          />
-          {/* <Form
+        <Navbar />
+        <main className="form-signin text-center mb-5">
+          <form>
+            <h1>Signup</h1>
+            <Form
+              type="text"
+              placeholder="Username"
+              onChange={setUsername}
+              alert={props.username}
+            />
+            <Form
+              type="text"
+              placeholder="Full name"
+              onChange={setName}
+              alert={props.name}
+            />
+            <Form
+              type="email"
+              placeholder="Email address"
+              onChange={setEmail}
+              alert={props.email}
+            />
+            {/* <Form
             type="phone"
             placeholder="Phone"
             onChange={setPhone}
             alert={props.phone}
           /> */}
-          <Form
-            type="password"
-            placeholder="Password"
-            onChange={setPassword}
-            alert={props.password}
-          />
-          <div
-            className="d-grid gap-2 d-flex  justify-content-center"
-            style={{ height: "50px" }}
-          >
-            <button
-              onClick={onSubmit}
-              className="w-50 btn btn-lg fs-6 text-white"
-              type="submit"
-              style={{ backgroundColor: "#163F66" }}
+            <Form
+              type={isRevealPwd ? "text" : "password"}
+              placeholder="Password"
+              onChange={setPassword}
+              alert={props.password}
+            />
+            <Checkbox
+              // title={isRevealPwd ? "Hide password" : "Show password"}
+              // src={isRevealPwd ? hidePwdImg : showPwdImg}
+              onClick={() => setIsRevealPwd((prevState) => !prevState)}
+              style={{marginLeft:"35px", display: "flex"}}
+              
             >
-              Sign Up
-            </button>
-            {/* <button onClick={() => handleOnClick(facebookProvider)}>facebook</button> */}
-          </div>
-          <Link href="/auth/login">
-            <button type="button" className="btn btn-secondary mt-3">
-              Back to Log in
-            </button>
-          </Link>
-        </form>
-      </main>
+              show password
+            </Checkbox>
+            <div
+              className="d-grid gap-2 d-flex  justify-content-center"
+              style={{ height: "50px" }}
+            >
+              <button
+                onClick={onSubmit}
+                className="w-50 btn btn-lg fs-6 text-white"
+                type="submit"
+                style={{ backgroundColor: "#163F66" }}
+              >
+                Sign Up
+              </button>
+              {/* <button onClick={() => handleOnClick(facebookProvider)}>facebook</button> */}
+            </div>
+            <Link href="/auth/login">
+              <button type="button" className="btn btn-secondary mt-3">
+                Back to Log in
+              </button>
+            </Link>
+          </form>
+        </main>
       </Layout>
       {/* <Footer /> */}
     </>
