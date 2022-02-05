@@ -379,11 +379,11 @@ const navbar = ({
             </SubMenu>
             <Menu.Item
               key="setting:15"
-              style={{ paddingTop: "30px", paddingBottom: "40px" }}
+              style={{ paddingTop: "5px", paddingBottom: "5px" }}
             >
               <Badge count={unreadnotificationList.length}>
                 <Dropdown overlay={notification} placement="bottomLeft">
-                  <Avatar
+                  {/* <Avatar
                     shape="square"
                     size="default"
                     style={{
@@ -393,7 +393,8 @@ const navbar = ({
                     }}
                   >
                     <NotificationFilled style={{ color: "#1890FF" }} />
-                  </Avatar>
+                  </Avatar> */}
+                  <span>Notifications</span>
                 </Dropdown>
               </Badge>
             </Menu.Item>
