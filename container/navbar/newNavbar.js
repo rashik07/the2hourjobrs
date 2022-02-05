@@ -152,11 +152,11 @@ const navbar = ({
         overflowY: "scroll",
         height: "auto",
         maxHeight: "60vh",
-        width: "500px",
+        width: "400px",
         padding: "15px",
       }}
     >
-      <h1 style={{ weight: "bold" }}>Notifications</h1>
+      <h3 style={{ weight: "bold" }}>Notifications</h3>
       <Link href={"/Notification/SeeAllNotification"}>See All</Link>
       <Divider />
 

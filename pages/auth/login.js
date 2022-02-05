@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { connect } from "react-redux";
 import { Layout } from "antd";
+import { Form, Input, Button, Checkbox } from 'antd';
 import Navbar from "../../container/navbar/newNavbar";
 import { signIn, googleLogin, facebookLogin } from "redux/actions/authAction";
 import { GoogleLogin } from "react-google-login";
@@ -81,7 +82,7 @@ const Login = ({
               <label htmlFor="inputEmail " className="fs-6 fw-normal">
                 Email / Username:
               </label>
-              <input
+              <Input
                 type="text"
                 className="form-control"
                 onChange={(e) => setUsername(e.target.value)}
@@ -91,7 +92,7 @@ const Login = ({
               <label htmlFor="inputPassword" className="fs-6 fw-normal">
                 Password:
               </label>
-              <input
+              <Input.Password
                 type={hidePassword ? "password" : "text"}
                 className="form-control"
                 onChange={(e) => setPassword(e.target.value)}
