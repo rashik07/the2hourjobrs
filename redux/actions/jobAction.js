@@ -48,8 +48,13 @@ export const getIndustries = () => async (dispatch) => {
     const response = await backend.get("v1/category/industry/");
 
     dispatch({ type: types.GET_JOB_INDUSTRIES, payload: response.data });
+    if (response.status === 200) {
+      return response.data;
+      } 
+      return [];
   } catch (error) {
     console.log(error);
+    return [];
   }
 };
 
@@ -87,10 +92,10 @@ export const getAllJobs_withoutlogin = () => async (dispatch) => {
   }
 };
 
-export const getSelfPostedJobs = () => async (dispatch) => {
+export const getSelfPostedJobs = (id) => async (dispatch) => {
   try {
     const response = await backend.get(
-      `v1/jobpost/data/?poster=${store.getState().auth.id}`,
+      `v1/jobpost/data/?poster=${id}`,
       getConfig()
     );
     if (response.status === 200) {
@@ -109,8 +114,13 @@ export const getSavedJobs = () => async (dispatch) => {
     const response = await backend.get("v1/jobpost/saved_jobs/", getConfig());
    
     dispatch({ type: types.GET_SAVED_JOB, payload: response.data });
+    if (response.status === 200) {
+      return response.data;
+      } 
+      return [];
   } catch (error) {
     console.log(error);
+    return [];
   }
 };
 
@@ -119,8 +129,13 @@ export const getAppliedJobs = () => async (dispatch) => {
     const response = await backend.get("v1/jobpost/applied_jobs/", getConfig());
 
     dispatch({ type: types.GET_APPLIED_JOB, payload: response.data });
+    if (response.status === 200) {
+      return response.data;
+      } 
+      return [];
   } catch (error) {
     console.log(error);
+    return [];
   }
 };
 export const getAppliedJobsPerson = (temp_jobpost) => async (dispatch) => {
@@ -131,8 +146,13 @@ export const getAppliedJobsPerson = (temp_jobpost) => async (dispatch) => {
     );
 
     dispatch({ type: types.GET_APPLIED_JOB_PERSON, payload: response.data });
+    if (response.status === 200) {
+      return response.data;
+      } 
+      return [];
   } catch (error) {
     console.log(error);
+    return [];
   }
 };
 
@@ -476,9 +496,12 @@ export const getJob = (job_id) => async (dispatch) => {
         type: types.SAVE_TEMPORARY_JOBPOST,
         payload: response.data,
       });
+      return response.data;
     }
+    return [];
   } catch (error) {
     console.log(error);
+    return [];
   }
 };
 
@@ -491,9 +514,12 @@ export const getJobDetails = (job_id) => async (dispatch) => {
         type: types.GET_SINGLE_JOB,
         payload: response.data,
       });
+      return response.data;
     }
+    return [];
   } catch (error) {
     console.log(error);
+    return [];
   }
 };
 export const getJobDetails_withoutlogin = (job_id) => async (dispatch) => {
@@ -505,9 +531,12 @@ export const getJobDetails_withoutlogin = (job_id) => async (dispatch) => {
         type: types.GET_SINGLE_JOB,
         payload: response.data,
       });
+      return response.data;
     }
+    return [];
   } catch (error) {
     console.log(error);
+    return [];
   }
 };
 

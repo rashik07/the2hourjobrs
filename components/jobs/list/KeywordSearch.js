@@ -34,7 +34,7 @@ const KeywordSearch = ({
       getFilteredList(filter, page_no, pageSize.current).then((result) => {
         totaldata.current = result.count;
         setfiltered_data(result.results);
-        console.log(result);
+        console.log(result.results);
       });
     }
   }, [page_no, reload, filter]);

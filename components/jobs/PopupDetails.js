@@ -123,7 +123,7 @@ const PopupDetails = ({
               </Col>
               <Col span={12}>
                 {" "}
-                {job.min_experience} - {job.max_experience} years
+                {job.min_experience? job.min_experience:" "} - {job.max_experience? job.max_experience:" "} years
               </Col>
             </Row>
             <Row>

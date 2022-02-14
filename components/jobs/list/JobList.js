@@ -27,7 +27,7 @@ const JobList = ({
   setPageNoFilter,
 }) => {
   const [all_jobs, setall_jobs] = useState([]);
- 
+
   // const [filtered_jobs, setall_jobs] = useState();
 
   const [reload, setReload] = useState(false);
@@ -40,7 +40,6 @@ const JobList = ({
         // console.log(result.count);
         setall_jobs(result.results);
       });
-  
     } else {
       getAllJobs_withoutlogin(page_no, pageSize.current).then((result) => {
         totaldata.current = result.count;
@@ -55,26 +54,26 @@ const JobList = ({
   };
 
   if (showFilterJobs && filtered_jobs) {
-    
     console.log(filtered_jobs);
     if (filtered_jobs.length > 0) {
-     return(
-      <>
-        <List
-          pagination={{
-            onChange: (page_no) => {
-              setPageNoFilter(page_no);
-            },
-            current: page_no_filter,
-            pageSize: pageSizeFiltered.current,
-            defaultCurrent: page_no_filter,
-            total: totaldataFilter.current,
-          }}
-          dataSource={filtered_jobs}
-          renderItem={(job) => jobPostItem(job)}
-        />
-        {/* {jobPostItem1()} */}
-      </>);
+      return (
+        <>
+          <List
+            pagination={{
+              onChange: (page_no) => {
+                setPageNoFilter(page_no);
+              },
+              current: page_no_filter,
+              pageSize: pageSizeFiltered.current,
+              defaultCurrent: page_no_filter,
+              total: totaldataFilter.current,
+            }}
+            dataSource={filtered_jobs}
+            renderItem={(job) => jobPostItem(job)}
+          />
+          {/* {jobPostItem1()} */}
+        </>
+      );
     } else {
       return (
         <h1 style={{ color: "#AEB6BF", marginTop: "20%", marginLeft: "20%" }}>

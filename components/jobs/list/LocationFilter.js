@@ -14,7 +14,7 @@ const LocationFilter = ({
   
 }) => {
 
-  const [location, setLocation] = useState();
+  const [location, setLocation] = useState([]);
 
   
   const onLocationSelect = (location) => {

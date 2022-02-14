@@ -28,6 +28,7 @@ const LocationFilter = ({
     getLocationList().then((result) => {
       setlocation(result);
       setloading(false);
+      
     });
   }, []);
 
@@ -54,8 +55,14 @@ const LocationFilter = ({
               type: divison.type,
             })}
             onClick={() => {
-              //delete divison.districts;
-              onLocationSelect(JSON.stringify(divison));
+             
+              onLocationSelect(JSON.stringify({
+                id: divison.id,
+                name: divison.name,
+                type: divison.type,
+              }));
+              // delete divison;
+              // delete divison.districts;
               console.log(divison);
             }}
             className="location_btn"
