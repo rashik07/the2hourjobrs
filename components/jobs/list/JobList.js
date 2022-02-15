@@ -31,13 +31,13 @@ const JobList = ({
   // const [filtered_jobs, setall_jobs] = useState();
 
   const [reload, setReload] = useState(false);
-  // console.log(pageSize.current);
+
   useEffect(() => {
     totaldata.current = 0;
     if (auth.isSignedIn) {
       getAllJobs(page_no, pageSize.current).then((result) => {
         totaldata.current = result.count;
-        // console.log(result.count);
+     
         setall_jobs(result.results);
       });
     } else {
@@ -48,13 +48,13 @@ const JobList = ({
     }
   }, [page_no, reload, listreload]);
 
-  console.log(all_jobs);
+  // console.log(all_jobs);
   const jobPostItem = (job) => {
     return <JobPostItem key={job.id} job={job} loader={setReload} />;
   };
 
   if (showFilterJobs && filtered_jobs) {
-    console.log(filtered_jobs);
+    // console.log(filtered_jobs);
     if (filtered_jobs.length > 0) {
       return (
         <>

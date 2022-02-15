@@ -23,6 +23,7 @@ const PopupDetails = ({
   const onClose = () => {
     setVisible(false);
   };
+
   useEffect(() => {
     if (isSignedIn) {
       getAppliedJobsPerson(job);
@@ -70,22 +71,40 @@ const PopupDetails = ({
             </span>
           </Col>
           <Col xs={24} sm={24} md={2} lg={2} xl={2}>
-            <h4>Vacancy : </h4>
-            <span style={{ fontWeight: "600" }}>
-              {job.vacancy ? job.vacancy : ""}
-            </span>
+            {job.vacancy ? (
+              <>
+                {" "}
+                <h4>Vacancy : </h4>
+                <span style={{ fontWeight: "600" }}>{job.vacancy}</span>
+              </>
+            ) : (
+              ""
+            )}
           </Col>
         </Row>
         <Divider />
-        <h4>Job description</h4>
-        <p>{job.job_description ? job.job_description : ""}</p>
+        {job.job_description ? (
+          <>
+            <h4>Job description</h4>
+            <p> {job.job_description} </p>
+            <Divider />
+          </>
+        ) : (
+          ""
+        )}
         {/* <h4>Job Responsibilities</h4>
         <p>{job.job_responsibilities}</p> */}
-        <Divider />
-        <h4>Skills</h4>
-        <Descriptions.Item label="Skills">
-          {job.skills.length ? job.skills.join(", ") : ""}
-        </Descriptions.Item>
+
+        {job.skills.length > 0 ? (
+          <>
+            <h4>Skills</h4>
+            <Descriptions.Item label="Skills">
+              {job.skills.length ? job.skills.join(", ") : ""}
+            </Descriptions.Item>
+          </>
+        ) : (
+          ""
+        )}
         <Divider />
         <Row>
           <Col xs={24} sm={24} md={10} lg={10} xl={10}>
@@ -103,12 +122,17 @@ const PopupDetails = ({
                 )}
               </Col>
             </Row>
-            <Row>
-              <Col span={12}>
-                <h4>Gender : </h4>
-              </Col>
-              <Col span={12}>{job.gender.join(", ")}</Col>
-            </Row>
+            {job.gender.length > 0 ? (
+              <Row>
+                <Col span={12}>
+                  <h4>Gender : </h4>
+                </Col>
+                <Col span={12}>{job.gender.join(", ")}</Col>
+              </Row>
+            ) : (
+              ""
+            )}
+
             <Row>
               <Col span={12}>
                 <h4>Employment Status</h4>
@@ -117,25 +141,33 @@ const PopupDetails = ({
             </Row>
           </Col>
           <Col span={10} offset={2}>
-            <Row>
-              <Col span={12}>
-                <h4>Experience :</h4>
-              </Col>
-              <Col span={12}>
-                {" "}
-                {job.min_experience? job.min_experience:" "} - {job.max_experience? job.max_experience:" "} years
-              </Col>
-            </Row>
-            <Row>
-              <Col span={12}>
-                <h4>Job type :</h4>
-              </Col>
-              <Col span={12}>
-                <Descriptions.Item label="Skills">
-                  {job.workplace.length ? job.workplace.join(", ") : ""}
-                </Descriptions.Item>
-              </Col>
-            </Row>
+            { job.min_experience && job.max_experience ?
+              <Row>
+                <Col span={12}>
+                  <h4>Experience :</h4>
+                </Col>
+                <Col span={12}>
+                  {" "}
+                  {job.min_experience ? job.min_experience : " "} -{" "}
+                  {job.max_experience ? job.max_experience : " "} years
+                </Col>
+              </Row> :""
+            }
+            {console.log(job.min_experience)}
+            {job.workplace.length > 0 ? (
+              <Row>
+                <Col span={12}>
+                  <h4>Job type :</h4>
+                </Col>
+                <Col span={12}>
+                  <Descriptions.Item label="Skills">
+                    {job.workplace.length ? job.workplace.join(", ") : ""}
+                  </Descriptions.Item>
+                </Col>
+              </Row>
+            ) : (
+              ""
+            )}
             {/* <Row>
               <Col span={12}>
                 {" "}

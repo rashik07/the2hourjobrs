@@ -55,7 +55,7 @@ const Jobs = ({ filterJobs, filterfromState, SetfilterAction }) => {
   };
 
   useEffect(() => {
-    // console.log("reload");
+ 
     if (_.isEmpty(filter)) {
       setShowFilterJobs(false);
     }

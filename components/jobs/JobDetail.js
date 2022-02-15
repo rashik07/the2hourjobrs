@@ -73,10 +73,11 @@ const renderExperience = (min, max) => {
     min ? (experience = min) : (experience = max);
     experience += " years";
   }
+  console.log(experience);
 
   return (
     <Descriptions.Item label="Experience" labelStyle={{ fontWeight: 700 }}>
-      {experience}
+      {experience=="null years" ? "": experience}
     </Descriptions.Item>
   );
 };
@@ -137,6 +138,7 @@ const JobDetail = ({
 }) => {
   const [user, setUser] = useState(null);
   const { id, title, poster, applied, saved, applied_saved_id } = temp_job;
+  const [disable, setDisable] = useState(false);
 
   const btn_disable = userid === poster.id ? "disabled" : "";
 
@@ -282,6 +284,7 @@ const JobDetail = ({
         okType: "danger",
         cancelText: "No",
         onOk() {
+          setDisable(true);
           applyJob(
             id,
             userid,
@@ -289,7 +292,8 @@ const JobDetail = ({
             setAppliedStatus,
             applied_saved_id
           );
-          window.location.reload();
+          // window.location.reload();
+          message.success('This is a success message');
         },
       });
     }
@@ -314,6 +318,7 @@ const JobDetail = ({
           type="primary"
           onClick={applyJobBtnClick}
           style={{ float: "right" }}
+          disabled={disable}
         >
           Apply Now
         </Button>

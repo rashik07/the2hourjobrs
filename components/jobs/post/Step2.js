@@ -25,14 +25,12 @@ const Step2 = ({ postStep, setPostStep, temp_jobpost }) => {
         message.warning("You must enter minimum salary");
 
         return;
-      }
-      else if (parseInt(min_salary) > parseInt(max_salary)) {
+      } else if (parseInt(min_salary) > parseInt(max_salary)) {
         message.warning("Max salary should be greater than min salary");
 
         return;
-      }
-      else {
-        return   setPostStep(postStep + 1);;
+      } else {
+        return setPostStep(postStep + 1);
       }
     }
     if (!job_description) {
@@ -77,11 +75,7 @@ const Step2 = ({ postStep, setPostStep, temp_jobpost }) => {
         >
           Prev
         </Button>
-        <Button
-          onClick={onSubmit}
-          className="btn btn-primary"
-         
-        >
+        <Button onClick={onSubmit} className="btn btn-primary">
           Next
         </Button>
       </div>

@@ -7,10 +7,10 @@ const Step3 = ({ postStep, setPostStep, temp_jobpost }) => {
   const onSubmit = () => {
     const { min_experience, max_experience, min_age, max_age, education } =
       temp_jobpost;
-    if (education.length == 0) {
-      message.warning("You must select education");
-      return;
-    }
+    // if (education.length == 0) {
+    //   message.warning("You must select education");
+    //   return;
+    // }
     // if (!min_experience && !max_experience) {
      
     //   } 

@@ -38,7 +38,6 @@ const JobPostItem = ({
   self_posted_jobs,
   getAppliedJobsPerson,
   applied_jobs_person,
-  
 }) => {
   const router = useRouter();
 
@@ -57,7 +56,7 @@ const JobPostItem = ({
     if (min) {
       return `Minimum ${min} year(s)`;
     }
-    return `Maximum ${max} year(s)`;
+    return "";
   };
 
   useEffect(() => {
@@ -269,7 +268,7 @@ const JobPostItem = ({
                   query: { id: poster.id },
                 }}
               >
-               <a target="_blank"> {poster.username}</a>
+                <a target="_blank"> {poster.username}</a>
               </Link>
             </p>
             {"   "}
@@ -302,15 +301,31 @@ const JobPostItem = ({
         </p> */}
 
           <p>
-            <EditOutlined /> {getEducation(job.education)}
+            {getEducation(job.education) ? (
+              <>
+                {" "}
+                <EditOutlined />
+                {getEducation(job.education)}
+              </>
+            ) : (
+              " "
+            )}
           </p>
           <div style={{ display: "flex" }}>
             <p style={{ marginRight: "10px" }}>
-              <ScheduleOutlined />{" "}
-              {getExperience(job.min_experience, job.max_experience)}
+              {getExperience(job.min_experience, job.max_experience) ? (
+                <>
+                  {" "}
+                  <ScheduleOutlined />{" "}
+                  {getExperience(job.min_experience, job.max_experience)}{" "}
+                </>
+              ) :(
+                ""
+              )}
+              {console.log(getExperience(job.min_experience, job.max_experience))}
             </p>
             <p>
-              <CalendarOutlined /> Deadline: {job.deadline ? job.deadline :" "}
+              <CalendarOutlined /> Deadline: {job.deadline ? job.deadline : " "}
             </p>
           </div>
           {/* {appliedPerson()} */}
