@@ -293,7 +293,7 @@ const JobDetail = ({
             applied_saved_id
           );
           // window.location.reload();
-          message.success('This is a success message');
+          message.success('Applied successfully');
         },
       });
     }
