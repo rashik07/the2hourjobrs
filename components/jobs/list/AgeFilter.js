@@ -6,7 +6,7 @@ const AgeFilter = ({ filter, setFilter, reload }) => {
     if (value) {
       value = JSON.parse(value);
       setFilter({ ...filter, age: value });
-      console.log(value);
+     
     }
     reload(true);
   }

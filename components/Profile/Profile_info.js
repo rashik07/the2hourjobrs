@@ -54,7 +54,7 @@ const Profile_info = ({
   const [otp, setotp] = useState("");
   const [show, setshow] = useState(false);
   const [final, setfinal] = useState("");
-  // console.log(user_profile);
+  
   var FirebaseConfig = {
     apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
     authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
@@ -110,7 +110,7 @@ const Profile_info = ({
     signInWithPhoneNumber(firebaseAuth, phoneNumber, verify)
       .then((confirmationResult) => {
         setfinal(confirmationResult);
-        // console.log(confirmationResult);
+       
         message.success("code sent");
         setshow(true);
       })
@@ -129,7 +129,7 @@ const Profile_info = ({
         // success
         let data = { phone: mynumber };
         let status = PhoneVerifyUpdate(data, router).then((res) => {
-          console.log(res);
+        
           if (res.status == 226) {
             // message.error(res.data.error);
             const { error } = Modal;
@@ -157,7 +157,7 @@ const Profile_info = ({
 
   const uploadcover = (fileList) => {
     setcover(fileList);
-    console.log(fileList);
+   
   };
 
   useEffect(() => {
@@ -172,7 +172,7 @@ const Profile_info = ({
         } else {
           result.birthday = moment(result.birthday, dateFormat);
         }
-        console.log(result);
+       
         setnumber(result.phone);
         setuser_profile(result);
         setloading(false);
@@ -183,7 +183,7 @@ const Profile_info = ({
   const uploadPhoto = (values) => {
     const formData = new FormData();
 
-    console.log(cover.length);
+  
     if (cover.length === 0) {
       message.warning("Please select your photo");
     } else {

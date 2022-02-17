@@ -36,7 +36,7 @@ const Workers = ({ filterWorkers }) => {
   }
 
   useEffect(() => {
-    console.log("reload");
+   
     if (_.isEmpty(filter)) {
       setShowFilterWorker(false);
     }

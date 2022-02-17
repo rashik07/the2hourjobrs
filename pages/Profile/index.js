@@ -20,7 +20,7 @@ const Profile = ({ auth, user_profile }) => {
   const { Content } = Layout;
   const selector = useRef("");
   const [loader, setloader] = useState(false);
-  // console.log(user_profile);
+
 
   useEffect(() => {
     if (!auth.isSignedIn) {

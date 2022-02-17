@@ -17,7 +17,7 @@ const DistrictList = ({
   useEffect(() => {
     getDistrict();
   }, []);
-console.log(get_district);
+
   const { TreeNode } = TreeSelect;
 
   if (get_district)

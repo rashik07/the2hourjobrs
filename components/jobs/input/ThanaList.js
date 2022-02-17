@@ -17,7 +17,7 @@ const ThanaList = ({
   useEffect(() => {
     getThana();
   }, []);
-console.log(get_thana);
+
   const { TreeNode } = TreeSelect;
 
   if (get_thana)

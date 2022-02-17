@@ -30,6 +30,7 @@ import {
   NotificationFilled,
   ExclamationCircleOutlined,
   MenuOutlined,
+  WindowsFilled,
 } from "@ant-design/icons";
 import { useRouter } from "next/router";
 
@@ -77,6 +78,7 @@ const getItems = (isSignedIn, signOut, user_profile) => {
             <a
               onClick={() => {
                 signOut();
+                
               }}
             >
               Logout

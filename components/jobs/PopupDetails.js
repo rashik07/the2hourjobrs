@@ -15,7 +15,7 @@ const PopupDetails = ({
 }) => {
   const router = useRouter();
   const [visible, setVisible] = useState(false);
-  //  console.log(job);
+  
   const showDrawer = () => {
     setVisible(true);
   };
@@ -153,7 +153,7 @@ const PopupDetails = ({
                 </Col>
               </Row> :""
             }
-            {console.log(job.min_experience)}
+           
             {job.workplace.length > 0 ? (
               <Row>
                 <Col span={12}>

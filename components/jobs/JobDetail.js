@@ -73,7 +73,7 @@ const renderExperience = (min, max) => {
     min ? (experience = min) : (experience = max);
     experience += " years";
   }
-  console.log(experience);
+  
 
   return (
     <Descriptions.Item label="Experience" labelStyle={{ fontWeight: 700 }}>

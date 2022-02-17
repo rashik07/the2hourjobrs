@@ -31,7 +31,7 @@ const Career_application = ({
 }) => {
   const [user_profile, setuser_profile] = useState([]);
   const [loading, setloading] = useState(true);
-  console.log(user_profile);
+ 
 
   useEffect(() => {
     if (!auth.isSignedIn) {
@@ -50,15 +50,15 @@ const Career_application = ({
 
     const formData = new FormData();
     formData.append("objective", values.objective);
-    console.log(values);
+
     if (values.present_salary == null) {
-      console.log("present salary")
+     
       // formData.append("present_salary",setNull(6, Types.INTEGER));
     } else { 
       formData.append("present_salary", values.present_salary);
     }
     if (values.expected_salary == null) {
-      console.log("expected salary")
+  
     } else {
       formData.append("expected_salary", values.expected_salary);
     }
@@ -72,8 +72,7 @@ const Career_application = ({
     }
 
     editUserProfile(formData, user_profile.id);
-    console.log(values);
-
+   
     message.success("successfully added");
   };
 
@@ -99,7 +98,7 @@ const Career_application = ({
   const plainOptions = ["entry", "mid", "top"];
   const [value, setValue] = React.useState();
   const onChange = (e) => {
-    console.log("radio1 checked", e.target.value);
+   
     setValue(e.target.value);
   };
   //job nature
@@ -112,7 +111,7 @@ const Career_application = ({
   ];
   const [value2, setValue2] = React.useState();
   const onChange2 = (e) => {
-    console.log("radio2 checked", e.target.value);
+  
     setValue2(e.target.value);
   };
 
@@ -152,7 +151,7 @@ const Career_application = ({
   };
 
   const normFile = (e) => {
-    console.log("Upload event:", e);
+   
 
     if (Array.isArray(e)) {
       return e;

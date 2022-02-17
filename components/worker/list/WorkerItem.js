@@ -25,7 +25,7 @@ const renderButtons = (
   savedWorkerList,
   setReload
 ) => {
-  // console.log(savedWorkerList);
+ 
 
   let isSaved = false;
   let savedId = null;
@@ -66,7 +66,7 @@ const renderButtons = (
         </Tooltip>
       );
     }
-    //  console.log(self_posted_jobs);
+   
     return (
       <Tooltip title="press to save">
         <PushpinFilled
@@ -91,7 +91,7 @@ const WorkerItem = ({
   savedWorkerList,
   setReload,
 }) => {
-  console.log(worker);
+
   const {
     id,
     name,
@@ -105,7 +105,7 @@ const WorkerItem = ({
     image,
   } = worker;
 
-  // console.log(hide_phone);
+  
 
   const router = useRouter();
 

@@ -322,7 +322,7 @@ const JobPostItem = ({
               ) :(
                 ""
               )}
-              {console.log(getExperience(job.min_experience, job.max_experience))}
+             
             </p>
             <p>
               <CalendarOutlined /> Deadline: {job.deadline ? job.deadline : " "}

@@ -30,7 +30,7 @@ const JobList = ({
   useEffect(() => {
     totaldata.current = 0;
     getOtherWorkers(page_no, pageSize.current).then((result) => {
-      console.log(result);
+    
       totaldata.current = result.count;
       setAll_workers(result.results);
       
@@ -39,7 +39,7 @@ const JobList = ({
     getSavedWorkers();
   }, [page_no, reaload, listreload]);
 
-  console.log(all_workers);
+  
 
   const worksList =(worker)=>{
    
@@ -84,7 +84,7 @@ const JobList = ({
           <List
             pagination={{
               onChange: (page_no) => {
-                console.log(page_no);
+            
                 setPageNo(page_no);
               },
               current: page_no,
