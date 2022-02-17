@@ -71,7 +71,7 @@ const JobList = ({
             dataSource={filtered_jobs}
             renderItem={(job) => jobPostItem(job)}
           />
-          {/* {jobPostItem1()} */}
+          {jobPostItem1()}
         </>
       );
     } else {

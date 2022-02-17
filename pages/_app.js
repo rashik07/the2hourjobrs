@@ -17,10 +17,10 @@ import Script from "next/script";
 function MyApp({ Component, pageProps }) {
   return (
     <>
-      <Script
+      {/* <Script
         src="https://polyfill.io/v3/polyfill.min.js?features=IntersectionObserver"
         strategy="beforeInteractive"
-      />
+      /> */}
       <Provider store={store}>
         <PersistGate persistor={persistor}>
           <Component {...pageProps} />

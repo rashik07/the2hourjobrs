@@ -174,11 +174,11 @@ const Jobs = ({ filterJobs, filterfromState, SetfilterAction }) => {
                       setFilter={setFilter}
                       reload={setShowFilterJobs}
                     />
-                    <DeadlineFilter
+                    {/* <DeadlineFilter
                       filter={filter}
                       setFilter={setFilter}
                       reload={setShowFilterJobs}
-                    />
+                    /> */}
                     <GenderFilter
                       filter={filter}
                       setFilter={setFilter}
