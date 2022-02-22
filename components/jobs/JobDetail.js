@@ -73,11 +73,10 @@ const renderExperience = (min, max) => {
     min ? (experience = min) : (experience = max);
     experience += " years";
   }
-  
 
   return (
     <Descriptions.Item label="Experience" labelStyle={{ fontWeight: 700 }}>
-      {experience=="null years" ? "": experience}
+      {experience == "null years" ? "" : experience}
     </Descriptions.Item>
   );
 };
@@ -157,17 +156,19 @@ const JobDetail = ({
     }
     return applied_jobs_person.map((applied_jobs_person) => {
       return (
-        <div style={{ marginLeft: "5px" }}>
-          <Link
-            href={{
-              pathname: "/Profile/Profile_details/",
-              query: { id: applied_jobs_person.user.id },
-            }}
-          >
-            <a> {applied_jobs_person.user.username}</a>
-          </Link>
-          {" , "}
-        </div>
+        <>
+          <div style={{ marginLeft: "5px" }}>
+            <Link
+              href={{
+                pathname: "/Profile/Profile_details/",
+                query: { id: applied_jobs_person.user.id },
+              }}
+            >
+              <a> {applied_jobs_person.user.username}</a>
+            </Link>
+            {" , "}
+          </div>
+        </>
       );
     });
   };
@@ -293,7 +294,7 @@ const JobDetail = ({
             applied_saved_id
           );
           // window.location.reload();
-          message.success('Applied successfully');
+          message.success("Applied successfully");
         },
       });
     }
@@ -340,8 +341,9 @@ const JobDetail = ({
               <HomeOutlined />
             </Breadcrumb.Item>
             <Breadcrumb.Item href="/jobs/list">Job List</Breadcrumb.Item>
-            <Breadcrumb.Item>Job Details - {temp_job.title.slice(0, 15) + "..."}</Breadcrumb.Item>
-           
+            <Breadcrumb.Item>
+              Job Details - {temp_job.title.slice(0, 15) + "..."}
+            </Breadcrumb.Item>
           </Breadcrumb>
           <div className="site-layout-background">
             <div className="text-secondary">
@@ -352,9 +354,27 @@ const JobDetail = ({
                   {userid == poster.id ? (
                     <>
                       {" "}
-                      <span className="applied_person">
+                    <div style={{display: "flex",justifyContent:"space-between"}}>
+                      <span className="applied_person" style={{float: "left"}}>
                         Applied Person: {appliedPerson()}
                       </span>
+                      <span  >
+                        <Link
+                          // href={"/jobs/edit/[id]"} as={`/jobs/edit/${id}`}
+                          href={{ pathname: "/jobs/edit/", query: { id: id } }}
+                         
+                        >
+                          <Button
+                            type="primary"
+                            block
+                            style={{ marginBottom: "5px", width: "50px" }}
+                          
+                          >
+                            Edit
+                          </Button>
+                        </Link>
+                      </span>
+                      </div>
                       <hr />
                     </>
                   ) : (

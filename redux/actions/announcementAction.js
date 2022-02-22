@@ -64,16 +64,15 @@ const uploadimage = (id, file, flag) => async (dispatch) => {
 
 export const getAllAnnouncement = (page,pageSize) => async (dispatch) => {
   try {
-    const response = await backend.get(`v1/announcement/data/?page=${page}&page_size=${pageSize}`);
+    const response = await backend.get(`v1/announcement/data/?page=${page}&page_size=${pageSize}`, getConfig());
     if (response.status === 200) {
       dispatch({
         type: types.GET_ALL_ANNOUNCEMENT,
         payload: response.data,
       });
+      return response.data ;
     }
-    if(response.data===200){
-    return response.data;
-    } 
+   
     return [];
   } catch (error) {
     console.log(error);

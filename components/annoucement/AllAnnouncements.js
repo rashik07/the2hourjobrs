@@ -17,12 +17,14 @@ const AllAnnouncements = ({ getAllAnnouncement }) => {
   const [page_no, setPageNo] = useState(1);
   const totaldata = useRef();
 
+
   useEffect(() => {
     totaldata.current = 0;
 
     getAllAnnouncement(page_no, pageSize.current).then((result) => {
       totaldata.current = result.count;
       setannouncment(result.results);
+    
     });
   }, [page_no]);
 
