@@ -54,7 +54,7 @@ const Profile_info = ({
   const [otp, setotp] = useState("");
   const [show, setshow] = useState(false);
   const [final, setfinal] = useState("");
-  
+
   var FirebaseConfig = {
     apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
     authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
@@ -110,7 +110,7 @@ const Profile_info = ({
     signInWithPhoneNumber(firebaseAuth, phoneNumber, verify)
       .then((confirmationResult) => {
         setfinal(confirmationResult);
-       
+
         message.success("code sent");
         setshow(true);
       })
@@ -129,7 +129,6 @@ const Profile_info = ({
         // success
         let data = { phone: mynumber };
         let status = PhoneVerifyUpdate(data, router).then((res) => {
-        
           if (res.status == 226) {
             // message.error(res.data.error);
             const { error } = Modal;
@@ -157,7 +156,6 @@ const Profile_info = ({
 
   const uploadcover = (fileList) => {
     setcover(fileList);
-   
   };
 
   useEffect(() => {
@@ -169,10 +167,13 @@ const Profile_info = ({
       setloading(true);
       updateProfile().then((result) => {
         if (result.birthday == null) {
+          // result.birthday =moment();
+          console.log(result.birthday);
         } else {
           result.birthday = moment(result.birthday, dateFormat);
+          console.log(result.birthday);
         }
-       
+
         setnumber(result.phone);
         setuser_profile(result);
         setloading(false);
@@ -183,7 +184,6 @@ const Profile_info = ({
   const uploadPhoto = (values) => {
     const formData = new FormData();
 
-  
     if (cover.length === 0) {
       message.warning("Please select your photo");
     } else {
@@ -197,13 +197,20 @@ const Profile_info = ({
 
   const onFinish = (values) => {
     const formData = new FormData();
+    if (values.birthday== undefined) {
+      values = {
+        ...values,
 
-    values = {
-      ...values,
+        birthday: values["birthday"],
+      };
+    } else {
+      values = {
+        ...values,
 
-      birthday: values["birthday"].format("YYYY-MM-DD"),
-    };
-
+        birthday: values["birthday"].format("YYYY-MM-DD"),
+      };
+    }
+    console.log(values.birthday);
     editUserProfile(values, user_profile.id);
     setloader(true);
     updatePhone(values, user_profile.id);
@@ -303,7 +310,11 @@ const Profile_info = ({
           name="register"
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
-          initialValues={user_profile}
+          initialValues={
+            user_profile
+
+            // {'birthday':moment('2015/01/01', dateFormat)}
+          }
         >
           <Form.Item
             name="employeer"
@@ -444,16 +455,16 @@ const Profile_info = ({
           <Form.Item
             label="Date of Birth"
             name="birthday"
-            rules={[
-              {
-                type: "date",
-                message: "The input is not valid BOD!",
-              },
-              {
-                required: true,
-                message: "Please input your BOD!",
-              },
-            ]}
+            // rules={[
+            //   {
+            //     type: "date",
+            //     message: "The input is not valid BOD!",
+            //   },
+            //   {
+            //     required: true,
+            //     message: "Please input your BOD!",
+            //   },
+            // ]}
           >
             <DatePicker format={dateFormat} />
           </Form.Item>
