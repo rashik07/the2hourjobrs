@@ -47,7 +47,7 @@ const getItems = (isSignedIn, signOut, user_profile) => {
           <a>
             <UserOutlined />
 
-            {user_profile.username}
+            {user_profile.username? user_profile.username.substr(0, 4):""}
           </a>
         </Link>
       );
@@ -63,7 +63,7 @@ const getItems = (isSignedIn, signOut, user_profile) => {
             style={{ marginTop: "10px", borderRadius: "50%" }}
           />
           {"  "}
-          {user_profile.username}
+          {user_profile.username? user_profile.username.substr(0, 9):""}
         </a>
       </Link>
     );

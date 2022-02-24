@@ -68,6 +68,10 @@
 }
 .ant-select:not(.ant-select-customize-input) .ant-select-selector {
   border: 0px solid #95d5d2;
+  /* border-bottom: 1px solid #95d5d2; */
+}
+.ant-select{
+  border: 0px solid #95d5d2;
   border-bottom: 1px solid #95d5d2;
 }
 .ant-select:not(.ant-select-customize-input) .ant-select-selector:hover {
@@ -89,6 +93,28 @@
   border-bottom: 1px solid #95d5d2;
   border-radius: 0px;
 }
+.form-control-jobpost{
+  margin-bottom: 1rem;
+  width: 100%;
+  padding: 7px 7px;
+  border: 1px solid #95d5d2;
+  border-radius: 5px;
+}
+.select-option .ant-select {
+  border: 1px solid #95d5d2;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  width: 100%;
+
+}
+
+/* .form-control-jobpost-select{
+  margin-bottom: 1rem;
+  width: 100%;
+ 
+  border: 1px solid #95d5d2;
+  border-radius: 5px;
+} */
 .form-label {
   margin-bottom: 2rem;
   text-transform: uppercase;

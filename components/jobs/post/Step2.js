@@ -15,10 +15,12 @@ const Step2 = ({ postStep, setPostStep, temp_jobpost }) => {
       job_location,
     } = temp_jobpost;
 
-    if (job_location.length == 0) {
+    if (job_location.length == 0 ||job_location=="") {
       message.warning("You must select Job location");
       return;
+     
     }
+    {console.log(job_location);}
     if (!negotiable) {
       // console.log(parseInt(min_salary),parseInt(max_salary))
       if (!min_salary) {
@@ -44,41 +46,74 @@ const Step2 = ({ postStep, setPostStep, temp_jobpost }) => {
   console.log(temp_jobpost);
   return (
     <>
-      <Space direction="vertical" size="large">
+      <br />
         <Row>
-          <Col span={24}>
+          <Col
+            xs={{ span: 24, offset: 0 }}
+            sm={{ span: 24, offset: 0 }}
+            md={{ span: 12, offset: 6 }}
+            lg={{ span: 12, offset: 6 }}
+            xl={{ span: 12, offset: 6 }}
+          >
             <StepsParent item="workplace" />
           </Col>
-          <br />
-
-          <Col span={24}>
+          <br /> <br /><br />
+          <Col
+            xs={{ span: 24, offset: 0 }}
+            sm={{ span: 24, offset: 0 }}
+            md={{ span: 12, offset: 6 }}
+            lg={{ span: 12, offset: 6 }}
+            xl={{ span: 12, offset: 6 }}
+          >
             <StepsParent item="job_location" />
           </Col>
-          <Col span={24}>
+          <br /> <br /><br />
+          <Col
+            xs={{ span: 24, offset: 0 }}
+            sm={{ span: 24, offset: 0 }}
+            md={{ span: 12, offset: 6 }}
+            lg={{ span: 12, offset: 6 }}
+            xl={{ span: 12, offset: 6 }}
+          >
             <StepsParent item="salary" />
           </Col>
-          <Col span={24}>
+          <br /> <br /><br />
+          <Col
+            xs={{ span: 24, offset: 0 }}
+            sm={{ span: 24, offset: 0 }}
+            md={{ span: 12, offset: 6 }}
+            lg={{ span: 12, offset: 6 }}
+            xl={{ span: 12, offset: 6 }}
+          >
             <StepsParent item="description" />
           </Col>
+          <br /> <br /><br />
+          <Col
+            xs={{ span: 24, offset: 0 }}
+            sm={{ span: 24, offset: 0 }}
+            md={{ span: 12, offset: 6 }}
+            lg={{ span: 12, offset: 6 }}
+            xl={{ span: 12, offset: 6 }}
+          >
+            <div >
+              <Button
+                onClick={() => setPostStep(postStep - 1)}
+                className="btn btn-secondary mr-3"
+                style={{
+                  marginRight: "10px",
+                  backgroundColor: "dodgerblue",
+                  color: "#ffffff",
+                }}
+              >
+                Prev
+              </Button>
+              <Button onClick={onSubmit} className="btn btn-primary">
+                Next
+              </Button>
+            </div>
+          </Col>
         </Row>
-      </Space>
-
-      <div style={{ float: "right" }}>
-        <Button
-          onClick={() => setPostStep(postStep - 1)}
-          className="btn btn-secondary mr-3"
-          style={{
-            marginRight: "10px",
-            backgroundColor: "dodgerblue",
-            color: "#ffffff",
-          }}
-        >
-          Prev
-        </Button>
-        <Button onClick={onSubmit} className="btn btn-primary">
-          Next
-        </Button>
-      </div>
+    
     </>
   );
 };

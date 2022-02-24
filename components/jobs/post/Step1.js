@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import StepsParent from "./StepsParent";
 import { connect } from "react-redux";
-import {  Row, Col, message,Button } from "antd";
+import { Row, Col, message, Button } from "antd";
 
 const Step1 = ({ postStep, setPostStep, temp_jobpost }) => {
   const onSubmit = () => {
@@ -34,40 +34,55 @@ const Step1 = ({ postStep, setPostStep, temp_jobpost }) => {
   return (
     <>
       <br />
-
-      <StepsParent item="title" />
-
-      {/* <StepsParent item="image">
-        <CropImageUploader limit={1} uploadImage={setImage} />
-      </StepsParent> */}
-
       <Row>
-        <Col xs={24} sm={24} md={8} lg={8} xl={8}>
+        <Col
+          xs={{ span: 24, offset: 0 }}
+          sm={{ span: 24, offset: 0 }}
+          md={{ span: 5, offset: 0 }}
+          lg={{ span: 5, offset: 0 }}
+          xl={{ span: 5, offset: 0 }}
+        >
+          <img
+            src="../../../img/banner_jobpost2.jpg"
+            style={{ width: "100%" }}
+          />
+        </Col>
+        <Col
+          xs={{ span: 24, offset: 0 }}
+          sm={{ span: 24, offset: 0 }}
+          md={{ span: 12 , offset: 1}}
+          lg={{ span: 12 , offset: 1}}
+          xl={{ span: 12, offset:  1}}
+        >
+          <StepsParent item="title" />
+
           <StepsParent item="vacancy" />
-        </Col>
-        <Col xs={24} sm={24} md={8} lg={8} xl={8} id="jobpost_category">
+
           <StepsParent item="category" />
-        </Col>
-        <Col xs={24} sm={24} md={8} lg={8} xl={8}>
+
           <StepsParent item="deadline" />
+
+          <StepsParent item="skills" />
+
+          <StepsParent item="employment_status" />
+
+          <Button onClick={onSubmit} style={{ marginTop: "10px" }}>
+            Next
+          </Button>
+        </Col>
+        <Col
+          xs={{ span: 24, offset: 0 }}
+          sm={{ span: 24, offset: 0 }}
+          md={{ span: 5, offset: 1 }}
+          lg={{ span: 5, offset: 1 }}
+          xl={{ span: 5, offset: 1 }}
+        >
+          <img
+            src="../../../img/banner_jobpost.jpg"
+            style={{ width: "100%" }}
+          />
         </Col>
       </Row>
-
-      <StepsParent item="skills" />
-
-      <br />
-
-      <StepsParent item="employment_status" />
-
-      <br />
-
-      <Button onClick={onSubmit} style={{ float: "right" }}  >
-        Next
-      </Button>
-
-      <br />
-      <br />
-      <br />
     </>
   );
 };
