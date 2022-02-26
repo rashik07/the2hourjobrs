@@ -226,7 +226,10 @@ const jobs = ({
               showPage={showPage}
             />
             <Space className="search_bar banner_button">
-              <Button style={{ borderRadius: "5px" }}> <Link href="/jobs/list">Find jobs</Link></Button>
+              <Button style={{ borderRadius: "5px" }}>
+                {" "}
+                <Link href="/jobs/list" >Find jobs</Link>
+              </Button>
               <Button
                 style={{
                   borderRadius: "5px",
@@ -234,7 +237,7 @@ const jobs = ({
                   border: "1px solid",
                 }}
               >
-              <Link href="/worker/list"> Find talent</Link> 
+                <Link href="/worker/list"> Find talent</Link>
               </Button>
             </Space>
 
@@ -364,30 +367,29 @@ const jobs = ({
                 setFilter={setFilter}
                 reload={setShowFilterJobs}
               /> */}
-          
           </div>
           <Row>
-              {/* <Divider /> */}
-              <Col xs={24} sm={24} md={24} lg={24} xl={24}>
-                <div
-                  style={{
-                    backgroundImage: `url('/img/banner4.png')`,
-                    height: "280px",
-                    marginBottom: "15px",
-                    borderRadius: "5px",
-                    backgroundSize:"cover",
-                  }}
-                  className="stepJobPostPc"
-                >
-                  {/* <Button className="jobpost_btn">
+            {/* <Divider /> */}
+            <Col xs={24} sm={24} md={24} lg={24} xl={24}>
+              <div
+                style={{
+                  backgroundImage: `url('/img/banner4.png')`,
+                  height: "280px",
+                  marginBottom: "15px",
+                  borderRadius: "5px",
+                  backgroundSize: "cover",
+                }}
+                className="stepJobPostPc"
+              >
+                {/* <Button className="jobpost_btn">
                     <Link href="/jobs/post">Post a Job</Link>
                   </Button> */}
-                  {/* <Button className="jobpost_btn"> */}
-                  {createPostBottominpc()}
-                  {/* </Button> */}
-                </div>
-              </Col>
-            </Row>
+                {/* <Button className="jobpost_btn"> */}
+                {createPostBottominpc()}
+                {/* </Button> */}
+              </div>
+            </Col>
+          </Row>
         </Content>
         <Affix offsetBottom={bottom} style={{ textAlign: "center" }}>
           {/* <Button className="jobpost_btn_mobile">

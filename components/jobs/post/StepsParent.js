@@ -41,8 +41,10 @@ const renderItem = (item, children, saveTemporayJobPost, temp_jobpost) => {
 
         return (
           <>
-            <label className="form-label">Skills</label>
-            <TagInput value={temp_jobpost.skills} setValue={setSkill} />
+            <div style={{ marginBottom: "1rem" }}>
+              <label className="form-label">Skills</label>
+              <TagInput value={temp_jobpost.skills} setValue={setSkill} />
+            </div>
           </>
         );
 
@@ -122,61 +124,63 @@ const renderItem = (item, children, saveTemporayJobPost, temp_jobpost) => {
         const negotiation_options = [true];
         return (
           <>
-            <label className="form-label">Salary</label>
-            <br />
+            <div style={{ marginBottom: "1rem" }}>
+              <label className="form-label">Salary</label>
+              <br />
 
-            <Row>
-              {temp_jobpost.negotiable ? (
-                ""
-              ) : (
-                <>
-                  <Col xs={11} sm={11} md={11} lg={11} xl={11}>
-                    <input
-                      type="number"
-                      className="form-control-jobpost"
-                      placeholder="From"
-                      onChange={(e) =>
-                        saveTemporayJobPost({
-                          min_salary: temp_jobpost.min_salary,
-                          min_salary: e.target.value,
-                        })
-                      }
-                      defaultValue={temp_jobpost.min_salary}
-                    />
-                  </Col>
-                  &mdash;
-                  <Col xs={11} sm={11} md={11} lg={11} xl={11}>
-                    <input
-                      type="number"
-                      className="form-control-jobpost"
-                      placeholder="To"
-                      onChange={(e) =>
-                        saveTemporayJobPost({
-                          max_salary: temp_jobpost.max_salary,
-                          max_salary: e.target.value,
-                        })
-                      }
-                      defaultValue={temp_jobpost.max_salary}
-                    />
-                  </Col>
-                </>
-              )}
+              <Row>
+                {temp_jobpost.negotiable ? (
+                  ""
+                ) : (
+                  <>
+                    <Col xs={11} sm={11} md={11} lg={11} xl={11}>
+                      <input
+                        type="number"
+                        className="form-control-jobpost"
+                        placeholder="From"
+                        onChange={(e) =>
+                          saveTemporayJobPost({
+                            min_salary: temp_jobpost.min_salary,
+                            min_salary: e.target.value,
+                          })
+                        }
+                        defaultValue={temp_jobpost.min_salary}
+                      />
+                    </Col>
+                    &mdash;
+                    <Col xs={11} sm={11} md={11} lg={11} xl={11}>
+                      <input
+                        type="number"
+                        className="form-control-jobpost"
+                        placeholder="To"
+                        onChange={(e) =>
+                          saveTemporayJobPost({
+                            max_salary: temp_jobpost.max_salary,
+                            max_salary: e.target.value,
+                          })
+                        }
+                        defaultValue={temp_jobpost.max_salary}
+                      />
+                    </Col>
+                  </>
+                )}
 
-              <Col xs={24} sm={24} md={24} lg={24} xl={24}>
-                <Checkbox
-                  checked={temp_jobpost.negotiable}
-                  onChange={(e) => {
-                    if (e.target.checked) {
-                      saveTemporayJobPost({ negotiable: true });
-                    } else {
-                      saveTemporayJobPost({ negotiable: false });
-                    }
-                  }}
-                >
-                  Negotiable
-                </Checkbox>
-              </Col>
-            </Row>
+                <Col xs={24} sm={24} md={24} lg={24} xl={24}>
+                  <Checkbox
+                    checked={temp_jobpost.negotiable}
+                    onChange={(e) => {
+                      if (e.target.checked) {
+                        saveTemporayJobPost({ negotiable: true });
+                      } else {
+                        saveTemporayJobPost({ negotiable: false });
+                      }
+                    }}
+                  >
+                    Negotiable
+                  </Checkbox>
+                </Col>
+              </Row>
+            </div>
           </>
         );
 
@@ -230,15 +234,17 @@ const renderItem = (item, children, saveTemporayJobPost, temp_jobpost) => {
 
         return (
           <>
-            <label className="form-label">Employment Status</label>
-            <br />
-            <CheckBox
-              value={temp_jobpost.employment_status}
-              setValue={(val) =>
-                saveTemporayJobPost({ employment_status: val })
-              }
-              options={es_options}
-            />
+            <div style={{ marginBottom: "1rem" }}>
+              <label className="form-label">Employment Status</label>
+              <br />
+              <CheckBox
+                value={temp_jobpost.employment_status}
+                setValue={(val) =>
+                  saveTemporayJobPost({ employment_status: val })
+                }
+                options={es_options}
+              />
+            </div>
           </>
         );
 
@@ -247,13 +253,16 @@ const renderItem = (item, children, saveTemporayJobPost, temp_jobpost) => {
 
         return (
           <>
-            <label className="form-label">Workplace</label>
-            <br />
-            <CheckBox
-              value={temp_jobpost.workplace}
-              setValue={(val) => saveTemporayJobPost({ workplace: val })}
-              options={workplace_options}
-            />
+            <div style={{ marginBottom: "1rem" }}>
+              <label className="form-label">Workplace</label>
+              <br />
+              <CheckBox
+                value={temp_jobpost.workplace}
+                setValue={(val) => saveTemporayJobPost({ workplace: val })}
+                options={workplace_options}
+                // className="form-control-jobpost"
+              />
+            </div>
           </>
         );
 

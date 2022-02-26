@@ -66,7 +66,7 @@ const Step1 = ({ postStep, setPostStep, temp_jobpost }) => {
 
           <StepsParent item="employment_status" />
 
-          <Button onClick={onSubmit} style={{ marginTop: "10px" }}>
+          <Button onClick={onSubmit} >
             Next
           </Button>
         </Col>

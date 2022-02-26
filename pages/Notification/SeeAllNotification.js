@@ -45,7 +45,7 @@ const SeeAllNotification = ({
           >
           <a onClick={(e) => notificationRead(notification["id"])}>
             {notification["unread"] ? (
-                <p style={{backgroundColor: "skyblue"}}>{notification["description"]}</p>
+                <p style={{fontWeight: "bold" }}>{notification["description"]}</p>
             ) : (
               <p>{notification["description"]}</p>
             )}

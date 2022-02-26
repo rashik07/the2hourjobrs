@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { connect } from "react-redux";
 import { Layout } from "antd";
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button, Checkbox, message } from "antd";
 import Navbar from "../../container/navbar/newNavbar";
 import { signIn, googleLogin, facebookLogin } from "redux/actions/authAction";
 import { GoogleLogin } from "react-google-login";
@@ -14,8 +14,8 @@ import { useHistory } from "react-router-dom";
 // import { facebookProvider } from "config/authMethods";
 // import socialMediaAuth from "service/auth";
 
-const handleSubmit = (e, username, password, signIn, router) => {
-  e.preventDefault();
+const handleSubmit = (username, password, signIn, router) => {
+  // e.preventDefault();
   if (signIn({ username, password }) === true) {
     router.back();
   }
@@ -30,7 +30,7 @@ const Login = ({
 }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [hidePassword, setHidePassword] = useState(true);
+  // const [hidePassword, setHidePassword] = useState(true);
 
   const router = useRouter();
   const handleOnClick = async (provider) => {
@@ -62,6 +62,15 @@ const Login = ({
     console.log(response);
     facebookLogin(response.accessToken);
   };
+  const onFinish = () => {
+    handleSubmit(username, password, signIn, router);
+    // message.success("Submit success!");
+  };
+
+  const onFinishFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
+  };
+
   return (
     <>
       <Head>
@@ -76,27 +85,40 @@ const Login = ({
       <Layout className="layout">
         <Navbar />
         <main className="form-signin text-center ">
-          <form>
+          <Form
+            // form={form}
+            layout="vertical"
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+            autoComplete="off"
+          >
             <h1>Login</h1>
             <div className="m-4 ">
-              <label htmlFor="inputEmail " className="fs-6 fw-normal">
-                Email / Username:
-              </label>
-              <Input
-                type="text"
-                className="form-control"
-                onChange={(e) => setUsername(e.target.value)}
-              />
+              <Form.Item
+                name="username"
+                label="Username"
+                rules={[{ required: true }]}
+              >
+                <Input
+                  type="text"
+                  className="form-control"
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+              </Form.Item>
             </div>
             <div className="m-4">
-              <label htmlFor="inputPassword" className="fs-6 fw-normal">
-                Password:
-              </label>
-              <Input.Password
-                type={hidePassword ? "password" : "text"}
-                className="form-control"
-                onChange={(e) => setPassword(e.target.value)}
-              />
+         
+              <Form.Item
+                name="password"
+                label="Password"
+                rules={[{ required: true }]}
+              >
+                <Input.Password
+                  // type={hidePassword ? "password" : "text"}
+                  className="form-control"
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </Form.Item>
             </div>
             <div data-v-e52648b8 className="right">
               <div
@@ -108,24 +130,21 @@ const Login = ({
               </div>
             </div>
             <div>
-              <div className="d-grid gap-2 d-flex " style={{ height: "50px" }}>
-                <button
-                  className="w-50 btn btn-lg btn-success fs-6 mr-3"
-                  onClick={(e) =>
-                    handleSubmit(e, username, password, signIn, router)
-                  }
-                >
-                  Log in
-                </button>
+              <div
+                style={{
+                  height: "50px",
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
+                <Form.Item style={{ marginRight: "10px" }}>
+                  <Button htmlType="submit" style={{ borderRadius: "5px"}}>Log in</Button>
+                </Form.Item>
 
                 <Link href="/auth/signup">
-                  <button
-                    className="w-50 btn btn-lg fs-6 text-white"
-                    type="submit"
-                    style={{ backgroundColor: "#163F66" }}
-                  >
+                  <Button type="submit" style={{ backgroundColor: "#163F66",borderRadius: "5px" }}>
                     Sign Up
-                  </button>
+                  </Button>
                 </Link>
                 {/* <button onClick={() => handleOnClick(facebookProvider)}>facebook</button> */}
               </div>
@@ -152,7 +171,7 @@ const Login = ({
                 />
               </div>
             </div>
-          </form>
+          </Form>
         </main>
       </Layout>
     </>

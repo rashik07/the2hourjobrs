@@ -34,56 +34,36 @@ const Step3 = ({ postStep, setPostStep, temp_jobpost }) => {
 
   return (
     <>
-    <br />
+      <br />
       <Row>
         <Col
           xs={{ span: 24, offset: 0 }}
           sm={{ span: 24, offset: 0 }}
-          md={{ span: 12, offset: 6 }}
-          lg={{ span: 12, offset: 6 }}
-          xl={{ span: 12, offset: 6 }}
+          md={{ span: 5, offset: 0 }}
+          lg={{ span: 5, offset: 0 }}
+          xl={{ span: 5, offset: 0 }}
+        >
+          <img
+            src="../../../img/banner_jobpost2.jpg"
+            style={{ width: "100%" }}
+          />
+        </Col>
+        <Col
+          xs={{ span: 24, offset: 0 }}
+          sm={{ span: 24, offset: 0 }}
+          md={{ span: 12, offset: 1 }}
+          lg={{ span: 12, offset: 1 }}
+          xl={{ span: 12, offset: 1 }}
         >
           <StepsParent item="education" />
-        </Col>
-        <br /> <br /><br />
-        <Col
-          xs={{ span: 24, offset: 0 }}
-          sm={{ span: 24, offset: 0 }}
-          md={{ span: 12, offset: 6 }}
-          lg={{ span: 12, offset: 6 }}
-          xl={{ span: 12, offset: 6 }}
-        >
+
           <StepsParent item="gender" />
-        </Col>
-        <br /> <br /><br />
-        <Col
-          xs={{ span: 24, offset: 0 }}
-          sm={{ span: 24, offset: 0 }}
-          md={{ span: 12, offset: 6 }}
-          lg={{ span: 12, offset: 6 }}
-          xl={{ span: 12, offset: 6 }}
-        >
+
           <StepsParent item="age" />
-        </Col>
-        <br /> <br /><br />
-        <Col
-          xs={{ span: 24, offset: 0 }}
-          sm={{ span: 24, offset: 0 }}
-          md={{ span: 12, offset: 6 }}
-          lg={{ span: 12, offset: 6 }}
-          xl={{ span: 12, offset: 6 }}
-        >
+
           <StepsParent item="experience" />
-        </Col>
-        <br /> <br /><br />
-        <Col
-          xs={{ span: 24, offset: 0 }}
-          sm={{ span: 24, offset: 0 }}
-          md={{ span: 12, offset: 6 }}
-          lg={{ span: 12, offset: 6 }}
-          xl={{ span: 12, offset: 6 }}
-        >
-          <div >
+
+          <div>
             <Button
               onClick={() => setPostStep(postStep - 1)}
               className="btn btn-secondary mr-3"
@@ -99,6 +79,18 @@ const Step3 = ({ postStep, setPostStep, temp_jobpost }) => {
               Next
             </Button>
           </div>
+        </Col>
+        <Col
+          xs={{ span: 24, offset: 0 }}
+          sm={{ span: 24, offset: 0 }}
+          md={{ span: 5, offset: 1 }}
+          lg={{ span: 5, offset: 1 }}
+          xl={{ span: 5, offset: 1 }}
+        >
+          <img
+            src="../../../img/banner_jobpost.jpg"
+            style={{ width: "100%" }}
+          />
         </Col>
       </Row>
     </>

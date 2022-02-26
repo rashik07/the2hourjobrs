@@ -15,12 +15,13 @@ const Step2 = ({ postStep, setPostStep, temp_jobpost }) => {
       job_location,
     } = temp_jobpost;
 
-    if (job_location.length == 0 ||job_location=="") {
+    if (job_location.length == 0 || job_location == "") {
       message.warning("You must select Job location");
       return;
-     
     }
-    {console.log(job_location);}
+    {
+      console.log(job_location);
+    }
     if (!negotiable) {
       // console.log(parseInt(min_salary),parseInt(max_salary))
       if (!min_salary) {
@@ -47,73 +48,64 @@ const Step2 = ({ postStep, setPostStep, temp_jobpost }) => {
   return (
     <>
       <br />
-        <Row>
-          <Col
-            xs={{ span: 24, offset: 0 }}
-            sm={{ span: 24, offset: 0 }}
-            md={{ span: 12, offset: 6 }}
-            lg={{ span: 12, offset: 6 }}
-            xl={{ span: 12, offset: 6 }}
-          >
-            <StepsParent item="workplace" />
-          </Col>
-          <br /> <br /><br />
-          <Col
-            xs={{ span: 24, offset: 0 }}
-            sm={{ span: 24, offset: 0 }}
-            md={{ span: 12, offset: 6 }}
-            lg={{ span: 12, offset: 6 }}
-            xl={{ span: 12, offset: 6 }}
-          >
-            <StepsParent item="job_location" />
-          </Col>
-          <br /> <br /><br />
-          <Col
-            xs={{ span: 24, offset: 0 }}
-            sm={{ span: 24, offset: 0 }}
-            md={{ span: 12, offset: 6 }}
-            lg={{ span: 12, offset: 6 }}
-            xl={{ span: 12, offset: 6 }}
-          >
-            <StepsParent item="salary" />
-          </Col>
-          <br /> <br /><br />
-          <Col
-            xs={{ span: 24, offset: 0 }}
-            sm={{ span: 24, offset: 0 }}
-            md={{ span: 12, offset: 6 }}
-            lg={{ span: 12, offset: 6 }}
-            xl={{ span: 12, offset: 6 }}
-          >
-            <StepsParent item="description" />
-          </Col>
-          <br /> <br /><br />
-          <Col
-            xs={{ span: 24, offset: 0 }}
-            sm={{ span: 24, offset: 0 }}
-            md={{ span: 12, offset: 6 }}
-            lg={{ span: 12, offset: 6 }}
-            xl={{ span: 12, offset: 6 }}
-          >
-            <div >
-              <Button
-                onClick={() => setPostStep(postStep - 1)}
-                className="btn btn-secondary mr-3"
-                style={{
-                  marginRight: "10px",
-                  backgroundColor: "dodgerblue",
-                  color: "#ffffff",
-                }}
-              >
-                Prev
-              </Button>
-              <Button onClick={onSubmit} className="btn btn-primary">
-                Next
-              </Button>
-            </div>
-          </Col>
-        </Row>
-    
+      <Row>
+        <Col
+          xs={{ span: 24, offset: 0 }}
+          sm={{ span: 24, offset: 0 }}
+          md={{ span: 5, offset: 0 }}
+          lg={{ span: 5, offset: 0 }}
+          xl={{ span: 5, offset: 0 }}
+        >
+          <img
+            src="../../../img/banner_jobpost2.jpg"
+            style={{ width: "100%" }}
+          />
+        </Col>
+        <Col
+          xs={{ span: 24, offset: 0 }}
+          sm={{ span: 24, offset: 0 }}
+          md={{ span: 12 , offset: 1}}
+          lg={{ span: 12 , offset: 1}}
+          xl={{ span: 12, offset:  1}}
+        >
+          <StepsParent item="workplace"/>
+
+          <StepsParent item="job_location" />
+
+          <StepsParent item="salary" />
+
+          <StepsParent item="description" />
+
+          <div>
+            <Button
+              onClick={() => setPostStep(postStep - 1)}
+              className="btn btn-secondary mr-3"
+              style={{
+                marginRight: "10px",
+                backgroundColor: "dodgerblue",
+                color: "#ffffff",
+              }}
+            >
+              Prev
+            </Button>
+            <Button onClick={onSubmit} className="btn btn-primary">
+              Next
+            </Button>
+          </div>
+        </Col>
+        <Col
+          xs={{ span: 24, offset: 0 }}
+          sm={{ span: 24, offset: 0 }}
+          md={{ span: 5, offset: 1 }}
+          lg={{ span: 5, offset: 1 }}
+          xl={{ span: 5, offset: 1 }}
+        >
+          <img
+            src="../../../img/banner_jobpost.jpg"
+            style={{ width: "100%" }}
+          />
+        </Col>
+      </Row>
     </>
   );
 };

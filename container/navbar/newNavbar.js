@@ -46,8 +46,11 @@ const getItems = (isSignedIn, signOut, user_profile) => {
         <Link href="/Profile">
           <a>
             <UserOutlined />
-
-            {user_profile.username? user_profile.username.substr(0, 4):""}
+            {user_profile.username
+              ? user_profile.username.length < 10
+                ? user_profile.username.substr(0, 9)
+                : user_profile.username.substr(0, 9) + "..."
+              : ""}
           </a>
         </Link>
       );
@@ -63,7 +66,11 @@ const getItems = (isSignedIn, signOut, user_profile) => {
             style={{ marginTop: "10px", borderRadius: "50%" }}
           />
           {"  "}
-          {user_profile.username? user_profile.username.substr(0, 9):""}
+          {user_profile.username
+            ? user_profile.username.length < 10
+              ? user_profile.username.substr(0, 9)
+              : user_profile.username.substr(0, 9) + "..."
+            : ""}
         </a>
       </Link>
     );
@@ -78,7 +85,6 @@ const getItems = (isSignedIn, signOut, user_profile) => {
             <a
               onClick={() => {
                 signOut();
-                
               }}
             >
               Logout
@@ -92,14 +98,14 @@ const getItems = (isSignedIn, signOut, user_profile) => {
     <>
       <Menu.Item key="setting:13">
         <Link href="/auth/login" onClick={() => router.push("/auth/login")}>
-          Login
+          Login/Signup
         </Link>
       </Menu.Item>
-      <Menu.Item key="setting:14">
+      {/* <Menu.Item key="setting:14">
         <Link href="/auth/signup" onClick={() => router.push("/auth/signup")}>
           Sign up
         </Link>
-      </Menu.Item>
+      </Menu.Item> */}
     </>
   );
 };
@@ -173,7 +179,7 @@ const navbar = ({
               >
                 <a onClick={(e) => notificationRead(notification["id"])}>
                   {notification["unread"] ? (
-                    <p style={{ fontWeight: "bold"}}>
+                    <p style={{ fontWeight: "bold" }}>
                       {notification["description"]}
                     </p>
                   ) : (
@@ -252,7 +258,6 @@ const navbar = ({
         mode="horizontal"
         className="menu_pc"
         style={{ backgroundColor: "#95D5D2", paddingLeft: "34%" }}
-        
       >
         {createPost()}
         <SubMenu key="1" title="Jobs">
@@ -313,7 +318,6 @@ const navbar = ({
               
               </Avatar> */}
               <span>Notifications</span>
-              
             </Dropdown>
           </Badge>
         </Menu.Item>

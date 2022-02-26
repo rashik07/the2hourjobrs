@@ -1,5 +1,6 @@
 import * as types from "./../types";
 import backend from "./../../api/backend";
+import {message } from "antd";
 
 export const signIn = (logInformValues) => async (dispatch) => {
   try {
@@ -8,10 +9,12 @@ export const signIn = (logInformValues) => async (dispatch) => {
     });
     dispatch({ type: types.SIGN_IN, payload: response.data });
     console.log(response.data);
-
+  
     return true;
   } catch (error) {
     dispatch({ type: types.AUTH_FAILED });
+    // alert("wrong username or password");
+     message.error("wrong username or password");
     return false;
   }
 };
