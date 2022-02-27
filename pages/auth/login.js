@@ -59,7 +59,7 @@ const Login = ({
   };
   const responseFacebook = (response) => {
     console.log("response facebook");
-    console.log(response);
+    console.log(response.accessToken);
     facebookLogin(response.accessToken);
   };
   const onFinish = () => {

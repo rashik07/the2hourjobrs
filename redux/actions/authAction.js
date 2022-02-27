@@ -47,6 +47,7 @@ export const facebookLogin = (accesstoken) => async (dispatch) => {
     const data = { token: response.data.key, social_auth: true };
     console.log("data");
     console.log(data);
+
     dispatch({ type: types.SIGN_IN, payload: data });
     console.log(response.data);
 
