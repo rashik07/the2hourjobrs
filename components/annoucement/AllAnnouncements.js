@@ -79,9 +79,13 @@ const AllAnnouncements = ({ getAllAnnouncement }) => {
                           href={{
                             pathname: "/Profile/Profile_details/",
                             query: { id: announcment.user.id },
+                           
                           }}
                         >
-                          {announcment.user.name}
+                        <a target="_blank"> 
+                          {announcment.user.username}
+                        </a>
+                       
                         </Link>
                       </div>
                       {/* <div>

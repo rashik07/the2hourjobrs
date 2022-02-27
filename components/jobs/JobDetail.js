@@ -24,10 +24,12 @@ const renderJobLocation = (inside_dhaka, locations) => {
     : (inside_dhaka = "Outside Dhaka");
 
   const extract_location = [];
-
+  if(locations){
   locations.forEach((element) => extract_location.push(element.name));
+  
 
   locations = extract_location.join(", ");
+  }
   // locations += ` (${inside_dhaka})`;
 
   return (
@@ -139,7 +141,7 @@ const JobDetail = ({
   const { id, title, poster, applied, saved, applied_saved_id } = temp_job;
   const [disable, setDisable] = useState(false);
 
-  const btn_disable = userid === poster.id ? "disabled" : "";
+  const btn_disable = userid === (poster ? poster.id :"") ? "disabled" : "";
 
   const [appliedStatus, setAppliedStatus] = useState(applied);
 
@@ -190,10 +192,10 @@ const JobDetail = ({
                 <Link
                   href={{
                     pathname: "/Profile/Profile_details/",
-                    query: { id: temp_job.poster.id },
+                    query: { id:temp_job.poster ? temp_job.poster.id :""},
                   }}
                 >
-                  {temp_job.poster.username}
+                  {temp_job.poster ? temp_job.poster.username:""}
                 </Link>
               </Descriptions.Item>
 
@@ -215,18 +217,19 @@ const JobDetail = ({
                 temp_job.max_experience
               )}
               <Descriptions.Item label="Workplace" labelStyle={labelStyle}>
-                {temp_job.workplace.length ? temp_job.workplace.join(", ") : ""}
+                {temp_job.workplace ? temp_job.workplace.length>0 ? temp_job.workplace.join(", ") : "":""}
+                {console.log(temp_job.workplace)}
               </Descriptions.Item>
               <Descriptions.Item
                 label="Employment Status"
                 labelStyle={labelStyle}
               >
-                {temp_job.employment_status.length
+                {temp_job.employment_status?temp_job.employment_status.length
                   ? temp_job.employment_status.join(", ")
-                  : ""}
+                  : "":""}
               </Descriptions.Item>
               <Descriptions.Item label="Skills" labelStyle={labelStyle}>
-                {temp_job.skills.length ? temp_job.skills.join(", ") : ""}
+                {temp_job.skills?temp_job.skills.length ? temp_job.skills.join(", ") : "":""}
               </Descriptions.Item>
               {/* <Descriptions.Item label="Description" labelStyle={labelStyle}>
               {temp_job.job_description}
@@ -247,7 +250,7 @@ const JobDetail = ({
         return (
           <Descriptions title="Employee Requirement" layout="horizontal">
             <Descriptions.Item label="Gender" labelStyle={labelStyle}>
-              {temp_job.gender.length ? temp_job.gender.join(", ") : ""}
+              {temp_job.gender?temp_job.gender.length ? temp_job.gender.join(", ") : "":""}
             </Descriptions.Item>
             <Descriptions.Item label="Age" labelStyle={labelStyle}>
               {renderAge(temp_job.min_age, temp_job.max_age)}
@@ -342,7 +345,7 @@ const JobDetail = ({
             </Breadcrumb.Item>
             <Breadcrumb.Item href="/jobs/list">Job List</Breadcrumb.Item>
             <Breadcrumb.Item>
-              Job Details - {temp_job.title.slice(0, 15) + "..."}
+              Job Details - {temp_job.title ? temp_job.title.slice(0, 15) + "...":""}
             </Breadcrumb.Item>
           </Breadcrumb>
           <div className="site-layout-background">

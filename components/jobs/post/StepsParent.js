@@ -22,6 +22,7 @@ const renderItem = (item, children, saveTemporayJobPost, temp_jobpost) => {
               className="form-control-jobpost"
               defaultValue={temp_jobpost.title}
               // style={{width: '100%', borderRadius: "5px",}}
+           
             />
           </>
         );

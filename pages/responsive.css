@@ -225,7 +225,7 @@
   .jobpost_btn_mobile:hover {
     background-color: darkblue;
     color: #ffffff;
-    margin-left: 270px;
+    /* margin-left: 270px; */
     border: 1px solid #ffffff;
     border-radius: 5px;
   }

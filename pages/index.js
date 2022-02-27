@@ -100,8 +100,21 @@ const jobs = ({
     });
   };
   const loginAlert = () => {
-    message.error("Please login for access this feature");
-    router.push("/");
+    const { warning } = Modal;
+
+    warning({
+      title: "Please login for access this feature",
+      icon: <ExclamationCircleOutlined />,
+
+      okText: "OK",
+      okType: "danger",
+      cancelText: "No",
+      onOk() {
+        router.push("/auth/login");
+      },
+    });
+    // message.error("Please login for access this feature");
+    // router.push("/");
   };
 
   const createPost = () => {
