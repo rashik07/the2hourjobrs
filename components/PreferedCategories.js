@@ -36,6 +36,7 @@ const PreferedCategories = ({
   const onFinish = (values) => {
 
     createPreferedCategories(values);
+    // console.log(values);
     setloader(true);
     message.success("successfully added");
   };
@@ -182,12 +183,18 @@ const PreferedCategories = ({
       );
     });
   let location_list = [...division_list, ...district_list, ...thana_list];
+  console.log(view_prefered_categories.skill)
 
   let skill_list = [];
-  if (view_prefered_categories)
+  if (view_prefered_categories.skill)
+
     Object.keys(view_prefered_categories.skill).forEach(function (skill) {
       skill_list.push(view_prefered_categories.skill[skill]["name"]);
+
+      //  console.log(view_prefered_categories.skill[skill]["name"]);
+     
     });
+ 
   let form_init = {
     category: category_list,
     locations: location_list,
@@ -234,8 +241,9 @@ const PreferedCategories = ({
         </Form.Item>
         <Form.Item label="Special Skills " name="skill">
           <TagsInput></TagsInput>
-          <em>press enter to add new skills</em>
+          {/* <em>press enter to add new skills</em> */}
         </Form.Item>
+        {/* <em>press enter to add new skills</em>  */}
         <Form.Item label="Location " name="locations">
           {locationList()}
         </Form.Item>
