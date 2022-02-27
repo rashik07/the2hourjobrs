@@ -59,9 +59,9 @@ const JobPostItem = ({
     return "";
   };
 
-  useEffect(() => {
-    getSelfPostedJobs();
-  }, []);
+  // useEffect(() => {
+  //   getSelfPostedJobs();
+  // }, []);
 
   const getLocations = (location) => {
     const location_list = [];
