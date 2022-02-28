@@ -217,10 +217,41 @@ const jobs = ({
         <Navbar />
 
         <div className="slider_pic" style={{ marginTop: "64px" }}>
+          <Space className="search_bar banner_button">
+            <Button
+              style={{
+                borderRadius: "5px",
+                width: "230px",
+                height: "50px",
+                fontSize: "20px",
+                boxShadow: "0px 3px 6px rgb(0 0 0 / 16%)",
+                border: "1px solid",
+              }}
+            >
+              {" "}
+              <Link href="/jobs/list">Find jobs</Link>
+            </Button>
+            <Button
+              style={{
+                borderRadius: "5px",
+                backgroundColor: "rgba(0,0,0,0.3)",
+
+                border: "1px solid",
+                width: "230px",
+                height: "50px",
+                fontSize: "20px",
+                boxShadow: "0px 3px 6px rgb(0 0 0 / 16%)",
+                // borderShadow: "1px solid white"
+              }}
+            >
+              <Link href="/worker/list"> Find talent</Link>
+            </Button>
+          </Space>
+
           <Row>
             {/* <Notification_bar /> */}
             {/*1st part*/}
-            <h1>Find jobs & hire talent. Anywhere.</h1>
+            <h1>Find suitable jobs here...</h1>
 
             <KeywordSearch
               filter={filter}
@@ -238,21 +269,6 @@ const jobs = ({
               //setShowPage={setShowPage}
               showPage={showPage}
             />
-            <Space className="search_bar banner_button">
-              <Button style={{ borderRadius: "5px" }}>
-                {" "}
-                <Link href="/jobs/list" >Find jobs</Link>
-              </Button>
-              <Button
-                style={{
-                  borderRadius: "5px",
-                  backgroundColor: "transparent",
-                  border: "1px solid",
-                }}
-              >
-                <Link href="/worker/list"> Find talent</Link>
-              </Button>
-            </Space>
 
             {/* <Col span={12}><img src="/img/landing.png"style={{  width: "100vh", marginTop: "7vh"}}/></Col> */}
           </Row>
