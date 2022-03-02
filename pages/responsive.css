@@ -1,10 +1,10 @@
 @media only screen and (min-width: 900px) {
   .location_btn {
-    /* background-color: rgb(149, 213, 210); */
-    border: 1px solid #333131;
+    background-color: #7d7da7;
+    border: 1px solid #ffffff;
     margin: 3px;
     padding: 2px 6px;
-    color: #333131;
+    color: #ffffff;
     font-weight: 400;
     border-radius: 5px;
   }
@@ -40,18 +40,25 @@
   }
 
   .search_bar {
-    padding: 0px 40px;
+    /* padding: 0px 40px; */
+    display: flex;
+    justify-content: center;
   }
   .slider_pic {
-    background-image: url("/img/banner1.jpg");
+    background: url("/img/banner1.jpg") rgba(184, 224, 210, .7);
     background-size: cover;
     height: 90vh;
+    background-blend-mode: multiply;
+    text-align: center;
+
   }
   .slider_pic h1 {
-    color: black;
+    color: #ffffff;
     margin-left: 40px;
-    margin-top: 5vh;
+    margin-top: 1vh;
     font-size: xx-large;
+    text-shadow: 0px 3px 10px rgb(0 0 0 / 50%);
+    /* font-weight: bold; */
   }
   .picture_upload {
     position: absolute;
@@ -64,6 +71,8 @@
   .search_form {
     display: flex;
     width: 50%;
+    box-shadow: 0px 3px 10px rgb(0 0 0 / 50%);
+    border-radius:8px;
     /* margin-left: 205px; */
   }
   .applied_person {
@@ -117,7 +126,21 @@
     box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%) !important;
   }
   .banner_button {
-    margin-top: 22vh;
+    margin-top: 25vh;
+  }
+  .banner_button button {
+    border-radius: 100px;
+    width: 250px;
+    height: 60px;
+    font-Size: 20px;
+    box-shadow: 0px 3px 10px rgb(0 0 0 / 50%);
+    /* border: 1px solid #ffffff; */
+    color:#000000;
+    /* font-weight: bold; */
+  }
+  .banner_button button:hover{
+    background-color: darkblue !important;
+    border: 1px solid white;
   }
   .sidebar-layout-background-mobile {
     display: none;
@@ -130,7 +153,7 @@
     max-width: 15% !important;
     min-width: 15% !important;
     margin-left: -30px;
-    margin-top:50%;
+    margin-top: 50%;
     position: fixed;
   }
   footer {
@@ -309,5 +332,5 @@
   .breadcrumb_main {
     margin: 16px 0;
     padding-right: 40px;
-}
+  }
 }

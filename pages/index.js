@@ -217,41 +217,38 @@ const jobs = ({
         <Navbar />
 
         <div className="slider_pic" style={{ marginTop: "64px" }}>
-          <Space className="search_bar banner_button">
+        
+          <div className="search_bar banner_button" >
+          <Space>
             <Button
               style={{
-                borderRadius: "5px",
-                width: "230px",
-                height: "50px",
-                fontSize: "20px",
-                boxShadow: "0px 3px 6px rgb(0 0 0 / 16%)",
-                border: "1px solid",
+                backgroundColor: "rgb(109, 183, 132)",
+              
               }}
+              className="worker_btn"
             >
               {" "}
               <Link href="/jobs/list">Find jobs</Link>
             </Button>
             <Button
               style={{
-                borderRadius: "5px",
-                backgroundColor: "rgba(0,0,0,0.3)",
-
-                border: "1px solid",
-                width: "230px",
-                height: "50px",
-                fontSize: "20px",
-                boxShadow: "0px 3px 6px rgb(0 0 0 / 16%)",
+             
+                backgroundColor: "#ffc800",
+            
                 // borderShadow: "1px solid white"
               }}
+             
             >
-              <Link href="/worker/list"> Find talent</Link>
+              <Link href="/worker/list"> Find workers</Link>
             </Button>
-          </Space>
+            </Space>
+          </div>
+          <h1>Find suitable jobs here...</h1>
 
           <Row>
             {/* <Notification_bar /> */}
             {/*1st part*/}
-            <h1>Find suitable jobs here...</h1>
+         
 
             <KeywordSearch
               filter={filter}

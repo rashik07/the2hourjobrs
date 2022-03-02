@@ -98,7 +98,7 @@ const LocationFilter = ({
             lineBreak: "anywhere",
           }}
         >
-          <span style={{ fontWeight: "bold", color: "#333131" }}>Location:</span>
+          <span style={{ fontWeight: "bold", color: "#000000" }}>Location:</span>
           {locationList()}
           {/* <h3 style={{ marginTop: "15px " }}>Quick links</h3>
           <div className="quick_link">
