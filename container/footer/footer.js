@@ -142,6 +142,9 @@ const Footer = () => {
           
            
           </div>
+          <div className="footer_social_icon" style={{float: 'right',color:"#656565"}}>
+            <p>This page is supported by The2hourjob Foundation</p>
+          </div>
           <Divider />
         </div>
       </div>
