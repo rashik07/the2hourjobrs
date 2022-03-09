@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { connect } from "react-redux";
 import { Layout } from "antd";
-import { Form, Input, Button, Checkbox, message } from "antd";
+import { Form, Input, Button, Checkbox, message, Modal } from "antd";
 import Navbar from "../../container/navbar/newNavbar";
 import { signIn, googleLogin, facebookLogin } from "redux/actions/authAction";
 import { GoogleLogin } from "react-google-login";
@@ -71,6 +71,19 @@ const Login = ({
     console.log("Failed:", errorInfo);
   };
 
+  function info() {
+    Modal.info({
+   
+      content: (
+        <div style={{textAlign: "center" }}>
+          <img style={{paddingBottom:"15px"}} src="https://mybdjobs.bdjobs.com/mybdjobs/images/facebook-warning.gif"/>
+          <h5>Sorry, you are unable to sign in to your account due to Facebook technical issues.</h5>
+         
+        </div>
+      ),
+      onOk() {},
+    });
+  }
   return (
     <>
       <Head>
@@ -107,7 +120,6 @@ const Login = ({
               </Form.Item>
             </div>
             <div className="m-4">
-         
               <Form.Item
                 name="password"
                 label="Password"
@@ -138,11 +150,16 @@ const Login = ({
                 }}
               >
                 <Form.Item style={{ marginRight: "10px" }}>
-                  <Button htmlType="submit" style={{ borderRadius: "5px"}}>Log in</Button>
+                  <Button htmlType="submit" style={{ borderRadius: "5px" }}>
+                    Log in
+                  </Button>
                 </Form.Item>
 
                 <Link href="/auth/signup">
-                  <Button type="submit" style={{ backgroundColor: "#163F66",borderRadius: "5px" }}>
+                  <Button
+                    type="submit"
+                    style={{ backgroundColor: "#163F66", borderRadius: "5px" }}
+                  >
                     Sign Up
                   </Button>
                 </Link>
@@ -162,13 +179,15 @@ const Login = ({
                 />
 
                 <FacebookLogin
-                  appId={REACT_APP_FACEBOOK_CLIENT_ID}
-                  fields="name,email,picture"
-                  scope="public_profile,email"
-                  buttonText="Join with Facebook"
-                  callback={responseFacebook}
-                  version="3.1"
+                  // appId={REACT_APP_FACEBOOK_CLIENT_ID}
+                  // fields="name,email,picture"
+                  // scope="public_profile,email"
+                  // buttonText="Join with Facebook"
+                  // callback={responseFacebook}
+                  // version="3.1"
+                  onClick={info}
                 />
+            
               </div>
             </div>
           </Form>
