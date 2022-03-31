@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Select, Form, Button, Divider,Typography,Input,message } from "antd";
+import {
+  Select,
+  Form,
+  Button,
+  Divider,
+  Typography,
+  Input,
+  message,
+} from "antd";
 import { connect } from "react-redux";
 import {
   getDistrict,
@@ -8,7 +16,6 @@ import {
   updateProfile,
   editUserProfile,
 } from "@/redux/actions/userAction";
-
 
 const Profile_adress = ({
   updateProfile,
@@ -22,10 +29,10 @@ const Profile_adress = ({
   get_district,
   get_thana,
 }) => {
-    const { Option } = Select;
-    const { TextArea } = Input;
-    const { Title } = Typography;
-    const [value, setValue] = React.useState();
+  const { Option } = Select;
+  const { TextArea } = Input;
+  const { Title } = Typography;
+  const [value, setValue] = React.useState();
   const [loader, setloader] = useState(false);
 
   useEffect(() => {
@@ -37,7 +44,7 @@ const Profile_adress = ({
   }, [loader]);
 
   const onFinish2 = (values) => {
-    editUserProfile(values,user_profile.id);
+    editUserProfile(values, user_profile.id);
     setloader(true);
     message.success("successfully added your address");
   };
@@ -51,37 +58,37 @@ const Profile_adress = ({
     setFormLayout(layout);
   };
   const formItemLayout =
-  formLayout === "horizontal"
-    ? {
-        labelCol: {
-          span: 4,
-        },
-        wrapperCol: {
-          span: 12,
-        },
-      }
-    : null;
-const buttonItemLayout =
-  formLayout === "horizontal"
-    ? {
-        wrapperCol: {
-          span: 14,
-          offset: 4,
-        },
-      }
-    : null;
-const tailFormItemLayout = {
-  wrapperCol: {
-    xs: {
-      span: 24,
-      offset: 0,
+    formLayout === "horizontal"
+      ? {
+          labelCol: {
+            span: 4,
+          },
+          wrapperCol: {
+            span: 12,
+          },
+        }
+      : null;
+  const buttonItemLayout =
+    formLayout === "horizontal"
+      ? {
+          wrapperCol: {
+            span: 14,
+            offset: 4,
+          },
+        }
+      : null;
+  const tailFormItemLayout = {
+    wrapperCol: {
+      xs: {
+        span: 24,
+        offset: 0,
+      },
+      sm: {
+        span: 16,
+        offset: 8,
+      },
     },
-    sm: {
-      span: 16,
-      offset: 8,
-    },
-  },
-};
+  };
 
   let divisionToRender;
   if (get_division) {
@@ -139,6 +146,10 @@ const tailFormItemLayout = {
         </Divider>
         <Form.Item label="Division" name="division">
           <Select
+            style={{
+              width: "84%",
+              color: "black",
+            }}
             showSearch
             className="filtter-items"
             value={value}
@@ -157,6 +168,10 @@ const tailFormItemLayout = {
 
         <Form.Item label="District" name="district">
           <Select
+            style={{
+              width: "84%",
+              color: "black",
+            }}
             showSearch
             className="filtter-items"
             value={value}
@@ -174,6 +189,10 @@ const tailFormItemLayout = {
         </Form.Item>
         <Form.Item label="Thana" name="thana">
           <Select
+            style={{
+              width: "84%",
+              color: "black",
+            }}
             showSearch
             className="filtter-items"
             value={value}
@@ -190,7 +209,13 @@ const tailFormItemLayout = {
           </Select>
         </Form.Item>
         <Form.Item label="Address" name="address">
-          <TextArea rows={4} />
+          <TextArea
+            rows={4}
+            style={{
+              width: "84%",
+              color: "black",
+            }}
+          />
         </Form.Item>
         <Form.Item {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit">

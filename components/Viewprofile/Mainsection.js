@@ -202,7 +202,7 @@ const Mainsection = ({
   //qualilification_table end
   // object start
   const objective = () => {
-    if (user_profile.objective == null || user_profile.objective == "null") {
+    if (user_profile.objective == null || user_profile.objective == "null" || user_profile.objective == "") {
       return " ";
     }
 
