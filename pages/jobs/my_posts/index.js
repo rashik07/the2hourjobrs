@@ -29,7 +29,7 @@ const SelfPostedJobs = ({
     });
     dispatch({ type: types.RESET_TEMP_JOB_STATE });
   }, []);
-  console.log(selfpostedjob.length);
+
 
   const showSelfPostedJobs = (job) => {
     if (selfpostedjob.length > 0) {
