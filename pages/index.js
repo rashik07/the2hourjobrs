@@ -2,49 +2,209 @@ import Head from "next/head";
 import React, { useState, useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import Navbar from "../container/navbar/newNavbar";
-import JobList from "components/Home/list/JobList";
 import KeywordSearch from "components/Home/list/KeywordSearch";
-import SelectedFilter from "components/Home/list/SelectedFilter";
 import LocationFilter from "components/Home/list/LocationFilter";
-import PostTimeFilter from "components/Home/list/PostTimeFilter";
-import DeadlineFilter from "components/Home/list/DeadlineFilter";
-import GenderFilter from "components/Home/list/GenderFilter";
-import EmploymentStatusFilter from "components/Home/list/EmploymentStatusFilter";
 import JobCategoryFilter from "components/Home/list/JobCategoryFilter";
-import JobIndustryFilter from "components/Home/list/JobIndustryFilter";
-import ExperienceFilter from "components/Home/list/ExperienceFilter";
-import AgeFilter from "components/jobs/list/AgeFilter";
 import { filterJobs } from "redux/actions/jobAction";
-import { Layout, Breadcrumb, Row, Col, Divider,BackTop } from "antd";
+import {
+  Layout,
+  Row,
+  Col,
+  Divider,
+  BackTop,
+  Typography,
+  Affix,
+  Modal,
+  message,
+  Space,
+  Button,
+} from "antd";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Notification_bar from "container/Notification_bar/Notification_bar";
-import { Button } from "antd/lib/radio";
-import Footer from "container/footer/footer";
-import { UpOutlined } from "@ant-design/icons";
+// import { Button } from "antd/lib/radio";
+import { getOtherWorkers, getWorkers } from "redux/actions/userAction";
+import { getAllJobs, getAllJobs_withoutlogin } from "redux/actions/jobAction";
+import {
+  UpOutlined,
+  TeamOutlined,
+  AreaChartOutlined,
+  UsergroupAddOutlined,
+  GlobalOutlined,
+  PlusCircleOutlined,
+} from "@ant-design/icons";
+import AnimatedNumber from "animated-number-react";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
+import { updateProfile } from "@/redux/actions/userAction";
 
 const { Content } = Layout;
+const { Title } = Typography;
 
-const Jobs = ({ filterJobs }) => {
+const jobs = ({
+  filterJobs,
+  getOtherWorkers,
+  getWorkers,
+  updateProfile,
+
+  auth,
+  getAllJobs,
+  getAllJobs_withoutlogin,
+  user_profile,
+}) => {
   const router = useRouter();
   let query = Object.keys(router.query)[0];
   const [filter, setFilter] = useState({});
   const [showFilterJobs, setShowFilterJobs] = useState(false);
+  const [bottom, setBottom] = useState(10);
+  const [all_jobs, setall_jobs] = useState([]);
   const showPage = useRef("job_list");
+  const [workers, setworkers] = useState([]);
+
+  const [employeer, setemployeer] = useState([]);
 
   useEffect(() => {
-    if (_.isEmpty(filter)) {
-      setShowFilterJobs(false);
+    updateProfile();
+  }, []);
+
+  useEffect(() => {
+    getWorkers(1, 5, true, false, null).then((result) => {
+      setemployeer(result.count);
+    });
+    getWorkers(1, 5, false, true, null).then((result) => {
+      setworkers(result.count);
+    });
+    if (auth.isSignedIn) {
+      getAllJobs(1, 5).then((result) => {
+        setall_jobs(result.count);
+      });
+    } else {
+      getAllJobs_withoutlogin(1, 5).then((result) => {
+        setall_jobs(result.count);
+      });
     }
-  }, [filter]);
+  }, []);
+
+  const phoneNumberAlert = () => {
+    const { warning } = Modal;
+
+    warning({
+      title: "please save/verify your phone number",
+      icon: <ExclamationCircleOutlined />,
+
+      okText: "OK",
+      okType: "danger",
+      cancelText: "No",
+      onOk() {
+        router.push("/Profile");
+      },
+    });
+  };
+  const loginAlert = () => {
+    const { warning } = Modal;
+
+    warning({
+      title: "Please login for access this feature",
+      icon: <ExclamationCircleOutlined />,
+
+      okText: "OK",
+      okType: "danger",
+      cancelText: "No",
+      onOk() {
+        router.push("/auth/login");
+      },
+    });
+    // message.error("Please login for access this feature");
+    // router.push("/");
+  };
+
+  const createPost = () => {
+    if (!auth.isSignedIn) {
+      return (
+        <Button className="jobpost_btn_mobile" onClick={() => loginAlert()}>
+          <PlusCircleOutlined />
+          Post a Job
+        </Button>
+      );
+    } else if (user_profile.phone == null) {
+      return (
+        <Button
+          className="jobpost_btn_mobile"
+          onClick={() => phoneNumberAlert()}
+        >
+          <PlusCircleOutlined /> Post a Job
+        </Button>
+      );
+    } else {
+      return (
+        <Button
+          className="jobpost_btn_mobile"
+          onClick={() => router.push("/jobs/post")}
+        >
+          <PlusCircleOutlined />
+          Post a Job
+        </Button>
+      );
+    }
+  };
+  const createPostBottominpc = () => {
+    if (!auth.isSignedIn) {
+      return (
+        <Button
+          className="jobpost_btn"
+          onClick={() => loginAlert()}
+          style={{
+            marginTop: "190px",
+            marginLeft: "920px",
+            width: "10%",
+            height: "13%",
+          }}
+        >
+          {/* <PlusCircleOutlined /> */}
+          Post a Job
+        </Button>
+      );
+    } else if (user_profile.phone == null) {
+      return (
+        <Button
+          className="jobpost_btn"
+          onClick={() => phoneNumberAlert()}
+          style={{
+            marginTop: "190px",
+            marginLeft: "920px",
+            width: "10%",
+            height: "13%",
+          }}
+        >
+          {/* <PlusCircleOutlined />  */}
+          Post a Job
+        </Button>
+      );
+    } else {
+      return (
+        <Button
+          className="jobpost_btn"
+          style={{
+            marginTop: "190px",
+            marginLeft: "920px",
+            width: "10%",
+            height: "13%",
+          }}
+        >
+          {/* <PlusCircleOutlined />  */}
+          <Link href="/jobs/post">Post a Job</Link>
+        </Button>
+      );
+    }
+  };
+
   const style = {
     height: 40,
     width: 40,
-    lineHeight: '40px',
-    borderRadius: 4,
-    backgroundColor: '#773ea9',
-    color: '#fff',
-    textAlign: 'center',
+    lineHeight: "40px",
+    borderRadius: 5,
+    backgroundColor: " rgb(109, 183, 132)",
+    color: "#fff",
+    textAlign: "center",
     fontSize: 14,
   };
 
@@ -56,10 +216,39 @@ const Jobs = ({ filterJobs }) => {
       <Layout className="layout">
         <Navbar />
 
-        <div style={{ marginTop: "64px" }}>
+        <div className="slider_pic" style={{ marginTop: "64px" }}>
+        
+          <div className="search_bar banner_button" >
+          <Space>
+            <Button
+              style={{
+                backgroundColor: "darkblue",
+              
+              }}
+              className="worker_btn"
+            >
+              {" "}
+              <Link href="/jobs/list">Find jobs</Link>
+            </Button>
+            <Button
+              style={{
+             
+                backgroundColor: "#ffc800",
+            
+                // borderShadow: "1px solid white"
+              }}
+             
+            >
+              <Link href="/worker/list"> Find workers</Link>
+            </Button>
+            </Space>
+          </div>
+          <h1>Find suitable jobs here...</h1>
+
           <Row>
-            <Notification_bar />
+            {/* <Notification_bar /> */}
             {/*1st part*/}
+         
 
             <KeywordSearch
               filter={filter}
@@ -77,43 +266,189 @@ const Jobs = ({ filterJobs }) => {
               //setShowPage={setShowPage}
               showPage={showPage}
             />
+
+            {/* <Col span={12}><img src="/img/landing.png"style={{  width: "100vh", marginTop: "7vh"}}/></Col> */}
           </Row>
         </div>
+        <Row justify="space-around" className="data_section">
+          <Col xs={12} sm={12} md={4} lg={4} xl={4}>
+            <Title level={4}>
+              {/* <TeamOutlined className="home_icon" /> */}
+              Workers{" "}
+            </Title>{" "}
+            <Title
+              level={2}
+              style={{
+                marginTop: "-3px",
+                color: "darkblue",
+                fontWeight: "bold",
+              }}
+            >
+              <AnimatedNumber
+                value={10946 + workers}
+                duration={2000}
+                formatValue={(n) => n.toFixed(0)}
+                frameStyle={(percentage) =>
+                  percentage > 20 && percentage < 80 ? { opacity: 0.5 } : {}
+                }
+              />
+            </Title>
+          </Col>
 
-        <Content
-          className="site-layout"
-          style={{ backgroundColor: "white", margin: "16px 66px" }}
-        >
-          <h2 style={{ color: "#773EA9", marginTop: "15px" }}>
-            Job Categories
-          </h2>
-          <Row>
+          <Col xs={12} sm={12} md={4} lg={4} xl={4}>
+            <Title level={4}>
+              {/* <UsergroupAddOutlined className="home_icon" /> */}
+              Employers
+            </Title>{" "}
+            <Title
+              level={2}
+              style={{
+                marginTop: "-3px",
+                color: "darkblue",
+                fontWeight: "bold",
+              }}
+            >
+              <AnimatedNumber
+                value={2222 + employeer}
+                duration={2000}
+                formatValue={(n) => n.toFixed(0)}
+                frameStyle={(percentage) =>
+                  percentage > 20 && percentage < 80 ? { opacity: 0.5 } : {}
+                }
+              />
+            </Title>
+          </Col>
+
+          <Col xs={12} sm={12} md={4} lg={4} xl={4}>
+            <Title level={4}>
+              {/* <GlobalOutlined className="home_icon" /> */}
+              Ongoing Jobs
+            </Title>{" "}
+            <Title
+              level={2}
+              style={{
+                marginTop: "-3px",
+                color: "darkblue",
+                fontWeight: "bold",
+              }}
+            >
+              <AnimatedNumber
+                value={318 + all_jobs}
+                duration={1000}
+                formatValue={(n) => n.toFixed(0)}
+                frameStyle={(percentage) =>
+                  percentage > 20 && percentage < 80 ? { opacity: 0.5 } : {}
+                }
+              />
+            </Title>
+          </Col>
+
+          <Col xs={12} sm={12} md={4} lg={4} xl={4}>
+            <Title level={4}>
+              {/* <AreaChartOutlined className="home_icon" /> */}
+              Total Visitors
+            </Title>{" "}
+            <Title
+              level={2}
+              style={{
+                marginTop: "-3px",
+                color: "darkblue",
+                fontWeight: "bold",
+              }}
+            >
+              <AnimatedNumber
+                value={240816}
+                duration={2000}
+                formatValue={(n) => n.toFixed(0)}
+                frameStyle={(percentage) =>
+                  percentage > 20 && percentage < 80 ? { opacity: 0.5 } : {}
+                }
+              />
+            </Title>
+          </Col>
+        </Row>
+
+        <Content className="site-layout-home ">
+          <div className="site-layout-background">
+            <h2
+              style={{
+                color: "darkblue",
+                margin: "30px 0px 15px 0px",
+                fontWeight: "bold",
+              }}
+            >
+              Job Categories
+            </h2>
+
             <JobCategoryFilter
               filter={filter}
               setFilter={setFilter}
               reload={setShowFilterJobs}
             />
-          </Row>
-          <Divider />
-          <div
-            style={{
-              backgroundImage: `url('/img/banner2.png')`,
-              height: "280px",
-              marginBottom: "15px",
-            }}
-          >
-            <Button className="jobpost_btn">
-              <Link href="/jobs/post">Post a Job</Link>
-            </Button>
+            {/* <h2 style={{ color: "darkblue", marginTop: "15px" }}>
+                Job Categories
+              </h2>
+              <JobCategoryFilter
+                filter={filter}
+                setFilter={setFilter}
+                reload={setShowFilterJobs}
+              /> */}
           </div>
+          <Row>
+            {/* <Divider /> */}
+            <Col xs={24} sm={24} md={24} lg={24} xl={24}>
+              <div
+                style={{
+                  backgroundImage: `url('/img/banner4.png')`,
+                  height: "280px",
+                  marginBottom: "15px",
+                  borderRadius: "5px",
+                  backgroundSize: "cover",
+                }}
+                className="stepJobPostPc"
+              >
+                {/* <Button className="jobpost_btn">
+                    <Link href="/jobs/post">Post a Job</Link>
+                  </Button> */}
+                {/* <Button className="jobpost_btn"> */}
+                {createPostBottominpc()}
+                {/* </Button> */}
+              </div>
+            </Col>
+          </Row>
         </Content>
-        <Footer />
+        <Affix offsetBottom={bottom} style={{ textAlign: "center" }}>
+          {/* <Button className="jobpost_btn_mobile">
+            
+          </Button> */}
+          {createPost()}
+        </Affix>
+
         <BackTop>
-          <div style={style}><UpOutlined /></div>
+          <div style={style}>
+            <UpOutlined />
+          </div>
         </BackTop>
       </Layout>
     </>
   );
 };
 
-export default connect(null, { filterJobs })(Jobs);
+const mapStateToProps = (state) => {
+  return {
+    // all_workers: Object.values(state.user.all_workers),
+    // all_workers: state.user.all_workers,
+    // all_jobs: state.job.all_jobs,
+    auth: state.auth,
+    user_profile: state.user.user_profile,
+  };
+};
+
+export default connect(mapStateToProps, {
+  filterJobs,
+  getOtherWorkers,
+  getAllJobs,
+  getAllJobs_withoutlogin,
+  getWorkers,
+  updateProfile,
+})(jobs);

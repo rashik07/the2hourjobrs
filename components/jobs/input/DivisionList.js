@@ -19,7 +19,7 @@ const DivisionList = ({
     updateProfile();
     getDivision();
   }, []);
-console.log(get_division);
+
   const { TreeNode } = TreeSelect;
   const { Option, OptGroup } = Select;
 

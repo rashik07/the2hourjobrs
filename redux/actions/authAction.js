@@ -1,5 +1,6 @@
 import * as types from "./../types";
 import backend from "./../../api/backend";
+import {message } from "antd";
 
 export const signIn = (logInformValues) => async (dispatch) => {
   try {
@@ -8,10 +9,12 @@ export const signIn = (logInformValues) => async (dispatch) => {
     });
     dispatch({ type: types.SIGN_IN, payload: response.data });
     console.log(response.data);
-
+  
     return true;
   } catch (error) {
     dispatch({ type: types.AUTH_FAILED });
+    // alert("wrong username or password");
+     message.error("wrong username or password");
     return false;
   }
 };
@@ -44,6 +47,7 @@ export const facebookLogin = (accesstoken) => async (dispatch) => {
     const data = { token: response.data.key, social_auth: true };
     console.log("data");
     console.log(data);
+
     dispatch({ type: types.SIGN_IN, payload: data });
     console.log(response.data);
 
@@ -109,7 +113,32 @@ export const signUp = (formValues, router) => async (dispatch) => {
     });
   }
 };
-
+export const password_reset = (logInformValues) => async (dispatch) => {
+  console.log(logInformValues);
+  try {
+    const response = await backend.post("v1/user/password_reset/", {
+      ...logInformValues,
+    });
+    if (response.status === 200) {
+      console.log(response.data);
+      alert("Password reset link sent to your email");
+    }
+    else
+    {
+      console.log(response.data);
+      alert("Email not found");
+    }
+    
+  } catch (error) {
+    console.log(error);
+    alert("Email not found");
+    // if (response.status === 400) {
+    //   console.log(response.data);
+    //   alert("Password reset link sent to your email");
+    //   alert("Email not found");
+    // }
+  }
+};
 export const signOut = () => (dispatch) => {
   // dispatch({ type: types.RESET_JOB_STATE });
   dispatch({ type: types.SIGN_OUT });

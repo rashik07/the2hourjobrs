@@ -1,25 +1,22 @@
 import React from "react";
 import { useState } from "react";
-import { Form, Input, Button, DatePicker, Typography, Divider } from "antd";
+import { Form, Input, Button, DatePicker, Typography, message } from "antd";
 import { connect } from "react-redux";
 import { createProject } from "@/redux/actions/projectAction";
 
 const Add_project = ({ createProject, create_project, setloader }) => {
   const dateFormat = "YYYY-MM-DD";
-
   const onFinish = (values) => {
     values = {
       ...values,
       start_date: values["start_date"].format("YYYY-MM-DD"),
       end_date: values["end_date"].format("YYYY-MM-DD"),
     };
-    // console.log('Success:', values );
     createProject(values);
-    alert("successfully added");
     form.resetFields();
     setloader(true);
+    message.success("successfully added");
   };
-
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
@@ -62,10 +59,6 @@ const Add_project = ({ createProject, create_project, setloader }) => {
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
       >
-        <Divider>
-          {" "}
-          <Title>Add Portfolio</Title>
-        </Divider>
         <Form.Item label="Project Title:" name={"title"}>
           <Input placeholder="project title" />
         </Form.Item>

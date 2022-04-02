@@ -1,26 +1,72 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { updatePhone } from "@/redux/actions/userAction";
-import { Layout, Row, Col, Image, Typography, Space } from "antd";
+import { Layout, Row, Col, Image, Typography, Space, Popover } from "antd";
 import { PhoneFilled, HomeFilled } from "@ant-design/icons";
-
-const Topsection = ({ updateProfile, user_profile ,updatePhone,edit_phone}) => {
+import {
+  FacebookShareButton,
+  WhatsappShareButton,
+  WhatsappIcon,
+  FacebookIcon,
+  FacebookMessengerShareButton,
+  FacebookMessengerIcon,
+  EmailShareButton,
+  EmailIcon,
+} from "react-share";
+import { DownloadOutlined, ShareAltOutlined } from "@ant-design/icons";
+const Topsection = ({
+  updateProfile,
+  user_profile,
+  updatePhone,
+  edit_phone,
+}) => {
   const { Text, Link, Title } = Typography;
   const { Content } = Layout;
+  const shareUrl = `https://web.the2hourjob.com/Profile/Profile_details?id=${user_profile.id}`;
+  const content = (
+    <div>
+      <FacebookShareButton
+        url={shareUrl}
+        quote={""}
+        hashtag={"#the2hourjob"}
+      >
+        <FacebookIcon size={40} round={true} />
+      </FacebookShareButton>
 
-
+      <WhatsappShareButton
+        url={shareUrl}
+        quote={""}
+        hashtag={"#the2hourjob"}
+      >
+        <WhatsappIcon size={40} round={true} />
+      </WhatsappShareButton>
+      <EmailShareButton
+        url={shareUrl}
+        quote={""}
+        hashtag={"#the2hourjob"}
+      >
+        <EmailIcon size={40} round={true} />
+      </EmailShareButton>
+      <FacebookMessengerShareButton
+        url={shareUrl}
+        quote={""}
+        hashtag={"#the2hourjob"}
+      >
+        <FacebookMessengerIcon size={40} round={true} />
+      </FacebookMessengerShareButton>
+    </div>
+  );
+  // console.log(user_profile);
   return (
     <div>
       <Row justify="center" align="top">
         <Col span={4}>
-          {user_profile.image !=
-          `http://127.0.0.1:8000/api/v1/user/other_users/${user_profile.id}/` ? (
+          {user_profile.image ? (
             <Image
               shape="circle"
               width={100}
               height={100}
               src={user_profile.image}
-              preview={false}
             />
           ) : (
             <Image
@@ -33,25 +79,65 @@ const Topsection = ({ updateProfile, user_profile ,updatePhone,edit_phone}) => {
         </Col>
 
         <Col span={20}>
-          <Title level={2}>{user_profile.name}</Title>
+          <Title level={2}>
+            {user_profile.name}{" "}
+           
+          </Title>
+          <div
+              style={{
+                float: "right",
+                marginRight: "45px",
+                // marginTop:"-52px",
+              }}
+            >
+              <Popover placement="bottom" content={content} trigger="click">
+                <h1>
+                  {" "}
+                  <ShareAltOutlined /> Share
+                </h1>
+              </Popover>
+            </div>
           <Space>
             <Text>
-              <PhoneFilled /> {"  "}
-              {user_profile.phone}
+              {user_profile.hide_phone == true ? (
+                " "
+              ) : (
+                <>
+                  {" "}
+                  <PhoneFilled /> {"  "}{" "}
+                  <a href={`tel:${user_profile.phone}`}>{user_profile.phone}</a>
+                </>
+              )}
             </Text>
+
             <Text>
-              <HomeFilled /> {"  "}
+              {user_profile.address == null &&
+              user_profile.Thana == null &&
+              user_profile.District == null &&
+              user_profile.Division == null ? (
+                " "
+              ) : (
+                <HomeFilled />
+              )}{" "}
+              {"  "}
+              {user_profile.address == null || user_profile.address == ""
+                ? " "
+                : user_profile.address + ", "}
               {user_profile.Thana == null
-                ? "-"
+                ? " "
                 : user_profile.Thana.name + ", "}
               {user_profile.District == null
-                ? "-"
+                ? " "
                 : user_profile.District.name + ", "}
-              {user_profile.Division == null ? "-" : user_profile.Division.name}
+              {user_profile.Division == null ? " " : user_profile.Division.name}
             </Text>
           </Space>
           <Text>
-            <p>{user_profile.bio}</p>
+            <p>
+              {user_profile.bio == null || user_profile.bio == "null"
+                ? ""
+                : user_profile.bio}
+            </p>
           </Text>
         </Col>
       </Row>
@@ -60,15 +146,10 @@ const Topsection = ({ updateProfile, user_profile ,updatePhone,edit_phone}) => {
 };
 const mapStateToProps = (state) => {
   return {
- 
     edit_phone: state.user.edit_phone,
-    
   };
 };
 
-
 export default connect(mapStateToProps, {
-
-  updatePhone
+  updatePhone,
 })(Topsection);
-

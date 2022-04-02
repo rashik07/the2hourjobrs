@@ -10,14 +10,19 @@ const DeadlineList = ({ value, setValue, onClear }) => {
     show: "Today",
     date: dateformat(date, "yyyy-mm-dd"),
   });
+  var tomorrowDate = new Date();
+  tomorrowDate.setDate(tomorrowDate.getDate()+1);
+
+  var next2Date = new Date();
+  next2Date.setDate(next2Date.getDate()+2);
 
   const tomorrow = JSON.stringify({
     show: "Tomorrow",
-    date: dateformat(date + 1, "yyyy-mm-dd"),
+    date: dateformat(tomorrowDate, "yyyy-mm-dd"),
   });
   const next2 = JSON.stringify({
     show: "Next 2 days",
-    date: dateformat(date + 2, "yyyy-mm-dd"),
+    date: dateformat(next2Date, "yyyy-mm-dd"),
   });
 
   return (

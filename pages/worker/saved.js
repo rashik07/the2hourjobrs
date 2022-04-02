@@ -1,15 +1,24 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import Navbar from "../../container/navbar/newNavbar";
 import { useRouter } from "next/router";
-import { getSavedWorkers } from "@/redux/actions/userAction";
+import { getSavedWorkers, getOtherWorkers } from "@/redux/actions/userAction";
 import { connect } from "react-redux";
 import WorkerItem from "components/worker/list/WorkerItem";
-import { Layout, Breadcrumb, Row, Col, Divider } from "antd";
+import { Layout, Breadcrumb } from "antd";
+import { HomeOutlined } from "@ant-design/icons";
 
-const SavedWorkerList = ({ getSavedWorkers, saved_workers, isSignedIn }) => {
+
+const SavedWorkerList = ({
+  getSavedWorkers,
+  saved_workers,
+  isSignedIn,
+  getOtherWorkers,
+  all_workers,
+}) => {
   const router = useRouter();
   const { Content } = Layout;
+  const [reaload, setReload] = useState(false);
 
   useEffect(() => {
     if (!isSignedIn) {
@@ -17,12 +26,26 @@ const SavedWorkerList = ({ getSavedWorkers, saved_workers, isSignedIn }) => {
     }
 
     getSavedWorkers();
-  }, []);
+    getOtherWorkers();
+  }, [reaload]);
 
   const showSavedWorkers = () => {
-    if (saved_workers.length)
+    if (saved_workers)
       return saved_workers.map((worker) => {
-        return <WorkerItem key={worker.id} worker={worker} />;
+        console.log(worker.saved_user_profile);
+        let worker_profile = worker.saved_user_profile;
+        // if(worker.saved_user_instance_id){
+        //       console.log(worker);
+        //       return <WorkerItem key={worker.id} worker={worker} />;
+
+        //   }
+        return (
+          <WorkerItem
+            key={worker_profile.id}
+            worker={worker_profile}
+            setReload={setReload}
+          />
+        );
       });
 
     return (
@@ -41,7 +64,11 @@ const SavedWorkerList = ({ getSavedWorkers, saved_workers, isSignedIn }) => {
         <Navbar />
         <Content className="site-layout">
           <Breadcrumb className="breadcrumb_main">
-            <Breadcrumb.Item>Home</Breadcrumb.Item>
+            <Breadcrumb.Item href="/">
+              {" "}
+              <HomeOutlined />
+            </Breadcrumb.Item>
+            <Breadcrumb.Item href="/worker/list">Worker List</Breadcrumb.Item>
             <Breadcrumb.Item>Saved Worker</Breadcrumb.Item>
           </Breadcrumb>
           <div className="site-layout-background">{showSavedWorkers()}</div>
@@ -53,9 +80,12 @@ const SavedWorkerList = ({ getSavedWorkers, saved_workers, isSignedIn }) => {
 
 const mapStateToProps = (state) => {
   return {
+    all_workers: Object.values(state.user.all_workers),
     saved_workers: Object.values(state.user.saved_workers),
     isSignedIn: state.auth.isSignedIn,
   };
 };
 
-export default connect(mapStateToProps, { getSavedWorkers })(SavedWorkerList);
+export default connect(mapStateToProps, { getSavedWorkers, getOtherWorkers })(
+  SavedWorkerList
+);

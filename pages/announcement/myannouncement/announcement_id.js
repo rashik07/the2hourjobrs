@@ -1,15 +1,14 @@
 import React, { useEffect } from "react";
-
 import { connect } from "react-redux";
-
 import Head from "next/head";
 import Link from "next/link";
-// import Navbar from "../../container/navbar/navbar";
 import Footer from "../../../container/footer/footer";
 import Newnavbar from "../../../container/navbar/newNavbar";
 import EditAnnouncement from "../../../components/annoucement/EditAnnouncement";
 import { getSpecificAnnouncement } from "../../../redux/actions/announcementAction";
 import { useRouter } from "next/router";
+import { HomeOutlined } from "@ant-design/icons";
+
 
 import { Layout, Breadcrumb } from "antd";
 
@@ -34,15 +33,18 @@ const editAnnouncement = ({ getSpecificAnnouncement, announcement }) => {
           style={{ padding: "0 50px", marginTop: 64 }}
         >
           <Breadcrumb style={{ margin: "16px 0" }}>
-            <Breadcrumb.Item>Home</Breadcrumb.Item>
+            <Breadcrumb.Item href="/">
+              {" "}
+              <HomeOutlined />
+            </Breadcrumb.Item>
             <Breadcrumb.Item>
               <Link href="/announcement">Announcement</Link>
             </Breadcrumb.Item>
             <Breadcrumb.Item>
               <Link href="/announcement/myannouncement">My Announcements</Link>
             </Breadcrumb.Item>
-            <Breadcrumb.Item>{announcement.title}</Breadcrumb.Item>
-            <Breadcrumb.Item>Edit</Breadcrumb.Item>
+            <Breadcrumb.Item >{announcement.title} edit</Breadcrumb.Item>
+           
           </Breadcrumb>
           <div
             className="site-layout-background"

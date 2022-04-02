@@ -1,35 +1,46 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Head from "next/head";
-import { getSelfPostedJobs,getAppliedJobsPerson } from "@/redux/actions/jobAction";
+import {
+  getSelfPostedJobs,
+  getAppliedJobsPerson,
+} from "@/redux/actions/jobAction";
 import { connect, useDispatch } from "react-redux";
 import Navbar from "container/navbar/newNavbar";
 import JobPostItem from "components/jobs/JobPostItem";
 import { Layout, Breadcrumb } from "antd";
 import * as types from "@/redux/types";
+import { List } from "antd";
+import { HomeOutlined } from "@ant-design/icons";
 
-const SelfPostedJobs = ({ self_posted_jobs, getSelfPostedJobs ,getAppliedJobsPerson,applied_jobs_person,job }) => {
+const SelfPostedJobs = ({
+  self_posted_jobs,
+  getSelfPostedJobs,
+  auth,
+  user_profile,
+}) => {
   const dispatch = useDispatch();
   const { Content } = Layout;
+  const [selfpostedjob, setSelfpostedJobs] = useState([]);
+
   useEffect(() => {
-    getSelfPostedJobs();
-    getAppliedJobsPerson();
+    getSelfPostedJobs(user_profile.id).then((result) => {
+      setSelfpostedJobs(result.results);
+      console.log(result.results);
+    });
     dispatch({ type: types.RESET_TEMP_JOB_STATE });
   }, []);
-//  console.log(self_posted_jobs);
- // console.log(applied_jobs_person);
 
-  const showSelfPostedJobs = () => {
-    if (self_posted_jobs.length)
-      return self_posted_jobs.map((job) => {
-        return <JobPostItem key={job.id} job={job} />;
-        
-      });
 
-    return (
-      <h1 style={{ color: "#AEB6BF", marginTop: "20%", marginLeft: "20%" }}>
-        You have not posted any jobs
-      </h1>
-    );
+  const showSelfPostedJobs = (job) => {
+    if (selfpostedjob.length > 0) {
+      return <JobPostItem key={job.id} job={job} />;
+    } else {
+      return (
+        <h1 style={{ color: "#AEB6BF", marginTop: "20%", marginLeft: "20%" }}>
+          You have not posted any jobs
+        </h1>
+      );
+    }
   };
 
   return (
@@ -42,12 +53,29 @@ const SelfPostedJobs = ({ self_posted_jobs, getSelfPostedJobs ,getAppliedJobsPer
 
         <Content className="site-layout" style={{ padding: "0 50px" }}>
           <Breadcrumb style={{ margin: "16px 0" }}>
-            <Breadcrumb.Item>Jobs</Breadcrumb.Item>
+            <Breadcrumb.Item href="/">
+              {" "}
+              <HomeOutlined />
+            </Breadcrumb.Item>
+            <Breadcrumb.Item href="/jobs/list">Job List</Breadcrumb.Item>
             <Breadcrumb.Item>Self posted jobs</Breadcrumb.Item>
           </Breadcrumb>
           <div className="site-layout-content">
             <h2 className="ml-3 mt-4">Self Posted Jobs</h2>
-            {showSelfPostedJobs()}
+            {/* {showSelfPostedJobs()} */}
+            <List
+              // pagination={{
+              //   onChange: (page_no) => {
+              //     setPageNo(page_no);
+              //   },
+
+              //   pageSize: 100,
+              //   defaultCurrent: 1,
+              //   // total: totaldata.current,
+              // }}
+              dataSource={selfpostedjob}
+              renderItem={(job) => showSelfPostedJobs(job)}
+            />
           </div>
         </Content>
       </Layout>
@@ -57,9 +85,13 @@ const SelfPostedJobs = ({ self_posted_jobs, getSelfPostedJobs ,getAppliedJobsPer
 
 const mapStateToProps = (state) => {
   return {
-    self_posted_jobs: Object.values(state.job.self_posted_jobs),
-    applied_jobs_person:state.job.applied_jobs_person,
+    // self_posted_jobs: Object.values(state.job.self_posted_jobs),
+    user_profile: state.user.user_profile,
+    auth: state.auth,
   };
 };
 
-export default connect(mapStateToProps, { getSelfPostedJobs,getAppliedJobsPerson })(SelfPostedJobs);
+export default connect(mapStateToProps, {
+  getSelfPostedJobs,
+  getAppliedJobsPerson,
+})(SelfPostedJobs);

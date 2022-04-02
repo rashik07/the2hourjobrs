@@ -14,6 +14,7 @@ const getConfig = () => {
 
   return config;
 };
+
 /*education */
 export const viewEducation = () => async (dispatch) => {
   try {
@@ -74,6 +75,7 @@ export const deleteEducation = (education_id) => async (dispatch) => {
     console.log(error);
   }
 };
+
 /*training */
 export const viewTraining = (data) => async (dispatch) => {
   try {
@@ -86,6 +88,17 @@ export const viewTraining = (data) => async (dispatch) => {
     console.log(error.response);
   }
 };
+
+export const viewSingleTraining = (id) => async (dispatch) => {
+  try {
+    const response = await backend.get(`/v1/user/training/?user=${id}`);
+    dispatch({ type: types.VIEW_SINGLE_TRAINING, payload: response.data });
+  } catch (error) {
+    console.log(error);
+    console.log(error.response);
+  }
+};
+
 
 export const createTraining = (formValues) => async (dispatch) => {
   console.log(formValues);
@@ -125,6 +138,7 @@ export const deleteTraining = (training_id) => async (dispatch) => {
   }
 };
 
+
 /*ProfessionalQualification */
 export const viewQualification = (data) => async (dispatch) => {
   try {
@@ -137,6 +151,19 @@ export const viewQualification = (data) => async (dispatch) => {
     console.log(error.response);
   }
 };
+
+export const viewSingleQualification = (id) => async (dispatch) => {
+  try {
+    const response = await backend.get(`/v1/user/professional-qualification/?user=${id}`);
+    dispatch({ type: types.VIEW_SINGLE_QUALIFICATION, payload: response.data });
+    console.log(response.data);
+  } catch (error) {
+    console.log(error);
+    console.log(error.response);
+    
+  }
+};
+
 
 export const createQualification = (formValues) => async (dispatch) => {
   console.log(formValues);
@@ -159,7 +186,7 @@ export const createQualification = (formValues) => async (dispatch) => {
 };
 
 export const deleteQualification = (qualification_id) => async (dispatch) => {
-  //console.log('bal')
+  
   try {
     const response = await backend.delete(
       `/v1/user/professional-qualification/${qualification_id}/`,

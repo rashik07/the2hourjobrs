@@ -6,10 +6,11 @@ const AgeFilter = ({ filter, setFilter, reload }) => {
     if (value) {
       value = JSON.parse(value);
       setFilter({ ...filter, age: value });
-      reload(true);
+     
     }
+    reload(true);
   }
-
+ 
   const onClear = () => {
     filter = _.omit(filter, ["age"]);
     setFilter(filter);

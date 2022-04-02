@@ -1,15 +1,53 @@
 import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import Navbar from "../../container/navbar/newNavbar";
-import { Layout, Breadcrumb, Row, Col, Typography, Divider } from "antd";
+import {
+  Layout,
+  Breadcrumb,
+  Row,
+  Col,
+  Typography,
+  Divider,
+  Button,
+} from "antd";
 import Topsection from "components/Viewprofile/Topsection";
 import Sidesection from "components/Viewprofile/Sidesection";
 import Mainsection from "components/Viewprofile/Mainsection";
+import {  HomeOutlined } from "@ant-design/icons";
 
-const View_profile = ({ user_profile, view_education,view_employment ,view_project}) => {
+const View_profile = ({
+  user_profile,
+  view_education,
+  view_employment,
+  view_project,
+  view_single_training,
+  view_single_qualification,
+  auth,
+}) => {
   const { Text, Link, Title } = Typography;
   const { Content } = Layout;
-  //  console.log(user_profile)
+  const editProfileButton = () => {
+    if (user_profile.id === auth.id) {
+      return (
+        <a href={"/Profile"} target="_blank">
+          <Button
+            type="primary"
+            style={{
+              float: "right",
+              backgroundColor: "#40a9ff",
+              border: "1px solid #ffffff",
+              color: "#ffffff",
+            }}
+          >
+            Edit My Profile
+          </Button>
+        </a>
+      );
+    } else {
+      return " ";
+    }
+  };
+
   return (
     <div>
       <Head>
@@ -22,10 +60,16 @@ const View_profile = ({ user_profile, view_education,view_employment ,view_proje
           style={{ padding: "0 50px" }}
         >
           <Breadcrumb className="breadcrumb_main">
-            <Breadcrumb.Item>Profile</Breadcrumb.Item>
-            <Breadcrumb.Item>View Profile</Breadcrumb.Item>
+            <Breadcrumb.Item href="/">
+              {" "}
+              <HomeOutlined />
+            </Breadcrumb.Item>
+            <Breadcrumb.Item href="/worker/list">Employee List</Breadcrumb.Item>
+            <Breadcrumb.Item>Profile Details</Breadcrumb.Item>
+            {editProfileButton()}
           </Breadcrumb>
-          <div className="site-layout-background">
+
+          <div className="site-layout-background site-layout-background-view-profile">
             <Topsection user_profile={user_profile} />
             <Divider />
             <Row justify="left" align="top">
@@ -38,10 +82,11 @@ const View_profile = ({ user_profile, view_education,view_employment ,view_proje
               >
                 <Mainsection
                   user_profile={user_profile}
-                  view_education={view_education}
                   view_employment={view_employment}
+                  view_education={view_education}
+                  view_single_training={view_single_training}
+                  view_single_qualification={view_single_qualification}
                   view_project={view_project}
-                 
                 />
               </Col>
             </Row>

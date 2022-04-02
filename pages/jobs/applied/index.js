@@ -1,21 +1,23 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import { getAppliedJobs } from "@/redux/actions/jobAction";
 import { connect } from "react-redux";
 import Navbar from "container/navbar/newNavbar";
 import JobPostItem from "components/jobs/JobPostItem";
 import { Layout, Breadcrumb } from "antd";
+import {  HomeOutlined } from "@ant-design/icons";
 
 const AppliedJobs = ({ applied_jobs, getAppliedJobs }) => {
   const { Content } = Layout;
+  const [reload, setReload] = useState(false);
   useEffect(() => {
     getAppliedJobs();
-  }, []);
+  }, [reload]);
 
   const showAppliedJobs = () => {
     if (applied_jobs.length)
       return applied_jobs.map((job) => {
-        return <JobPostItem key={job.id} job={job} />;
+        return <JobPostItem key={job.id} job={job} loader={setReload}/>;
       });
 
     return (
@@ -34,8 +36,11 @@ const AppliedJobs = ({ applied_jobs, getAppliedJobs }) => {
         <Navbar />
         <Content className="site-layout">
           <Breadcrumb className="breadcrumb_main">
-            <Breadcrumb.Item>Home</Breadcrumb.Item>
-            <Breadcrumb.Item>Job</Breadcrumb.Item>
+          <Breadcrumb.Item href="/">
+              {" "}
+              <HomeOutlined />
+            </Breadcrumb.Item>
+            <Breadcrumb.Item href="/jobs/list">Job List</Breadcrumb.Item>
             <Breadcrumb.Item>Applied Jobs</Breadcrumb.Item>
           </Breadcrumb>
           <div className="site-layout-background">

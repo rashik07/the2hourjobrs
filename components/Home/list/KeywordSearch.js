@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Tooltip,Col } from "antd";
+import { Button, Tooltip, Col } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { connect } from "react-redux";
 import { SetfilterAction } from "../../../redux/actions/jobAction";
@@ -28,7 +28,6 @@ const KeywordSearch = ({
     }
   }
 
-
   const onKeywordSubmit = (e) => {
     e.preventDefault();
     if (keyword) {
@@ -42,48 +41,64 @@ const KeywordSearch = ({
   }
 
   return (
-    <Col span={18} style={{ padding: "100px"  ,backgroundImage: `url('/img/banner.jpg')`, }}> 
-    <form style={{ display: "flex", width: "100%" }}>
-      <input
-        // className="form-control mt-2"
-        style={{
-          width: "90%",
-          padding: ".5rem",
-          borderTopLeftRadius: "8px",
-          borderBottomLeftRadius: "8px",
-          border: "1px solid #000000",
-        }}
-        placeholder="Type and hit Enter"
-        onChange={(e) => setKeyword(e.target.value)}
-        value={keyword}
-      />
+    <Col
+      xs={24}
+      sm={24}
+      md={24}
+      lg={24}
+      xl={24}
+    
 
-      <Button
-        style={{
-          height: "auto",
-          borderTopRightRadius: "8px",
-          borderBottomRightRadius: "8px",
-          background: "#773EA9",
-          color: "white",
-          borderColor: "#000000",
-        }}
-        icon={<SearchOutlined />}
-        onClick={(e) => {
-        //  onKeywordSubmit(e);
-        handleChange(e);
-          getFilteredList(filter);
-          setShowFilter(true);
-        }}
-      >
-        Search
-      </Button>
-    </form>
+      className="search_bar"
+    >
+      <form className="search_form">
+        <input
+          // className="form-control mt-2"
+          style={{
+            width: "100%",
+            padding: ".5rem",
+            borderTopLeftRadius: "8px",
+            borderBottomLeftRadius: "8px",
+            border: "0px solid #000000",
+          }}
+          placeholder=" What I am looking for"
+          onChange={(e) => setKeyword(e.target.value)}
+          value={keyword}
+          onKeyPress={(e) => {
+            if (e.key === "Enter") {
+              e.preventDefault();
+              if (keyword) {
+                const new_filter = { ...filter, keyword };
+                SetfilterAction(new_filter);
+                router.push({
+                  pathname: "/jobs/list",
+                  // query: filter,
+                });
+                // setFilter(new_filter);
+                // reload(true);
+              }
+              // getFilteredList(filter);
+              setShowFilter(true);
+            }
+          }}
+        />
+
+        <Button
+          className="search_button"
+          icon={<SearchOutlined  />}
+          onClick={(e) => {
+            //  onKeywordSubmit(e);
+            handleChange(e);
+            getFilteredList(filter);
+            setShowFilter(true);
+          }}
+        >
+          Search
+        </Button>
+      </form>
+      
     </Col>
   );
 };
 
-
-export default connect(null, { SetfilterAction })(
-  KeywordSearch
-);
-
+export default connect(null, { SetfilterAction })(KeywordSearch);

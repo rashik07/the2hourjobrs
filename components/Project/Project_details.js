@@ -1,15 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Card, Avatar, Modal, Table, Space } from "antd";
-import {
-  EditOutlined,
-  EllipsisOutlined,
-  SettingOutlined,
-  DeleteOutlined,
-} from "@ant-design/icons";
+import { Table, Space, Divider, Typography, message } from "antd";
+import { DeleteOutlined } from "@ant-design/icons";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import { viewProject, deleteProject } from "@/redux/actions/projectAction";
-import { ExclamationCircleOutlined } from "@ant-design/icons";
 
 const Project_details = ({
   viewProject,
@@ -19,6 +13,7 @@ const Project_details = ({
   setloader,
 }) => {
   const router = useRouter();
+  const { Title } = Typography;
 
   useEffect(() => {
     viewProject();
@@ -30,13 +25,14 @@ const Project_details = ({
       dataIndex: "title",
       key: "title",
       width: "30%",
-      //...this.getColumnSearchProps('name'),
+      align: "center",
     },
     {
       title: "Description",
       dataIndex: "description",
       key: "description",
       width: "100%",
+      align: "center",
     },
 
     {
@@ -44,17 +40,19 @@ const Project_details = ({
       dataIndex: "start_date",
       key: "start_date",
       width: "150px",
+      align: "center",
     },
     {
       title: "To",
       dataIndex: "end_date",
       key: "end_date",
       width: "150px",
+      align: "center",
     },
     {
       title: "Action",
       key: "action",
-
+      align: "center",
       render: (details) => (
         <Space size="middle">
           <DeleteOutlined
@@ -62,6 +60,7 @@ const Project_details = ({
             onClick={() => {
               deleteProject(details.id);
               setloader(true);
+              message.success("successfully delete");
             }}
           />
         </Space>
@@ -70,8 +69,18 @@ const Project_details = ({
   ];
 
   return (
-    <div>
-      <Table columns={columns} dataSource={view_project} />
+    <div style={{ marginBottom: "15px" }}>
+      <Divider>
+        {" "}
+        <Title>Add Portfolio</Title>
+      </Divider>
+      <Table
+        columns={columns}
+        dataSource={view_project}
+        pagination={false}
+        bordered
+        scroll={{ x: 800 }}
+      />
     </div>
   );
 };

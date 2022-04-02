@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
   Select,
-  Row,
-  Col,
-  Image,
-  Upload,
-  Space,
   Form,
   Input,
   Button,
@@ -13,13 +8,13 @@ import {
   DatePicker,
   Typography,
   Divider,
-  Tooltip,
+  message,
   InputNumber,
   Skeleton,
-  Checkbox
+  Checkbox,
+  Modal,
 } from "antd";
 import { connect } from "react-redux";
-import Link from "next/link";
 import {
   getDistrict,
   getDivision,
@@ -27,25 +22,141 @@ import {
   updateProfile,
   editUserProfile,
   updatePhone,
+  PhoneVerifyUpdate,
 } from "@/redux/actions/userAction";
-import { UploadOutlined, EyeOutlined, ContactsFilled } from "@ant-design/icons";
+import { initializeApp } from "firebase/app";
+import {
+  getAuth,
+  RecaptchaVerifier,
+  signInWithPhoneNumber,
+} from "firebase/auth";
 import { useRouter } from "next/router";
 import moment from "moment";
 import Profile_adress from "./Profile_adress";
+import PicturesWall from "components/annoucement/PicturesWall";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
+import Blink from "react-blink-text";
 
 const Profile_info = ({
   updateProfile,
-  // user_profile,
   editUserProfile,
   updatePhone,
   edit_phone,
   auth,
+  PhoneVerifyUpdate,
 }) => {
   const [user_profile, setuser_profile] = useState([]);
   const [loading, setloading] = useState(true);
   const [loader, setloader] = useState(false);
+  const [cover, setcover] = useState([]);
   const dateFormat = "YYYY-MM-DD";
+  const [mynumber, setnumber] = useState("");
+  const [otp, setotp] = useState("");
+  const [show, setshow] = useState(false);
+  const [final, setfinal] = useState("");
+
+  var FirebaseConfig = {
+    apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+    authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+    projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+    storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+    appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+    measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
+  };
+  const firebaseApp = initializeApp(FirebaseConfig);
+
+  const firebaseAuth = getAuth();
   const router = useRouter();
+  const phoneNotsave = () => {
+    if (!user_profile.phone) {
+      return (
+        <Blink
+          color="red"
+          text=" Please update/verify your phone number "
+          fontSize="20"
+        ></Blink>
+      );
+    }
+  };
+
+  const signin = () => {
+    let phoneNumber = mynumber;
+    if (!phoneNumber.includes("+88")) {
+      phoneNumber = "+88" + mynumber;
+    }
+
+    if (phoneNumber === "" || phoneNumber.length < 14) {
+      message.error("Please enter a valid phone number");
+
+      return;
+    }
+    let verify = new RecaptchaVerifier(
+      "recaptcha-container",
+      {
+        size: "normal",
+        callback: (response) => {
+          // reCAPTCHA solved, allow signInWithPhoneNumber.
+          // ...
+        },
+        "expired-callback": () => {
+          // Response expired. Ask user to solve reCAPTCHA again.
+          // ...
+        },
+      },
+      firebaseAuth
+    );
+
+    signInWithPhoneNumber(firebaseAuth, phoneNumber, verify)
+      .then((confirmationResult) => {
+        setfinal(confirmationResult);
+
+        message.success("code sent");
+        setshow(true);
+      })
+      .catch((err) => {
+        alert(err);
+        window.location.reload();
+      });
+  };
+
+  // Validate OTP
+  const ValidateOtp = () => {
+    if (otp === null || final === null) return;
+    final
+      .confirm(otp)
+      .then((result) => {
+        // success
+        let data = { phone: mynumber };
+        let status = PhoneVerifyUpdate(data, router).then((res) => {
+          if (res.status == 226) {
+            // message.error(res.data.error);
+            const { error } = Modal;
+            error({
+              title: res.data.error,
+              icon: <ExclamationCircleOutlined />,
+
+              okText: "OK",
+              okType: "danger",
+              cancelText: "No",
+              onOk() {
+                window.location.reload();
+              },
+            });
+          } else {
+            message.success(res.data.success);
+            window.location.reload();
+          }
+        });
+      })
+      .catch((err) => {
+        message.error("Wrong code");
+      });
+  };
+
+  const uploadcover = (fileList) => {
+    setcover(fileList);
+  };
 
   useEffect(() => {
     if (!auth.isSignedIn) {
@@ -56,71 +167,63 @@ const Profile_info = ({
       setloading(true);
       updateProfile().then((result) => {
         if (result.birthday == null) {
-          // result.birthday = moment("2015/01/01", dateFormat);
+          // result.birthday =moment();
+          console.log(result.birthday);
         } else {
           result.birthday = moment(result.birthday, dateFormat);
+          console.log(result.birthday);
         }
-        // if (result.facebook_link == "null") {
-        //   " "// result.birthday = moment("2015/01/01", dateFormat);
-        // } else {
-        //   result.facebook_link = result.facebook_link;
-        // }
+
+        setnumber(result.phone);
         setuser_profile(result);
-        //  console.log(user_profile);
         setloading(false);
       });
     }
   }, [loader]);
-  console.log(edit_phone);
+
+  const uploadPhoto = (values) => {
+    const formData = new FormData();
+
+    if (cover.length === 0) {
+      message.warning("Please select your photo");
+    } else {
+      formData.append("image", cover[0].originFileObj);
+      editUserProfile(formData, user_profile.id);
+      setloader(true);
+      message.success("successfully added your profile pic");
+      window.location.reload();
+    }
+  };
 
   const onFinish = (values) => {
     const formData = new FormData();
+    if (values.birthday== undefined) {
+      values = {
+        ...values,
 
-    values = {
-      ...values,
-
-      birthday: values["birthday"].format("YYYY-MM-DD"),
-    };
-    //formData.append("phone", values.phone);
-    formData.append("nid", values.nid);
-    formData.append("gender", values.gender);
-    formData.append("facebook_link", values.facebook_link);
-
-    formData.append("birthday", values.birthday);
-    formData.append("bio", values.bio);
-    formData.append("youtube_link", values.youtube_link);
-    formData.append("website_link", values.website_link);
-    formData.append("portfolio_link", values.portfolio_link);
-
-    if (typeof values.photo === "undefined") {
+        birthday: values["birthday"],
+      };
     } else {
-      console.log("image");
-      formData.append("image", values.photo[0].originFileObj);
+      values = {
+        ...values,
+
+        birthday: values["birthday"].format("YYYY-MM-DD"),
+      };
     }
-    for (var value of formData.values()) {
-      console.log(value);
-    }
-    editUserProfile(formData, user_profile.id);
+    console.log(values.birthday);
+    editUserProfile(values, user_profile.id);
     setloader(true);
     updatePhone(values, user_profile.id);
-    alert("successfully saved");
-      console.log(values);
+    message.success("successfully saved your basic info");
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
+    message.error("not saved your basic info");
   };
   const { Option } = Select;
   const { TextArea } = Input;
   const { Title } = Typography;
-  const config = {
-    rules: [
-      {
-        type: "object",
-        required: true,
-        message: "Please select time!",
-      },
-    ],
-  };
+
   //gender
   const plainOptions = ["Male", "Female"];
   const [value, setValue] = React.useState();
@@ -144,7 +247,7 @@ const Profile_info = ({
             span: 4,
           },
           wrapperCol: {
-            span: 12,
+            span: 14,
           },
         }
       : null;
@@ -184,6 +287,22 @@ const Profile_info = ({
   } else {
     return (
       <>
+        <Divider>
+          {" "}
+          <Title>Basic Info</Title>
+        </Divider>
+
+        <div className="picture_upload">
+          <p>Upload picture</p>
+          <PicturesWall setImages={uploadcover} />
+          <Button
+            onClick={() => uploadPhoto()}
+            type="primary"
+            style={{ marginRight: "10px" }}
+          >
+            Save Picture
+          </Button>
+        </div>
         <Form
           {...formItemLayout}
           layout={formLayout}
@@ -191,45 +310,27 @@ const Profile_info = ({
           name="register"
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
-          initialValues={user_profile}
-          //   setloader={setloader}
+          initialValues={
+            user_profile
+
+            // {'birthday':moment('2015/01/01', dateFormat)}
+          }
         >
-          <Divider>
-            {" "}
-            <Title>Basic Info</Title>
-          </Divider>
-          {/* <Image
-          width={200}
-          height={200}
-          src={"http://127.0.0.1:8000" + user_profile.image}
-        /> */}
-          <Link href={`/Profile/Profile_details/${user_profile.id}`}>
-            <Tooltip title="View My Profile" className="button_eye">
-              <Button
-                // onClick={() =>
-                //   router.push(`/Profile/Profile_details/${user_profile.id}`)
-                // }
-                type="primary"
-                shape="circle"
-                icon={<EyeOutlined />}
-              ></Button>
-            </Tooltip>
-          </Link>
           <Form.Item
-            name="photo"
-            label="Upload Photo"
-            valuePropName="fileList"
-            getValueFromEvent={normFile}
-            extra="upload photo"
+            name="employeer"
+            label="Click here"
+            valuePropName="checked"
           >
-            <Upload name="image" listType="picture" maxCount={1}>
-              <Button icon={<UploadOutlined />}>Click to upload</Button>
-            </Upload>
+            <Checkbox>if you are an Empoyeer</Checkbox>
           </Form.Item>
+          <Form.Item name="worker" label="Click here" valuePropName="checked">
+            <Checkbox>if you are a Worker</Checkbox>
+          </Form.Item>
+
           <Form.Item label="Name" name="name">
             <Input
               style={{
-                width: "100%",
+                width: "70%",
                 color: "black",
               }}
               placeholder="name"
@@ -238,7 +339,7 @@ const Profile_info = ({
           <Form.Item label="User Name" name="username">
             <Input
               style={{
-                width: "100%",
+                width: "70%",
                 color: "black",
               }}
               placeholder="name"
@@ -261,7 +362,7 @@ const Profile_info = ({
           >
             <Input
               style={{
-                width: "100%",
+                width: "70%",
                 color: "black",
               }}
               placeholder="e-mail"
@@ -270,26 +371,47 @@ const Profile_info = ({
           </Form.Item>
 
           <Form.Item
-            name="phone"
+            style={{ display: !show ? "" : "none" }}
             label="Phone Number"
-            rules={[
-              {
-                //  required: true,
-                message: "Please input your phone number!",
-              },
-            ]}
           >
             <Input
-              // addonBefore={prefixSelector}
-
+              value={mynumber}
+              onChange={(e) => {
+                setnumber(e.target.value);
+              }}
+              placeholder="phone number"
               style={{
-                width: "35%",
+                width: "54%",
                 color: "black",
-                marginRight: "3px",
               }}
             />
-            {/* <Button type="primary">Verify</Button> */}
+            <Button onClick={signin}>Send OTP</Button>
+            {phoneNotsave()}
+
+            <div id="recaptcha-container"></div>
           </Form.Item>
+
+          <Form.Item
+            style={{ display: show ? "" : "none" }}
+            label="Phone Number"
+          >
+            <Input
+              type="text"
+              placeholder={"Enter your OTP"}
+              onChange={(e) => {
+                setotp(e.target.value);
+              }}
+              style={{
+                width: "54%",
+                color: "black",
+              }}
+            />
+            <Button onClick={ValidateOtp}>Verify</Button>
+          </Form.Item>
+          {/* <a href="../Profile/Mobile_verify" style={{ marginLeft: "180px" }}>
+            <Button type="primary">Update Phone Number</Button>
+          </a> */}
+
           <Form.Item
             name="hide_phone"
             valuePropName="checked"
@@ -297,8 +419,9 @@ const Profile_info = ({
               offset: 4,
               span: 12,
             }}
+            style={{ marginTop: "-25px" }}
           >
-            <Checkbox>Hide phone no</Checkbox>
+            <Checkbox>Hide phone number</Checkbox>
           </Form.Item>
 
           <Form.Item
@@ -309,10 +432,10 @@ const Profile_info = ({
                 type: "number",
                 message: "The input is not valid NID!",
               },
-              {
-                required: true,
-                message: "Please input your NID!",
-              },
+              // {
+              //   required: true,
+              //   message: "Please input your NID!",
+              // },
             ]}
           >
             <InputNumber
@@ -332,34 +455,64 @@ const Profile_info = ({
           <Form.Item
             label="Date of Birth"
             name="birthday"
-            rules={[
-              {
-                type: "date",
-                message: "The input is not valid BOD!",
-              },
-              {
-                required: true,
-                message: "Please input your BOD!",
-              },
-            ]}
+            // rules={[
+            //   {
+            //     type: "date",
+            //     message: "The input is not valid BOD!",
+            //   },
+            //   {
+            //     required: true,
+            //     message: "Please input your BOD!",
+            //   },
+            // ]}
           >
             <DatePicker format={dateFormat} />
           </Form.Item>
           <Form.Item label="Facebook Link" name="facebook_link">
-            <Input placeholder="input Facebook Link" />
+            <Input
+              placeholder="input Facebook Link"
+              style={{
+                width: "70%",
+                color: "black",
+              }}
+            />
           </Form.Item>
           <Form.Item label="Website Link" name="website_link">
-            <Input placeholder="input Website Link" />
+            <Input
+              placeholder="input Website Link"
+              style={{
+                width: "70%",
+                color: "black",
+              }}
+            />
           </Form.Item>
           <Form.Item label="Youtube Link" name="youtube_link">
-            <Input placeholder="input Youtube Link" />
+            <Input
+              placeholder="input Youtube Link"
+              style={{
+                width: "70%",
+                color: "black",
+              }}
+            />
           </Form.Item>
           <Form.Item label="Portfolio Link" name="portfolio_link">
-            <Input placeholder="input Portfolio Link" />
+            <Input
+              placeholder="input Portfolio Link"
+              style={{
+                width: "70%",
+                color: "black",
+              }}
+            />
           </Form.Item>
 
           <Form.Item label="Bio" name="bio">
-            <TextArea rows={4} />
+            <TextArea
+              rows={4}
+              style={{
+                width: "70%",
+                color: "black",
+              }}
+            />
           </Form.Item>
           <Form.Item {...tailFormItemLayout}>
             <Button type="primary" htmlType="submit">
@@ -378,7 +531,6 @@ const mapStateToProps = (state) => {
     get_district: state.user.get_district,
     get_division: state.user.get_division,
     get_thana: state.user.get_thana,
-    // user_profile: state.user.user_profile,
     edit_user_profile: state.user.edit_user_profile,
     edit_phone: state.user.edit_phone,
     auth: state.auth,
@@ -392,4 +544,5 @@ export default connect(mapStateToProps, {
   getDivision,
   getThana,
   updatePhone,
+  PhoneVerifyUpdate,
 })(Profile_info);

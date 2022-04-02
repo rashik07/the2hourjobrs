@@ -48,23 +48,30 @@ export const getIndustries = () => async (dispatch) => {
     const response = await backend.get("v1/category/industry/");
 
     dispatch({ type: types.GET_JOB_INDUSTRIES, payload: response.data });
+    if (response.status === 200) {
+      return response.data;
+      } 
+      return [];
   } catch (error) {
     console.log(error);
+    return [];
   }
 };
 
-export const getAllJobs = () => async (dispatch) => {
+export const getAllJobs = (page, pageSize) => async (dispatch) => {
   try {
    
  
-      const response = await backend.get("v1/jobpost/data/", getConfig());
+      const response = await backend.get(`v1/jobpost/data/?page=${page}&page_size=${pageSize}`, getConfig());
    
     if (response.status === 200) {
       dispatch({ type: types.GET_ALL_JOB, payload: response.data });
       return response.data;
     }
+    return [];
   } catch (error) {
     console.log(error);
+    return [];
   }
 };
 
@@ -78,31 +85,42 @@ export const getAllJobs_withoutlogin = () => async (dispatch) => {
       dispatch({ type: types.GET_ALL_JOB, payload: response.data });
       return response.data;
     }
+    return [];
   } catch (error) {
     console.log(error);
+    return [];
   }
 };
 
-export const getSelfPostedJobs = () => async (dispatch) => {
+export const getSelfPostedJobs = (id) => async (dispatch) => {
   try {
     const response = await backend.get(
-      `v1/jobpost/data/?poster=${store.getState().auth.id}`,
+      `v1/jobpost/data/?poster=${id}`,
       getConfig()
     );
-
+    if (response.status === 200) {
     dispatch({ type: types.GET_SELF_POSTED_JOB, payload: response.data });
+    return response.data;
+    }
+    return [];
   } catch (error) {
     console.log(error);
+    return [];
   }
 };
 
 export const getSavedJobs = () => async (dispatch) => {
   try {
     const response = await backend.get("v1/jobpost/saved_jobs/", getConfig());
-
+   
     dispatch({ type: types.GET_SAVED_JOB, payload: response.data });
+    if (response.status === 200) {
+      return response.data;
+      } 
+      return [];
   } catch (error) {
     console.log(error);
+    return [];
   }
 };
 
@@ -111,8 +129,13 @@ export const getAppliedJobs = () => async (dispatch) => {
     const response = await backend.get("v1/jobpost/applied_jobs/", getConfig());
 
     dispatch({ type: types.GET_APPLIED_JOB, payload: response.data });
+    if (response.status === 200) {
+      return response.data;
+      } 
+      return [];
   } catch (error) {
     console.log(error);
+    return [];
   }
 };
 export const getAppliedJobsPerson = (temp_jobpost) => async (dispatch) => {
@@ -123,14 +146,19 @@ export const getAppliedJobsPerson = (temp_jobpost) => async (dispatch) => {
     );
 
     dispatch({ type: types.GET_APPLIED_JOB_PERSON, payload: response.data });
+    if (response.status === 200) {
+      return response.data;
+      } 
+      return [];
   } catch (error) {
     console.log(error);
+    return [];
   }
 };
 
-export const filterJobs = (filter) => async (dispatch) => {
+export const filterJobs = (filter, page, pageSize) => async (dispatch) => {
   try {
-    let url = "v1/jobpost/filter/?";
+    let url = `v1/jobpost/filter/?page=${page}&page_size=${pageSize}&`;
 
     const createURL = {
       location: (url, location) => {
@@ -200,9 +228,14 @@ export const filterJobs = (filter) => async (dispatch) => {
 
     const response = await backend.get(url);
 
-    dispatch({ type: types.FILTER_JOB, payload: response.data });
+    // dispatch({ type: types.FILTER_JOB, payload: response.data });
+    if (response.status === 200) {
+    return response.data;
+    } 
+    return [];
   } catch (error) {
     console.log(error);
+    return [];
   }
 };
 
@@ -221,9 +254,14 @@ export const getLocationList = () => async (dispatch) => {
     const response = await backend.get("v1/category/division/");
 
     dispatch({ type: types.GET_LOCATION_LIST, payload: response.data });
+    if (response.status === 200) {
     return response.data;
+    }
+    return [];
   } catch (error) {
+    
     console.log(error);
+    return [];
   }
 };
 
@@ -235,7 +273,7 @@ export const saveTemporayJobPost = (data) => async (dispatch) => {
   }
 };
 
-export const postJob = (data, router) => async (dispatch) => {
+export const postJob = (data, router,setDisable) => async (dispatch) => {
   try {
     const {
       category,
@@ -288,9 +326,10 @@ export const postJob = (data, router) => async (dispatch) => {
 
     dispatch({ type: types.CREATE_JOB, payload: id });
     dispatch({ type: types.UNSAVE_TEMPORARY_JOBPOST });
-
     router.push("/jobs/list");
+   
   } catch (error) {
+    setDisable(false);
     console.log(error.response);
   }
 };
@@ -306,7 +345,9 @@ export const updateJob = (data, router) => async (dispatch) => {
       job_location,
       education,
       gender,
+      
     } = data;
+   
 
     data = _.omit(data, [
       "skills",
@@ -344,12 +385,10 @@ export const updateJob = (data, router) => async (dispatch) => {
       },
     };
 
-    const response = await backend.patch(
-      `v1/jobpost/data/${id}/`,
-      data,
-      getConfig()
-    );
-
+    const response = await backend.patch(`v1/jobpost/data/${id}/`,data,getConfig());
+    console.log(response.data);
+    // const { id } = response.data;
+    // dispatch({ type: types.UPDATE_JOB, payload: id });
     dispatch({ type: types.UNSAVE_TEMPORARY_JOBPOST });
 
     router.push("/jobs/my_posts");
@@ -359,21 +398,29 @@ export const updateJob = (data, router) => async (dispatch) => {
 };
 
 export const applyJob =
-  (job_id, userid,appliedStatus,setAppliedStatus) => async (dispatch) => {
+  (job_id, userid,appliedStatus,setAppliedStatus,applied_saved_id) => async (dispatch) => {
     try {
       const formData = { applied: true, job: job_id, user: userid };
-     // console.log(applied);
-
-      const response = await backend.post(
+      // console.log(applied);
+      let response = null;
+      if (applied_saved_id) {
+        response = await backend.patch(
+          `v1/jobpost/user_apply_save_jobs/${applied_saved_id}/`,
+          formData,
+          getConfig()
+        );
+      } else {
+       response = await backend.post(
         "v1/jobpost/user_apply_save_jobs/",
         formData,
         getConfig()
       );
+      }
 
       if (response.status == 200 || response.status == 201) {
         setAppliedStatus(true);
       }
-
+   
       dispatch({ type: types.APPLY_JOB, payload: job_id });
     } catch (error) {
       console.log(error);
@@ -449,13 +496,33 @@ export const getJob = (job_id) => async (dispatch) => {
         type: types.SAVE_TEMPORARY_JOBPOST,
         payload: response.data,
       });
+      return response.data;
     }
+    return [];
   } catch (error) {
     console.log(error);
+    return [];
   }
 };
 
 export const getJobDetails = (job_id) => async (dispatch) => {
+  try {
+    const response = await backend.get(`v1/jobpost/data/${job_id}/`,getConfig());
+
+    if (response.status == 200) {
+      dispatch({
+        type: types.GET_SINGLE_JOB,
+        payload: response.data,
+      });
+      return response.data;
+    }
+    return [];
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
+};
+export const getJobDetails_withoutlogin = (job_id) => async (dispatch) => {
   try {
     const response = await backend.get(`v1/jobpost/data/${job_id}/`);
 
@@ -464,9 +531,12 @@ export const getJobDetails = (job_id) => async (dispatch) => {
         type: types.GET_SINGLE_JOB,
         payload: response.data,
       });
+      return response.data;
     }
+    return [];
   } catch (error) {
     console.log(error);
+    return [];
   }
 };
 

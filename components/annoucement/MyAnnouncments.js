@@ -60,6 +60,7 @@ const AllAnnouncements = ({
                   <Row>
                     <Col span={12} offset={6}>
                       {renderimage(announcment)}
+                      {console.log(announcment)}
                     </Col>
                   </Row>
                 </Col>
@@ -104,9 +105,20 @@ const AllAnnouncements = ({
                 >
                   <Row>
                     <Col span={18} offset={3}>
-                      <Link
-                        href={
-                          "/announcement/myannouncement/" + announcment.id + "/"
+                    <Link
+                        // href={"/announcement/myannouncement/[announcement_id]"} as={`/announcement/myannouncement/${announcment.id}`}
+                        href={{ pathname: '/announcement/myannouncement/announcement_id', query: { announcement_id: announcment.id} }}
+                    >
+                        <Button
+                          type="primary"
+                          block
+                          style={{ marginBottom: "15px" }}
+                        >
+                          Edit
+                        </Button>
+                      </Link>
+                      {/* <Link
+                        href={"/announcement/myannouncement/" + announcment.id + "/"
                         }
                       >
                         <Button
@@ -116,7 +128,7 @@ const AllAnnouncements = ({
                         >
                           Edit
                         </Button>
-                      </Link>
+                      </Link> */}
                       <Button
                         block
                         onClick={() =>
@@ -193,9 +205,7 @@ const AllAnnouncements = ({
                   <Row>
                     <Col span={18} offset={3}>
                       <Link
-                        href={
-                          "/announcement/myannouncement/" + announcment.id + "/"
-                        }
+                        href={{ pathname: '/announcement/myannouncement/announcement_id', query: { announcement_id: announcment.id} }}
                       >
                         <Button
                           type="primary"

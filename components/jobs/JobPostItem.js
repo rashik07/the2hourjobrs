@@ -11,9 +11,9 @@ import Link from "next/link";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import PopupDetails from "./PopupDetails";
-import { Modal, Button } from "antd";
+import { Modal, Button, Pagination, message } from "antd";
 import { ExclamationCircleOutlined, PushpinFilled } from "@ant-design/icons";
-import { Row, Col } from "antd";
+import { Row, Col, List, Tooltip } from "antd";
 import {
   PhoneOutlined,
   ScheduleOutlined,
@@ -33,7 +33,7 @@ const JobPostItem = ({
   saveJob,
   deleteJob,
   getSelfPostedJobs,
-
+  loader,
   show_save_button,
   self_posted_jobs,
   getAppliedJobsPerson,
@@ -56,50 +56,59 @@ const JobPostItem = ({
     if (min) {
       return `Minimum ${min} year(s)`;
     }
-    return `Maximum ${max} year(s)`;
+    return "";
   };
 
-  useEffect(() => {
-    getSelfPostedJobs();
-  }, []);
+  // useEffect(() => {
+  //   getSelfPostedJobs();
+  // }, []);
 
   const getLocations = (location) => {
     const location_list = [];
+    if (location) {
+      location.forEach((loc) => {
+        location_list.push(loc.name);
+      });
 
-    location.forEach((loc) => {
-      location_list.push(loc.name);
-    });
-
-    return location_list.join(", ");
+      return location_list.join(", ");
+    }
   };
 
   const getEducation = (education) => {
     const education_list = [];
+    if (education) {
+      education.forEach((edu) => {
+        education_list.push(edu.name);
+      });
 
-    education.forEach((edu) => {
-      education_list.push(edu.name);
-    });
+      return education_list.join(", ");
+    }
+  };
+  const getPostTime = () => {
+    const moment = require("moment");
 
-    return education_list.join(", ");
+    const m = moment(new Date(job.posting_timestamp));
+
+    return m.format("LL");
   };
 
   const applyJobBtnClick = () => {
     if (!isSignedIn) {
       alert("You must log in to access this feature");
-      
-    }else{
-    console.log(userid);
-    applyJob(id, userid, appliedStatus,setAppliedStatus);
-    alert("successfully");
+    } else {
+      applyJob(id, userid, appliedStatus, setAppliedStatus);
+      alert("successfully");
     }
   };
 
   const saveJobBtnClick = () => {
     if (!isSignedIn) {
-      alert("You must log in to access this feature");
-      
-    }else{
-    saveJob(id, userid, savedStatus, setSavedStatus, applied_saved_id);
+      message.error("You must log in to access this feature");
+    } else {
+      saveJob(id, userid, savedStatus, setSavedStatus, applied_saved_id);
+
+      // window.location.reload();
+      loader(savedStatus);
     }
   };
   const deleteJobBtnClick = () => {
@@ -114,6 +123,7 @@ const JobPostItem = ({
       cancelText: "No",
       onOk() {
         deleteJob(id);
+        window.location.reload();
       },
     });
 
@@ -138,7 +148,6 @@ const JobPostItem = ({
   };
 
   const applyShow = () => {
-    
     if (appliedStatus) {
       return (
         <Button
@@ -155,35 +164,39 @@ const JobPostItem = ({
     }
     return (
       <Button type="primary" shape="round" onClick={applyJobBtnClick}>
-        Apply
+        Apply Now
       </Button>
     );
   };
   const saveShow = () => {
     if (savedStatus) {
       return (
-        <SaveOutlined
+        <Tooltip title="press to unsave">
+          <SaveOutlined
+            onClick={saveJobBtnClick}
+            style={{
+              fontSize: "20px",
+              color: "#0E8044",
+              marginTop: "5px",
+              float: "right",
+            }}
+          />
+        </Tooltip>
+      );
+    }
+
+    return (
+      <Tooltip title="press to save">
+        <PushpinFilled
           onClick={saveJobBtnClick}
           style={{
             fontSize: "20px",
-            // color: "#0E8044",
+            color: "#0E8044",
             marginTop: "5px",
             float: "right",
           }}
         />
-      );
-    }
-    //  console.log(self_posted_jobs);
-    return (
-      <PushpinFilled
-        onClick={saveJobBtnClick}
-        style={{
-          fontSize: "20px",
-          color: "#FF3155",
-          marginTop: "5px",
-          float: "right",
-        }}
-      />
+      </Tooltip>
     );
   };
 
@@ -192,23 +205,28 @@ const JobPostItem = ({
     if (router.pathname === "/jobs/my_posts") {
       return (
         <>
-          {applyShow()}
-          {deleteShow()}
-          {saveShow()}
-          <Button
-            onClick={() => router.push(`/jobs/edit/${id}`)}
-            type="primary"
-            shape="round"
+          {/* {applyShow()} */}
+
+          <Link
+            // href={"/jobs/edit/[id]"} as={`/jobs/edit/${id}`}
+            href={{ pathname: "/jobs/edit/", query: { id: id } }}
           >
-            Edit
-          </Button>
+            <Button
+              type="primary"
+              block
+              style={{ marginBottom: "5px", width: "50px" }}
+            >
+              Edit
+            </Button>
+          </Link>
+          {deleteShow()}
         </>
       );
     }
 
     return (
       <>
-        {applyShow()}
+        {/* {applyShow()} */}
 
         {saveShow()}
 
@@ -228,49 +246,97 @@ const JobPostItem = ({
       </>
     );
   };
-  // {
-  //   console.log(poster);
-  // }
+
+  const [size, setSize] = useState();
+  const showDefaultDrawer = () => {
+    setSize("default");
+  };
   return (
-    <Row className="job_post">
-      <Col span={24}>
-        <Row>
-          <Col span={21}>
-            <PopupDetails job={job} />
-          </Col>
-          <Col span={3}>{renderButtons()}</Col>
-        </Row>
-        <h4 style={{ color: "gray" }}>
-          <UserOutlined />{" "}
-          <Link href={`/Profile/Profile_details/${poster.id}`}>
-            {poster.username}
-          </Link>{" "}
-          <EnvironmentOutlined /> {getLocations(job.job_location)}
-        </h4>
-        {/* onClick={() => router.push(`/jobs/detail/${job.id}`)} */}
-        {/* <p style={{ marginTop: "1rem", marginBottom: "1rem" }}>
+    <>
+      <Row className="job_post">
+        <Col span={24}>
+          <Row>
+            <Col xs={24} sm={24} md={22} lg={22} xl={22}>
+              <PopupDetails job={job} onClick={showDefaultDrawer} size={size} />
+            </Col>
+            <Col span={2}>{renderButtons()}</Col>
+            <p style={{ fontWeight: "700" }}>
+              <UserOutlined />{" "}
+              <Link
+                href={{
+                  pathname: "/Profile/Profile_details/",
+                  query: { id: poster.id },
+                }}
+              >
+                <a target="_blank"> {poster.username}</a>
+              </Link>
+            </p>
+            {"   "}
+            <p>
+              <CalendarOutlined style={{ marginLeft: "10px" }} /> Published on:{" "}
+              {getPostTime()}
+            </p>
+          </Row>
+
+          {/* {job.posting_timestamp} */}
+
+          {/* <h4 style={{ color: "gray" }}>
+            <UserOutlined />{" "}
+            <Link
+              href={{
+                pathname: "/Profile/Profile_details/",
+                query: { id: poster.id },
+              }}
+            >
+              {poster.username}
+            </Link>{" "}
+          </h4> */}
+          <p>
+            <EnvironmentOutlined />
+            {getLocations(job.job_location)}
+          </p>
+          {/* onClick={() => router.push(`/jobs/detail/${job.id}`)} */}
+          {/* <p style={{ marginTop: "1rem", marginBottom: "1rem" }}>
           {job.skills} {" "}
         </p> */}
 
-        <p>
-          <EditOutlined /> {getEducation(job.education)}
-        </p>
-        <p>
-          <ScheduleOutlined />{" "}
-          {getExperience(job.min_experience, job.max_experience)}
-        </p>
-        <p>
-          <CalendarOutlined /> Deadline: {job.deadline}
-        </p>
-        {/* {appliedPerson()} */}
-      </Col>
-    </Row>
+          <p>
+            {getEducation(job.education) ? (
+              <>
+                {" "}
+                <EditOutlined />
+                {getEducation(job.education)}
+              </>
+            ) : (
+              " "
+            )}
+          </p>
+          <div style={{ display: "flex" }}>
+            <p style={{ marginRight: "10px" }}>
+              {getExperience(job.min_experience, job.max_experience) ? (
+                <>
+                  {" "}
+                  <ScheduleOutlined />{" "}
+                  {getExperience(job.min_experience, job.max_experience)}{" "}
+                </>
+              ) :(
+                ""
+              )}
+             
+            </p>
+            <p>
+              <CalendarOutlined /> Deadline: {job.deadline ? job.deadline : " "}
+            </p>
+          </div>
+          {/* {appliedPerson()} */}
+        </Col>
+      </Row>
+    </>
   );
 };
 
 const mapStateToProps = (state) => {
   return {
-    
     userid: state.auth.id,
     isSignedIn: state.auth.isSignedIn,
     self_posted_jobs: Object.values(state.job.self_posted_jobs),

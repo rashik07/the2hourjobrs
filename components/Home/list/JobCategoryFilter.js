@@ -21,7 +21,6 @@ const JobCategoryFilter = ({
   useEffect(() => {
     setloading(true);
     getJobCategories().then((result) => {
-      console.log(result);
       setcategories(result);
       setloading(false);
     });
@@ -39,33 +38,82 @@ const JobCategoryFilter = ({
       // reload(true);
     }
   }
-
-  const onClear = () => {
-    filter = _.omit(filter, ["category"]);
-    setFilter(filter);
-    reload(reload);
-  };
+// console.log(categories);
   if (loading) {
     return <Skeleton active />;
   } else {
     return (
       <>
-        {categories.map((category) => {
-          return category.list.map((subcategory) => {
-            return (
-              <Col
-                span={6}
-                onClick={() => {
-                  handleChange(JSON.stringify(subcategory));
-                }}
-                style={{ margin: "0rem 0rem" }}
-                className="home_category"
-              >
-                <CaretRightOutlined /> <a>{subcategory.name}</a>
-              </Col>
-            );
-          });
-        })}
+        <p style={{ color: "black", fontWeight: "bold" }}>
+          Skill base
+        </p>
+        <Row>
+          {categories?categories.map((category) => {
+            // console.log(category);
+            // return <h1>jdnvjdkj</h1>
+            if (category.type === "Skilled") {
+              return category.list.map((subcategory) => {
+                return (
+                  <Col
+                    xs={24}
+                    sm={24}
+                    md={6}
+                    lg={6}
+                    xl={6}
+                    onClick={() => {
+                      handleChange(JSON.stringify(subcategory));
+                    }}
+                    key={subcategory.id}
+                    style={{ margin: "5px 0px" }}
+                    className="home_category"
+                    
+                  >
+                    
+                    <CaretRightOutlined style={{ color: "#6db784" }} />{" "}
+                    <a>{subcategory.name}</a>
+
+                    
+                  </Col>
+                );
+              });
+            }
+          }):""}
+        </Row>
+        <p style={{ color: "black", marginTop: "15px", fontWeight: "bold" }}>
+          Funcational Base
+        </p>
+        <Row>
+          {categories?categories.map((category) => {
+            // console.log(category);
+
+            if (category.type === "Funcational") {
+              return category.list.map((subcategory) => {
+                return (
+                  <Col
+                    xs={24}
+                    sm={24}
+                    md={6}
+                    lg={6}
+                    xl={6}
+                    onClick={() => {
+                      handleChange(JSON.stringify(subcategory));
+                    }}
+                    key={subcategory.id}
+                    style={{ margin: "5px 0px" }}
+                    className="home_category"
+                  >
+                    
+                    <CaretRightOutlined style={{ color: "#6db784" }} />{" "}
+                    <a>{subcategory.name}</a>
+
+                 
+                    
+                  </Col>
+                );
+              });
+            }
+          }):""}
+        </Row>
       </>
     );
   }

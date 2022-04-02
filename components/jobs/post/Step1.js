@@ -1,25 +1,27 @@
-import CropImageUploader from "components/CropImageUploader";
 import React, { useState } from "react";
 import StepsParent from "./StepsParent";
 import { connect } from "react-redux";
-import { Space } from "antd";
+import { Row, Col, message, Button } from "antd";
 
 const Step1 = ({ postStep, setPostStep, temp_jobpost }) => {
   const onSubmit = () => {
     if (!temp_jobpost.title) {
-      alert("You must enter title");
+      message.warning('You must enter "what am i looking for?"');
       return;
     }
+
     if (!temp_jobpost.category) {
-      alert("You must select category");
+      message.warning("You must select category");
       return;
     }
+
     if (!temp_jobpost.deadline) {
-      alert("You must select Application deadline");
+      message.warning("You must select Application deadline");
       return;
     }
-    if (temp_jobpost.employmentStatus === []) {
-      alert("You must select Employment Status");
+
+    if (temp_jobpost.employment_status.length == 0) {
+      message.warning("You must select Employment Status");
       return;
     }
 
@@ -27,30 +29,60 @@ const Step1 = ({ postStep, setPostStep, temp_jobpost }) => {
   };
 
   const [image, setImage] = useState([]);
+  // console.log(temp_jobpost.employment_status.length);
   console.log(temp_jobpost);
   return (
     <>
       <br />
-      <StepsParent item="title" />
-      {/* <StepsParent item="image">
-        <CropImageUploader limit={1} uploadImage={setImage} />
-      </StepsParent> */}
-      <Space size="large">
-        <StepsParent item="vacancy" />
-        <StepsParent item="category" />
-        <StepsParent item="deadline" />
-      </Space>
-      <StepsParent item="skills" />
-      <br />
-      <StepsParent item="employment_status" />
-      <br />
-      <button onClick={onSubmit} style={{ float: "right" }}>
-        Next
-      </button>
+      <Row>
+        <Col
+          xs={{ span: 24, offset: 0 }}
+          sm={{ span: 24, offset: 0 }}
+          md={{ span: 5, offset: 0 }}
+          lg={{ span: 5, offset: 0 }}
+          xl={{ span: 5, offset: 0 }}
+        >
+          <img
+            src="../../../img/banner_jobpost2.jpg"
+            style={{ width: "100%" }}
+          />
+        </Col>
+        <Col
+          xs={{ span: 24, offset: 0 }}
+          sm={{ span: 24, offset: 0 }}
+          md={{ span: 12 , offset: 1}}
+          lg={{ span: 12 , offset: 1}}
+          xl={{ span: 12, offset:  1}}
+        >
+          <StepsParent item="title" />
 
-      <br />
-      <br />
-      <br />
+          <StepsParent item="vacancy" />
+
+          <StepsParent item="category" />
+
+          <StepsParent item="deadline" />
+
+          <StepsParent item="skills" />
+
+          <StepsParent item="employment_status" />
+
+          <Button onClick={onSubmit} >
+            Next
+          </Button>
+        </Col>
+        <Col
+          xs={{ span: 24, offset: 0 }}
+          sm={{ span: 24, offset: 0 }}
+          md={{ span: 5, offset: 1 }}
+          lg={{ span: 5, offset: 1 }}
+          xl={{ span: 5, offset: 1 }}
+        >
+          <img
+            src="../../../img/banner_jobpost.jpg"
+            style={{ width: "100%" }}
+          />
+        </Col>
+      </Row>
     </>
   );
 };

@@ -4,11 +4,16 @@ import {
   Menu,
   Row,
   Col,
-  Popover,
   Image,
   Button,
+  Divider,
   Dropdown,
   Select,
+  message,
+  Badge,
+  Avatar,
+  Modal,
+  Drawer,
 } from "antd";
 import Link from "next/link";
 import { connect } from "react-redux";
@@ -17,13 +22,17 @@ import { updateProfile } from "@/redux/actions/userAction";
 import {
   getAllNotification,
   getAllUnreadNotification,
+  markAllasRead,
+  markasRead,
 } from "@/redux/actions/notoficationAction";
-
 import {
   UserOutlined,
-  NotificationOutlined,
   NotificationFilled,
+  ExclamationCircleOutlined,
+  MenuOutlined,
+  WindowsFilled,
 } from "@ant-design/icons";
+import { useRouter } from "next/router";
 
 const { Header } = Layout;
 const { SubMenu } = Menu;
@@ -32,16 +41,16 @@ const getItems = (isSignedIn, signOut, user_profile) => {
   const { Header, Content, Footer } = Layout;
 
   const image = () => {
-    if (
-      user_profile.image ==
-      `http://127.0.0.1:8000/api/v1/user/me/?user=${user_profile.id}`
-    ) {
+    if (!user_profile.image) {
       return (
         <Link href="/Profile">
           <a>
             <UserOutlined />
-
-            {user_profile.username}
+            {user_profile.username
+              ? user_profile.username.length < 10
+                ? user_profile.username.substr(0, 9)
+                : user_profile.username.substr(0, 9) + "..."
+              : ""}
           </a>
         </Link>
       );
@@ -57,7 +66,11 @@ const getItems = (isSignedIn, signOut, user_profile) => {
             style={{ marginTop: "10px", borderRadius: "50%" }}
           />
           {"  "}
-          {user_profile.username}
+          {user_profile.username
+            ? user_profile.username.length < 10
+              ? user_profile.username.substr(0, 9)
+              : user_profile.username.substr(0, 9) + "..."
+            : ""}
         </a>
       </Link>
     );
@@ -65,34 +78,34 @@ const getItems = (isSignedIn, signOut, user_profile) => {
   if (isSignedIn) {
     return (
       <>
-        {/* {console.log(user_profile.name)} */}
-        <Menu.Item key="setting:12">{image()}</Menu.Item>
+        <Menu.Item key="setting:11">{image()}</Menu.Item>
 
-        <Menu.Item key="setting:13">
-          <a
-            href="#"
-            onClick={() => {
-              signOut();
-            }}
-          >
-            Logout
-          </a>
+        <Menu.Item key="setting:12">
+          <Link href="/jobs/list">
+            <a
+              onClick={() => {
+                signOut();
+              }}
+            >
+              Logout
+            </a>
+          </Link>
         </Menu.Item>
       </>
     );
   }
   return (
     <>
-      <Menu.Item key="setting:14">
+      <Menu.Item key="setting:13">
         <Link href="/auth/login" onClick={() => router.push("/auth/login")}>
-          Login
+          Login/Signup
         </Link>
       </Menu.Item>
-      <Menu.Item key="setting:15">
+      {/* <Menu.Item key="setting:14">
         <Link href="/auth/signup" onClick={() => router.push("/auth/signup")}>
           Sign up
         </Link>
-      </Menu.Item>
+      </Menu.Item> */}
     </>
   );
 };
@@ -107,11 +120,25 @@ const navbar = ({
   temp_jobpost,
   getAllNotification,
   getAllUnreadNotification,
+  markasRead,
 }) => {
+  const router = useRouter();
+
   const { Option } = Select;
+  const [visible, setVisible] = useState(false);
+
+  const showDrawer = () => {
+    setVisible(true);
+  };
+
+  const onClose = () => {
+    setVisible(false);
+  };
+
   useEffect(() => {
     getAllNotification();
     getAllUnreadNotification();
+    updateProfile();
   }, []);
   const data = [
     "Racing car sprays burning fuel into crowd.",
@@ -120,66 +147,211 @@ const navbar = ({
     "Man charged over missing wedding girl.",
     "Los Angeles battles huge wildfires.",
   ];
-
+  const NotificationOnClick = ({ key }) => {
+    message.info(`Click on item ${key}`);
+  };
+  const notificationRead = (id) => {
+    markasRead(id);
+  };
   const notification = (
     <Row
-      
       style={{
         backgroundColor: "white",
         overflowY: "scroll",
-        height: "200px",
+        height: "auto",
+        maxHeight: "60vh",
         width: "400px",
-        boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
-        padding: "5px",
-        
+        padding: "15px",
       }}
     >
-      {allnotificationList.map((notification, index) => (      
-        <Col span={24} className="notifi_bar">
-          {/* {console.log(notification)} */}
-          <Link
-            href={"/jobs/detail/" + notification["description"]}
-            style={{ color: "white" }}
-          >
-            {notification["verb"]}
-          </Link>{" "}
-        </Col>
-      ))}
+      <h3 style={{ weight: "bold" }}>Notifications</h3>
+      <Link href={"/Notification/SeeAllNotification"}>See All</Link>
+      <Divider />
+
+      {allnotificationList
+        ? allnotificationList.map((notification, index) => (
+            <Row span={24} className="notifi_bar">
+              <Link
+                href={{
+                  pathname: "/jobs/detail/",
+                  query: { id: notification["verb"] },
+                }}
+              >
+                <a onClick={(e) => notificationRead(notification["id"])}>
+                  {notification["unread"] ? (
+                    <p style={{ fontWeight: "bold" }}>
+                      {notification["description"]}
+                    </p>
+                  ) : (
+                    <p>{notification["description"]}</p>
+                  )}
+                </a>
+              </Link>
+            </Row>
+          ))
+        : ""}
     </Row>
   );
-  useEffect(() => {
-    updateProfile();
-  }, []);
-  // const createPost=()=>{
-  //   if (!isSignedIn) {
-  //     alert("You must log in to access this feature");
-  //     return;
-  //   }
 
-  // }
+  const phoneNumberAlert = () => {
+    const { warning } = Modal;
 
-  // console.log(user_profile.name);
-  return (
-    <Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
-      <Row>
-        <Col xs={24} sm={24} md={6} lg={6} xl={6}>
-          <a href="/">
-            <div className="logo">
-              <img src="/img/logo.png" alt="Logo" height={40} />
-            </div>
-          </a>
-        </Col>
-        <Col xs={24} sm={24} md={18} lg={18} xl={18}>
+    warning({
+      title: "please save/verify your phone number",
+      icon: <ExclamationCircleOutlined />,
+
+      okText: "OK",
+      okType: "danger",
+      cancelText: "No",
+      onOk() {
+        router.push("/Profile");
+      },
+    });
+  };
+  const loginAlert = () => {
+    const { warning } = Modal;
+
+    warning({
+      title: "Please login for access this feature",
+      icon: <ExclamationCircleOutlined />,
+
+      okText: "OK",
+      okType: "danger",
+      cancelText: "No",
+      onOk() {
+        router.push("/auth/login");
+      },
+    });
+    // message.error("Please login for access this feature");
+  };
+
+  const createPost = () => {
+    if (!isSignedIn) {
+      return (
+        // <Button className="jobpost_btn" onClick={() =>phoneNumberAlert()} >
+        //   <Link href="">Post a Job</Link>
+        // </Button>
+        <Menu.Item key="setting:1" className="jobpost_list ">
+          <Button className="jobpost_btn" onClick={() => loginAlert()}>
+            <Link href="">Post a Job</Link>
+          </Button>
+        </Menu.Item>
+      );
+    } else if (user_profile.phone == null) {
+      return (
+        // <Button className="jobpost_btn" onClick={() =>phoneNumberAlert()} >
+        //   <Link href="">Post a Job</Link>
+        // </Button>
+        <Menu.Item key="setting:1" className="jobpost_list">
+          <Button className="jobpost_btn" onClick={() => phoneNumberAlert()}>
+            <Link href="">Post a Job</Link>
+          </Button>
+        </Menu.Item>
+      );
+    } else {
+      return (
+        <Menu.Item key="setting:1" className="jobpost_list ">
           <Button className="jobpost_btn">
             <Link href="/jobs/post">Post a Job</Link>
           </Button>
-          <Menu
-            theme=""
-            mode="horizontal"
-            defaultSelectedKeys={["2"]}
-            style={{ float: "right" }}
-          >
-            {/* <Menu.Item key="setting:1"></Menu.Item> */}
+        </Menu.Item>
+      );
+    }
+  };
+
+  return (
+    <Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
+      <a href="/">
+        <div className="logo" style={{ float: "left" }}>
+          <img src="/img/logo.png" alt="Logo" height={40} />
+        </div>
+      </a>
+
+      <Menu
+        mode="horizontal"
+        className="menu_pc"
+        style={{ backgroundColor: "#95D5D2", paddingLeft: "34%" }}
+      >
+        {createPost()}
+        <SubMenu key="1" title="Jobs">
+          <Menu.Item key="setting:2">
+            {" "}
+            <Link href="/jobs/list">Job list</Link>
+          </Menu.Item>
+          <Menu.Item key="setting:3">
+            {" "}
+            <Link href="/jobs/saved">Saved Jobs</Link>
+          </Menu.Item>
+          <Menu.Item key="setting:4">
+            {" "}
+            <Link href="/jobs/applied">Applied Jobs</Link>
+          </Menu.Item>
+          <Menu.Item key="setting:5">
+            {" "}
+            <Link href="/jobs/my_posts">My Posted Jobs</Link>
+          </Menu.Item>
+        </SubMenu>
+
+        <SubMenu key="2" title="Employees">
+          <Menu.Item key="setting:6">
+            <Link href="/worker/list">List</Link>
+          </Menu.Item>
+          <Menu.Item key="setting:7">
+            {" "}
+            <Link href="/worker/saved">Saved employees</Link>
+          </Menu.Item>
+        </SubMenu>
+
+        <SubMenu key="3" title="Announcements">
+          <Menu.Item key="setting:8">
+            <Link href="/announcement">All Announcements</Link>
+          </Menu.Item>
+          <Menu.Item key="setting:9">
+            {" "}
+            <Link href="/announcement/myannouncement">My Announcements</Link>
+          </Menu.Item>
+          <Menu.Item key="setting:10">
+            {" "}
+            <Link href="/announcement/create">Create Announcement</Link>
+          </Menu.Item>
+        </SubMenu>
+        <Menu.Item key="setting:15">
+          <Badge count={unreadnotificationList.length}>
+            <Dropdown overlay={notification} placement="bottomLeft">
+              {/* <Avatar
+                shape="square"
+                size="default"
+                style={{
+                  backgroundColor: "transparent",
+                  // border: "1px solid #1890FF",
+                  // marginTop: "-2px",
+                }}
+              >
+                <NotificationFilled style={{ color: "#1890FF" }} />
+              
+              </Avatar> */}
+              <span>Notifications</span>
+            </Dropdown>
+          </Badge>
+        </Menu.Item>
+
+        {getItems(isSignedIn, signOut, user_profile)}
+      </Menu>
+      <div style={{ float: "right" }}>
+        <Button type="primary" onClick={showDrawer} className="menu_mobile">
+          <MenuOutlined />
+        </Button>
+        <Drawer
+          title=""
+          placement="right"
+          onClose={onClose}
+          visible={visible}
+          width="900"
+          drawerStyle={{ backgroundColor: "#95D5D2" }}
+          className="section_menu_mobile"
+        >
+          <Menu mode="inline" style={{ backgroundColor: "#95D5D2" }}>
+            {createPost()}
             <SubMenu key="1" title="Jobs">
               <Menu.Item key="setting:2">
                 {" "}
@@ -199,39 +371,59 @@ const navbar = ({
               </Menu.Item>
             </SubMenu>
 
-            <SubMenu key="2" title="Workers">
-              <Menu.Item key="setting:7">
+            <SubMenu key="2" title="Employees">
+              <Menu.Item key="setting:6">
                 <Link href="/worker/list">List</Link>
               </Menu.Item>
-              <Menu.Item key="setting:8">
+              <Menu.Item key="setting:7">
                 {" "}
-                <Link href="/worker/saved">Saved workers</Link>
+                <Link href="/worker/saved">Saved employees</Link>
               </Menu.Item>
             </SubMenu>
 
             <SubMenu key="3" title="Announcements">
-              <Menu.Item key="setting:9">
+              <Menu.Item key="setting:8">
                 <Link href="/announcement">All Announcements</Link>
               </Menu.Item>
-              <Menu.Item key="setting:10">
+              <Menu.Item key="setting:9">
                 {" "}
                 <Link href="/announcement/myannouncement">
                   My Announcements
                 </Link>
               </Menu.Item>
-              <Menu.Item key="setting:11">
+              <Menu.Item key="setting:10">
                 {" "}
                 <Link href="/announcement/create">Create Announcement</Link>
               </Menu.Item>
             </SubMenu>
-            <Dropdown overlay={notification} placement="bottomLeft">
-              <NotificationFilled />
-            </Dropdown>
+            <Menu.Item
+              key="setting:15"
+              style={{ paddingTop: "5px", paddingBottom: "5px" }}
+            >
+              <Badge count={unreadnotificationList.length}>
+                <Dropdown overlay={notification} placement="bottomLeft">
+                  {/* <Avatar
+                    shape="square"
+                    size="default"
+                    style={{
+                      backgroundColor: "transparent",
+                      border: "1px solid #1890FF",
+                      // marginTop: "-2px",
+                    }}
+                  >
+                    <NotificationFilled style={{ color: "#1890FF" }} />
+                  </Avatar> */}
+                  <span>Notifications</span>
+                </Dropdown>
+              </Badge>
+            </Menu.Item>
 
             {getItems(isSignedIn, signOut, user_profile)}
           </Menu>
-        </Col>
-      </Row>
+        </Drawer>
+      </div>
+      {/* </Col>
+      </Row> */}
     </Header>
   );
 };
@@ -250,4 +442,5 @@ export default connect(mapStateToProps, {
   signOut,
   getAllNotification,
   getAllUnreadNotification,
+  markasRead,
 })(navbar);

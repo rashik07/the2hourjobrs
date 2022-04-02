@@ -11,6 +11,7 @@ import {
   Select,
   Table,
   Space,
+  message,
 } from "antd";
 import { getEducation } from "redux/actions/jobAction";
 import {
@@ -18,8 +19,7 @@ import {
   viewEducation,
   deleteEducation,
 } from "@/redux/actions/usereducationAction";
-import moment from "moment";
-import { DeleteOutlined } from "@ant-design/icons";
+import { DeleteOutlined, PicCenterOutlined } from "@ant-design/icons";
 
 const Academic_info = ({
   education,
@@ -39,7 +39,6 @@ const Academic_info = ({
     setloader(false);
   }, [loader]);
 
-  console.log(view_education);
   const { Option, OptGroup } = Select;
   const dateFormat = "YYYY";
 
@@ -51,11 +50,9 @@ const Academic_info = ({
     createEducation(values);
     form.resetFields();
     setloader(true);
-
+    message.success("successfully added your academic info");
     //       console.log('Success:', values);
   };
-
-  //user_profile.birthday=moment(user_profile.birthday, dateFormat);
 
   function onChangeNum(value) {
     console.log("changed", value);
@@ -116,44 +113,51 @@ const Academic_info = ({
       dataIndex: "Education",
       key: "Education",
       width: "30%",
+      align:"center",
     },
     {
       title: "Exam/Degree Title",
       dataIndex: "Degree",
       key: "Degree",
       width: "100%",
+      align:"center",
     },
 
     {
-      title: "institute_name",
+      title: "Institute Name",
       dataIndex: "institute_name",
       key: "institute_name",
-      width: "150px",
+      width: "200px",
+      align:"center",
     },
     {
-      title: "result",
+      title: "Result",
       dataIndex: "result",
       key: "result",
       width: "150px",
+      align:"center",
     },
     {
-      title: "year_of_passing",
+      title: "Year of passing",
       dataIndex: "year_of_passing",
       key: "year_of_passing",
       width: "150px",
+      align:"center",
     },
     {
       title: "Action",
       key: "action",
+      align:"center",
 
+      
       render: (details) => (
-        //  console.log('education id:',details.id),
         <Space size="middle">
           <DeleteOutlined
             key="ellipsis"
             onClick={() => {
               deleteEducation(details.id);
               setloader(true);
+              message.success("successfully delete");
             }}
           />
         </Space>
@@ -162,6 +166,21 @@ const Academic_info = ({
   ];
   return (
     <div>
+      <div style={{ marginBottom: "15px" }}>
+        <Divider>
+          {" "}
+          <Title>Academic Info</Title>
+        </Divider>
+        <Table
+          columns={columns}
+          dataSource={view_education}
+          pagination={false}
+          style={{ textAlign: "center" }}
+          bordered
+          scroll={{ x: 900 }}
+        />
+      </div>
+
       <Form
         {...formItemLayout}
         layout={formLayout}
@@ -169,11 +188,6 @@ const Academic_info = ({
         name="register"
         onFinish={onFinish}
       >
-        <Divider>
-          {" "}
-          <Title>Academic Info</Title>
-        </Divider>
-        <Table columns={columns} dataSource={view_education} />
         <Form.Item label="Level of Education" name="degree_parent">
           <Select
             showSearch
@@ -212,7 +226,13 @@ const Academic_info = ({
         <Form.Item label="Institution" name="institute_name">
           <Input></Input>
         </Form.Item>
-        <Form.Item label="Result" name="result">
+        <Form.Item label="Result" name="result"   rules={[
+         
+              {
+                  required: true,
+                message: "Please input your result",
+              },
+            ]}>
           <InputNumber min={1} max={5} onChange={onChangeNum} />
         </Form.Item>
         <Form.Item label="Year of Passing" name="year_of_passing">
@@ -239,6 +259,5 @@ export default connect(mapStateToProps, {
   getEducation,
   createEducation,
   viewEducation,
-  deleteEducation,
   deleteEducation,
 })(Academic_info);

@@ -13,8 +13,7 @@ import {
   DatePicker,
   Typography,
   Divider,
-  InputNumber,
-  Select,
+  message,
   Table,
   Space,
 } from "antd";
@@ -40,7 +39,7 @@ const Training = ({
     createTraining(values);
     form.resetFields();
     setloader(true);
-    // console.log("Success:", values);
+    message.success("successfully added");
   };
 
   const { TextArea } = Input;
@@ -86,31 +85,28 @@ const Training = ({
       dataIndex: "title",
       key: "title",
       width: "30%",
-      //...this.getColumnSearchProps('name'),
+      align: "center",
     },
     {
       title: "Institution",
       dataIndex: "institution",
       key: "institution",
       width: "100%",
-
-      // ...this.getColumnSearchProps('age'),
+      align: "center",
     },
 
     {
-      title: "Training_year",
+      title: "Training year",
       dataIndex: "training_year",
       key: "training_year",
       width: "150px",
-      //  ...this.getColumnSearchProps('address'),
-      //   sorter: (a, b) => a.address.length - b.address.length,
-      //sortDirections: ['descend', 'ascend'],
+      align: "center",
     },
 
     {
       title: "Action",
       key: "action",
-
+      align: "center",
       render: (details) => (
         console.log("training id:", details.id),
         (
@@ -120,6 +116,7 @@ const Training = ({
               onClick={() => {
                 deleteTraining(details.id);
                 setloader(true);
+                message.success("successfully delete");
               }}
             />
           </Space>
@@ -129,17 +126,26 @@ const Training = ({
   ];
   return (
     <div>
+      <div style={{ marginBottom: "15px" }}>
+        <Divider>
+          {" "}
+          <Title>Training</Title>
+        </Divider>
+        <Table
+          columns={columns}
+          dataSource={view_training}
+          pagination={false}
+          bordered
+          scroll={{ x: 500 }}
+        />
+      </div>
+
       <Form
         {...formItemLayout}
         layout={formLayout}
         form={form}
         onFinish={onFinish}
       >
-        <Divider>
-          {" "}
-          <Title>Training</Title>
-        </Divider>
-        <Table columns={columns} dataSource={view_training} />
         <Form.Item label="Title" name="title">
           <Input />
         </Form.Item>

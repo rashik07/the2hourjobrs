@@ -63,3 +63,19 @@ export const markAllasRead = () => async (dispatch) => {
       console.log(error);
     }
   };
+  export const markasRead = (id) => async (dispatch) => {
+    try {
+      const response = await backend.get(
+        `v1/user/notifications/mark-as-read/${id}/`,
+        getConfig()
+      );
+      if (response.status === 200) {
+        dispatch({
+          type: types.MARK_AS_READ_NOTIFICATION,
+          payload: response.data,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };

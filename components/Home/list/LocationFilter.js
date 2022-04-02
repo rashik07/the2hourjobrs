@@ -28,6 +28,7 @@ const LocationFilter = ({
     getLocationList().then((result) => {
       setlocation(result);
       setloading(false);
+      
     });
   }, []);
 
@@ -39,6 +40,37 @@ const LocationFilter = ({
       SetfilterAction(new_filter);
       router.push({
         pathname: "/jobs/list",
+      });
+    }
+  };
+  const locationList = () => {
+    if (location) {
+      return location.map((divison) => {
+        return (
+          // <div>
+          <a
+            key={JSON.stringify({
+              id: divison.id,
+              name: divison.name,
+              type: divison.type,
+            })}
+            onClick={() => {
+             
+              onLocationSelect(JSON.stringify({
+                id: divison.id,
+                name: divison.name,
+                type: divison.type,
+              }));
+              // delete divison;
+              // delete divison.districts;
+              console.log(divison);
+            }}
+            className="location_btn"
+          >
+            {divison.name}
+          </a>
+          // </div>
+        );
       });
     }
   };
@@ -55,45 +87,26 @@ const LocationFilter = ({
     return (
       <>
         <Col
-          span={6}
+          xs={24}
+          sm={24}
+          md={24}
+          lg={24}
+          xl={24}
           style={{
-            backgroundColor: "#A93EA6",
-            padding: "10px 33px",
+            // backgroundColor: "#95D5D2",
+            padding: "10px 40px",
+            lineBreak: "anywhere",
           }}
         >
-          <h3>Location</h3>
-          {location.map((divison) => {
-            return (
-              <Button
-                key={JSON.stringify({
-                  id: divison.id,
-                  name: divison.name,
-                  type: divison.type,
-                })}
-                onClick={() => {
-                  //delete divison.districts;
-                  onLocationSelect(JSON.stringify(divison));
-                  console.log(divison);
-                }}
-                style={{
-                  backgroundColor: "#773EA9",
-                  border: "1px solid #ffffff",
-                  margin: "3px",
-                  color: "#ffffff",
-                }}
-              >
-                {" "}
-                {divison.name}
-              </Button>
-            );
-          })}
-          <h3 style={{ marginTop: "15px " }}>Quick links</h3>
+          <span style={{ fontWeight: "bold", color: "#000000" }}>Location:</span>
+          {locationList()}
+          {/* <h3 style={{ marginTop: "15px " }}>Quick links</h3>
           <div className="quick_link">
             <ForwardOutlined />
-            <Link href="/worker/list"> Worker list </Link>
+            <Link href="/worker/list"> Employees List </Link>
             <ForwardOutlined />
             <Link href="/announcement"> All Announcements </Link>
-          </div>
+          </div> */}
         </Col>
       </>
     );

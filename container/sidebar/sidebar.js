@@ -1,13 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Layout, Menu, Breadcrumb, Typography } from "antd";
-
+import { Layout, Menu, Button, Typography } from "antd";
 import {
   DesktopOutlined,
   RadiusSettingOutlined,
   PieChartOutlined,
   FolderOpenOutlined,
-  FileOutlined,
-  TeamOutlined,
   BookOutlined,
   UserOutlined,
 } from "@ant-design/icons";
@@ -16,7 +13,7 @@ const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 const sidebar = ({ selector, setloader }) => {
   const { Title } = Typography;
-  const [collapsed, setcollapsed] = useState(false);
+  const [collapsed, setcollapsed] = useState(true);
 
   const collapse = () => {
     setcollapsed({ collapsed });
@@ -28,11 +25,13 @@ const sidebar = ({ selector, setloader }) => {
         className="sidebar-layout-background"
         width={200}
         collapsible
+        // collapsed
         collapse={collapse}
       >
-        <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
+  
+        <Menu defaultSelectedKeys={["1"]} mode="inline">
+         
           <Menu.Item key="1" icon={<UserOutlined />}>
-        
             <a
               href="#"
               onClick={() => {

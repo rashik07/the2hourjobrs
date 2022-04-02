@@ -1,9 +1,10 @@
-import React from "react";
+import React,{ useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { Descriptions } from "antd";
+import { Descriptions, Button, Modal} from "antd";
 import dateformat from "dateformat";
 import { postJob, updateJob } from "redux/actions/jobAction";
 import { useRouter } from "next/router";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
 
 const renderJobLocation = (inside_dhaka, locations) => {
   inside_dhaka
@@ -125,6 +126,9 @@ const Step4 = ({
   updateJob,
   editJob,
 }) => {
+
+
+  const [disable, setDisable] = useState(false);
   const router = useRouter();
 
   const renderItem = (item) => {
@@ -201,7 +205,39 @@ const Step4 = ({
         break;
     }
   };
+  const postJobBtnClick = () => {
+    const { confirm } = Modal;
 
+    confirm({
+      title: "Are you sure post this job?",
+      icon: <ExclamationCircleOutlined />,
+      // content: "Some descriptions",
+      okText: "Yes",
+      okType: "danger",
+      cancelText: "No",
+      onOk() {
+        setDisable(true);
+        postJob(temp_jobpost, router,setDisable);
+      
+      },
+    });
+  };
+  const updateJobBtnClick = () => {
+    const { confirm } = Modal;
+
+    confirm({
+      title: "Are you sure update this job?",
+      icon: <ExclamationCircleOutlined />,
+      content: "Some descriptions",
+      okText: "Yes",
+      okType: "danger",
+      cancelText: "No",
+      onOk() {
+        updateJob(temp_jobpost, router);
+      
+      },
+    });
+  };
   return (
     <>
       <div className="col-8 mt-4">
@@ -209,26 +245,36 @@ const Step4 = ({
           {renderItem("job_detail")} <hr />
           {renderItem("employee_requirement")}
         </div>
-        <button
+        <Button
           onClick={() => setPostStep(postStep - 1)}
           className="btn btn-secondary mr-3"
+          style={{
+            marginRight: "10px",
+            backgroundColor: "dodgerblue",
+            color: "#ffffff",
+          }}
         >
           Prev
-        </button>
+        </Button>
         {editJob ? (
-          <button
-            onClick={() => updateJob(temp_jobpost, router)}
+          <Button
+            onClick={updateJobBtnClick}
             className="btn btn-primary mr-3"
+            style={{
+              marginRight: "10px",
+              
+            }}
           >
             Update
-          </button>
+          </Button>
         ) : (
-          <button
-            onClick={() => postJob(temp_jobpost, router)}
+          <Button
+            onClick={postJobBtnClick}
             className="btn btn-primary mr-3"
+            disabled={disable}
           >
             Post
-          </button>
+          </Button>
         )}
         <br />
         <br />

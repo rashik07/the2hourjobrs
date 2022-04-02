@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import Head from "next/head";
 import Navbar from "../../container/navbar/newNavbar";
 import Sidebar from "../../container/sidebar/sidebar";
-import { Layout, Breadcrumb, Row, Col } from "antd";
+import { Layout, Breadcrumb, Button } from "antd";
 import Profile_info from "components/Profile/Profile_info";
 import Career_application from "components/Profile/Career_application";
 import Education from "components/Profile/Education";
@@ -11,12 +11,16 @@ import Employment from "components/Profile/Employment";
 import Portfolio from "components/Profile/Portfolio";
 import Setting from "components/Profile/Setting";
 import { useRouter } from "next/router";
+import Link from "next/link";
+import { HomeOutlined } from "@ant-design/icons";
+import Sidebar_mobile from "container/sidebar/Sidebar_mobile";
 
-const Profile = ({ auth }) => {
+const Profile = ({ auth, user_profile }) => {
   const router = useRouter();
   const { Content } = Layout;
   const selector = useRef("");
   const [loader, setloader] = useState(false);
+
 
   useEffect(() => {
     if (!auth.isSignedIn) {
@@ -28,33 +32,26 @@ const Profile = ({ auth }) => {
   }, [loader]);
   const clickPage = () => {
     if (selector.current == "") {
-      console.log(selector.current);
       return <Profile_info />;
     }
 
     if (selector.current == "Profile_info") {
-      console.log(selector.current);
       return <Profile_info />;
     }
     if (selector.current == "career") {
-      //console.log(selector.current);
       return <Career_application />;
     }
 
     if (selector.current == "education") {
-      //console.log(selector.current);
       return <Education />;
     }
     if (selector.current == "employment") {
-      // console.log(selector.current);
       return <Employment />;
     }
     if (selector.current == "portfolio") {
-      // console.log(selector.current);
       return <Portfolio />;
     }
     if (selector.current == "setting") {
-      // console.log(selector.current);
       return <Setting />;
     }
   };
@@ -68,17 +65,49 @@ const Profile = ({ auth }) => {
         <Navbar />
         <Layout style={{ minHeight: "100vh" }}>
           <Sidebar setloader={setloader} selector={selector} />
+          {/* <Sidebar_mobile  setloader={setloader} selector={selector}/> */}
           <Layout>
-            <Content className="site-layout" style={{ padding: "0 50px" }}>
+            <Content className="profile-site-layout" >
+        
               <Breadcrumb className="breadcrumb_main">
+                <Breadcrumb.Item href="/">
+                  {" "}
+                  <HomeOutlined />
+                </Breadcrumb.Item>
                 <Breadcrumb.Item>Profile</Breadcrumb.Item>
                 <Breadcrumb.Item>{selector.current}</Breadcrumb.Item>
+
+                <Link
+                  href={{
+                    pathname: "/Profile/Profile_details/",
+                    query: { id: user_profile.id },
+                  }}
+                >
+                  <a
+                    target="_blank"
+                    style={{
+                      float: "right",
+                      backgroundColor: "#40a9ff",
+                      border: "1px solid #ffffff",
+                      color: "#ffffff",
+                      padding: "5px",
+                      border: "1px solid white",
+                    }}
+                  >
+                    {" "}
+                    Preview My Profile
+                  </a>
+                </Link>
               </Breadcrumb>
-              <div className="site-layout-background">
+
+              <div className="site-layout-background site-layout-background-profile-mobile">
+              {/* <Sidebar /> */}
+             
                 {clickPage(selector.current)}
               </div>
             </Content>
           </Layout>
+          <Sidebar_mobile  setloader={setloader} selector={selector}/>
         </Layout>
       </Layout>
     </div>
@@ -88,6 +117,7 @@ const Profile = ({ auth }) => {
 const mapStateToProps = (state) => {
   return {
     auth: state.auth,
+    user_profile: state.user.user_profile,
   };
 };
 export default connect(mapStateToProps)(Profile);

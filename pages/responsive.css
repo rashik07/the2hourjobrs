@@ -1,0 +1,352 @@
+@media only screen and (min-width: 900px) {
+  .location_btn {
+    background-color: #7d7da7;
+    border: 1px solid #ffffff;
+    margin: 3px;
+    padding: 2px 6px;
+    color: #ffffff;
+    font-weight: 400;
+    border-radius: 5px;
+  }
+  .location_btn:hover {
+    /* background-color: darkblue;
+    border: 1px solid #ffffff; */
+    margin: 3px;
+    color: white;
+    background-color: darkblue;
+  }
+
+  .data_section {
+    margin: 50px 0px;
+  }
+  .site-layout {
+    padding: 0 50px;
+
+    margin: 60px 36px;
+  }
+  .site-layout .site-layout-background {
+    background: #fff;
+  }
+  .profile-site-layout {
+    padding: 0 50px;
+
+    margin: 60px 0px;
+  }
+  .profile-site-layout .site-layout-background {
+    background: #fff;
+  }
+  .menu_mobile {
+    display: none;
+  }
+
+  .search_bar {
+    /* padding: 0px 40px; */
+    display: flex;
+    justify-content: center;
+  }
+  .slider_pic {
+    background: url("/img/banner1.jpg") rgba(184, 224, 210, .7);
+    background-size: cover;
+    height: 90vh;
+    background-blend-mode: multiply;
+    text-align: center;
+
+  }
+  .slider_pic h1 {
+    color: #ffffff;
+    margin-left: 40px;
+    margin-top: 1vh;
+    font-size: xx-large;
+    text-shadow: 0px 3px 10px rgb(0 0 0 / 50%);
+    /* font-weight: bold; */
+  }
+  .picture_upload {
+    position: absolute;
+    margin-left: 50%;
+  }
+  .footer_title {
+    border-bottom: "4px solid #ffc800";
+    margin: "0px 610px";
+  }
+  .search_form {
+    display: flex;
+    width: 50%;
+    box-shadow: 0px 3px 10px rgb(0 0 0 / 50%);
+    border-radius:8px;
+    /* margin-left: 205px; */
+  }
+  .applied_person {
+    font-weight: bold;
+    display: flex;
+  }
+  .stepJobPostMobile {
+    display: none;
+  }
+  .site-layout-home {
+    padding: 0 20px;
+
+    margin: 0px 36px;
+  }
+  .site-layout-home .site-layout-background {
+    background: #fff;
+  }
+  .jobpost_btn_mobile {
+    display: none;
+  }
+  #jobpost_category {
+    padding-left: 35px;
+  }
+  main.form-signin.text-center h1 {
+    text-transform: capitalize;
+    font-size: 30px;
+    font-weight: 700;
+  }
+  main.form-signin.text-center label {
+    display: block;
+    margin-bottom: 10px;
+    text-align: left;
+    font-weight: 500 !important;
+  }
+  .d-grid.gap-2.d-flex {
+    width: 452px;
+    margin: 0 auto;
+  }
+  .d-grid.gap-2.d-flex.social_media_btn {
+    display: flex;
+    justify-content: space-between;
+  }
+  .d-grid.gap-2.d-flex.social_media_btn button {
+    width: 222px;
+    height: 50px;
+    text-transform: capitalize;
+    font-weight: 500;
+    border-radius: 0.3rem !important;
+  }
+  .d-grid.gap-2.d-flex.social_media_btn button:first-child {
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%) !important;
+  }
+  .banner_button {
+    margin-top: 25vh;
+  }
+  .banner_button button {
+    border-radius: 100px;
+    width: 250px;
+    height: 60px;
+    font-Size: 20px;
+    box-shadow: 0px 3px 10px rgb(0 0 0 / 50%);
+    /* border: 1px solid #ffffff; */
+    color:#000000;
+    /* font-weight: bold; */
+  }
+  .banner_button button:hover{
+    color:#000000;
+   
+    border: 1px solid white;
+  }
+  .sidebar-layout-background-mobile {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .sidebar-layout-background-mobile {
+    width: 15% !important;
+    max-width: 15% !important;
+    min-width: 15% !important;
+    margin-left: -30px;
+    margin-top: 50%;
+    position: fixed;
+  }
+  .footer_social_icon {
+    
+    margin-bottom: 15px;
+  
+}
+  footer {
+    position: relative;
+    margin-top: 15%;
+    margin-bottom: -50px;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+    text-align: center;
+  }
+  .slider_pic h1 {
+    color: black;
+    margin-left: 40px;
+    margin-top: 1vh;
+    font-size: xx-large;
+  }
+  .slider_pic {
+    background-image: url("/img/banner1.jpg");
+    background-size: cover;
+    height: 100vh;
+  }
+  .banner_button {
+    margin-top: 20vh;
+  }
+  .banner_button button {
+    border-radius: 100px;
+    width: 150px;
+    height: 50px;
+    font-Size: 20px;
+    box-shadow: 0px 3px 10px rgb(0 0 0 / 50%);
+    /* border: 1px solid #ffffff; */
+    color:#000000;
+    /* font-weight: bold; */
+  }
+  /* .site-layout {
+    margin: 16px 30px !important;
+  } */
+  /* .section_menu_mobile .ant-menu-item-only-child{
+
+    display:none;
+  
+  } */
+  .profile-site-layout {
+    /* padding: 0 50px; */
+    margin: 60px 0px;
+    width: 400px;
+  }
+  .profile-site-layout .site-layout-background {
+    background: #fff;
+  }
+  .jobpost_list {
+    display: none;
+  }
+  .section_menu_mobile .ant-drawer-body {
+    padding: 0px !important;
+  }
+  .section_menu_mobile .ant-drawer-header {
+    background-color: #95d5d2;
+  }
+  .menu_pc {
+    display: none;
+  }
+  /* .picture_upload{
+    position: absolute;
+    margin-left: 100%;
+  } */
+  .sidebar-layout-background {
+    display: none;
+  }
+  .search_form {
+    display: flex;
+    width: 100%;
+  }
+  .notificationIcon {
+    padding-left: 20px;
+  }
+  .ant-menu-submenu-popup > .ant-menu {
+    background-color: #95d5d2;
+  }
+  .applied_person {
+    font-weight: bold;
+    display: grid !important;
+  }
+  .form-signin {
+    margin-top: 25%;
+  }
+  .ant-drawer .ant-drawer-content {
+    width: 39%;
+    height: 100%;
+    margin: 0px 550px;
+  }
+  .jobpost_btn_mobile {
+    background-color: #ffc800;
+    color: #1e1e1e;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border: 1px solid #ffffff;
+    font-weight: bold;
+    border-radius: 5px;
+  }
+  .jobpost_btn_mobile:hover {
+    background-color: darkblue;
+    color: #ffffff;
+    /* margin-left: 270px; */
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+  }
+  .site-layout-home {
+    padding: 0 20px;
+
+    margin: 0px 0px;
+  }
+  .site-layout-home .site-layout-background {
+    background: #fff;
+  }
+  .site-layout {
+    padding: 0 20px;
+
+    margin: 60px 0px;
+  }
+  .ant-radio-button-wrapper:first-child:last-child {
+    margin-top: 207px;
+    margin-left: 116px;
+    font-size: 22px;
+    height: 50px;
+    border-radius: 5px;
+    text-align: center;
+    padding-top: 7px;
+    width: 195px;
+  }
+  .search_bar {
+    padding: 0px 40px;
+  }
+  .data_section {
+    margin: 20px;
+  }
+  .stepJobPostPc {
+    display: none;
+  }
+  .jobpost_btn {
+    display: none;
+  }
+  .jobfilter_pc {
+    display: none;
+  }
+  .stepJobPostMobile {
+    width: 335px;
+  }
+  .site-layout-background-profile-mobile {
+    width: 360px;
+  }
+  .site-layout-background-view-profile {
+    width: 775px;
+  }
+  #jobpost_category {
+    padding-bottom: 38px;
+  }
+  .location_btn {
+    /* background-color: rgb(149, 213, 210); */
+    border: 1px solid #333131;
+    margin: 3px;
+    padding: 0px 1px;
+    color: #333131;
+    font-weight: 400;
+    border-radius: 5px;
+  }
+  .location_btn:hover {
+    /* background-color: darkblue;
+    border: 1px solid #ffffff; */
+    margin: 3px;
+    color: white;
+    background-color: darkblue;
+  }
+  .site-layout-background-profile-mobile h1 {
+    font-size: 15px;
+  }
+  .ant-table-thead > tr > th,
+  .ant-table-tbody > tr > td,
+  .ant-table tfoot > tr > th,
+  .ant-table tfoot > tr > td {
+    position: relative;
+    padding: 5px 0px;
+    overflow-wrap: break-word;
+  }
+  .breadcrumb_main {
+    margin: 16px 0;
+    padding-right: 40px;
+  }
+}

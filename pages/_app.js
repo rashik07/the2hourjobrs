@@ -10,13 +10,24 @@ import "components/jobs/list/SelectedFilter.css";
 import "./../styles/header.css";
 import "./Landing_page/Landing_page.css";
 import "./custom.css";
+import "./responsive.css";
+import Footer from "container/footer/footer";
+import Script from "next/script";
+
 function MyApp({ Component, pageProps }) {
   return (
-    <Provider store={store}>
-      <PersistGate persistor={persistor}>
-        <Component {...pageProps} />
-      </PersistGate>
-    </Provider>
+    <>
+      {/* <Script
+        src="https://polyfill.io/v3/polyfill.min.js?features=IntersectionObserver"
+        strategy="beforeInteractive"
+      /> */}
+      <Provider store={store}>
+        <PersistGate persistor={persistor}>
+          <Component {...pageProps} />
+          <Footer />
+        </PersistGate>
+      </Provider>
+    </>
   );
 }
 

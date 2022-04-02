@@ -22,13 +22,10 @@ export const viewEmployment = (data) => async (dispatch) => {
       getConfig()
     );
     dispatch({ type: types.VIEW_EMPLOYMENT, payload: response.data });
-    
   } catch (error) {
     console.log(error);
     console.log(error.response);
   }
-
-
 };
 export const viewSingleEmployment = (id) => async (dispatch) => {
   try {
@@ -37,13 +34,10 @@ export const viewSingleEmployment = (id) => async (dispatch) => {
       getConfig()
     );
     dispatch({ type: types.VIEW_SINGLE_EMPLOYMENT, payload: response.data });
-    console.log(response.data);
   } catch (error) {
     console.log(error);
     console.log(error.response);
   }
-
-
 };
 
 export const createEmployment = (formValues) => async (dispatch) => {

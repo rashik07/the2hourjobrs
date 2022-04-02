@@ -26,11 +26,22 @@ import { getSpecificAnnouncement } from "../../redux/actions/announcementAction"
 import dateformat from "dateformat";
 import Link from "next/link";
 const { Content } = Layout;
+import {
+  FacebookShareButton,
+  WhatsappShareButton,
+  WhatsappIcon,
+  FacebookIcon,
+  FacebookMessengerShareButton,
+  FacebookMessengerIcon,
+  EmailShareButton,
+  EmailIcon,
+} from "react-share";
 
 const AnnouncementDetails = ({ getSpecificAnnouncement, announcment }) => {
   const router = useRouter();
   const [loader, setLoader] = useState(true);
   const { announcement_id } = router.query;
+  const shareUrl = `https://web.the2hourjob.com/announcement/announcement_id?announcement_id=${announcement_id}`;
 
   useEffect(() => {
     getSpecificAnnouncement(announcement_id).then(() => {
@@ -97,8 +108,16 @@ const AnnouncementDetails = ({ getSpecificAnnouncement, announcment }) => {
           </Col>
           <Col xs={24} sm={24} md={12} lg={12} xl={12} offset={1}>
             <h2>{announcment.title}</h2>
-            <p style={{ marginBottom: "1px", color: "blue" }}>
-              posted by {announcment.user.name}
+            <p style={{ marginBottom: "1px" }}>
+              posted by{" "}
+              <Link
+                href={{
+                  pathname: "/Profile/Profile_details/",
+                  query: { id: announcment.user.id },
+                }}
+              >
+                {announcment.user.name}
+              </Link>
             </p>
             <p>
               {/* <EnvironmentOutlined /> {announcment.user.profile.address} */}
@@ -107,10 +126,10 @@ const AnnouncementDetails = ({ getSpecificAnnouncement, announcment }) => {
             <h3>Description</h3>
             <p>{announcment.description}</p>
             <Divider />
-            <h3>Other annoucement from the same user</h3>
+            {/* <h3>Other annoucement from the same user</h3> */}
           </Col>
           <Col xs={24} sm={24} md={4} lg={4} xl={4} offset={1}>
-            <h3>location</h3>
+            {/* <h3>location</h3>
             <p>
               Address:{" "}
               {announcment.Thana == null ? "-" : announcment.Thana.name + ", "}
@@ -118,16 +137,20 @@ const AnnouncementDetails = ({ getSpecificAnnouncement, announcment }) => {
                 ? "-"
                 : announcment.District.name + ", "}
               {announcment.Division == null ? "-" : announcment.Division.name}
-            </p>
+            </p> */}
             <p>
               Contact:{" "}
-              {announcment.contact_information == null
-                ? "-"
-                : announcment.contact_information}
+              {announcment.contact_information == null ? (
+                "-"
+              ) : (
+                <a href={`tel:${announcment.contact_information}`}>
+                  {announcment.contact_information}
+                </a>
+              )}
             </p>
 
             <Divider />
-            <h3>User details</h3>
+            {/* <h3>User details</h3>
             <p>
               Phone:{" "}
               {announcment.user.phone == null ? "-" : announcment.user.phone}
@@ -138,7 +161,7 @@ const AnnouncementDetails = ({ getSpecificAnnouncement, announcment }) => {
             </p>
             <p>
               Bio: {announcment.user.bio == null ? "-" : announcment.user.bio}
-            </p>
+            </p> */}
           </Col>
         </Row>
       );
@@ -159,9 +182,12 @@ const AnnouncementDetails = ({ getSpecificAnnouncement, announcment }) => {
           style={{ padding: "0 50px", marginTop: 64 }}
         >
           <Breadcrumb style={{ margin: "16px 0" }}>
-            <Breadcrumb.Item>Home</Breadcrumb.Item>
+            <Breadcrumb.Item href="/">
+              {" "}
+              <HomeOutlined />
+            </Breadcrumb.Item>
             <Breadcrumb.Item>
-              <Link href="/announcement">Announcement</Link>
+              <Link href="/announcement">Announcement List</Link>
             </Breadcrumb.Item>
             <Breadcrumb.Item>{announcment.title}</Breadcrumb.Item>
           </Breadcrumb>
@@ -170,6 +196,45 @@ const AnnouncementDetails = ({ getSpecificAnnouncement, announcment }) => {
             style={{ padding: 24, minHeight: 380 }}
           >
             {renderAnnounements()}
+            <div
+              style={{
+                background: "#0000",
+                height: "100vh",
+                width: "100%",
+              }}
+            >
+              <h1>Share</h1>
+
+              <FacebookShareButton
+                url={shareUrl}
+                quote={""}
+                hashtag={"#the2hourjob"}
+              >
+                <FacebookIcon size={40} round={true} />
+              </FacebookShareButton>
+
+              <WhatsappShareButton
+                url={shareUrl}
+                quote={""}
+                hashtag={"#the2hourjob"}
+              >
+                <WhatsappIcon size={40} round={true} />
+              </WhatsappShareButton>
+              <EmailShareButton
+                url={shareUrl}
+                quote={""}
+                hashtag={"#the2hourjob"}
+              >
+                <EmailIcon size={40} round={true} />
+              </EmailShareButton>
+              <FacebookMessengerShareButton
+                url={shareUrl}
+                quote={""}
+                hashtag={"#the2hourjob"}
+              >
+                <FacebookMessengerIcon size={40} round={true} />
+              </FacebookMessengerShareButton>
+            </div>
           </div>
         </Content>
         <Footer />

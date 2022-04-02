@@ -9,7 +9,7 @@ import {
   Typography,
   Divider,
   InputNumber,
-  Select,
+  message,
   Table,
   Space,
 } from "antd";
@@ -41,6 +41,7 @@ const ProfessionalQualification = ({
     form.resetFields();
     setloader(true);
     // console.log("Success:", values);
+    message.success("successfully added");
   };
   const { TextArea } = Input;
 
@@ -89,47 +90,42 @@ const ProfessionalQualification = ({
       dataIndex: "certification_title",
       key: "certification_title",
       width: "30%",
-      //...this.getColumnSearchProps('name'),
+      align: "center",
     },
     {
       title: "Institution",
       dataIndex: "institute",
       key: "institute",
       width: "30%",
-
-      // ...this.getColumnSearchProps('age'),
+      align: "center",
     },
     {
-      title: "location",
+      title: "Location",
       dataIndex: "location",
       key: "institute",
       width: "100%",
-
-      // ...this.getColumnSearchProps('age'),
+      align: "center",
     },
     {
-      title: "duration",
+      title: "Duration(Month)",
       dataIndex: "duration",
       key: "duration",
       width: "100%",
-
-      // ...this.getColumnSearchProps('age'),
+      align: "center",
     },
 
     {
-      title: "year_of_passing",
+      title: "Year of passing",
       dataIndex: "year_of_passing",
       key: "year_of_passing",
       width: "150px",
-      //  ...this.getColumnSearchProps('address'),
-      //   sorter: (a, b) => a.address.length - b.address.length,
-      //sortDirections: ['descend', 'ascend'],
+      align: "center",
     },
 
     {
       title: "Action",
       key: "action",
-
+      align: "center",
       render: (details) => (
         console.log("training id:", details.id),
         (
@@ -139,6 +135,7 @@ const ProfessionalQualification = ({
               onClick={() => {
                 deleteQualification(details.id);
                 setloader(true);
+                message.success("successfully delete");
               }}
             />
           </Space>
@@ -148,17 +145,25 @@ const ProfessionalQualification = ({
   ];
   return (
     <div>
+      <div style={{ marginBottom: "15px" }}>
+        <Divider>
+          {" "}
+          <Title>Professional Certifications</Title>
+        </Divider>
+        <Table
+          columns={columns}
+          dataSource={view_qualification}
+          pagination={false}
+          bordered
+          scroll={{ x: 800 }}
+        />
+      </div>
       <Form
         {...formItemLayout}
         layout={formLayout}
         form={form}
         onFinish={onFinish}
       >
-        <Divider>
-          {" "}
-          <Title>Professional Qualification</Title>
-        </Divider>
-        <Table columns={columns} dataSource={view_qualification} />
         <Form.Item label="Certification" name="certification_title">
           <Input />
         </Form.Item>
@@ -168,8 +173,8 @@ const ProfessionalQualification = ({
         <Form.Item label="Location:" name="location">
           <Input placeholder="Location" />
         </Form.Item>
-        <Form.Item label="Duration" name="duration">
-          <InputNumber min={1} max={10} onChange={onChangeNum} />
+        <Form.Item label="Duration(Month)" name="duration">
+          <InputNumber min={1} max={1000} onChange={onChangeNum} />
         </Form.Item>
         <Form.Item name="year_of_passing" label="Year of Passing" {...config}>
           <DatePicker format={dateFormat} picker="year" />

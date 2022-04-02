@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { Select, Skeleton } from "antd";
-import { connect } from "react-redux";
-import { updateProfile, editUserProfile } from "@/redux/actions/userAction";
-import { saveTemporayJobPost } from "redux/actions/jobAction";
 import {
+  Select,
+  Skeleton,
   Form,
   Input,
   Switch,
   Button,
   Radio,
-  DatePicker,
   Typography,
   Divider,
-  TextArea,
   Upload,
+  message,
+  InputNumber,
+  Checkbox,
 } from "antd";
-import { getJobCategories } from "redux/actions/jobAction";
+import { connect } from "react-redux";
+import { updateProfile, editUserProfile } from "@/redux/actions/userAction";
+import { saveTemporayJobPost, getJobCategories } from "redux/actions/jobAction";
 import { UploadOutlined } from "@ant-design/icons";
 import PreferedCategories from "components/PreferedCategories";
 
@@ -27,11 +28,11 @@ const Career_application = ({
   saveTemporayJobPost,
   temp_jobpost,
   getJobCategories,
-  categories,
-  onClear,
 }) => {
   const [user_profile, setuser_profile] = useState([]);
   const [loading, setloading] = useState(true);
+ 
+
   useEffect(() => {
     if (!auth.isSignedIn) {
       router.push({
@@ -46,29 +47,35 @@ const Career_application = ({
     }
   }, []);
   const onFinish = (values) => {
+
     const formData = new FormData();
     formData.append("objective", values.objective);
-    formData.append("present_salary", values.present_salary);
-    formData.append("expected_salary", values.expected_salary);
+
+    if (values.present_salary == null) {
+     
+      // formData.append("present_salary",setNull(6, Types.INTEGER));
+    } else { 
+      formData.append("present_salary", values.present_salary);
+    }
+    if (values.expected_salary == null) {
+  
+    } else {
+      formData.append("expected_salary", values.expected_salary);
+    }
+
     formData.append("job_level", values.job_level);
     formData.append("job_nature", values.job_nature);
     formData.append("available_for_work", values.available_for_work);
     if (typeof values.upload === "undefined") {
-      console.log("not resume");
     } else {
-      console.log("resume");
       formData.append("resume", values.upload[0].originFileObj);
     }
 
-    // console.log("Received values of form: ", values);
     editUserProfile(formData, user_profile.id);
-    alert("successfully saved");
+   
+    message.success("successfully added");
+  };
 
-    //   console.log('update: ', editUserProfile);
-  };
-  const onFinish1 = (values) => {
-    console.log("Received values of form: ", values);
-  };
   const { OptGroup } = Select;
 
   useEffect(() => {
@@ -91,30 +98,25 @@ const Career_application = ({
   const plainOptions = ["entry", "mid", "top"];
   const [value, setValue] = React.useState();
   const onChange = (e) => {
-    console.log("radio1 checked", e.target.value);
+   
     setValue(e.target.value);
   };
   //job nature
   const natureOptions = [
-    "Full time",
-    "Part time",
+    "Full Time",
+    "Part Time",
     "Contractual",
-    "Freelance",
     "Internship",
+    "Freelance",
   ];
   const [value2, setValue2] = React.useState();
   const onChange2 = (e) => {
-    console.log("radio2 checked", e.target.value);
+  
     setValue2(e.target.value);
   };
 
   const [form] = Form.useForm();
   const [formLayout, setFormLayout] = useState("horizontal");
-
-  const onFormLayoutChange = ({ layout }) => {
-    setFormLayout(layout);
-  };
-
   const formItemLayout =
     formLayout === "horizontal"
       ? {
@@ -147,11 +149,9 @@ const Career_application = ({
       },
     },
   };
-  const setJobLocation = (value) => {
-    saveTemporayJobPost({ job_location: value });
-  };
+
   const normFile = (e) => {
-    console.log("Upload event:", e);
+   
 
     if (Array.isArray(e)) {
       return e;
@@ -186,14 +186,14 @@ const Career_application = ({
           </Form.Item>
           <Form.Item
             name="upload"
-            label="CV Upload"
+            label="CV Upload/File Upload"
             valuePropName="fileList"
             getValueFromEvent={normFile}
-            extra="Please Upload PDF Format"
+            extra="You Can Upload PDF/Powerpoint/Jpg/Png/ Format"
           >
             <Upload name="resume" listType="picture" maxCount={1}>
               <Button icon={<UploadOutlined />}>Click to upload</Button> <br />
-              <a href={"http://127.0.0.1:8000" + user_profile.resume} download>
+              <a href={user_profile.resume} download>
                 Click to download
               </a>
             </Upload>
@@ -202,11 +202,36 @@ const Career_application = ({
           <Form.Item label="Objective" name="objective">
             <TextArea rows={4} />
           </Form.Item>
-          <Form.Item label="Present Salary" name="present_salary">
-            <Input placeholder="present salary" />
+          <Form.Item
+            label="Present Salary"
+            name="present_salary"
+            rules={[
+              // {
+              //   required: true,
+              //   message: "Please input your Present Salary",
+              // },
+              {
+                type: "number",
+                min: 0,
+                max: 99999999999,
+              },
+            ]}
+          >
+            <InputNumber placeholder="present salary" />
           </Form.Item>
-          <Form.Item label="Expected Salary" name="expected_salary">
-            <Input placeholder="expected salary" />
+          <Form.Item
+            label="Expected Salary"
+            name="expected_salary"
+            rules={
+              [
+                // {
+                //   required: true,
+                //   message: "Please input your Expected Salary",
+                // },
+              ]
+            }
+          >
+            <InputNumber placeholder="expected salary" />
           </Form.Item>
           <Form.Item label="Job level" name="job_level">
             <Radio.Group

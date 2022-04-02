@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Input, Form, Button, Row, Col, Image, Space } from "antd";
 import { updateAnnouncement } from "../../redux/actions/announcementAction";
 import PicturesWall from "./PicturesWall";
+import { useRouter } from "next/router";
 
 const tailLayout = {
   wrapperCol: {
@@ -32,12 +33,11 @@ const editAnnouncementForm = ({ announcement, updateAnnouncement }) => {
   const setImages = (fileList) => {
     setfilelist(fileList);
   };
-
+  const router = useRouter();
   const onFinish = (values) => {
     updateAnnouncement(announcement.id, values);
-    // this.state.fileList.map((file) => {
-    //   this.props.uploadimage(this.props.announcementResponse.id, file);
-    // });
+    router.push("/announcement/myannouncement");
+
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -116,7 +116,10 @@ const editAnnouncementForm = ({ announcement, updateAnnouncement }) => {
           <h3>Upload New image</h3>
           <Image.PreviewGroup>
             <Row>
-              {announcement.image.map((imagee) => {
+              
+            {  
+            
+            announcement.image? announcement.image.map((imagee) => {
                 console.log(imagee);
                 if (imagee.cover) {
                   return (
@@ -131,7 +134,7 @@ const editAnnouncementForm = ({ announcement, updateAnnouncement }) => {
                     </>
                   );
                 }
-              })}
+              }) : ""}
               <Col span={8}>
                 <PicturesWall setImages={setImages} />
               </Col>
@@ -141,7 +144,7 @@ const editAnnouncementForm = ({ announcement, updateAnnouncement }) => {
           <h3>Gallery images</h3>
           <Image.PreviewGroup>
             <Row>
-              {announcement.image.map((imagee) => {
+              {announcement.image? announcement.image.map((imagee) => {
                 console.log(imagee);
                 if (!imagee.cover) {
                   return (
@@ -156,7 +159,7 @@ const editAnnouncementForm = ({ announcement, updateAnnouncement }) => {
                     </>
                   );
                 }
-              })}
+              }): ""}
             </Row>
           </Image.PreviewGroup>
         </Col>

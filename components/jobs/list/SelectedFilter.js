@@ -13,6 +13,7 @@ const SelectedFilter = ({
   setShowFilter,
   query,
   SetfilterAction,
+  setReload,
 }) => {
   //const obj=JSON.parse(query);
   const [state, setState] = useState([]);
@@ -136,6 +137,8 @@ const SelectedFilter = ({
               type="button"
               data-testid="button-clearAll"
               onClick={() => {
+                console.log("before reload");
+                setReload(true);
                 setFilter({});
                 SetfilterAction("");
               }}

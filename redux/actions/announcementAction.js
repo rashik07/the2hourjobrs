@@ -23,7 +23,7 @@ export const createAnnouncement =
         getConfig()
       );
       if (response.status === 201) {
-        router.push("/announcement");
+      router.push("/announcement");
         dispatch({
           type: types.CREATE_ANNOUNCEMENT,
           payload: { ...response.data },
@@ -62,24 +62,28 @@ const uploadimage = (id, file, flag) => async (dispatch) => {
   }
 };
 
-export const getAllAnnouncement = () => async (dispatch) => {
+export const getAllAnnouncement = (page,pageSize) => async (dispatch) => {
   try {
-    const response = await backend.get("v1/announcement/data/");
+    const response = await backend.get(`v1/announcement/data/?page=${page}&page_size=${pageSize}`, getConfig());
     if (response.status === 200) {
       dispatch({
         type: types.GET_ALL_ANNOUNCEMENT,
         payload: response.data,
       });
+      return response.data ;
     }
+   
+    return [];
   } catch (error) {
     console.log(error);
+    return [];
   }
 };
 
 export const getAllAnnouncementOfUser = (id) => async (dispatch) => {
   try {
     const response = await backend.get(
-      `v1/announcement/user_annoucements/${id}`
+      `v1/announcement/user_annoucements/${id}`,getConfig()
     );
     if (response.status === 200) {
       dispatch({
@@ -100,6 +104,7 @@ export const getSpecificAnnouncement = (id) => async (dispatch) => {
         type: types.GET_SINGLE_ANNOUNCEMENT,
         payload: response.data,
       });
+      console.log(response.data);
     }
   } catch (error) {
     console.log(error);

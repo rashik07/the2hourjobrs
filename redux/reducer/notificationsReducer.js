@@ -17,6 +17,9 @@ const notificationReducer = (state = INITIAL_STATE, action) => {
     case types.MARK_ALL_AS_READ_NOTIFICATION:
       return state;
 
+      case types.MARK_AS_READ_NOTIFICATION:
+        return state;
+
     default:
       return state;
   }

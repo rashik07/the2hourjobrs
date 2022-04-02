@@ -3,6 +3,7 @@ import backend from "./../../api/backend";
 import { store } from "./../store";
 import _ from "lodash";
 
+
 const getConfig = () => {
   const token = store.getState().auth.token;
 
@@ -26,11 +27,16 @@ export const updateProfile = () => async (dispatch) => {
     store.getState().auth.username = response.data.username;
     store.getState().auth.email = response.data.email;
     store.getState().auth.phone = response.data.phone;
+
+    if(response.status == 200){
     return response.data;
+    } 
+    return [];
     //console.log("user data callll");
   } catch (error) {
     console.log(error);
     console.log(error.response);
+    return [];
   }
 };
 export const updatePhone = (values, id) => async (dispatch) => {
@@ -42,6 +48,26 @@ export const updatePhone = (values, id) => async (dispatch) => {
     );
     dispatch({ type: types.EDIT_PHONE, payload: response.data });
     console.log("user data callll");
+  } catch (error) {
+    console.log(error);
+    console.log(error.response);
+  }
+};
+export const PhoneVerifyUpdate = (data, router) => async (dispatch) => {
+  console.log(data);
+  
+  try {
+    const response = await backend.put(
+      `/v1/user/mobile_verify_update/`,
+      data,
+      getConfig()
+    );
+
+    dispatch({ type: types.EDIT_PHONE, payload: response.data });
+    console.log("Mobile Verified");
+    // router.push("/Profile");
+    
+    return response;
   } catch (error) {
     console.log(error);
     console.log(error.response);
@@ -70,7 +96,7 @@ export const getSpecificProfile = (profile_id) => async (dispatch) => {
   }
 };
 
-export const editUserProfile = (values, id) => async (dispatch) => {
+export const editUserProfile = (values, id,fileList) => async (dispatch) => {
   console.log(values);
 
   try {
@@ -119,35 +145,66 @@ export const getThana = () => async (dispatch) => {
   }
 };
 
-export const getOtherWorkers = () => async (dispatch) => {
+export const getOtherWorkers = (page,pageSize) => async (dispatch) => {
   try {
     // let response = null;
 
     // if (store.getState().auth.isSignedIn) {
     //   response = await backend.get("/v1/user/other_users/", getConfig());
     // } else {
-    const response = await backend.get("/v1/user/other_users/");
+
+    const response = await backend.get(`/v1/user/other_users/?page=${page}&page_size=${pageSize}&profile__available_for_work=${true}`, getConfig());
     // }
 
     dispatch({ type: types.GET_OTHER_WORKERS, payload: response.data });
-    console.log(response.data);
+    // console.log(response.data);
+    if(response.status === 200){
+    return response.data;
+    } 
+    return [];
   } catch (error) {
     console.log(error);
     console.log(error.response);
+    return [];
   }
 };
-
-export const filterWorkers = (filter) => async (dispatch) => {
+export const getWorkers = (page=1,pageSize=5,employeer=false,worker=false,available=null) => async (dispatch) => {
   try {
-    let url = "v1/user/filter_worker/?";
-    let response = null;
 
+    let url = `/v1/user/other_users/?page=${page}&page_size=${pageSize}&profile__employeer=${employeer}&profile__worker=${worker}&`;
+    if(available!=null)
+    {
+      url += `profile__available_for_work=${available}&`;
+    }
+    const response = await backend.get(url);
+    if(response.status === 200){
+    return response.data;
+    } 
+    return [];
+  } catch (error) {
+    console.log(error);
+    console.log(error.response);
+    return [];
+  }
+};
+export const filterWorkers = (filter, page, pageSize) => async (dispatch) => {
+  try {
+    let url = `v1/user/filter_worker/?page=${page}&page_size=${pageSize}&profile__available_for_work=${true}&`;
+    let response = null;
+    console.log(filter);
     const createURL = {
       gender: (url, gender) => {
         url += `profile__gender=${gender}&`;
         return url;
       },
-
+      employmentStatus: (url, job_nature) => {
+        url += `profile__job_nature=${job_nature}&`;
+        return url;
+      },
+      category: (url, category) => {
+        url += `category=${category.id}&`;
+        return url;
+      },
       location: (url, location) => {
         const { id, type } = location;
 
@@ -155,7 +212,7 @@ export const filterWorkers = (filter) => async (dispatch) => {
 
         return url;
       },
-
+   
       keyword: (url, keyword) => {
         url += `keyword=${keyword}&`;
         return url;
@@ -165,41 +222,46 @@ export const filterWorkers = (filter) => async (dispatch) => {
     for (let i in filter) {
       url = createURL[i](url, filter[i]);
     }
-
+    // dispatch({ type: types.FILTERED_WORKERS, payload: response.data });
     if (store.getState().auth.isSignedIn) {
       response = await backend.get(url);
     } else {
       response = await backend.get(url);
     }
     if (response.status == 200) {
-      console.log(response);
+      // console.log(response);
       dispatch({ type: types.FILTERED_WORKERS, payload: response.data });
+      return response.data;
     }
+   return [];
   } catch (error) {
     console.log(error);
+    return [];
   }
 };
 
 export const saveWorker =
-  (worker_id, saved_user_instance_id, setSavedStatus) => async (dispatch) => {
+  (worker_id, saved_user_instance_id, setSavedStatus, isSaved, savedId, setReload) => async (dispatch) => {
     const formData = { saved_user: worker_id, saved_by: null };
 
     let response = null;
-
+    let saved = false;
     try {
-      if (saved_user_instance_id) {
+      if (isSaved && savedId!=null) {
         response = await backend.delete(
-          `v1/user/save_user/${saved_user_instance_id}/`,
+          `v1/user/save_user/${savedId}/`,
           getConfig()
         );
+        saved = false;
       } else {
         response = await backend.post(
           `v1/user/save_user/`,
           formData,
           getConfig()
-        );
+        ); 
+        saved = true;
       }
-
+      getSavedWorkers();
       if (response.status === 201) {
         setSavedStatus(response.data.id);
         dispatch({
@@ -217,6 +279,7 @@ export const saveWorker =
           payload: { saved_user: worker_id, saved_user_instance_id: null },
         });
       }
+      setReload(true);
     } catch (error) {
       console.log(error);
       console.log(error.response);
@@ -234,7 +297,8 @@ export const getSavedWorkers = () => async (dispatch) => {
 
     const data = response.data.map((instance) => instance.saved_user_profile);
 
-    dispatch({ type: types.GET_SAVED_WORKERS, payload: data });
+    dispatch({ type: types.GET_SAVED_WORKERS, payload: response.data });
+    // console.log(response.data);
   } catch (error) {
     console.log(error);
     console.log(error.response);

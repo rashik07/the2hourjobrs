@@ -3,8 +3,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
-
-import { Layout, Breadcrumb, Row, Col, Image } from "antd";
+import { Row, Col, Image, Tooltip } from "antd";
 import {
   PhoneOutlined,
   ScheduleOutlined,
@@ -14,6 +13,7 @@ import {
   PushpinFilled,
   SaveOutlined,
 } from "@ant-design/icons";
+import { PhoneFilled, HomeFilled } from "@ant-design/icons";
 
 const renderButtons = (
   id,
@@ -21,20 +21,55 @@ const renderButtons = (
   setSavedStatus,
   saveWorker,
   isSignedIn,
-  show_save_button,
-  savedStatus
+  savedStatus,
+  savedWorkerList,
+  setReload
 ) => {
+ 
+
+  let isSaved = false;
+  let savedId = null;
+  savedWorkerList.forEach((item) => {
+    if (item.saved_user_profile.id === id) {
+      isSaved = true;
+      savedId = item.id;
+    }
+  });
   const saveWorkerBtnClick = () => {
     if (!isSignedIn) {
       alert("You must log in to access this feature");
       return;
     }
-    saveWorker(id, saved_user_instance_id, setSavedStatus);
+    saveWorker(
+      id,
+      saved_user_instance_id,
+      setSavedStatus,
+      isSaved,
+      savedId,
+      setReload
+    );
+    window.location.reload();
   };
   const saveShow = () => {
-    if (saved_user_instance_id) {
+    if (isSaved) {
       return (
-        <SaveOutlined
+        <Tooltip title="press to unsave">
+          <SaveOutlined
+            onClick={saveWorkerBtnClick}
+            style={{
+              fontSize: "20px",
+              color: "#0E8044",
+              marginTop: "5px",
+              float: "right",
+            }}
+          />
+        </Tooltip>
+      );
+    }
+   
+    return (
+      <Tooltip title="press to save">
+        <PushpinFilled
           onClick={saveWorkerBtnClick}
           style={{
             fontSize: "20px",
@@ -43,27 +78,34 @@ const renderButtons = (
             float: "right",
           }}
         />
-      );
-    }
-    //  console.log(self_posted_jobs);
-    return (
-      <PushpinFilled
-        onClick={saveWorkerBtnClick}
-        style={{
-          fontSize: "20px",
-          color: "#0E8044",
-          marginTop: "5px",
-          float: "right",
-        }}
-      />
+      </Tooltip>
     );
   };
   return <>{saveShow()}</>;
 };
 
-const WorkerItem = ({ worker, saveWorker, isSignedIn }) => {
-  // console.log(worker);
-  const { id, name, phone, email, saved_user_instance_id, image } = worker;
+const WorkerItem = ({
+  worker,
+  saveWorker,
+  isSignedIn,
+  savedWorkerList,
+  setReload,
+}) => {
+
+  const {
+    id,
+    name,
+    hide_phone,
+    username,
+    phone,
+    bio,
+    email,
+    saved_user_instance_id,
+    address,
+    image,
+  } = worker;
+
+  
 
   const router = useRouter();
 
@@ -78,8 +120,8 @@ const WorkerItem = ({ worker, saveWorker, isSignedIn }) => {
   return (
     <>
       <Row className="job_post">
-        <Col span={4}>
-          {image != "http://127.0.0.1:8000/api/v1/user/other_users/" ? (
+        <Col xs={24} sm={24} md={4} lg={4} xl={4}>
+          {image ? (
             <Image
               shape="circle"
               width={100}
@@ -96,7 +138,7 @@ const WorkerItem = ({ worker, saveWorker, isSignedIn }) => {
             />
           )}
         </Col>
-        <Col span={20}>
+        <Col xs={24} sm={24} md={20} lg={20} xl={20}>
           {/* <Row>
             <Col span={21}>
               <PopupDetails job={job} />
@@ -109,26 +151,36 @@ const WorkerItem = ({ worker, saveWorker, isSignedIn }) => {
             setSavedStatus,
             saveWorker,
             isSignedIn,
-            show_save_button
+            show_save_button,
+            savedWorkerList,
+            setReload
           )}
           <h4 style={{ color: "gray" }}>
             <UserOutlined />{" "}
-            <Link href={`/Profile/Profile_details/${id}`}>{name}</Link>{" "}
+            <Link
+              href={{
+                pathname: "/Profile/Profile_details/",
+                query: { id: id },
+              }}
+            >
+              <a target="_blank">{username}</a>
+            </Link>{" "}
             {/* <EnvironmentOutlined /> {getLocations(job.job_location)} */}
           </h4>
           <p style={{ marginTop: "1rem", marginBottom: "1rem" }}>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry.
+            {bio === "null" ? "" : bio}
           </p>
 
           <p>
             {/* <EditOutlined /> {getEducation(job.education)} */}
-            {phone}
+            {hide_phone == true ? " " : phone}
+            {"      "}
+            <HomeFilled /> {"  "}
             {email}
           </p>
 
           <p>
-            <ScheduleOutlined />{" "}
+            <ScheduleOutlined /> {address}
             {/* {getExperience(job.min_experience, job.max_experience)} */}
           </p>
         </Col>
@@ -140,6 +192,7 @@ const WorkerItem = ({ worker, saveWorker, isSignedIn }) => {
 const mapStateToProps = (state) => {
   return {
     isSignedIn: state.auth.isSignedIn,
+    savedWorkerList: state.user.saved_workers,
   };
 };
 

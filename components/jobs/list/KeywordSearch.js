@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Tooltip } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 
@@ -8,8 +8,16 @@ const KeywordSearch = ({
   getFilteredList,
   setShowFilter,
   reload,
+  setreload,
+  pageSize,
+  page_no,
+  totaldata,
+  setPageNo,
+  setfiltered_data,
+  setlistreload,
 }) => {
   const [keyword, setKeyword] = useState("");
+  const [message, setMessage] = useState("");
 
   const onKeywordSubmit = (e) => {
     e.preventDefault();
@@ -19,9 +27,17 @@ const KeywordSearch = ({
       setKeyword("");
     }
   };
-  if (reload) {
-    getFilteredList(filter);
-  }
+
+  useEffect(() => {
+    //  setreload(false);
+    if (reload) {
+      getFilteredList(filter, page_no, pageSize.current).then((result) => {
+        totaldata.current = result.count;
+        setfiltered_data(result.results);
+        console.log(result.results);
+      });
+    }
+  }, [page_no, reload, filter]);
 
   return (
     <form style={{ display: "flex", width: "100%" }}>
@@ -34,24 +50,30 @@ const KeywordSearch = ({
           borderBottomLeftRadius: "8px",
           border: "1px solid #000000",
         }}
-        placeholder="Type and hit Enter"
+        placeholder="What I am looking for"
         onChange={(e) => setKeyword(e.target.value)}
         value={keyword}
+        onKeyPress={(e) => {
+          console.log("changing page no to 1");
+          setPageNo(1);
+          if (e.key === "Enter") {
+            e.preventDefault();
+            if (keyword) {
+              const new_filter = { ...filter, keyword };
+              setFilter(new_filter);
+              setKeyword("");
+            }
+            setShowFilter(true);
+          }
+        }}
       />
 
       <Button
-        style={{
-          height: "auto",
-          borderTopRightRadius: "8px",
-          borderBottomRightRadius: "8px",
-          background: "#773EA9",
-          color: "white",
-          borderColor: "#000000",
-        }}
+        className="search_button"
         icon={<SearchOutlined />}
         onClick={(e) => {
           onKeywordSubmit(e);
-          getFilteredList(filter);
+          // getFilteredList(filter);
           setShowFilter(true);
         }}
       >

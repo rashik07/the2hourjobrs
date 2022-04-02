@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Select } from "antd";
 import { connect } from "react-redux";
-import { getJobCategories } from "redux/actions/jobAction";
+import { getJobCategories, getLocationList } from "redux/actions/jobAction";
 import { Form, TreeSelect, Button, Typography, Divider, message } from "antd";
 import { TagsInput } from "react-tag-input-component";
-import { getLocationList } from "redux/actions/jobAction";
 import {
   createPreferedCategories,
   viewPreferedCategories,
@@ -32,13 +31,13 @@ const PreferedCategories = ({
     viewPreferedCategories();
     setloader(false);
   }, [loader]);
-  console.log(view_prefered_categories);
+
   const { Option, OptGroup } = Select;
   const onFinish = (values) => {
-    console.log("Received values of form: ", values);
     createPreferedCategories(values);
+    // console.log(values);
     setloader(true);
-    alert("This is a success message");
+    message.success("successfully added");
   };
   const onFinishFailed = () => {
     message.error("something error");
@@ -183,18 +182,19 @@ const PreferedCategories = ({
       );
     });
   let location_list = [...division_list, ...district_list, ...thana_list];
+  // console.log(view_prefered_categories.skill)
 
   let skill_list = [];
   if (view_prefered_categories)
     Object.keys(view_prefered_categories.skill).forEach(function (skill) {
       skill_list.push(view_prefered_categories.skill[skill]["name"]);
     });
+
   let form_init = {
     category: category_list,
     locations: location_list,
     skill: skill_list,
   };
-  // console.log(form_init);
 
   return (
     <div>
@@ -233,9 +233,11 @@ const PreferedCategories = ({
             ))}
           </Select>
         </Form.Item>
-        <Form.Item label="Special Skills " name="skill">
+        <Form.Item label="Special Skills " name="skill" extra="Press enter to add new skills">
           <TagsInput></TagsInput>
+          
         </Form.Item>
+      
         <Form.Item label="Location " name="locations">
           {locationList()}
         </Form.Item>

@@ -1,12 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
-
 import Head from "next/head";
 import Link from "next/link";
-import Footer from "../../../container/footer/footer";
 import Newnavbar from "../../../container/navbar/newNavbar";
 import MyAnnouncments from "../../../components/annoucement/MyAnnouncments";
 import { Layout, Breadcrumb } from "antd";
+import { HomeOutlined } from "@ant-design/icons";
 
 const { Content } = Layout;
 
@@ -23,9 +22,12 @@ const myannouncement = () => {
           style={{ padding: "0 50px", marginTop: 64 }}
         >
           <Breadcrumb style={{ margin: "16px 0" }}>
-            <Breadcrumb.Item>Home</Breadcrumb.Item>
+            <Breadcrumb.Item href="/">
+              {" "}
+              <HomeOutlined />
+            </Breadcrumb.Item>
             <Breadcrumb.Item>
-              <Link href="/announcement">Announcements</Link>
+              <Link href="/announcement">Announcement List</Link>
             </Breadcrumb.Item>
             <Breadcrumb.Item>My Announcements</Breadcrumb.Item>
           </Breadcrumb>
@@ -36,7 +38,6 @@ const myannouncement = () => {
             <MyAnnouncments />
           </div>
         </Content>
-        <Footer />
       </Layout>
     </>
   );

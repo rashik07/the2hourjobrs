@@ -1,11 +1,22 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import { connect } from "react-redux";
-import { Descriptions, Layout, Breadcrumb, Typography } from "antd";
+import {
+  Descriptions,
+  Layout,
+  Breadcrumb,
+  Typography,
+  Button,
+  List,
+  message,
+  Modal,
+} from "antd";
 import dateformat from "dateformat";
 import Navbar from "container/navbar/newNavbar";
-import { getAppliedJobsPerson } from "@/redux/actions/jobAction";
+import { getAppliedJobsPerson, applyJob } from "@/redux/actions/jobAction";
 import Link from "next/link";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
+import { HomeOutlined } from "@ant-design/icons";
 
 const renderJobLocation = (inside_dhaka, locations) => {
   inside_dhaka
@@ -13,11 +24,13 @@ const renderJobLocation = (inside_dhaka, locations) => {
     : (inside_dhaka = "Outside Dhaka");
 
   const extract_location = [];
-
+  if(locations){
   locations.forEach((element) => extract_location.push(element.name));
+  
 
   locations = extract_location.join(", ");
-  locations += ` (${inside_dhaka})`;
+  }
+  // locations += ` (${inside_dhaka})`;
 
   return (
     <Descriptions.Item label="Job location" labelStyle={{ fontWeight: 700 }}>
@@ -65,7 +78,7 @@ const renderExperience = (min, max) => {
 
   return (
     <Descriptions.Item label="Experience" labelStyle={{ fontWeight: 700 }}>
-      {experience}
+      {experience == "null years" ? "" : experience}
     </Descriptions.Item>
   );
 };
@@ -106,13 +119,11 @@ const renderEducation = (education, job_post_education) => {
 
   return (
     <Descriptions.Item label="Education" labelStyle={{ fontWeight: 700 }}>
-      {/* <List
-          size="small"
-          bordered
-          dataSource={child_educations}
-          renderItem={(item) => <List.Item>{item}</List.Item>}
-        /> */}
-      {child_educations.join(", ")}
+      <List
+        size="small"
+        dataSource={job_post_education}
+        renderItem={(item) => <List.Item>{item.name}</List.Item>}
+      />
     </Descriptions.Item>
   );
 };
@@ -124,35 +135,42 @@ const JobDetail = ({
   applied_jobs_person,
   userid,
   isSignedIn,
+  applyJob,
 }) => {
-  // const { Paragraph, Title } = Typography;
   const [user, setUser] = useState(null);
-  //  console.log(user);
+  const { id, title, poster, applied, saved, applied_saved_id } = temp_job;
+  const [disable, setDisable] = useState(false);
+
+  const btn_disable = userid === (poster ? poster.id :"") ? "disabled" : "";
+
+  const [appliedStatus, setAppliedStatus] = useState(applied);
+
   useEffect(() => {
-    if(isSignedIn){
+    if (isSignedIn) {
       getAppliedJobsPerson(temp_job).then((u) => setUser(u));
     }
-    
+    // applyJob();
   }, [temp_job]);
 
-  console.log(temp_job);
-  // if(applied_jobs_person)
   const appliedPerson = () => {
     if (user === null) {
       return <p>Loading profile...</p>;
     }
     return applied_jobs_person.map((applied_jobs_person) => {
-      //  console.log(applied_jobs_person.user.username);
-      //  console.log(user);
-
       return (
-        <Link href={`/Profile/Profile_details/${applied_jobs_person.user.id}`}>
-          <a>
-            {" "}
-            {applied_jobs_person.user.username}
-            {", "}
-          </a>
-        </Link>
+        <>
+          <div style={{ marginLeft: "5px" }}>
+            <Link
+              href={{
+                pathname: "/Profile/Profile_details/",
+                query: { id: applied_jobs_person.user.id },
+              }}
+            >
+              <a> {applied_jobs_person.user.username}</a>
+            </Link>
+            {" , "}
+          </div>
+        </>
       );
     });
   };
@@ -162,39 +180,67 @@ const JobDetail = ({
     switch (item) {
       case "job_detail":
         return (
-          <Descriptions title="Job Detail" layout="vertical">
-            <Descriptions.Item label="Title" labelStyle={labelStyle}>
-              {temp_job.title}
-            </Descriptions.Item>
-            <Descriptions.Item label="Vacancy" labelStyle={labelStyle}>
-              {temp_job.vacancy}
-            </Descriptions.Item>
-            {renderSalary(
-              temp_job.min_salary,
-              temp_job.max_salary,
-              temp_job.negotiable
-            )}
-            {renderDeadline(temp_job.deadline)}
-            {renderJobLocation(
-              temp_job.job_location_inside_dhaka,
-              temp_job.job_location
-            )}
-            {renderExperience(temp_job.min_experience, temp_job.max_experience)}
-            <Descriptions.Item label="Workplace" labelStyle={labelStyle}>
-              {temp_job.workplace.length ? temp_job.workplace.join(", ") : ""}
-            </Descriptions.Item>
-            <Descriptions.Item
-              label="Employment Status"
-              labelStyle={labelStyle}
-            >
-              {temp_job.employment_status.length
-                ? temp_job.employment_status.join(", ")
-                : ""}
-            </Descriptions.Item>
-            <Descriptions.Item label="Skills" labelStyle={labelStyle}>
-              {temp_job.skills.length ? temp_job.skills.join(", ") : ""}
-            </Descriptions.Item>
-            <Descriptions.Item label="Description" labelStyle={labelStyle}>
+          <>
+            {" "}
+            {applyShow()}
+            <Descriptions title={temp_job.title} layout="horizontal">
+              <Descriptions.Item
+                label="Job Poster"
+                labelStyle={labelStyle}
+                style={{ fontWeight: "700" }}
+              >
+                <Link
+                  href={{
+                    pathname: "/Profile/Profile_details/",
+                    query: { id:temp_job.poster ? temp_job.poster.id :""},
+                  }}
+                >
+                  {temp_job.poster ? temp_job.poster.username:""}
+                </Link>
+              </Descriptions.Item>
+
+              <Descriptions.Item label="Vacancy" labelStyle={labelStyle}>
+                {temp_job.vacancy}
+              </Descriptions.Item>
+              {renderSalary(
+                temp_job.min_salary,
+                temp_job.max_salary,
+                temp_job.negotiable
+              )}
+              {renderDeadline(temp_job.deadline)}
+              {renderJobLocation(
+                temp_job.job_location_inside_dhaka,
+                temp_job.job_location
+              )}
+              {renderExperience(
+                temp_job.min_experience,
+                temp_job.max_experience
+              )}
+              <Descriptions.Item label="Workplace" labelStyle={labelStyle}>
+                {temp_job.workplace ? temp_job.workplace.length>0 ? temp_job.workplace.join(", ") : "":""}
+                {console.log(temp_job.workplace)}
+              </Descriptions.Item>
+              <Descriptions.Item
+                label="Employment Status"
+                labelStyle={labelStyle}
+              >
+                {temp_job.employment_status?temp_job.employment_status.length
+                  ? temp_job.employment_status.join(", ")
+                  : "":""}
+              </Descriptions.Item>
+              <Descriptions.Item label="Skills" labelStyle={labelStyle}>
+                {temp_job.skills?temp_job.skills.length ? temp_job.skills.join(", ") : "":""}
+              </Descriptions.Item>
+              {/* <Descriptions.Item label="Description" labelStyle={labelStyle}>
+              {temp_job.job_description}
+            </Descriptions.Item> */}
+            </Descriptions>
+          </>
+        );
+      case "job_description":
+        return (
+          <Descriptions title="Job Description" layout="vertical">
+            <Descriptions.Item label="" labelStyle={labelStyle}>
               {temp_job.job_description}
             </Descriptions.Item>
           </Descriptions>
@@ -202,15 +248,20 @@ const JobDetail = ({
 
       case "employee_requirement":
         return (
-          <Descriptions title="Employee Requirement" layout="vertical">
+          <Descriptions title="Employee Requirement" layout="horizontal">
             <Descriptions.Item label="Gender" labelStyle={labelStyle}>
-              {temp_job.gender.length ? temp_job.gender.join(", ") : ""}
+              {temp_job.gender?temp_job.gender.length ? temp_job.gender.join(", ") : "":""}
             </Descriptions.Item>
             <Descriptions.Item label="Age" labelStyle={labelStyle}>
               {renderAge(temp_job.min_age, temp_job.max_age)}
             </Descriptions.Item>
-
-            {renderEducation(education, temp_job.education)}
+            <Descriptions.Item label="Education" labelStyle={labelStyle}>
+              {/* {temp_job.education.map(() => {
+                return " "+temp_job.education[0].name + ",";
+                
+              })} */}
+              {renderEducation(education, temp_job.education)}
+            </Descriptions.Item>
           </Descriptions>
         );
 
@@ -222,6 +273,62 @@ const JobDetail = ({
   // if (user === null) {
   //   return <p>Loading profile...</p>;
   // }
+
+  const applyJobBtnClick = () => {
+    if (!isSignedIn) {
+      message.error("You must log in to access this feature");
+    } else {
+      const { confirm } = Modal;
+
+      confirm({
+        title: "Are you sure apply this job?",
+        icon: <ExclamationCircleOutlined />,
+        // content: "Some descriptions",
+        okText: "Yes",
+        okType: "danger",
+        cancelText: "No",
+        onOk() {
+          setDisable(true);
+          applyJob(
+            id,
+            userid,
+            appliedStatus,
+            setAppliedStatus,
+            applied_saved_id
+          );
+          // window.location.reload();
+          message.success("Applied successfully");
+        },
+      });
+    }
+  };
+  const applyShow = () => {
+    if (appliedStatus) {
+      return (
+        <Button
+          type="primary"
+          onClick={applyJobBtnClick}
+          disabled
+          style={{ float: "right" }}
+        >
+          Applied
+        </Button>
+      );
+    } else if (btn_disable) {
+      return "";
+    } else
+      return (
+        <Button
+          type="primary"
+          onClick={applyJobBtnClick}
+          style={{ float: "right" }}
+          disabled={disable}
+        >
+          Apply Now
+        </Button>
+      );
+  };
+
   return (
     <>
       <Head>
@@ -232,23 +339,55 @@ const JobDetail = ({
 
         <Content className="site-layout">
           <Breadcrumb className="breadcrumb_main">
-            <Breadcrumb.Item>Home</Breadcrumb.Item>
-            <Breadcrumb.Item>Job</Breadcrumb.Item>
-            <Breadcrumb.Item>Job Details</Breadcrumb.Item>
-            <Breadcrumb.Item>{temp_job.title}</Breadcrumb.Item>
+            <Breadcrumb.Item href="/">
+              {" "}
+              <HomeOutlined />
+            </Breadcrumb.Item>
+            <Breadcrumb.Item href="/jobs/list">Job List</Breadcrumb.Item>
+            <Breadcrumb.Item>
+              Job Details - {temp_job.title ? temp_job.title.slice(0, 15) + "...":""}
+            </Breadcrumb.Item>
           </Breadcrumb>
           <div className="site-layout-background">
             <div className="text-secondary">
-              {renderItem("job_detail")} <hr />
-              {renderItem("employee_requirement")}
               {typeof applied_jobs_person == "undefined" ? (
                 ""
               ) : (
                 <>
-                  <span style={{ fontWeight: "bold" }}>Applied Person:</span>{" "}
-                  {userid == applied_jobs_person.id ? appliedPerson() : ""}
+                  {userid == poster.id ? (
+                    <>
+                      {" "}
+                    <div style={{display: "flex",justifyContent:"space-between"}}>
+                      <span className="applied_person" style={{float: "left"}}>
+                        Applied Person: {appliedPerson()}
+                      </span>
+                      <span  >
+                        <Link
+                          // href={"/jobs/edit/[id]"} as={`/jobs/edit/${id}`}
+                          href={{ pathname: "/jobs/edit/", query: { id: id } }}
+                         
+                        >
+                          <Button
+                            type="primary"
+                            block
+                            style={{ marginBottom: "5px", width: "50px" }}
+                          
+                          >
+                            Edit
+                          </Button>
+                        </Link>
+                      </span>
+                      </div>
+                      <hr />
+                    </>
+                  ) : (
+                    ""
+                  )}
                 </>
               )}
+              {renderItem("job_detail")} <hr />
+              {renderItem("job_description")} <hr />
+              {renderItem("employee_requirement")}
             </div>
           </div>
         </Content>
@@ -267,5 +406,5 @@ const mapStateToProps = (state) => {
 };
 export default connect(mapStateToProps, {
   getAppliedJobsPerson,
+  applyJob,
 })(JobDetail);
-//export default connect(mapStateToProps)(JobDetail);
