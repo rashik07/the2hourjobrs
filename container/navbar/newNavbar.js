@@ -270,7 +270,7 @@ const navbar = ({
       <Menu
         mode="horizontal"
         className="menu_pc"
-        style={{ backgroundColor: "#95D5D2", paddingLeft: "34%" }}
+        style={{ backgroundColor: "#95D5D2"}}
       >
         {createPost()}
         <SubMenu key="1" title="Jobs">
