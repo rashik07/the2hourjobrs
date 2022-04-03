@@ -14,6 +14,7 @@ import {
 } from "../../redux/actions/announcementAction";
 import dateformat from "dateformat";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const { TabPane } = Tabs;
 
@@ -22,10 +23,14 @@ const AllAnnouncements = ({
   archiveAnnouncement,
   announcments,
   auth,
+  isSignedIn
 }) => {
   const [updatelist, setUpdatelist] = useState(true);
-
+  const router = useRouter();
   useEffect(() => {
+    if (!isSignedIn) {
+      router.push("/auth/login");
+    }
     getAllAnnouncementOfUser(auth.id);
     setUpdatelist(true);
   }, [getAllAnnouncementOfUser, updatelist, setUpdatelist]);
@@ -258,6 +263,7 @@ const mapStateToProps = (state) => {
   return {
     announcments: state.announcement.myAnnouncement,
     auth: state.auth,
+    isSignedIn: state.auth.isSignedIn,
   };
 };
 

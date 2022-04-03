@@ -6,11 +6,16 @@ import Navbar from "container/navbar/newNavbar";
 import JobPostItem from "components/jobs/JobPostItem";
 import { Layout, Breadcrumb } from "antd";
 import {  HomeOutlined } from "@ant-design/icons";
+import { useRouter } from "next/router";
 
-const AppliedJobs = ({ applied_jobs, getAppliedJobs }) => {
+const AppliedJobs = ({ applied_jobs, getAppliedJobs,isSignedIn }) => {
   const { Content } = Layout;
   const [reload, setReload] = useState(false);
+  const router = useRouter();
   useEffect(() => {
+    if (!isSignedIn) {
+      router.push("/auth/login");
+    }
     getAppliedJobs();
   }, [reload]);
 
@@ -55,6 +60,7 @@ const AppliedJobs = ({ applied_jobs, getAppliedJobs }) => {
 const mapStateToProps = (state) => {
   return {
     applied_jobs: Object.values(state.job.applied_jobs),
+    isSignedIn: state.auth.isSignedIn,
   };
 };
 

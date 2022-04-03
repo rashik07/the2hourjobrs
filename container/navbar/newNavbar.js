@@ -312,7 +312,7 @@ const navbar = ({
           </Menu.Item>
           <Menu.Item key="setting:10">
             {" "}
-            <Link href="/announcement/create">Create Announcement</Link>
+           {isSignedIn? <Link href="/announcement/create">Create Announcement</Link>:<Link href="/auth/login">Create Announcement</Link>}
           </Menu.Item>
         </SubMenu>
         <Menu.Item key="setting:15">

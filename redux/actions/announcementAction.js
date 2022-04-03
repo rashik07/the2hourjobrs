@@ -64,7 +64,7 @@ const uploadimage = (id, file, flag) => async (dispatch) => {
 
 export const getAllAnnouncement = (page,pageSize) => async (dispatch) => {
   try {
-    const response = await backend.get(`v1/announcement/data/?page=${page}&page_size=${pageSize}`, getConfig());
+    const response = await backend.get(`v1/announcement/data/?page=${page}&page_size=${pageSize}`);
     if (response.status === 200) {
       dispatch({
         type: types.GET_ALL_ANNOUNCEMENT,

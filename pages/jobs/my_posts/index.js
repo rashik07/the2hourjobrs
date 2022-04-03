@@ -11,21 +11,26 @@ import { Layout, Breadcrumb } from "antd";
 import * as types from "@/redux/types";
 import { List } from "antd";
 import { HomeOutlined } from "@ant-design/icons";
+import { useRouter } from "next/router";
 
 const SelfPostedJobs = ({
   self_posted_jobs,
   getSelfPostedJobs,
   auth,
   user_profile,
+  isSignedIn 
 }) => {
   const dispatch = useDispatch();
   const { Content } = Layout;
   const [selfpostedjob, setSelfpostedJobs] = useState([]);
-
+  const router = useRouter();
   useEffect(() => {
+    if (!isSignedIn) {
+      router.push("/auth/login");
+    }
     getSelfPostedJobs(user_profile.id).then((result) => {
       setSelfpostedJobs(result.results);
-      console.log(result.results);
+      
     });
     dispatch({ type: types.RESET_TEMP_JOB_STATE });
   }, []);
@@ -88,6 +93,7 @@ const mapStateToProps = (state) => {
     // self_posted_jobs: Object.values(state.job.self_posted_jobs),
     user_profile: state.user.user_profile,
     auth: state.auth,
+    isSignedIn: state.auth.isSignedIn,
   };
 };
 
