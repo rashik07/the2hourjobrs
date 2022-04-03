@@ -11,7 +11,7 @@ import Link from "next/link";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import PopupDetails from "./PopupDetails";
-import { Modal, Button, Pagination, message } from "antd";
+import { Modal, Button, Pagination, message ,Space} from "antd";
 import { ExclamationCircleOutlined, PushpinFilled } from "@ant-design/icons";
 import { Row, Col, List, Tooltip } from "antd";
 import {
@@ -50,7 +50,7 @@ const JobPostItem = ({
 
   const getExperience = (min, max) => {
     if (min && max) {
-      return `${min} to ${max} year(s)`;
+      return `${min} to ${max} year(s) `+" ";
     }
 
     if (min) {
@@ -312,12 +312,12 @@ const JobPostItem = ({
             )}
           </p>
           <div style={{ display: "flex" }}>
-            <p style={{ marginRight: "10px" }}>
+            <p >
               {getExperience(job.min_experience, job.max_experience) ? (
                 <>
-                  {" "}
+                  {/* {" "} */}
                   <ScheduleOutlined />{" "}
-                  {getExperience(job.min_experience, job.max_experience)}{" "}
+                  Experience:{getExperience(job.min_experience, job.max_experience)}{" "}
                 </>
               ) :(
                 ""
@@ -325,7 +325,7 @@ const JobPostItem = ({
              
             </p>
             <p>
-              <CalendarOutlined /> Deadline: {job.deadline ? job.deadline : " "}
+              <CalendarOutlined /> Deadline: {job.deadline ?job.deadline : " "}
             </p>
           </div>
           {/* {appliedPerson()} */}

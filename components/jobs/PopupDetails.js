@@ -35,7 +35,7 @@ const PopupDetails = ({
       <h3 className="job_title" onClick={showDrawer}>
         {job.title}
       </h3>
-
+    
       <Drawer
         title={job.title}
         placement="right"
@@ -45,7 +45,7 @@ const PopupDetails = ({
         size={size}
         extra={
           <Space>
-            {/* <Button onClick={onClose}>Cancel</Button> */}
+           
             <div className="ant-btn">
               <Link href={{ pathname: "/jobs/detail/", query: { id: job.id } }}>
                 <a target="_blank">See More</a>
@@ -54,13 +54,18 @@ const PopupDetails = ({
           </Space>
         }
       >
+          <div className="ant-btn seeMoreButton">
+              <Link href={{ pathname: "/jobs/detail/", query: { id: job.id } }}>
+                <a target="_blank">See More</a>
+              </Link>
+          </div>
         <Row>
-          <Col xs={24} sm={24} md={10} lg={10} xl={10}>
+          <Col xs={24} sm={8} md={7} lg={7} xl={7}>
             <h4>Type :</h4> {job.category.name}
             <br />
           </Col>
 
-          <Col xs={24} sm={24} md={4} lg={4} xl={4}>
+          <Col xs={24} sm={24} md={5} lg={5} xl={5}>
             <h4>Posted on :</h4>{" "}
             <span>{dateformat(job.posting_timestamp, "mmmm dS, yyyy")}</span>
           </Col>
@@ -135,7 +140,7 @@ const PopupDetails = ({
 
             <Row>
               <Col span={12}>
-                <h4>Employment Status</h4>
+                <h4>Employment Status : </h4>
               </Col>
               <Col span={12}>{job.employment_status.join(", ")}</Col>
             </Row>
