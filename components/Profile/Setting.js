@@ -3,19 +3,19 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { editPassword } from "@/redux/actions/settingAction";
 
-import { Form, Input, Button, DatePicker, Typography, Divider } from "antd";
+import { Form, Input, Button, DatePicker, Typography, Divider ,message} from "antd";
 
 const Setting = ({ editPassword }) => {
   const onFinish = (values) => {
     // console.log('Received values of form: ', values);
-    editPassword(values, alert("password change successfully"));
+    editPassword(values);
     form.resetFields();
-
+    // alert("password change successfully");
     // window.location.reload();
     //   console.log('update: ', editUserProfile);
   };
   const onFinishFailed = (errorInfo) => {
-    alert("password is not changed");
+    message.error("password is not changed");
   };
   const { Title } = Typography;
   const [form] = Form.useForm();
