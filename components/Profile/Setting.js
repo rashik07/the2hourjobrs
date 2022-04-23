@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 
 import { connect } from "react-redux";
-import { editPassword } from "@/redux/actions/settingAction";
+import { editPassword,deleteProfile  } from "@/redux/actions/settingAction";
 
 import { Form, Input, Button, DatePicker, Typography, Divider ,message} from "antd";
 
-const Setting = ({ editPassword }) => {
+const Setting = ({ editPassword ,deleteProfile}) => {
   const onFinish = (values) => {
     // console.log('Received values of form: ', values);
     editPassword(values);
@@ -95,6 +95,13 @@ const Setting = ({ editPassword }) => {
           </Button>
         </Form.Item>
       </Form>
+      <Button type="danger" onClick={() => {
+              deleteProfile();
+              
+              message.success("successfully delete");
+            }}>
+            delete account
+          </Button>
     </div>
   );
 };
@@ -105,4 +112,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { editPassword })(Setting);
+export default connect(mapStateToProps, { editPassword ,deleteProfile})(Setting);

@@ -5,10 +5,11 @@ import { useRouter } from "next/router";
 import { connect } from "react-redux";
 import { Layout } from "antd";
 import Navbar from "../../container/navbar/newNavbar";
-import { signIn, googleLogin, facebookLogin, password_reset } from "redux/actions/authAction";
+import { signIn, googleLogin, facebookLogin, password_reset} from "redux/actions/authAction";
 import { useHistory } from "react-router-dom";
 import { Form, Input, Button, Checkbox, Typography } from "antd";
-const forgot_password = ({password_reset}) => {
+
+const forgot_password = ({password_reset,deleteProfile}) => {
   const { Content } = Layout;
   const { Title } = Typography;
   const [form] = Form.useForm();
@@ -55,6 +56,7 @@ const forgot_password = ({password_reset}) => {
               </Button>
             </Form.Item>
           </Form>
+         
             
           </div>
         </Content>

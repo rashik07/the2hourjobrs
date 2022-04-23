@@ -44,3 +44,21 @@ export const editPassword = (values) => async (dispatch) => {
     );
   }
 };
+export const deleteProfile = () => async (dispatch) => {
+  try {
+    const response = await backend.delete(
+      `v1/user/other_users/${store.getState().auth.id}`,
+      getConfig()
+ 
+    );
+    console.log("success")
+    if (response.status == 200 || response.status == 204) {
+      // dispatch({
+      //   type: types.DELETE_PROFILE,
+      //   payload: { project_id: project_id },
+      // });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
