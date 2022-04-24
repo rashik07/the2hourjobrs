@@ -95,13 +95,13 @@ const Setting = ({ editPassword ,deleteProfile}) => {
           </Button>
         </Form.Item>
       </Form>
-      <Button type="danger" onClick={() => {
+      {/* <Button type="danger" onClick={() => {
               deleteProfile();
               
-              message.success("successfully delete");
+              message.success("successfully delete your account");
             }}>
             delete account
-          </Button>
+          </Button> */}
     </div>
   );
 };

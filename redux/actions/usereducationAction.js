@@ -59,7 +59,7 @@ export const createEducation = (formValues) => async (dispatch) => {
 };
 
 export const deleteEducation = (education_id) => async (dispatch) => {
-  console.log("bal");
+  // console.log("bal");
   try {
     const response = await backend.delete(
       `/v1/user/education/${education_id}/`,

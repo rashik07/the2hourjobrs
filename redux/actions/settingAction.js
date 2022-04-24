@@ -60,5 +60,6 @@ export const deleteProfile = () => async (dispatch) => {
     }
   } catch (error) {
     console.log(error);
+ 
   }
 };
